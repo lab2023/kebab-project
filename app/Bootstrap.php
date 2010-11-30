@@ -4,7 +4,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     private $_config;
     private $_logger;
-    private $_database;
 
     /*
      * Config Initialization
