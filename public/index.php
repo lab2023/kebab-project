@@ -1,4 +1,24 @@
 <?php
+/**
+ * Kebab Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the  Dual Licensing Model that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.kebab-project.com/licensing
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@lab2023.com so we can send you a copy immediately.
+ *
+ * @category   KEBAB
+ * @package    Core
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+
 $starttime = microtime();
 $startarray = explode(" ", $starttime);
 $starttime = $startarray[1] + $startarray[0];
@@ -14,14 +34,18 @@ $env = $envs['dev'];
 
 //Application Folders & Paths
 $path = array(
-    'app'   => 'app',
+    'app'   => 'application',
     'core'  => 'core',
     'pub'   => 'public',
     'mod'   => 'modules',
     'lib'   => 'libraries',
     'conf'  =>  array(
-        'folder'    => 'configs',
-        'file'      => 'application.ini'
+        'folder' => 'configs',
+        'files' => array(
+            'application' => 'application.ini',
+            'database' => 'database.ini',
+            'default' => 'kernel.ini'
+         )
     )
 );
 
@@ -57,11 +81,18 @@ set_include_path(
     )
 );
 
+// Setup Config File Path
+foreach($path['conf']['files'] as $key => $value) {
+    $configs[$key] = APPLICATION_PATH
+        . '/' . $path['conf']['folder']
+        . '/' . $value;
+}
+
 // Zend_Application
 require_once 'Zend/Application.php';
 $app = new Zend_Application(
     APPLICATION_ENV,
-    APPLICATION_PATH . '/' . $path['conf']['folder'] . '/' . $path['conf']['file']
+    array('config' => $configs)
 );
 $app->bootstrap()->run();
 
