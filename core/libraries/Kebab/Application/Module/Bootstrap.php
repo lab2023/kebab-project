@@ -22,11 +22,24 @@
 abstract class Kebab_Application_Module_Bootstrap
     extends Zend_Application_Module_Bootstrap
 {
+    protected $_moduleName = null;
+    
     protected function _initBootstrap()
+    {
+        $this->_moduleName = $this->getModuleName();
+        
+        // Info Log
+        Zend_Registry::get('logger')->log(
+            $this->_moduleName . ' initialized...',
+            Zend_Log::INFO
+        );
+    }
+
+    protected function _initModuleConfig()
     {
         // Info Log
         Zend_Registry::get('logger')->log(
-            get_class($this) . ' initialized...',
+            $this->_moduleName . '::' . __FUNCTION__ . ' Called...',
             Zend_Log::INFO
         );
     }
