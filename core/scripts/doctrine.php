@@ -21,6 +21,8 @@
 
 include '../core/core.php';
 
+$env = $envs['cli'];
+
 //Setup Defines
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('BASE_PATH')        || define('BASE_PATH', realpath(dirname(__FILE__) . '/../../') . DIRECTORY_SEPARATOR);
@@ -29,12 +31,15 @@ defined('KERNEL_PATH')      || define('KERNEL_PATH', BASE_PATH . $path['app']);
 defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$path['mod']);
 
 // Ensure library/ is on include_paths
-set_include_path(implode( PATH_SEPARATOR,
-    array(
-        realpath(CORE_PATH . DIRECTORY_SEPARATOR . $path['lib']),
-        realpath(KERNEL_PATH . DIRECTORY_SEPARATOR . $path['lib']),
-        get_include_path()
-    ))
+set_include_path(
+    implode(
+        PATH_SEPARATOR,
+        array(
+            realpath(CORE_PATH . DIRECTORY_SEPARATOR . $path['lib']),
+            realpath(KERNEL_PATH . DIRECTORY_SEPARATOR . $path['lib']),
+            get_include_path()
+        )
+    )
 );
 
 // Setup Config File Path
