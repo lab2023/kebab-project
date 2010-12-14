@@ -83,7 +83,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(
             Doctrine::ATTR_MODEL_LOADING,
-            Doctrine::MODEL_LOADING_CONSERVATIVE
+            $this->_config->database->doctrine->model_autoloading
         );
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
 
