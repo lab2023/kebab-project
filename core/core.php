@@ -27,7 +27,8 @@ $envs = array(
     'prod'  => 'production',
     'stage' => 'staging',
     'test'  => 'testing',
-    'dev'   => 'development'
+    'dev'   => 'development',
+    'cli'   => 'doctrinecli'
 );
 $env = $envs['dev'];
 
