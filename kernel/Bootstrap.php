@@ -45,19 +45,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             new Zend_Log_Writer_Null()
         );
         
-        if($this->_config->kernel->logger->use) {
+        if($this->_config->global->logger->use) {
             //Stream Writer
-            if($this->_config->kernel->logger->stream->use) {
+            if($this->_config->global->logger->stream->use) {
                 $logger->addWriter(
                     new Zend_Log_Writer_Stream(
                         CORE_PATH . '/' .
-                        $this->_config->kernel->logger->folder. '/' .
-                        $this->_config->kernel->logger->file
+                        $this->_config->global->logger->folder. '/' .
+                        $this->_config->global->logger->file
                     )
                 );
             }
             //Firebug Writer
-            if($this->_config->kernel->logger->firebug->use) {
+            if($this->_config->global->logger->firebug->use) {
                 $logger->addWriter(
                     new Zend_Log_Writer_Firebug()
                 );
