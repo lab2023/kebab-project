@@ -19,7 +19,7 @@
  * @version    1.5.0
  */
 
-include '../core/core.php';
+include '../core.php';
 
 $env = $envs['cli'];
 
