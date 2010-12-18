@@ -19,7 +19,7 @@
  * @version    1.5.0
  */
 
-class SysAdministration_UsersController
+class SysAdministration_IndexController
     extends Kebab_Controller_Action
 {
     public function indexAction()
