@@ -27,15 +27,23 @@ class AuthController extends Kebab_Controller_Action
 
     public function loginAction()
     {
-        //KBBTODO don't forget Zend_Filter for SQL_INJECTION
-        $username = $this->_request->getParam('username');
+        // getParams
+        $userName = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
 
-        // Check isPost
+        //Filter for SQL Injection
+        $validatorUserName = new Zend_Validate();
+        $validatorUserName->addValidator(new Zend_Validate_StringLength(4, 16))
+                          ->addValidator(new Zend_Validate_Alnum());
+
+        $validatorPassword = new Zend_Validate();
+        $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
+
+                
         //KBBTODO Check if username and password is null
         if ($this->_request->isPost()
-            && $username !== ''
-            && $password !== '') {
+            && $validatorPassword->isValid($password)
+            && $validatorUserName->isValid($userName)) {
 
             // set Zend_Auth and ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
@@ -46,7 +54,7 @@ class AuthController extends Kebab_Controller_Action
                 ->setIdentityColumn('username')
                 ->setCredentialColumn('password')
                 ->setCredentialTreatment('MD5(?)')
-                ->setIdentity($username)
+                ->setIdentity($userName)
                 ->setCredential($password);
             $result = $auth->authenticate($authAdapter);
 
