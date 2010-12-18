@@ -23,10 +23,11 @@ include '../core/core.php';
 
 //Setup Defines
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
-defined('BASE_PATH')        || define('BASE_PATH', realpath(dirname(__FILE__) . '/../../') . DIRECTORY_SEPARATOR);
+defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR);
 defined('CORE_PATH')        || define('CORE_PATH', BASE_PATH . $path['core']);
 defined('KERNEL_PATH')      || define('KERNEL_PATH', BASE_PATH . $path['app']);
 defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$path['mod']);
+defined('CONFIGS_PATH')     || define('CONFIGS_PATH', $path['conf']['path']);
 
 // Ensure library/ is on include_paths
 set_include_path(implode( PATH_SEPARATOR,
@@ -39,7 +40,7 @@ set_include_path(implode( PATH_SEPARATOR,
 
 // Setup Config File Path
 foreach($path['conf']['files'] as $key => $value) {
-    $configs[$key] = KERNEL_PATH . DIRECTORY_SEPARATOR . $path['conf']['path'] . DIRECTORY_SEPARATOR . $value;
+    $configs[$key] = KERNEL_PATH . DIRECTORY_SEPARATOR . CONFIGS_PATH . DIRECTORY_SEPARATOR . $value;
 }
 
 // Zend_Application
