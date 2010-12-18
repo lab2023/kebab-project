@@ -50,7 +50,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             if($this->_config->global->logger->stream->use) {
                 $logger->addWriter(
                     new Zend_Log_Writer_Stream(
-                        CORE_PATH . '/' .
+                        CORE_PATH . '/data/' .
                         $this->_config->global->logger->folder. '/' .
                         $this->_config->global->logger->file
                     )
