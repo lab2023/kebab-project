@@ -1,0 +1,10 @@
+User:
+  columns:
+    username:
+      type: string(255)
+    password:
+      type: string(255)
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
