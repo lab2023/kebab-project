@@ -6,12 +6,18 @@ This is Kebab Framework 1.5.x version
 
 Requirements
 ------------
-Kebab 1.5.x is only supported on PHP 5.3.2 and up.
+Kebab 1.5.x is only supported on PHP 5.3.3 and up.
     - Zend Framework 1.11.1
     - Doctrine 1.2.3
 
 Documentation
 -------------
+    Directories:
+        applications: installed modules here
+        developer: developer tools here (doctrineCLI etc.)
+        system: kernel, core zend application, configs, helpers etc. here
+        libraries: 3rd. party libraries here (PEAR v.s.)
+        web: public html folder 
 
 [1]: http://kebab.tc/
 [2]: http://kebab-project.com/
