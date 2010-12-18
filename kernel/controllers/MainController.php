@@ -25,8 +25,12 @@ if (!defined('BASE_PATH'))
 class MainController extends Kebab_Controller_Action
 {
 
-    public function indexAction()
+    private $_fc;
+
+    public function init()
     {
+        $this->_fc = Zend_Controller_Front::getInstance();
+        $this->_fc->setParam('noViewRenderer', true);
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->view->identity = $auth->getIdentity();
