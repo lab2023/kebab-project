@@ -1,9 +1,20 @@
 User:
   columns:
-    username:
+    userName:
+      type: string(16)
+      primary: true
+    email:
       type: string(255)
     password:
       type: string(255)
+
+  relations:
+    Roles:
+      class: Role
+      local: userName
+      foreign: roleName
+      refClass: UserRole
+
   options:
     type: INNODB
     collate: utf8_bin
