@@ -24,6 +24,5 @@ class SysPreferences_AboutMeController
 {
     public function indexAction()
     {
-        
     }
 }
