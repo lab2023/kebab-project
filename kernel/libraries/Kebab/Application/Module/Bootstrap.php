@@ -35,12 +35,31 @@ abstract class Kebab_Application_Module_Bootstrap
         );
     }
 
-    protected function _initModuleConfig()
+    protected function _initConfig()
     {
+        
+        // load ini file
+        $config = new Zend_Config_Ini(
+            APPLICATIONS_PATH .
+            DIRECTORY_SEPARATOR . $this->_camelize($this->_moduleName) . DIRECTORY_SEPARATOR.
+            CONFIGS_PATH . DIRECTORY_SEPARATOR . 'module.ini',
+            APPLICATION_ENV
+        );
+
+        $this->setOptions($config->toArray());
+        
         // Info Log
         Zend_Registry::get('logger')->log(
-            $this->_moduleName . '::' . __FUNCTION__ . ' Called...',
+            $this->getOptions(),
             Zend_Log::INFO
         );
     }
+    
+    private function _camelize($str, $separator = '-')
+    {
+        $str[0] = strtolower($str[0]);
+        $func = create_function('$c', 'return "' . $separator . '" . strtolower($c[1]);');
+        return preg_replace_callback('/([A-Z])/', $func, $str);
+    }
+
 }
