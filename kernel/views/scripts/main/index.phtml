@@ -34,7 +34,8 @@ h1 {
 <?php if ($this->identity == null) { ?>
     <p><a href="http://localhost/lab2023/kebab-reloaded/public/default/auth/login"> To login</a></p>
 <?php } else { ?>
-    <p>Welcome back <?php echo $this->identity->role; ?></p>
+    <p>Welcome back <?php echo $this->identity->roles; ?></p>
+    <p><pre><?php print_r($this->identity); ?></pre></p>
     <p><a href="http://localhost/lab2023/kebab-reloaded/public/default/auth/logout"> To logout </a></p>
 <?php } ?>
 </body>
