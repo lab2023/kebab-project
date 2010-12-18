@@ -1,0 +1,20 @@
+UserRole:
+  columns:
+    userName:
+      type: string(16)
+      primary: true
+    roleName:
+      type: string(255)
+      primary: true
+  relations:
+    User:
+      local: userName
+      foreign: userName
+    Role:
+      local: roleName
+      foreign: roleName
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

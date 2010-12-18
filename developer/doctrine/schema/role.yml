@@ -1,0 +1,23 @@
+Role:
+  columns:
+    roleName:
+      type: string(255)
+      primary: true
+    inheritRole:
+      type: string(255)
+  relations:
+    InheritRole:
+      class: Role
+      local: inheritRole
+      foreign: roleName
+
+    Users:
+      class: User
+      local: roleName
+      foreign: userName
+      refClass: UserRole
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
