@@ -34,13 +34,11 @@ class AuthController extends Kebab_Controller_Action
         //Filter for SQL Injection
         $validatorUserName = new Zend_Validate();
         $validatorUserName->addValidator(new Zend_Validate_StringLength(4, 16))
-                          ->addValidator(new Zend_Validate_Alnum());
+            ->addValidator(new Zend_Validate_Alnum());
 
         $validatorPassword = new Zend_Validate();
         $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
 
-                
-        //KBBTODO Check if username and password is null
         if ($this->_request->isPost()
             && $validatorPassword->isValid($password)
             && $validatorUserName->isValid($userName)) {
@@ -62,7 +60,8 @@ class AuthController extends Kebab_Controller_Action
             if ($result->isValid()) {
                 $identity = $authAdapter->getResultRowObject(null, 'password');
                 //KBBTODO Set role and ACL object
-                $identity->role = 'member';
+                $identity->roles = array('member', 'owner');
+                $identity->acl = new Kebab_Acl();
                 $auth->getStorage()->write($identity);
                 //KBBTODO Set a message not valid user
                 $this->_redirect('default/main/index');
