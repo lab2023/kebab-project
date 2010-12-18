@@ -19,7 +19,9 @@
  * @version    1.5.0
  */
 
-include '../core/core.php';
+include '../core.php';
+
+$env = $envs['cli'];
 
 //Setup Defines
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
@@ -30,12 +32,15 @@ defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$path['mod
 defined('CONFIGS_PATH')     || define('CONFIGS_PATH', $path['conf']['path']);
 
 // Ensure library/ is on include_paths
-set_include_path(implode( PATH_SEPARATOR,
-    array(
-        realpath(CORE_PATH . DIRECTORY_SEPARATOR . $path['lib']),
-        realpath(KERNEL_PATH . DIRECTORY_SEPARATOR . $path['lib']),
-        get_include_path()
-    ))
+set_include_path(
+    implode(
+        PATH_SEPARATOR,
+        array(
+            realpath(CORE_PATH . DIRECTORY_SEPARATOR . $path['lib']),
+            realpath(KERNEL_PATH . DIRECTORY_SEPARATOR . $path['lib']),
+            get_include_path()
+        )
+    )
 );
 
 // Setup Config File Path
