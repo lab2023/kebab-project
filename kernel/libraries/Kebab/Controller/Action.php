@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
+
 /**
  * Kebab Framework
  *
@@ -18,10 +22,9 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-
-abstract class Kebab_Controller_Action 
-     extends Zend_Controller_Action
+abstract class Kebab_Controller_Action extends Zend_Controller_Action
 {
+
     public function init()
     {
         Zend_Registry::get('logger')->log(
@@ -29,4 +32,5 @@ abstract class Kebab_Controller_Action
             Zend_Log::INFO
         );
     }
+
 }

@@ -1,8 +1,7 @@
 <?php
 
-if (!defined('BASE_PATH')) {
+if (!defined('BASE_PATH'))
     exit('No direct script access allowed');
-}
 
 /**
  * Kebab Framework
@@ -18,17 +17,20 @@ if (!defined('BASE_PATH')) {
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   KEBAB
- * @package    Kernel
+ * @package    Core
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class IndexController extends Kebab_Controller_Action
+class MainController extends Kebab_Controller_Action
 {
 
     public function indexAction()
     {
-        $this->_forward('login', 'auth', 'default');
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+            $this->view->identity = $auth->getIdentity();
+        }
     }
 
 }
