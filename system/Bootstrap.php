@@ -33,9 +33,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('config', $this->_config = $config);
     }
 
-    /*
-     * Logger Initialization
-     */
     protected function _initLogging()
 	{
 	    $logger = new Zend_Log();
@@ -91,5 +88,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
         
         return $conn;
+    }
+
+    protected function _initTranslation()
+    {
+        $this->bootstrap('translate');
+        $translate = $this->getResource('translate');
+        $translate->setOptions(
+            array(
+                'log' => Zend_Registry::get('logger'),
+                //KBBTODO getLocale from session
+                'locale' => 'auto'
+            )
+        );
+        Zend_Registry::set('translate', $translate);
     }
 }
