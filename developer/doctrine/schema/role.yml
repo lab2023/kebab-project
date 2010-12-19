@@ -1,18 +1,20 @@
-User:
+Role:
   columns:
-    userName:
-      type: string(16)
+    roleName:
+      type: string(255)
       primary: true
-    email:
+    inheritRole:
       type: string(255)
-    password:
-      type: string(255)
-
   relations:
-    Roles:
+    InheritRole:
       class: Role
-      local: userName
+      local: inheritRole
       foreign: roleName
+
+    Users:
+      class: User
+      local: roleName
+      foreign: userName
       refClass: UserRole
 
   options:

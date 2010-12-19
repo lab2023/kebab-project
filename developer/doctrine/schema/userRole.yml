@@ -1,19 +1,18 @@
-User:
+UserRole:
   columns:
     userName:
       type: string(16)
       primary: true
-    email:
+    roleName:
       type: string(255)
-    password:
-      type: string(255)
-
+      primary: true
   relations:
-    Roles:
-      class: Role
+    User:
       local: userName
+      foreign: userName
+    Role:
+      local: roleName
       foreign: roleName
-      refClass: UserRole
 
   options:
     type: INNODB

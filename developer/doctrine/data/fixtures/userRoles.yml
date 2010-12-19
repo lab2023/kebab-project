@@ -1,0 +1,16 @@
+System_Model_UserRole:
+  Guest:
+    userName: guest
+    roleName: guest
+
+  Member:
+    userName: member
+    roleName: member
+
+  Admin:
+    userName: admin
+    roleName: admin
+
+  Owner:
+    userName: owner
+    roleName: owner

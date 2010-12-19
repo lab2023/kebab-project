@@ -1,0 +1,15 @@
+System_Model_Role:
+  Guest:
+    roleName: guest
+
+  Member:
+    roleName: member
+    inheritRole: guest
+
+  Admin:
+    roleName: admin
+    inheritRole: member
+
+  Owner:
+    roleName: owner
+    inheritRole: admin
