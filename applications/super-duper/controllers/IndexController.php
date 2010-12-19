@@ -24,6 +24,6 @@ class SuperDuper_IndexController
 {
     public function indexAction()
     {
-        
+
     }
 }
