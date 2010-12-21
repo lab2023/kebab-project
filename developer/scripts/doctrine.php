@@ -12,8 +12,22 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
+ * @category   Kebab (kebab-reloaded)
+ * @package    Developers
+ * @subpackage Scripts
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+
+/**
+ * Doctrine CLI Bootstrapping File
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    Developer
+ * @subpackage Scripts
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0

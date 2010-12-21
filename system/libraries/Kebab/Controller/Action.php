@@ -1,8 +1,4 @@
-<?php
-
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
-
+<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,15 +12,32 @@ if (!defined('BASE_PATH'))
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
+ * @category   Kebab (kebab-reloaded)
+ * @package    Kebab
+ * @subpackage Controller
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+
+/**
+ * Kebab Controller Action Abstract Class
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    Kebab
+ * @subpackage Controller
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 abstract class Kebab_Controller_Action extends Zend_Controller_Action
 {
-
+    /**
+     * Global init method
+     * @return void
+     */
     public function init()
     {
         Zend_Registry::get('logger')->log(
@@ -32,5 +45,4 @@ abstract class Kebab_Controller_Action extends Zend_Controller_Action
             Zend_Log::INFO
         );
     }
-
 }

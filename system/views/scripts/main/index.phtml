@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Welcome to the Kebab Framework</title>
+<title>Kebab Framework Reloaded :: Main Page</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
 <style>
@@ -28,13 +28,17 @@ h1 {
  padding: 5px 0 6px 0;
 }
 </style>
-<h1>Welcome to the <strong>Kebab Framework Reloaded</strong></h1>
+<h1><strong>Kebab Framework Reloaded :: Main Page</strong></h1>
 
 <h2>My Account</h2>
 <?php if ($this->identity == null) { ?>
-    <p><a href="<?php echo $this->baseUrl('auth/login'); ?>"> To login</a></p>
+    <p><a href="<?php echo $this->baseUrl('auth/index'); ?>"> To login</a></p>
 <?php } else { ?>   
-    <p>Welcome back <?php echo $this->identity->role; ?></p>
+    <p>Welcome back <?php echo $this->identity->userName; ?>
+        <br />
+        Roles:
+        <br /><?php print_r ($this->identity->roles); ?>
+    </p>
     <p><a href="<?php echo $this->baseUrl('auth/logout'); ?>"> To logout </a></p>
 <?php } ?>
 </body>

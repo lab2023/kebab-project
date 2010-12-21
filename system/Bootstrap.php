@@ -12,27 +12,59 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @category   Kebab (kebab-reloaded)
+ * @package    System
+ * @subpackage 
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - 
+ *             internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
+/**
+ * Kebab Application Bootstrapping Class
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    System
+ * @subpackage 
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 -
+ *             internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    /**
+     * Configuration variable
+     *
+     * @var integer
+     */
     private $_config;
+
+    /**
+     * Logger variable
+     *
+     * @var integer
+     */
     private $_logger;
 
     /*
      * Config Initialization
+     * @return void
      */
     protected function _initConfig()
 	{
         $config = new Zend_Config($this->getOptions(), true);
+        $config->modules = array();
         Zend_Registry::set('config', $this->_config = $config);
     }
 
+    /*
+     * Logging Initialization
+     * @return void
+     */
     protected function _initLogging()
 	{
 	    $logger = new Zend_Log();
@@ -68,6 +100,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
 	}
 
+    /*
+     * Doctrine Initialization
+     * @return void
+     */
     public function _initDoctrine()
     {
         $this->getApplication()->getAutoloader()
@@ -90,6 +126,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $conn;
     }
 
+    /*
+     * Translation Initialization
+     * @return void
+     */
     protected function _initTranslation()
     {
         $this->bootstrap('translate');
