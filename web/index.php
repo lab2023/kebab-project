@@ -51,6 +51,15 @@ $app = new Zend_Application(
 );
 $app->bootstrap()->run();
 
-$scriptTime = number_format((microtime(true) - $scriptTimeStart), 5,'.','.');
-$mgpu = number_format(memory_get_peak_usage(true));
-echo "<p><em>Page rendered time in " . $scriptTime . " second | Memory peak usage in ".$mgpu." bytes</em></p>";
+if(APPLICATION_ENV != 'production')
+{
+    $scriptTime = number_format((microtime(true) - $scriptTimeStart), 5,'.','.');
+    $mgpu = number_format(memory_get_peak_usage(true));
+    echo "<p title='Kebab Reloaded Debug &amp; Profiling Area' 
+        style='position:absolute; border-top:1px solid silver;
+        text-align:center; font-style:italic; background:#eee; margin:0;
+        padding:3px 0; bottom:0; left:0%; width:100%'>
+        <strong>Page rendered time :</strong> " . $scriptTime . " seconds
+        | <strong>Memory peak usage :</strong> ".$mgpu." bytes
+        | <strong>Application environment: </strong> {".APPLICATION_ENV."}</p>";
+}
