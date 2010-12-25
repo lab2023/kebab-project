@@ -58,7 +58,7 @@ class Kebab_Notification implements IteratorAggregate, Countable
      */
     static public function addNotification($notificationType, $notification)
     {
-        
+
         $type = array('ALERT', 'CRIT', 'ERR', 'WARN', 'NOTICE', 'INFO');
 
         if (!in_array($notificationType, $type)) {
@@ -68,8 +68,11 @@ class Kebab_Notification implements IteratorAggregate, Countable
         if (!is_string($notification)) {
             throw new Kebab_Notification_Exception('Invalid notification string');
         }
-
-        self::$_notifications[] = array($notificationType, $notification);
+        
+        self::$_notifications[] = array(
+            $notificationType,
+            Zend_Registry::get('translate')->_($notification)
+        );
     }
 
     /**
