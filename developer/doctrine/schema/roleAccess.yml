@@ -1,0 +1,40 @@
+RoleAccess:
+  columns:
+    roleName:
+      type: string(255)
+    resourceId:
+      type: integer
+    actionId:
+      type: integer
+    allow:
+      type: enum
+      length: 5
+      values: ['deny', 'allow']   
+    assertionId:
+      type: integer
+
+  relations:
+    Role:
+      local: roleName
+      foreign: roleName
+      type: one
+
+    Resource:
+      local: resourceId
+      foreign: resourceId
+      type: one
+
+    Action:
+      local: actionId
+      foreign: actionId
+      type: one
+
+    Assertion:
+      local: assertionId
+      foreign: assertionId
+      type: one
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
