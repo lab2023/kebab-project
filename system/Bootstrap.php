@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -42,7 +45,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @var integer
      */
     private $_config;
-
     /**
      * Logger variable
      *
@@ -55,7 +57,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @return void
      */
     protected function _initConfig()
-	{
+    {
         $config = new Zend_Config($this->getOptions(), true);
         $config->modules = array();
         Zend_Registry::set('config', $this->_config = $config);
@@ -66,17 +68,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @return void
      */
     protected function _initLogging()
-	{
-	    $logger = new Zend_Log();
+    {
+        $logger = new Zend_Log();
 
-	    //Empty Writer
+        //Empty Writer
         $logger->addWriter(
             new Zend_Log_Writer_Null()
         );
-        
-        if($this->_config->global->logger->use) {
+
+        if ($this->_config->global->logger->use) {
             //Stream Writer
-            if($this->_config->global->logger->stream->use) {
+            if ($this->_config->global->logger->stream->use) {
                 $logger->addWriter(
                     new Zend_Log_Writer_Stream(
                         SYSTEM_PATH . '/variables/logs/kernel.log'
@@ -84,7 +86,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 );
             }
             //Firebug Writer
-            if($this->_config->global->logger->firebug->use) {
+            if ($this->_config->global->logger->firebug->use) {
                 $logger->addWriter(
                     new Zend_Log_Writer_Firebug()
                 );
@@ -98,7 +100,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'Logging initialized...',
             Zend_Log::INFO
         );
-	}
+    }
 
     /*
      * Doctrine Initialization
@@ -107,9 +109,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     public function _initDoctrine()
     {
         $this->getApplication()->getAutoloader()
-                               ->pushAutoloader(array('Doctrine', 'autoload'));
+            ->pushAutoloader(array('Doctrine', 'autoload'));
         spl_autoload_register(array('Doctrine', 'modelsAutoload'));
-        
+
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(
@@ -122,7 +124,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $conn = Doctrine_Manager::connection($this->_config->database->doctrine->dsn, 'doctrine');
         $conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-        
+
         return $conn;
     }
 
@@ -143,4 +145,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         Zend_Registry::set('translate', $translate);
     }
+
+    /**
+     * Action Helper Initialization
+     * @return void
+     */
+    protected function _initActionHelpers()
+    {
+        Zend_Controller_Action_HelperBroker::addPrefix('Kebab_Controller_Action_Helper');
+    }
+
 }
