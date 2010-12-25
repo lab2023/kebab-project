@@ -1,8 +1,16 @@
 User:
   columns:
+    userId:
+      type: integer
+      unsigned: false
+      primary: true
+      autoincrement: true
+    firstName:
+      type: string(255)
+    surname:
+      type: string(255)
     userName:
       type: string(16)
-      primary: true
     email:
       type: string(255)
     password:
@@ -11,7 +19,7 @@ User:
   relations:
     Roles:
       class: Role
-      local: userName
+      local: userId
       foreign: roleName
       refClass: UserRole
 
