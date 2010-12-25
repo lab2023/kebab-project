@@ -1,0 +1,6 @@
+System_Model_Module:
+  Contact:
+    moduleName: Contact
+
+  Task:
+    moduleName: Task

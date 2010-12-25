@@ -1,0 +1,22 @@
+Action:
+  columns:
+    actionId:
+      type: integer
+      unsigned: false
+      primary: true
+      autoincrement: true
+    resourceId:
+      type: integer
+    action:
+      type: string(255)
+
+  relations:
+    Resource:
+      local: resourceId
+      foreign: resourceId
+      type: one
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

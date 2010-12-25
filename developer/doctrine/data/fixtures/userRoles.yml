@@ -1,16 +1,16 @@
 System_Model_UserRole:
   Guest:
-    userName: guest
-    roleName: guest
+    User: Guest
+    Role: Guest
 
   Member:
-    userName: member
-    roleName: member
+    User: Member
+    Role: Member
 
   Admin:
-    userName: admin
-    roleName: admin
+    User: Admin
+    Role: Admin
 
   Owner:
-    userName: owner
-    roleName: owner
+    User: Owner
+    Role: Owner

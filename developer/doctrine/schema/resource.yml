@@ -1,0 +1,28 @@
+Resource:
+  columns:
+    resourceId:
+      type: integer
+      unsigned: false
+      primary: true
+      autoincrement: true
+    moduleId:
+      type: integer  
+    controller:
+      type: string(255)
+
+  relations:
+    Module:
+      local: moduleId
+      foreign: moduleId
+      type: one
+
+    Actions:
+      local: resourceId
+      foreign: resourceId
+      type: many
+      class: Action
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
