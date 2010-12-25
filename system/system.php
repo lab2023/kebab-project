@@ -12,17 +12,35 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
+ * @category   Kebab (kebab-reloaded)
+ * @package    System
+ * @subpackage Bootstrap
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
-// Begin Script Executing Time
+/**
+ * System Bootstrapping Configurations File
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    System
+ * @subpackage Bootstrap
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+
+/*
+ * Set Script Executing Start Time
+ */
 $scriptTimeStart = microtime(true);
 
-//Application Environments
+/*
+ * Application Environments
+ */
 $envs = array(
     'prod'  => 'production',
     'stage' => 'staging',
@@ -32,7 +50,9 @@ $envs = array(
 );
 $env = $envs['dev'];
 
-//Application Folders & Paths
+/*
+ * Application Folders & Paths
+ */
 $paths = array(
     'sys'   => 'system',        // system folder name
     'app'   => 'applications',  // modules folder name
@@ -41,7 +61,9 @@ $paths = array(
     'pub'   => 'web'            // public folder name
 );
 
-//Application Configs
+/*
+ * Application Configs
+ */
 $cfgs = array(
     'application'   => 'application.ini',
     'database'      => 'database.ini',

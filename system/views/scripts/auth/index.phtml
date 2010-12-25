@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Welcome to the Kebab Framework</title>
+<title>Kebab Framework Reloaded :: Login Page</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
 <style>
@@ -28,24 +28,20 @@ h1 {
  padding: 5px 0 6px 0;
 }
 </style>
-<h1>Welcome to the <strong>Kebab Framework Reloaded</strong></h1>
 
-<p>Congratulations! This is your project's main page.</p>
+<h1><strong>Kebab Framework Reloaded :: Login Page</strong></h1>
+
+<form method="post" action="<?php echo $this->baseUrl('auth/login'); ?>">
+    <strong>Username</strong>
+    <input type="text" size="20" name="username"><br />
+    <strong>Password</strong>
+    <input type="password" size="20" name="password"><br />
+    <input type="submit" name="login" value="Login"> or <a href="<?php echo $this->baseUrl(); ?>">Go back</a>
+</form>
 
 <p>
     <a href="http://www.kebab.tc/" target="_blank">Kebab Framework website</a> |
     <a href="http://www.kebab.tc/?page_id=26" target="_blank">About this framework</a>
 </p>
-
-<h2>Form Login</h2>
-
-<form method="post" action="">
-    <strong>Username</strong>
-    <input type="text" size="20" name="username"><br />
-    <strong>Password</strong>
-    <input type="password" size="20" name="password"><br />
-    <input type="submit" name="login" value="Login">
-</form>
-
 </body>
 </html>

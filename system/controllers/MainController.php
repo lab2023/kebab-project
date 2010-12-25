@@ -1,8 +1,4 @@
-<?php
-
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
-
+<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,42 +12,73 @@ if (!defined('BASE_PATH'))
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
+ * @category   Kebab (kebab-reloaded)
+ * @package    Controllers
+ * @subpackage Default
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+
+/**
+ * Kebab Application Main Controller
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    Controllers
+ * @subpackage Default
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 class MainController extends Kebab_Controller_Action
 {
-
+    /**
+     * This variable access to zend front controller
+     * @var Zend_Controller_Front
+     */
     private $_fc;
 
     public function init()
     {
-        $this->_fc = Zend_Controller_Front::getInstance();
-        $this->_fc->setParam('noViewRenderer', true);
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->view->identity = $auth->getIdentity();
         }
     }
 
+    /**
+     * Index action
+     * @return void
+     */
     public function indexAction()
     {
-        echo "index - member";
+        
     }
 
+    /**
+     * Member test action
+     * @return void
+     */
     public function memberAction()
     {
         echo "member";
     }
 
+    /**
+     * Admin test action
+     * @return void
+     */
     public function adminAction()
     {
         echo "admin";
     }
 
+    /**
+     * Owner test action
+     * @return void
+     */
     public function ownerAction()
     {
         echo "owner";

@@ -12,20 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
+ * @category   Kebab (kebab-reloaded)
+ * @package    SuperDuper_Languages
+ * @subpackage En
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
-abstract class Kebab_Model_Base
-{    
-    public function  __construct()
-    {
-        Zend_Registry::get('logger')->log(
-            get_class($this) . ' initialized...',
-            Zend_Log::INFO
-        );
-    }
-}
+/**
+ * Kebab Application Engilsh Language File
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    SuperDuper_Languages
+ * @subpackage En
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+return array(
+    'SUPER_DUPER_ONE'   => 'Super Duper One',
+    'SUPER_DUPER_TWO'   => 'Super Duper Two',
+    'SUPER_DUPER_THREE' => 'Super Duper Three'
+);

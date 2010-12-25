@@ -1,5 +1,4 @@
-#!/usr/bin/env /usr/bin/php
-<?php
+<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -14,8 +13,8 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Developer
- * @subpackage Scripts
+ * @package    Applications
+ * @subpackage Tr
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
@@ -23,15 +22,19 @@
  */
 
 /**
- * Doctrine CLI Bootstrapping File Includer
+ * Kebab Application Engilsh Language File
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Developer
- * @subpackage Scripts
+ * @package    SuperDuper_Languages
+ * @subpackage Tr
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-chdir(dirname(__FILE__));
-include('doctrine.php');
+return array(
+    'KERNEL_ONE' => 'Super Duper Bir',
+    'SUPER_DUPER_TWO' => 'Super Duper İki',
+    'SUPER_DUPER_HREE' => 'Super Duper Üç'
+);
+

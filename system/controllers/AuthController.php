@@ -1,8 +1,4 @@
-<?php
-
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
-
+<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,15 +12,41 @@ if (!defined('BASE_PATH'))
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   KEBAB
- * @package    Core
+ * @category   Kebab (kebab-reloaded)
+ * @package    System
+ * @subpackage Controllers
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
+
+/**
+ * Kebab Application Auth Controller
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    System
+ * @subpackage Controllers
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 class AuthController extends Kebab_Controller_Action
 {
-
+    /**
+     * Check user name and password and authorize user
+     * @return void
+     */
+    public function indexAction()
+    {
+        
+    }
+    
+    /**
+     * Check user name and password and authorize user
+     * @return void
+     */
     public function loginAction()
     {
         // getParams
@@ -69,16 +91,20 @@ class AuthController extends Kebab_Controller_Action
                 //KBBTODO Set a message not valid user
                 $this->_redirect('main');
             } else {
-                //KBBTODO Set a message not valid user
+                $this->_redirect('auth/index');
             }
         }
     }
 
+    /**
+     * Logout, clear authorized user identity and redirect login page
+     * @return void
+     */
     public function logoutAction()
     {
         $authAdapter = Zend_Auth::getInstance();
         $authAdapter->clearIdentity();
-        $this->_redirect('');
+        $this->_redirect('auth/index');
     }
 
 }
