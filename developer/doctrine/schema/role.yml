@@ -14,7 +14,7 @@ Role:
     Users:
       class: User
       local: roleName
-      foreign: userId
+      foreign: userName
       refClass: UserRole
 
   options:

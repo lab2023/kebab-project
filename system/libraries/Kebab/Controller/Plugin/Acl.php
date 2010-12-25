@@ -24,7 +24,7 @@
 /**
  * Kebab Controller Acl Plugin
  * This class ckeck kebab acl and resources automaticly
- 
+
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
  * @subpackage Controller_Plugin
