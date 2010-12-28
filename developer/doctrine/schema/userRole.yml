@@ -1,15 +1,15 @@
 UserRole:
   columns:
-    userName:
-      type: string(16)
+    userId:
+      type: integer
       primary: true
     roleName:
       type: string(255)
       primary: true
   relations:
     User:
-      local: userName
-      foreign: userName
+      local: userId
+      foreign: userId
     Role:
       local: roleName
       foreign: roleName
