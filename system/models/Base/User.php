@@ -13,7 +13,6 @@
  * @property string $password
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
- * @property Doctrine_Collection $Role
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -68,10 +67,5 @@ abstract class System_Model_Base_User extends Doctrine_Record
         $this->hasMany('System_Model_UserRole as UserRole', array(
              'local' => 'userId',
              'foreign' => 'userId'));
-
-        $this->hasMany('System_Model_Role as Role', array(
-             'refClass' => 'System_Model_UserRole',
-             'local' => 'userName',
-             'foreign' => 'roleName'));
     }
 }
