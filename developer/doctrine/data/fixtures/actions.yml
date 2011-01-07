@@ -1,0 +1,8 @@
+System_Model_Action:
+  Contact_Contact_addContact:
+    Resource: Contact_Contact
+    action: addContact
+
+  Task_Task_addTask:
+    Resource: Task_Task
+    action: addTask

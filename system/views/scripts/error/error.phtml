@@ -1,28 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Zend Framework Default Application</title>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Zend Framework Default Application</title>
+    <style type="text/css">
+        html {
+            background-color:#EEE;
+        }
+
+        body {
+            margin:5em;
+            padding:2em;
+            border:1px solid #DDD;
+            -moz-border-radius:	0.5em;
+            background-color:#FFF;
+            font-family:Verdana, Arial, sans-serif;
+            line-height:1.5em;
+            font-size:10pt;
+        }
+
+        h1 {
+            margin:							0 0 1.5em 0;
+        }
+
+        h3 {
+            margin:							2em 0 0 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>An error occurred</h1>
-  <h2><?php echo $this->message ?></h2>
+    <h1>An error occurred</h1>
+    <h2><?php echo $this->message ?></h2>
 
-  <?php if (isset($this->exception)): ?>
+    <?php if(isset($this->exception)): ?>
 
-  <h3>Exception information:</h3>
-  <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
-  </p>
+    <h3>Exception information:</h3>
+    <p><?php echo $this->exception->getMessage() ?></p>
+    
 
-  <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
-  </pre>
+    <h3>Stack trace:</h3>
+    <pre><?php echo $this->exception->getTraceAsString() ?></pre>
+    
 
-  <h3>Request Parameters:</h3>
-  <pre><?php echo var_export($this->request->getParams(), true) ?>
-  </pre>
-  <?php endif ?>
+    <h3>Request Parameters:</h3>
+    <pre><?php echo var_export($this->request->getParams(), true) ?></pre>
+    <?php endif ?>
+
+    <h3>Version Information</h3>
+    <dl>
+        <dt>Zend Framework:</dt>
+        <dd><?php echo Zend_Version::VERSION; ?></dd>
+        <dt>PHP:</dt>
+        <dd><?php echo htmlspecialchars(phpversion()); ?></dd>
+        <dt>System:</dt>
+        <dd><?php echo htmlspecialchars(php_uname()); ?></dd>
+        <dt>Timestamp:</dt>
+        <dd><?php echo gmdate(DATE_ISO8601); ?></dd>
+    </dl>
 
 </body>
 </html>

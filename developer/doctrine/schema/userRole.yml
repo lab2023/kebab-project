@@ -1,18 +1,18 @@
 UserRole:
   columns:
-    userName:
-      type: string(16)
+    userId:
+      type: integer
       primary: true
-    roleName:
-      type: string(255)
+    roleId:
+      type: integer
       primary: true
   relations:
     User:
-      local: userName
-      foreign: userName
+      local: userId
+      foreign: userId
     Role:
-      local: roleName
-      foreign: roleName
+      local: roleId
+      foreign: roleId
 
   options:
     type: INNODB

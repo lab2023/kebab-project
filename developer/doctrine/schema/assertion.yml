@@ -1,0 +1,14 @@
+Assertion:
+  columns:
+    assertionId:
+      type: integer
+      unsigned: false
+      primary: true
+      autoincrement: true
+    assertionName:
+      type: string(255)
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

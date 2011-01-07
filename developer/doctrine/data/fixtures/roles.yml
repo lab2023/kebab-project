@@ -4,12 +4,12 @@ System_Model_Role:
 
   Member:
     roleName: member
-    inheritRole: guest
+    InheritRole: Guest
 
   Admin:
     roleName: admin
-    inheritRole: member
+    InheritRole: Member
 
   Owner:
     roleName: owner
-    inheritRole: admin
+    InheritRole: Admin

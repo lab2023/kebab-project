@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -84,7 +87,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @return Zend_Config
      */
     protected function _initConfig()
-	{
+    {
         $config = new Zend_Config($this->getOptions(), true);
         Zend_Registry::set('config', $this->_config = $config);
 
@@ -128,7 +131,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'Logging initialized...',
             Zend_Log::INFO
         );
-	}
+
+        return $this->_logging;
+    }
 
     /*
      * Doctrine Initialization
@@ -137,9 +142,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     public function _initDoctrine()
     {
         $this->getApplication()->getAutoloader()
-                               ->pushAutoloader(array('Doctrine', 'autoload'));
+            ->pushAutoloader(array('Doctrine', 'autoload'));
         spl_autoload_register(array('Doctrine', 'modelsAutoload'));
-        
+
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(
@@ -149,7 +154,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
 
         Doctrine::loadModel($this->_config->database->doctrine->models_path);
-
+            
         $connection = Doctrine_Manager::connection(
             $this->_config->database->doctrine->connections->master->dsn,
             $this->_config->database->doctrine->connections->master->name

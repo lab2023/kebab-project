@@ -77,12 +77,7 @@ class Kebab_Acl extends Zend_Acl
     private function addAllAllow()
     {
         // Rules
-        parent::allow('guest', 'Default_Index');
-        parent::allow('guest', 'Default_Auth');
-        parent::allow('guest', 'Default_Error');
-        parent::allow('member', 'Default_Main', array('member', 'index'));
-        parent::allow('admin', 'Default_Main', array('admin'));
-        parent::allow('owner', 'Default_Main', array('owner'));
+        parent::allow();
     }
 
 }

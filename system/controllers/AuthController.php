@@ -40,9 +40,9 @@ class AuthController extends Kebab_Controller_Action
      */
     public function indexAction()
     {
-        
+
     }
-    
+
     /**
      * Check user name and password and authorize user
      * @return void
@@ -77,7 +77,7 @@ class AuthController extends Kebab_Controller_Action
                 ->setCredentialTreatment('MD5(?)')
                 ->setIdentity($userName)
                 ->setCredential($password);
-            
+
             // set Zend_Auth
             $result = $auth->authenticate($authAdapter);
 

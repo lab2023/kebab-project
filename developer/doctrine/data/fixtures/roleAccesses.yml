@@ -1,0 +1,20 @@
+System_Model_RoleAccess:
+  Guest_Contact_Contact_addContact_deny:
+    Role: Guest
+    Action: Contact_Contact_addContact
+    allow: deny
+
+  Guest_Task_Task_addTask_deny:
+    Role: Guest
+    Action: Task_Task_addTask
+    allow: deny
+
+  Member_Contact_Contact_addContact_allow:
+    Role: Member
+    Action: Contact_Contact_addContact
+    allow: allow
+
+  Member_Task_Task_addTask_allow:
+    Role: Member
+    Action: Task_Task_addTask
+    allow: allow

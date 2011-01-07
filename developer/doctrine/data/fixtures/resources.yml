@@ -1,0 +1,8 @@
+System_Model_Resource:
+  Contact_Contact:
+    Module: Contact
+    controller: Contact
+
+  Task_Task:
+    Module: Task
+    controller: Task
