@@ -85,9 +85,20 @@ class Kebab_Ajax_Response
      * @param  Kebab_Extjs_Form_Errors $errors
      * @return Kebab_Ajax_Response
      */
-    public function setErrors($errors)
+    public function setErrors(Kebab_Extjs_Form_Errors $errors)
     {
         $this->errors = $errors->getErrors();
+        return $this;
+    }
+
+    /**
+     * setNotifications - set notifications
+     * @param  Kebab_Notification $notifications
+     * @return Kebab_Ajax_Response 
+     */
+    public function setNotifications(Kebab_Notification $notifications)
+    {
+        $this->notifications = $notifications->getNotifications();
         return $this;
     }
 }
