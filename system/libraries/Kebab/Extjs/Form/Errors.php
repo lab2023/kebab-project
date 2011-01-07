@@ -41,7 +41,7 @@ class Kebab_Extjs_Form_Errors extends ArrayObject
 {
 
     /**
-     *
+     * @access protected
      * @var array
      */
     protected $errors = array();
@@ -93,6 +93,20 @@ class Kebab_Extjs_Form_Errors extends ArrayObject
         }
 
         return $this;
+    }
+
+    /**
+     * hasErrors() - Are there any errors?
+     *
+     * @return boolean
+     */
+    public function hasErrors()
+    {
+        if (count($this->errors) > 0) {
+            return true;
+        }
+
+        return false;
     }
 
 }
