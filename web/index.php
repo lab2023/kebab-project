@@ -36,16 +36,18 @@
 /*
  * Kebab System Settings
  */
-include '../system/system.php';
+include '../system/configs/system.php';
 
 /*
  * Setup Defines
  */
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
-defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR);
+defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../') . '/');
 defined('SYSTEM_PATH')      || define('SYSTEM_PATH', BASE_PATH . $paths['sys']);
 defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$paths['app']);
 defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH .$paths['dev']);
+defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH .$paths['dns']);
+defined('BASE_URL')         || define('BASE_URL', $baseUrl);
 
 /*
  * Ensure library is on include_paths
@@ -53,7 +55,7 @@ defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH .$paths['dev']
 set_include_path(implode( PATH_SEPARATOR,
     array(
         realpath(BASE_PATH . $paths['lib']), // 3rd party libraries
-        realpath(SYSTEM_PATH . DIRECTORY_SEPARATOR . $paths['lib']), // system libraries
+        realpath(SYSTEM_PATH . '/' . $paths['lib']), // system libraries
         get_include_path()
     ))
 );
@@ -62,7 +64,7 @@ set_include_path(implode( PATH_SEPARATOR,
  * Setup Config File Path
  */
 foreach($cfgs as $key => $value) {
-    $configs[$key] = SYSTEM_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . $value;
+    $configs[$key] = SYSTEM_PATH . '/configs/' . $value;
 }
 
 /*

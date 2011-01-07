@@ -90,10 +90,10 @@ class AuthController extends Kebab_Controller_Action
                 $auth->getStorage()->write($identity);
                 //KBBTODO Set a message not valid user
                 $this->_redirect('main');
-            } else {
-                $this->_redirect('auth/index');
             }
         }
+
+        $this->_redirect('auth/index');
     }
 
     /**

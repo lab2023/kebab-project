@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Kebab Framework Reloaded :: Login Page</title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->baseUrl('favicon.ico')?>" type="image/x-icon" />
 
 <style>
  body {
@@ -36,7 +36,7 @@ h1 {
     <input type="text" size="20" name="username"><br />
     <strong>Password</strong>
     <input type="password" size="20" name="password"><br />
-    <input type="submit" name="login" value="Login"> or <a href="<?php echo $this->baseUrl(); ?>">Go back</a>
+    <input type="submit" name="login" value="Login"> or <a href="<?php echo $this->baseUrl('index'); ?>">Go back</a>
 </form>
 
 <p>

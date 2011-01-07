@@ -1,8 +1,4 @@
-<?php
-
-if (!defined('BASE_PATH')) {
-    exit('No direct script access allowed');
-}
+<?php if (!defined('BASE_PATH')) exit('No direct script access allowed');
 
 /**
  * Kebab Framework
@@ -63,7 +59,7 @@ class ErrorController extends Kebab_Controller_Action
 
         $this->view->request = $errors->request;
 
-        Zend_Registry::get('logger')->log(
+        Zend_Registry::get('logging')->log(
             $errors,
             Zend_Log::ERR
         );
