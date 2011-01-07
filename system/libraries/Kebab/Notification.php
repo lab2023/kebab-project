@@ -37,24 +37,27 @@ if (!defined('BASE_PATH'))
  */
 class Kebab_Notification implements IteratorAggregate, Countable
 {
-    const ALERT     = "ALERT";    // Alert: action must be taken immediately
-    const CRIT      = "CRIT";      // Critical: critical conditions
+    const ALERT     = "ALERT";      // Alert: action must be taken immediately
+    const CRIT      = "CRIT";       // Critical: critical conditions
     const ERR       = "ERR";        // Error: error conditions
-    const WARN      = "WARN";      // Warning: warning conditions
-    const NOTICE    = "NOTICE";  // Notice: normal but significant condition
-    const INFO      = "INFO";      // Informational: informational messages
+    const WARN      = "WARN";       // Warning: warning conditions
+    const NOTICE    = "NOTICE";     // Notice: normal but significant condition
+    const INFO      = "INFO";       // Informational: informational messages
 
     /**
      * $_notifications - All notifications from current request
-     * @var array
+     * 
+     * @access protected
+     * @var    array
      */
     static protected $_notifications = array();
 
     /**
      * addNotification() - Add a new notification
      *
-     * @param array $notification
-     * @return Kebab_Notification
+     * @param string $notificationType
+     * @param string $notification
+     * @return void
      */
     static public function addNotification($notificationType, $notification)
     {
