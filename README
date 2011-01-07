@@ -20,5 +20,6 @@ Documentation
         system: zend application, kernel, core, configs, helpers etc. here        
         web: public html folder 
 
-[1]: http://kebab.tc/
-[2]: http://kebab-project.com/
+[1]: http://kebab-project.com
+[2]: http://kebab.tc
+[3]: http://zendext.com
