@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('BASE_PATH'))
+if (!defined('BASE_PATH')) 
     exit('No direct script access allowed');
 
 /**
@@ -35,14 +35,14 @@ if (!defined('BASE_PATH'))
  *             TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  */
-class Kebab_Notification implements IteratorAggregate, Countable
+class Kebab_Notification
 {
-    const ALERT     = "ALERT";      // Alert: action must be taken immediately
-    const CRIT      = "CRIT";       // Critical: critical conditions
-    const ERR       = "ERR";        // Error: error conditions
-    const WARN      = "WARN";       // Warning: warning conditions
-    const NOTICE    = "NOTICE";     // Notice: normal but significant condition
-    const INFO      = "INFO";       // Informational: informational messages
+    const ALERT = "ALERT";      // Alert: action must be taken immediately
+    const CRIT = "CRIT";       // Critical: critical conditions
+    const ERR = "ERR";        // Error: error conditions
+    const WARN = "WARN";       // Warning: warning conditions
+    const NOTICE = "NOTICE";     // Notice: normal but significant condition
+    const INFO = "INFO";       // Informational: informational messages
 
     /**
      * $_notifications - All notifications from current request
@@ -50,16 +50,18 @@ class Kebab_Notification implements IteratorAggregate, Countable
      * @access protected
      * @var    array
      */
-    static protected $_notifications = array();
+    protected $notifications = array();
 
     /**
      * addNotification() - Add a new notification
      *
      * @param string $notificationType
      * @param string $notification
+     * @param boolean $autoHide
      * @return void
      */
-    static public function addNotification($notificationType, $notification)
+    public function addNotification($notificationType, $notification,
+        $autoHide = TRUE)
     {
 
         $type = array('ALERT', 'CRIT', 'ERR', 'WARN', 'NOTICE', 'INFO');
@@ -71,10 +73,15 @@ class Kebab_Notification implements IteratorAggregate, Countable
         if (!is_string($notification)) {
             throw new Kebab_Notification_Exception('Invalid notification string');
         }
-        
-        self::$_notifications[] = array(
+
+        if (!is_bool($autoHide)) {
+            throw new Kebab_Notification_Exception('Invalid autoHide type');
+        }
+
+        $this->notifications[] = array(
             $notificationType,
-            Zend_Registry::get('translate')->_($notification)
+            Zend_Registry::get('translate')->_($notification),
+            $autoHide
         );
     }
 
@@ -85,7 +92,7 @@ class Kebab_Notification implements IteratorAggregate, Countable
      */
     public function hasNotifications()
     {
-        if (count(self::$_notifications) > 0) {
+        if (count($this->notifications) > 0) {
             return true;
         }
 
@@ -97,13 +104,9 @@ class Kebab_Notification implements IteratorAggregate, Countable
      *
      * @return array()
      */
-    static public function getNotifications()
+    public function getNotifications()
     {
-        if (self::hasNotifications()) {
-            return self::$_notifications;
-        }
-
-        return array();
+        return $this->notifications;
     }
 
     /**
@@ -111,42 +114,14 @@ class Kebab_Notification implements IteratorAggregate, Countable
      *
      * @return boolean
      */
-    static public function clearNotifications()
+    public function clearNotifications()
     {
-        if (self::hasNotifications()) {
-            self::$_notifications = array();
+        if ($this->hasNotifications()) {
+            $this->notifications = array();
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * getIterator() - Complete the IteratorAggregate interface, for iterating
-     *
-     * @return ArrayObject
-     */
-    public function getIterator()
-    {
-        if ($this->hasNotifications()) {
-            return new ArrayObject($this->getNotifications());
-        }
-
-        return new ArrayObject();
-    }
-
-    /**
-     * count() - Complete the countable interface
-     *
-     * @return int
-     */
-    public function count()
-    {
-        if ($this->hasNotifications()) {
-            return count($this->getNotifications());
-        }
-
-        return 0;
     }
 
 }
