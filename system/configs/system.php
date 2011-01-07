@@ -42,13 +42,14 @@ $scriptTimeStart = microtime(true);
  * Application Environments
  */
 $envs = array(
-    'prod'  => 'production',
-    'stage' => 'staging',
-    'test'  => 'testing',
-    'dev'   => 'development',
-    'cli'   => 'doctrinecli'
+    'prod'  => 'production',    // Production environment
+    'stage' => 'staging',       // Staging environment
+    'test'  => 'testing',       // Testing environment
+    'dev'   => 'development',   // Development environment
+    'cli'   => 'doctrinecli'    // Doctrin CLI environment (Dev. only)
 );
 $env = $envs['dev'];
+
 
 /*
  * Application Folders & Paths
@@ -56,6 +57,7 @@ $env = $envs['dev'];
 $paths = array(
     'sys'   => 'system',        // system folder name
     'app'   => 'applications',  // modules folder name
+    'dns'   => 'subdomains',    // domains & users folder name
     'dev'   => 'developer',     // modules folder name
     'lib'   => 'libraries',     // libraries folder name
     'pub'   => 'web'            // public folder name
@@ -65,7 +67,14 @@ $paths = array(
  * Application Configs
  */
 $cfgs = array(
-    'application'   => 'application.ini',
-    'database'      => 'database.ini',
-    'global'        => 'global.ini',
+    'application'   => 'application.ini',   // Zend Framework application settings
+    'kebab'         => 'kebab.ini',         // Kebab Framework global settings
+    'database'      => 'database.ini',      // System DB settings
+    'routes'        => 'routes.ini'         // System Routing settings
 );
+
+/*
+ * Dynamic BaseUrl and HTTPS detector
+ */
+$ssl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : null;
+$baseUrl = 'http'.$ssl.'://'. @$_SERVER['HTTP_HOST'];
