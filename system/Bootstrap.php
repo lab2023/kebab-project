@@ -39,26 +39,56 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * Configuration variable
      *
-     * @var integer
+     * @var Zend_Config
      */
-    private $_config;
+    private $_config = null;
 
     /**
-     * Logger variable
+     * Logging variable
      *
-     * @var integer
+     * @var Zend_Log
      */
-    private $_logger;
+    private $_logging = null;
 
+    /**
+     * Subdomain Initialization
+     * @return string
+     */
+    protected function _initSubdomain()
+    {
+        $subdomain = null;
+        $config = $this->getOption('kebab');
+
+        if ($config['subdomain']['use']) {
+
+            $host = explode('.', @$_SERVER['HTTP_HOST'], 2);
+            $subdomainName = $host[0];
+
+            $subdomainDir = glob(SUBDOMAINS_PATH . '/' . $subdomainName . '/*.ini');
+
+            if (count($subdomainDir) > 0) {
+                $subdomainCfg = new Zend_Config_Ini($subdomainDir[0], APPLICATION_ENV);
+                $this->setOptions($subdomainCfg->toArray());
+            }
+            /*
+             * KBBTODO: Check reserved subdomains and
+             * show subdomains not found error page
+             */
+        }
+
+        return $subdomain;
+    }
+    
     /*
      * Config Initialization
-     * @return void
+     * @return Zend_Config
      */
     protected function _initConfig()
 	{
         $config = new Zend_Config($this->getOptions(), true);
-        $config->modules = array();
         Zend_Registry::set('config', $this->_config = $config);
+
+        return $config;
     }
 
     /*
@@ -67,34 +97,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initLogging()
 	{
-	    $logger = new Zend_Log();
+	    $this->_logging = new Zend_Log();
 
 	    //Empty Writer
-        $logger->addWriter(
+        $this->_logging->addWriter(
             new Zend_Log_Writer_Null()
         );
         
-        if($this->_config->global->logger->use) {
+        if ($this->_config->kebab->logging->use) {
             //Stream Writer
-            if($this->_config->global->logger->stream->use) {
-                $logger->addWriter(
+            if($this->_config->kebab->logging->stream->use) {
+                $this->_logging->addWriter(
                     new Zend_Log_Writer_Stream(
                         SYSTEM_PATH . '/variables/logs/kernel.log'
                     )
                 );
             }
             //Firebug Writer
-            if($this->_config->global->logger->firebug->use) {
-                $logger->addWriter(
+            if ($this->_config->kebab->logging->firebug->use) {
+                $this->_logging->addWriter(
                     new Zend_Log_Writer_Firebug()
                 );
             }
         }
 
-        Zend_Registry::set('logger', $this->_logger = $logger);
+        Zend_Registry::set('logging', $this->_logging);
 
         // Info Log
-        $this->_logger->log(
+        $this->_logging->log(
             'Logging initialized...',
             Zend_Log::INFO
         );
@@ -102,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /*
      * Doctrine Initialization
-     * @return void
+     * @return Doctrine_Manager
      */
     public function _initDoctrine()
     {
@@ -120,15 +150,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         Doctrine::loadModel($this->_config->database->doctrine->models_path);
 
-        $conn = Doctrine_Manager::connection($this->_config->database->doctrine->dsn, 'doctrine');
-        $conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
+        $connection = Doctrine_Manager::connection(
+            $this->_config->database->doctrine->connections->master->dsn,
+            $this->_config->database->doctrine->connections->master->name
+        );
+        $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
         
-        return $conn;
+        return $connection;
     }
 
     /*
      * Translation Initialization
-     * @return void
+     * @return Zend_Translate
      */
     protected function _initTranslation()
     {
@@ -136,11 +169,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $translate = $this->getResource('translate');
         $translate->setOptions(
             array(
-                'log' => Zend_Registry::get('logger'),
+                'log' => Zend_Registry::get('logging'),
                 //KBBTODO getLocale from session
                 'locale' => 'auto'
             )
         );
         Zend_Registry::set('translate', $translate);
+
+        return $translate;
     }
 }
