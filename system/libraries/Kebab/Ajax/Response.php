@@ -40,6 +40,7 @@ if (!defined('BASE_PATH'))
 class Kebab_Ajax_Response
 {
     /**
+     * default false
      * @var string
      */
     public $success = 'false';
@@ -55,7 +56,7 @@ class Kebab_Ajax_Response
 
     /**
      * setSuccess()
-     * @param boolean $success
+     * @param  boolean $success
      * @throws Kebab_Ajax_Exception
      * @return Kebab_Ajax_Response
      */
@@ -70,4 +71,23 @@ class Kebab_Ajax_Response
         return $this;
     }
 
+    /**
+     * getErrors() - get all errors 
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * setErrors() - set errors
+     * @param  Kebab_Extjs_Form_Errors $errors
+     * @return Kebab_Ajax_Response
+     */
+    public function setErrors($errors)
+    {
+        $this->errors = $errors->getErrors();
+        return $this;
+    }
 }
