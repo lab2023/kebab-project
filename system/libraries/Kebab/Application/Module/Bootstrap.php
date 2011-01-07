@@ -54,7 +54,7 @@ abstract class Kebab_Application_Module_Bootstrap
         $this->_moduleName = $this->getModuleName();
         
         // Info Log
-        Zend_Registry::get('logger')->log(
+        Zend_Registry::get('logging')->log(
             $this->_moduleName . ' initialized...',
             Zend_Log::INFO
         );
@@ -78,7 +78,7 @@ abstract class Kebab_Application_Module_Bootstrap
         $this->setOptions($config->toArray());
         
         // Info Log
-        Zend_Registry::get('logger')->log(
+        Zend_Registry::get('logging')->log(
             $this->getOptions(),
             Zend_Log::INFO
         );

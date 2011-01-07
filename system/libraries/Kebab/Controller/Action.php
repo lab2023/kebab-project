@@ -40,7 +40,7 @@ abstract class Kebab_Controller_Action extends Zend_Controller_Action
      */
     public function init()
     {
-        Zend_Registry::get('logger')->log(
+        Zend_Registry::get('logging')->log(
             get_class($this) . ' initialized...',
             Zend_Log::INFO
         );
