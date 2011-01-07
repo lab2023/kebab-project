@@ -20,7 +20,7 @@ User:
     Roles:
       class: Role
       local: userId
-      foreign: roleName
+      foreign: roleId
       refClass: UserRole
 
   options:

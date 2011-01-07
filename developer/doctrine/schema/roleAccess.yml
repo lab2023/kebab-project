@@ -1,7 +1,7 @@
 RoleAccess:
   columns:
-    roleName:
-      type: string(255)
+    roleId:
+      type: integer
     resourceId:
       type: integer
     actionId:
@@ -15,8 +15,8 @@ RoleAccess:
 
   relations:
     Role:
-      local: roleName
-      foreign: roleName
+      local: roleId
+      foreign: roleId
       type: one
 
     Resource:
