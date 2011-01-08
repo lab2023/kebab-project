@@ -1,17 +1,17 @@
 UserRole:
   columns:
-    userId:
+    user_id:
       type: integer
       primary: true
-    roleId:
+    role_id:
       type: integer
       primary: true
   relations:
     User:
-      local: userId
+      local: user_id
       foreign: userId
     Role:
-      local: roleId
+      local: role_id
       foreign: roleId
 
   options:

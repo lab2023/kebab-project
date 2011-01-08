@@ -14,11 +14,9 @@ Role:
       class: Role
       local: inheritRole
       foreign: roleId
-
     Users:
+      foreignAlias : Roles
       class: User
-      local: roleId
-      foreign: userId
       refClass: UserRole
 
   options:

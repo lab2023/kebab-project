@@ -15,12 +15,10 @@ User:
       type: string(255)
     password:
       type: string(255)
-
   relations:
     Roles:
+      foreignAlias : Users
       class: Role
-      local: userId
-      foreign: roleId
       refClass: UserRole
 
   options:
