@@ -48,6 +48,7 @@ defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$paths['ap
 defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH .$paths['dev']);
 defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH .$paths['dns']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
+defined('IS_CLI')           || define('IS_CLI', false);
 
 /*
  * Ensure library is on include_paths

@@ -37,13 +37,14 @@
 include '../../system/configs/system.php';
 
 //Setup Defines
-defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'doctrineCLI'));
+defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../../') . '/');
 defined('SYSTEM_PATH')      || define('SYSTEM_PATH', BASE_PATH . $paths['sys']);
 defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$paths['app']);
 defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH .$paths['dev']);
 defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH .$paths['dns']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
+defined('IS_CLI')           || define('IS_CLI', true);
 
 // Ensure library/ is on include_paths
 set_include_path(implode( PATH_SEPARATOR,
@@ -65,10 +66,11 @@ $app = new Zend_Application(
     APPLICATION_ENV,
     array('config' => $configs)
 );
-$app->getBootstrap()->bootstrap();
+$app->bootstrap();
 
-$dbConfig = $app->getOption('database');
-$config = $dbConfig['doctrine'];
+//Zend Config
+require_once 'Zend/Config/Ini.php';
+$config = new Zend_Config_Ini(DEVELOPER_PATH . '/scripts/configs.ini' , 'doctrineCli');
 
-$cli = new Doctrine_Cli($config);
+$cli = new Doctrine_Cli($config->database->doctrine->toArray());
 $cli->run($_SERVER['argv']);

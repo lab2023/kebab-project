@@ -46,7 +46,6 @@ $envs = array(
     'stage' => 'staging',       // Staging environment
     'test'  => 'testing',       // Testing environment
     'dev'   => 'development',   // Development environment
-    'cli'   => 'doctrinecli'    // Doctrin CLI environment (Dev. only)
 );
 $env = $envs['dev'];
 
