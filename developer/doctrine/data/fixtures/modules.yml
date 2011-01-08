@@ -1,4 +1,7 @@
 System_Model_Module:
+  Default:
+    moduleName: Default
+
   Contact:
     moduleName: Contact
 

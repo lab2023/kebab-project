@@ -1,4 +1,20 @@
 System_Model_Resource:
+  Default_Auth:
+    Module: Default
+    controller: Auth
+
+  Default_Error:
+    Module: Default
+    controller: Error
+
+  Default_Index:
+    Module: Default
+    controller: Index
+
+  Default_Main:
+    Module: Default
+    controller: Main
+
   Contact_Contact:
     Module: Contact
     controller: Contact
