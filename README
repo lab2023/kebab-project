@@ -14,7 +14,7 @@ Documentation
 -------------
     Directories:
         applications: installed modules here
-        developer: developer tools here (doctrineCLI etc.)
+        developer: installation files and developer tools here (doctrineCLI etc.)
         libraries: 3rd. party libraries here (PEAR v.s.)
         subdomains* : optional subdomains folders and config files here
         system: zend application, kernel, core, configs, helpers etc. here        
