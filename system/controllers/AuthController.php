@@ -94,10 +94,10 @@ class AuthController extends Kebab_Controller_Action
                         ->from('System_Model_Role r')
                         ->leftJoin('r.Users u')
                         ->where('u.userName = ?', $identity->userName);
-                $roles = $query->fetchArray();
+                $roles = $query->execute();
 
                 foreach ($roles as $role) {
-                    $userRoles[] = $role['roleName'];
+                    $userRoles[] = $role->roleName;
                 }
 
                 $identity->roles = $userRoles;
@@ -105,6 +105,7 @@ class AuthController extends Kebab_Controller_Action
                 $auth->getStorage()->write($identity);
 
                 //KBBTODO Set a message not valid user
+                //die(Zend_Debug::dump($identity->acl));
                 $this->_redirect('main');
             }
         }
