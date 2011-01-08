@@ -1,20 +1,13 @@
 Module:
   columns:
-    moduleId:
-      type: integer
-      unsigned: false
-      primary: true
-      autoincrement: true
     moduleName:
       type: string(255)
 
   relations:
     Resources:
-      local: moduleId
-      foreign: moduleId
-      type: many
       class: Resource
-
+      type: many
+      
   options:
     type: INNODB
     collate: utf8_bin

@@ -1,26 +1,18 @@
 Resource:
   columns:
-    resourceId:
+    module_id:
       type: integer
-      unsigned: false
-      primary: true
-      autoincrement: true
-    moduleId:
-      type: integer  
     controller:
       type: string(255)
 
   relations:
     Module:
-      local: moduleId
-      foreign: moduleId
+      class: Module
       type: one
 
     Actions:
-      local: resourceId
-      foreign: resourceId
-      type: many
       class: Action
+      type: many
 
   options:
     type: INNODB

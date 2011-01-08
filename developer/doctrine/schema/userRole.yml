@@ -6,13 +6,12 @@ UserRole:
     role_id:
       type: integer
       primary: true
+
   relations:
     User:
-      local: user_id
-      foreign: userId
+      class: User
     Role:
-      local: role_id
-      foreign: roleId
+      class: Role
 
   options:
     type: INNODB

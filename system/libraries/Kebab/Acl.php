@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -33,6 +36,7 @@
  */
 class Kebab_Acl extends Zend_Acl
 {
+
     /**
      * Call all private methods this class
      * @return void
@@ -50,11 +54,15 @@ class Kebab_Acl extends Zend_Acl
      */
     private function addAllRoles()
     {
-        //Add Role
-        parent::addRole(new Zend_Acl_Role('guest'));
-        parent::addRole(new Zend_Acl_Role('member'));
-        parent::addRole(new Zend_Acl_Role('admin'));
-        parent::addRole(new Zend_Acl_Role('owner'));
+        $query = Doctrine_Query::create()
+                ->select('r.roleName, ir.roleName')
+                ->from('System_Model_Role r')
+                ->leftJoin('r.InheritRole ir');
+        $roles = $query->fetchArray();
+
+        foreach ($roles as $role) {
+            parent::addRole(new Zend_Acl_Role($role['roleName']), $role['InheritRole']['roleName']);
+        }
     }
 
     /**

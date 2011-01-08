@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -34,6 +37,7 @@
  */
 class AuthController extends Kebab_Controller_Action
 {
+
     /**
      * Check user name and password and authorize user
      * @return void
@@ -89,17 +93,17 @@ class AuthController extends Kebab_Controller_Action
                         ->select('r.roleName')
                         ->from('System_Model_Role r')
                         ->leftJoin('r.Users u')
-                        ->where('u.userName = ?', 'member');
+                        ->where('u.userName = ?', $identity->userName);
                 $roles = $query->fetchArray();
 
                 foreach ($roles as $role) {
-                     $userRoles[] = $role['roleName'];
-                }               
-                
-                $identity->roles =  $userRoles;
+                    $userRoles[] = $role['roleName'];
+                }
+
+                $identity->roles = $userRoles;
                 $identity->acl = new Kebab_Acl();
                 $auth->getStorage()->write($identity);
-                
+
                 //KBBTODO Set a message not valid user
                 $this->_redirect('main');
             }
