@@ -37,6 +37,7 @@
  * Kebab System Settings
  */
 include '../system/configs/system.php';
+// -----------------------------------------------------------------------------
 
 /*
  * Setup Defines
@@ -44,11 +45,12 @@ include '../system/configs/system.php';
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../') . '/');
 defined('SYSTEM_PATH')      || define('SYSTEM_PATH', BASE_PATH . $paths['sys']);
-defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH .$paths['app']);
-defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH .$paths['dev']);
-defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH .$paths['dns']);
+defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH . $paths['app']);
+defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . $paths['dev']);
+defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH . $paths['dns']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
 defined('IS_CLI')           || define('IS_CLI', false);
+// -----------------------------------------------------------------------------
 
 /*
  * Ensure library is on include_paths
@@ -60,6 +62,7 @@ set_include_path(implode( PATH_SEPARATOR,
         get_include_path()
     ))
 );
+// -----------------------------------------------------------------------------
 
 /*
  * Setup Config File Path
@@ -67,6 +70,7 @@ set_include_path(implode( PATH_SEPARATOR,
 foreach($cfgs as $key => $value) {
     $configs[$key] = SYSTEM_PATH . '/configs/' . $value;
 }
+// -----------------------------------------------------------------------------
 
 /*
  * Zend_Application
@@ -77,6 +81,7 @@ $app = new Zend_Application(
     array('config' => $configs)
 );
 $app->bootstrap()->run();
+// -----------------------------------------------------------------------------
 
 /**
  * Simple Kebab Profiling & Benchmarking Area
@@ -93,3 +98,4 @@ if(APPLICATION_ENV != 'production')
         | <strong>Memory peak usage :</strong> ".$mgpu." bytes
         | <strong>Application environment: </strong> {".APPLICATION_ENV."}</p>";
 }
+// -----------------------------------------------------------------------------

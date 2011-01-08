@@ -76,4 +76,4 @@ $cfgs = array(
  * Dynamic BaseUrl and HTTPS detector
  */
 $ssl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : null;
-$baseUrl = 'http'.$ssl.'://'. @$_SERVER['HTTP_HOST'];
+$baseUrl = "http" . $ssl . "://" . @$_SERVER['HTTP_HOST'];

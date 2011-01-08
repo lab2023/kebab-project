@@ -61,6 +61,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $subdomain = null;
         $config = $this->getOption('kebab');
+        //$this->_options['kebab']; //KBBTODO Try this!
 
         if ($config['subdomain']['use']) {
 

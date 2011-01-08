@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteCond $1 !^(index\.php|resources|uploads|favicon\.ico|robots\.txt)
+RewriteCond $1 !^(index\.php|assets|uploads|favicon\.ico|robots\.txt)
 RewriteRule ^(.*)$ index.php/$1 [L]
 
 php_flag magic_quotes_gpc off
