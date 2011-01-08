@@ -85,9 +85,21 @@ class AuthController extends Kebab_Controller_Action
             if ($result->isValid()) {
                 $identity = $authAdapter->getResultRowObject(null, 'password');
                 //KBBTODO Set role and ACL object
-                $identity->roles = array('member', 'admin');
+                $query = Doctrine_Query::create()
+                        ->select('r.roleName')
+                        ->from('System_Model_Role r')
+                        ->leftJoin('r.Users u')
+                        ->where('u.userName = ?', 'member');
+                $roles = $query->fetchArray();
+
+                foreach ($roles as $role) {
+                     $userRoles[] = $role['roleName'];
+                }               
+                
+                $identity->roles =  $userRoles;
                 $identity->acl = new Kebab_Acl();
                 $auth->getStorage()->write($identity);
+                
                 //KBBTODO Set a message not valid user
                 $this->_redirect('main');
             }
