@@ -1,19 +1,13 @@
 Action:
   columns:
-    actionId:
-      type: integer
-      unsigned: false
-      primary: true
-      autoincrement: true
-    resourceId:
-      type: integer
+    resource_id:
+       type: integer
     action:
       type: string(255)
 
   relations:
     Resource:
-      local: resourceId
-      foreign: resourceId
+      class: Resource
       type: one
 
   options:

@@ -1,10 +1,5 @@
 Assertion:
   columns:
-    assertionId:
-      type: integer
-      unsigned: false
-      primary: true
-      autoincrement: true
     assertionName:
       type: string(255)
 
