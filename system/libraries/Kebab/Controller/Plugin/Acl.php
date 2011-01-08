@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -35,12 +38,12 @@
  */
 class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 {
+
     /**
      * Zend_Acl object variable
      * @var Zend_Acl
      */
     private $_acl;
-
     /**
      * Roles variable
      * @var array
@@ -78,6 +81,7 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $isAllowed = $this->_acl->isAllowed($role, $mvcResource, $action);
         }
 
+        // Redirect default/auth/index
         if (!$isAllowed) {
             $request->setModuleName('default');
             $request->setControllerName('auth');
