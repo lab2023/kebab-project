@@ -1,37 +1,33 @@
 RoleAccess:
   columns:
-    roleId:
+    role_id:
       type: integer
-    resourceId:
+    resource_id:
       type: integer
-    actionId:
+    action_id:
       type: integer
     allow:
       type: enum
       length: 5
-      values: ['deny', 'allow']   
-    assertionId:
+      values: ['deny', 'allow']
+    assertion_id:
       type: integer
 
   relations:
     Role:
-      local: roleId
-      foreign: roleId
+      class: Role
       type: one
 
     Resource:
-      local: resourceId
-      foreign: resourceId
+      class: Resource
       type: one
 
     Action:
-      local: actionId
-      foreign: actionId
+      class: Action
       type: one
 
     Assertion:
-      local: assertionId
-      foreign: assertionId
+      class: Assertion
       type: one
 
   options:
