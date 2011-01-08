@@ -14,10 +14,12 @@ Documentation
 -------------
     Directories:
         applications: installed modules here
-        developer: developer tools here (doctrineCLI etc.)
-        system: zend application, kernel, core, configs, helpers etc. here
+        developer: installation files and developer tools here (doctrineCLI etc.)
         libraries: 3rd. party libraries here (PEAR v.s.)
-        web: public html folder 
+        subdomains* : optional subdomains folders and config files here
+        system: zend application, kernel, core, configs, helpers etc. here
+        web: public html folder
 
-[1]: http://kebab.tc/
-[2]: http://kebab-project.com/
+[1]: http://kebab-project.com
+[2]: http://kebab.tc
+[3]: http://zendext.com
