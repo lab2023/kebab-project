@@ -1,0 +1,14 @@
+Some:
+  columns:
+    someId:
+      type: integer
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
