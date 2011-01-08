@@ -1,19 +1,15 @@
 Role:
   columns:
-    roleId:
-      type : integer
-      unsigned: false
-      primary: true
-      autoincrement: true
     roleName:
       type: string(255)
     inheritRole:
       type: integer
+
   relations:
     InheritRole:
-      class: Role
       local: inheritRole
-      foreign: roleId
+      class: Role
+
     Users:
       foreignAlias : Roles
       class: User

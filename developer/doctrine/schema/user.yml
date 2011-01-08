@@ -1,10 +1,5 @@
 User:
   columns:
-    userId:
-      type: integer
-      unsigned: false
-      primary: true
-      autoincrement: true
     firstName:
       type: string(255)
     surname:

@@ -39,10 +39,10 @@ abstract class System_Model_Base_UserRole extends Doctrine_Record
         parent::setUp();
         $this->hasOne('System_Model_User as User', array(
              'local' => 'user_id',
-             'foreign' => 'userId'));
+             'foreign' => 'id'));
 
         $this->hasOne('System_Model_Role as Role', array(
              'local' => 'role_id',
-             'foreign' => 'roleId'));
+             'foreign' => 'id'));
     }
 }
