@@ -61,11 +61,11 @@ abstract class System_Model_Base_User extends Doctrine_Record
         parent::setUp();
         $this->hasMany('System_Model_Role as Roles', array(
              'refClass' => 'System_Model_UserRole',
-             'local' => 'userId',
-             'foreign' => 'roleId'));
+             'local' => 'user_id',
+             'foreign' => 'role_id'));
 
         $this->hasMany('System_Model_UserRole as UserRole', array(
              'local' => 'userId',
-             'foreign' => 'userId'));
+             'foreign' => 'user_id'));
     }
 }
