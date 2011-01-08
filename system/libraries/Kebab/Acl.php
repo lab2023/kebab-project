@@ -61,7 +61,9 @@ class Kebab_Acl extends Zend_Acl
         $roles = $query->fetchArray();
 
         foreach ($roles as $role) {
-            parent::addRole(new Zend_Acl_Role($role['roleName']), $role['InheritRole']['roleName']);
+            parent::addRole(
+                    new Zend_Acl_Role($role['roleName']), $role['InheritRole']['roleName']
+            );
         }
     }
 
@@ -71,11 +73,19 @@ class Kebab_Acl extends Zend_Acl
      */
     private function addAllResources()
     {
-        //Add Resource
-        parent::add(new Zend_Acl_Resource('Default_Index'));
-        parent::add(new Zend_Acl_Resource('Default_Auth'));
-        parent::add(new Zend_Acl_Resource('Default_Error'));
-        parent::add(new Zend_Acl_Resource('Default_Main'));
+        $query = Doctrine_Query::create()
+                ->select('r.controller, m.moduleName')
+                ->from('System_Model_Resource r')
+                ->leftJoin('r.Module m');
+        $resources = $query->execute();
+
+        foreach ($resources as $resource) {
+            parent::add(
+                    new Zend_Acl_Resource(
+                        $resource->Module->moduleName . '_' . $resource->controller
+                    )
+            );
+        }
     }
 
     /**
@@ -84,8 +94,39 @@ class Kebab_Acl extends Zend_Acl
      */
     private function addAllAllow()
     {
+        parent::deny();
+
+        $query = Doctrine_Query::create()
+                ->select('ro.roleName, ra.allow, re.controller, mo.moduleName, as.assertionName')
+                ->from('System_Model_RoleAccess ra')
+                ->leftJoin('ra.Role ro')
+                ->leftJoin('ra.Resource re')
+                ->leftJoin('re.Module mo')
+                ->leftJoin('ra.Assertion as');
+        $rules = $query->execute();
+        
+        (string) $allowOrDeny = 'deny';
+
+        foreach ($rules as $rule) {
+
+            $ruleType = $rule->allow;
+            $roleName = is_null($rule->Role) ? NULL : $rule->Role->roleName;
+            $resource = is_null($rule->Resource) ? $rule->Action->Resource : $rule->Resource;
+            $resourceName = is_null($resource->controller) ? NULL : $resource->Module->moduleName . '_' . $resource->controller;
+            $actionName = is_null($rule->Action) ? NULL : $rule->Action->action;
+            $assertionName = is_null($rule->Assertion) ? NULL : $rule->Assertion->assertionName;
+
+            parent::$ruleType(
+                    $roleName,
+                    $resourceName,
+                    $actionName,
+                    $assertionName
+            );
+        }
+
         // Rules
-        parent::allow();
+        //parent::allow(NULL, NULL, NULL, NULL);
+        parent::allow(NULL, NULL, array('login','logout'));
     }
 
 }
