@@ -39,9 +39,10 @@ class Kebab_Acl extends Zend_Acl
 
     /**
      * Call all private methods this class
+     *
      * @return void
      */
-    function __construct()
+    public function __construct()
     {
         self::addAllRoles();
         self::addAllResources();
@@ -50,6 +51,7 @@ class Kebab_Acl extends Zend_Acl
 
     /**
      * Add kebab roles
+     * 
      * @return void
      */
     private function addAllRoles()
@@ -58,17 +60,20 @@ class Kebab_Acl extends Zend_Acl
                 ->select('r.roleName, ir.roleName')
                 ->from('System_Model_Role r')
                 ->leftJoin('r.InheritRole ir');
-        $roles = $query->fetchArray();
+        $roles = $query->execute();
 
         foreach ($roles as $role) {
+            $inheritRole = is_null($role->inheritRole) ? NULL : $role->InheritRole->roleName;
             parent::addRole(
-                    new Zend_Acl_Role($role['roleName']), $role['InheritRole']['roleName']
+                    new Zend_Acl_Role($role->roleName),
+                    $inheritRole
             );
         }
     }
 
     /**
      * Add kebab resources
+     *
      * @return void
      */
     private function addAllResources()
@@ -90,6 +95,7 @@ class Kebab_Acl extends Zend_Acl
 
     /**
      * Add kebab acl allows
+     * 
      * @return void
      */
     private function addAllAllow()
@@ -104,7 +110,7 @@ class Kebab_Acl extends Zend_Acl
                 ->leftJoin('re.Module mo')
                 ->leftJoin('ra.Assertion as');
         $rules = $query->execute();
-        
+
         (string) $allowOrDeny = 'deny';
 
         foreach ($rules as $rule) {
@@ -126,7 +132,7 @@ class Kebab_Acl extends Zend_Acl
 
         // Rules
         //parent::allow(NULL, NULL, NULL, NULL);
-        parent::allow(NULL, NULL, array('login','logout'));
+        parent::allow(NULL, NULL, array('login', 'logout'));
     }
 
 }
