@@ -41,12 +41,14 @@ class Kebab_Ajax_Response
 {
     /**
      * default false
+     *
      * @var string
      */
     public $success = 'false';
 
     /**
      * getSuccess()
+     *
      * @return string
      */
     public function getSuccess()
@@ -56,6 +58,7 @@ class Kebab_Ajax_Response
 
     /**
      * setSuccess()
+     *
      * @param  boolean $success
      * @throws Kebab_Ajax_Exception
      * @return Kebab_Ajax_Response
@@ -72,7 +75,8 @@ class Kebab_Ajax_Response
     }
 
     /**
-     * getErrors() - get all errors 
+     * getErrors() - get all errors
+     *
      * @return array
      */
     public function getErrors()
@@ -82,6 +86,7 @@ class Kebab_Ajax_Response
 
     /**
      * setErrors() - set errors
+     *
      * @param  Kebab_Extjs_Form_Errors $errors
      * @return Kebab_Ajax_Response
      */
@@ -93,6 +98,7 @@ class Kebab_Ajax_Response
 
     /**
      * setNotifications - set notifications
+     * 
      * @param  Kebab_Notification $notifications
      * @return Kebab_Ajax_Response 
      */
