@@ -103,6 +103,8 @@ class AuthController extends Kebab_Controller_Action
                 $identity->roles = $userRoles;
                 $identity->acl = new Kebab_Acl();
                 $auth->getStorage()->write($identity);
+                //KBBTODO Set session time and check from getParams
+                Zend_Session::rememberMe();
 
                 //KBBTODO Set a message not valid user
                 //die(Zend_Debug::dump($identity->acl));
@@ -121,6 +123,7 @@ class AuthController extends Kebab_Controller_Action
     {
         $authAdapter = Zend_Auth::getInstance();
         $authAdapter->clearIdentity();
+        Zend_Session::forgetMe();
         $this->_redirect('auth/index');
     }
 
