@@ -73,7 +73,7 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $this->_acl = new Kebab_Acl();
         }
 
-        // Create mvcResource from Request Object
+        // Create mvcResource and action from Request Object
         $module = ucfirst($request->getModuleName());
         $controller = ucfirst($request->getControllerName());
         $mvcResource = $module . '_' . $controller;
