@@ -37,7 +37,7 @@ if (!defined('BASE_PATH'))
  *             TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  */
-class Kebab_Extjs_Form_Errors extends ArrayObject
+class Kebab_Extjs_Form_Errors
 {
 
     /**
@@ -78,18 +78,19 @@ class Kebab_Extjs_Form_Errors extends ArrayObject
 
     /**
      * addError() - add a new error to errors stack
-     * @param string $id
-     * @param string $msg
+     * 
+     * @param string $fieldId
+     * @param string $errorMessage
      * @throws Kebab_Extjs_Form_Exception
      * @return Kebab_Extjs_Form_Errors
      */
-    public function addError($id, $msg)
+    public function addError($fieldId, $errorMessage)
     {
         //KBBTODO check the $id is unique
-        if (!is_null($id) && !is_null($msg)) {
-            $this->errors[] = array($id => $msg);
+        if (!is_null($fieldId) && !is_null($errorMessage)) {
+            $this->errors[] = array($fieldId => $errorMessage);
         } else {
-            throw new Kebab_Extjs_Form_Exception('$id and $msg can\'t be null.');
+            throw new Kebab_Extjs_Form_Exception('$fieldId and $errorMessage can\'t be null.');
         }
 
         return $this;
