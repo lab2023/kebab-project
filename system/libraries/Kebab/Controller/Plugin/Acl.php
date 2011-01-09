@@ -55,16 +55,19 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
      * Kebab acl and resources checking here
      *
      * @param Zend_Controller_Request_Abstract $request
+     * @return void
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
+        // Get user roles and acl from session or set default user role as guest
+        // KBBTODO Don't like it. Hardcoding is bad!
+        // May be define a default user in a config file in the future!!!
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $identity = $auth->getIdentity();
-            $this->_roles = $identity->roles;
-            $this->_acl = $identity->acl;
+            $this->_roles = isset($identity->roles) ? $identity->roles : array('guest');
+            $this->_acl = isset($identity->acl) ? $identity->acl : new Kebab_Acl();
         } else {
-            //KBBTODO Don't like it' Hardcoding is bad!
             $this->_roles = array('guest');
             $this->_acl = new Kebab_Acl();
         }
