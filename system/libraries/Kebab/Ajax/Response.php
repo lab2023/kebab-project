@@ -97,6 +97,18 @@ class Kebab_Ajax_Response
     }
 
     /**
+     * setData() - set data
+     *
+     * @param  Kebab_Extjs_Form_Load $data
+     * @return Kebab_Ajax_Response
+     */
+    public function setData(Kebab_Extjs_Form_Load $data)
+    {
+        $this->data = $data->getData();
+        return $this;
+    }
+    
+    /**
      * setNotifications - set notifications
      * 
      * @param  Kebab_Notification $notifications
