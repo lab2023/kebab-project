@@ -45,7 +45,7 @@ if (!defined('BASE_PATH'))
  *             TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  */
-class Kebab_Extjs_Form_Load extends ArrayObject
+class Kebab_Extjs_Form_Load
 {
 
     /**
@@ -101,7 +101,7 @@ class Kebab_Extjs_Form_Load extends ArrayObject
             && is_string($fieldName)
             && is_string($fieldValue)
         ) {
-            $this->errors[] = array($fieldName => $fieldValue);
+            $this->data[] = array($fieldName => $fieldValue);
         } else {
             throw new Kebab_Extjs_Form_Exception('Invalid $fieldName or $fieldValue type.');
         }
