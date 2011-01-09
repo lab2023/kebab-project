@@ -44,6 +44,7 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
      * @var Zend_Acl
      */
     private $_acl;
+    
     /**
      * Roles variable
      * @var array
@@ -72,19 +73,20 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $this->_acl = new Kebab_Acl();
         }
 
-        // Create mvcResource
+        // Create mvcResource from Request Object
         $module = ucfirst($request->getModuleName());
         $controller = ucfirst($request->getControllerName());
         $mvcResource = $module . '_' . $controller;
         $action = $request->getActionName();
 
-        //Check Rules
+        // Check the this user allow to access module/controller/action
         $isAllowed = FALSE;
         while (!$isAllowed && list(, $role) = each($this->_roles)) {
             $isAllowed = $this->_acl->isAllowed($role, $mvcResource, $action);
         }
 
-        // Redirect default/auth/index
+        // If user don't have right to access module/controller/action
+        // , redirect default/auth/index
         if (!$isAllowed) {
             $request->setModuleName('default');
             $request->setControllerName('auth');
