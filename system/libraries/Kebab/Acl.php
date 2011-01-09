@@ -27,6 +27,10 @@ if (!defined('BASE_PATH'))
  * Kebab ACL
  * This class setup and all acl resources
  *
+ * Assertions
+ * 1. Every controller has a module.
+ * 2. Every action has a controller.
+ *
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
  * @author	   lab2023 Dev Team
@@ -100,6 +104,7 @@ class Kebab_Acl extends Zend_Acl
      */
     private function addAllAllow()
     {
+        //First off deny every resource for every roles
         parent::deny();
 
         $query = Doctrine_Query::create()
@@ -111,7 +116,7 @@ class Kebab_Acl extends Zend_Acl
                 ->leftJoin('ra.Assertion as');
         $rules = $query->execute();
 
-        (string) $allowOrDeny = 'deny';
+        (string) $ruleType = 'deny';
 
         foreach ($rules as $rule) {
 
@@ -129,10 +134,6 @@ class Kebab_Acl extends Zend_Acl
                     $assertionName
             );
         }
-
-        // Rules
-        //parent::allow(NULL, NULL, NULL, NULL);
-        parent::allow(NULL, NULL, array('login', 'logout'));
     }
 
 }
