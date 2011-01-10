@@ -40,6 +40,7 @@ class AuthController extends Kebab_Controller_Action
 
     /**
      * Check user name and password and authorize user
+     * 
      * @return void
      */
     public function indexAction()
@@ -49,6 +50,7 @@ class AuthController extends Kebab_Controller_Action
 
     /**
      * Check user name and password and authorize user
+     * 
      * @return void
      */
     public function loginAction()
@@ -56,6 +58,7 @@ class AuthController extends Kebab_Controller_Action
         // getParams
         $userName = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
+        $rememberMe = $this->_request->getParam('rememberMe');
 
         //Filter for SQL Injection
         $validatorUserName = new Zend_Validate();
@@ -117,6 +120,7 @@ class AuthController extends Kebab_Controller_Action
 
     /**
      * Logout, clear authorized user identity and redirect login page
+     * 
      * @return void
      */
     public function logoutAction()
