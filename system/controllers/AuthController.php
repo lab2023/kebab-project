@@ -39,7 +39,9 @@ class AuthController extends Kebab_Controller_Action
 {
 
     /**
-     * Check user name and password and authorize user
+     * index()
+     *
+     * <p>Check user name and password and authorize user</p>
      * 
      * @return void
      */
@@ -49,7 +51,9 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     * Check user name and password and authorize user
+     * loginAction()
+     * 
+     * <p>Check user name and password and authorize user</p>
      * 
      * @return void
      */
@@ -129,6 +133,129 @@ class AuthController extends Kebab_Controller_Action
         $authAdapter->clearIdentity();
         Zend_Session::forgetMe();
         $this->_redirect('auth/index');
+    }
+
+    /**
+     * forgotPassword()
+     * 
+     * Check email, send reset password link mail
+     *
+     * @return void
+     */
+    public function forgotPasswordAction()
+    {
+        $email = $this->_request->getParam('email');
+        $validatorEmail = new Zend_Validate_EmailAddress();
+
+        // Create user object
+        $user = Doctrine::getTable('System_Model_User')
+                ->findOneByemail($email);
+
+        //Filter for SQL Injection
+        if ($this->_request->isPost()
+            && $validatorEmail->isValid($email)
+            && ($user !== FALSE)
+        ) {
+            //KBBTODO We need a secure key for application
+            $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
+
+            $user->activationKey = $activationKey;
+            $user->save();
+
+            //KBBTODO move these settings to config file
+            $smtpServer = 'smtp.gmail.com';
+            $config = array(
+                'ssl' => 'tls',
+                'auth' => 'login',
+                'username' => 'noreply@kebab-project.com',
+                'password' => 'xxxxx'
+            );
+
+            // Mail PHTML
+            $view = new Zend_View;
+            $view->setScriptPath(SYSTEM_PATH . '/views/mails/');
+
+            //KBBTODO assign other things like username
+            //KBBTODO use language file
+            $view->assign('activationKey', $activationKey);
+
+            $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+            $mail = new Zend_Mail();
+            $mail->setFrom('noreply@kebab-project.com', 'Kebab Project');
+            $mail->addTo($user->email, $user->firstName . $user->surname);
+            $mail->setSubject('Reset your password');
+            $mail->setBodyHtml($view->render('forgot-password.phtml'));
+            $mail->send($transport);
+
+            $notification = new Kebab_Notification();
+            $notification->addNotification(Kebab_Notification::INFO, 'Please look your email.');
+            $this->_helper->redirector('login');
+        } else {
+            $notification = new Kebab_Notification();
+            $notification->addNotification(Kebab_Notification::ALERT, 'Please write your email correct!');
+        }
+    }
+
+    /**
+     *  resetPassword()
+     *
+     *  <p>Check the activationKey from url, show the resetPassword view, reset the password</p>
+     *
+     *  @return void
+     */
+    public function resetPasswordAction()
+    {
+        // Set variables from request
+        $activationKey = $this->_request->getParam('activation-key');
+        $password = $this->_request->getParam('password');
+        $passwordConfirm = $this->_request->getParam('password-confirm');
+
+        // Create a user object from doctrine
+        if (!is_null($activationKey)) {
+            $user = Doctrine::getTable('System_Model_User')
+                ->findOneByactivationKey($activationKey);
+        }
+
+
+        // NULL or expired activation key
+        if (!$this->_request->isGet()
+            && is_null($activationKey)
+            && is_null($user->activationKey)
+        ) {
+            $this->_helper->redirector('auth/reset-password-expired');
+        }
+
+        // Reset password and activationKey
+        if ($this->_request->isPost()
+            && !is_null($password)
+            && !is_null($passwordConfirm)
+            && ($password === $passwordConfirm)
+            && is_object($user)
+        ) {
+            $user->activationKey = NULL;
+            //KBBTODO we need more secure!!!
+            $user->password = md5($password);
+            $user->save();
+
+            //KBBTODO Use Translate
+            $notification = new Kebab_Notification();
+            $notification->addNotification(Kebab_Notification::INFO, 'Your password is changed.');
+            $this->_helper->redirector('login');
+        }
+
+        $this->view->activationKey = $activationKey;
+    }
+
+    /**
+     * resetPasswordExpired()
+     *
+     * <p>If the activationKey is expired, show the view</p>
+     *
+     * @return void
+     */
+    public function resetPasswordExpiredAction()
+    {
+        
     }
 
 }
