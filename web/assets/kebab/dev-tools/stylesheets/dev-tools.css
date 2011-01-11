@@ -45,10 +45,12 @@ div.kebab-developer-tools-bottom {
     margin:5px;
     padding:5px;
     display:none;
-    font-size:10px;
 }
 #kebab-developer-tools-console textarea {
+    font-family: "Lucida Console";
+    font-size:11px;
     height: 100px;
+    color:#000;
     width:100%;
-    border:1px solid silver;
+    border:1px solid;
 }

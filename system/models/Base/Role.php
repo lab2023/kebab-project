@@ -51,13 +51,20 @@ abstract class System_Model_Base_Role extends Doctrine_Record
         $this->hasMany('System_Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'role_id'));
+<<<<<<< HEAD
 
         $this->hasMany('System_Model_Role as Role', array(
              'local' => 'id',
              'foreign' => 'inheritRole'));
+=======
+>>>>>>> e9903474980923bb678952d9012b8473fabcbae6
 
         $this->hasMany('System_Model_RoleAccess as RoleAccess', array(
              'local' => 'id',
              'foreign' => 'role_id'));
+
+        $this->hasMany('System_Model_Role as Role', array(
+             'local' => 'id',
+             'foreign' => 'inheritRole'));
     }
 }
