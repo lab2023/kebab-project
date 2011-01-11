@@ -26,84 +26,97 @@ if (!defined('BASE_PATH'))
  */
 
 /**
- * Kebab_Extjs_Form_Errors - Return object with ExtJS Standard
+ * Kebab_Extjs_Form_Load - Return object with ExtJS Standard
  *
- * <p> A object with success /p>
+ * <p>
+ * If the client wanna to load form, server return an array.
+ * $data = array('
+ *          'formInputName' => 'value',
+ *          'formInoutNameTwo' => 'valueTwo'
+ *         );
+ *
+ * For more information see the Ext.form.Action.Load 
+ * </p>
  *
  * @category   Kebab
  * @package    Kebab_Extjs
- * @subpackage Kebab_Extjs_Form
+ * @subpackage Kebab_Extjs_Load
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies
  *             TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  */
-class Kebab_Extjs_Form_Errors
+class Kebab_Extjs_Form_Load
 {
 
     /**
      * @access protected
      * @var array
      */
-    protected $errors = array();
+    protected $data = array();
 
     /**
-     * getErrors() - return errrors 
+     * getData() - return data
+     *
      * @return array
      * @return void
      */
-    public function getErrors()
+    public function getData()
     {
-        return $this->errors;
+        return $this->data;
     }
 
     /**
-     * setErrrors() - set all errors
+     * setData() - set data property
      *
-     * <p>When you use this function you reset previous errors!</p>
+     * <p>When you use this function you reset previous data!</p>
      *
-     * @param  array $errors
+     * @param  array $data
      * @throws Kebab_ExtJs_Form_Exception
-     * @return Kebab_Extjs_Form_Errors
+     * @return Kebab_Extjs_Form_Data
      */
-    public function setErrors($errors)
+    public function setData($data)
     {
-        if (is_array($errors)) {
-            $this->errors = $errors;
+        if (is_array($data)) {
+            $this->data = $data;
         } else {
-            throw new Kebab_Extjs_Form_Exception('$errors type must be array.');
+            throw new Kebab_Extjs_Form_Exception('$data type must be array.');
         }
 
         return $this;
     }
 
     /**
-     * addError() - add a new error to errors stack
-     * 
-     * @param string $fieldId
-     * @param string $errorMessage
+     * addFieldValue() - add a new field and value to data stack
+     *
+     * @param string $fieldName
+     * @param string $fieldValue
      * @throws Kebab_Extjs_Form_Exception
      * @return Kebab_Extjs_Form_Errors
      */
-    public function addError($fieldId, $errorMessage)
+    public function addField($fieldName, $fieldValue)
     {
         //KBBTODO check the $id is unique
-        if (!is_null($fieldId) && !is_null($errorMessage)) {
-            $this->errors[] = array($fieldId => $errorMessage);
+        if (!is_null($fieldName)
+            && !is_null($fieldValue)
+            && is_string($fieldName)
+            && is_string($fieldValue)
+        ) {
+            $this->data[] = array($fieldName => $fieldValue);
         } else {
-            throw new Kebab_Extjs_Form_Exception('$fieldId and $errorMessage can\'t be null.');
+            throw new Kebab_Extjs_Form_Exception('Invalid $fieldName or $fieldValue type.');
         }
 
         return $this;
     }
 
     /**
-     * hasErrors() - Are there any errors?
+     * hasData() - Are there any form field at data stack?
      *
      * @return boolean
      */
-    public function hasErrors()
+    public function hasData()
     {
-        if (count($this->errors) > 0) {
+        if (count($this->data) > 0) {
             return true;
         }
 

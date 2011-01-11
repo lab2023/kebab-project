@@ -9,9 +9,9 @@
  * @property integer $inheritRole
  * @property System_Model_Role $InheritRole
  * @property Doctrine_Collection $Users
- * @property Doctrine_Collection $RoleAccess
  * @property Doctrine_Collection $UserRole
- * @property Doctrine_Collection $Role
+ * @property Doctrine_Collection $Role *
+ * @property Doctrine_Collection $RoleAccess
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -51,13 +51,13 @@ abstract class System_Model_Base_Role extends Doctrine_Record
         $this->hasMany('System_Model_RoleAccess as RoleAccess', array(
              'local' => 'id',
              'foreign' => 'role_id'));
+        
+        $this->hasMany('System_Model_Role as Role', array(
+             'local' => 'id',
+             'foreign' => 'inheritRole'));
 
         $this->hasMany('System_Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'role_id'));
-
-        $this->hasMany('System_Model_Role as Role', array(
-             'local' => 'id',
-             'foreign' => 'inheritRole'));
     }
 }
