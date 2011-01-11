@@ -134,6 +134,8 @@ class Kebab_Acl extends Zend_Acl
                     $assertionName
             );
         }
+
+        parent::allow();
     }
 
 }
