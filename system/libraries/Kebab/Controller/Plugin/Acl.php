@@ -61,7 +61,7 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         // Get user roles and acl from session or set default user role as guest
-        // KBBTODO Don't like it. Hardcoding is bad!
+        //KBBTODO Don't like it. Hardcoding is bad!
         // May be define a default user in a config file in the future!!!
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
@@ -70,6 +70,8 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $this->_acl = isset($identity->acl) ? $identity->acl : new Kebab_Acl();
         } else {
             $this->_roles = array('guest');
+            //KBBTODO make performans problem before login
+            //create a new Kebab_Acl object every request
             $this->_acl = new Kebab_Acl();
         }
 
@@ -85,8 +87,8 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $isAllowed = $this->_acl->isAllowed($role, $mvcResource, $action);
         }
 
-        // If user don't have right to access module/controller/action
-        // , redirect default/auth/index
+        // If user don't have right to access module/controller/action,
+        // redirect default/auth/index
         if (!$isAllowed) {
             $request->setModuleName('default');
             $request->setControllerName('auth');
