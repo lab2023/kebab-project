@@ -2,7 +2,7 @@
 /**
  * Simple Kebab Developer Console & Profiling & Benchmarking Area
  */
-$scriptTime         = number_format((microtime(true) - PROFILER_SCRIPT_START_TIME), 5,'.','.');
+$scriptTime         = number_format((microtime(true) - PROFILER_SCRIPT_START_TIME), 5,'.',',');
 $mgpu               = number_format(memory_get_peak_usage(true));
 $consolePosition    = Zend_Registry::get('config')->kebab->developerTools->position;
 ?>
@@ -16,11 +16,15 @@ $consolePosition    = Zend_Registry::get('config')->kebab->developerTools->posit
     <div id="kebab-developer-tools-img"></div>
     <p>
         <strong>Page render time :</strong>
-        <span><?php echo $scriptTime; ?> seconds</span>
-        |
+        <span <?php echo $scriptTime > .2 ? 'style="color:red;"' : null ;?>>
+            <?php echo $scriptTime; ?> seconds
+        </span>
+        <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong>
         <strong>Memory peak usage :</strong>
-        <span><?php echo $mgpu; ?> bytes</span>
-        |
+        <span>
+            <?php echo $mgpu; ?> bytes
+        </span>
+        <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong>
         <strong>Application environment: </strong>
         <span class="env-<?php echo APPLICATION_ENV ?>"><?php echo APPLICATION_ENV; ?></span>
     </p>
