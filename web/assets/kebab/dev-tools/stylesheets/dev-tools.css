@@ -1,0 +1,54 @@
+#kebab-developer-tools {
+    background: #000;
+    position:absolute;
+    margin:0; padding: 3px 0px 2px; left:0%;
+    width:100%;
+    z-index:999;
+}
+div.kebab-developer-tools-top {
+    border-bottom:5px solid silver;
+    top:0;
+}
+div.kebab-developer-tools-bottom {
+    border-top:5px solid silver;
+    bottom:0;
+}
+#kebab-developer-tools p {
+    font-size:12px;
+    font-style:italic;
+    color: #fff;
+    margin:3px 10px;
+    padding:0px;
+    float:left;
+}
+#kebab-developer-tools span.env-production   { color:chartreuse }
+#kebab-developer-tools span.env-staging      { color:aqua }
+#kebab-developer-tools span.env-testing      { color:yellow }
+#kebab-developer-tools span.env-development  { color:orangered }
+
+#kebab-developer-tools em {
+    float:right;
+    font-style:italic;
+    color:#eee;
+    font-size:10px;
+    padding:4px;
+}
+#kebab-developer-tools-img  {
+    background:url('../images/dev-tools.png') no-repeat;
+    width:22px; height:22px;
+    float:left;
+    margin-left:5px;
+    cursor:pointer;
+}
+#kebab-developer-tools-console {
+    clear:both;
+    margin:5px;
+    padding:5px;
+    display:none;
+    font-size:10px;
+}
+#kebab-developer-tools-console textarea {
+    height: 100px;
+    width:100%;
+    border:1px solid silver;
+}

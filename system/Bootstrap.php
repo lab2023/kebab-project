@@ -55,6 +55,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Subdomain Initialization
+     *
      * @return string
      */
     protected function _initSubdomain()
@@ -82,9 +83,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $subdomain;
     }
-    
-    /*
+
+    /**
      * Config Initialization
+     *
      * @return Zend_Config
      */
     protected function _initConfig()
@@ -95,25 +97,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $config;
     }
 
-    /*
+    /**
      * Logging Initialization
+     *
      * @return void
      */
     protected function _initLogging()
-	{
-	    $this->_logging = new Zend_Log();
+    {
+        $this->_logging = new Zend_Log();
 
-	    //Empty Writer
+        //Empty Writer
         $this->_logging->addWriter(
             new Zend_Log_Writer_Null()
         );
-        
+
         if ($this->_config->kebab->logging->use) {
             //Stream Writer
-            if($this->_config->kebab->logging->stream->use) {
+            if ($this->_config->kebab->logging->stream->use) {
                 $this->_logging->addWriter(
                     new Zend_Log_Writer_Stream(
-                        SYSTEM_PATH . '/variables/logs/kernel.log'
+                        SYSTEM_PATH . '/variables/logs/system.log'
                     )
                 );
             }
@@ -136,8 +139,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $this->_logging;
     }
 
-    /*
+    /**
      * Doctrine Initialization
+     *
      * @return Doctrine_Manager
      */
     public function _initDoctrine()
@@ -152,17 +156,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
 
         Doctrine::loadModel($this->_config->database->doctrine->models_path);
-            
+
         $connection = Doctrine_Manager::connection(
             $this->_config->database->doctrine->connections->master->dsn,
             $this->_config->database->doctrine->connections->master->name
         );
         $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-        
+
         return $connection;
     }
 
-    /*
+    /**
      * Translation Initialization
      * @return Zend_Translate
      */
@@ -181,4 +185,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $translate;
     }
+
 }

@@ -4,9 +4,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Welcome to the Kebab Framework</title>
-    <?php 
-        echo $this->headLink()
-                ->appendStylesheet('/assets/stylesheets/layout.css');
+    <?php
+    echo $this->headLink()
+        ->appendStylesheet($this->baseUrl('assets/kebab/system/stylesheets/layout.css'))
+        ->appendStylesheet($this->baseUrl('assets/kebab/dev-tools/stylesheets/dev-tools.css'));
     ?>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
@@ -19,3 +20,6 @@
     </p>
 </body>
 </html>
+<?php if (Zend_Registry::get('config')->kebab->developerTools->enable): ?>
+    <?php echo $this->render('sections/kebab-dev-tools/body.phtml'); ?>
+<?php endif; ?>
