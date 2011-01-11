@@ -36,6 +36,6 @@
 {
     public function indexAction()
     {
-
+        echo "test";
     }
 }
