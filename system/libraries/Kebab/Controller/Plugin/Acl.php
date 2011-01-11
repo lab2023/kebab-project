@@ -41,19 +41,22 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 
     /**
      * Zend_Acl object variable
+     *
      * @var Zend_Acl
      */
     private $_acl;
     
     /**
      * Roles variable
+     *
      * @var array
      */
     private $_roles = array();
 
     /**
      * Overrided preDispatch Method
-     * Kebab acl and resources checking here
+     *
+     * <p>Kebab acl and resources checking here</p>
      *
      * @param Zend_Controller_Request_Abstract $request
      * @return void
