@@ -47,7 +47,7 @@ class AuthController extends Kebab_Controller_Action
      */
     public function indexAction()
     {
-
+        
     }
 
     /**
@@ -129,6 +129,7 @@ class AuthController extends Kebab_Controller_Action
      */
     public function logoutAction()
     {
+        //KBBTODO Has identity!!!
         $authAdapter = Zend_Auth::getInstance();
         $authAdapter->clearIdentity();
         Zend_Session::forgetMe();
