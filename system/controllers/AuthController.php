@@ -123,16 +123,19 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     * Logout, clear authorized user identity and redirect login page
+     * logoutAction()
+     * 
+     * <p>Logout, clear authorized user identity and redirect login page</p>
      * 
      * @return void
      */
     public function logoutAction()
     {
-        //KBBTODO Has identity!!!
-        $authAdapter = Zend_Auth::getInstance();
-        $authAdapter->clearIdentity();
-        Zend_Session::forgetMe();
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+            $auth->clearIdentity();
+            Zend_Session::forgetMe();            
+        }
         $this->_redirect('auth/index');
     }
 
@@ -214,7 +217,7 @@ class AuthController extends Kebab_Controller_Action
         // Create a user object from doctrine
         if (!is_null($activationKey)) {
             $user = Doctrine::getTable('System_Model_User')
-                ->findOneByactivationKey($activationKey);
+                    ->findOneByactivationKey($activationKey);
         }
 
 
