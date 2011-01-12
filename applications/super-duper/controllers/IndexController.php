@@ -31,11 +31,12 @@
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
- */class SuperDuper_IndexController
+ */
+class SuperDuper_IndexController
     extends Kebab_Controller_Action
 {
     public function indexAction()
     {
-        echo "test3";
+        
     }
 }
