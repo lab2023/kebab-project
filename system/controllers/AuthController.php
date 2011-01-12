@@ -38,6 +38,7 @@ if (!defined('BASE_PATH'))
 class AuthController extends Kebab_Controller_Action
 {
 
+
     /**
      * index()
      *
@@ -59,7 +60,7 @@ class AuthController extends Kebab_Controller_Action
      */
     public function loginAction()
     {
-        // getParams
+        // Get params
         $userName = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('rememberMe');
@@ -74,8 +75,8 @@ class AuthController extends Kebab_Controller_Action
 
         if ($this->_request->isPost()
             && $validatorPassword->isValid($password)
-            && $validatorUserName->isValid($userName)) {
-
+            && $validatorUserName->isValid($userName)
+        ) {
             // set ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
             $authAdapter = new ZendX_Doctrine_Auth_Adapter(
@@ -95,7 +96,6 @@ class AuthController extends Kebab_Controller_Action
             // Check Auth Validation
             if ($result->isValid()) {
                 $identity = $authAdapter->getResultRowObject(null, 'password');
-                //KBBTODO Set role and ACL object
                 $query = Doctrine_Query::create()
                         ->select('r.roleName')
                         ->from('System_Model_Role r')
@@ -112,14 +112,14 @@ class AuthController extends Kebab_Controller_Action
                 $auth->getStorage()->write($identity);
                 //KBBTODO Set session time and check from getParams
                 Zend_Session::rememberMe();
-
-                //KBBTODO Set a message not valid user
-                //die(Zend_Debug::dump($identity->acl));
                 $this->_redirect('main');
             }
+        } else {
+            //KBBTODO use translate
+            $notification = new Kebab_Notification();
+            $notification->addNotification(Kebab_Notification::INFO, "Invalid username or password.");
+            $this->_redirect('auth/index');
         }
-
-        $this->_redirect('auth/index');
     }
 
     /**
@@ -134,7 +134,7 @@ class AuthController extends Kebab_Controller_Action
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $auth->clearIdentity();
-            Zend_Session::forgetMe();            
+            Zend_Session::forgetMe();
         }
         $this->_redirect('auth/index');
     }
@@ -162,7 +162,6 @@ class AuthController extends Kebab_Controller_Action
         ) {
             //KBBTODO We need a secure key for application
             $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
-
             $user->activationKey = $activationKey;
             $user->save();
 
@@ -179,7 +178,6 @@ class AuthController extends Kebab_Controller_Action
             $view = new Zend_View;
             $view->setScriptPath(SYSTEM_PATH . '/views/mails/');
 
-            //KBBTODO assign other things like username
             //KBBTODO use language file
             $view->assign('activationKey', $activationKey);
 
