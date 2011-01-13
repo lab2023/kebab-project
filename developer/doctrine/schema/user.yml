@@ -6,8 +6,10 @@ User:
       type: string(255)
     userName:
       type: string(16)
+      unique: true
     email:
       type: string(255)
+      unique: true
     password:
       type: string(255)
     activationKey:
