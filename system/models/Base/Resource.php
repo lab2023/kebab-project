@@ -9,8 +9,8 @@
  * @property string $controller
  * @property System_Model_Module $Module
  * @property Doctrine_Collection $Actions
- * @property Doctrine_Collection $RoleAccess
  * @property Doctrine_Collection $Action
+ * @property Doctrine_Collection $RoleAccess
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -46,11 +46,11 @@ abstract class System_Model_Base_Resource extends Doctrine_Record
              'local' => 'action_id',
              'foreign' => 'id'));
 
-        $this->hasMany('System_Model_RoleAccess as RoleAccess', array(
+        $this->hasMany('System_Model_Action as Action', array(
              'local' => 'id',
              'foreign' => 'resource_id'));
 
-        $this->hasMany('System_Model_Action as Action', array(
+        $this->hasMany('System_Model_RoleAccess as RoleAccess', array(
              'local' => 'id',
              'foreign' => 'resource_id'));
     }
