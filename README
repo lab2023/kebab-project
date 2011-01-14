@@ -10,6 +10,13 @@ Kebab 1.5.x is only supported on PHP 5.3.3 and up.
     - Zend Framework 1.11.1
     - Doctrine 1.2.3
 
+Suggessions
+-----------
+We offer unix-linux operation systems, 
+PHP 5.3.4 (with APC or eAccelerator or xcache enabled better performance),
+Apache 2.2.x for application server. 
+If you use CDN (yeah Kebab Project supports CDN) you can use Nginx for static content.
+
 Documentation
 -------------
     Directories:

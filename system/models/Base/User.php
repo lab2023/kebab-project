@@ -34,10 +34,12 @@ abstract class System_Model_Base_User extends Doctrine_Record
              ));
         $this->hasColumn('userName', 'string', 16, array(
              'type' => 'string',
+             'unique' => true,
              'length' => '16',
              ));
         $this->hasColumn('email', 'string', 255, array(
              'type' => 'string',
+             'unique' => true,
              'length' => '255',
              ));
         $this->hasColumn('password', 'string', 255, array(
