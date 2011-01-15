@@ -79,8 +79,10 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         }
 
         // Create mvcResource and action from Request Object
-        $module = ucfirst($request->getModuleName());
-        $controller = ucfirst($request->getControllerName());
+        $filter = new Zend_Filter_Word_DashToCamelCase();
+        
+        $module = $filter->filter($request->getModuleName());
+        $controller = $filter->filter($request->getControllerName());
         $mvcResource = $module . '_' . $controller;
         $action = $request->getActionName();
 

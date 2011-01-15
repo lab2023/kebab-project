@@ -55,7 +55,7 @@ class Kebab_Acl extends Zend_Acl
         
         self::addAllRoles();
         self::addAllResources();
-        self::addAllAllow();
+        self::addAllPermissions();
 
     }
 
@@ -67,16 +67,16 @@ class Kebab_Acl extends Zend_Acl
     private function addAllRoles()
     {
         $query = Doctrine_Query::create()
-                ->select('r.roleName, ir.roleName')
+                ->select('r.name, ir.name')
                 ->from('System_Model_Role r')
                 ->leftJoin('r.InheritRole ir');
         $roles = $query->execute();
 
         foreach ($roles as $role) {
-            $inheritRole = is_null($role->inheritRole) ? NULL : $role->InheritRole->roleName;
+            $inheritRoleName = is_null($role->inheritRole) ? NULL : $role->InheritRole->name;
             parent::addRole(
-                    new Zend_Acl_Role($role->roleName),
-                    $inheritRole
+                    new Zend_Acl_Role($role->name),
+                    $inheritRoleName
             );
         }
     }
@@ -89,15 +89,15 @@ class Kebab_Acl extends Zend_Acl
     private function addAllResources()
     {
         $query = Doctrine_Query::create()
-                ->select('r.controller, m.moduleName')
-                ->from('System_Model_Resource r')
-                ->leftJoin('r.Module m');
-        $resources = $query->execute();
+                ->select('c.name, m.name')
+                ->from('System_Model_Controller c')
+                ->leftJoin('c.Module m');
+        $controllers = $query->execute();
 
-        foreach ($resources as $resource) {
+        foreach ($controllers as $controller) {
             parent::add(
                     new Zend_Acl_Resource(
-                        $resource->Module->moduleName . '_' . $resource->controller
+                        $controller->Module->name . '_' . $controller->name
                     )
             );
         }
@@ -108,32 +108,32 @@ class Kebab_Acl extends Zend_Acl
      * 
      * @return void
      */
-    private function addAllAllow()
+    private function addAllPermissions()
     {
         //First off deny every resource for every roles
         parent::deny();
 
         $query = Doctrine_Query::create()
-                ->select('ro.roleName, ra.allow, re.controller, mo.moduleName, as.assertionName')
-                ->from('System_Model_RoleAccess ra')
-                ->leftJoin('ra.Role ro')
-                ->leftJoin('ra.Resource re')
-                ->leftJoin('re.Module mo')
-                ->leftJoin('ra.Assertion as');
-        $rules = $query->execute();
+                ->select('r.name, p.rule, c.name, m.name, a.name')
+                ->from('System_Model_Permission p')
+                ->leftJoin('p.Role role')
+                ->leftJoin('p.Controller c')
+                ->leftJoin('c.Module m')
+                ->leftJoin('p.Assertion a');
+        $permissions = $query->execute();
 
-        (string) $ruleType = 'deny';
+        (string) $rule = 'deny';
 
-        foreach ($rules as $rule) {
+        foreach ($permissions as $permission) {
 
-            $ruleType = $rule->allow;
-            $roleName = is_null($rule->Role) ? NULL : $rule->Role->roleName;
-            $resource = is_null($rule->Resource) ? $rule->Action->Resource : $rule->Resource;
-            $resourceName = is_null($resource->controller) ? NULL : $resource->Module->moduleName . '_' . $resource->controller;
-            $actionName = is_null($rule->Action) ? NULL : $rule->Action->action;
-            $assertionName = is_null($rule->Assertion) ? NULL : $rule->Assertion->assertionName;
+            $rule = $permission->rule;
+            $roleName = is_null($permission->Role) ? NULL : $permission->Role->name;
+            $controller = is_null($permission->Controller) ? $permission->Action->Controller : $permission->Controller;
+            $resourceName = is_null($controller->name) ? NULL : $controller->Module->name . '_' . $controller->name;
+            $actionName = is_null($permission->Action) ? NULL : $permission->Action->name;
+            $assertionName = is_null($permission->Assertion) ? NULL : $permission->Assertion->name;
 
-            parent::$ruleType(
+            parent::$rule(
                     $roleName,
                     $resourceName,
                     $actionName,

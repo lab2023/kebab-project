@@ -61,13 +61,13 @@ class AuthController extends Kebab_Controller_Action
     public function loginAction()
     {
         // Get params
-        $userName = $this->_request->getParam('username');
+        $username = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('rememberMe');
 
         //Filter for SQL Injection
-        $validatorUserName = new Zend_Validate();
-        $validatorUserName->addValidator(new Zend_Validate_StringLength(4, 16))
+        $validatorUsername = new Zend_Validate();
+        $validatorUsername->addValidator(new Zend_Validate_StringLength(4, 16))
             ->addValidator(new Zend_Validate_Alnum());
 
         $validatorPassword = new Zend_Validate();
@@ -75,7 +75,7 @@ class AuthController extends Kebab_Controller_Action
 
         if ($this->_request->isPost()
             && $validatorPassword->isValid($password)
-            && $validatorUserName->isValid($userName)
+            && $validatorUsername->isValid($username)
         ) {
             // set ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
@@ -87,7 +87,7 @@ class AuthController extends Kebab_Controller_Action
                 ->setIdentityColumn('username')
                 ->setCredentialColumn('password')
                 ->setCredentialTreatment('MD5(?)')
-                ->setIdentity($userName)
+                ->setIdentity($username)
                 ->setCredential($password);
 
             // set Zend_Auth
@@ -96,15 +96,16 @@ class AuthController extends Kebab_Controller_Action
             // Check Auth Validation
             if ($result->isValid()) {
                 $identity = $authAdapter->getResultRowObject(null, 'password');
+
                 $query = Doctrine_Query::create()
-                        ->select('r.roleName')
+                        ->select('r.name')
                         ->from('System_Model_Role r')
                         ->leftJoin('r.Users u')
-                        ->where('u.userName = ?', $identity->userName);
+                        ->where('u.username = ?', $identity->username);
                 $roles = $query->execute();
 
                 foreach ($roles as $role) {
-                    $userRoles[] = $role->roleName;
+                    $userRoles[] = $role->name;
                 }
 
                 $identity->roles = $userRoles;
