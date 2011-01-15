@@ -34,6 +34,10 @@ abstract class System_Model_Base_Invitation extends Doctrine_Record
         $this->hasColumn('invitedBy', 'integer', null, array(
              'type' => 'integer',
              ));
+
+        $this->option('type', 'INNODB');
+        $this->option('collate', 'utf8_bin');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()
@@ -47,16 +51,8 @@ abstract class System_Model_Base_Invitation extends Doctrine_Record
              'local' => 'invitedBy',
              'foreign' => 'id'));
 
-        $sluggable0 = new Doctrine_Template_Sluggable(array(
-             'fields' => 
-             array(
-              0 => 'firstName',
-              1 => 'surname',
-             ),
-             ));
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
-        $this->actAs($sluggable0);
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
     }

@@ -6,3 +6,7 @@ System_Model_Action:
   SysPreferences_AboutMe_index:
     Controller: SysPreferences_AboutMe
     name: index
+
+  SysAdministration_User_sendInvitation:
+    Controller: SysAdministration_User
+    name: sendInvitation

@@ -20,3 +20,8 @@ System_Model_Permission:
     Role: Guest
     Action: SysPreferences_AboutMe_index
     rule: allow
+
+  Admin_SysAdministration_User_sendInvitation_allow:
+    Role: Admin
+    Action: SysAdministration_User_sendInvitation
+    rule: allow

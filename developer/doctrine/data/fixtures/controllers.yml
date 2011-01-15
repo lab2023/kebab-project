@@ -23,6 +23,10 @@ System_Model_Controller:
     Module: SysAdministration
     name: Index
 
+  SysAdministration_User:
+    Module: SysAdministration
+    name: User
+
   SysPreferences_AboutMe:
     Module: SysPreferences
     name: AboutMe
