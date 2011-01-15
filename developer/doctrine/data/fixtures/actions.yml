@@ -1,8 +1,8 @@
 System_Model_Action:
-  Contact_Contact_addContact:
-    Resource: Contact_Contact
-    action: addContact
+  SuperDuper_Index_index:
+    Controller: SuperDuper_Index
+    name: index
 
-  Task_Task_addTask:
-    Resource: Task_Task
-    action: addTask
+  SysPreferences_AboutMe_index:
+    Controller: SysPreferences_AboutMe
+    name: index

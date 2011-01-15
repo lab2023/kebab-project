@@ -1,16 +1,16 @@
 System_Model_User:
   Guest:
-    userName: guest
+    username: guest
     password: 084e0343a0486ff05530df6c705c8bb4
 
   Member:
-    userName: member
+    username: member
     password: aa08769cdcb26674c6706093503ff0a3
 
   Admin:
-    userName: admin
+    username: admin
     password: 21232f297a57a5a743894a0e4a801fc3
 
   Owner:
-    userName: owner
+    username: owner
     password: 72122ce96bfec66e2396d2e25225d70a

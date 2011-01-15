@@ -1,6 +1,6 @@
 Role:
   columns:
-    roleName:
+    name:
       type: string(255)
     inheritRole:
       type: integer

@@ -1,0 +1,29 @@
+Invitation:
+  columns: 
+    user_id:
+      type: integer
+    activationKey:
+      type: string
+    message:
+      type: text
+    invitedBy:
+      type: integer
+
+  actAs:
+    Timestampable:
+    SoftDelete:
+
+  relations:
+    User:
+      class: User
+      type: one
+
+    InvitedBy:
+      class: User
+      local: invitedBy
+      type: one
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

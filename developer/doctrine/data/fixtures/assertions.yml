@@ -1,9 +1,9 @@
 System_Model_Assertion:
   CleanIP:
-    assertionName: CleanIP
+    name: CleanIP
 
   MaxContact:
-    assertionName: MaxContact
+    name: MaxContact
 
   RestrictedTime:
-    assertionName: RestrictedTime
+    name: RestrictedTime

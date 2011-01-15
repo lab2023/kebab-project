@@ -1,8 +1,8 @@
-Resource:
+Controller:
   columns:
     module_id:
       type: integer
-    controller:
+    name:
       type: string(255)
 
   relations:

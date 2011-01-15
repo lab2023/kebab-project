@@ -1,6 +1,6 @@
 Assertion:
   columns:
-    assertionName:
+    name:
       type: string(255)
 
   options:

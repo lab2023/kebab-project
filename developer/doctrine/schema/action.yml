@@ -1,13 +1,13 @@
 Action:
   columns:
-    resource_id:
+    controller_id:
        type: integer
-    action:
+    name:
       type: string(255)
 
   relations:
-    Resource:
-      class: Resource
+    Controller:
+      class: Controller
       type: one
 
   options:

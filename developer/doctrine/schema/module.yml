@@ -1,11 +1,11 @@
 Module:
   columns:
-    moduleName:
+    name:
       type: string(255)
 
   relations:
-    Resources:
-      class: Resource
+    Controllers:
+      class: Controller
       type: many
       
   options:

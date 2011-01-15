@@ -1,0 +1,28 @@
+System_Model_Controller:
+  Default_Auth:
+    Module: Default
+    name: Auth
+
+  Default_Error:
+    Module: Default
+    name: Error
+
+  Default_Index:
+    Module: Default
+    name: Index
+
+  Default_Main:
+    Module: Default
+    name: Main
+
+  SuperDuper_Index:
+    Module: SuperDuper
+    name: Index
+
+  SysAdministration_Index:
+    Module: SysAdministration
+    name: Index
+
+  SysPreferences_AboutMe:
+    Module: SysPreferences
+    name: AboutMe

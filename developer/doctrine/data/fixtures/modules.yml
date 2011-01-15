@@ -1,9 +1,12 @@
 System_Model_Module:
   Default:
-    moduleName: Default
+    name: Default
 
-  Contact:
-    moduleName: Contact
+  SuperDuper:
+    name: SuperDuper
 
-  Task:
-    moduleName: Task
+  SysAdministration:
+    name: SysAdministration
+
+  SysPreferences:
+    name: SysPreferences

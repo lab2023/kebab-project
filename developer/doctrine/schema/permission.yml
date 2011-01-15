@@ -1,12 +1,12 @@
-RoleAccess:
+Permission:
   columns:
     role_id:
       type: integer
-    resource_id:
+    controller_id:
       type: integer
     action_id:
       type: integer
-    allow:
+    rule:
       type: enum
       length: 5
       values: ['deny', 'allow']
@@ -18,8 +18,8 @@ RoleAccess:
       class: Role
       type: one
 
-    Resource:
-      class: Resource
+    Controller:
+      class: Controller
       type: one
 
     Action:

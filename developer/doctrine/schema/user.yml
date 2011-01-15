@@ -4,7 +4,7 @@ User:
       type: string(255)
     surname:
       type: string(255)
-    userName:
+    username:
       type: string(16)
       unique: true
     email:
@@ -14,6 +14,13 @@ User:
       type: string(255)
     activationKey:
       type: string(255)
+
+  actAs:
+    Sluggable:
+      fields: [firstName, surname]
+    Timestampable:
+    SoftDelete:
+
   relations:
     Roles:
       foreignAlias : Users

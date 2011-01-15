@@ -7,12 +7,13 @@
  * 
  * @property string $firstName
  * @property string $surname
- * @property string $userName
+ * @property string $username
  * @property string $email
  * @property string $password
  * @property string $activationKey
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
+ * @property Doctrine_Collection $Invitation
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -32,7 +33,7 @@ abstract class System_Model_Base_User extends Doctrine_Record
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('userName', 'string', 16, array(
+        $this->hasColumn('username', 'string', 16, array(
              'type' => 'string',
              'unique' => true,
              'length' => '16',
@@ -67,5 +68,22 @@ abstract class System_Model_Base_User extends Doctrine_Record
         $this->hasMany('System_Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('System_Model_Invitation as Invitation', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $sluggable0 = new Doctrine_Template_Sluggable(array(
+             'fields' => 
+             array(
+              0 => 'firstName',
+              1 => 'surname',
+             ),
+             ));
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $softdelete0 = new Doctrine_Template_SoftDelete();
+        $this->actAs($sluggable0);
+        $this->actAs($timestampable0);
+        $this->actAs($softdelete0);
     }
 }
