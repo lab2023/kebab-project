@@ -48,7 +48,7 @@ abstract class System_Model_Base_Role extends Doctrine_Record
              'local' => 'role_id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('System_Model_UserRole as UserRole', array(
+        $this->hasMany('System_Model_RoleAccess as RoleAccess', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 

@@ -60,24 +60,36 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initSubdomain()
     {
-        $subdomain = null;
+        $subdomain = array();
+        
         $config = $this->getOption('kebab');
         //$this->_options['kebab']; //KBBTODO Try this!
 
-        if ($config['subdomain']['use']) {
+        if ($config['subdomain']['enable']) {
 
             $host = explode('.', @$_SERVER['HTTP_HOST'], 2);
-            $subdomainName = $host[0];
+            $subdomain['name'] = $host[0];
 
-            $subdomainDir = glob(SUBDOMAINS_PATH . '/' . $subdomainName . '/*.ini');
+            $subdomain['path'] = SUBDOMAINS_PATH . '/' . $subdomain['name'];
+            $subdomain['config']['file'] = SUBDOMAINS_PATH . '/' . $subdomain['name'] . '/configs.ini';
 
-            if (count($subdomainDir) > 0) {
-                $subdomainCfg = new Zend_Config_Ini($subdomainDir[0], APPLICATION_ENV);
-                $this->setOptions($subdomainCfg->toArray());
+            if (file_exists($subdomain['config']['file'])) {
+                
+                $subdomain['config']['options'] = new Zend_Config_Ini(
+                    $subdomain['config']['file'], APPLICATION_ENV
+                );
+                
+                // Adding
+                $this->setOptions(array('subdomain' => $subdomain));
+                // Merging
+                $this->setOptions($subdomain['config']['options']->toArray());
+                
             }
             /*
              * KBBTODO: Check reserved subdomains and
              * show subdomains not found error page
+             * Throw exception "Subdomain settings not loading. Subdomain config file not found!"
+             * Merge two option set method
              */
         }
 
@@ -111,9 +123,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             new Zend_Log_Writer_Null()
         );
 
-        if ($this->_config->kebab->logging->use) {
+        if ($this->_config->kebab->logging->enable) {
             //Stream Writer
-            if ($this->_config->kebab->logging->stream->use) {
+            if ($this->_config->kebab->logging->stream->enable) {
                 $this->_logging->addWriter(
                     new Zend_Log_Writer_Stream(
                         SYSTEM_PATH . '/variables/logs/system.log'
@@ -121,7 +133,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 );
             }
             //Firebug Writer
-            if ($this->_config->kebab->logging->firebug->use) {
+            if ($this->_config->kebab->logging->firebug->enable) {
                 $this->_logging->addWriter(
                     new Zend_Log_Writer_Firebug()
                 );
@@ -147,22 +159,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     public function _initDoctrine()
     {
         $this->getApplication()->getAutoloader()
-            ->pushAutoloader(array('Doctrine', 'autoload'));
-        spl_autoload_register(array('Doctrine', 'modelsAutoload'));
+                                ->pushAutoloader(array('Doctrine', 'autoload'));
+        
+        // KBBTODO: Detected and removed unnecessary line
+        //spl_autoload_register(array('Doctrine', 'modelsAutoload'));
 
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(Doctrine::ATTR_MODEL_LOADING, IS_CLI ? 1 : 2);
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
 
-        Doctrine::loadModel($this->_config->database->doctrine->models_path);
+        // KBBTODO: Detected and removed unnecessary line
+        //Doctrine::loadModel($this->_config->database->doctrine->models_path);
 
         $connection = Doctrine_Manager::connection(
             $this->_config->database->doctrine->connections->master->dsn,
             $this->_config->database->doctrine->connections->master->name
         );
         $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-
+        
         return $connection;
     }
 
@@ -185,5 +200,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $translate;
     }
-
 }

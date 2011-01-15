@@ -67,10 +67,16 @@ abstract class Kebab_Application_Module_Bootstrap
      */
     protected function _initConfig()
     {
+        // Fiter SeperatorToCamelCase Setup
+        $filter = new Zend_Filter_Word_CamelCaseToSeparator('-');
+
+        //Filtered module name
+        $moduleName = strtolower($filter->filter($this->_moduleName));
+
         // load ini file
         $config = new Zend_Config_Ini(
             APPLICATIONS_PATH .
-            DIRECTORY_SEPARATOR . $this->_camelize($this->_moduleName) . DIRECTORY_SEPARATOR.
+            DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR.
             'configs' . DIRECTORY_SEPARATOR . 'module.ini',
             APPLICATION_ENV
         );
@@ -83,20 +89,4 @@ abstract class Kebab_Application_Module_Bootstrap
             Zend_Log::INFO
         );
     }
-
-    /**
-     * Convert camelize string to sluggable
-     * (etc. blahBlah -> blah-blah)
-     *
-     * @param array $str
-     * @param string $separator
-     * @return string
-     */
-    private function _camelize($str, $separator = '-')
-    {
-        $str[0] = strtolower($str[0]);
-        $func = create_function('$c', 'return "' . $separator . '" . strtolower($c[1]);');
-        return preg_replace_callback('/([A-Z])/', $func, $str);
-    }
-
 }
