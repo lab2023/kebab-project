@@ -261,4 +261,68 @@ class AuthController extends Kebab_Controller_Action
         
     }
 
+    /**
+     * Accept Invitation
+     *
+     * <p> User invited accepts invitation</p>
+     * @return void
+     */
+    public function acceptInvitationAction()
+    {
+        $activationKey = $this->getRequest()->getParam('check');
+
+        $invitationValid = false;
+
+        if ($activationKey) {
+
+            $invitation = Doctrine_Core::getTable('System_Model_Invitation')
+                                        ->findOneBy('activationKey', $activationKey);
+            if ($invitation) {
+                
+                $invitationValid = true;
+                $this->view->activationKey = $activationKey;
+
+                if ($this->_request->isPost()) {
+
+                    // Get params
+                    $username = $this->_request->getParam('username');
+                    $password = $this->_request->getParam('password');
+                    $rePassword = $this->_request->getParam('re_password');
+
+                    // Filter for SQL Injection
+                    // KBBTODO: Add validator here
+
+                    $user = Doctrine_Core::getTable('System_Model_User')
+                                        ->findOneBy('username', $username);
+
+                    if (! $user && $password == $rePassword) {
+
+                        // Get invited user
+                        $user = $invitation->User;
+                        $user->username = $username;
+                        $user->password = md5($password);
+
+                        // KBBTODO: Get Default Role(s) from configuration
+                        $defaultRole = Doctrine_Core::getTable('System_Model_Role')
+                                            ->findOneBy('name', 'guest');
+
+                        $user->Roles[] = $defaultRole;
+                        $user->save();
+
+                        // Delete old invitation
+                        $invitation->delete();
+
+                        $this->_redirect('auth');
+                    }
+                }
+            }
+        }
+
+
+        if (! $invitationValid) { // KBBTODO: No invitation error
+            $this->view->message ="No invitation or invitation has expired";
+            $this->renderScript('auth/accept-invitation-error.phtml');
+        }
+    }
+
 }
