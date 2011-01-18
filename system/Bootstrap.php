@@ -168,13 +168,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(Doctrine::ATTR_MODEL_LOADING, IS_CLI ? 1 : 2);
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
+        $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
 
         // KBBTODO: Detected and removed unnecessary line
         //Doctrine::loadModel($this->_config->database->doctrine->models_path);
 
-        $connection = Doctrine_Manager::connection(
+        $connection = $manager->connection(
             $this->_config->database->doctrine->connections->master->dsn,
             $this->_config->database->doctrine->connections->master->name
+        );
+        $connection->setCollate(
+            $this->_config->database->doctrine->connections->master->collate
+        );
+        $connection->setCharset(
+            $this->_config->database->doctrine->connections->master->charset
         );
         $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
         
