@@ -32,8 +32,7 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class SysAdministration_UserController
-    extends Kebab_Controller_Action
+class SysAdministration_UserController extends Kebab_Controller_Action
 {
     public function indexAction()
     {
@@ -42,48 +41,44 @@ class SysAdministration_UserController
 
     public function sendInvitationAction()
     {
-        // Get params
-        $firstName = $this->_request->getParam('first_name');
-        $surname = $this->_request->getParam('surname');
-        $email = $this->_request->getParam('email');
-        $message = $this->_request->getParam('message');
-
-        //Filter for SQL Injection
-        // KBBTODO: Add validator here
-
         if ($this->_request->isPost()) {
+
+            // Get params
+            $firstName = $this->_request->getParam('first_name');
+            $surname = $this->_request->getParam('surname');
+            $email = $this->_request->getParam('email');
+            $message = $this->_request->getParam('message');
+
+            //Filter for SQL Injection
+            // KBBTODO: Add validator here
 
             $user = Doctrine_Core::getTable('System_Model_User')
                                     ->findOneBy('email', $email);
             if (!$user) {
 
-                $conn = Doctrine_Manager::connection();
+                $auth = Zend_Auth::getInstance();
 
-                $conn->beginTransaction();
+                $invitation = new System_Model_Invitation();
+                $invitation->message = $message;
+                $invitation->activationKey = md5(uniqid());
+
+                $user = $invitation->User;
+                $user->firstName = $firstName;
+                $user->surname = $surname;
+                $user->email = $email;
+
+                $invitation->invitedBy = $auth->getIdentity()->id;
 
                 try {
-                    $auth = Zend_Auth::getInstance();
-
-                    $invitation = new System_Model_Invitation();
-                    $invitation->message = $message;
-                    $invitation->activationKey = md5(uniqid());
-
-                    $user = $invitation->User;
-                    $user->firstName = $firstName;
-                    $user->surname = $surname;
-                    $user->email = $email;
-
-                    $invitation->invitedBy = $auth->getIdentity()->id;
-
                     $invitation->save();
 
                     // KBBTODO: Prepare and Send invitation email here
-                    $conn->commit();
-
-                } catch (Zend_Exception $e) {
-                    $conn->rollback();
+                } catch (Exception $exc) {
+                   // KBBTODO: Error logging here
                 }
-                
+
+
+
             } else {
 
                 //KBBTODO use translate
