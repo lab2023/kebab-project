@@ -161,17 +161,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->getApplication()->getAutoloader()
                                 ->pushAutoloader(array('Doctrine', 'autoload'));
         
-        // KBBTODO: Detected and removed unnecessary line
-        //spl_autoload_register(array('Doctrine', 'modelsAutoload'));
-
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(Doctrine::ATTR_MODEL_LOADING, IS_CLI ? 1 : 2);
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
         $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
-
-        // KBBTODO: Detected and removed unnecessary line
-        //Doctrine::loadModel($this->_config->database->doctrine->models_path);
 
         $connection = $manager->connection(
             $this->_config->database->doctrine->connections->master->dsn,
