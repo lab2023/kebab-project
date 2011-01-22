@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -32,11 +35,11 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class SuperDuper_IndexController
-    extends Kebab_Controller_Action
+class SuperDuper_IndexController extends Kebab_Controller_Action
 {
+
     public function indexAction()
     {
-        
     }
+
 }

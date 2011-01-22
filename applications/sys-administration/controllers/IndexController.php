@@ -32,8 +32,7 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class SysAdministration_IndexController
-    extends Kebab_Controller_Action
+class SysAdministration_IndexController extends Kebab_Controller_Action
 {
     public function indexAction()
     {

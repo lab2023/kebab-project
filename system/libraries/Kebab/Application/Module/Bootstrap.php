@@ -33,8 +33,7 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-abstract class Kebab_Application_Module_Bootstrap
-    extends Zend_Application_Module_Bootstrap
+abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Module_Bootstrap
 {
     /**
      * Module name variable

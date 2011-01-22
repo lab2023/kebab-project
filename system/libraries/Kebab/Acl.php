@@ -41,6 +41,10 @@ if (!defined('BASE_PATH'))
 class Kebab_Acl extends Zend_Acl
 {
 
+    private 
+        $_config,
+        $_doctrineCaching;
+    
     /**
      * Call all private methods this class
      *
@@ -49,9 +53,12 @@ class Kebab_Acl extends Zend_Acl
     public function __construct()
     {
         Zend_Registry::get('logging')->log(
-            'Kebab_Acl Start ...',
+            'Kebab_Acl Start...',
             Zend_Log::DEBUG
         );
+
+        $this->_config = Zend_Registry::get('config');
+        $this->_doctrineCaching = $this->_config->database->doctrine->caching->enable ? true : false;
         
         self::addAllRoles();
         self::addAllResources();
@@ -69,7 +76,9 @@ class Kebab_Acl extends Zend_Acl
         $query = Doctrine_Query::create()
                 ->select('r.name, ir.name')
                 ->from('System_Model_Role r')
-                ->leftJoin('r.InheritRole ir');
+                ->leftJoin('r.InheritRole ir')
+                ->useQueryCache($this->_doctrineCaching);
+        
         $roles = $query->execute();
 
         foreach ($roles as $role) {
@@ -91,7 +100,8 @@ class Kebab_Acl extends Zend_Acl
         $query = Doctrine_Query::create()
                 ->select('c.name, m.name')
                 ->from('System_Model_Controller c')
-                ->leftJoin('c.Module m');
+                ->leftJoin('c.Module m')
+                ->useQueryCache($this->_doctrineCaching);
         $controllers = $query->execute();
 
         foreach ($controllers as $controller) {
@@ -119,7 +129,8 @@ class Kebab_Acl extends Zend_Acl
                 ->leftJoin('p.Role role')
                 ->leftJoin('p.Controller c')
                 ->leftJoin('c.Module m')
-                ->leftJoin('p.Assertion a');
+                ->leftJoin('p.Assertion a')
+                ->useQueryCache($this->_doctrineCaching);
         $permissions = $query->execute();
 
         (string) $rule = 'deny';

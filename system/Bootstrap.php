@@ -177,34 +177,29 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $this->_config->database->doctrine->connections->master->dsn,
             $this->_config->database->doctrine->connections->master->name
         );
-        $connection->setCollate(
-            $this->_config->database->doctrine->connections->master->collate
-        );
-        $connection->setCharset(
-            $this->_config->database->doctrine->connections->master->charset
-        );
         $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-        
+
+        if (!IS_CLI) {
+            $connection->setCollate($this->_config->database->doctrine->connections->master->collate);
+            $connection->setCharset($this->_config->database->doctrine->connections->master->charset);
+
+            // Caching Enabled ?
+            if ($this->_config->database->doctrine->caching->enable) {
+
+                // Select cache driver
+                $cacheDriver = $this->_config->database->doctrine->caching->driver == 'Apc' ?
+                    new Doctrine_Cache_Apc(array('connection' => $connection)) :
+                    new Doctrine_Cache_Memcache(array('connection' => $connection));
+
+                // Use Query Caching
+                if ($this->_config->database->doctrine->caching->query)
+                    $connection->setAttribute(Doctrine::ATTR_QUERY_CACHE, $cacheDriver);
+                // Use Result Caching
+                if ($this->_config->database->doctrine->caching->result->enable)
+                    $connection->setAttribute(Doctrine::ATTR_RESULT_CACHE, $cacheDriver);
+            }
+        }
+
         return $connection;
-    }
-
-    /**
-     * Translation Initialization
-     * @return Zend_Translate
-     */
-    protected function _initTranslation()
-    {
-        $this->bootstrap('translate');
-        $translate = $this->getResource('translate');
-        $translate->setOptions(
-            array(
-                'log' => Zend_Registry::get('logging'),
-                //KBBTODO getLocale from session
-                'locale' => 'auto'
-            )
-        );
-        Zend_Registry::set('translate', $translate);
-
-        return $translate;
     }
 }

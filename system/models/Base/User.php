@@ -12,8 +12,8 @@
  * @property string $password
  * @property string $activationKey
  * @property Doctrine_Collection $Roles
- * @property Doctrine_Collection $UserRole
  * @property Doctrine_Collection $Invitation
+ * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -65,11 +65,11 @@ abstract class System_Model_Base_User extends Doctrine_Record
              'local' => 'user_id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('System_Model_UserRole as UserRole', array(
+        $this->hasMany('System_Model_Invitation as Invitation', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('System_Model_Invitation as Invitation', array(
+        $this->hasMany('System_Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

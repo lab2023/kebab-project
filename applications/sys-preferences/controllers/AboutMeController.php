@@ -31,7 +31,8 @@
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
- */class SysPreferences_AboutMeController
+ */
+class SysPreferences_AboutMeController
     extends Kebab_Controller_Action
 {
     public function indexAction()
