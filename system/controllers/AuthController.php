@@ -317,7 +317,7 @@ class AuthController extends Kebab_Controller_Action
                     }
                 }
             }
-        }
+        } //eof if
 
 
         if (! $invitationValid) { // KBBTODO: No invitation error
