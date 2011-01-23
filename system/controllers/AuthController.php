@@ -265,6 +265,7 @@ class AuthController extends Kebab_Controller_Action
      * Accept Invitation
      *
      * <p> User invited accepts invitation</p>
+     * 
      * @return void
      */
     public function acceptInvitationAction()
