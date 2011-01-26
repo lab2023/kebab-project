@@ -46,6 +46,51 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
         return $this;
     }
 
+    public function addError($id, $value)
+    {
+        if (is_null($id) || is_null($value)) {
+            throw new Kebab_Controller_Helper_Exception('$id and $value can\'t be  $response[\'errors\']');
+        }
+
+        foreach ($errors as $key => $value) {
+            $this->_response['errors'][] = array(
+                $id => Zend_Registry::get('translate')->_($value)
+            );
+        }
+
+        return $this;
+    }
+
+    public function addNotification($notificationType, $notification,
+        $autoHide = TRUE)
+    {
+        $type = array('ALERT', 'CRIT', 'ERR', 'WARN', 'NOTICE', 'INFO');
+
+        if (!in_array($notificationType, $type)) {
+            throw new Kebab_Controller_Helper_Exception('Invalid notification type');
+        }
+
+        if (!is_string($notification)) {
+            throw new Kebab_Controller_Helper_Exception('Invalid notification string');
+        }
+
+        if (!is_bool($autoHide)) {
+            throw new Kebab_Controller_Helper_Exception('Invalid autoHide type');
+        }
+
+        if (!is_string($group)) {
+            throw new Kebab_Controller_Helper_Exception('Invalid $group type');
+        }
+
+        $this->_response['notifications'][] = array(
+            $notificationType,
+            Zend_Registry::get('translate')->_($notification),
+            $autoHide
+        );
+
+        return $this;
+    }
+
     public function getResponse()
     {
         $jsonHelper = new Zend_Controller_Action_Helper_Json();
