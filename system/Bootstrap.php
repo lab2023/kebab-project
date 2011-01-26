@@ -196,4 +196,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $connection;
     }
+
+    /*
+     * Translation Initialization
+     * @return Zend_Translate
+     */
+    protected function _initTranslation()
+    {
+        $this->bootstrap('translate');
+        $translate = $this->getResource('translate');
+        $translate->setOptions(
+            array(
+                'log' => Zend_Registry::get('logging'),
+                //KBBTODO getLocale from session
+                'locale' => 'auto'
+            )
+        );
+        Zend_Registry::set('translate', $translate);
+
+        return $translate;
+    }
 }
