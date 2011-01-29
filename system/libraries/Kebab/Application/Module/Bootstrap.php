@@ -40,7 +40,7 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
      * @var string
      * @access protected
      */
-    protected $_moduleName = null;
+    protected $_module = array();
 
     /**
      * Initialize class and log debug message
@@ -50,11 +50,17 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
      */
     protected function _initBootstrap()
     {
-        $this->_moduleName = $this->getModuleName();
+        // Fiter SeperatorToCamelCase Setup
+        $filter = new Zend_Filter_Word_CamelCaseToSeparator('-');
+        
+        $this->_module['class'] = $this->getModuleName();
+        $this->_module['folder']  = strtolower(
+            $filter->filter($this->_module['class'])
+        );
         
         // Info Log
         Zend_Registry::get('logging')->log(
-            $this->_moduleName . ' initialized...',
+            $this->_module['class'] . ' bootstrap initialized...',
             Zend_Log::INFO
         );
     }
@@ -66,26 +72,12 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
      */
     protected function _initConfig()
     {
-        // Fiter SeperatorToCamelCase Setup
-        $filter = new Zend_Filter_Word_CamelCaseToSeparator('-');
-
-        //Filtered module name
-        $moduleName = strtolower($filter->filter($this->_moduleName));
-
         // load ini file
         $config = new Zend_Config_Ini(
-            APPLICATIONS_PATH .
-            DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR.
-            'configs' . DIRECTORY_SEPARATOR . 'module.ini',
+            APPLICATIONS_PATH . '/' . $this->_module['folder'] . '/configs/module.ini',
             APPLICATION_ENV
         );
 
         $this->setOptions($config->toArray());
-        
-        // Info Log
-        Zend_Registry::get('logging')->log(
-            $this->getOptions(),
-            Zend_Log::INFO
-        );
     }
 }
