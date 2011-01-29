@@ -53,8 +53,8 @@ class Kebab_Acl extends Zend_Acl
     public function __construct()
     {
         Zend_Registry::get('logging')->log(
-            'Kebab_Acl Start...',
-            Zend_Log::DEBUG
+            'Kebab_Acl initialized...',
+            Zend_Log::INFO
         );
 
         $this->_config = Zend_Registry::get('config');
