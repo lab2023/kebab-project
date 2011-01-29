@@ -1,0 +1,46 @@
+/* -----------------------------------------------------------------------
+ Kebab Framework 1.5.x
+ http://kebab-project.com
+ Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
+ http://www.lab2023.com
+
+    * LICENSE
+    *
+    * This source file is subject to the  Dual Licensing Model that is bundled
+    * with this package in the file LICENSE.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://www.kebab-project.com/licensing
+    * If you did not receive a copy of the license and are unable to
+    * obtain it through the world-wide-web, please send an email
+    * to info@lab2023.com so we can send you a copy immediately.
+----------------------------------------------------------------------- */
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Ubuntu Italic'), local('Ubuntu-Italic'), url('http://themes.googleusercontent.com/font?kit=ISUraQdBYMI3VoDzBxXqNvesZW2xOQ-xsNqO47m55DA') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Ubuntu'), local('Ubuntu-Regular'), url('http://themes.googleusercontent.com/font?kit=2Q-AW1e_taO6pHwMXcXW5w') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('http://themes.googleusercontent.com/font?kit=OMD20Sg9RTs7sUORCEN-7Z0EAVxt0G0biEntp43Qt6E') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('http://themes.googleusercontent.com/font?kit=0ihfXUL2emPh0ROJezvraKCWcynf_cDxXwCLxiixG1c') format('truetype');
+}
+* {
+    font-family: Ubuntu, Georgia, "Bitstream Charter", serif;
+    font-size: 14px;
+    color: #3A3A3A;
+    font-style: normal;
+}

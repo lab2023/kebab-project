@@ -1,0 +1,15 @@
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headTitle('Kebab Project')->setSeparator(' :: '); ?>
+    <?php
+    echo $this->headLink()
+        ->prependStylesheet($this->kebabAsset('shared/stylesheets/screen.css')->theme('ubuntu')->get());
+    ?>
+    <?php echo $this->headScript(); ?>
+</head>
+<body>
+    <?php echo $this->layout()->content; ?>
+</body>
+</html>

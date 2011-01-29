@@ -139,7 +139,7 @@ class AuthController extends Kebab_Controller_Action
             $auth->clearIdentity();
             Zend_Session::forgetMe();
         }
-        $this->_redirect('auth/index');
+        $this->_redirect('auth');
     }
 
     /**

@@ -21,6 +21,10 @@
  */
 class ErrorController extends Kebab_Controller_Action
 {
+    public function init()
+    {
+        $this->_helper->layout->disableLayout();
+    }
 
     public function errorAction()
     {

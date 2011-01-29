@@ -1,8 +1,12 @@
-    <h1><strong>Kebab Framework Reloaded :: Account Page</strong></h1>
-    
+<?php
+$this->headTitle('Main page');
+?>
+<div class="kebab-standart-container kebab-rounded-corners kebab-shadow">
+    <h1>Main page</h1>
+
     <?php if ($this->identity == null): ?>
 
-        <p><a href="<?php echo $this->baseUrl('auth/index'); ?>"> To login</a></p>
+        <p><a href="<?php echo $this->baseUrl('auth'); ?>"> To login</a></p>
 
     <?php else: ?>
 
@@ -14,3 +18,4 @@
         <p><a href="<?php echo $this->baseUrl('auth/logout'); ?>"> To logout </a></p>
 
     <?php endif; ?>
+</div>
