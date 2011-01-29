@@ -51,7 +51,6 @@ class SysAdministration_UserController extends Kebab_Controller_Action
 
             //Filter for SQL Injection
             // KBBTODO: Add validator here
-
             $user = Doctrine_Core::getTable('System_Model_User')
                                     ->findOneBy('email', $email);
             if (!$user) {
@@ -72,7 +71,36 @@ class SysAdministration_UserController extends Kebab_Controller_Action
                 try {
                     $invitation->save();
 
-                    // KBBTODO: Prepare and Send invitation email here
+                    //KBBTODO move these settings to config file
+                    $smtpServer = 'smtp.gmail.com';
+                    $config = array(
+                        'ssl'      => 'tls',
+                        'auth'     => 'login',
+                        'username' => 'noreply@kebab-project.com',
+                        'password' => 'xxxxx'
+                    );
+                    // Mail PHTML
+                    $view = new Zend_View;
+                    $view->setScriptPath(SYSTEM_PATH . '/views/mails/');
+
+                    //KBBTODO use language file
+                    $view->assign('activationKey', $invitation->activationKey);
+                    $view->assign('firstName', $user->firstName);
+                    $view->assign('fullName', $auth->getIdentity()->firstName . ' ' . $auth->getIdentity()->surname);
+                    $view->assign('email', $auth->getIdentity()->email);
+                    $view->assign('message', $message);
+
+                    $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+                    $mail = new Zend_Mail();
+                    $mail->setFrom('noreply@kebab-project.com', $auth->getIdentity()->firstName . ' ' . $auth->getIdentity()->surname);
+                    $mail->addTo($user->email, $user->firstName . $user->surname);
+                    $mail->setSubject('You\'re invited to join ' . '......');
+                    $mail->setBodyHtml($view->render('send-invitation.phtml'));
+                    $mail->send($transport);
+
+                    // KBBTODO : Use response
+//                    $notification = new Kebab_Notification();
+//                    $notification->addNotification(Kebab_Notification::INFO, 'Invitation send.');
                 } catch (Exception $exc) {
                    // KBBTODO: Error logging here
                 }
@@ -80,10 +108,10 @@ class SysAdministration_UserController extends Kebab_Controller_Action
 
 
             } else {
-
-                //KBBTODO use translate
-                $notification = new Kebab_Notification();
-                $notification->addNotification(Kebab_Notification::ERR, "This email already exists. ");
+                // KBBTODO : Use response
+                // KBBTODO : use translate
+//                $notification = new Kebab_Notification();
+//                $notification->addNotification(Kebab_Notification::ERR, "This email already exists. ");
                 $this->_redirect('sys-administration/user/send-invitation/fail');
             }
         }
