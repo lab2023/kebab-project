@@ -48,6 +48,7 @@ defined('SYSTEM_PATH')      || define('SYSTEM_PATH', BASE_PATH . $paths['sys']);
 defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH . $paths['app']);
 defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . $paths['dev']);
 defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH . $paths['dns']);
+defined('WEB_PATH')         || define('WEB_PATH', BASE_PATH . $paths['pub']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
 defined('IS_CLI')           || define('IS_CLI', false);
 // -----------------------------------------------------------------------------
