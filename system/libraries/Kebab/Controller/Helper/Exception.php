@@ -17,8 +17,8 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Kebab_Extjs_Form
- * @subpackage Kebab_Extjs_Form_Exception
+ * @package    Kebab_Controller
+ * @subpackage Kebab_Controller_Helper
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies
  *             TURKEY Inc. (http://www.lab2023.com)
@@ -34,10 +34,10 @@ require_once 'Zend/Controller/Exception.php';
 
 
 /**
- * @package    Kebab_Extjs_Form
- * @subpackage Kebab_Extjs_Form_Exception
+ * @package    Kebab_Controller
+ * @subpackage Kebab_Controller_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Kebab_Extjs_Form_Exception extends Zend_Controller_Exception{}
+class Kebab_Controller_Helper_Exception extends Zend_Controller_Exception{}
 

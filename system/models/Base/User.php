@@ -12,15 +12,15 @@
  * @property string $password
  * @property string $activationKey
  * @property Doctrine_Collection $Roles
- * @property Doctrine_Collection $Invitation
  * @property Doctrine_Collection $UserRole
+ * @property Doctrine_Collection $Invitation
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     lab2023 - Dev. Team <info@lab2023.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class System_Model_Base_User extends Doctrine_Record
+class System_Model_Base_User extends Doctrine_Record
 {
     public function setTableDefinition()
     {
@@ -60,16 +60,16 @@ abstract class System_Model_Base_User extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('System_Model_Role as Roles', array(
-             'refClass' => 'System_Model_UserRole',
+        $this->hasMany('System_Model_Base_Role as Roles', array(
+             'refClass' => 'System_Model_Base_UserRole',
              'local' => 'user_id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('System_Model_Invitation as Invitation', array(
+        $this->hasMany('System_Model_Base_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('System_Model_UserRole as UserRole', array(
+        $this->hasMany('System_Model_Base_Invitation as Invitation', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

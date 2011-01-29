@@ -7,18 +7,18 @@
  * 
  * @property string $name
  * @property integer $inheritRole
- * @property System_Model_Role $InheritRole
+ * @property System_Model_Base_Role $InheritRole
  * @property Doctrine_Collection $Users
- * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $UserRole
  * @property Doctrine_Collection $Role
+ * @property Doctrine_Collection $Permission
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     lab2023 - Dev. Team <info@lab2023.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class System_Model_Base_Role extends Doctrine_Record
+class System_Model_Base_Role extends Doctrine_Record
 {
     public function setTableDefinition()
     {
@@ -39,25 +39,25 @@ abstract class System_Model_Base_Role extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('System_Model_Role as InheritRole', array(
+        $this->hasOne('System_Model_Base_Role as InheritRole', array(
              'local' => 'inheritRole',
              'foreign' => 'id'));
 
-        $this->hasMany('System_Model_User as Users', array(
-             'refClass' => 'System_Model_UserRole',
+        $this->hasMany('System_Model_Base_User as Users', array(
+             'refClass' => 'System_Model_Base_UserRole',
              'local' => 'role_id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('System_Model_Permission as Permission', array(
+        $this->hasMany('System_Model_Base_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('System_Model_UserRole as UserRole', array(
-             'local' => 'id',
-             'foreign' => 'role_id'));
-
-        $this->hasMany('System_Model_Role as Role', array(
+        $this->hasMany('System_Model_Base_Role as Role', array(
              'local' => 'id',
              'foreign' => 'inheritRole'));
+
+        $this->hasMany('System_Model_Base_Permission as Permission', array(
+             'local' => 'id',
+             'foreign' => 'role_id'));
     }
 }

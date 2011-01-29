@@ -13,7 +13,7 @@
  * @author     lab2023 - Dev. Team <info@lab2023.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class System_Model_Base_Assertion extends Doctrine_Record
+class System_Model_Base_Assertion extends Doctrine_Record
 {
     public function setTableDefinition()
     {
@@ -31,7 +31,7 @@ abstract class System_Model_Base_Assertion extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('System_Model_Permission as Permission', array(
+        $this->hasMany('System_Model_Base_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'assertion_id'));
     }

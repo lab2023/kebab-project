@@ -189,12 +189,14 @@ class AuthController extends Kebab_Controller_Action
             $mail->setBodyHtml($view->render('forgot-password.phtml'));
             $mail->send($transport);
 
-            $notification = new Kebab_Notification();
-            $notification->addNotification(Kebab_Notification::INFO, 'Please look your email.');
+            // KBBTODO : Use response
+//            $notification = new Kebab_Notification();
+//            $notification->addNotification(Kebab_Notification::INFO, 'Please look your email.');
             $this->_helper->redirector('login');
         } else {
-            $notification = new Kebab_Notification();
-            $notification->addNotification(Kebab_Notification::ALERT, 'Please write your email correct!');
+                        // KBBTODO : Use response
+//            $notification = new Kebab_Notification();
+//            $notification->addNotification(Kebab_Notification::ALERT, 'Please write your email correct!');
         }
     }
 

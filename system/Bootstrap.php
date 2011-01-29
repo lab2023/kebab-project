@@ -214,10 +214,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $connection;
     }
 
-    /**
-     * Translation Initialization
-     * @return Zend_Translate
-     */
     protected function _initTranslation()
     {
         $this->bootstrap('translate');

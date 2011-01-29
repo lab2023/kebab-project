@@ -10,17 +10,17 @@
  * @property integer $action_id
  * @property enum $rule
  * @property integer $assertion_id
- * @property System_Model_Role $Role
- * @property System_Model_Controller $Controller
- * @property System_Model_Action $Action
- * @property System_Model_Assertion $Assertion
+ * @property System_Model_Base_Role $Role
+ * @property System_Model_Base_Controller $Controller
+ * @property System_Model_Base_Action $Action
+ * @property System_Model_Base_Assertion $Assertion
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     lab2023 - Dev. Team <info@lab2023.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class System_Model_Base_Permission extends Doctrine_Record
+class System_Model_Base_Permission extends Doctrine_Record
 {
     public function setTableDefinition()
     {
@@ -55,19 +55,19 @@ abstract class System_Model_Base_Permission extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('System_Model_Role as Role', array(
+        $this->hasOne('System_Model_Base_Role as Role', array(
              'local' => 'role_id',
              'foreign' => 'id'));
 
-        $this->hasOne('System_Model_Controller as Controller', array(
+        $this->hasOne('System_Model_Base_Controller as Controller', array(
              'local' => 'controller_id',
              'foreign' => 'id'));
 
-        $this->hasOne('System_Model_Action as Action', array(
+        $this->hasOne('System_Model_Base_Action as Action', array(
              'local' => 'action_id',
              'foreign' => 'id'));
 
-        $this->hasOne('System_Model_Assertion as Assertion', array(
+        $this->hasOne('System_Model_Base_Assertion as Assertion', array(
              'local' => 'assertion_id',
              'foreign' => 'id'));
     }

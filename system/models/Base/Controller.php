@@ -7,7 +7,7 @@
  * 
  * @property integer $module_id
  * @property string $name
- * @property System_Model_Module $Module
+ * @property System_Model_Base_Module $Module
  * @property Doctrine_Collection $Actions
  * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $Action
@@ -17,7 +17,7 @@
  * @author     lab2023 - Dev. Team <info@lab2023.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class System_Model_Base_Controller extends Doctrine_Record
+class System_Model_Base_Controller extends Doctrine_Record
 {
     public function setTableDefinition()
     {
@@ -38,19 +38,19 @@ abstract class System_Model_Base_Controller extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('System_Model_Module as Module', array(
+        $this->hasOne('System_Model_Base_Module as Module', array(
              'local' => 'module_id',
              'foreign' => 'id'));
 
-        $this->hasMany('System_Model_Action as Actions', array(
+        $this->hasMany('System_Model_Base_Action as Actions', array(
              'local' => 'action_id',
              'foreign' => 'id'));
 
-        $this->hasMany('System_Model_Permission as Permission', array(
+        $this->hasMany('System_Model_Base_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'controller_id'));
 
-        $this->hasMany('System_Model_Action as Action', array(
+        $this->hasMany('System_Model_Base_Action as Action', array(
              'local' => 'id',
              'foreign' => 'controller_id'));
     }
