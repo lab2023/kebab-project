@@ -1,11 +1,14 @@
-    <h1><strong>Kebab Framework Reloaded :: Login Page</strong></h1>
+<?php
+$this->headTitle('Login Screen');
+$this->headLink()->prependStylesheet(
+    $this->kebabAsset('auth/stylesheets/auth.css')->theme($this->kebabVariable('kebabTheme'))->get()
+);
+?>
 
-    <form method="post" action="<?php echo $this->baseUrl('auth/login'); ?>">
-        <strong>Username</strong>
-        <input type="text" size="20" name="username"><br />
-        <strong>Password</strong>
-        <input type="password" size="20" name="password"><br />
-        <strong>Remember Me</strong>
-        <input type="checkbox" name="remember_me" /> <br />
-        <input type="submit" name="login" value="Login"> or <a href="<?php echo $this->baseUrl('index'); ?>">Go back</a>
-    </form>
+<div id="kebab-system-auth-container" class="kebab-centered-container kebab-rounded-corners kebab-shadow kebab-opacity">
+
+    <div id="kebab-system-auth-logo">
+        <img src="http://www.tayfunoziserikan.com/images/tayfun-ozis-erikan.jpg" alt="APP LOGO" />
+    </div>
+    
+</div>
