@@ -54,49 +54,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     private $_logging = null;
 
     /**
-     * Subdomain Initialization
-     *
-     * @return string
-     */
-    protected function _initSubdomain()
-    {
-        $subdomain = array();
-        
-        $config = $this->getOption('kebab');
-        //$this->_options['kebab']; //KBBTODO Try this!
-
-        if ($config['subdomain']['enable']) {
-
-            $host = explode('.', @$_SERVER['HTTP_HOST'], 2);
-            $subdomain['name'] = $host[0];
-
-            $subdomain['path'] = SUBDOMAINS_PATH . '/' . $subdomain['name'];
-            $subdomain['config']['file'] = SUBDOMAINS_PATH . '/' . $subdomain['name'] . '/configs.ini';
-
-            if (file_exists($subdomain['config']['file'])) {
-                
-                $subdomain['config']['options'] = new Zend_Config_Ini(
-                    $subdomain['config']['file'], APPLICATION_ENV
-                );
-                
-                // Adding
-                $this->setOptions(array('subdomain' => $subdomain));
-                // Merging
-                $this->setOptions($subdomain['config']['options']->toArray());
-                
-            }
-            /*
-             * KBBTODO: Check reserved subdomains and
-             * show subdomains not found error page
-             * Throw exception "Subdomain settings not loading. Subdomain config file not found!"
-             * Merge two option set method
-             */
-        }
-
-        return $subdomain;
-    }
-
-    /**
      * Config Initialization
      *
      * @return Zend_Config
@@ -111,7 +68,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Logging Initialization
-     *
+     * KBBTODO:Move to application.ini
      * @return void
      */
     protected function _initLogging()
@@ -150,6 +107,60 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $this->_logging;
     }
+    
+    /**
+     * Subdomain Initialization
+     *
+     * @return string
+     */
+    protected function _initSubdomain()
+    {
+        $subdomain = array();
+
+        if ($this->_config->kebab->subdomain->enable) {
+
+            // Info Log
+            $this->_logging->log(
+                'Subdomain initialized...',
+                Zend_Log::INFO
+            );
+
+            $host = explode('.', @$_SERVER['HTTP_HOST'], 2);
+            $subdomain['name'] = $host[0];
+
+            $subdomain['path'] = SUBDOMAINS_PATH . '/' . $subdomain['name'];
+            $subdomain['config']['file'] = SUBDOMAINS_PATH . '/' . $subdomain['name'] . '/configs.ini';
+
+            if (file_exists($subdomain['config']['file'])) {
+                
+                $subdomain['config']['options'] = new Zend_Config_Ini(
+                    $subdomain['config']['file'], APPLICATION_ENV
+                );
+                
+                // Adding
+                $this->setOptions(array('subdomain' => $subdomain));
+                // Merging
+                $this->setOptions($subdomain['config']['options']->toArray());
+
+                // ReInit Config
+                $this->_initConfig();
+
+                // Info Log
+                $this->_logging->log(
+                    $subdomain . ' Subdomain  binded...',
+                    Zend_Log::INFO
+                );
+            }
+            /*
+             * KBBTODO: Check reserved subdomains and
+             * show subdomains not found error page
+             * Throw exception "Subdomain settings not loading. Subdomain config file not found!"
+             * Merge two option set method
+             */
+        }
+
+        return $subdomain;
+    }
 
     /**
      * Doctrine Initialization
@@ -160,7 +171,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->getApplication()->getAutoloader()
                                 ->pushAutoloader(array('Doctrine', 'autoload'));
-        
+
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
         $manager->setAttribute(Doctrine::ATTR_MODEL_LOADING, IS_CLI ? 1 : 2);
@@ -194,6 +205,32 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             }
         }
 
+        // Info Log
+        $this->_logging->log(
+            'Doctrine initialized...',
+            Zend_Log::INFO
+        );
+
         return $connection;
+    }
+
+    /**
+     * Translation Initialization
+     * @return Zend_Translate
+     */
+    protected function _initTranslation()
+    {
+        $this->bootstrap('translate');
+        $translate = $this->getResource('translate');
+        $translate->setOptions(
+            array(
+                'log' => Zend_Registry::get('logging'),
+                //KBBTODO getLocale from session
+                'locale' => 'auto'
+            )
+        );
+        Zend_Registry::set('translate', $translate);
+
+        return $translate;
     }
 }
