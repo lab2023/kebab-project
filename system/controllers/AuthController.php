@@ -47,7 +47,6 @@ class AuthController extends Kebab_Controller_Action
      */
     public function indexAction()
     {
-
     }
 
     /**
@@ -118,10 +117,7 @@ class AuthController extends Kebab_Controller_Action
                 $this->_redirect('main');
             }
         } else {
-            //KBBTODO use translate
-            $notification = new Kebab_Notification();
-            $notification->addNotification(Kebab_Notification::INFO, "Invalid username or password.");
-            $this->_redirect('auth/index');
+            $this->_redirect('auth');
         }
     }
 
@@ -154,12 +150,14 @@ class AuthController extends Kebab_Controller_Action
         $email = $this->_request->getParam('email');
         $validatorEmail = new Zend_Validate_EmailAddress();
 
-        // Create user object
-        $user = Doctrine::getTable('System_Model_User')
-            ->findOneByemail($email);
+        if ($validatorEmail->isValid($email)) {
+            // Create user object
+            $user = Doctrine_Core::getTable('System_Model_User')
+                    ->findOneBy('email', $email);
+        }
 
         //Filter for SQL Injection
-        if ($this->_request->isPost() && $validatorEmail->isValid($email) && ($user !== FALSE)) {
+        if ($this->_request->isPost() && $user !== FALSE) {
             //KBBTODO We need a secure key for application
             $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
             $user->activationKey = $activationKey;
