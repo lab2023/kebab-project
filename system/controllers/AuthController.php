@@ -231,8 +231,8 @@ class AuthController extends Kebab_Controller_Action
             $user->save();
 
             //KBBTODO Use Translate
-            $notification = new Kebab_Notification();
-            $notification->addNotification(Kebab_Notification::INFO, 'Your password is changed.');
+//            $notification = new Kebab_Notification();
+//            $notification->addNotification(Kebab_Notification::INFO, 'Your password is changed.');
             $this->_helper->redirector('login');
         }
 
