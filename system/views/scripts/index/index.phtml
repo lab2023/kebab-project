@@ -2,10 +2,11 @@
 $this->headTitle('Welcome Screen');
 ?>
     <div class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">
-        <h1>Welcome to the Kebab Framework Reloaded</h1>
+        
+        <h1 class="kebab-heading">Welcome to the Kebab Framework Reloaded</h1>
 
-        <p>Congratulations! This is your project's main page.</p>
+        <p class="kebab-paragraph">Congratulations! This is your project's main page.</p>
 
-        <p>Please <a href="<?php echo $this->baseUrl('auth/index')?>">login</a> this application</p>
-        <p>Are you <a href="<?php echo $this->baseUrl('auth/forgot-password')?>">forgot password</a>?</p>
+        <p class="kebab-paragraph">Please <a href="<?php echo $this->baseUrl('auth/index')?>">login</a> this application</p>
+        <p class="kebab-paragraph">Are you <a href="<?php echo $this->baseUrl('auth/forgot-password')?>">forgot password</a>?</p>
     </div>
