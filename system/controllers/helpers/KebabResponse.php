@@ -38,8 +38,21 @@ if (!defined('BASE_PATH'))
  */
 class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Helper_Abstract
 {
+    /**
+     *
+     * @var type array
+     */
     protected $_response = array();
 
+    /**
+     * setSuccess()
+     * 
+     * <p>Set the success node at $_response array</p>
+     * 
+     * @param boolean $success
+     * @throws Kebab_Controller_Helper_Exception
+     * @return System_Controller_Helper_KebabResponse 
+     */
     public function setSuccess($success)
     {
         if (is_bool($success)) {
@@ -51,22 +64,44 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
         return $this;
     }
 
-    public function setResults($results, $addTotal = true, $name = 'results')
+    /**
+     * addData()
+     * 
+     * <p>Add result data to $_result array</p>
+     * 
+     * @param Traversable $data
+     * @param string $name
+     * @param boolean $addTotal
+     * @throws Kebab_Controller_Helper_Exception
+     * @return System_Controller_Helper_KebabResponse 
+     */
+    public function addData($data, $name = 'data', $addTotal = true)
     {
-        if (!is_array($results)
-            && (!is_object($results) || !($results instanceof Traversable))
+        if (!is_array($data)
+            && (!is_object($data) || !($data instanceof Traversable))
         ) {
             throw new Kebab_Controller_Helper_Exception('Only arrays and Traversable objects may be added to $response[\'data\']');
         }
 
         if ($addTotal) {
-            $this->_response['total'] = count($results);
+            $totalName = $name === 'data' ? 'total' : 'total' . ucwords(strtolower($name));
+            $this->_response[$totalName] = count($results);
         }
-        $this->_response[$name] = $results;
+        $this->_response[$name] = $data;
 
         return $this;
     }
 
+    /**
+     * setErrors()
+     * 
+     * <p>Set $_result[errors] elemants</p>
+     * 
+     * @param Traversable $errors
+     * @param string $name
+     * @throws Kebab_Controller_Helper_Exception
+     * @return System_Controller_Helper_KebabResponse 
+     */
     public function setErrors($errors, $name = 'errors')
     {
         if (!is_array($errors)
@@ -82,6 +117,16 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
         return $this;
     }
 
+    /**
+     * addError()
+     * 
+     * <p>Add a new error to $_response[errors] elements</p>
+     * 
+     * @param string $id
+     * @param string $value
+     * @throws Kebab_Controller_Helper_Exception
+     * @return System_Controller_Helper_KebabResponse 
+     */
     public function addError($id, $value)
     {
         if (is_null($id) || is_null($value)) {
@@ -97,8 +142,18 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
         return $this;
     }
 
-    public function addNotification($notificationType, $notification,
-        $autoHide = TRUE)
+    /**
+     * addNotification()
+     * 
+     * <p>Add a new notification at $_response[notifications]</p>
+     * 
+     * @param string $notificationType
+     * @param string $notification
+     * @param boolean $autoHide
+     * @throws Kebab_Controller_Helper_Exception
+     * @return System_Controller_Helper_KebabResponse 
+     */
+    public function addNotification($notificationType, $notification, $autoHide = TRUE)
     {
         $type = array('ALERT', 'CRIT', 'ERR', 'WARN', 'NOTICE', 'INFO');
 
@@ -126,13 +181,39 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
 
         return $this;
     }
+    
+    /**
+     * add()
+     * 
+     * <p>Add a unknow element to $_response like $_response[$name] = $data</p>
+     * 
+     * @param mixed $data
+     * @param string $name
+     * @return System_Controller_Helper_KebabResponse 
+     */
+    public function add($data, $name) 
+    {
+        $this->_response[$name] = $data;
+        return $this;
+    }
 
+    /**
+     * getResponse()
+     * 
+     * <p>convert the $_response array to json and set the application mine type json</p>
+     */
     public function getResponse()
     {
         $jsonHelper = new Zend_Controller_Action_Helper_Json();
         $jsonHelper->direct($this->_response);
     }
 
+    /**
+     * direct() : Stragry Design Pattern
+     * 
+     * @param boolean $success
+     * @return System_Controller_Helper_KebabResponse 
+     */
     public function direct($success = false)
     {
         $this->setSuccess($success);
