@@ -1,5 +1,21 @@
 COPYRIGHT
-=========
-Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
-http://www.lab2023.com
-All rights reserved
+================================================================================
+
+Kebab Framework 1.5.x
+--------------------------------------------------------------------------------
+    Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. http://www.lab2023.com
+    http://www.kebab-project.com/licensing
+
+3rd Party Libraries, Plugins, Extentions etc.
+--------------------------------------------------------------------------------
+- Zend Framework
+    Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+    http://framework.zend.com/license/new-bsd     New BSD License
+- Doctrine 1.2.x
+    Copyright (c) www.doctrine-project.org
+    http://www.opensource.org/licenses/lgpl-license.php LGPL
+- Imind Library
+    Copyright (c) iMind Ltd. (http://www.imind.hu)
+    http://www.opensource.org/licenses/bsd-license.php New BSD License
+
+        
