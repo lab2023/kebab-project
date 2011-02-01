@@ -183,6 +183,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $this->_config->database->doctrine->connections->master->name
         );
         $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
+        
+        if ($this->_config->database->doctrine->profiling->enable) {
+            $connection->setListener(new Imind_Profiler_Doctrine_Firebug('Doctrine Profiler'));
+        }
 
         if (!IS_CLI) {
             $connection->setCollate($this->_config->database->doctrine->connections->master->collate);
