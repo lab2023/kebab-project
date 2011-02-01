@@ -18,7 +18,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    PACKAGE
  * @subpackage SUB_PACKAGE
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
@@ -26,11 +26,15 @@ if (!defined('BASE_PATH'))
 
 /**
  * System_Controller_Helper_KebabResponse
+ * 
+ * <p>This controller helper aim is preparing response for the ajax request.
+ * You can set the success, data, errors, notifications. Also you can add new
+ * node to response object.</p>
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Controller
  * @subpackage Helper
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @since      1.5.x (kebab-reloaded)
@@ -145,15 +149,16 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
     /**
      * addNotification()
      * 
-     * <p>Add a new notification at $_response[notifications]</p>
+     * <p>Add a new notification at $_response[notifications] array</p>
      * 
-     * @param string $notificationType
+     * @param enum $notificationType
      * @param string $notification
      * @param boolean $autoHide
+     * @param string $group
      * @throws Kebab_Controller_Helper_Exception
      * @return System_Controller_Helper_KebabResponse 
      */
-    public function addNotification($notificationType, $notification, $autoHide = TRUE)
+    public function addNotification($notificationType, $notification, $autoHide = TRUE, $group = 'Default')
     {
         $type = array('ALERT', 'CRIT', 'ERR', 'WARN', 'NOTICE', 'INFO');
 
@@ -176,7 +181,8 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
         $this->_response['notifications'][] = array(
             $notificationType,
             Zend_Registry::get('translate')->_($notification),
-            $autoHide
+            $autoHide,
+            $group
         );
 
         return $this;
@@ -191,7 +197,7 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
      * @param string $name
      * @return System_Controller_Helper_KebabResponse 
      */
-    public function add($data, $name) 
+    public function add($name, $data) 
     {
         $this->_response[$name] = $data;
         return $this;
@@ -204,6 +210,7 @@ class System_Controller_Helper_KebabResponse extends Zend_Controller_Action_Help
      */
     public function getResponse()
     {
+        //KBBTODO We should write an adaptor for array, xml in future
         $jsonHelper = new Zend_Controller_Action_Helper_Json();
         $jsonHelper->direct($this->_response);
     }
