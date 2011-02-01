@@ -69,7 +69,8 @@ $cfgs = array(
     'application'   => 'application.ini',   // Zend Framework application settings
     'kebab'         => 'kebab.ini',         // Kebab Framework global settings
     'database'      => 'database.ini',      // System DB settings
-    'routes'        => 'routes.ini'         // System Routing settings
+    'routes'        => 'routes.ini',        // System Routing settings
+    'plugins'       => 'plugins.ini'        // System Plugins settings
 );
 
 /*

@@ -33,12 +33,12 @@ if (!defined('BASE_PATH'))
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Kebab_Acl extends Zend_Acl
+class System_Plugin_Acl_Acl extends Zend_Acl
 {
 
     private 
@@ -53,7 +53,7 @@ class Kebab_Acl extends Zend_Acl
     public function __construct()
     {
         Zend_Registry::get('logging')->log(
-            'Kebab_Acl initialized...',
+            __CLASS__ . ' initialized...',
             Zend_Log::INFO
         );
 

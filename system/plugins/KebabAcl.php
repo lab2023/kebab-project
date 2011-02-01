@@ -18,7 +18,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab_Controller
  * @subpackage Kebab_Controller_Plugin
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
@@ -31,12 +31,12 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab_Controller
  * @subpackage Kebab_Controller_Plugin
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
+class System_Plugin_KebabAcl extends Zend_Controller_Plugin_Abstract
 {
 
     /**
@@ -52,7 +52,7 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
      * @var array
      */
     private $_roles = array();
-
+    
     /**
      * Overrided preDispatch Method
      *
@@ -63,35 +63,36 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
+        
+        // Create resource and action from Request Object
+        $filter = new Zend_Filter_Word_DashToCamelCase();
+        $module = $filter->filter($request->getModuleName());
+        $controller = $filter->filter($request->getControllerName());
+        $resource = $module . '_' . $controller;
+        $action = $request->getActionName();
+        
         // Get user roles and acl from session or set default user role as guest
         //KBBTODO Don't like it. Hardcoding is bad!
         // May be define a default user in a config file in the future!!!
-        $auth = Zend_Auth::getInstance();
-        if ($auth->hasIdentity()) {
-            $identity = $auth->getIdentity();
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $identity = Zend_Auth::getInstance()->getIdentity();
             $this->_roles = isset($identity->roles) ? $identity->roles : array('guest');
-            $this->_acl = isset($identity->acl) ? $identity->acl : new Kebab_Acl();
+            $this->_acl = isset($identity->acl) ? $identity->acl : new System_Plugin_Acl_Acl();
         } else {
             $this->_roles = array('guest');
             //KBBTODO make performans problem before login
-            //create a new Kebab_Acl object every request
-            $this->_acl = new Kebab_Acl();
+            //create a new System_Plugin_Acl_Acl object every request
+            $this->_acl = new System_Plugin_Acl_Acl();
         }
 
-        // Create mvcResource and action from Request Object
-        $filter = new Zend_Filter_Word_DashToCamelCase();
         
-        $module = $filter->filter($request->getModuleName());
-        $controller = $filter->filter($request->getControllerName());
-        $mvcResource = $module . '_' . $controller;
-        $action = $request->getActionName();
 
         // Check the this user allow to access module/controller/action
         $isAllowed = FALSE;
         while (!$isAllowed && list(, $role) = each($this->_roles)) {
-            $isAllowed = $this->_acl->isAllowed($role, $mvcResource, $action);
+            $isAllowed = $this->_acl->isAllowed($role, $resource, $action);
         }
-
+        
         // If user don't have right to access module/controller/action,
         // redirect default/auth/index
         if (!$isAllowed) {
@@ -100,5 +101,6 @@ class Kebab_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $request->setActionName('index');
         }
     }
+    
 
 }
