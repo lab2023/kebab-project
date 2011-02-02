@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -34,12 +37,14 @@
  */
 class MainController extends Kebab_Controller_Action
 {
+
     /**
      * This variable access to zend front controller
      * @var Zend_Controller_Front
      */
     private $_fc;
-
+    
+    //KBBTODO Add PHPDOC
     public function init()
     {
         $auth = Zend_Auth::getInstance();
@@ -47,6 +52,7 @@ class MainController extends Kebab_Controller_Action
             $this->view->identity = $auth->getIdentity();
         }
     }
+
     /**
      * Desktop action
      * @return void
@@ -55,4 +61,5 @@ class MainController extends Kebab_Controller_Action
     {
         
     }
+
 }

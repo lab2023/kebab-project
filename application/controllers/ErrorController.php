@@ -1,4 +1,7 @@
-<?php if (!defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 
 /**
  * Kebab Framework
@@ -19,13 +22,16 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
+
+//KBBTODO Add PHPDOC
 class ErrorController extends Kebab_Controller_Action
 {
+    //KBBTODO Add PHPDOC
     public function init()
     {
         $this->_helper->layout->disableLayout();
     }
-
+    //KBBTODO Add PHPDOC
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -64,11 +70,10 @@ class ErrorController extends Kebab_Controller_Action
         $this->view->request = $errors->request;
 
         Zend_Registry::get('logging')->log(
-            $errors,
-            Zend_Log::ERR
+            $errors, Zend_Log::ERR
         );
     }
-
+    //KBBTODO Add PHPDOC
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');

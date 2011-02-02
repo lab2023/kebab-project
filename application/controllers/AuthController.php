@@ -47,6 +47,7 @@ class AuthController extends Kebab_Controller_Action
      */
     public function indexAction()
     {
+        
     }
 
     /**
@@ -62,10 +63,11 @@ class AuthController extends Kebab_Controller_Action
         $username = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('remember_me');
-    
+
         if (is_null($rememberMe)) {
             Zend_Session::forgetMe();
         }
+
         //Filter for SQL Injection
         $validatorUsername = new Zend_Validate();
         $validatorUsername->addValidator(new Zend_Validate_StringLength(4, 16))
@@ -74,8 +76,8 @@ class AuthController extends Kebab_Controller_Action
         $validatorPassword = new Zend_Validate();
         $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
 
-        if ($this->_request->isPost() 
-            && $validatorPassword->isValid($password) 
+        if ($this->_request->isPost()
+            && $validatorPassword->isValid($password)
             && $validatorUsername->isValid($username)
         ) {
             // set ZendX_Doctrine_Auth_Adapter
@@ -91,29 +93,28 @@ class AuthController extends Kebab_Controller_Action
 
             // set Zend_Auth
             $result = $auth->authenticate($authAdapter);
-            
-            
 
             // Check Auth Validation
             if ($result->isValid()) {
                 $identity = $authAdapter->getResultRowObject(null, 'password');
-               
+
                 $query = Doctrine_Query::create()
-                    ->select('r.name')
-                    ->from('Model_Role r')
-                    ->leftJoin('r.Users u')
-                    ->where('u.username = ?', $identity->username);
+                        ->select('r.name')
+                        ->from('Model_Role r')
+                        ->leftJoin('r.Users u')
+                        ->where('u.username = ?', $identity->username);
                 $roles = $query->execute();
 
                 foreach ($roles as $role) {
                     $userRoles[] = $role->name;
-                }       
-                                 
+                }
+
                 $identity->roles = $userRoles;
                 $auth->getStorage()->write($identity);
+
                 //KBBTODO Set session time and check from getParams
                 if (!is_null($rememberMe)) {
-                    //Zend_Session::rememberMe(604800);
+                    Zend_Session::rememberMe(604800);
                 }
                 $this->_redirect('main');
             }
@@ -167,13 +168,13 @@ class AuthController extends Kebab_Controller_Action
             //KBBTODO move these settings to config file
             $smtpServer = 'smtp.gmail.com';
             $config = array(
-                'ssl'      => 'tls',
-                'auth'     => 'login',
+                'ssl' => 'tls',
+                'auth' => 'login',
                 'username' => 'noreply@kebab-project.com',
                 'password' => 'xxxxx'
             );
 
-            // Mail PHTML
+            // Mail phtml
             $view = new Zend_View;
             $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
@@ -211,7 +212,7 @@ class AuthController extends Kebab_Controller_Action
         // Create a user object from doctrine
         if (!is_null($activationKey)) {
             $user = Doctrine::getTable('Model_User')
-                ->findOneByactivationKey($activationKey);
+                    ->findOneByactivationKey($activationKey);
         }
 
         // NULL or expired activation key
@@ -220,15 +221,18 @@ class AuthController extends Kebab_Controller_Action
         }
 
         // Reset password and activationKey
-        if ($this->_request->isPost() && !is_null($password) && !is_null($passwordConfirm) && ($password === $passwordConfirm) && is_object($user)) {
+        if ($this->_request->isPost()
+            && !is_null($password)
+            && !is_null($passwordConfirm)
+            && ($password === $passwordConfirm)
+            && is_object($user)
+        ) {
             $user->activationKey = NULL;
             //KBBTODO we need more secure!!!
             $user->password = md5($password);
             $user->save();
 
             //KBBTODO Use Translate
-//            $notification = new Kebab_Notification();
-//            $notification->addNotification(Kebab_Notification::INFO, 'Your password is changed.');
             $this->_helper->redirector('login');
         }
 
@@ -244,7 +248,7 @@ class AuthController extends Kebab_Controller_Action
      */
     public function resetPasswordExpiredAction()
     {
-
+        
     }
 
     /**
@@ -263,8 +267,8 @@ class AuthController extends Kebab_Controller_Action
         if ($activationKey) {
 
             $invitation = Doctrine_Core::getTable('Model_Invitation')
-                ->findOneBy('activationKey', $activationKey);
-            
+                    ->findOneBy('activationKey', $activationKey);
+
             if ($invitation) {
 
                 $invitationValid = true;
@@ -279,9 +283,8 @@ class AuthController extends Kebab_Controller_Action
 
                     // Filter for SQL Injection
                     // KBBTODO: Add validator here
-
                     $user = Doctrine_Core::getTable('Model_User')
-                        ->findOneBy('username', $username);
+                            ->findOneBy('username', $username);
 
                     if (!$user && $password == $rePassword) {
 
@@ -292,7 +295,7 @@ class AuthController extends Kebab_Controller_Action
 
                         // KBBTODO: Get Default Role(s) from configuration
                         $defaultRole = Doctrine_Core::getTable('Model_Role')
-                            ->findOneBy('name', 'guest');
+                                ->findOneBy('name', 'guest');
 
                         $user->Roles[] = $defaultRole;
                         $user->save();
