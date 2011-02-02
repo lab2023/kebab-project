@@ -38,11 +38,11 @@ if (!defined('BASE_PATH'))
  * @version    1.5.0
  *
  * @tutorial
- * echo $this->kebabAsset('dev-tools/javascripts/dev-tools.js')->get();
- * echo $this->kebabAsset('system/default/stylesheets/layout.css')->get();
- * echo $this->kebabAsset('wallpapers/Life_by_Paco_Espinoza.jpg')->get();
+ * echo $this->asset('dev-tools/javascripts/dev-tools.js')->get();
+ * echo $this->asset('system/default/stylesheets/layout.css')->get();
+ * echo $this->asset('wallpapers/Life_by_Paco_Espinoza.jpg')->get();
  */
-class Zend_View_Helper_KebabAsset extends Zend_View_Helper_Abstract
+class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
 {
     protected $_config;
     protected $_asset;
@@ -53,7 +53,7 @@ class Zend_View_Helper_KebabAsset extends Zend_View_Helper_Abstract
         $this->_config = Zend_Registry::get('config')->kebab->assets;
     }
     
-    public function kebabAsset($asset)
+    public function asset($asset)
     {
         $this->_asset[2] = $asset;
 

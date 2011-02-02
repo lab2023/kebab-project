@@ -9,7 +9,16 @@
     <?php echo $this->headMeta(); ?>
 
     <!-- TITLE AREA -->
-    <?php echo $this->headTitle('Kebab Project')->setSeparator(' :: '); ?>    
+    <?php echo $this->headTitle('Kebab Project')->setSeparator(' :: '); ?>
+
+    <!-- LINK AREA -->
+    <link href="<?php echo $this->assetVendor('reset.css')->get('blueprint', true); ?>" media="screen" rel="stylesheet" type="text/css" >
+    <!--[if lt IE]>
+        <link href="<?php echo $this->assetVendor('ie.css')->get('blueprint', true); ?>" media="screen" rel="stylesheet" type="text/css" >
+    <![endif]-->
+    <link href="<?php echo $this->asset('shared/stylesheets/screen.css')->theme($this->variable('kebabTheme'))->get(); ?>" media="screen" rel="stylesheet" type="text/css" >
+    <link href="<?php echo $this->assetVendor('resources/css/ext-all.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" >
+    <?php echo $this->headLink(); ?>
 
     <!-- STYLE AREA -->
     <?php echo $this->headStyle(); ?>
@@ -21,11 +30,14 @@
 
 <!-- SCRIPT AREA -->
 <?php
-echo $this->headScript();
+echo $this->headScript()        
+    ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
+    ->prependFile($this->assetVendor('adapter/ext/ext-base.js')->get('extjs'));
 ?>
 
 <?php
-echo $this->headLink();
+echo $this->headLink()
+ ->appendStylesheet($this->asset('application/plugins/dev-tools/stylesheets/dev-tools.css')->get());
 ?>
 </body>
 </html>

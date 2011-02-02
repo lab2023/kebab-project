@@ -38,16 +38,16 @@ if (!defined('BASE_PATH'))
  * @version    1.5.0
  *
  * @tutorial
- * echo $this->kebabAssetVendor('adapter/ext/ext-base.js')->get('extjs');
- * echo $this->kebabAssetVendor('resources/css/ext-all.css')->get('extjs', true);
+ * echo $this->assetVendor('adapter/ext/ext-base.js')->get('extjs');
+ * echo $this->assetVendor('resources/css/ext-all.css')->get('extjs', true);
  */
-class Zend_View_Helper_KebabAssetVendor extends Zend_View_Helper_KebabAsset
+class Kebab_View_Helper_AssetVendor extends Kebab_View_Helper_Asset
 {
     protected $_config;
     protected $_asset;
     protected $_clearDebug = false;
 
-    public function kebabAssetVendor($asset)
+    public function assetVendor($asset)
     {
         $this->_asset[2] = $asset;
         return $this;

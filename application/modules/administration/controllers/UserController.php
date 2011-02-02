@@ -81,7 +81,7 @@ class Administration_UserController extends Kebab_Controller_Action
                     );
                     // Mail PHTML
                     $view = new Zend_View;
-                    $view->setScriptPath(SYSTEM_PATH . '/views/mails/');
+                    $view->setScriptPath(APPLICATION_PATH . '/views/mails');
 
                     //KBBTODO use language file
                     $view->assign('activationKey', $invitation->activationKey);
