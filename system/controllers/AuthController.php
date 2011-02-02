@@ -108,11 +108,11 @@ class AuthController extends Kebab_Controller_Action
                 }
 
                 $identity->roles = $userRoles;
-                $identity->acl = new Kebab_Acl();
+                $identity->acl = new System_Plugin_Acl_Acl();
                 $auth->getStorage()->write($identity);
                 //KBBTODO Set session time and check from getParams
                 if (!is_null($rememberMe)) {
-                    Zend_Session::rememberMe(604800);
+                    //Zend_Session::rememberMe(604800);
                 }
                 $this->_redirect('main');
             }
