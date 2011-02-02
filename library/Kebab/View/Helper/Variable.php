@@ -37,7 +37,7 @@ if (!defined('BASE_PATH'))
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Zend_View_Helper_KebabVariable extends Zend_View_Helper_Abstract
+class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
 {
     protected $_config;
     
@@ -46,7 +46,7 @@ class Zend_View_Helper_KebabVariable extends Zend_View_Helper_Abstract
         $this->_config = Zend_Registry::get('config')->kebab;
     }
     
-    public function kebabVariable($var)
+    public function variable($var)
     {
         $view = new stdClass();
         $view->kebabDeveloperTools = $this->_config->developerTools;

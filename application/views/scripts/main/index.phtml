@@ -1,5 +1,12 @@
 <?php
-$this->headTitle('Desktop');
+$this->headTitle('Main');
+
+$this->headLink()
+     ->appendStylesheet($this->asset('main/stylesheets/os.css')->theme($this->variable('kebabTheme'))->get());
+
+$this->headScript()
+     ->appendFile($this->asset('application/main/kernel.js')->get())
+     ->appendFile($this->asset('application/main/os.js')->get());
 ?>
 <div id="kebab-system-os-container">
     <div id="kebab-system-os-panel">
@@ -11,7 +18,7 @@ $this->headTitle('Desktop');
         <div id="kebab-system-os-panel-infos"></div>
     </div>
     
-   <h1>Welcome to Kebab Desktop</h1>
+   <h1>Welcome to Kebab Project Main Screen</h1>
 
     <?php if ($this->identity == null): ?>
 

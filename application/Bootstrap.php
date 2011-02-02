@@ -85,7 +85,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             if ($this->_config->kebab->logging->stream->enable) {
                 $this->_logging->addWriter(
                     new Zend_Log_Writer_Stream(
-                        APPLICATION_PATH . '/variables/logs/system.log'
+                        APPLICATION_PATH . '/variables/logs/application.log'
                     )
                 );
             }

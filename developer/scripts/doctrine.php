@@ -46,6 +46,7 @@ defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../../')
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', BASE_PATH . $paths['app']);
 defined('MODULES_PATH')     || define('MODULES_PATH', APPLICATION_PATH . '/' . $paths['mod']);
+defined('LIBRARY_PATH')     || define('LIBRARY_PATH', BASE_PATH . '/' . $paths['lib']);
 defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . '/' . $paths['dev']);
 defined('WEB_PATH')         || define('WEB_PATH', BASE_PATH . $paths['web']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
