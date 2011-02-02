@@ -51,9 +51,9 @@ class System_Plugin_Acl_Acl extends Zend_Acl
      * @return void
      */
     public function __construct()
-    {
+    {   
         Zend_Registry::get('logging')->log(
-            __CLASS__ . ' initialized...',
+            __CLASS__ . ' initializated...',
             Zend_Log::INFO
         );
 
