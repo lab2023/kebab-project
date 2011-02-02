@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#kebab-developer-tools-img').click(function () {
-        $('#kebab-developer-tools-console').toggle('fast');
-    });    
-});
+//Ext.onReady(function() {
+//    Ext.fly('kebab-developer-tools-img').on('click', function(e, t) {
+//        Ext.fly('kebab-developer-tools-console').toggle();
+//    });  
+//});

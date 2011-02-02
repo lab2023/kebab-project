@@ -1,0 +1,32 @@
+<?php
+$this->headTitle('Desktop');
+?>
+<div id="kebab-system-os-container">
+    <div id="kebab-system-os-panel">
+        <div id="kebab-system-os-panel-menus">
+            <div id="kebab-system-os-panel-menus-applications"></div>
+            <div id="kebab-system-os-panel-menus-system"></div>
+        </div>
+        <div id="kebab-system-os-panel-launchers"></div>
+        <div id="kebab-system-os-panel-infos"></div>
+    </div>
+    
+   <h1>Welcome to Kebab Desktop</h1>
+
+    <?php if ($this->identity == null): ?>
+
+        <p><a href="<?php echo $this->baseUrl('auth'); ?>"> To login</a></p>
+
+    <?php else: ?>
+
+        <p>Welcome back <?php echo $this->identity->username; ?></p>
+
+        <h4>Roles</h4>
+        <p><?php Zend_Debug::dump($this->identity->roles); ?></p>
+
+        <p><a href="<?php echo $this->baseUrl('auth/logout'); ?>"> To logout </a></p>
+
+    <?php endif; ?> 
+</div>
+
+

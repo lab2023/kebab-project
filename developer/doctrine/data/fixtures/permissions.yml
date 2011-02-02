@@ -1,4 +1,4 @@
-System_Model_Permission:
+Model_Permission:
 
   NULL_Default_Auth_NULL_allow:
     Controller: Default_Auth
@@ -14,14 +14,4 @@ System_Model_Permission:
 
   NULL_Default_Main_NULL_allow:
     Controller: Default_Main
-    rule: allow
-
-  Guest_SysPreferences_AboutMe_index_allow:
-    Role: Guest
-    Action: SysPreferences_AboutMe_index
-    rule: allow
-
-  Admin_SysAdministration_User_sendInvitation_allow:
-    Role: Admin
-    Action: SysAdministration_User_sendInvitation
     rule: allow

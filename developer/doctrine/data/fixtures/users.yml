@@ -1,4 +1,4 @@
-System_Model_User:
+Model_User:
   Guest:
     username: guest
     password: 084e0343a0486ff05530df6c705c8bb4

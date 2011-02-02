@@ -1,12 +1,12 @@
 README
 ======
 
-This is Kebab Framework 1.5.x version
+This is Kebab Project 1.5.x version
 ------------
 
 Requirements
 ------------
-Kebab 1.5.x is only supported on PHP 5.3.3 and up.
+Kebab Project 1.5.x is only supported on PHP 5.3.3 and up.
     - Zend Framework 1.11.1 (http://framework.zend.com)
     - Doctrine 1.2.3        (http://www.doctrine-project.org)
     - ExtJS 3.3.1           (http://www.sencha.com)
@@ -26,11 +26,10 @@ http://kebab-project.com/blog/how-to-install-kebab-project-on-ubuntu
 Documentation
 -------------
 Directories:
-    applications: installed modules here
+    application: your application is here
+        |-modules: installed modules here
     developer: installation files and developer tools here (doctrineCLI etc.)
-    libraries: 3rd. party libraries here (PEAR v.s.)
-    subdomains* : optional subdomains folders and config files here
-    system: zend application, kernel, core, configs, helpers etc. here
+    library: kebab and 3rd. party libraries here (PEAR v.s.)
     web: public html folder
 
 [1]: http://kebab-project.com

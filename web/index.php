@@ -36,19 +36,18 @@
 /*
  * Kebab System Settings
  */
-include '../system/configs/system.php';
+include '../application/configs/system.php';
 // -----------------------------------------------------------------------------
 
 /*
  * Setup Defines
  */
-defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../') . '/');
-defined('SYSTEM_PATH')      || define('SYSTEM_PATH', BASE_PATH . $paths['sys']);
-defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH . $paths['app']);
-defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . $paths['dev']);
-defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH . $paths['dns']);
-defined('WEB_PATH')         || define('WEB_PATH', BASE_PATH . $paths['pub']);
+defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
+defined('APPLICATION_PATH') || define('APPLICATION_PATH', BASE_PATH . $paths['app']);
+defined('MODULES_PATH')     || define('MODULES_PATH', APPLICATION_PATH . '/' . $paths['mod']);
+defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . '/' . $paths['dev']);
+defined('WEB_PATH')         || define('WEB_PATH', BASE_PATH . $paths['web']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
 defined('IS_CLI')           || define('IS_CLI', false);
 // -----------------------------------------------------------------------------
@@ -56,10 +55,9 @@ defined('IS_CLI')           || define('IS_CLI', false);
 /*
  * Ensure library is on include_paths
  */
-set_include_path(implode( PATH_SEPARATOR,
+set_include_path(implode(PATH_SEPARATOR,
     array(
-        realpath(BASE_PATH . $paths['lib']), // 3rd party libraries
-        realpath(SYSTEM_PATH . '/' . $paths['lib']), // system libraries
+        realpath(BASE_PATH . $paths['lib']),
         get_include_path()
     ))
 );
@@ -69,7 +67,7 @@ set_include_path(implode( PATH_SEPARATOR,
  * Setup Config File Path
  */
 foreach($cfgs as $key => $value) {
-    $configs[$key] = SYSTEM_PATH . '/configs/' . $value;
+    $configs[$key] = APPLICATION_PATH . '/configs/' . $value;
 }
 // -----------------------------------------------------------------------------
 

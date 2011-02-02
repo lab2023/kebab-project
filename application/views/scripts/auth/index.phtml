@@ -1,0 +1,21 @@
+<?php
+$this->headTitle('Login Screen');
+$this->headLink();
+?>
+
+<div id="kebab-system-auth-container" class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">
+
+    <h1 class="kebab-heading">Login screen</h1>
+
+     <form method="post" action="<?php echo $this->baseUrl('auth/login'); ?>">
+        <strong>Username</strong>
+        <input type="text" size="20" name="username"><br />
+        <strong>Password</strong>
+        <input type="password" size="20" name="password"><br />
+        <strong>Remember Me</strong>
+        <input type="checkbox" name="remember_me" /> <br />
+
+        <p class="kebab-paragraph"><input type="submit" name="login" value="Login"> or <a href="<?php echo $this->baseUrl('index'); ?>">Welcome screen</a></p>
+    </form>
+    
+</div>

@@ -36,19 +36,18 @@
 /*
  *  Kebab System Settings
  */
-include '../../system/configs/system.php';
+include '../../application/configs/system.php';
 // -----------------------------------------------------------------------------
 
 /*
  * Setup Defines
  */
-defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../../') . '/');
-defined('SYSTEM_PATH')      || define('SYSTEM_PATH', BASE_PATH . $paths['sys']);
-defined('APPLICATIONS_PATH')|| define('APPLICATIONS_PATH', BASE_PATH . $paths['app']);
-defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . $paths['dev']);
-defined('SUBDOMAINS_PATH')  || define('SUBDOMAINS_PATH', BASE_PATH . $paths['dns']);
-defined('WEB_PATH')         || define('WEB_PATH', BASE_PATH . $paths['pub']);
+defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
+defined('APPLICATION_PATH') || define('APPLICATION_PATH', BASE_PATH . $paths['app']);
+defined('MODULES_PATH')     || define('MODULES_PATH', APPLICATION_PATH . '/' . $paths['mod']);
+defined('DEVELOPER_PATH')   || define('DEVELOPER_PATH', BASE_PATH . '/' . $paths['dev']);
+defined('WEB_PATH')         || define('WEB_PATH', BASE_PATH . $paths['web']);
 defined('BASE_URL')         || define('BASE_URL', $baseUrl);
 defined('IS_CLI')           || define('IS_CLI', true);
 // -----------------------------------------------------------------------------
@@ -56,10 +55,9 @@ defined('IS_CLI')           || define('IS_CLI', true);
 /*
  *  Ensure library/ is on include_paths
  */
-set_include_path(implode( PATH_SEPARATOR,
+set_include_path(implode(PATH_SEPARATOR,
     array(
-        realpath(BASE_PATH . $paths['lib']),   // 3rd party libraries
-        realpath(SYSTEM_PATH . '/' . $paths['lib']), // system libraries
+        realpath(BASE_PATH . $paths['lib']),
         get_include_path()
     ))
 );
@@ -69,7 +67,7 @@ set_include_path(implode( PATH_SEPARATOR,
  *  Setup Config File Path
  */
 foreach($cfgs as $key => $value) {
-    $configs[$key] = SYSTEM_PATH . '/configs/' . $value;
+    $configs[$key] = APPLICATION_PATH . '/configs/' . $value;
 }
 // -----------------------------------------------------------------------------
 
@@ -116,7 +114,7 @@ if ($moduleNameIndex !== false) {   // Module argument is set
 
     if (!empty($moduleName)) { // Module name is not empty and already exist
 
-        if (!is_dir(APPLICATIONS_PATH . "/" . $moduleName)) {
+        if (!is_dir(MODULES_PATH . "/" . $moduleName)) {
             die("** Module path not found! **" . PHP_EOL);
         }
         
@@ -126,14 +124,14 @@ if ($moduleNameIndex !== false) {   // Module argument is set
 
         // Replacement Mapping, String Replace and Apply Filter
         $mapping = array(
-            'find'      => array(   // Original
-                SYSTEM_PATH,    // models path
-                DEVELOPER_PATH, // data_fixtures, sql, migrations, yaml_schema paths
-                "System_Model_" // generate_models_options.classPrefix
+            'find'      => array(    // Original
+                APPLICATION_PATH,    // application models path
+                DEVELOPER_PATH,      // data_fixtures, sql, migrations, yaml_schema paths
+                "Model_"             // generate_models_options.classPrefix
             ),
             'replace'   => array(   // Replaced
-                APPLICATIONS_PATH . "/" . $moduleName,
-                APPLICATIONS_PATH . "/" . $moduleName . "/" . $paths['dev'],
+                MODULES_PATH . "/" . $moduleName,
+                MODULES_PATH . "/" . $moduleName . "/" . $paths['dev'],
                 $camelCaseModuleName . "_Model_"
             )
         );

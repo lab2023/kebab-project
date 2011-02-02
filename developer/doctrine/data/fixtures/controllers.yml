@@ -1,4 +1,4 @@
-System_Model_Controller:
+Model_Controller:
   Default_Auth:
     Module: Default
     name: Auth
@@ -14,19 +14,3 @@ System_Model_Controller:
   Default_Main:
     Module: Default
     name: Main
-
-  SuperDuper_Index:
-    Module: SuperDuper
-    name: Index
-
-  SysAdministration_Index:
-    Module: SysAdministration
-    name: Index
-
-  SysAdministration_User:
-    Module: SysAdministration
-    name: User
-
-  SysPreferences_AboutMe:
-    Module: SysPreferences
-    name: AboutMe

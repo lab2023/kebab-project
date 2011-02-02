@@ -1,4 +1,4 @@
-System_Model_UserRole:
+Model_UserRole:
   Guest:
     User: Guest
     Role: Guest
