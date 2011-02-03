@@ -42,6 +42,7 @@ if (!defined('BASE_PATH'))
  */
 class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abstract
 {
+
     /**
      *
      * @var type array
@@ -137,11 +138,9 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             throw new Kebab_Controller_Helper_Exception('$id and $value can\'t be  $response[\'errors\']');
         }
 
-        foreach ($errors as $key => $value) {
-            $this->_response['errors'][] = array(
-                $id => Zend_Registry::get('translate')->_($value)
-            );
-        }
+        $this->_response['errors'][] = array(
+            $id => Zend_Registry::get('translate')->_($value)
+        );
 
         return $this;
     }
@@ -187,18 +186,23 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
         return $this;
     }
-    
+
     /**
      * add()
      * 
      * <p>Add a unknow element to $_response like $_response[$name] = $data</p>
      * 
-     * @param mixed $data
      * @param string $name
+     * @param mixed $data
+     * @throws Kebab_Controller_Helper_Exception
      * @return System_Controller_Helper_KebabResponse 
      */
-    public function add($name, $data) 
+    public function add($name, $data)
     {
+        if (!is_string($name)) {
+            throw new Kebab_Controller_Helper_Exception('Invalid $name type');
+        }
+        
         $this->_response[$name] = $data;
         return $this;
     }
