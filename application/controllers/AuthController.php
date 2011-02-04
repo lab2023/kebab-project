@@ -151,47 +151,52 @@ class AuthController extends Kebab_Controller_Action
     {
         $email = $this->_request->getParam('email');
         $validatorEmail = new Zend_Validate_EmailAddress();
+        $response = $this->_helper->response();
 
-        if ($validatorEmail->isValid($email)) {
-            // Create user object
-            $user = Doctrine_Core::getTable('Model_User')
-                    ->findOneBy('email', $email);
-        }
+        if ($this->_request->isPost()) {
+            if ($validatorEmail->isValid($email)) {
 
-        //Filter for SQL Injection
-        if ($this->_request->isPost() && $user !== FALSE) {
-            //KBBTODO We need a secure key for application
-            $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
-            $user->activationKey = $activationKey;
-            $user->save();
+                // Create user object
+                $user = Doctrine_Core::getTable('Model_User')
+                        ->findOneBy('email', $email);
 
-            //KBBTODO move these settings to config file
-            $smtpServer = 'smtp.gmail.com';
-            $config = array(
-                'ssl' => 'tls',
-                'auth' => 'login',
-                'username' => 'noreply@kebab-project.com',
-                'password' => 'xxxxx'
-            );
+                if ($user !== false) {
+                    //KBBTODO We need a secure key for application
+                    $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
+                    $user->activationKey = $activationKey;
+                    $user->save();
 
-            // Mail phtml
-            $view = new Zend_View;
-            $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
+                    //KBBTODO move these settings to config file
+                    $smtpServer = 'smtp.gmail.com';
+                    $config = array(
+                        'ssl' => 'tls',
+                        'auth' => 'login',
+                        'username' => 'oozgurozkan@gmail.com',
+                        'password' => 'hermes26'
+                    );
 
-            //KBBTODO use language file
-            $view->assign('activationKey', $activationKey);
+                    // Mail phtml
+                    $view = new Zend_View;
+                    $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
-            $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
-            $mail = new Zend_Mail();
-            $mail->setFrom('noreply@kebab-project.com', 'Kebab Project');
-            $mail->addTo($user->email, $user->firstName . $user->surname);
-            $mail->setSubject('Reset your password');
-            $mail->setBodyHtml($view->render('forgot-password.phtml'));
-            $mail->send($transport);
+                    //KBBTODO use language file
+                    $view->assign('activationKey', $activationKey);
 
-            $this->_helper->redirector('login');
-        } else {
-            //KBBTODO use notification.
+                    $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+                    $mail = new Zend_Mail();
+                    $mail->setFrom('noreply@kebab-project.com', 'Kebab Project');
+                    $mail->addTo($user->email, $user->firstName . $user->surname);
+                    $mail->setSubject('Reset your password');
+                    $mail->setBodyHtml($view->render('forgot-password.phtml'));
+                    $mail->send($transport);
+
+                    $this->_helper->redirector('login');
+                } else {
+                    $response->addNotification('ERR', 'There isn\'t user with this email')->getResponse();
+                }
+            } else {
+                $response->addError('email', 'Invalid email format')->getResponse();
+            }
         }
     }
 
@@ -215,9 +220,9 @@ class AuthController extends Kebab_Controller_Action
                     ->findOneByactivationKey($activationKey);
         }
 
-        // NULL or expired activation key
-        if (!$this->_request->isGet() && is_null($activationKey) && is_null($user->activationKey)) {
-            $this->_helper->redirector('auth/reset-password-expired');
+        // Null activation key
+        if (!$user) {
+            $this->_helper->redirector('reset-password-expired');
         }
 
         // Reset password and activationKey
