@@ -109,6 +109,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     /**
+     * Plugins initializer
+     * 
+     * @return string
+     */
+    public function _initPlugins()
+    {
+        $plugins = $this->_config->plugins ? $this->_config->plugins->toArray() : array();
+        
+        if (count($plugins) > 0 ) {
+            $this->bootstrap('frontController') ;
+            $front = $this->getResource('frontController');
+
+        foreach ($plugins as $plugin) {
+                $front->registerPlugin(new $plugin());
+            }
+        }
+        return $plugins;
+    }
+    
+    /**
      * Doctrine Initialization
      *
      * @return Doctrine_Manager
