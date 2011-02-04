@@ -75,35 +75,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->_logging = new Zend_Log();
 
-        //Empty Writer
-        $this->_logging->addWriter(
-            new Zend_Log_Writer_Null()
-        );
-
         if ($this->_config->kebab->logging->enable) {
             //Stream Writer
             if ($this->_config->kebab->logging->stream->enable) {
-                $this->_logging->addWriter(
-                    new Zend_Log_Writer_Stream(
-                        APPLICATION_PATH . '/variables/logs/application.log'
-                    )
-                );
+                
+                $logFile = APPLICATION_PATH . '/variables/logs/application.log';
+                $streamWriter = new Zend_Log_Writer_Stream($logFile);
+                $this->_logging->addWriter($streamWriter);
             }
             //Firebug Writer
             if ($this->_config->kebab->logging->firebug->enable) {
-                $this->_logging->addWriter(
-                    new Zend_Log_Writer_Firebug()
-                );
+                
+                $firebugWriter = new Zend_Log_Writer_Firebug();                                
+                $firebugWriter->setFormatter(new Zend_Log_Formatter_Simple());               
+                $this->_logging->addWriter($firebugWriter);
             }
+        } else {
+            //Empty Writer
+            $nullWriter = new Zend_Log_Writer_Null();
+            $this->_logging->addWriter($nullWriter);
         }
 
         Zend_Registry::set('logging', $this->_logging);
 
         // Info Log
-        $this->_logging->log(
-            'Logging initialized...',
-            Zend_Log::INFO
-        );
+        $this->_logging->log('Logging initialized...', Zend_Log::INFO);
 
         return $this->_logging;
     }
@@ -115,16 +111,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     public function _initPlugins()
     {
-        $plugins = $this->_config->plugins ? $this->_config->plugins->toArray() : array();
+        // Info Log
+        $this->_logging->log('Plugins initialized...', Zend_Log::INFO);
+        
+        $plugins = $this->_config->plugins 
+                 ? $this->_config->plugins->toArray() : array();
         
         if (count($plugins) > 0 ) {
             $this->bootstrap('frontController') ;
             $front = $this->getResource('frontController');
 
-        foreach ($plugins as $plugin) {
+            foreach ($plugins as $plugin) {
                 $front->registerPlugin(new $plugin());
             }
         }
+        
         return $plugins;
     }
     
@@ -135,8 +136,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     public function _initDoctrine()
     {
-        $this->getApplication()->getAutoloader()
-                                ->pushAutoloader(array('Doctrine', 'autoload'));
+        // Info Log
+        $this->_logging->log('Doctrine initialized...', Zend_Log::INFO);
+
+        $this->getApplication()->getAutoloader()->pushAutoloader(array('Doctrine', 'autoload'));
 
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
@@ -175,17 +178,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             }
         }
 
-        // Info Log
-        $this->_logging->log(
-            'Doctrine initialized...',
-            Zend_Log::INFO
-        );
-
         return $connection;
     }
 
+    /**
+     * Translation Initialization
+     * 
+     * @return Zend_Translate 
+     */
     protected function _initTranslation()
     {
+        // Info Log
+        $this->_logging->log('Translation initialized...', Zend_Log::INFO);
+        
         $this->bootstrap('translate');
         $translate = $this->getResource('translate');
         $translate->setOptions(
@@ -195,6 +200,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'locale' => 'auto'
             )
         );
+        
         Zend_Registry::set('translate', $translate);
 
         return $translate;
