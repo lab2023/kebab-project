@@ -1,0 +1,41 @@
+<?php
+$this->headLink()
+     ->appendStylesheet($this->asset('application/plugins/dev-tools/stylesheets/dev-tools.css')->get());
+?>
+
+<div id="kebab-developer-tools" class="kebab-shadow-std kebab-developer-tools-<?php echo $this->data->position; ?>" title="Kebab Framework Developer Tools v.0.1">
+    <?php if ($this->data->position == "top"): ?>
+        <?php echo $this->render('console.phtml'); ?>
+    <?php endif; ?>
+    
+    <div id="kebab-developer-tools-terminal-icon"></div>
+    <p>
+        <strong>Page render time :</strong>
+        <span <?php echo $this->data->scriptExecutingTime > .2 ? 'style="color:red;"' : null ;?>>
+            <?php echo $this->data->scriptExecutingTime; ?> seconds
+        </span>
+        <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong>
+        
+        <strong>Memory peak usage :</strong>
+        <span>
+            <?php echo $this->data->memoryPeakUsage; ?> bytes
+        </span>
+        <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong>
+        
+        <strong>Environment: </strong>
+        <span class="env-<?php echo APPLICATION_ENV ?>"><?php echo APPLICATION_ENV; ?></span>        
+        <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong>
+        
+        <strong>Kebab Version :</strong>
+        <span><?php echo Kebab_Version::VERSION; ?></span>
+        <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong>
+        
+        <strong>Zend Version :</strong>
+        <span><?php echo Zend_Version::VERSION; ?></span>
+    </p>
+    <em title="Kebab Framework Developer Tools v.0.1">Kebab Developer Tools v.0.1</em>
+
+    <?php if ($this->data->position == "bottom"): ?>
+        <?php echo $this->render('console.phtml'); ?>
+    <?php endif; ?>    
+</div>

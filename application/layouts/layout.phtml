@@ -34,10 +34,5 @@ echo $this->headScript()
     ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
     ->prependFile($this->assetVendor('adapter/ext/ext-base.js')->get('extjs'));
 ?>
-
-<?php
-echo $this->headLink()
- ->appendStylesheet($this->asset('application/plugins/dev-tools/stylesheets/dev-tools.css')->get());
-?>
 </body>
 </html>

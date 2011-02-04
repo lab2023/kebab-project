@@ -36,7 +36,7 @@
 /*
  * Set Script Executing Start Time
  */
-defined('PROFILER_SCRIPT_START_TIME')   || define('PROFILER_SCRIPT_START_TIME', microtime(true));
+defined('SCRIPT_START_TIME')   || define('SCRIPT_START_TIME', microtime(true));
 
 /*
  * Application Environments
