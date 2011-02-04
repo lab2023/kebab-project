@@ -1,9 +1,9 @@
 <?php
 $this->headLink()
-     ->appendStylesheet($this->asset('application/plugins/dev-tools/stylesheets/dev-tools.css')->get());
+     ->appendStylesheet($this->asset('plugins/kebab-developer-tools/stylesheets/style.css')->get());
 ?>
 
-<div id="kebab-developer-tools" class="kebab-shadow-std kebab-developer-tools-<?php echo $this->data->position; ?>" title="Kebab Framework Developer Tools v.0.1">
+<div id="kebab-developer-tools" class="kebab-shadow-std kebab-developer-tools-<?php echo $this->data->position; ?>" title="Kebab Developer Tools v.0.1">
     <?php if ($this->data->position == "top"): ?>
         <?php echo $this->render('console.phtml'); ?>
     <?php endif; ?>
