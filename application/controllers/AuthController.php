@@ -159,7 +159,7 @@ class AuthController extends Kebab_Controller_Action
                 // Create user object
                 $user = Doctrine_Core::getTable('Model_User')
                         ->findOneBy('email', $email);
-
+                        
                 if ($user !== false) {
                     //KBBTODO We need a secure key for application
                     $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
