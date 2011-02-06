@@ -1,0 +1,112 @@
+/* -----------------------------------------------------------------------------
+ Kebab Project 1.5.x (Kebab Reloaded)
+ http://kebab-project.com
+ Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
+ http://www.lab2023.com
+
+    * LICENSE
+    * 
+    * This source file is subject to the  Dual Licensing Model that is bundled
+    * with this package in the file LICENSE.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://www.kebab-project.com/licensing
+    * If you did not receive a copy of the license and are unable to
+    * obtain it through the world-wide-web, please send an email
+    * to info@lab2023.com so we can send you a copy immediately.
+----------------------------------------------------------------------------- */
+
+/*---------------------------------TYPOGRAPHY---------------------------------*/
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Ubuntu Italic'), 
+         local('Ubuntu-Italic'), 
+         url('../fonts/Ubuntu-Italic.ttf')
+         format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Ubuntu'), 
+         local('Ubuntu-Regular'), 
+         url('../fonts/Ubuntu-Regular.ttf') 
+         format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Ubuntu Bold Italic'), 
+         local('Ubuntu-BoldItalic'), 
+         url('../fonts/Ubuntu-Italic.ttf') 
+         format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Ubuntu Bold'),
+         local('Ubuntu-Bold'), 
+         url('../fonts/Ubuntu-Bold.ttf') 
+         format('truetype');
+}
+* {
+    font-family: Ubuntu, Georgia, "Bitstream Charter", serif;
+    font-size: 12.5px;
+    font-style: normal;
+}
+/*----------------------------------BASE--------------------------------------*/
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+* {
+    margin:0;
+    padding:0;
+}
+/*---------------------------------CLASSES------------------------------------*/
+.kebab-standart-container {
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+	margin:auto;
+    background:#fff;
+    border:1px outset #a7a5a6;
+    padding:20px;
+    width:600px;
+    height:300px;
+}
+h1.kebab-heading {
+    font-size:2em;
+    margin-bottom:0.4em;
+}
+p.kebab-paragraph {
+    margin:2px 0;
+    padding:2px 0;
+}
+.kebab-opacity {
+    opacity:.85;
+}
+.kebab-opacity:hover {
+    opacity:1;
+}
+.kebab-rounded-corners {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+.kebab-shadow-std {
+    -moz-box-shadow: 0px 0px 20px #222;
+    -webkit-box-shadow: 0px 0px 20px #222;
+    box-shadow: 0px 0px 20px #222;
+}
+.kebab-shadow {
+    -moz-box-shadow: 0px 10px 20px #222;
+    -webkit-box-shadow: 0px 10px 20px #222;
+    box-shadow: 0px 10px 20px #222;
+}
+.kebab-debug {
+    border:1px dashed red;
+}

@@ -50,7 +50,7 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
 
     public function  __construct()
     {
-        $this->_config = Zend_Registry::get('config')->kebab->assets;
+        $this->_config = Zend_Registry::get('config')->kebab;
     }
     
     public function asset($asset)
@@ -60,10 +60,29 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function theme($theme)
+    public function distribution($distro = null)
     {
-        $path = $this->_config->themes->path;
-        $this->_asset[1] = $path . '/' . $theme;
+        $path = $this->_config->os->distributions->path;
+        
+        $distro = is_null($distro)
+                ? $this->_config->os->distributions->current
+                : $distro;
+                
+        $this->_asset[1] = $path . '/' . $distro;
+        
+        return $this;
+    }
+    
+    public function theme($theme = null)
+    {   
+        $theme = is_null($theme)
+               ? $this->_config->os->distributions->theme
+               : $theme;
+
+        $this->_asset[1] = isset($this->_asset[1]) 
+                         ? $this->_asset[1] . '/themes/' . $theme
+                         : 'themes/' . $theme;
+            
         return $this;
     }
 
@@ -80,20 +99,21 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
 
     protected function _root()
     {
-        return $this->_config->loading->mode == 'local'
-                ? WEB_PATH . '/' . $this->_config->path
-                : $this->_config->loading->cdn->url . '/' . $this->_config->path;
+        return $this->_config->assets->loading->mode == 'local'
+                ? WEB_PATH . '/' . $this->_config->assets->path
+                : $this->_config->assets->loading->cdn->url . '/' . $this->_config->assets->path;
     }
 
     protected function _debug($file)
     {
+        // KBBFIX: This parsing system not running by Ex.ux.BlahBlah.js typos
         // KBBTODO: Check is really file
         $file = explode('.', $file);
 
         // Apply this only css and js files
         $isCssOrJS = ($file[1] == 'js' || $file[1] == 'css');
 
-        return ($this->_config->debug->enable && $isCssOrJS)
+        return ($this->_config->assets->debug->enable && $isCssOrJS)
                     ? str_replace('.', '-debug.', implode('.', $file))
                     : implode('.', $file);
     }
@@ -109,7 +129,7 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
                     ? $this->_clearDebug($this->_merge())
                     : $this->_merge();
 
-        return $this->_config->loading->cacheControl->enable
+        return $this->_config->assets->loading->cacheControl->enable
                 ? file_exists(realpath($asset))
                     ? $seperator . filemtime($asset)
                     : null
