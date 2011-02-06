@@ -37,7 +37,7 @@ class Administration_UserController extends Kebab_Controller_Action
     public function indexAction()
     {
         
-    }
+    }        
 
     public function sendInvitationAction()
     {
