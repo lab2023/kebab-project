@@ -1,0 +1,19 @@
+GuiAsset:
+  columns:
+    gui_id:
+      type: integer
+      primary: true
+    asset_id:
+      type: integer
+      primary: true
+      
+  relations:
+    Gui:
+      class: Gui
+    Asset:
+      class: Asset
+      
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

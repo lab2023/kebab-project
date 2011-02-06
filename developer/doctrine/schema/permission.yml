@@ -2,32 +2,22 @@ Permission:
   columns:
     role_id:
       type: integer
-    controller_id:
+      primary: true
+    story_id:
       type: integer
-    action_id:
-      type: integer
+      primary: true
     rule:
       type: enum
       length: 5
       values: ['deny', 'allow']
-    assertion_id:
-      type: integer
 
   relations:
     Role:
       class: Role
       type: one
 
-    Controller:
-      class: Controller
-      type: one
-
-    Action:
-      class: Action
-      type: one
-
-    Assertion:
-      class: Assertion
+    Story:
+      class: Story
       type: one
 
   options:

@@ -1,13 +1,14 @@
-Module:
+Gui:
   columns:
-    name:
+    name: 
       type: string(255)
       unique: true
-
+      
   relations:
-    Controllers:
-      class: Controller
-      type: many
+    Assets:
+      foreignAlias: Asset
+      class: Asset
+      refClass: GuiAsset
       
   options:
     type: INNODB

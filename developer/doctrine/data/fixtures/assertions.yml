@@ -1,9 +1,0 @@
-Model_Assertion:
-  CleanIP:
-    name: CleanIP
-
-  MaxContact:
-    name: MaxContact
-
-  RestrictedTime:
-    name: RestrictedTime

@@ -1,0 +1,20 @@
+StoryResource:
+  columns:
+    story_id:
+      type: integer
+      primary: true
+    resource_id:
+      type: integer
+      primary: true
+      
+  relations:
+    Story:
+      class: Story
+    Resource:
+      class: Resource      
+    
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+      

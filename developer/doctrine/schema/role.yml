@@ -1,7 +1,8 @@
 Role:
   columns:
     name:
-      type: string(255)
+      type: string(255)      
+      unique: true
     inheritRole:
       type: integer
 

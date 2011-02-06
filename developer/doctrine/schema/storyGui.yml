@@ -1,0 +1,19 @@
+StoryGui:
+  columns:
+    story_id: 
+      type: integer
+      primary: true
+    gui_id:
+      type: integer
+      primary: true
+  
+  relations:
+    Story:
+      class: Story
+    Gui:
+      class: Gui
+    
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

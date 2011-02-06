@@ -1,0 +1,21 @@
+Asset:
+  columns:
+    name:
+      type: string(255)
+      unique: true
+    path:
+      type: string(255)
+      
+  relations:
+    Guis:
+      foreignAlias: Gui
+      class: Gui
+      refClass: GuiAsset
+    
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+    
+     
+    
