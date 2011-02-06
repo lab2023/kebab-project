@@ -90,7 +90,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
         if ($addTotal) {
             $totalName = $name === 'data' ? 'total' : 'total' . ucwords(strtolower($name));
-            $this->_response[$totalName] = count($results);
+            $this->_response[$totalName] = count($data);
         }
         $this->_response[$name] = $data;
 
