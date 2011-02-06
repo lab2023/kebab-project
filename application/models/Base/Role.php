@@ -25,6 +25,7 @@ abstract class Model_Base_Role extends Doctrine_Record
         $this->setTableName('role');
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
+             'unique' => true,
              'length' => '255',
              ));
         $this->hasColumn('inheritRole', 'integer', null, array(

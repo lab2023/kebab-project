@@ -8,7 +8,7 @@
  * @property integer $controller_id
  * @property string $name
  * @property Model_Controller $Controller
- * @property Doctrine_Collection $Permission
+ * @property Doctrine_Collection $Resource
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -40,7 +40,7 @@ abstract class Model_Base_Action extends Doctrine_Record
              'local' => 'controller_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Model_Permission as Permission', array(
+        $this->hasMany('Model_Resource as Resource', array(
              'local' => 'id',
              'foreign' => 'action_id'));
     }
