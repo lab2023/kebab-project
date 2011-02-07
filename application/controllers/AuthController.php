@@ -39,9 +39,9 @@ class AuthController extends Kebab_Controller_Action
 {
 
     /**
-     * index()
+     * indexAction()
      *
-     * <p>Check user name and password and authorize user</p>
+     * <p>Login form</p>
      *
      * @return void
      */
@@ -59,6 +59,7 @@ class AuthController extends Kebab_Controller_Action
      */
     public function loginAction()
     {
+
         // Get params
         $username = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
@@ -116,10 +117,15 @@ class AuthController extends Kebab_Controller_Action
                 if (!is_null($rememberMe)) {
                     Zend_Session::rememberMe(604800);
                 }
+                //KBBTODO Language notification
                 $this->_redirect('desktop');
+            } else {
+                //KBBTODO Language notification
+                $this->_redirect('auth/index');
             }
         } else {
-            $this->_redirect('auth');
+            //KBBTODO Language notification
+            $this->_redirect('auth/index');
         }
     }
 
@@ -137,7 +143,7 @@ class AuthController extends Kebab_Controller_Action
             $auth->clearIdentity();
             Zend_Session::forgetMe();
         }
-        $this->_redirect('auth');
+        $this->_redirect('auth/index');
     }
 
     /**
@@ -159,7 +165,7 @@ class AuthController extends Kebab_Controller_Action
                 // Create user object
                 $user = Doctrine_Core::getTable('Model_User')
                         ->findOneBy('email', $email);
-                        
+
                 if ($user !== false) {
                     //KBBTODO We need a secure key for application
                     $activationKey = sha1(mt_rand(10000, 99999) . time() . $email);
@@ -171,8 +177,8 @@ class AuthController extends Kebab_Controller_Action
                     $config = array(
                         'ssl' => 'tls',
                         'auth' => 'login',
-                        'username' => 'oozgurozkan@gmail.com',
-                        'password' => 'hermes26'
+                        'username' => 'email@kebab-project.com',
+                        'password' => 'password'
                     );
 
                     // Mail phtml
