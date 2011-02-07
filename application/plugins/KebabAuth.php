@@ -40,11 +40,14 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
 
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        parent::preDispatch($request);
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-            Zend_Registry::get('logging')->log('No identity', Zend_Log::ERR);
+        $module = $request->getModuleName();
+        $controller = $request->getControllerName();
+        $pass = $module . '-' . $controller;
+        if ($pass != 'default-auth') {
+            $auth = Zend_Auth::getInstance();
+            if (!$auth->hasIdentity()) {
+                throw new Zend_Exception('You haven\'t right to access this page');
+            }
         }
     }
-
 }
