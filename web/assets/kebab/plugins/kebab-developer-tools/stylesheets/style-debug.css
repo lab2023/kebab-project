@@ -3,7 +3,6 @@
     position:fixed;
     margin:auto; padding: 0;
     width:100%;
-    z-index:99999;
     overflow: hidden;
 }
 div.kebab-developer-tools-top {
