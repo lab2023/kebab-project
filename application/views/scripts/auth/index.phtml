@@ -1,8 +1,11 @@
 <?php
 $this->headTitle('Login Screen');
+
 $this->headLink()->prependStylesheet(
-    $this->asset('auth/stylesheets/auth.css')->theme($this->variable('kebabTheme'))->get()
-);
+    $this->asset('stylesheets/auth.css')->theme($this->variable('kebabTheme'))->get());
+
+$this->headScript()
+     ->appendFile($this->asset('javascripts/auth.js')->theme($this->variable('kebabTheme'))->get());
 ?>
 
 <div id="kebab-system-auth-container" class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">

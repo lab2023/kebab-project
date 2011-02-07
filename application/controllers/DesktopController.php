@@ -16,8 +16,8 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    PACKAGE
- * @subpackage SUB_PACKAGE
+ * @package    Controllers
+ * @subpackage Default
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
@@ -25,38 +25,34 @@ if (!defined('BASE_PATH'))
  */
 
 /**
- * Title Here
- * Class Description here
+ * Kebab Application Main Controller
  *
  * @category   Kebab (kebab-reloaded)
- * @package    PACKAGE
- * @subpackage SUB_PACKAGE
+ * @package    Controllers
+ * @subpackage Default
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
- * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
+class DesktopController extends Kebab_Controller_Action
 {
-    protected $_config;
-    
-    public function  __construct()
+    //KBBTODO Add PHPDOC
+    public function init()
     {
-        $this->_config = Zend_Registry::get('config')->kebab;
-    }
-    
-    public function variable($var = null)
-    {
-        if (!is_null($var)) {
-            
-            $vars = new stdClass();
-            $vars->kebabOs = $this->_config->os;
-            $vars->assets = $this->_config->assets;
-
-            return $vars->$var;
-        } else {
-            return $var;
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+            $this->view->identity = $auth->getIdentity();
         }
     }
+
+    /**
+     * Index action
+     * @return void
+     */
+    public function indexAction()
+    {
+        
+    }
+
 }

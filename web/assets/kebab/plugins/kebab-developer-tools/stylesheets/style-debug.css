@@ -1,9 +1,10 @@
 #kebab-developer-tools {
     background: #000;
-    position:absolute;
-    margin:0; padding: 1px 0px; left:0%;
+    position:fixed;
+    margin:auto; padding: 0;
     width:100%;
-    z-index:999;
+    z-index:99999;
+    overflow: hidden;
 }
 div.kebab-developer-tools-top {
     border-bottom:1px solid #fff;
@@ -13,13 +14,19 @@ div.kebab-developer-tools-bottom {
     border-top:1px solid #fff;
     bottom:0;
 }
-#kebab-developer-tools p {
-    font-size:12px;
-    font-style:italic;
-    color: #fff;
-    margin:3px 6px;
+#kebab-developer-tools p {    
+    margin:0px;
     padding:0px;
-    float:left;
+    position:absolute;
+    top:5px;
+    left:30px;
+}
+#kebab-developer-tools p strong {
+    font-weight: bold;
+}
+#kebab-developer-tools p strong, #kebab-developer-tools p span {
+    color: #fff;
+    font-size:12px;
 }
 #kebab-developer-tools span.env-production   { color:chartreuse }
 #kebab-developer-tools span.env-staging      { color:aqua }
@@ -27,12 +34,12 @@ div.kebab-developer-tools-bottom {
 #kebab-developer-tools span.env-development  { color:orangered }
 
 #kebab-developer-tools em {
-    float:right;
     font-style:italic;
     color:#eee;
-    font-size:10px;
-    padding:4px;
-    margin-top:3px;
+    font-size:10px;    
+    position:absolute;
+    right:10px;
+    top:9px;
 }
 #kebab-developer-tools-terminal-icon  {
     background:url('../images/terminal.png') no-repeat;

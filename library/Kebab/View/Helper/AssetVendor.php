@@ -55,12 +55,12 @@ class Kebab_View_Helper_AssetVendor extends Kebab_View_Helper_Asset
 
     public function get($vendor, $clearDebug = false)
     {
-        $config = $this->_config->vendors;
+        $config = $this->_config->assets->vendors;
 
         $root = $config->$vendor->path;
         $cdn  = $config->$vendor->cdn 
                     ? $config->$vendor->cdn
-                    : $this->_config->loading->cdn->url . '/' . $this->_config->path . '/vendors';
+                    : $this->_config->assets->loading->cdn->url . '/' . $this->_config->assets->path . '/vendors';
 
         $this->_asset[0] = $this->_root($root, $cdn);
 
@@ -73,8 +73,8 @@ class Kebab_View_Helper_AssetVendor extends Kebab_View_Helper_Asset
 
     protected function _root($root, $cdn)
     {
-        return $this->_config->loading->mode == 'local'
-                ? WEB_PATH . '/' . $this->_config->path . '/vendors/' . $root
+        return $this->_config->assets->loading->mode == 'local'
+                ? WEB_PATH . '/' . $this->_config->assets->path . '/vendors/' . $root
                 : $cdn . '/' . $root;
     }
 }

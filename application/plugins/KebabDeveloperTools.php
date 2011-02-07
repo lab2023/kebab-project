@@ -51,9 +51,9 @@ class Plugin_KebabDeveloperTools extends Zend_Controller_Plugin_Abstract
         
         $pluginPath = substr(__FILE__, 0, strpos(__FILE__, '.'));        
         if (is_dir($pluginPath)) {
-            
+
             $this->_pluginPath = $pluginPath;
-            
+
             if (file_exists($this->_pluginPath . '/config.ini')) {
                 $this->_pluginConfig = new Zend_Config_Ini(
                     $this->_pluginPath . '/config.ini',
@@ -70,16 +70,16 @@ class Plugin_KebabDeveloperTools extends Zend_Controller_Plugin_Abstract
         // Access active viewRenderer helper
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')->view;
         $view->addScriptPath($this->_pluginPath . '/views');
-        
+
         // Setup data
         $data = new stdClass();                
         $data->position = $this->_pluginConfig->position;
         $data->scriptExecutingTime = number_format((microtime(true) - SCRIPT_START_TIME), 5,'.',',');
         $data->memoryPeakUsage = number_format(memory_get_peak_usage(true));
-        
+
         // Assign view data
         $view->assign('data', $data);
-        
+
         // Appanend View data to response body
         $this->getResponse()->appendBody($view->render('index.phtml'));
     }

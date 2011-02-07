@@ -1,0 +1,29 @@
+<?php
+$this->headTitle('Main');
+
+$this->headLink()
+     ->appendStylesheet($this->asset('application/stylesheets/desktop.css')->distribution()->theme()->get());
+
+$this->headScript()
+     ->appendFile($this->asset('kernel/kernel.js')->distribution()->get())
+     ->appendFile($this->asset('application/desktop.js')->distribution()->get());
+?>
+
+<div id="x-desktop"> 
+    <dl id="x-shortcuts"> 
+        <dt id="grid-win-shortcut"> 
+            <a href="#"><img src="<?php echo $this->asset('application/images/desktop/s.gif')->distribution()->theme()->get() ?>" /> 
+            <div>Grid Window</div></a> 
+        </dt> 
+        <dt id="acc-win-shortcut"> 
+            <a href="#"><img src="<?php echo $this->asset('application/images/desktop/s.gif')->distribution()->theme()->get(); ?>" /> 
+            <div>Accordion Window</div></a> 
+        </dt> 
+    </dl> 
+</div> 
+ 
+<div id="ux-taskbar" class="kebab-shadow-std"> 
+	<div id="ux-taskbar-start"></div> 
+	<div id="ux-taskbuttons-panel"></div> 
+	<div class="x-clear"></div> 
+</div>

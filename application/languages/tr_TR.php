@@ -14,7 +14,7 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Languages
- * @subpackage Tr
+ * @subpackage Application
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
@@ -26,7 +26,7 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Languages
- * @subpackage Tr
+ * @subpackage Application
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing

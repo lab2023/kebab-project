@@ -116,7 +116,7 @@ class AuthController extends Kebab_Controller_Action
                 if (!is_null($rememberMe)) {
                     Zend_Session::rememberMe(604800);
                 }
-                $this->_redirect('main');
+                $this->_redirect('desktop');
             }
         } else {
             $this->_redirect('auth');
