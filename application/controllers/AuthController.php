@@ -111,6 +111,7 @@ class AuthController extends Kebab_Controller_Action
                 }
 
                 $identity->roles = $userRoles;
+                $identity->acl   = new Plugin_KebabAcl_Acl();
                 $auth->getStorage()->write($identity);
 
                 //KBBTODO Set session time and check from getParams
