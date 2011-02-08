@@ -37,7 +37,6 @@ if (!defined('BASE_PATH'))
  */
 class DesktopController extends Kebab_Controller_Action
 {
-    //KBBTODO Add PHPDOC
     public function init()
     {
         $auth = Zend_Auth::getInstance();
