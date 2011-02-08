@@ -23,7 +23,7 @@
  */
 
 /**
- * Plugin_KebabDAuth
+ * Plugin_KebabAuth
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Application
@@ -33,21 +33,35 @@
 class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
 {
 
+    /**
+     * __construct
+     * 
+     * @param object Plugin_KebabAuth
+     * @param file KebabAuth.php
+     */
     public function __construct()
     {
         parent::__construct(__CLASS__, __FILE__);
     }
 
+    /**
+     * preDispatch 
+     * 
+     * @param Zend_Controller_Request_Abstract $request 
+     * @throws Zend_Exception
+     */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $module = $request->getModuleName();
         $controller = $request->getControllerName();
         $pass = $module . '-' . $controller;
-        if ($pass != 'default-auth') {
+        
+        if ($pass !== 'default-index' && $pass !== 'default-auth') {
             $auth = Zend_Auth::getInstance();
             if (!$auth->hasIdentity()) {
                 throw new Zend_Exception('You haven\'t right to access this page');
             }
         }
+        
     }
 }
