@@ -55,13 +55,16 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         $module = $request->getModuleName();
         $controller = $request->getControllerName();
         $pass = $module . '-' . $controller;
-        
-        if ($pass !== 'default-index' && $pass !== 'default-auth') {
+
+        if ($pass !== 'default-index'
+            && $pass !== 'default-auth'
+            && $pass !== 'default-error'
+        ) {
             $auth = Zend_Auth::getInstance();
             if (!$auth->hasIdentity()) {
                 throw new Zend_Exception('You haven\'t right to access this page');
             }
         }
-        
     }
+
 }
