@@ -87,7 +87,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             if ($this->_config->kebab->logging->firebug->enable) {
                 
                 $firebugWriter = new Zend_Log_Writer_Firebug();                                
-                $firebugWriter->setFormatter(new Zend_Log_Formatter_Simple());               
+                //$firebugWriter->setFormatter(new Zend_Log_Formatter_Simple());               
                 $this->_logging->addWriter($firebugWriter);
             }
         } else {
