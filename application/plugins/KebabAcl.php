@@ -52,30 +52,36 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $module = $request->getModuleName();
-        $controller = $request->getControllerName();
-        $action = $request->getActionName();
+        $filter = new Zend_Filter_Word_DashToCamelCase();
+        $module = $filter->filter($request->getModuleName());
+        $controller = $filter->filter($request->getControllerName());
+        $action = $filter->filter($request->getActionName());
         $resource = $module . '-' . $controller;
-
-        if ($resource !== 'default-index'
-            && $resource !== 'default-auth'
-            && $resource !== 'default-error'
+        
+        if ($resource !== 'Default-Index'
+            && $resource !== 'Default-Auth'
+            && $resource !== 'Default-Error'
         ) {
-            $auth = Zend_Auth::getInstance();
-            if ($auth->hasIdentity()) {
-                $acl = $auth->getIdentity()->acl;
-                $roles = $auth->getIdentity()->roles;
-                $isallowed = false;
-                foreach ($roles as $role) {
-                    if($acl->isAllowed($role, $resource, $action)){
-                        $isallowed = true;
-                        break;
-                    }                        
+            if (Zend_Auth::getInstance()->hasIdentity()) {
+                $acl = Zend_Auth::getInstance()->getIdentity()->acl;
+                $roles = Zend_Auth::getInstance()->getIdentity()->roles;
+
+                $isAllowed = false;
+                while (!$isAllowed && list(, $role) = each($roles)) {
+                    $isAllowed = $acl->isAllowed($role, $resource, $action);
+                    Zend_Registry::get('logging')->log(
+                        '$isAllowed:' .$isAllowed .', 
+                         $role:'.$role.' $resource:'.$resource.'  
+                         $action:'.$action, Zend_Log::DEBUG
+                    );
+                }
+
+                if (!$isAllowed) {
+                    throw new Zend_Exception('You can\'t access this resource. isAllowed() = false, hasIdentity() = true');
                 }
                 
-                if(!$isallowed) {
-                    throw new Zend_Exception('You can\'t access this resource');
-                }
+            } else {
+                throw new Zend_Exception('Resource which you try to access isn\'t public. hasIdentity() = false');
             }
         }
     }

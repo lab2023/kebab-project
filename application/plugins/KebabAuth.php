@@ -52,17 +52,20 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $module = $request->getModuleName();
-        $controller = $request->getControllerName();
-        $pass = $module . '-' . $controller;
-
-        if ($pass !== 'default-index'
-            && $pass !== 'default-auth'
-            && $pass !== 'default-error'
+        $filter = new Zend_Filter_Word_DashToCamelCase();
+        $module = $filter->filter($request->getModuleName());
+        $controller = $filter->filter($request->getControllerName());
+        $resource = $module . '-' . $controller;
+        
+        if ($resource !== 'Default-Index'
+            && $resource !== 'Default-Auth'
+            && $resource !== 'Default-Error'
         ) {
             $auth = Zend_Auth::getInstance();
             if (!$auth->hasIdentity()) {
-                throw new Zend_Exception('You haven\'t right to access this page');
+                $request->setModuleName('default');
+                $request->setControllerName('auth');
+                $request->setActionName('index');
             }
         }
     }
