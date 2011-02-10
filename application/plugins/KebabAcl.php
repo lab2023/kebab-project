@@ -55,9 +55,9 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
         $filter = new Zend_Filter_Word_DashToCamelCase();
         $module = $filter->filter($request->getModuleName());
         $controller = $filter->filter($request->getControllerName());
-        $action = $filter->filter($request->getActionName());
+        $action = $request->getActionName();
         $resource = $module . '-' . $controller;
-        
+
         if ($resource !== 'Default-Index'
             && $resource !== 'Default-Auth'
             && $resource !== 'Default-Error'
@@ -70,16 +70,16 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
                 while (!$isAllowed && list(, $role) = each($roles)) {
                     $isAllowed = $acl->isAllowed($role, $resource, $action);
                     Zend_Registry::get('logging')->log(
-                        '$isAllowed:' .$isAllowed .', 
-                         $role:'.$role.' $resource:'.$resource.'  
-                         $action:'.$action, Zend_Log::DEBUG
+                        '$isAllowed:' . $isAllowed . ', 
+                         $role:' . $role . ' $resource:' . $resource . '  
+                         $action:' . $action,
+                        Zend_Log::DEBUG
                     );
                 }
 
                 if (!$isAllowed) {
                     throw new Zend_Exception('You can\'t access this resource. isAllowed() = false, hasIdentity() = true');
                 }
-                
             } else {
                 throw new Zend_Exception('Resource which you try to access isn\'t public. hasIdentity() = false');
             }
