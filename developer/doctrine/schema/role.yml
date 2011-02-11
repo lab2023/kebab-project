@@ -5,6 +5,17 @@ Role:
       unique: true
     inheritRole:
       type: integer
+    title:
+      type: string(255)
+    description:
+      type: clob
+      
+  actAs:
+    I18n:
+      fields: [title, description]
+      className: RoleTranslation
+      length: 5
+    SoftDelete:
 
   relations:
     InheritRole:

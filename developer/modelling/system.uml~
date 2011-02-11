@@ -78,7 +78,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Feb 10 16:39:36 EET 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Feb 10 16:37:44 EET 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -1877,9 +1877,6 @@ A1
         <UML:Class xmi.id = '127-0-1-1-7b8d82e:12df4dc2a43:-8000:0000000000000BC7'
           name = 'Story' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
-          <UML:ModelElement.comment>
-            <UML:Comment xmi.idref = '127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C18'/>
-          </UML:ModelElement.comment>
           <UML:Classifier.feature>
             <UML:Attribute xmi.id = '127-0-1-1-7b8d82e:12df4dc2a43:-8000:0000000000000BC8'
               name = 'id' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
@@ -2421,14 +2418,6 @@ A1
             </UML:Attribute>
           </UML:Classifier.feature>
         </UML:Class>
-        <UML:Comment xmi.id = '127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C18'
-          isSpecification = 'false' body = 'Story&#10;I18n[title, description]'>
-          <UML:Comment.annotatedElement>
-            <UML:Class xmi.idref = '127-0-1-1-7b8d82e:12df4dc2a43:-8000:0000000000000BC7'/>
-          </UML:Comment.annotatedElement>
-        </UML:Comment>
-        <UML:Comment xmi.id = '127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C19'
-          isSpecification = 'false' body = 'Role&#10;I18n[title, description]'/>
       </UML:Namespace.ownedElement>
     </UML:Model>
     <UML:Parameter xmi.id = '127-0-1-1-7b8d82e:12df4dc2a43:-8000:0000000000000BC2'
@@ -8129,200 +8118,6 @@ A1
       <lineto x="664"
               y="310" />
     </path>
-  </group>
-  <group name="Fig17"
-       description="org.argouml.uml.diagram.static_structure.ui.FigComment[888, 80, 155, 59]pathVisible=false;stereotypeView=0;"
-       href="127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C18"
-       fill="1"
-       fillcolor="white"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-    </private>
-    
-    <rectangle name="Fig17.0"
-      x="888"
-      y="80"
-      width="155"
-      height="59"
-      fill="0"
-      fillcolor="white"
-      stroke="0"
-      strokecolor="black"
-    />
-    <path name="Fig17.1"
-      description="org.tigris.gef.presentation.FigPoly"
-      fill="1"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="888"
-              y="80" />
-      <lineto x="1032"
-              y="80" />
-      <lineto x="1042"
-              y="90" />
-      <lineto x="1042"
-              y="138" />
-      <lineto x="888"
-              y="138" />
-      <lineto x="888"
-              y="80" />
-    </path>
-    <path name="Fig17.2"
-      description="org.tigris.gef.presentation.FigPoly"
-      fill="1"
-      fillcolor="178 178 178"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="1032"
-              y="80" />
-      <lineto x="1042"
-              y="90" />
-      <lineto x="1032"
-              y="90" />
-      <lineto x="1032"
-              y="80" />
-    </path>
-    <group name="Fig17.3"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[890, 82, 141, 0]"
-         href="127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C18"
-         fill="0"
-         fillcolor="white"
-         stroke="0"
-         strokecolor="black"
-    >
-      <private>
-      </private>
-      
-      <rectangle name="Fig17.3.0"
-        x="890"
-        y="82"
-        width="141"
-        height="0"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-      />
-    </group>
-    <text name="Fig17.4"
-      x="890"
-      y="82"
-      width="141"
-      height="55"
-      fill="0"
-      fillcolor="white"
-      stroke="0"
-      strokecolor="black"
-      textcolor="black"
-      font="Dialog"
-      italic="false"
-      bold="false"
-      textsize="12"
-      justification="Left"
-    >Story
-I18n[title, description]</text>
-  </group>
-  <group name="Fig18"
-       description="org.argouml.uml.diagram.static_structure.ui.FigComment[160, 232, 155, 59]pathVisible=false;stereotypeView=0;"
-       href="127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C19"
-       fill="1"
-       fillcolor="white"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-    </private>
-    
-    <rectangle name="Fig18.0"
-      x="160"
-      y="232"
-      width="155"
-      height="59"
-      fill="0"
-      fillcolor="white"
-      stroke="0"
-      strokecolor="black"
-    />
-    <path name="Fig18.1"
-      description="org.tigris.gef.presentation.FigPoly"
-      fill="1"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="160"
-              y="232" />
-      <lineto x="304"
-              y="232" />
-      <lineto x="314"
-              y="242" />
-      <lineto x="314"
-              y="290" />
-      <lineto x="160"
-              y="290" />
-      <lineto x="160"
-              y="232" />
-    </path>
-    <path name="Fig18.2"
-      description="org.tigris.gef.presentation.FigPoly"
-      fill="1"
-      fillcolor="178 178 178"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="304"
-              y="232" />
-      <lineto x="314"
-              y="242" />
-      <lineto x="304"
-              y="242" />
-      <lineto x="304"
-              y="232" />
-    </path>
-    <group name="Fig18.3"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[162, 234, 141, 0]"
-         href="127-0-1-1--4393c456:12e0ffff924:-8000:0000000000000C19"
-         fill="0"
-         fillcolor="white"
-         stroke="0"
-         strokecolor="black"
-    >
-      <private>
-      </private>
-      
-      <rectangle name="Fig18.3.0"
-        x="162"
-        y="234"
-        width="141"
-        height="0"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-      />
-    </group>
-    <text name="Fig18.4"
-      x="162"
-      y="234"
-      width="141"
-      height="55"
-      fill="0"
-      fillcolor="white"
-      stroke="0"
-      strokecolor="black"
-      textcolor="black"
-      font="Dialog"
-      italic="false"
-      bold="false"
-      textsize="12"
-      justification="Left"
-    >Role
-I18n[title, description]</text>
   </group>
 </pgml>
 <pgml description="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram|127-0-1-1-c57d005:12dd17f2aa9:-8000:0000000000000865"

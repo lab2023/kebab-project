@@ -9,7 +9,6 @@
  * @property Doctrine_Collection $Assets
  * @property Doctrine_Collection $StoryGui
  * @property Doctrine_Collection $GuiAsset
- * @property Doctrine_Collection $Gui
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -47,10 +46,5 @@ abstract class Model_Base_Gui extends Doctrine_Record
         $this->hasMany('Model_GuiAsset as GuiAsset', array(
              'local' => 'id',
              'foreign' => 'gui_id'));
-
-        $this->hasMany('Model_Story as Gui', array(
-             'refClass' => 'Model_StoryGui',
-             'local' => 'gui_id',
-             'foreign' => 'story_id'));
     }
 }
