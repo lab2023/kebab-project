@@ -4,6 +4,7 @@
     margin:auto; padding: 0;
     width:100%;
     overflow: hidden;
+    height:30px;
 }
 div.kebab-developer-tools-top {
     border-bottom:1px solid #fff;
@@ -33,12 +34,12 @@ div.kebab-developer-tools-bottom {
 #kebab-developer-tools span.env-development  { color:orangered }
 
 #kebab-developer-tools em {
-    font-style:italic;
-    color:#eee;
-    font-size:10px;    
-    position:absolute;
-    right:10px;
-    top:9px;
+    color: #eee;
+    font-size: 10px !important;
+    font-style: italic;
+    position: absolute;
+    right: 10px;
+    top: 7px;
 }
 #kebab-developer-tools-terminal-icon  {
     background:url('../images/terminal.png') no-repeat;

@@ -11,8 +11,8 @@
  * @property Doctrine_Collection $Resources
  * @property Doctrine_Collection $Guis
  * @property Doctrine_Collection $StoryGui
- * @property Doctrine_Collection $StoryResource
  * @property Doctrine_Collection $Permission
+ * @property Doctrine_Collection $StoryResource
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -58,11 +58,11 @@ abstract class Model_Base_Story extends Doctrine_Record
              'local' => 'id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_StoryResource as StoryResource', array(
+        $this->hasMany('Model_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_Permission as Permission', array(
+        $this->hasMany('Model_StoryResource as StoryResource', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
