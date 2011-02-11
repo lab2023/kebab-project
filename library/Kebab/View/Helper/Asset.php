@@ -123,7 +123,7 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         return str_replace('-debug', '', $asset);
     }
 
-    protected function _version($seperator = '?')
+    protected function _version($seperator = '?version=')
     {
         $asset = $this->_clearDebug
                     ? $this->_clearDebug($this->_merge())
