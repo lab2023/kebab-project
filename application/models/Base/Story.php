@@ -11,8 +11,8 @@
  * @property Doctrine_Collection $Resources
  * @property Doctrine_Collection $Guis
  * @property Doctrine_Collection $StoryGui
- * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $StoryResource
+ * @property Doctrine_Collection $Permission
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -58,11 +58,11 @@ abstract class Model_Base_Story extends Doctrine_Record
              'local' => 'id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_Permission as Permission', array(
+        $this->hasMany('Model_StoryResource as StoryResource', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_StoryResource as StoryResource', array(
+        $this->hasMany('Model_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
@@ -73,7 +73,7 @@ abstract class Model_Base_Story extends Doctrine_Record
               1 => 'description',
              ),
              'className' => 'StoryTranslation',
-             'length' => 4,
+             'length' => 5,
              ));
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($i18n0);
