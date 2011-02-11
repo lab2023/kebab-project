@@ -145,7 +145,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         var user = this.kernel.getUser();
         
         this.indicatorsToolbar = new Ext.Toolbar().render('kebab-os-panel-indicators');
-        this.indicatorsToolbar.add({
+        this.indicatorsToolbar.add('->',{
             iconCls : 'icon-status-online',
             template: stdButtonTemplate,
             text: user.firstName + ' ' + user.surname
@@ -178,9 +178,9 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         this.indicatorsMenu = new Ext.BoxComponent({
             el: 'kebab-os-panel-indicators',
             id: 'kebab-os-panel-indicators',
-            width:190,
-            minSize:190,
-            maxSize:190,
+            width:150,
+            minSize:150,
+            maxSize:150,
             region:'east',
             split:true
         });
