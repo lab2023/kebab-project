@@ -118,7 +118,7 @@ class AuthController extends Kebab_Controller_Action
                     Zend_Session::rememberMe(604800);
                 }
                 //KBBTODO Language notification
-                $this->_redirect('desktop');
+                $this->_redirect('main');
             } else {
                 //KBBTODO Language notification
                 $this->_redirect('auth/index');

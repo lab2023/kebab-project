@@ -35,7 +35,7 @@ if (!defined('BASE_PATH'))
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class DesktopController extends Kebab_Controller_Action
+class MainController extends Kebab_Controller_Action
 {
     //KBBTODO Add PHPDOC
     public function init()
