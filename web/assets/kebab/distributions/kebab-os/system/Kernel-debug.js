@@ -148,7 +148,23 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         this.indicatorsToolbar.add('->',{
             iconCls : 'icon-status-online',
             template: stdButtonTemplate,
-            text: user.firstName + ' ' + user.surname
+            text: user.firstName + ' ' + user.surname,
+            menu: [{
+                text:'Avaliable',
+                iconCls: 'icon-status-online'
+            },{
+                text:'Away',
+                iconCls: 'icon-status-away'
+            },{
+                text:'Busy',
+                iconCls: 'icon-status-busy'
+            },{
+                text:'Offline',
+                iconCls: 'icon-status-offline'
+            }, '-', {
+                text:'About Me',
+                iconCls: 'icon-vcard'
+            }]
         });
         this.indicatorsToolbar.add({
             iconCls : 'icon-shutdown',
@@ -583,7 +599,7 @@ Ext.extend(Kebab.OS.Panel.WindowList.TaskButton, Ext.Button, {
                 this.cmenu.render();
             }
             var xy = e.getXY();
-            xy[1] -= this.cmenu.el.getHeight();
+            xy[1] -= this.cmenu.el.getHeight() - 110;
             this.cmenu.showAt(xy);
         }, this);
     },
