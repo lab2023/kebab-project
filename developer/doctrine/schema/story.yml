@@ -2,9 +2,18 @@ Story:
   columns:
     name:
       type: string(255)
+    title:
+      type: string(255)
     description:
       type: clob
-  
+
+  actAs:
+    I18n:
+      fields: [title, description]
+      className: StoryTranslation
+      length: 5
+    SoftDelete:
+
   relations:
     Resources:
       foreignAlias: Resource

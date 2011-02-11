@@ -7,6 +7,8 @@
  * 
  * @property string $name
  * @property integer $inheritRole
+ * @property string $title
+ * @property clob $description
  * @property Model_Role $InheritRole
  * @property Doctrine_Collection $Users
  * @property Doctrine_Collection $UserRole
@@ -30,6 +32,13 @@ abstract class Model_Base_Role extends Doctrine_Record
              ));
         $this->hasColumn('inheritRole', 'integer', null, array(
              'type' => 'integer',
+             ));
+        $this->hasColumn('title', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
+        $this->hasColumn('description', 'clob', null, array(
+             'type' => 'clob',
              ));
 
         $this->option('type', 'INNODB');
@@ -60,5 +69,18 @@ abstract class Model_Base_Role extends Doctrine_Record
         $this->hasMany('Model_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'role_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'title',
+              1 => 'description',
+             ),
+             'className' => 'RoleTranslation',
+             'length' => 4,
+             ));
+        $softdelete0 = new Doctrine_Template_SoftDelete();
+        $this->actAs($i18n0);
+        $this->actAs($softdelete0);
     }
 }
