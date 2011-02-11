@@ -9,8 +9,8 @@
  * @property string $name
  * @property Model_Module $Module
  * @property Doctrine_Collection $Actions
- * @property Doctrine_Collection $Resource
  * @property Doctrine_Collection $Action
+ * @property Doctrine_Collection $Resource
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -46,11 +46,11 @@ abstract class Model_Base_Controller extends Doctrine_Record
              'local' => 'action_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Model_Resource as Resource', array(
+        $this->hasMany('Model_Action as Action', array(
              'local' => 'id',
              'foreign' => 'controller_id'));
 
-        $this->hasMany('Model_Action as Action', array(
+        $this->hasMany('Model_Resource as Resource', array(
              'local' => 'id',
              'foreign' => 'controller_id'));
     }
