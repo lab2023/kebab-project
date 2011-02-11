@@ -65,7 +65,7 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
             if (!$auth->hasIdentity()) {
                 $request->setModuleName('default');
                 $request->setControllerName('auth');
-                $request->setActionName('index');
+                $request->setActionName('unauthorized');
             }
         }
     }

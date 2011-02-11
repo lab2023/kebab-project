@@ -328,5 +328,17 @@ class AuthController extends Kebab_Controller_Action
             $this->renderScript('auth/accept-invitation-error.phtml');
         }
     }
+    
+    /**
+     * unauthorizedAction()
+     *
+     * <p>Login form</p>
+     *
+     * @return void
+     */
+    public function unauthorizedAction()
+    {
+        
+    }
 
 }
