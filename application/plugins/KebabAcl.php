@@ -30,7 +30,7 @@
  * @subpackage Plugins
  * @author	   lab2023 Dev Team
  */
-class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
+class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
 {
 
     /**
@@ -55,17 +55,33 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         $filter = new Zend_Filter_Word_DashToCamelCase();
         $module = $filter->filter($request->getModuleName());
         $controller = $filter->filter($request->getControllerName());
+        $action = $request->getActionName();
         $resource = $module . '-' . $controller;
-        
+
         if ($resource !== 'Default-Index'
             && $resource !== 'Default-Auth'
             && $resource !== 'Default-Error'
         ) {
-            $auth = Zend_Auth::getInstance();
-            if (!$auth->hasIdentity()) {
-                $request->setModuleName('default');
-                $request->setControllerName('auth');
-                $request->setActionName('index');
+            if (Zend_Auth::getInstance()->hasIdentity()) {
+                $acl = Zend_Auth::getInstance()->getIdentity()->acl;
+                $roles = Zend_Auth::getInstance()->getIdentity()->roles;
+
+                $isAllowed = false;
+                while (!$isAllowed && list(, $role) = each($roles)) {
+                    $isAllowed = $acl->isAllowed($role, $resource, $action);
+                    Zend_Registry::get('logging')->log(
+                        '$isAllowed:' . $isAllowed . ', 
+                         $role:' . $role . ' $resource:' . $resource . '  
+                         $action:' . $action,
+                        Zend_Log::DEBUG
+                    );
+                }
+
+                if (!$isAllowed) {
+                    throw new Zend_Exception('You can\'t access this resource. isAllowed() = false, hasIdentity() = true');
+                }
+            } else {
+                throw new Zend_Exception('Resource which you try to access isn\'t public. hasIdentity() = false');
             }
         }
     }
