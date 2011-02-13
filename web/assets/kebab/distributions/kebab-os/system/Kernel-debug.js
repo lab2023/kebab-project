@@ -713,6 +713,9 @@ Kebab.OS.Desktop = function(kernel) {
         });
 
         layout();
+        
+        Kebab.OS.Notification.message('Kebab OS', '\'' +win.title + '\' initialized...');
+        
         return win;
     };
 
@@ -837,6 +840,8 @@ Ext.namespace('Kebab.OS.Kernel');
 
 Kebab.OS.Kernel = function(data){
     
+    console.log('Kebab.OS.Kernel initialized...');
+    
     Ext.apply(this, data);
     
     this.addEvents({
@@ -850,11 +855,21 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
     isReady: false,
     
+    environment: null,
+    
     user: null,
     
     applications: null,
+    
+    getUser : Ext.emptyFn,
+    
+    getApplications : Ext.emptyFn,
+    
+    init : Ext.emptyFn,
 
     boot : function(){
+        
+        console.log('Kebab.OS.Kernel boot-up...');
         
     	this.desktop = new Kebab.OS.Desktop(this);
         
@@ -874,12 +889,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         this.isReady = true;
     },
 
-    getUser : Ext.emptyFn,
-    
-    getApplications : Ext.emptyFn,
-    
-    init : Ext.emptyFn,
-
     initApplications : function(appSC){
 		for(var i = 0, len = appSC.length; i < len; i++){
             var app = appSC[i];
@@ -889,6 +898,8 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     },
 
     getApplication : function(name){
+        
+        console.log('Kebab.OS.Kernel getApplication call by ' +name+ ' parameter...');
         
     	var app = this.applications;
     	
@@ -941,22 +952,33 @@ Kebab.OS.Notification = function(){
 
     // KBBTODO Customize this component layout
     function createBox(t, s){
-        return ['<div class="msg">',
+        return ['<div class="kebab-notification kebab-shadow-std">',
                 '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>',
                 '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>', t, '</h3>', s, '</div></div></div>',
                 '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>',
                 '</div>'].join('');
     }
     return {
-        msg : function(title, format){
+        message : function(title, message, keep){
             
             if(!msgCt){
-                msgCt = Ext.DomHelper.insertFirst(document.body, {id:'msg-div'}, true);
+                msgCt = Ext.DomHelper.insertFirst(document.body, {id:'kebab-notification-div'}, true);
             }
+            
             msgCt.alignTo(document, 'tr-tr');
-            var s = String.format.apply(String, Array.prototype.slice.call(arguments, 1));
-            var m = Ext.DomHelper.append(msgCt, {html:createBox(title, s)}, true);
-            m.slideIn('t').pause(1).ghost("t", {remove:true});
+            msgCt.setStyle('margin-top', '40px');
+            //var s = String.format.apply(String, Array.prototype.slice.call(arguments, 1));
+            //var hide = String.format.apply(String, Array.prototype.slice.call(arguments, 2));
+            var m = Ext.DomHelper.append(msgCt, {html:createBox(title, message)}, true);
+            
+            if (!keep) {
+                m.slideIn('t').pause(2).ghost("t", {remove:true});
+            } else {
+                m.slideIn('t');
+                m.on('click', function() {
+                    m.ghost("t", {remove:true});
+                });
+            }
         }
     };
 }();

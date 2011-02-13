@@ -120,10 +120,18 @@ p.kebab-paragraph {
 .icon-kebab-os {
     background-image: url(../images/icons/linux-1.png) !important;
 }
-.msg .x-box-mc {
+.kebab-notification .x-box-mc {
     font-size:14px;
+    cursor:pointer;
+    
 }
-#msg-div {
+.kebab-notification:hover {
+    opacity:.85;
+    -moz-opacity:.85;
+    -webkit-opacity:.85;
+    filter:alpha(opacity=85);
+}
+#kebab-notification-div {
     position:absolute;
     right:35%;
     top:10px;
