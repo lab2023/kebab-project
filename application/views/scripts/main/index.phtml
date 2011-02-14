@@ -23,6 +23,8 @@ $this->headScript()
 
             init :function(){
                 Ext.QuickTips.init();
+                this.environment = '<?php echo APPLICATION_ENV; ?>'
+                Kebab.OS.Notification.message('Kebab OS', 'Welcome to Kebab Project. Have fun!');
             },
 
             getUser: function() {
