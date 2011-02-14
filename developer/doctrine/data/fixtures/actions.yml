@@ -1,0 +1,6 @@
+#Actions
+Model_Action:
+  Default_Main_Index:
+    Controller: Default_Main
+    name: index
+

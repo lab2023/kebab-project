@@ -15,7 +15,6 @@ Permission:
     Role:
       class: Role
       type: one
-
     Story:
       class: Story
       type: one

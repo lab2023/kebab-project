@@ -1,18 +1,18 @@
-GuiAsset:
+StoryApplication:
   columns:
-    gui_id:
+    story_id: 
       type: integer
       primary: true
-    asset_id:
+    application_id:
       type: integer
       primary: true
-      
+  
   relations:
-    Gui:
-      class: Gui
-    Asset:
-      class: Asset
-      
+    Story:
+      class: Story
+    GApplication:
+      class: Application
+    
   options:
     type: INNODB
     collate: utf8_bin

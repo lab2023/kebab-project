@@ -1,0 +1,6 @@
+Model_Service:
+  #Access Desktop Stories
+  Service_1:
+    Story: Access_Desktop
+    Action: Default_Main_Index
+    

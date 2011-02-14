@@ -26,6 +26,11 @@ Role:
       foreignAlias : Roles
       class: User
       refClass: UserRole
+     
+    Stories:
+      foreignAlias : Stories
+      class: Story
+      refClass: Permission
 
   options:
     type: INNODB

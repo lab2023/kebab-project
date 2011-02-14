@@ -11,8 +11,8 @@
  * @property clob $description
  * @property Model_Role $InheritRole
  * @property Doctrine_Collection $Users
+ * @property Doctrine_Collection $Stories
  * @property Doctrine_Collection $UserRole
- * @property Doctrine_Collection $Role
  * @property Doctrine_Collection $Permission
  * 
  * @package    ##PACKAGE##
@@ -58,13 +58,14 @@ abstract class Model_Base_Role extends Doctrine_Record
              'local' => 'role_id',
              'foreign' => 'user_id'));
 
+        $this->hasMany('Model_Story as Stories', array(
+             'refClass' => 'Model_Permission',
+             'local' => 'role_id',
+             'foreign' => 'story_id'));
+
         $this->hasMany('Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'role_id'));
-
-        $this->hasMany('Model_Role as Role', array(
-             'local' => 'id',
-             'foreign' => 'inheritRole'));
 
         $this->hasMany('Model_Permission as Permission', array(
              'local' => 'id',

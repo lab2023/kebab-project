@@ -8,7 +8,7 @@
  * @property integer $controller_id
  * @property string $name
  * @property Model_Controller $Controller
- * @property Doctrine_Collection $Resource
+ * @property Doctrine_Collection $Service
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -40,7 +40,7 @@ abstract class Model_Base_Action extends Doctrine_Record
              'local' => 'controller_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Model_Resource as Resource', array(
+        $this->hasMany('Model_Service as Service', array(
              'local' => 'id',
              'foreign' => 'action_id'));
     }

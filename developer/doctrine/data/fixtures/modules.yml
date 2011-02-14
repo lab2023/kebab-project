@@ -1,3 +1,4 @@
+#Modules
 Model_Module:
   Default:
-    name: Default
+    name: default

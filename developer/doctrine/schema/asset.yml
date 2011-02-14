@@ -3,14 +3,21 @@ Asset:
     name:
       type: string(255)
       unique: true
+    description:
+      type: clob
     path:
       type: string(255)
+    extension:
+      type: enum
+      length: 4
+      values: ['css', 'js']
+      
       
   relations:
-    Guis:
-      foreignAlias: Gui
-      class: Gui
-      refClass: GuiAsset
+    Applications:
+      foreignAlias: Application
+      class: Application
+      refClass: ApplicationAsset
     
   options:
     type: INNODB

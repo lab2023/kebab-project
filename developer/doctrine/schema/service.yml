@@ -1,24 +1,25 @@
-Resource:
+Service:
   columns:
+    story_id:
+      type: integer
     controller_id:
       type: integer
     action_id:
       type: integer
-  
+      
   relations:
-    Controller:
+    Story:
+      class: Story
+      type: one
+    Resource:
       class: Controller
       type: one
     Action:
       class: Action
       type: one
-    Stories:
-      foreignAlias: Story
-      class: Story
-      refClass: StoryResource
-      
-      
+    
   options:
     type: INNODB
     collate: utf8_bin
     charset: utf8
+      

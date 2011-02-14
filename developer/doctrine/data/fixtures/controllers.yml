@@ -1,16 +1,18 @@
+#Controllers
 Model_Controller:
   Default_Auth:
     Module: Default
-    name: Auth
+    name: auth
 
   Default_Error:
     Module: Default
-    name: Error
+    name: error
 
   Default_Index:
     Module: Default
-    name: Index
+    name: index
 
   Default_Main:
     Module: Default
-    name: Main
+    name: main
+    

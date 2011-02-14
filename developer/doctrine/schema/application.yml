@@ -1,32 +1,33 @@
-Story:
+Application:
   columns:
-    name:
+    name: 
       type: string(255)
+      unique: true
     title:
       type: string(255)
     description:
       type: clob
+    version:
+      type: string(255)
+    url:
+      type: string(255)
     status:
       type: enum
       length: 7
       values: ['active', 'passive']
-      default: active
       
   actAs:
     I18n:
       fields: [title, description]
-      className: StoryTranslation
+      className: ApplicationTranslation
       length: 5
-
+    SoftDelete:
+     
   relations:
-    Applications:
-      foreignAlias: Application
-      class: Application
-      refClass: StoryApplication
-    Roles:
-      foreignAlias: Role
-      class: Role
-      refClass: Permission
+    Assets:
+      foreignAlias: Asset
+      class: Asset
+      refClass: ApplicationAsset
       
   options:
     type: INNODB
