@@ -42,6 +42,8 @@ class MainController extends Kebab_Controller_Action
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->view->identity = $auth->getIdentity();
+            $this->view->applications = $this->_getAllApplicationByPermission();
+            
         }
     }
 
@@ -52,6 +54,22 @@ class MainController extends Kebab_Controller_Action
     public function indexAction()
     {
         
+    }
+    
+    private function _getAllApplicationByPermission()
+    {        
+        $query = Doctrine_Query::create()
+                 ->select('a.name')
+                 ->from('Model_Application a')
+                 ->leftJoin('a.StoryApplication sa')
+                 ->leftJoin('sa.Story s')
+                 ->leftJoin('s.Permission p')
+                 ->leftJoin('p.Role r')
+                 ->where('a.status = ?', array('active'))
+                 ->whereIn('r.name', array('guest', 'admin', 'owner'));
+        $application = $query->execute();
+        
+        return $application->toArray();
     }
 
 }
