@@ -41,7 +41,7 @@ abstract class Model_Base_StoryApplication extends Doctrine_Record
              'local' => 'story_id',
              'foreign' => 'id'));
 
-        $this->hasOne('Model_Application as GApplication', array(
+        $this->hasOne('Model_Application as Application', array(
              'local' => 'application_id',
              'foreign' => 'id'));
     }

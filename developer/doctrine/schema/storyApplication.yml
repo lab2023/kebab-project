@@ -10,7 +10,7 @@ StoryApplication:
   relations:
     Story:
       class: Story
-    GApplication:
+    Application:
       class: Application
     
   options:
