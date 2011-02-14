@@ -42,7 +42,7 @@ class MainController extends Kebab_Controller_Action
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->view->identity = $auth->getIdentity();
-            $this->view->applications = $this->_getAllApplicationByPermission();
+            $this->view->applications = $this->_getApplicationsByPermission();
             
         }
     }
@@ -56,7 +56,7 @@ class MainController extends Kebab_Controller_Action
         
     }
     
-    private function _getAllApplicationByPermission()
+    private function _getApplicationsByPermission()
     {        
         $query = Doctrine_Query::create()
                  ->select('a.name')
@@ -65,11 +65,15 @@ class MainController extends Kebab_Controller_Action
                  ->leftJoin('sa.Story s')
                  ->leftJoin('s.Permission p')
                  ->leftJoin('p.Role r')
-                 ->where('a.status = ?', array('active'))
-                 ->whereIn('r.name', array('guest', 'admin', 'owner'));
-        $application = $query->execute();
-        
-        return $application->toArray();
+                 ->where('a.status = ?', array('active'));
+            
+        // Check if the ACL is on, otherwise load all application
+//        if (Zend_Registry::get('config')->plugins->kebabAcl) { 
+//            $roles = Zend_Auth::getInstance()->getIdentity()->roles;
+//            $query->whereIn('r.name', $roles);
+//        }        
+                 
+        return $query->execute()->toArray();
     }
 
 }
