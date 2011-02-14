@@ -15,6 +15,7 @@ Application:
       type: enum
       length: 7
       values: ['active', 'passive']
+      default: 'active'
       
   actAs:
     I18n:
