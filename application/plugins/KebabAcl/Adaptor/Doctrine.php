@@ -79,37 +79,50 @@ class Plugin_KebabAcl_Adaptor_Doctrine extends Zend_Acl
         parent::deny();
 
         $query = Doctrine_Query::create()
-                ->select('resource.id, role.id, stories.id, permission.rule, role.name, stories.name, 
-                    controller.name, module.name, action.name')
-                ->from('Model_Resource resource')
-                ->leftJoin('resource.Controller controller')
+                ->select('module.name, acontroller.name, controller.name, action.name, 
+                    service.id, role.id, story.id, permission.rule, role.name, story.name')
+                ->from('Model_Service service')
+                ->leftJoin('service.Resource controller')
                 ->leftJoin('controller.Module module')
-                ->leftJoin('resource.Action action')
-                ->leftJoin('resource.Stories stories')
-                ->leftJoin('stories.Permission permission')
-                ->leftJoin('permission.Role role')
-                ->useQueryCache($this->_doctrineCaching);
-        $resources = $query->execute();
-
-        foreach ($resources as $resource) {
-            if (count($resource->Stories) > 0) {
-                $moduleName = $resource->Controller->Module->name;
-                $controllerName = !isset($resource->Controller->name) ? null : $resource->Controller->name;
-                $actionName = !isset($resource->Action->name) ? null : $resource->Action->name;
-
-                foreach ($resource->Stories as $story) {
-                    if (count($story->Permission) > 0) {
-                        foreach ($story->Permission as $permission) {
-                            $rule = $permission->rule;
-                            $roleName = $permission->Role->name;
-                            Zend_Registry::get('logging')->log($rule . '-' . $roleName . '-' .
-                                $moduleName . '-' . $controllerName . '-' . $actionName, Zend_Log::ERR);
-                            parent::$rule($roleName, $moduleName . '-' . $controllerName, $actionName);
+                ->leftJoin('service.Action action')
+                ->leftJoin('action.Controller acontroller')
+                ->leftJoin('service.Story story')
+                ->leftJoin('story.Permission permission')
+                ->leftJoin('permission.Role role');
+        $services = $query->execute();
+        
+        if (count($services->toArray()) > 0 ) {
+            
+            foreach ($services as $service) {
+                $action = !isset($service->Action->name) ? null : $service->Action->name;
+                $resource = (isset($service->Resource)) 
+                          ? $service->Resource->Module->name .'-'. $service->Resource->name 
+                          : null;
+                $resource = is_null($resource) && isset($service->Action->Controller)
+                          ? $service->Action->Controller->Module->name .'-'. $service->Action->Controller->name 
+                          : $resource;
+                
+                if (isset($service->Story)) {
+                    foreach ($service->Story->Permission->toArray() as $permission) {
+                        if (count($permission) > 0) {
+                            Zend_Registry::get('logging')->log(
+                                $permission['rule'] . '-' . 
+                                $permission['Role']['name'] . '-' .
+                                $resource . '-' . 
+                                $action, Zend_Log::DEBUG
+                            );
+                            parent::$permission['rule'](
+                                $permission['Role']['name'],  
+                                $resource,  
+                                $action
+                            );
                         }
                     }
                 }
             }
-        }
+        } 
+                            
+                        
     }
 
 }

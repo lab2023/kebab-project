@@ -52,15 +52,14 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $filter = new Zend_Filter_Word_DashToCamelCase();
-        $module = $filter->filter($request->getModuleName());
-        $controller = $filter->filter($request->getControllerName());
+        $module = $request->getModuleName();
+        $controller = $request->getControllerName();
         $action = $request->getActionName();
         $resource = $module . '-' . $controller;
 
-        if ($resource !== 'Default-Index'
-            && $resource !== 'Default-Auth'
-            && $resource !== 'Default-Error'
+        if ($resource !== 'default-index'
+            && $resource !== 'default-auth'
+            && $resource !== 'default-error'
         ) {
             if (Zend_Auth::getInstance()->hasIdentity()) {
                 $acl = Zend_Auth::getInstance()->getIdentity()->acl;
@@ -78,10 +77,14 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
                 }
 
                 if (!$isAllowed) {
-                    throw new Zend_Exception('You can\'t access this resource. isAllowed() = false, hasIdentity() = true');
+                    $request->setModuleName('default');
+                    $request->setControllerName('auth');
+                    $request->setActionName('unauthorized');
                 }
             } else {
-                throw new Zend_Exception('Resource which you try to access isn\'t public. hasIdentity() = false');
+                $request->setModuleName('default');
+                $request->setControllerName('auth');
+                $request->setActionName('unauthorized');
             }
         }
     }
