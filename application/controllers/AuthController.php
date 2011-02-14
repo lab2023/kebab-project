@@ -99,21 +99,24 @@ class AuthController extends Kebab_Controller_Action
             if ($result->isValid()) {
                 $identity = $authAdapter->getResultRowObject(null, 'password');
 
-                $query = Doctrine_Query::create()
+                // Check Acl Plugin is on and write acl and role
+                if (Zend_Registry::get('config')->plugins->kebabAcl) {
+                    $query = Doctrine_Query::create()
                         ->select('r.name')
                         ->from('Model_Role r')
                         ->leftJoin('r.Users u')
                         ->where('u.username = ?', $identity->username);
-                $roles = $query->execute();
+                    $roles = $query->execute();
 
-                foreach ($roles as $role) {
-                    $userRoles[] = $role->name;
+                    foreach ($roles as $role) {
+                        $userRoles[] = $role->name;
+                    }
+                
+                    $aclAdaptor = Plugin_KebabAcl_Acl::getAdaptor();  
+                    $identity->acl   = new $aclAdaptor;
+                    $identity->roles = $userRoles;
                 }
-
-                // Get Acl Plugin Adaptor
-                $aclAdaptor = Plugin_KebabAcl_Acl::getAdaptor();   
-                $identity->roles = $userRoles;
-                $identity->acl   = new $aclAdaptor;
+                
                 $auth->getStorage()->write($identity);
 
                 //KBBTODO Set session time and check from getParams
