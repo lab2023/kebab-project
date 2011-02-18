@@ -97,24 +97,17 @@ class AuthController extends Kebab_Controller_Action
 
             // Check Auth Validation
             if ($result->isValid()) {
-                $identity = $authAdapter->getResultRowObject(null, 'password');
+                $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
+                $identity = $authAdapter->getResultRowObject( null, $omitColumns);
 
                 // Check Acl Plugin is on and write acl and role
                 if (Zend_Registry::get('config')->plugins->kebabAcl) {
-                    $query = Doctrine_Query::create()
-                        ->select('r.name')
-                        ->from('Model_Role r')
-                        ->leftJoin('r.Users u')
-                        ->where('u.username = ?', $identity->username);
-                    $roles = $query->execute();
-
-                    foreach ($roles as $role) {
-                        $userRoles[] = $role->name;
-                    }
-                
+                    $roles = $this->_getUserRoles($identity->id);
                     $aclAdaptor = Plugin_KebabAcl_Acl::getAdaptor();  
+                    $identity->roles = $roles['roles'];
+                    $identity->rolesWithAncestor = $roles['rolesWithAncestor'];
                     $identity->acl   = new $aclAdaptor;
-                    $identity->roles = $userRoles;
+                    
                 }
                 
                 $auth->getStorage()->write($identity);
@@ -344,4 +337,33 @@ class AuthController extends Kebab_Controller_Action
         
     }
 
+    /**
+     * _getUserRoles()
+     * 
+     * @access private
+     * @param type $userId
+     * @return array
+     */
+    private function _getUserRoles($userId)
+    {        
+        $userId = $userId;
+        $query = Doctrine_Query::create()
+                 ->select('role.name')
+                 ->from('Model_Role role')
+                 ->leftJoin('role.UserRole userrole')
+                 ->where('userrole.user_id = ?', $userId);
+        $rolesResult = $query->execute();
+        foreach ($rolesResult as $role) {
+           $roles[] = $role->name;
+           $roleAncestors = Doctrine_Core::getTable('Model_Role')->find($role['id'])->getNode()->getAncestors();
+           if ($roleAncestors) {
+               $rolesWithAncestor[] = $role->name;
+               foreach ($roleAncestors as $roleAncestor) {
+                   $rolesWithAncestor[] = $roleAncestor->name;
+               }               
+           }
+        }
+        $rolesWithAncestor = array_unique(array_merge($roles, $rolesWithAncestor));
+        return array('roles' => $roles, 'rolesWithAncestor' => $rolesWithAncestor);
+    }
 }
