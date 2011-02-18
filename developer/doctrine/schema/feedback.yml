@@ -1,0 +1,36 @@
+Feedback:
+  columns:
+    user_id: 
+      type: integer
+      notnull: true
+    application_id:
+      type: integer
+    description:
+      type: clob
+    status:
+      type: enum
+      length: 7
+      values: ['open', 'process', 'closed']
+      default: 'open'
+      notnull: true
+  
+  relations:
+    User:
+      class: User
+      type: one
+    Application:
+      class: Application
+      type: one
+      
+  actAs:
+    Timestampable:
+    SoftDelete:
+    Blameable:
+    Searchable:
+      fields: [id, user_id, application_id, status]    
+      className: FeedbackSearch
+  
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

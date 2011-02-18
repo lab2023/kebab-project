@@ -16,10 +16,14 @@ User:
       type: string(255)
 
   actAs:
-    Sluggable:
-      fields: [firstName, surname]
     Timestampable:
     SoftDelete:
+    Blameable:
+    Sluggable:
+      fields: [firstName, surname]
+    Searchable:
+      fields: [firstName, surname, username, email]    
+      className: UserSearch
 
   relations:
     Roles:
@@ -31,3 +35,4 @@ User:
     type: INNODB
     collate: utf8_bin
     charset: utf8
+    

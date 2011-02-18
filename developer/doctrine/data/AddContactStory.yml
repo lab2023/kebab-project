@@ -1,0 +1,44 @@
+Model_Story:
+  AddContactStory:
+    name: addContact
+    Translation:
+      en:
+        title: Add Contact
+        description: Lorem ipsum dolor sit amet
+      tr:
+        title: Kontakt ekleme
+        description: Kontakt ekleme açıklamaları
+    status: active
+  
+Model_ResourceAccess:
+  AddContactStoryResourceAccess:
+    Action: ContactIndex_index
+  ListContactStoryResourceAccess:
+    Action: ContactIndex_list
+
+Model_StoryResourceAccess:
+  AddContactStoryHasAddContactStoryResourceAccess:
+    Story: AddContactStory
+    ResourceAccess: AddContactStoryResourceAccess
+  AddContactStoryHasListContactStoryResourceAccess:
+    Story: AddContactStory
+    ResourceAccess: ListContactStoryResourceAccess
+
+Model_Module:
+  Contact:
+    name: contact
+    
+Model_Controller:
+  ContactIndex:
+    Module: Contact
+    name: index
+    
+Model_Action:
+  ContactIndex_index:
+    Controller: ContactIndex
+    name: index
+  ContactIndex_list:
+    Controller: ContactIndex
+    name: list
+
+ 

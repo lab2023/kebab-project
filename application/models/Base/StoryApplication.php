@@ -8,7 +8,7 @@
  * @property integer $story_id
  * @property integer $application_id
  * @property Model_Story $Story
- * @property Model_Application $GApplication
+ * @property Model_Application $Application
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##

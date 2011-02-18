@@ -1,27 +1,34 @@
 Role:
   columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
     name:
       type: string(255)      
       unique: true
-    inheritRole:
-      type: integer
     title:
       type: string(255)
     description:
       type: clob
       
   actAs:
+    Timestampable:
+    SoftDelete:
+    Blameable:
+    NestedSet:
+      hasManyRoots: true
+      rootColumnName: root_id
     I18n:
       fields: [title, description]
       className: RoleTranslation
       length: 5
-    SoftDelete:
+      actAs:
+        Searchable:
+          fields: [title]
+          className: RoleSearch
 
   relations:
-    InheritRole:
-      local: inheritRole
-      class: Role
-
     Users:
       foreignAlias : Roles
       class: User

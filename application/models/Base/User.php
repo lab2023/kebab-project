@@ -13,6 +13,7 @@
  * @property string $activationKey
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
+ * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $Invitation
  * 
  * @package    ##PACKAGE##
@@ -69,10 +70,17 @@ abstract class Model_Base_User extends Doctrine_Record
              'local' => 'id',
              'foreign' => 'user_id'));
 
+        $this->hasMany('Model_Feedback as Feedback', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
         $this->hasMany('Model_Invitation as Invitation', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $softdelete0 = new Doctrine_Template_SoftDelete();
+        $blameable0 = new Doctrine_Template_Blameable();
         $sluggable0 = new Doctrine_Template_Sluggable(array(
              'fields' => 
              array(
@@ -80,10 +88,20 @@ abstract class Model_Base_User extends Doctrine_Record
               1 => 'surname',
              ),
              ));
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $softdelete0 = new Doctrine_Template_SoftDelete();
-        $this->actAs($sluggable0);
+        $searchable0 = new Doctrine_Template_Searchable(array(
+             'fields' => 
+             array(
+              0 => 'firstName',
+              1 => 'surname',
+              2 => 'username',
+              3 => 'email',
+             ),
+             'className' => 'UserSearch',
+             ));
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
+        $this->actAs($blameable0);
+        $this->actAs($sluggable0);
+        $this->actAs($searchable0);
     }
 }

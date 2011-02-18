@@ -4,12 +4,9 @@ Model_Role:
 
   Member:
     name: member
-    InheritRole: Guest
 
   Admin:
     name: admin
-    InheritRole: Member
 
   Owner:
     name: owner
-    InheritRole: Admin

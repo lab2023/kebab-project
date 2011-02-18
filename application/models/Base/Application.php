@@ -11,9 +11,9 @@
  * @property string $version
  * @property string $url
  * @property enum $status
- * @property Doctrine_Collection $Assets
  * @property Doctrine_Collection $StoryApplication
- * @property Doctrine_Collection $ApplicationAsset
+ * @property Doctrine_Collection $Feedback
+ * @property Doctrine_Collection $Application
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -53,6 +53,7 @@ abstract class Model_Base_Application extends Doctrine_Record
               0 => 'active',
               1 => 'passive',
              ),
+             'default' => 'active',
              ));
 
         $this->option('type', 'INNODB');
@@ -63,18 +64,18 @@ abstract class Model_Base_Application extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Model_Asset as Assets', array(
-             'refClass' => 'Model_ApplicationAsset',
-             'local' => 'application_id',
-             'foreign' => 'asset_id'));
-
         $this->hasMany('Model_StoryApplication as StoryApplication', array(
              'local' => 'id',
              'foreign' => 'application_id'));
 
-        $this->hasMany('Model_ApplicationAsset as ApplicationAsset', array(
+        $this->hasMany('Model_Feedback as Feedback', array(
              'local' => 'id',
              'foreign' => 'application_id'));
+
+        $this->hasMany('Model_Story as Application', array(
+             'refClass' => 'Model_StoryApplication',
+             'local' => 'application_id',
+             'foreign' => 'story_id'));
 
         $i18n0 = new Doctrine_Template_I18n(array(
              'fields' => 
