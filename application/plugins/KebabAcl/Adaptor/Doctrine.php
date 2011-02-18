@@ -40,17 +40,19 @@ class Plugin_KebabAcl_Adaptor_Doctrine extends Zend_Acl
     public function addAllRoles()
     {
         $query = Doctrine_Query::create()
-                ->select('r.name, ir.name')
+                ->select('r.name')
                 ->from('Model_Role r')
-                ->leftJoin('r.InheritRole ir')
                 ->useQueryCache($this->_doctrineCaching);
-
         $roles = $query->execute();
 
         foreach ($roles as $role) {
-            $inheritRoleName = is_null($role->inheritRole) ? NULL : $role->InheritRole->name;
+            $ancestorRoleName = null;
+            if (Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->hasParent()) {
+                $rolesStack = Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->getAncestors(1)->toArray();
+                $ancestorRoleName = $rolesStack->name;
+            }
             parent::addRole(
-                    new Zend_Acl_Role($role->name), $inheritRoleName
+                    new Zend_Acl_Role($role->name), $ancestorRoleName
             );
         }
     }
