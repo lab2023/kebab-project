@@ -48,8 +48,8 @@ class Plugin_KebabAcl_Adaptor_Doctrine extends Zend_Acl
         foreach ($roles as $role) {
             $ancestorRoleName = null;
             if (Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->hasParent()) {
-                $rolesStack = Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->getAncestors(1)->toArray();
-                $ancestorRoleName = $rolesStack->name;
+                $rolesStack = Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->getParent()->toArray();
+                $ancestorRoleName = $rolesStack['name'];
             }
             parent::addRole(
                     new Zend_Acl_Role($role->name), $ancestorRoleName
