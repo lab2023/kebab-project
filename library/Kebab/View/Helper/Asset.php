@@ -40,7 +40,7 @@ if (!defined('BASE_PATH'))
  * @tutorial
  * echo $this->asset('dev-tools/javascripts/dev-tools.js')->get();
  * echo $this->asset('system/default/stylesheets/layout.css')->get();
- * echo $this->asset('wallpapers/Life_by_Paco_Espinoza.jpg')->get();
+ * echo $this->asset('wallpapers/vladstudio_underwater2.jpg')->get();
  */
 class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
 {
@@ -69,6 +69,15 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
                 : $distro;
                 
         $this->_asset[1] = $path . '/' . $distro;
+        
+        return $this;
+    }
+    
+    public function application($department = null)
+    {
+        $department = $department ? '/' . $department : null;
+        
+        $this->_asset[1] = $this->_config->os->applications->path . $department;
         
         return $this;
     }

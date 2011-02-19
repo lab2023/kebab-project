@@ -1,43 +1,41 @@
 <?php
-$this->headTitle('Main');
+$this->headTitle('Desktop');
 
 $this->headLink()
-     ->appendStylesheet($this->asset('system/stylesheets/desktop.css')->distribution()->theme()->get());
+     ->appendStylesheet($this->asset('desktop.css')->distribution()->theme()->get());
 $this->headScript()
-     ->appendFile($this->asset('system/Kernel.js')->distribution()->get());
+     ->appendFile($this->asset('kernel/Kernel.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Application.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Desktop.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Panel.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Notification.js')->distribution()->get());
 ?>
 
     <?php // BEGIN: Kernel Boot & All Applications Load ----------------------?>
     <?php 
     $this->headLink()
-         ->appendStylesheet($this->asset('applications/sample/stylesheets/sample-application.css')->get())
-         ->appendStylesheet($this->asset('applications/example/stylesheets/example-application.css')->get());
+         ->appendStylesheet($this->asset('about-me/web/theme/style.css')->application('preferences')->get());
 
     $this->headScript()
-         ->appendFile($this->asset('applications/sample/javascripts/SampleApplication.js')->get())
-         ->appendFile($this->asset('applications/example/javascripts/ExampleApplication.js')->get())
+         ->appendFile($this->asset('about-me/web/index.js')->application('preferences')->get());
     ?>
     <script type="text/javascript">
-    Ext.onReady(function() {
-        KebabOS = new Kebab.OS.Kernel({
+    Ext.namespace('KebabOS', 'KebabOS.kernel');
+    KebabOS.kernel = new Kebab.OS.Kernel({
 
-            init :function(){
-                Ext.QuickTips.init();
-                this.environment = '<?php echo APPLICATION_ENV; ?>'
-                Kebab.OS.Notification.message('Kebab OS', 'Welcome to Kebab Project. Have fun!');
-            },
+        distribution    : '<?php echo $this->variable('kebabOs')->distributions->current; ?>',
+        
+        environment     : '<?php echo APPLICATION_ENV; ?>',
+        
+        user            : '<?php echo json_encode($this->user); ?>',
+        
+        apps            : '<?php echo json_encode($this->applications); ?>',
 
-            getUser: function() {
-                return new Kebab.OS.User(<?php echo json_encode($this->identity); ?>);
-            },
-
-            getApplications : function(){
-                return [
-                    new KebabOS.SampleApplication(),
-                    new KebabOS.ExampleApplication()
-                ];
-            }
-        });
+        getApplications : function(){
+            return [
+                new KebabOS.applications.preferences.AboutMe() // Convert to JSON object
+            ];
+        }
     });
     </script>
     <?php // END: Kernel Boot & All Applications Load ------------------------?>
@@ -55,15 +53,10 @@ $this->headScript()
     <div id="kebab-os-desktop"> 
         
         <dl id="kebab-os-desktop-shortcuts"> 
-            <dt id="sample-application-shortcut"> 
-                <a href="#"><img src="<?php echo $this->asset('system/images/desktop/s.gif')->distribution()->theme()->get() ?>" /> 
-                <div>Sample Application</div></a> 
-            </dt>
-            <dt id="example-application-shortcut"> 
-                <a href="#"><img src="<?php echo $this->asset('system/images/desktop/s.gif')->distribution()->theme()->get() ?>" /> 
-                <div>Example Application</div></a> 
-            </dt>        
-        </dl> 
+            <dt id="aboutMe-application-shortcut">
+                <span>About Me</span>
+            </dt>       
+        </dl>
         
     </div>
     <?php // END: OS Desktop Environment -------------------------------------?>

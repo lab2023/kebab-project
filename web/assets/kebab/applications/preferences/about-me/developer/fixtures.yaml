@@ -1,0 +1,5 @@
+AboutMe:
+  id: aboutMe-application
+  class: KebabOS.applications.preferences.AboutMe
+  type: system
+  department: Prerefences
