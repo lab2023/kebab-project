@@ -22,10 +22,7 @@
           <actionMethod actionName="acceptInvitation"/>
           <actionMethod actionName="unauthorized"/>
         </controllerFile>
-        <controllerFile controllerName="Main">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Index"/>
+        <controllerFile controllerName="Main"/>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
