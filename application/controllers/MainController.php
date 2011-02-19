@@ -37,7 +37,6 @@ if (!defined('BASE_PATH'))
  */
 class MainController extends Kebab_Controller_Action
 {
-
     public function init()
     {
         $auth = Zend_Auth::getInstance();
@@ -48,16 +47,8 @@ class MainController extends Kebab_Controller_Action
     }
 
     /**
-     * Index action
-     * @return void
-     */
-    public function indexAction()
-    {
-        
-    }
-
-    /**
      * _getApplicationsByPermission()
+     * 
      * @return array
      */
     private function _getApplicationsByPermission()
@@ -83,6 +74,6 @@ class MainController extends Kebab_Controller_Action
                 }
             }
             return $stack;
-        }        
+        }
     }
 }

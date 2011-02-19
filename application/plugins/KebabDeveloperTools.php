@@ -42,6 +42,9 @@ class Plugin_KebabDeveloperTools extends Kebab_Controller_Plugin_Abstract
 
     public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
+        if ($request->getParam('error_handler'))
+            return; // By-pass to errors
+           
         // Access active viewRenderer helper
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')->view;
         $view->addScriptPath($this->_pluginPath . '/views');

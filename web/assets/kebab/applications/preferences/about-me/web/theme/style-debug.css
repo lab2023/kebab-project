@@ -1,0 +1,9 @@
+.aboutMe-application-launcher-icon {
+    background-image: url(images/launcher.png);
+}
+.aboutMe-application-gui-icon {
+    background-image: url(images/gui.png);
+}
+#aboutMe-application-shortcut {
+    background-image: url(images/shortcut.png);
+}

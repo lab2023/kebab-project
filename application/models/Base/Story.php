@@ -11,9 +11,9 @@
  * @property enum $status
  * @property Doctrine_Collection $Applications
  * @property Doctrine_Collection $Roles
- * @property Doctrine_Collection $StoryApplication
  * @property Doctrine_Collection $Service
  * @property Doctrine_Collection $Permission
+ * @property Doctrine_Collection $StoryApplication
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -65,15 +65,15 @@ abstract class Model_Base_Story extends Doctrine_Record
              'local' => 'story_id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('Model_StoryApplication as StoryApplication', array(
-             'local' => 'id',
-             'foreign' => 'story_id'));
-
         $this->hasMany('Model_Service as Service', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
         $this->hasMany('Model_Permission as Permission', array(
+             'local' => 'id',
+             'foreign' => 'story_id'));
+
+        $this->hasMany('Model_StoryApplication as StoryApplication', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 

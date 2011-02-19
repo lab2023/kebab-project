@@ -12,9 +12,9 @@
  * @property string $password
  * @property string $activationKey
  * @property Doctrine_Collection $Roles
- * @property Doctrine_Collection $UserRole
  * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $Invitation
+ * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -66,15 +66,15 @@ abstract class Model_Base_User extends Doctrine_Record
              'local' => 'user_id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('Model_UserRole as UserRole', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
         $this->hasMany('Model_Feedback as Feedback', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
         $this->hasMany('Model_Invitation as Invitation', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
