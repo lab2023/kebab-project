@@ -37,13 +37,13 @@ if (!defined('BASE_PATH'))
  */
 class MainController extends Kebab_Controller_Action
 {
+
     public function init()
     {
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->view->identity = $auth->getIdentity();
             $this->view->applications = $this->_getApplicationsByPermission();
-            
         }
     }
 
@@ -55,25 +55,34 @@ class MainController extends Kebab_Controller_Action
     {
         
     }
-    
-    private function _getApplicationsByPermission()
-    {        
-        $query = Doctrine_Query::create()
-                 ->select('a.name')
-                 ->from('Model_Application a')
-                 ->leftJoin('a.StoryApplication sa')
-                 ->leftJoin('sa.Story s')
-                 ->leftJoin('s.Permission p')
-                 ->leftJoin('p.Role r')
-                 ->where('a.status = ?', array('active'));
-            
-        // Check if the ACL is on, otherwise load all application
-//        if (Zend_Registry::get('config')->plugins->kebabAcl) { 
-//            $roles = Zend_Auth::getInstance()->getIdentity()->roles;
-//            $query->whereIn('r.name', $roles);
-//        }        
-                 
-        return $query->execute()->toArray();
-    }
 
+    /**
+     * _getApplicationsByPermission()
+     * @return array
+     */
+    private function _getApplicationsByPermission()
+    {
+        if (Zend_Registry::get('config')->plugins->kebabAcl) {
+            $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
+            $query = Doctrine_Query::create()
+                    ->from('Model_Application a')
+                    ->leftJoin('a.StoryApplication sa')
+                    ->leftJoin('sa.Story s')
+                    ->leftJoin('s.Permission p')
+                    ->leftJoin('p.Role r')
+                    ->whereIn('r.name', $rolesWithAncestor)
+                    ->andWhere('a.status = ?', array('active'))
+                    ->andWhere('s.status = ?', array('active'));
+            $applications = $query->execute();
+
+            $stack = array();
+            foreach ($applications as $application) {
+                $stack[$application->name]['name'] = $application->name;
+                foreach ($application->StoryApplication as $storyApplication) {
+                    $stack[$application->name]['permissions'][] = $storyApplication->Story->name;
+                }
+            }
+            return $stack;
+        }        
+    }
 }
