@@ -46,22 +46,6 @@ class MainController extends Kebab_Controller_Action
         if ($auth->hasIdentity()) {
             $this->view->user = $auth->getIdentity();
             $this->view->applications = $this->_getApplicationsByPermission(); 
-            
-            //TODO
-            /*
-                return : {
-                    identity: "aboutMe-application",
-                    class: "KebabOS.applications.preferences.AboutMe",
-                    name: "about-me",
-                    type: "kebab-os-applications-aboutMe",
-                    department: "kebab-os-applications-aboutMe",
-                    version: "kebab-os-applications-aboutMe",
-                    permissions: [
-                        {id, name}
-                    ]
-                }
-             */
-            
         }
     }
 
@@ -76,24 +60,30 @@ class MainController extends Kebab_Controller_Action
     {
         //KBBTODO Move this function Model_Application
         //KBBTODO If ACL system is off, should return all applications
+        $rolesWithAncestor = array('guest', 'member');
         if (Zend_Registry::get('config')->plugins->kebabAcl) {
-            $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
+            //$rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
             $query = Doctrine_Query::create()
                     ->from('Model_Application a')
                     ->leftJoin('a.StoryApplication sa')
                     ->leftJoin('sa.Story s')
                     ->leftJoin('s.Permission p')
                     ->leftJoin('p.Role r')
-                    ->whereIn('r.name', $rolesWithAncestor)
+                    //->whereIn('r.name', $rolesWithAncestor)
                     ->andWhere('a.status = ?', array('active'))
                     ->andWhere('s.status = ?', array('active'));
             $applications = $query->execute();
 
             $stack = array();
             foreach ($applications as $application) {
-                $stack[$application->name]['name'] = $application->name;
+                $stack['identity'] = $application->identity;
+                $stack['class'] = $application->class;
+                $stack['name'] = $application->name;
+                $stack['type'] = $application->type;
+                $stack['department'] = $application->department;
+                $stack['version'] = $application->version;
                 foreach ($application->StoryApplication as $storyApplication) {
-                    $stack[$application->name]['permissions'][] = $storyApplication->Story->name;
+                    $stack['Permission'][] = $storyApplication->Story->slug;
                 }
             }
             return $stack;
