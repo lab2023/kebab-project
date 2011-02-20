@@ -1,4 +1,5 @@
 UserRole:
+  tableName: system_user_role
   columns:
     user_id:
       type: integer

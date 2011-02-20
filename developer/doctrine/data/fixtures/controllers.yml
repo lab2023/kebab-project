@@ -1,5 +1,5 @@
 #Controllers
-Model_Controller:
+Model_Entity_Controller:
   Default_Auth:
     Module: Default
     name: auth

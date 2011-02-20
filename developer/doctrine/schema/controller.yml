@@ -1,4 +1,5 @@
 Controller:
+  tableName: system_controller
   columns:
     module_id:
       type: integer

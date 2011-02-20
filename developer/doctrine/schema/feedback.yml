@@ -1,4 +1,5 @@
 Feedback:
+  tableName: system_feedback
   columns:
     user_id: 
       type: integer
@@ -28,7 +29,7 @@ Feedback:
     Blameable:
     Searchable:
       fields: [id, user_id, application_id, status]    
-      className: FeedbackSearch
+      className: SystemFeedbackSearch
   
   options:
     type: INNODB

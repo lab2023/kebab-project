@@ -1,34 +1,37 @@
 Application:
+  tableName: system_application
   columns:
-    name: 
+    identity: 
       type: string(255)
-      unique: true
+      unique: true    
+    class:
+      type: string(255)
+    name:
+        type: string(255)
+    department:
+        type: string(255)
+    version:
+        type: string(255)
+    type:
+      type: enum
+      length: 11
+      values: ['system', 'application']
+      default: 'application'  
     title:
       type: string(255)
     description:
-      type: clob
-    version:
-      type: string(255)
-    url:
-      type: string(255)
+      type: clob    
     status:
       type: enum
       length: 7
       values: ['active', 'passive']
-      default: 'active'
-      
+      default: 'active'      
   actAs:
     I18n:
       fields: [title, description]
       className: ApplicationTranslation
       length: 5
     SoftDelete:
-     
-  relations:
-    Assets:
-      foreignAlias: Asset
-      class: Asset
-      refClass: ApplicationAsset
       
   options:
     type: INNODB

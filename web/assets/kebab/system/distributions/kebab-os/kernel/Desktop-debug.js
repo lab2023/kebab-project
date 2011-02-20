@@ -119,6 +119,14 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this.kebabOsDesktop.setHeight(Ext.lib.Dom.getViewHeight() - this.kebabOsPanel.getHeight());
     },
     
+    launchApplication : function(id){
+        this.kernel.callApplication(id, function(app){
+            if(app){
+                app.createApplication();
+            }
+        }, this);
+    },
+    
     createApplication : function(config, cls) {
         
         var appWin = new(cls || Ext.Window)(

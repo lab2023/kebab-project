@@ -33,11 +33,11 @@ KebabOS.applications.preferences.AboutMe = Ext.extend(Kebab.OS.Application, {
             handler : this.createApplication,
             scope: this
         }
+        
+        var a = new MyClass();
     },
 
     createApplication : function(){
-        
-        console.log(this);
         
         var desktop = this.app.getDesktop();
         var app = desktop.getApplication(this.id);

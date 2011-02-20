@@ -1,4 +1,4 @@
-Model_Story:
+Model_Entity_Story:
   Access_Desktop:
     name: Access the desktop.
     Translation:

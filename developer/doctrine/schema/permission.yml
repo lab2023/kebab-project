@@ -1,4 +1,5 @@
 Permission:
+  tableName: system_permission
   columns:
     role_id:
       type: integer

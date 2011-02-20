@@ -1,4 +1,4 @@
-Model_Role:
+Model_Entity_Role:
   Guest:
     name: guest
     root_id: 0

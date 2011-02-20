@@ -1,4 +1,4 @@
-Model_Service:
+Model_Entity_Service:
   #Access Desktop Stories
   Service_1:
     Story: Access_Desktop

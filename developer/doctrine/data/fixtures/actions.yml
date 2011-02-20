@@ -1,5 +1,5 @@
 #Actions
-Model_Action:
+Model_Entity_Action:
   Default_Main_Index:
     Controller: Default_Main
     name: index

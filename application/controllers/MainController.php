@@ -37,12 +37,31 @@ if (!defined('BASE_PATH'))
  */
 class MainController extends Kebab_Controller_Action
 {
-    public function init()
+    /**
+     * indexAction
+     */    
+    public function indexAction()
     {
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
-            $this->view->identity = $auth->getIdentity();
-            $this->view->applications = $this->_getApplicationsByPermission();
+            $this->view->user = $auth->getIdentity();
+            $this->view->applications = $this->_getApplicationsByPermission(); 
+            
+            //TODO
+            /*
+                return : {
+                    identity: "aboutMe-application",
+                    class: "KebabOS.applications.preferences.AboutMe",
+                    name: "about-me",
+                    type: "kebab-os-applications-aboutMe",
+                    department: "kebab-os-applications-aboutMe",
+                    version: "kebab-os-applications-aboutMe",
+                    permissions: [
+                        {id, name}
+                    ]
+                }
+             */
+            
         }
     }
 

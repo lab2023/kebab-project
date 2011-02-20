@@ -1,3 +1,15 @@
-Model_Application:
-  Preferences_AboutMe:
-    name: kebab-os-applications-aboutMe
+Model_Entity_Application:
+  AboutMeApplication:
+    identity: aboutMe-application
+    class: KebabOS.applications.preferences.AboutMe
+    name: about-me
+    type: kebab-os-applications-aboutMe
+    department: kebab-os-applications-aboutMe
+    version: kebab-os-applications-aboutMe
+    Translation:
+      en:
+        title: About Me
+        description: Set your personal information 
+      tr:
+        title: Kişisel Bilgilerim
+        description: Kişisel bilgilerinizi yönetin

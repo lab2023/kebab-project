@@ -1,4 +1,5 @@
 Story:
+  tableName: system_story
   columns:
     name:
       type: string(255)
