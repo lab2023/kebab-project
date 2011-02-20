@@ -12,8 +12,8 @@
  * @property Doctrine_Collection $Applications
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $Service
- * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $StoryApplication
+ * @property Doctrine_Collection $Permission
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -69,14 +69,20 @@ class Model_Entity_Story extends Doctrine_Record
              'local' => 'id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_Entity_Permission as Permission', array(
-             'local' => 'id',
-             'foreign' => 'story_id'));
-
         $this->hasMany('Model_Entity_StoryApplication as StoryApplication', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
+        $this->hasMany('Model_Entity_Permission as Permission', array(
+             'local' => 'id',
+             'foreign' => 'story_id'));
+
+        $sluggable0 = new Doctrine_Template_Sluggable(array(
+             'fields' => 
+             array(
+              0 => 'name',
+             ),
+             ));
         $i18n0 = new Doctrine_Template_I18n(array(
              'fields' => 
              array(
@@ -86,6 +92,7 @@ class Model_Entity_Story extends Doctrine_Record
              'className' => 'StoryTranslation',
              'length' => 5,
              ));
+        $this->actAs($sluggable0);
         $this->actAs($i18n0);
     }
 }
