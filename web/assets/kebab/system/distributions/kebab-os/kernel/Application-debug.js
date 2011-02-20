@@ -23,5 +23,6 @@ Kebab.OS.Application = function(config){
 }
 
 Ext.extend(Kebab.OS.Application, Ext.util.Observable, {
-    init : Ext.emptyFn
+    init : Ext.emptyFn,
+    createApplication : Ext.emptyFn
 });

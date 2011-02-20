@@ -123,6 +123,14 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 collapsible: true,
                 constrainHeader:true,
                 shim:false,
+                animShowCfg: {
+                    duration: .0,
+                    easing: 'backOut'
+                },
+                animHideCfg: {
+                    duration: .15,
+                    easing: 'easeIn'
+                },
                 tools: [{
                     id:'gear',
                     qtip: 'Send feedback this application',

@@ -49,14 +49,18 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
         }, true);
 
         if (!keep) {
-            message.slideIn('t').pause(2).ghost("t", {
-                remove:true
+            message.slideIn('t', {easing: 'backOut', duration: .0}).pause(2).ghost("t", {
+                remove:true,
+                easing: 'easeIn',
+                duration: .15
             });
         } else {
-            message.slideIn('t');
+            message.slideIn('t', {easing: 'backOut', duration: .0});
             message.on('click', function() {
                 message.ghost("t", {
-                    remove: true
+                    remove: true,
+                    easing: 'easeIn',
+                    duration: .15
                 });
             });
         }
