@@ -19,14 +19,15 @@ $this->headScript()
         $this->headLink()->appendStylesheet(
                 
                 
-            $this->assetApplication($application->name .'/web/assets/style.css')
-                 ->department($application->department)
+            $this->assetApplication($application['name'] .'/web/assets/style.css')
+                 ->department($application['department'])
                  ->get()
         );
+        
         $this->headScript()->appendFile(
-            $this->assetApplication($application->name)
-             ->department($application->department)
-             ->version($application->version)
+            $this->assetApplication($application['name'])
+             ->department($application['department'])
+             ->version($application['version'])
              ->get()
         );
     }
@@ -66,8 +67,8 @@ $this->headScript()
         
         <?php foreach ($this->applications as $application): ?>
         <dl id="kebab-os-desktop-shortcuts"> 
-            <dt ext:qtip="" id="<?php echo $application->identity; ?>-shortcut">
-                <span></span>
+            <dt ext:qtip="<?php echo $application['name']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
+                <span><?php echo $application['name']; ?></span>
             </dt>       
         </dl>
         <?php endforeach; ?>
