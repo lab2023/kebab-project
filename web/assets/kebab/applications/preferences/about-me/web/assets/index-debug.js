@@ -33,8 +33,6 @@ KebabOS.applications.preferences.AboutMe = Ext.extend(Kebab.OS.Application, {
             handler : this.createApplication,
             scope: this
         }
-        
-        var a = new MyClass();
     },
 
     createApplication : function(){

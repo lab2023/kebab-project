@@ -65,7 +65,7 @@ $this->headScript()
     <?php // BEGIN: OS Desktop Environment -----------------------------------?>
     <div id="kebab-os-desktop"> 
         
-        <?php foreach ($this->applications as $application): ?>
+        <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
         <dl id="kebab-os-desktop-shortcuts"> 
             <dt ext:qtip="<?php echo $application['name']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
                 <span><?php echo $application['name']; ?></span>

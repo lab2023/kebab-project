@@ -178,14 +178,14 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             iconCls : 'icon-shutdown',
             template: stdButtonTemplate,
             menu: [{
-               text: 'Logout',
+               text: 'Logout...',
                iconCls: 'icon-door-out',
                handler: function() {
                     window.location.href= '/auth/logout';
                }
             }, {
-               text: 'Restart',
-               iconCls: 'icon-information',
+               text: 'Restart...',
+               iconCls: 'icon-arrow-refresh',
                handler: function() {
                     window.location.href= '/main';
                }
