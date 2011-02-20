@@ -1,0 +1,35 @@
+Story:
+  tableName: system_story
+  columns:
+    name:
+      type: string(255)
+    title:
+      type: string(255)
+    description:
+      type: clob
+    status:
+      type: enum
+      length: 7
+      values: ['active', 'passive']
+      default: active
+      
+  actAs:
+    I18n:
+      fields: [title, description]
+      className: StoryTranslation
+      length: 5
+
+  relations:
+    Applications:
+      foreignAlias: Application
+      class: Application
+      refClass: StoryApplication
+    Roles:
+      foreignAlias: Role
+      class: Role
+      refClass: Permission
+      
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
