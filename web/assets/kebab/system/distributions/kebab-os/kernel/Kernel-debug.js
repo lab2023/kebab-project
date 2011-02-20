@@ -93,6 +93,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         
 		for(var i = 0, len = appSC.length; i < len; i++){
             var app = appSC[i];
+            
             this.launcher.add(app.launcher);
             app.app = this;
         }

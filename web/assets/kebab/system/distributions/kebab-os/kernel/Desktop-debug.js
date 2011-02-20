@@ -43,17 +43,27 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this.applicationWindowManager.zseed = 7000; //10000;
         
         this.contextMenu = new Ext.menu.Menu([{
+            text: 'Close All',
+            iconCls: 'icon-application-delete',
+            handler: this.closeApplications,
+            scope: this
+        },{
+            text: 'Hide All',
+            iconCls: 'icon-application-put',
+            handler: this.minimizeApplications,
+            scope: this
+        },'-',{
             text: 'Tile Applications',
             iconCls: 'icon-application-tile-horizontal',
-            handler: this.tile,
+            handler: this.tileApplications,
             scope: this
         },{
             text: 'Cascade Applications',
             iconCls: 'icon-application-cascade',
-            handler: this.cascade,
+            handler: this.cascadeApplications,
             scope: this
         },'-',{
-            text: 'Appreance',
+            text: 'Apperance',
             iconCls: 'icon-palette',
             scope: this
         }]);
@@ -88,34 +98,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         }
 	},
     
-    minimizeApplication: function(appWin) {
-        appWin.minimized = true;
-        appWin.hide();
-    },
-
-    markActive: function(appWin) {
-        if (this.activeApplicationWindow && this.activeApplicationWindow != appWin) {
-            this.markInactive(this.activeApplicationWindow);
-        }
-        this.windowList.setActiveButton(appWin.taskButton);
-        this.activeApplicationWindow = appWin;
-        Ext.fly(appWin.taskButton.el).addClass('active-application-window');
-        appWin.minimized = false;
-    },
-
-    markInactive: function(appWin) {
-        if (appWin == this.activeApplicationWindow) {
-            this.activeApplicationWindow = null;
-            Ext.fly(appWin.taskButton.el).removeClass('active-application-window');
-        }
-    },
-
-    removeApplication : function(appWin) {
-        this.windowList.removeTaskButton(appWin.taskButton);
-        this.layout();
-    },
-    
-    layout: function() {
+   layout: function() {
         this.kebabOsDesktop.setHeight(Ext.lib.Dom.getViewHeight() - this.kebabOsPanel.getHeight());
     },
     
@@ -239,7 +222,47 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this);
     },
     
-    cascade: function() {
+    minimizeApplication: function(appWin) {
+        appWin.minimized = true;
+        appWin.hide();
+    },
+
+    markActive: function(appWin) {
+        if (this.activeApplicationWindow && this.activeApplicationWindow != appWin) {
+            this.markInactive(this.activeApplicationWindow);
+        }
+        this.windowList.setActiveButton(appWin.taskButton);
+        this.activeApplicationWindow = appWin;
+        Ext.fly(appWin.taskButton.el).addClass('active-application-window');
+        appWin.minimized = false;
+    },
+
+    markInactive: function(appWin) {
+        if (appWin == this.activeApplicationWindow) {
+            this.activeApplicationWindow = null;
+            Ext.fly(appWin.taskButton.el).removeClass('active-application-window');
+        }
+    },
+
+    removeApplication : function(appWin) {
+        this.windowList.removeTaskButton(appWin.taskButton);
+        this.layout();
+    },
+    
+    
+    closeApplications : function() {
+        this.applicationWindowManager.each(function(app) {
+            app.close();
+        }, this);
+    },
+   
+    minimizeApplications : function() {
+        this.applicationWindowManager.each(function(app) {
+            this.minimizeApplication(app);
+        }, this);
+    },
+    
+    cascadeApplications: function() {
         var x = 0,
         y = 0;
         this.applicationWindowManager.each(function(win) {
@@ -252,7 +275,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this);
     },
 
-    tile: function() {
+    tileApplications: function() {
         var availWidth = this.kebabOsDesktop.getWidth(true);
         var x = this.xTickSize;
         var y = this.yTickSize;

@@ -44,11 +44,6 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             '</tr></tbody></table>'
             );
         
-        var baseMenu = ['-',{
-            text:'Kebab Application Center',
-            iconCls: 'icon-box'
-        }];
-        
         var applicationsMenu = {
             text:'Applications',
             id: 'kebab-os-panel-main-menu-applications',
@@ -74,7 +69,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                     },
                     scope:this
                 },{
-                    text: 'Appreance',
+                    text: 'Apperance',
                     iconCls: 'icon-palette',
                     scope: this
                 }]

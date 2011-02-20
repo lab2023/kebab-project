@@ -3,9 +3,9 @@ Model_Entity_Application:
     identity: aboutMe-application
     class: KebabOS.applications.preferences.AboutMe
     name: about-me
-    type: kebab-os-applications-aboutMe
-    department: kebab-os-applications-aboutMe
-    version: kebab-os-applications-aboutMe
+    type: system
+    department: preferences
+    version: 0.0.1
     Translation:
       en:
         title: About Me
