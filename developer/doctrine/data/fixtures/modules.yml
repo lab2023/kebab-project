@@ -1,0 +1,4 @@
+#Modules
+Model_Entity_Module:
+  Default:
+    name: default

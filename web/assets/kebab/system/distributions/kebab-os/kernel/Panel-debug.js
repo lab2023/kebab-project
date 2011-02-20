@@ -67,8 +67,16 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                 text: 'Preferences',
                 iconCls: 'icon-brick',
                 menu: [{
-                   text: 'Preparing...',
-                   iconCls: 'icon-hourglass'
+                    text:'About Me',
+                    iconCls: 'icon-vcard',
+                    handler: function() {
+                        this.kernel.getDesktop().launchApplication('aboutMe-application');
+                    },
+                    scope:this
+                },{
+                    text: 'Appreance',
+                    iconCls: 'icon-palette',
+                    scope: this
                 }]
             }, {
                id: 'kebab-os-panel-main-menu-system-administration',
@@ -163,20 +171,12 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             template: stdButtonTemplate,
             text: user.firstName + ' ' + user.surname,
             menu: [{
-                text:'Avaliable',
-                iconCls: 'icon-status-online'
-            },{
-                text:'Away',
-                iconCls: 'icon-status-away'
-            },{
-                text:'Busy',
-                iconCls: 'icon-status-busy'
-            },{
-                text:'Offline',
-                iconCls: 'icon-status-offline'
-            }, '-', {
                 text:'About Me',
-                iconCls: 'icon-vcard'
+                iconCls: 'icon-vcard',
+                handler: function() {
+                    this.kernel.getDesktop().launchApplication('aboutMe-application');
+                },
+                scope:this
             }]
         });
         this.indicatorsToolbar.add({
@@ -193,12 +193,6 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                iconCls: 'icon-information',
                handler: function() {
                     window.location.href= '/main';
-               }
-            }, {
-               text: 'Shut Down',
-               iconCls: 'icon-information',
-               handler: function() {
-                    window.close();
                }
             }]
         });

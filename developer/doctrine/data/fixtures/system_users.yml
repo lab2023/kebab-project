@@ -1,4 +1,8 @@
+<<<<<<< HEAD:developer/doctrine/data/fixtures/system_users.yml
 Entity_User:
+=======
+Model_Entity_User:
+>>>>>>> de4ef6d20c65f884fc77e23dea6de884ca427af3:developer/doctrine/data/fixtures/users.yml
   Guest:
     username: guest
     password: 084e0343a0486ff05530df6c705c8bb4

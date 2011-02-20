@@ -1,0 +1,16 @@
+Model_Entity_UserRole:
+  Guest:
+    User: Guest
+    Role: Guest
+
+  Member:
+    User: Member
+    Role: Member
+
+  Admin:
+    User: Admin
+    Role: Admin
+
+  Owner:
+    User: Owner
+    Role: Owner

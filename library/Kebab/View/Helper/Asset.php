@@ -73,15 +73,6 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         return $this;
     }
     
-    public function application($department = null)
-    {
-        $department = $department ? '/' . $department : null;
-        
-        $this->_asset[1] = $this->_config->os->applications->path . $department;
-        
-        return $this;
-    }
-    
     public function theme($theme = null)
     {   
         $theme = is_null($theme)
@@ -95,9 +86,9 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function get($kebab = true)
+    public function get($kebab = true, $clearDebug = false)
     {
-        $kebab = $kebab ? '/kebab' : null;
+        $kebab = $kebab ? '/kebab/system' : null;
         
         $this->_asset[0] = $this->_root() . $kebab;
         
@@ -120,7 +111,7 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         $file = explode('.', $file);
 
         // Apply this only css and js files
-        $isCssOrJS = ($file[1] == 'js' || $file[1] == 'css');
+        $isCssOrJS = (@$file[1] == 'js' || @$file[1] == 'css');
 
         return ($this->_config->assets->debug->enable && $isCssOrJS)
                     ? str_replace('.', '-debug.', implode('.', $file))

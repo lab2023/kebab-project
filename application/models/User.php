@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Model_User
  * 
@@ -10,7 +9,7 @@
  * @author     lab2023 - Dev. Team <info@lab2023.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Model_User extends Entity_User
+class Model_User extends Model_Entity_User
 {
-
+    
 }

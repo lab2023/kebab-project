@@ -1,0 +1,28 @@
+Model_Entity_Role:
+  Guest:
+    name: guest
+    root_id: 0
+    lft: 1
+    rgt: 8
+    level: 0
+    
+  Member:
+    name: member
+    root_id: 0
+    lft: 2
+    rgt: 7
+    level: 1
+
+  Admin:
+    name: admin
+    root_id: 0
+    lft: 3
+    rgt: 6
+    level: 2
+
+  Owner:
+    name: owner
+    root_id: 0
+    lft: 4
+    rgt: 5
+    level: 3

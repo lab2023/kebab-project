@@ -1,0 +1,18 @@
+#Controllers
+Model_Entity_Controller:
+  Default_Auth:
+    Module: Default
+    name: auth
+
+  Default_Error:
+    Module: Default
+    name: error
+
+  Default_Index:
+    Module: Default
+    name: index
+
+  Default_Main:
+    Module: Default
+    name: main
+    
