@@ -1,4 +1,5 @@
 User:
+  tableName: system_user
   columns:
     firstName:
       type: string(255)
@@ -23,7 +24,7 @@ User:
       fields: [firstName, surname]
     Searchable:
       fields: [firstName, surname, username, email]    
-      className: UserSearch
+      className: SystemUserSearch
 
   relations:
     Roles:

@@ -1,4 +1,5 @@
 Module:
+  tableName: system_module
   columns:
     name:
       type: string(255)

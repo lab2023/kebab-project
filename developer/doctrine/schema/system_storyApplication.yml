@@ -1,4 +1,5 @@
 StoryApplication:
+  tableName: system_story_application
   columns:
     story_id: 
       type: integer

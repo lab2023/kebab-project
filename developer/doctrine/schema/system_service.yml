@@ -1,4 +1,5 @@
 Service:
+  tableName: system_service
   columns:
     story_id:
       type: integer

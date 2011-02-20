@@ -1,4 +1,5 @@
 Action:
+  tableName: system_action
   columns:
     controller_id:
        type: integer

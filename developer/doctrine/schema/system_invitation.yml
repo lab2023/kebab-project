@@ -1,4 +1,5 @@
 Invitation:
+  tableName: system_invitation
   columns: 
     user_id:
       type: integer

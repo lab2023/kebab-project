@@ -1,7 +1,0 @@
-Model_Permission:
-  Permission_1:
-    Story: Access_Desktop
-    Role: Guest
-    rule: allow
-    
-    

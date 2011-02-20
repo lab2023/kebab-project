@@ -1,4 +1,5 @@
 Application:
+  tableName: system_application
   columns:
     name: 
       type: string(255)

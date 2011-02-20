@@ -1,4 +1,5 @@
 Role:
+  tableName: system_role
   columns:
     id:
       type: integer
@@ -26,7 +27,7 @@ Role:
       actAs:
         Searchable:
           fields: [title]
-          className: RoleSearch
+          className: SystemRoleSearch
 
   relations:
     Users:
