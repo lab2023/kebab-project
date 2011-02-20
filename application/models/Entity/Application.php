@@ -14,8 +14,8 @@
  * @property string $title
  * @property clob $description
  * @property enum $status
- * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $Application
+ * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $StoryApplication
  * 
  * @package    ##PACKAGE##
@@ -85,14 +85,14 @@ class Model_Entity_Application extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Model_Entity_Feedback as Feedback', array(
-             'local' => 'id',
-             'foreign' => 'application_id'));
-
         $this->hasMany('Model_Entity_Story as Application', array(
              'refClass' => 'Model_Entity_StoryApplication',
              'local' => 'application_id',
              'foreign' => 'story_id'));
+
+        $this->hasMany('Model_Entity_Feedback as Feedback', array(
+             'local' => 'id',
+             'foreign' => 'application_id'));
 
         $this->hasMany('Model_Entity_StoryApplication as StoryApplication', array(
              'local' => 'id',
