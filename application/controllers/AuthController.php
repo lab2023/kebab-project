@@ -339,12 +339,17 @@ class AuthController extends Kebab_Controller_Action
     /**
      * _getUserRoles()
      * 
+     * <p>This action return two information in one array.  First element 'roles' type is array. This array
+     * come from UserRole table. Second element 'rolesWithAncestor' of the array is get all roles include 
+     * with ancestor roles in system. </p>
+     *  
      * @access private
-     * @param type $userId
+     * @param  type $userId
      * @return array
      */
     private function _getUserRoles($userId)
-    {        
+    {       
+        //KBBTODO remove this function to Model_Roles
         $userId = $userId;
         $query = Doctrine_Query::create()
                  ->select('role.name')

@@ -49,10 +49,14 @@ class MainController extends Kebab_Controller_Action
     /**
      * _getApplicationsByPermission()
      * 
+     * <p>This function return applications and their stories which are allowed in ACL.</p>
+     * 
      * @return array
      */
     private function _getApplicationsByPermission()
     {
+        //KBBTODO Move this function Model_Application
+        //KBBTODO If ACL system is off, should return all applications
         if (Zend_Registry::get('config')->plugins->kebabAcl) {
             $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
             $query = Doctrine_Query::create()
