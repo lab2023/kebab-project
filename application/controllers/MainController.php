@@ -37,15 +37,16 @@ if (!defined('BASE_PATH'))
  */
 class MainController extends Kebab_Controller_Action
 {
+
     /**
      * indexAction
-     */    
+     */
     public function indexAction()
     {
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->view->user = $auth->getIdentity();
-            $this->view->applications = $this->_getApplicationsByPermission(); 
+            $this->view->applications = $this->_getApplicationsByPermission();
         }
     }
 
@@ -60,33 +61,36 @@ class MainController extends Kebab_Controller_Action
     {
         //KBBTODO Move this function Model_Application
         //KBBTODO If ACL system is off, should return all applications
-        $rolesWithAncestor = array('guest', 'member');
         if (Zend_Registry::get('config')->plugins->kebabAcl) {
-            //$rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
+            $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
             $query = Doctrine_Query::create()
                     ->from('Model_Application a')
                     ->leftJoin('a.StoryApplication sa')
                     ->leftJoin('sa.Story s')
                     ->leftJoin('s.Permission p')
                     ->leftJoin('p.Role r')
-                    //->whereIn('r.name', $rolesWithAncestor)
+                    ->whereIn('r.name', $rolesWithAncestor)
                     ->andWhere('a.status = ?', array('active'))
                     ->andWhere('s.status = ?', array('active'));
             $applications = $query->execute();
 
-            $stack = array();
+            $returnData = array();
             foreach ($applications as $application) {
-                $stack['identity'] = $application->identity;
-                $stack['class'] = $application->class;
-                $stack['name'] = $application->name;
-                $stack['type'] = $application->type;
-                $stack['department'] = $application->department;
-                $stack['version'] = $application->version;
-                foreach ($application->StoryApplication as $storyApplication) {
-                    $stack['Permission'][] = $storyApplication->Story->slug;
+                $app['identity'] = $application->identity;
+                $app['class'] = $application->class;
+                $app['name'] = $application->name;
+                $app['type'] = $application->type;
+                $app['department'] = $application->department;
+                $app['version'] = $application->version;
+                $app['type'] = $application->type;
+                foreach ($application->StoryApplication as $story) {
+                    $app['permission'][] = $story->Story->slug;
                 }
+                $returnData[] = $app;
             }
-            return $stack;
+
+            return $returnData;
         }
     }
+
 }
