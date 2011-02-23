@@ -8,12 +8,10 @@
  * @property string $firstName
  * @property string $lastname
  * @property string $email
+ * @property enum $language
  * @property string $username
- * @property enum $status
- * @property enum $locale
  * @property string $password
  * @property string $activationKey
- * @property string $locale
  * @property enum $status
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
@@ -41,13 +39,31 @@ class Model_Entity_User extends Doctrine_Record
         $this->hasColumn('email', 'string', 255, array(
              'type' => 'string',
              'unique' => true,
-             'notnull' => true,
-             'length' => '16',
+             'length' => '255',
+             ));
+        $this->hasColumn('language', 'enum', 2, array(
+             'type' => 'enum',
+             'length' => 2,
+             'values' => 
+             array(
+              0 => 'en',
+              1 => 'tr',
+             ),
+             'default' => 'en',
              ));
         $this->hasColumn('username', 'string', 16, array(
              'type' => 'string',
              'unique' => true,
+             'notnull' => true,
              'length' => '16',
+             ));
+        $this->hasColumn('password', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
+        $this->hasColumn('activationKey', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
              ));
         $this->hasColumn('status', 'enum', 7, array(
              'type' => 'enum',
@@ -58,26 +74,7 @@ class Model_Entity_User extends Doctrine_Record
               1 => 'passive',
              ),
              'default' => 'passive',
-             ));
-        $this->hasColumn('locale', 'enum', 5, array(
-             'type' => 'enum',
-             'length' => 5,
-             'values' => 
-             array(
-              0 => 'en_US',
-              1 => 'tr_TR',
-             ),
-             'default' => 'en_US',
              'notnull' => true,
-             'length' => '255',
-             ));
-        $this->hasColumn('password', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
-             ));
-        $this->hasColumn('activationKey', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
              ));
 
         $this->option('type', 'INNODB');

@@ -39,13 +39,13 @@ if (!defined('BASE_PATH'))
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+
     /**
      * Configuration variable
      *
      * @var Zend_Config
      */
     private $_config = null;
-
     /**
      * Logging variable
      *
@@ -78,15 +78,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         if ($this->_config->kebab->logging->enable) {
             //Stream Writer
             if ($this->_config->kebab->logging->stream->enable) {
-                
+
                 $logFile = APPLICATION_PATH . '/variables/logs/application.log';
                 $streamWriter = new Zend_Log_Writer_Stream($logFile);
                 $this->_logging->addWriter($streamWriter);
             }
             //Firebug Writer
             if ($this->_config->kebab->logging->firebug->enable) {
-                
-                $firebugWriter = new Zend_Log_Writer_Firebug();                                
+
+                $firebugWriter = new Zend_Log_Writer_Firebug();
                 //$firebugWriter->setFormatter(new Zend_Log_Formatter_Simple());               
                 $this->_logging->addWriter($firebugWriter);
             }
@@ -103,7 +103,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $this->_logging;
     }
-    
+
     /**
      * Plugin Initializer
      * 
@@ -113,22 +113,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         // Info Log
         $this->_logging->log('Plugins initialized...', Zend_Log::INFO);
-        
-        $plugins = $this->_config->plugins 
-                 ? $this->_config->plugins->toArray() : array();
-        
-        if (count($plugins) > 0 ) {
-            $this->bootstrap('frontController') ;
+
+        $plugins = $this->_config->plugins ? $this->_config->plugins->toArray() : array();
+
+        if (count($plugins) > 0) {
+            $this->bootstrap('frontController');
             $front = $this->getResource('frontController');
 
             foreach ($plugins as $plugin) {
                 $front->registerPlugin(new $plugin());
             }
         }
-        
+
         return $plugins;
     }
-    
+
     /**
      * Doctrine Initialization
      *
@@ -148,11 +147,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
 
         $connection = $manager->connection(
-            $this->_config->database->doctrine->connections->master->dsn,
-            $this->_config->database->doctrine->connections->master->name
+                $this->_config->database->doctrine->connections->master->dsn,
+                $this->_config->database->doctrine->connections->master->name
         );
         $connection->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-        
+
         if ($this->_config->database->doctrine->profiling->enable) {
             $connection->setListener(new Imind_Profiler_Doctrine_Firebug('Doctrine Profiler'));
         }
@@ -181,5 +180,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $connection;
     }
 
-  
+    /**
+     * Zend Translate Initialization
+     * 
+     * First we look the user identity if null, we look the default language from locale.ini
+     * 
+     * @return Zend_Translate 
+     */
+    public function _initTranslate()
+    {      
+        $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
+                           ? Zend_Auth::getInstance()->getIdentity()->language 
+                           : $this->_config->locale->default;
+        $languagePath    = $this->_config->locale->languagePath . '/' . $defaultLanguage . '.php';
+        $translate = new Zend_Translate('array', $languagePath, $defaultLanguage);
+        Zend_Registry::set('translate', $translate);
+        return $translate;
+    }
+
 }

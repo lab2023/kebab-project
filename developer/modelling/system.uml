@@ -82,7 +82,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Wed Feb 23 12:25:00 EET 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Wed Feb 23 16:16:30 EET 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -666,7 +666,7 @@ A1
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '127-0-1-1-1d3886aa:12e5208af94:-8000:0000000000000C28'
-              name = 'locale' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+              name = 'language' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '127-0-1-1-1d3886aa:12e5208af94:-8000:0000000000000C29'>
@@ -5133,7 +5133,7 @@ A1
         bold="false"
         textsize="12"
         justification="Left"
-      >-locale : enum</text>
+      >-language : enum</text>
     </group>
     <rectangle name="Fig0.5"
       x="176"
@@ -7941,7 +7941,7 @@ I18n[title, description]</text>
         bold="false"
         textsize="12"
         justification="Left"
-      >-locale : enum</text>
+      >-language : enum</text>
     </group>
     <rectangle name="Fig0.5"
       x="160"
@@ -13437,7 +13437,7 @@ I18n[title, description]</text>
         bold="false"
         textsize="12"
         justification="Left"
-      >-locale : enum</text>
+      >-language : enum</text>
     </group>
     <rectangle name="Fig0.5"
       x="296"

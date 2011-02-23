@@ -5,7 +5,7 @@ Model_Entity_User:
     firstName: Guest
     email: guest@kebab-project.com
     status: active
-    locale: en_US
+    language: en
 
   Member:
     username: member
@@ -14,7 +14,7 @@ Model_Entity_User:
     lastname: User
     email: member@kebab-project.com
     status: active
-    locale: en_US
+    language: en
 
   Admin:
     username: admin
@@ -23,7 +23,7 @@ Model_Entity_User:
     lastname: User
     email: admin@kebab-project.com
     status: active
-    locale: en_US
+    language: en
 
   Owner:
     username: owner
@@ -32,4 +32,4 @@ Model_Entity_User:
     lastname: User
     email: owner@kebab-project.com
     status: active
-    locale: en_US
+    language: en

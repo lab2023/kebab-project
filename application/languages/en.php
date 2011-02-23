@@ -33,5 +33,5 @@
  * @version    1.5.0
  */
 return array(
-    'Hello World' => 'Hello World'
+    'Hello World' => 'Hello World en'
 );

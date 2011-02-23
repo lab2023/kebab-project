@@ -33,5 +33,5 @@
  * @version    1.5.0
  */
 return array(
-    'Hello World' => 'Merhaba Dünya'
+    'Hello World' => 'Merhaba Dünya tr'
 );
