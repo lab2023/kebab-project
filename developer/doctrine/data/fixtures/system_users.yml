@@ -3,22 +3,34 @@ Model_Entity_User:
     username: guest
     password: 084e0343a0486ff05530df6c705c8bb4
     firstName: Guest
-    surname: User
+    lastname: User
+    email: guest@kebab-project.com
+    status: active
+    locale: en_US
 
   Member:
     username: member
     password: aa08769cdcb26674c6706093503ff0a3
     firstName: Member
-    surname: User
+    lastname: User
+    email: member@kebab-project.com
+    status: active
+    locale: en_US
 
   Admin:
     username: admin
     password: 21232f297a57a5a743894a0e4a801fc3
     firstName: Admin
-    surname: User
+    lastname: User
+    email: admin@kebab-project.com
+    status: active
+    locale: en_US
 
   Owner:
     username: owner
     password: 72122ce96bfec66e2396d2e25225d70a
     firstName: Owner
-    surname: User
+    lastname: User
+    email: owner@kebab-project.com
+    status: active
+    locale: en_US
