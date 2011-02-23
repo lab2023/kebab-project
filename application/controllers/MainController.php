@@ -45,8 +45,18 @@ class MainController extends Kebab_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
-            $this->view->user = $auth->getIdentity();
-            $this->view->applications = $this->_getApplicationsByPermission();
+            
+            // Get default language
+            $defaultLanguage     = $auth->getIdentity()->language;
+            $languagesFromConfig = Zend_Registry::get('config')->languages->translations->toArray();
+            foreach ($languagesFromConfig as $k => $v) {
+                $v['active'] = $defaultLanguage == $v['language'] ? true : false;
+                $languages[] = $v; 
+            }
+            
+            $this->view->user           = $auth->getIdentity();
+            $this->view->applications   = $this->_getApplicationsByPermission();
+            $this->view->languages      = array_values($languages);
         }
     }
 
