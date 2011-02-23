@@ -3,19 +3,19 @@ User:
   columns:
     firstName:
       type: string(255)
-    surname:
+    lastname:
       type: string(255)
-    username:
-      type: string(16)
-      unique: true
     email:
       type: string(255)
+      unique: true
+    username:
+      type: string(16)
       unique: true
     status:
       type: enum
       length: 7
       values: ['active', 'passive']
-      default: active
+      default: passive
     locale:
       type: enum
       length: 5
