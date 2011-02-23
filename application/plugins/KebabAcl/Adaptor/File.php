@@ -41,16 +41,14 @@ class Plugin_KebabAcl_Adaptor_File extends Zend_Acl
 
     public function addAllResources()
     {
-        $this->addResource(new Zend_Acl_Resource('Administration-Index'));
-        $this->addResource(new Zend_Acl_Resource('Administration-User'));
+        $this->addResource(new Zend_Acl_Resource('Preferences-AboutMe'));
         $this->addResource(new Zend_Acl_Resource('Default-Desktop'));
     }
 
     public function addAllPermissions()
     {
         $this->allow('guest', 'Default-Desktop');
-        $this->allow('member', 'Administration-User');
-        $this->allow('admin', 'Administration-Index');
+        $this->allow('guest', 'Preferences-AboutMe');
     }
 
 }

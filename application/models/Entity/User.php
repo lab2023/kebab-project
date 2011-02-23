@@ -11,6 +11,8 @@
  * @property string $email
  * @property string $password
  * @property string $activationKey
+ * @property string $locale
+ * @property enum $status
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
  * @property Doctrine_Collection $Invitation
@@ -37,11 +39,13 @@ class Model_Entity_User extends Doctrine_Record
         $this->hasColumn('username', 'string', 16, array(
              'type' => 'string',
              'unique' => true,
+             'notnull' => true,
              'length' => '16',
              ));
         $this->hasColumn('email', 'string', 255, array(
              'type' => 'string',
              'unique' => true,
+             'notnull' => true,
              'length' => '255',
              ));
         $this->hasColumn('password', 'string', 255, array(
@@ -51,6 +55,23 @@ class Model_Entity_User extends Doctrine_Record
         $this->hasColumn('activationKey', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
+             ));
+        $this->hasColumn('locale', 'string', 2, array(
+             'type' => 'string',
+             'default' => 'en',
+             'notnull' => true,
+             'length' => '2',
+             ));
+        $this->hasColumn('status', 'enum', 7, array(
+             'type' => 'enum',
+             'length' => 7,
+             'values' => 
+             array(
+              0 => 'active',
+              1 => 'passive',
+             ),
+             'default' => 'passive',
+             'notnull' => true,
              ));
 
         $this->option('type', 'INNODB');

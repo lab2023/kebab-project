@@ -174,6 +174,16 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                 scope:this
             }]
         });
+        
+        
+        this.indicatorsToolbar.add({
+            iconCls : 'icon-status-online',
+            template: stdButtonTemplate,
+            text: this.kernel.getLanguages('current').text,
+            iconCls: this.kernel.getLanguages('current').iconCls,
+            menu: this.kernel.getLanguages()
+        });
+        
         this.indicatorsToolbar.add({
             iconCls : 'icon-shutdown',
             template: stdButtonTemplate,
@@ -193,7 +203,14 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         });
         this.indicatorsToolbar.doLayout();
         
-        var totalIndicatorsWidth = this.indicatorsToolbar.items.itemAt(0).getWidth() + this.indicatorsToolbar.items.itemAt(1).getWidth();
+        /**
+         *Dynamicly calculate indicator items total width
+         */
+        var totalIndicatorsWidth = 5; // Initial value
+        this.indicatorsToolbar.items.each(function(item) {
+           totalIndicatorsWidth += item.getWidth();
+        });
+        
         this.indicatorsMenu = new Ext.BoxComponent({
             el: 'kebab-os-panel-indicators',
             id: 'kebab-os-panel-indicators',

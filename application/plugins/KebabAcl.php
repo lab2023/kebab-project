@@ -68,12 +68,6 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
                 $isAllowed = false;
                 while (!$isAllowed && list(, $role) = each($roles)) {
                     $isAllowed = $acl->isAllowed($role, $resource, $action);
-                    Zend_Registry::get('logging')->log(
-                        '$isAllowed:' . $isAllowed . ', 
-                         $role:' . $role . ' $resource:' . $resource . '  
-                         $action:' . $action,
-                        Zend_Log::DEBUG
-                    );
                 }
 
                 if (!$isAllowed) {

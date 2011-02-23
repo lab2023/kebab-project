@@ -25,9 +25,9 @@ class Plugin_KebabAcl_Acl
 {
     static public function getAdaptor()
     {
-        if (file_exists( __DIR__ . '/config.ini')) {
+        if (file_exists( dirname(__FILE__) . '/config.ini')) {
             $config = new Zend_Config_Ini(
-                    __DIR__ . '/config.ini',
+                    dirname(__FILE__) . '/config.ini',
                     APPLICATION_ENV
             );
         } else {
