@@ -33,5 +33,6 @@
  * @version    1.5.0
  */
 return array(
-    'Administration' => 'Administration'
+    'Administration' => 'Yönetim',
+    'Users and Roles' => 'Kullanıcılar ve Roller'
 );

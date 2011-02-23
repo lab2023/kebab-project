@@ -32,11 +32,11 @@ abstract class Kebab_Controller_Plugin_Abstract extends Zend_Controller_Plugin_A
             $class . ' Initialized...', Zend_Log::INFO
         );
 
-        $pluginPath = substr($file, 0, strpos($file, '.'));
-        if (is_dir($pluginPath)) {
+        $pluginPath = explode('.' ,$file);
+        $remove = array_pop($pluginPath);
+        $pluginPath = implode('.', $pluginPath);
 
             $this->_pluginPath = $pluginPath;
-
             if (file_exists($this->_pluginPath . '/config.ini')) {
                 $this->_pluginConfig = new Zend_Config_Ini(
                         $this->_pluginPath . '/config.ini',
@@ -45,9 +45,7 @@ abstract class Kebab_Controller_Plugin_Abstract extends Zend_Controller_Plugin_A
             } else {
                 throw new Zend_Exception($class . ' config file not found!');
             }
-        }
+        
     }
 
 }
-
-

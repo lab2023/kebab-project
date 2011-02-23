@@ -122,7 +122,8 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 maximizable: true,
                 collapsible: true,
                 constrainHeader:true,
-                shim:false,
+                shim:false,                
+                layout:'fit',
                 animShowCfg: {
                     duration: .0,
                     easing: 'backOut'

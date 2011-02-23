@@ -3,7 +3,6 @@ Model_Entity_User:
     username: guest
     password: 084e0343a0486ff05530df6c705c8bb4
     firstName: Guest
-    lastname: User
     email: guest@kebab-project.com
     status: active
     locale: en_US

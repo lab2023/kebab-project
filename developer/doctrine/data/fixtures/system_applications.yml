@@ -1,7 +1,7 @@
 Model_Entity_Application:
   AboutMeApplication:
     identity: aboutMe-application
-    class: KebabOS.applications.preferences.AboutMe
+    class: KebabOS.applications.AboutMeApplication
     name: about-me
     type: system
     department: preferences

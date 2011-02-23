@@ -41,4 +41,19 @@ class IndexController extends Kebab_Controller_Action
     {
         
     }
+    
+    public function testAction()
+    {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        
+        $l = Zend_Registry::get('config')->languages->toArray();
+        Zend_Debug::dump($l);
+        
+        $t = new Zend_Translate('array', 
+                                 APPLICATION_PATH . '/languages/en.php',
+                                 'en');
+        echo $t->_('Hello World');
+        //echo Zend_Registry::get('Zend_Translate')->_('Hello Wdforld');
+    }
 }

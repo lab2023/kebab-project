@@ -13,6 +13,8 @@
  * @property enum $locale
  * @property string $password
  * @property string $activationKey
+ * @property string $locale
+ * @property enum $status
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
  * @property Doctrine_Collection $Feedback
@@ -39,7 +41,8 @@ class Model_Entity_User extends Doctrine_Record
         $this->hasColumn('email', 'string', 255, array(
              'type' => 'string',
              'unique' => true,
-             'length' => '255',
+             'notnull' => true,
+             'length' => '16',
              ));
         $this->hasColumn('username', 'string', 16, array(
              'type' => 'string',
@@ -65,6 +68,8 @@ class Model_Entity_User extends Doctrine_Record
               1 => 'tr_TR',
              ),
              'default' => 'en_US',
+             'notnull' => true,
+             'length' => '255',
              ));
         $this->hasColumn('password', 'string', 255, array(
              'type' => 'string',

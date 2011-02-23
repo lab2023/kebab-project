@@ -8,23 +8,25 @@ User:
     email:
       type: string(255)
       unique: true
-    username:
-      type: string(16)
-      unique: true
-    status:
-      type: enum
-      length: 7
-      values: ['active', 'passive']
-      default: passive
     locale:
       type: enum
       length: 5
       values: ['en_US', 'tr_TR']
       default: 'en_US'
+    username:
+      type: string(16)
+      unique: true
+      notnull: true
     password:
       type: string(255)
     activationKey:
       type: string(255)
+    status:
+      type: enum
+      length: 7
+      values: ['active', 'passive']
+      default: 'passive'
+      notnull: true
 
   actAs:
     Timestampable:

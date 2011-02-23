@@ -42,7 +42,7 @@ include '../../application/configs/system.php';
 /*
  * Setup Defines
  */
-defined('BASE_PATH')        || define('BASE_PATH', realpath(__DIR__ . '/../../') . '/');
+defined('BASE_PATH')        || define('BASE_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $env));
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', BASE_PATH . $paths['app']);
 defined('MODULES_PATH')     || define('MODULES_PATH', APPLICATION_PATH . '/' . $paths['mod']);

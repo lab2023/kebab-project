@@ -24,6 +24,9 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
         Ext.apply(this, config);
         
         Kebab.OS.Notification.superclass.constructor.call(this, arguments);
+        
+       
+
     },
     
     message : function(title, message, keep){
@@ -49,7 +52,7 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
         }, true);
 
         if (!keep) {
-            message.slideIn('t', {easing: 'backOut', duration: .0}).pause(2).ghost("t", {
+            message.slideIn('t', {easing: 'backOut', duration: .0}).pause(2).ghost("b", {
                 remove:true,
                 easing: 'easeIn',
                 duration: .15
@@ -57,7 +60,7 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
         } else {
             message.slideIn('t', {easing: 'backOut', duration: .0});
             message.on('click', function() {
-                message.ghost("t", {
+                message.ghost("b", {
                     remove: true,
                     easing: 'easeIn',
                     duration: .15

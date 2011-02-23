@@ -1,3 +1,7 @@
+/**
+ * ExtJS Window Override
+ * Window animation settings
+ */
 Ext.override(Ext.Window, {
     defaultAnimShowCfg: {
         duration: .25,

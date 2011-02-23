@@ -15,13 +15,13 @@
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
 
-Ext.namespace('KebabOS.applications.preferences.AboutMe');
+Ext.namespace('KebabOS.applications.AboutMeApplication');
 
 /**
  * AboutMe Application
  * @namespace KebabOS.applications.AboutMe
  */
-KebabOS.applications.preferences.AboutMe = Ext.extend(Kebab.OS.Application, {
+KebabOS.applications.AboutMeApplication = Ext.extend(Kebab.OS.Application, {
     
     id:'aboutMe-application',
     
@@ -29,7 +29,7 @@ KebabOS.applications.preferences.AboutMe = Ext.extend(Kebab.OS.Application, {
                 
         this.launcher = {
             text: 'About Me',
-            iconCls:'aboutMe-application-launcher-icon',
+            iconCls: 'aboutMe-application-launcher-icon',
             handler : this.createApplication,
             scope: this
         }
@@ -45,11 +45,16 @@ KebabOS.applications.preferences.AboutMe = Ext.extend(Kebab.OS.Application, {
                 id: this.id,
                 title: this.launcher.text,                
                 iconCls: 'aboutMe-application-gui-icon',
-                width: 740,
-                height: 480,
-                padding:10,
-                html: 'Hello world!'
+                width: 500,
+                height: 400,
+                resizable:false,
+                maximizable:false,
+                border:false,
+                items: new KebabOS.applications.AboutMeApplication.views.Layout({
+                    application: this
+                })
             });
+            
         }
         app.show();
     }

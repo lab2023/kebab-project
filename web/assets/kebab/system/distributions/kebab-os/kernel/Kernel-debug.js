@@ -35,11 +35,13 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
     distribution: 'KebabOS',
     
-    environment: null,
+    environment: 'production',
     
     user: null,
     
     applications: null,
+    
+    languages: [{text: "en", active: true}],
     
     getApplications : Ext.emptyFn,
     
@@ -53,6 +55,8 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         
         // Initialize Desktop
         this.desktop = new Kebab.OS.Desktop(this);
+        
+        this.translator = new Kebab.OS.Translator(this.languages);
         
         this.notification = new Kebab.OS.Notification();
 
@@ -79,14 +83,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         }
     },
     
-    getEnvironment : function(){
-        return this.environment;
-    },
-    
-    getUser : function(){
-        return Ext.util.JSON.decode(this.user);
-    },
-    
     initApplications : function(){
         
         var appSC = this.applications;
@@ -105,6 +101,38 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
             cb.call(scope, app)
         }
     },
+    
+    getEnvironment : function(){
+        return this.environment;
+    },
+    
+    getUser : function(){
+        return this.user;
+    },
+    
+    getLanguages: function(which) {
+        
+        if(which == 'current') {
+            
+            var currentLanguage = null;
+            
+            Ext.each(this.languages, function(language) {
+                if (language.active) {
+                    currentLanguage = language;
+                    return;
+                }
+            });
+            
+            return currentLanguage;
+            
+        } else {
+            return this.languages;
+        }
+    },    
+    
+    getTranslator: function() {
+        return this.translator;
+    },
 
     getApplication : function(id){
         
@@ -120,16 +148,16 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         return null;
     },
 
+    getDesktop : function(){
+        return this.desktop;
+    },
+
     onReady : function(fn, scope){
         if(!this.isBooted){
             this.on('booted', fn, scope);
         }else{
             fn.call(scope, this);
         }
-    },
-
-    getDesktop : function(){
-        return this.desktop;
     },
 
     onUnload : function(e){
