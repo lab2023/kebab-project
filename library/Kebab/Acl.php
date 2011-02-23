@@ -21,7 +21,7 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Plugin_KebabAcl_Adaptor_Doctrine extends Zend_Acl
+class Kebab_Acl extends Zend_Acl
 {
 
     private $_config;
@@ -122,9 +122,6 @@ class Plugin_KebabAcl_Adaptor_Doctrine extends Zend_Acl
                     }
                 }
             }
-        } 
-                            
-                        
-    }
-
-}
+        }              
+    }// eof function
+} // eof class

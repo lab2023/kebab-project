@@ -102,13 +102,11 @@ class AuthController extends Kebab_Controller_Action
 
                 // Check Acl Plugin is on and write acl and role
                 if (Zend_Registry::get('config')->plugins->kebabAcl) {
-                    $roles = $this->_getUserRoles($identity->id);
-                    $aclAdaptor = Plugin_KebabAcl_Acl::getAdaptor();
-                    $identity->roles = $roles['roles'];
+                    $roles                       = $this->_getUserRoles($identity->id);
+                    $identity->roles             = $roles['roles'];
                     $identity->rolesWithAncestor = $roles['rolesWithAncestor'];
-                    $identity->acl   = new $aclAdaptor;               
+                    $identity->acl               = new Kebab_Acl();              
                 }
-                
                 $auth->getStorage()->write($identity);
 
                 //KBBTODO Set session time and check from getParams
