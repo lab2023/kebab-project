@@ -116,7 +116,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
         }
 
         foreach ($errors as $key => $value) {
-            $this->_response[$name][$key] = Zend_Registry::get('translate')->_($value);
+            $this->_response[$name][$key] = Zend_Registry::get('translator')->_($value);
         }
 
         return $this;
@@ -139,7 +139,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
         }
 
         $this->_response['errors'][] = array(
-            $id => Zend_Registry::get('translate')->_($value)
+            $id => Zend_Registry::get('translator')->_($value)
         );
 
         return $this;
@@ -175,7 +175,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
         $notification = array(
             $notificationType,
-            Zend_Registry::get('translate')->_($message),
+            Zend_Registry::get('translator')->_($message),
             $autoHide
         );
         

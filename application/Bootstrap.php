@@ -187,15 +187,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * 
      * @return Zend_Translate 
      */
-    public function _initTranslate()
+    public function _initTranslator()
     {      
         $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
                            ? Zend_Auth::getInstance()->getIdentity()->language 
                            : $this->_config->locale->default;
         $languagePath    = $this->_config->locale->languagePath . '/' . $defaultLanguage . '.php';
-        $translate = new Zend_Translate('array', $languagePath, $defaultLanguage);
-        Zend_Registry::set('translate', $translate);
-        return $translate;
+        $translator = new Zend_Translate('array', $languagePath, $defaultLanguage);
+        Zend_Registry::set('translator', $translator);
+        return $translator;
     }
 
 }
