@@ -69,7 +69,8 @@ $cfgs = array(
     'kebab'         => 'kebab.ini',         // Kebab Framework global settings
     'database'      => 'database.ini',      // Application DB settings
     'routes'        => 'routes.ini',        // Application routing settings
-    'plugins'       => 'plugins.ini'        // Application plugins settings
+    'plugins'       => 'plugins.ini',       // Application plugins settings
+    'locale'        => 'locale.ini'         // Locale settings
 );
 
 /*
