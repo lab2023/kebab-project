@@ -49,7 +49,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             id: 'kebab-os-panel-main-menu-applications',
             iconCls: 'icon-kebab-os',
             template: applicationsButtonTemplate,
-            menu: this.mainMenu  // assign menu by instance
+            menu: this.mainMenu
         };
         
         var systemMenu = {
@@ -164,7 +164,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         this.indicatorsToolbar.add({
             iconCls : 'icon-status-online',
             template: stdButtonTemplate,
-            text: user.firstName + ' ' + user.surname,
+            text: user.firstName + ' ' + user.lastName,
             menu: [{
                 text:'About Me',
                 iconCls: 'icon-vcard',

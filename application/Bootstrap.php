@@ -183,7 +183,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * Zend Translate Initialization
      * 
-     * First we look the user identity if null, we look the default language from locale.ini
+     * First we look the user identity if null, we look the default language from languages.ini
      * 
      * @return Zend_Translate 
      */
@@ -191,10 +191,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {      
         $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
                            ? Zend_Auth::getInstance()->getIdentity()->language 
-                           : $this->_config->locale->default;
-        $languagePath    = $this->_config->locale->languagePath . '/' . $defaultLanguage . '.php';
+                           : $this->_config->languages->default;
+        
+        $languagePath    = $this->_config->languages->languagePath . '/' . $defaultLanguage . '.php';
         $translator = new Zend_Translate('array', $languagePath, $defaultLanguage);
+        
         Zend_Registry::set('translator', $translator);
+        
         return $translator;
     }
 

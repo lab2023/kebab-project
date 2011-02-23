@@ -54,8 +54,8 @@ class Preferences_AboutMeController extends Kebab_Controller_Action
 
             // Doctrine
             $query = Doctrine_Query::create()
-                    ->select('user.firstName, user.surname, user.username, 
-                        user.email, user.locale')
+                    ->select('user.firstName, user.lastName, user.username, 
+                        user.email, user.language')
                     ->where('user.id = ?', $userId)
                     ->from('Model_User user');
             

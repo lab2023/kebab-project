@@ -3,7 +3,7 @@ User:
   columns:
     firstName:
       type: string(255)
-    lastname:
+    lastName:
       type: string(255)
     email:
       type: string(255)
@@ -33,9 +33,9 @@ User:
     SoftDelete:
     Blameable:
     Sluggable:
-      fields: [firstName, lastname]
+      fields: [firstName, lastName]
     Searchable:
-      fields: [firstName, lastname, username, email]    
+      fields: [firstName, lastName, username, email]    
       className: SystemUserSearch
 
   relations:

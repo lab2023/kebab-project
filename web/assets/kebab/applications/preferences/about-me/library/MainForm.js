@@ -62,7 +62,7 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
                     allowBlank: false
                 },{
                     fieldLabel: 'Last Name',
-                    name: 'surname',
+                    name: 'lastName',
                     allowBlank: false
                 },{
                     fieldLabel: 'E-mail',
