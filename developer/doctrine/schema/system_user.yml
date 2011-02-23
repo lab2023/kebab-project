@@ -11,6 +11,16 @@ User:
     email:
       type: string(255)
       unique: true
+    status:
+      type: enum
+      length: 7
+      values: ['active', 'passive']
+      default: active
+    locale:
+      type: enum
+      length: 5
+      values: ['en_US', 'tr_TR']
+      default: 'en_US'
     password:
       type: string(255)
     activationKey:
@@ -21,9 +31,9 @@ User:
     SoftDelete:
     Blameable:
     Sluggable:
-      fields: [firstName, surname]
+      fields: [firstName, lastname]
     Searchable:
-      fields: [firstName, surname, username, email]    
+      fields: [firstName, lastname, username, email]    
       className: SystemUserSearch
 
   relations:

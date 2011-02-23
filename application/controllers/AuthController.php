@@ -187,7 +187,7 @@ class AuthController extends Kebab_Controller_Action
                     $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
                     $mail = new Zend_Mail();
                     $mail->setFrom('noreply@kebab-project.com', 'Kebab Project');
-                    $mail->addTo($user->email, $user->firstName . $user->surname);
+                    $mail->addTo($user->email, $user->firstName . $user->lastname);
                     $mail->setSubject('Reset your password');
                     $mail->setBodyHtml($view->render('forgot-password.phtml'));
                     $mail->send($transport);
