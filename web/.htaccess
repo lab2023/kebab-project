@@ -1,6 +1,8 @@
+<IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond $1 !^(index\.php|assets|uploads|favicon\.ico|robots\.txt)
 RewriteRule ^(.*)$ index.php/$1 [L]
 
 php_flag magic_quotes_gpc off
 php_flag display_errors on
+</IfModule>
