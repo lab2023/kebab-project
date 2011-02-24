@@ -18,6 +18,17 @@
 Ext.namespace('Kebab.OS.Kernel');
 Kebab.OS.Kernel = function(config){
     
+    // Initial Configs
+    this.isBooted = false;    
+    this.serviceAPI = 'api';    
+    this.distribution = 'KebabOS';    
+    this.environment = 'production';    
+    this.baseUrl = 'http://www.kebab-project.com';    
+    this.user = null;    
+    this.applications = null;    
+    this.languages =  [{text: "en", active: true}];
+    this.stateProvider = new Ext.state.CookieProvider();
+    
     Ext.apply(this, config);
     
     this.addEvents({
@@ -29,29 +40,20 @@ Kebab.OS.Kernel = function(config){
 };
 Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
-    isBooted: false,
-    
-    serviceAPI: 'api',
-    
-    distribution: 'KebabOS',
-    
-    environment: 'production',
-    
-    user: null,
-    
-    applications: null,
-    
-    languages: [{text: "en", active: true}],
-    
     getApplications : Ext.emptyFn,
     
     init : function() {
-        console.log('KebabOS initialized...'); 
+        
+        Ext.QuickTips.init();        
+        
+        Ext.state.Manager.setProvider(this.stateProvider);
+        
+        Kebab.OS.Logger.info('KebabOS initialized...');
     },
 
     boot : function(){
-        
-        Ext.QuickTips.init();
+
+        this.init();
         
         // Initialize Desktop
         this.desktop = new Kebab.OS.Desktop(this);
@@ -68,14 +70,12 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
             this.initApplications();
         }
 
-        this.init();
-
         Ext.EventManager.on(window, 'beforeunload', this.onUnload, this);
 		this.fireEvent('booted', this);
         this.isBooted = true;
         
         if (this.isBooted) {
-            console.log('Kebab.OS.Kernel booted...');
+            Kebab.OS.Logger.info('Kebab.OS.Kernel booted...');
             this.notification.message(
                 'Kebab OS', 
                 this.bootMessage || "Welcome to Kebab Project. Have fun!"
@@ -104,6 +104,10 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
     getEnvironment : function(){
         return this.environment;
+    },
+    
+    getBaseUrl : function(){
+        return this.baseUrl;
     },
     
     getUser : function(){
@@ -136,7 +140,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
     getApplication : function(id){
         
-        console.log('Kebab.OS.Kernel getApplication call by ' +id+ ' parameter...');
+        Kebab.OS.Logger.info('Kebab.OS.Kernel getApplication call by ' +id+ ' parameter...');
         
     	var app = this.applications;
     	
