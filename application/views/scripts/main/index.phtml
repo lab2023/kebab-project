@@ -10,6 +10,7 @@ $this->headScript()
      ->appendFile($this->asset('kernel/Panel.js')->distribution()->get())
      ->appendFile($this->asset('kernel/Notification.js')->distribution()->get())             
      ->appendFile($this->asset('kernel/Translator.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Logger.js')->distribution()->get())
      ->appendFile($this->asset('kernel/Extras.js')->distribution()->get());
 ?>
 
@@ -36,12 +37,18 @@ $this->headScript()
     }
     ?>
     <script type="text/javascript">
+        
+    var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";
+    var BASE_URL = "<?php echo BASE_URL; ?>";
+    
     Ext.namespace('KebabOS', 'KebabOS.kernel');
     KebabOS.kernel = new Kebab.OS.Kernel({
 
         distribution    : "<?php echo $this->variable('kebabOs')->distributions->current; ?>",
         
-        environment     : "<?php echo APPLICATION_ENV; ?>",
+        environment     : APPLICATION_ENV,
+        
+        baseUrl         : BASE_URL,
         
         languages       : [{language: "en", text: "English", iconCls: 'icon-flag-en_US', active: true}, {language: "tr", text: "Türkçe", iconCls: 'icon-flag-tr_TR', active: false}],
         
