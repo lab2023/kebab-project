@@ -7,3 +7,11 @@
 #aboutMe-application-shortcut {
     background-image: url(images/shortcut.png);
 }
+
+.aboutMe-application-firstNameSurnameText {
+    font-size:20px; margin-top:10px; font-weight:bold;
+}
+.aboutMe-application-emailText {
+    font-size:15px;
+}
+

@@ -23,7 +23,7 @@ Ext.namespace('KebabOS.applications.AboutMeApplication');
  */
 KebabOS.applications.AboutMeApplication = Ext.extend(Kebab.OS.Application, {
     
-    id:'aboutMe-application',
+    id : 'aboutMe-application',
     
     init : function(){
                 

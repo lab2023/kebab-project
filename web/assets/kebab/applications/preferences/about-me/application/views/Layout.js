@@ -2,6 +2,7 @@ Ext.namespace('KebabOS.applications.AboutMeApplication.views');
 
 KebabOS.applications.AboutMeApplication.views.Layout = Ext.extend(Ext.Panel, {
     layout: 'border',
+    border:false,
     defaults: {
         border: false
     },
