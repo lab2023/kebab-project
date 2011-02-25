@@ -50,7 +50,7 @@ $this->headScript()
         
         baseUrl         : BASE_URL,
         
-        languages       : [{language: "en", text: "English", iconCls: 'icon-flag-en_US', active: true}, {language: "tr", text: "Türkçe", iconCls: 'icon-flag-tr_TR', active: false}],
+        languages       : <?php echo json_encode($this->languages); ?>,
         
         user            : <?php echo json_encode($this->user); ?>,
 
@@ -74,14 +74,13 @@ $this->headScript()
 
     <?php // BEGIN: OS Desktop Environment -----------------------------------?>
     <div id="kebab-os-desktop"> 
-        
-        <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
-        <dl id="kebab-os-desktop-shortcuts"> 
+        <dl id="kebab-os-desktop-shortcuts">
+            <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
             <dt ext:qtip="<?php echo $application['name']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
                 <span><?php echo $application['name']; ?></span>
-            </dt>       
+            </dt>
+            <?php endforeach; ?>      
         </dl>
-        <?php endforeach; ?>
         
     </div>
     <?php // END: OS Desktop Environment -------------------------------------?>

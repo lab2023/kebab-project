@@ -27,7 +27,9 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         // Only menu! Ext.menu.Menu() object
         this.mainMenu = new Ext.menu.Menu();
                 
-        this.applications = new Ext.Toolbar().render('kebab-os-panel-main-menu');
+        this.applications = new Ext.Toolbar({
+            renderTo: 'kebab-os-panel-main-menu'
+        });
         
         var applicationsButtonTemplate = new Ext.Template(
             '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
