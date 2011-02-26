@@ -15,8 +15,8 @@
  * @property enum $status
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $UserRole
- * @property Doctrine_Collection $Invitation
  * @property Doctrine_Collection $Feedback
+ * @property Doctrine_Collection $Invitation
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -94,11 +94,11 @@ class Model_Entity_User extends Doctrine_Record
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('Model_Entity_Invitation as Invitation', array(
+        $this->hasMany('Model_Entity_Feedback as Feedback', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('Model_Entity_Feedback as Feedback', array(
+        $this->hasMany('Model_Entity_Invitation as Invitation', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

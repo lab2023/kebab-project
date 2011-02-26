@@ -1,0 +1,25 @@
+Category:
+  tableName: system_category
+  columns:
+    title:
+      type: string
+    description:
+      type: clob
+    iconCls: 
+      type: string
+    #relation from Media
+    image_id:
+      type: integer
+   
+  relations:
+    Image:
+      class: Media 
+      foreignAlias: Image
+      local: image_id
+      foreign: id
+      foreignType: one
+    
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
