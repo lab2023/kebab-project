@@ -1,0 +1,43 @@
+Media:
+  tableName: system_media
+  columns:
+    name:
+      type: string
+      notnull: true
+    description:
+      type: clob
+    mineType:
+      type: string
+      notnull: true
+    fileExt:
+      type: string
+      notnull: true
+    fileSize:
+      type: integer
+      notnull: true
+    imageWidth:
+      type: integer
+    imageHeight:
+      type: integer
+      
+  relations:
+    Category:
+      local: id
+      foreign: image_id
+  
+  actAs:    
+    SoftDelete:
+    Blameable:
+    Timestampable:
+    Searchable:
+      fields: [title]
+      className: SystemMediaSearch
+    Sluggable:
+      unique: true
+      fields: [title]
+      canUpdate: true
+     
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
