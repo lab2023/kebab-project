@@ -3,41 +3,36 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
     
     url: 'preferences/about-me/read',
     defaultType: 'textfield',    
-    padding: 5,    
+    bodyStyle: 'padding:0 10px;',    
     defaults: {
         labelAlign: 'top',
         anchor: '100%'
     },
     
-    listeners: {
-        actioncomplete:function(form, response) {
-            console.log(response.result);
-        }
-    },
-
-
     initComponent: function() {
         
         var config = {
             items: [{
                 layout:'column',
-                padding: 10,
+                bodyStyle: 'padding:20px 0;',
                 xtype:'panel',
                 border:false,
                 items: [{
-                    columnWidth: .6,
-                    bodyStyle: 'font-size:20px; margin-top:10px; font-weight:bold;',
-                    html: 'First Name Surname',
+                    columnWidth: .5,
+                    bodyCssClass: 'aboutMe-application-firstNameSurnameText',
+                    id: 'aboutMe-application-firstNameLastName-text',
+                    html: '-',
                     border:false
-                }, {
-                    columnWidth: .4,
+                },{
+                    columnWidth: .5,
                     xtype: 'panel',
                     border:false,
                     bodyStyle: 'text-align:center;',
                     defaults:{border:false},
-                    items: [{
-                        bodyStyle: 'font-size:15px;',
-                        html: 'username@email'
+                    items: [{                        
+                        bodyCssClass: 'aboutMe-application-emailText',
+                        id: 'aboutMe-application-email-text',
+                        html: '-'
                     },{
                         xtype: 'button',
                         width: '100%',
@@ -49,19 +44,20 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
                 name: 'customerId',
                 hidden:true
             },{
-                xtype:'fieldset',
-                title: 'Personal Info',
+                xtype:'panel',
+                layout: 'form',
+                padding: 10,
                 defaults: {
                     anchor: '100%'
                 },
                 autoHeight:true,
                 defaultType: 'textfield',
                 items: [{
-                    fieldLabel: 'First Name',
+                    fieldLabel: 'First name',
                     name: 'firstName',
                     allowBlank: false
                 },{
-                    fieldLabel: 'Last Name',
+                    fieldLabel: 'Last name',
                     name: 'lastName',
                     allowBlank: false
                 },{
@@ -69,19 +65,43 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
                     name: 'email',
                     vtype: 'email',
                     allowBlank: false
-                }]
+                }, new Ext.form.ComboBox({
+                    fieldLabel: 'Your language',
+                    typeAhead: true,
+                    triggerAction: 'all',
+                    lazyRender:true,
+                    mode: 'local',
+                    store: new Ext.data.JsonStore({
+                        fields: ['language', 'iconCls','text'],
+                        data: this.application.app.getLanguages()
+                    }),
+                    valueField: 'language',
+                    displayField: 'text',
+                    scope:this
+                })]
             }],
             buttons: [{
                 text: 'Save',
                 iconCls: 'icon-disk',
                 handler: this.onUpdate,
-                scope: this
+                scope: this,
+                disabled: true
             }]
         }
     
         Ext.apply(this, Ext.apply(this.initialConfig, config));
         
         KebabOS.applications.AboutMeApplication.library.MainForm.superclass.initComponent.apply(this, arguments);
+    },
+    
+    listeners: {
+        actioncomplete:function(form, response) {
+            
+            Ext.getCmp('aboutMe-application-firstNameLastName-text')
+               .update(response.result.data.firstName + " " + response.result.data.lastName);
+            Ext.getCmp('aboutMe-application-email-text')
+               .update(response.result.data.email);
+        }
     },
     
     onRender:function() {

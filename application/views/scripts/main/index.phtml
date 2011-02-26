@@ -10,6 +10,7 @@ $this->headScript()
      ->appendFile($this->asset('kernel/Panel.js')->distribution()->get())
      ->appendFile($this->asset('kernel/Notification.js')->distribution()->get())             
      ->appendFile($this->asset('kernel/Translator.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Logger.js')->distribution()->get())
      ->appendFile($this->asset('kernel/Extras.js')->distribution()->get());
 ?>
 
@@ -36,14 +37,20 @@ $this->headScript()
     }
     ?>
     <script type="text/javascript">
+        
+    var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";
+    var BASE_URL = "<?php echo BASE_URL; ?>";
+    
     Ext.namespace('KebabOS', 'KebabOS.kernel');
     KebabOS.kernel = new Kebab.OS.Kernel({
 
         distribution    : "<?php echo $this->variable('kebabOs')->distributions->current; ?>",
         
-        environment     : "<?php echo APPLICATION_ENV; ?>",
+        environment     : APPLICATION_ENV,
         
-        languages       : [{language: "en", text: "English", iconCls: 'icon-flag-en_US', active: true}, {language: "tr", text: "Türkçe", iconCls: 'icon-flag-tr_TR', active: false}],
+        baseUrl         : BASE_URL,
+        
+        languages       : <?php echo json_encode($this->languages); ?>,
         
         user            : <?php echo json_encode($this->user); ?>,
 
@@ -67,14 +74,13 @@ $this->headScript()
 
     <?php // BEGIN: OS Desktop Environment -----------------------------------?>
     <div id="kebab-os-desktop"> 
-        
-        <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
-        <dl id="kebab-os-desktop-shortcuts"> 
+        <dl id="kebab-os-desktop-shortcuts">
+            <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
             <dt ext:qtip="<?php echo $application['name']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
                 <span><?php echo $application['name']; ?></span>
-            </dt>       
+            </dt>
+            <?php endforeach; ?>      
         </dl>
-        <?php endforeach; ?>
         
     </div>
     <?php // END: OS Desktop Environment -------------------------------------?>

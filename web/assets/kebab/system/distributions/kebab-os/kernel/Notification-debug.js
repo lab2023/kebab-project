@@ -24,9 +24,6 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
         Ext.apply(this, config);
         
         Kebab.OS.Notification.superclass.constructor.call(this, arguments);
-        
-       
-
     },
     
     message : function(title, message, keep){
