@@ -20,7 +20,7 @@ $this->headScript()
         
         // TODO Load on-demand
         $this->headLink()->appendStylesheet(
-            $this->assetApplication($application['name'] .'/web/assets/style.css')
+            $this->assetApplication($application['name'] .'/web/theme/style.css')
                  ->department($application['department'])
                  ->get(),
             'screen', true, array('id' => $application['identity'] . '-style')
@@ -41,7 +41,7 @@ $this->headScript()
     var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";
     var BASE_URL = "<?php echo BASE_URL; ?>";
     
-    Ext.namespace('KebabOS', 'KebabOS.kernel');
+    Ext.namespace('KebabOS', 'KebabOS.kernel', 'KebabOS.applications');
     KebabOS.kernel = new Kebab.OS.Kernel({
 
         distribution    : "<?php echo $this->variable('kebabOs')->distributions->current; ?>",

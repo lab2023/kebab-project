@@ -46,14 +46,13 @@ while($scanner->valid()) {
         
         $pathInfo = pathinfo($scanner->key());
         
-        try {
-            @$pathInfo['extension'] == 'js' ?
-                readfile($scanner->key()) : null;
-        } catch (Exception $exc) {
-        }
+        $file .= @$pathInfo['extension'] == 'js' 
+                    ? file_get_contents($scanner->key()) : null;
     }
 
     $scanner->next();
 }
+
+print $file;
 
 ob_end_flush();

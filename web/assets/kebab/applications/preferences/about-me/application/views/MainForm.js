@@ -1,5 +1,4 @@
-Ext.namespace('KebabOS.applications.AboutMeApplication.library');
-KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.FormPanel, {
+KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.FormPanel, {
     
     url: 'preferences/about-me/read',
     defaultType: 'textfield',    
@@ -10,6 +9,8 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
     },
     
     initComponent: function() {
+        
+        var text = new KebabOS.applications.aboutMe.library.Test();
         
         var config = {
             items: [{
@@ -73,7 +74,7 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
                     mode: 'local',
                     store: new Ext.data.JsonStore({
                         fields: ['language', 'iconCls','text'],
-                        data: this.application.app.getLanguages()
+                        data: this.ownerApplication.app.getLanguages()
                     }),
                     valueField: 'language',
                     displayField: 'text',
@@ -81,7 +82,7 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
                 })]
             }],
             buttons: [{
-                text: 'Save',
+                text: text.getText(),
                 iconCls: 'icon-disk',
                 handler: this.onUpdate,
                 scope: this,
@@ -91,7 +92,7 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
     
         Ext.apply(this, Ext.apply(this.initialConfig, config));
         
-        KebabOS.applications.AboutMeApplication.library.MainForm.superclass.initComponent.apply(this, arguments);
+        KebabOS.applications.aboutMe.application.views.MainForm.superclass.initComponent.apply(this, arguments);
     },
     
     listeners: {
@@ -110,7 +111,7 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
             url:this.url            
         });
         
-        KebabOS.applications.AboutMeApplication.library.MainForm.superclass.onRender.apply(this, arguments);
+        KebabOS.applications.aboutMe.application.views.MainForm.superclass.onRender.apply(this, arguments);
         
     },
     
@@ -137,4 +138,3 @@ KebabOS.applications.AboutMeApplication.library.MainForm = Ext.extend(Ext.form.F
         }
     }
 });
-
