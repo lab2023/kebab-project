@@ -38,7 +38,8 @@ header("Content-type: text/javascript; charset: UTF-8");
 defined('BASE_PATH') || define('BASE_PATH', realpath(dirname(__FILE__) . '/../') . '/');
 
 // Load index.js once !important
-@readfile(BASE_PATH . 'web/index.js') . PHP_EOL;
+@readfile(BASE_PATH . 'web/index.js');
+print PHP_EOL;
 
 // Recursive scan directory and files
 $scanner = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(BASE_PATH));
@@ -51,6 +52,7 @@ while($scanner->valid()) {
         
         if (@$pathInfo['extension'] == 'js' && $scanner->getFilename() !== 'index.js') {
             @readfile($scanner->key());
+            print PHP_EOL;
         }
     }
 

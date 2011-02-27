@@ -23,3 +23,24 @@ Ext.namespace(
     'KebabOS.applications.aboutMe.application.views',
     'KebabOS.applications.aboutMe.library'
 );
+
+/**
+ * Producer Application Base Class
+ * @namespace KebabOS.applications.producer
+ */
+KebabOS.applications.aboutMe.application.Bootstrap = function() {
+    
+    Ext.apply(this, {
+        
+        // Application ID
+        id : 'aboutMe-application',
+        
+        // Application Launcher Settings
+        launcher: {
+            text: 'About Me',
+            iconCls: 'aboutMe-application-launcher-icon'
+        }
+    });
+    
+    KebabOS.applications.aboutMe.application.Bootstrap.superclass.constructor.call(this);
+}

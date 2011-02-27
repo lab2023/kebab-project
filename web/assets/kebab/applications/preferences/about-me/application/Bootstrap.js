@@ -1,21 +1,9 @@
 /**
  * AboutMe Application
- * @namespace KebabOS.applications.AboutMe
+ * @namespace KebabOS.applications.aboutMe
  */
-KebabOS.applications.aboutMe.application.Bootstrap = Ext.extend(Kebab.OS.Application, {
+Ext.extend(KebabOS.applications.aboutMe.application.Bootstrap, Kebab.OS.Application, {
     
-    id : 'aboutMe-application',
-    
-    init : function(){
-                
-        this.launcher = {
-            text: 'About Me',
-            iconCls: 'aboutMe-application-launcher-icon',
-            handler : this.createApplication,
-            scope: this
-        }
-    },
-
     createApplication : function(){
         
         var desktop = this.app.getDesktop();
