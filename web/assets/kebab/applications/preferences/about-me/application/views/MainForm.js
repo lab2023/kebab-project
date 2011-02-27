@@ -10,8 +10,6 @@ KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.Fo
     
     initComponent: function() {
         
-        var text = new KebabOS.applications.aboutMe.library.Test();
-        
         var config = {
             items: [{
                 layout:'column',
@@ -82,7 +80,7 @@ KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.Fo
                 })]
             }],
             buttons: [{
-                text: text.getText(),
+                text: 'Save',
                 iconCls: 'icon-disk',
                 handler: this.onUpdate,
                 scope: this,
