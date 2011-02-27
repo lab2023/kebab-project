@@ -62,7 +62,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
     public function setSuccess($success)
     {
         if (is_bool($success)) {
-            $this->_response['success'] = $success ? 'true' : 'false';
+            $this->_response['success'] = $success ? true : false;
         } else {
             throw new Kebab_Controller_Helper_Exception('$success type must be boolean.');
         }
