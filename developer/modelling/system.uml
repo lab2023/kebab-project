@@ -26,7 +26,7 @@
       <fontname>Dialog</fontname>
       <fontsize>12</fontsize>
       <defaultstereotypeview>0</defaultstereotypeview>
-      <activediagram>Media</activediagram>
+      <activediagram>Asset</activediagram>
     </settings>
     <searchpath href="PROJECT_DIR" />
     <members>
@@ -67,13 +67,9 @@
               diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
               diagramname="Feedback" />
       <member type="pgml"
-              name="system_ClassDiagram.pgml"
+              name="system_Media.pgml"
               diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
               diagramname="Media" />
-      <member type="pgml"
-              name="system_ClassDiagram.pgml"
-              diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
-              diagramname="Class Diagram" />
       <member type="todo"
               name="system.todo" />
     </members>
@@ -90,7 +86,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Feb 24 22:28:15 EET 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sat Feb 26 20:46:41 EET 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -14319,7 +14315,7 @@ status[open, process, closed]</text>
       justification="Center"
     >+ Media</text>
     <group name="Fig0.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[313, 41, 64, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[313, 41, 146, 0]"
          href="127-0-1-1-74d5d420:12e5941e9c5:-8000:0000000000001083"
          fill="0"
          fillcolor="white"
@@ -14333,7 +14329,7 @@ status[open, process, closed]</text>
       <rectangle name="Fig0.2.0"
         x="313"
         y="41"
-        width="64"
+        width="146"
         height="0"
         fill="0"
         fillcolor="white"
@@ -14578,7 +14574,7 @@ status[open, process, closed]</text>
     <path name="Fig1.2"
       description="org.tigris.gef.presentation.FigPoly"
       fill="1"
-      fillcolor="178 178 178"
+      fillcolor="white"
       stroke="1"
       strokecolor="black"
     >
@@ -14598,6 +14594,7 @@ status[open, process, closed]</text>
          fillcolor="white"
          stroke="0"
          strokecolor="black"
+         visibility="0"
     >
       <private>
       </private>
@@ -14636,10 +14633,6 @@ Timestampable
 Searchable[title]
 Slug[title]</text>
   </group>
-</pgml>
-<pgml description="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram|127-0-1-1-c57d005:12dd17f2aa9:-8000:0000000000000865"
-      name="Class Diagram"
->
 </pgml>
 <todo>
 <todolist>
