@@ -102,13 +102,13 @@ class AuthController extends Kebab_Controller_Action
 
                 // Check Acl Plugin is on and write acl and role
                 if (Zend_Registry::get('config')->plugins->kebabAcl) {
-                    $roles                       = $this->_getUserRoles($identity->id);
+                    $roles                       = Model_User::getUserRoles($identity->id);
                     $identity->roles             = $roles['roles'];
                     $identity->rolesWithAncestor = $roles['rolesWithAncestor'];
                     $identity->acl               = new Kebab_Acl();              
                 }
                 $auth->getStorage()->write($identity);
-
+                
                 //KBBTODO Set session time and check from getParams
                 if (!is_null($rememberMe)) {
                     Zend_Session::rememberMe(604800);
@@ -332,40 +332,5 @@ class AuthController extends Kebab_Controller_Action
     public function unauthorizedAction()
     {
         
-    }
-
-    /**
-     * _getUserRoles()
-     * 
-     * <p>This action return two information in one array.  First element 'roles' type is array. This array
-     * come from UserRole table. Second element 'rolesWithAncestor' of the array is get all roles include 
-     * with ancestor roles in system. </p>
-     *  
-     * @access private
-     * @param  type $userId
-     * @return array
-     */
-    private function _getUserRoles($userId)
-    {       
-        //KBBTODO remove this function to Model_Roles
-        $userId = $userId;
-        $query = Doctrine_Query::create()
-                 ->select('role.name')
-                 ->from('Model_Role role')
-                 ->leftJoin('role.UserRole userrole')
-                 ->where('userrole.user_id = ?', $userId);
-        $rolesResult = $query->execute();
-        foreach ($rolesResult as $role) {
-           $roles[] = $role->name;
-           $roleAncestors = Doctrine_Core::getTable('Model_Role')->find($role['id'])->getNode()->getAncestors();
-           if ($roleAncestors) {
-               $rolesWithAncestor[] = $role->name;
-               foreach ($roleAncestors as $roleAncestor) {
-                   $rolesWithAncestor[] = $roleAncestor->name;
-               }               
-           }
-        }
-        $rolesWithAncestor = array_unique(array_merge($roles, $rolesWithAncestor));
-        return array('roles' => $roles, 'rolesWithAncestor' => $rolesWithAncestor);
     }
 }
