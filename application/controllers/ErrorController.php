@@ -17,21 +17,51 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   KEBAB
- * @package    Core
+ * @package    Controller
+ * @subpackage Error 
+ * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
-//KBBTODO Add PHPDOC
+/**
+ * Kebab Application Error Controller
+ * 
+ * <p>If the request is ajax, response's type is json or html/text </p>
+ *
+ * @category   Kebab (kebab-reloaded)
+ * @package    Controller
+ * @subpackage Error
+ * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
+ */
 class ErrorController extends Kebab_Controller_Action
 {
-    //KBBTODO Add PHPDOC
+    /**
+     * init
+     */
     public function init()
     {
         $this->_helper->layout->disableLayout();
+        
+        // If request is ajax or not
+        if ($this->_request->isXmlHttpRequest()) {
+           $this->xmlHttpRequestErrorAction();
+        } else {
+           $this->errorAction();
+        }
+        
     }
-    //KBBTODO Add PHPDOC
+    
+    /**
+     *
+     * @return type 
+     */
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -73,7 +103,63 @@ class ErrorController extends Kebab_Controller_Action
             $errors, Zend_Log::ERR
         );
     }
-    //KBBTODO Add PHPDOC
+    
+    /**
+     *
+     * @return json
+     */
+    public function xmlHttpRequestErrorAction()
+    {
+        if ($this->_request->isXmlHttpRequest()) {
+            
+            $responseData = array();
+            $errors = $this->_getParam('error_handler');
+            
+            if (!$errors) {
+                $responseData['message'] = 'You have reached the error page';
+                return;
+            }
+            
+            switch ($errors->type) {
+                case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
+                case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+                case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+
+                    // 404 error -- controller or action not found
+                    $this->getResponse()->setHttpResponseCode(404);
+                    $responseData['message'] = 'Page not found';
+                    break;
+                default:
+                    // application error
+                    $this->getResponse()->setHttpResponseCode(500);
+                    $responseData['message'] = 'Application error';
+                    break;
+            }
+            
+            // Log exception, if logger available
+            if ($log = $this->getLog()) {
+                $log->crit($this->view->message, $errors->exception);
+            }
+            
+            // conditionally display exceptions
+            if ($this->getInvokeArg('displayExceptions') == true) {
+                $responseData['exception']['message']        = $errors->exception->getMessage();
+                $responseData['exception']['traceAsSttring'] = $errors->exception->getTraceAsString();
+                $responseData['request']['params']         = $errors->request->getParams();
+            }
+            
+            $this->_helper->response()
+                 ->addData($responseData)
+                 ->getResponse();
+        } else {
+            throw new Zend_Exception('Request isn\'t ajax');
+        }
+    }
+    
+    /**
+     *
+     * @return Zend_Log
+     */
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');
