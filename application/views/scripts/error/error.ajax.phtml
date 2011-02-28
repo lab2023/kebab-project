@@ -1,0 +1,12 @@
+<?
+$responseData = array();
+$responseData['message'] = $this->message;
+
+if(isset($this->exception)) {
+    $responseData['exception']['message'] = $this->exception->getMessage();
+    $responseData['exception']['traceAsString'] = $this->exception->getTraceAsString();
+    $responseData['request']['param'] = $this->request->getParams();
+}
+
+echo json_encode($responseData);
+?>
