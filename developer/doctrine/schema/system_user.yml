@@ -8,6 +8,7 @@ User:
     email:
       type: string(255)
       unique: true
+      notnull: true
     language:
       type: enum
       length: 2
@@ -21,6 +22,7 @@ User:
       type: string(255)
     activationKey:
       type: string(255)
+      unique: true
     status:
       type: enum
       length: 7
