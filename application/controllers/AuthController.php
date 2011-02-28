@@ -39,7 +39,7 @@ class AuthController extends Kebab_Controller_Action
 {
 
     /**
-     * indexAction()
+     * indexAction
      *
      * <p>Login form</p>
      *
@@ -51,7 +51,7 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     * loginAction()
+     * loginAction
      *
      * <p>Check user name and password and authorize user</p>
      *
@@ -126,7 +126,7 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     * logoutAction()
+     * logoutAction
      *
      * <p>Logout, clear authorized user identity and redirect login page</p>
      *
@@ -143,7 +143,7 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     * forgotPassword()
+     * forgotPassword
      *
      * Check email, send reset password link mail
      *
@@ -203,7 +203,7 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     *  resetPassword()
+     *  resetPassword
      *
      *  <p>Check the activationKey from url, show the resetPassword view, reset the password</p>
      *
@@ -247,7 +247,7 @@ class AuthController extends Kebab_Controller_Action
     }
 
     /**
-     * resetPasswordExpired()
+     * resetPasswordExpired
      *
      * <p>If the activationKey is expired, show the view</p>
      *
@@ -323,7 +323,7 @@ class AuthController extends Kebab_Controller_Action
     }
     
     /**
-     * unauthorizedAction()
+     * unauthorizedAction
      *
      * <p>Login form</p>
      *
