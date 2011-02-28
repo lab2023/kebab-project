@@ -76,7 +76,7 @@ class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstra
     protected $_currentPage;
     
     /**
-     * 
+     *  Set start, limit, sort, dir, resultsPerPage andcurrentPage for Doctrine_Pager
      */
     public function init()
     {
@@ -88,65 +88,107 @@ class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstra
         $this->setCurrentPage();
     }
 
+    /**
+     * set start
+     */
     public function setStart()
     {
         $request = $this->getRequest();
         $this->_start = $request->getParam('start', $this->_start);            
     }
     
+    /**
+     * get start
+     * @return integer 
+     */
     public function getStart()
     {
         return $this->_start;
     }
     
+    /**
+     * set limit
+     */
     public function setLimit()
     {
         $request = $this->getRequest();
         $this->_limit = $request->getParam('limit', $this->_limit);            
     }
     
+    /**
+     * get limit
+     * @return integer 
+     */
     public function getLimit()
     {
         return $this->_limit;
     }
     
+    /**
+     * set sort
+     */
     public function setSort()
     {
         $request = $this->getRequest();
         $this->_sort = $request->getParam('sort', $this->_sort);
     }
     
+    /**
+     * get sort
+     * @return string
+     */
     public function getSort()
     {
         return $this->_sort;
     }
     
+    /**
+     * set dir
+     */
     public function setDir()
     {
         $request = $this->getRequest();
         $this->_dir = $request->getParam('dir', $this->_dir);            
     }
     
+    /**
+     * get dir
+     * @return string
+     */
     public function getDir() 
     {
         return $this->_dir;
     }
     
+    /**
+     * set resultsPerPage. This value is equal to limit
+     */
     public function setResultsPerPage()
     {
         $this->_resultsPerPage = $this->_limit;           
     }
     
+    /**
+     * get resultsPerPage
+     * @return integer
+     */
     public function getResultsPerPage()
     {
         return $this->_resultsPerPage;
     }
    
+    /**
+     * set currentPage
+     */
     public function setCurrentPage()
     {
         $this->_currentPage = ($this->_start === 0) ? 1 : ($this->_start / $this->_resultsPerPage);         
     }
     
+    /**
+     * get currentPage
+     * @return integer
+     */
     public function getCurrentPage()
     {
         return $this->_currentPage;
@@ -163,4 +205,3 @@ class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstra
     }
     
 }
-
