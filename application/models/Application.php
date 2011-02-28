@@ -59,7 +59,7 @@ class Model_Application extends Model_Entity_Application
             $returnData = array();
             foreach ($applications as $application) {
                 $app['identity'] = $application->identity;
-                $app['class'] = $application->class;
+                $app['className'] = $application->class;
                 $app['name'] = $application->name;
                 $app['type'] = $application->type;
                 $app['department'] = $application->department;

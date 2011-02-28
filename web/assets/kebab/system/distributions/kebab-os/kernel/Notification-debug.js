@@ -64,5 +64,30 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
                 });
             });
         }
-    }    
+    },
+    
+    dialog: function(title, message, type) {
+        
+        var icon = null;
+        
+        switch (type) {
+            case 'WARNING':
+                icon = Ext.MessageBox.WARNING
+                break;
+            case 'ERROR':
+                icon = Ext.MessageBox.ERROR
+                break;
+            default:
+                icon = Ext.MessageBox.INFO
+                break;
+        }
+        
+        Ext.Msg.show({
+            modal:true,
+            title: title,
+            msg: message,
+            icon: icon,
+            buttons: Ext.Msg.OK
+        });
+    }
 });
