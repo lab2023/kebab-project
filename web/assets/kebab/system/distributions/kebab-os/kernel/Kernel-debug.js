@@ -40,8 +40,6 @@ Kebab.OS.Kernel = function(config){
 };
 Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
-    getApplications : Ext.emptyFn,
-    
     init : function() {
         
         Ext.QuickTips.init();        
