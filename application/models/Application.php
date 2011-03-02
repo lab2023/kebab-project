@@ -39,41 +39,37 @@ class Model_Application extends Model_Entity_Application
     /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
      * 
+     * @param  array $rolesWithAncestor
      * @return array
      */
-    public static function getApplicationsByPermission()
+    public static function getApplicationsByPermission($rolesWithAncestor)
     {
-        if (Zend_Registry::get('config')->plugins->kebabAcl) {
-            $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
-            $query = Doctrine_Query::create()
-                    ->from('Model_Application a')
-                    ->leftJoin('a.StoryApplication sa')
-                    ->leftJoin('sa.Story s')
-                    ->leftJoin('s.Permission p')
-                    ->leftJoin('p.Role r')
-                    ->whereIn('r.name', $rolesWithAncestor)
-                    ->andWhere('a.status = ?', array('active'))
-                    ->andWhere('s.status = ?', array('active'));
-            $applications = $query->execute();
+        $query = Doctrine_Query::create()
+                ->from('Model_Application a')
+                ->leftJoin('a.StoryApplication sa')
+                ->leftJoin('sa.Story s')
+                ->leftJoin('s.Permission p')
+                ->leftJoin('p.Role r')
+                ->whereIn('r.name', $rolesWithAncestor)
+                ->andWhere('a.status = ?', array('active'))
+                ->andWhere('s.status = ?', array('active'));
+        $applications = $query->execute();
 
-            $returnData = array();
-            foreach ($applications as $application) {
-                $app['identity'] = $application->identity;
-                $app['class'] = $application->class;
-                $app['name'] = $application->name;
-                $app['type'] = $application->type;
-                $app['department'] = $application->department;
-                $app['version'] = $application->version;
-                $app['type'] = $application->type;
-                foreach ($application->StoryApplication as $story) {
-                    $app['permission'][] = $story->Story->slug;
-                }
-                $returnData[] = $app;
+        $returnData = array();
+        foreach ($applications as $application) {
+            $app['identity'] = $application->identity;
+            $app['class'] = $application->class;
+            $app['name'] = $application->name;
+            $app['type'] = $application->type;
+            $app['department'] = $application->department;
+            $app['version'] = $application->version;
+            $app['type'] = $application->type;
+            foreach ($application->StoryApplication as $story) {
+                $app['permission'][] = $story->Story->slug;
             }
-
-            return $returnData;
-        } else {
-            throw new Zend_Exception('ACL plugin is disable');
+            $returnData[] = $app;
         }
+
+        return $returnData;
     }
 }
