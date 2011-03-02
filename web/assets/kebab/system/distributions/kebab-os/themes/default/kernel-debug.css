@@ -75,7 +75,7 @@ html, body {
     border:1px outset #a7a5a6;
     padding:20px;
     width:400px;
-    height:200px;
+    height:250px;
     text-align:center;
 }
 h1.kebab-heading {
@@ -120,21 +120,23 @@ p.kebab-paragraph {
 .icon-kebab-os {
     background-image: url(images/icons/distro.png) !important;
 }
-.kebab-notification .x-box-mc {
+.kebab-notifications {
     font-size:14px;
     cursor:pointer;
-    
+    background:#fff;
+    padding: 10px;
 }
-.kebab-notification:hover {
+.kebab-notifications:hover {
     opacity:.85;
     -moz-opacity:.85;
     -webkit-opacity:.85;
     filter:alpha(opacity=85);
 }
-#kebab-notification-div {
+.kebab-notifications-body {
     position:absolute;
     right:35%;
     top:10px;
     width:300px;
-    z-index:20000;
+    z-index:8999;
+    padding:10px;
 }

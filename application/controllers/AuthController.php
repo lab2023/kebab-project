@@ -325,12 +325,23 @@ class AuthController extends Kebab_Controller_Action
     /**
      * unauthorizedAction
      *
-     * <p>Login form</p>
-     *
      * @return void
      */
     public function unauthorizedAction()
     {
-        
+        // If request is ajax or not
+        if ($this->_request->isXmlHttpRequest()) {
+            
+           $responseData = array(
+               'status' => 'unauthorized',
+               'title' => 'Anauthorized Access',
+               'message' => 'You are not authorized to access this area.'
+           );
+            
+           $this->_helper->response()
+                 ->addData($responseData)
+                 ->getResponse();
+           return;
+        }
     }
 }

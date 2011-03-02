@@ -29,16 +29,14 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
     message : function(title, message, keep){
         
         var messageBody = function(t, s){
-            return ['<div class="kebab-notification kebab-shadow-std">',
-            '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>',
-            '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>', t, '</h3>', s, '</div></div></div>',
-            '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>',
+            return ['<div class="kebab-notifications kebab-shadow-std kebab-rounded-corners">',
+            '<p><h3>', t, '</h3>', s, '</p>',
             '</div>'].join('');
         }
             
         if(!this.messageContainer){
             this.messageContainer = Ext.DomHelper.insertFirst('kebab-os-desktop', {
-                id:'kebab-notification-div'
+                cls:'kebab-notifications-body'
             }, true);
         }
 
@@ -52,7 +50,11 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
             message.slideIn('t', {easing: 'backOut', duration: .0}).pause(2).ghost("b", {
                 remove:true,
                 easing: 'easeIn',
-                duration: .15
+                duration: .15,
+                callback: function() {
+                    this.remove();
+                },
+                scope:this
             });
         } else {
             message.slideIn('t', {easing: 'backOut', duration: .0});
@@ -60,9 +62,44 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
                 message.ghost("b", {
                     remove: true,
                     easing: 'easeIn',
-                    duration: .15
+                    duration: .15,
+                    callback: function() {
+                        this.remove();
+                    },
+                    scope:this
                 });
             });
         }
-    }    
+    },
+    
+    dialog: function(title, message, type) {
+        
+        var icon = null;
+        
+        switch (type) {
+            case 'WARNING':
+                icon = Ext.MessageBox.WARNING
+                break;
+            case 'ERROR':
+                icon = Ext.MessageBox.ERROR
+                break;
+            default:
+                icon = Ext.MessageBox.INFO
+                break;
+        }
+        
+        Ext.Msg.show({
+            modal:true,
+            title: title,
+            msg: message,
+            icon: icon,
+            buttons: Ext.Msg.OK
+        });
+    },
+    
+    remove: function() {
+        // TODO remove after finish...
+        //this.messageContainer.remove();
+        //console.log(this.messageContainer.remove());
+    }
 });

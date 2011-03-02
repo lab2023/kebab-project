@@ -40,8 +40,6 @@ Kebab.OS.Kernel = function(config){
 };
 Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
-    getApplications : Ext.emptyFn,
-    
     init : function() {
         
         Ext.QuickTips.init();        
@@ -83,6 +81,21 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         }
     },
     
+    getApplications: function() {
+        
+        var i = 0,
+            applicationInstances = new Array();
+        
+        Ext.each(this.apps, function(application) {
+            applicationInstances[i++] = Ext.apply(
+                eval('new ' + application.className + '()'), 
+                application
+            );
+        });
+        
+        return applicationInstances;
+    },
+    
     initApplications : function(){
         
         var appSC = this.applications;
@@ -93,6 +106,20 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
             this.launcher.add(app.launcher);
             app.app = this;
         }
+    },
+    
+    getApplication : function(id){
+        
+        Kebab.OS.Logger.info('Kebab.OS.Kernel getApplication call by ' +id+ ' parameter...');
+        
+    	var app = this.applications;
+    	
+        for(var i = 0, len = app.length; i < len; i++){
+    		if(app[i].id == id || app[i].appType == id){
+    			return app[i];
+			}
+        }
+        return null;
     },
     
     callApplication : function(id, cb, scope){
@@ -136,20 +163,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
     getTranslator: function() {
         return this.translator;
-    },
-
-    getApplication : function(id){
-        
-        Kebab.OS.Logger.info('Kebab.OS.Kernel getApplication call by ' +id+ ' parameter...');
-        
-    	var app = this.applications;
-    	
-        for(var i = 0, len = app.length; i < len; i++){
-    		if(app[i].id == id || app[i].appType == id){
-    			return app[i];
-			}
-        }
-        return null;
     },
 
     getDesktop : function(){
