@@ -40,13 +40,13 @@
 class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstract
 {
     /**
-     * Start value of list
+     * Offset of list
      * @var integer
      */
     protected $_start = 0;
     
     /**
-     * Offset of list
+     * Limit of list
      * @var integer
      */
     protected $_limit = 25;
@@ -181,8 +181,14 @@ class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstra
      * set currentPage
      */
     public function setCurrentPage()
-    {
-        $this->_currentPage = ($this->_start === 0) ? 1 : ($this->_start / $this->_resultsPerPage);         
+    {        
+        if ($this->_start < $this->_limit) {
+            $this->_currentPage = 1;
+        } elseif ($this->_start === $this->_limit) {
+            $this->_currentPage = 2;
+        } else {
+            $this->_currentPage = ceil($this->_start / $this->_resultsPerPage);
+        }
     }
     
     /**
