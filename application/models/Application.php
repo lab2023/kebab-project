@@ -39,13 +39,15 @@ class Model_Application extends Model_Entity_Application
     /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
      * 
-     * @param  array $rolesWithAncestor
+     * @param  array  $rolesWithAncestor
+     * @param  string $defaultLanguage
      * @return array
      */
-    public static function getApplicationsByPermission($rolesWithAncestor)
+    public static function getApplicationsByPermission($rolesWithAncestor, $defaultLanguage)
     {
         $query = Doctrine_Query::create()
                 ->from('Model_Application a')
+                ->leftJoin('a.Translation at')
                 ->leftJoin('a.StoryApplication sa')
                 ->leftJoin('sa.Story s')
                 ->leftJoin('s.Permission p')
@@ -60,6 +62,8 @@ class Model_Application extends Model_Entity_Application
             $app['identity'] = $application->identity;
             $app['class'] = $application->class;
             $app['name'] = $application->name;
+            $app['title'] = $application->Translation[$defaultLanguage]->title;
+            $app['description'] = $application->Translation[$defaultLanguage]->description;
             $app['type'] = $application->type;
             $app['department'] = $application->department;
             $app['version'] = $application->version;

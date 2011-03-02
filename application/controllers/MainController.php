@@ -54,12 +54,13 @@ class MainController extends Kebab_Controller_Action
                 $languages[] = $v; 
             }
             
+            // Assign paramtemers to view object
             $this->view->user           = $auth->getIdentity();
             $this->view->languages      = array_values($languages);
             
             if (Zend_Registry::get('config')->plugins->kebabAcl) { 
                 $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
-                $this->view->applications   = Model_Application::getApplicationsByPermission($rolesWithAncestor);
+                $this->view->applications  = Model_Application::getApplicationsByPermission($rolesWithAncestor, $defaultLanguage);
             } else {
                 throw new Zend_Exception('ACL plugin is disable');
             }
