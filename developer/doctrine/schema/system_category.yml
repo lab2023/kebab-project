@@ -10,7 +10,8 @@ Category:
     #relation from Media
     image_id:
       type: integer
-   
+      
+  
   relations:
     Image:
       class: Media 
@@ -18,7 +19,36 @@ Category:
       local: image_id
       foreign: id
       foreignType: one
-    
+    Unit:
+      class: Product 
+      foreignAlias: Unit
+      local: id
+      foreign: unit_id
+      foreignType: one
+    Products:
+      foreignAlias: Products
+      class: Product
+      refClass: ProductCategory
+   
+  actAs:    
+    Blameable:
+    Timestampable:
+    NestedSet:
+      hasManyRoots: true
+      rootColumnName: root_id
+    I18n:
+      fields: [title, description]
+      className: SystemCategoryTranslation
+      length: 2
+      actAs: 
+         Searchable: 
+           fields: [title, description] 
+           className: SystemCategorySearch         
+         Sluggable:
+           unique: true
+           fields: [title]
+           canUpdate: true
+      
   options:
     type: INNODB
     collate: utf8_bin
