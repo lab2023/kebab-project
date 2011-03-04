@@ -33,5 +33,14 @@
  * @version    1.5.0
  */
 return array(
-    'Hello World' => 'Merhaba Dünya tr'
+    'Hello World' => 'Merhaba Dünya tr',
+    
+    // REST CRUD
+    'Record was created.'                               => 'Kayıt eklendi.',
+    'Record couldn\'t be created.'                      => 'Kayıt eklenemedi.',
+    'Record was updated.'                               => 'Kayıt güncellendi.',
+    'Record couldn\'t be updated.'                      => 'Kayıt güncellenemedi',
+    'Record was deleted.'                               => 'Kayıt silindi.',
+    'First you have to delete related datas.'           => 'İlk önce ilişkili verileri silmelisiniz.',
+    'Record couldn\'t be deleted.'                      => 'Kayıt silinemedi.'
 );
