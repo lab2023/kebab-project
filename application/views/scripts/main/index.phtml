@@ -3,7 +3,6 @@ $this->headTitle('Desktop');
 
 $this->headLink()
      ->appendStylesheet($this->asset('desktop.css')->distribution()->theme()->get());
-
 $this->headScript()
      ->appendFile($this->asset('kernel/Kernel.js')->distribution()->get())
      ->appendFile($this->asset('kernel/Application.js')->distribution()->get())
@@ -40,7 +39,7 @@ $this->headScript()
     var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";
     var BASE_URL = "<?php echo BASE_URL; ?>";
     
-    Ext.namespace('KebabOS', 'KebabOS.kernel', 'KebabOS.applications');
+    Ext.namespace('KebabOS', 'KebabOS.kernel');
     KebabOS.kernel = new Kebab.OS.Kernel({
 
         distribution    : "<?php echo $this->variable('kebabOs')->distributions->current; ?>",
@@ -52,7 +51,7 @@ $this->headScript()
         languages       : <?php echo json_encode($this->languages); ?>,
         
         user            : <?php echo json_encode($this->user); ?>,
-
+        
         apps            : <?php echo json_encode($this->applications); ?>
     });
     </script>
@@ -71,8 +70,9 @@ $this->headScript()
     <div id="kebab-os-desktop"> 
         <dl id="kebab-os-desktop-shortcuts">
             <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
-            <dt ext:qtip="<?php echo $application['name']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
-                <span><?php echo $application['name']; ?></span>
+            <dt ext:qtip="<?php echo $application['launchers']['tooltip']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
+                <div></div>
+                <span><?php echo $application['launchers']['text']; ?></span>
             </dt>
             <?php endforeach; ?>      
         </dl>

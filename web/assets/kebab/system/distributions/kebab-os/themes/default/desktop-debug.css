@@ -284,25 +284,41 @@ td.ux-taskButtons-edge {
     margin: 10px;
 }
 #kebab-os-desktop-shortcuts dt {
+    background: transparent url(images/desktop/shortucts/shortcut-bg-t20.png);
     display: block;
     float: left;
-    margin: 20px;
+    margin: 10px;
     text-align: center;
-    width: 64px;
-    cursor:pointer;
+    width: 80px;
+    cursor: pointer;
     zoom: 1;
+    height: 95px;
+    padding: 10px;
+    border:1px solid #000;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+#kebab-os-desktop-shortcuts dt:hover {
+    border:1px solid gray;
+    background: transparent url(images/desktop/shortucts/shortcut-bg-t30.png);
+}
+#kebab-os-desktop-shortcuts dt div {
+    width: 64px;
+    height:64px;
+    margin:auto;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
 }
 #kebab-os-desktop-shortcuts dt span {
-    width:100%;
-    margin-top:84px;
-    display:block;
-    color:#eee;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    display:block;
-    text-decoration:none;
+    width: 100%;
+    margin-top: 2px;
+    color: #EEE;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    text-decoration: none;
 }
 #kebab-os-desktop-shortcuts dt:hover span {
     color:#fff;

@@ -4,7 +4,7 @@
 .aboutMe-application-gui-icon {
     background-image: url(images/gui.png);
 }
-#aboutMe-application-shortcut {
+#aboutMe-application-shortcut div {
     background-image: url(images/shortcut.png);
 }
 
