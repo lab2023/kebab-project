@@ -60,14 +60,16 @@ class Model_Application extends Model_Entity_Application
         $returnData = array();
         foreach ($applications as $application) {
             $app['identity'] = $application->identity;
-            $app['className'] = $application->class;
+            $app['className'] = $application->className;
             $app['name'] = $application->name;
-            $app['title'] = $application->Translation[$defaultLanguage]->title;
-            $app['description'] = $application->Translation[$defaultLanguage]->description;
             $app['type'] = $application->type;
             $app['department'] = $application->department;
             $app['version'] = $application->version;
             $app['type'] = $application->type;
+            $app['launchers'] = array(
+                'text' => $application->Translation[$defaultLanguage]->title,
+                'tooltip' => $application->Translation[$defaultLanguage]->description
+            );
             foreach ($application->StoryApplication as $story) {
                 $app['permission'][] = $story->Story->slug;
             }

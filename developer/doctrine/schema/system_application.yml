@@ -4,7 +4,7 @@ Application:
     identity: 
       type: string(255)
       unique: true    
-    class:
+    className:
       type: string(255)
     name:
         type: string(255)
