@@ -37,7 +37,7 @@
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstract
+class Kebab_Controller_Helper_Request extends Zend_Controller_Action_Helper_Abstract
 {
     /**
      * Offset of list
@@ -76,6 +76,12 @@ class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstra
     protected $_currentPage;
     
     /**
+     * 
+     * @var string
+     */
+    protected $_query = null;
+    
+    /**
      *  Set start, limit, sort, dir, resultsPerPage andcurrentPage for Doctrine_Pager
      */
     public function init()
@@ -84,8 +90,27 @@ class Kebab_Controller_Helper_Pager extends Zend_Controller_Action_Helper_Abstra
         $this->setLimit();
         $this->setSort();
         $this->setDir();
+        $this->setQuery();
         $this->setResultsPerPage();
         $this->setCurrentPage();
+    }
+    
+    /**
+     * set query if unset, set this null
+     */
+    public function setQuery()
+    {
+        $request = $this->getRequest();
+        $request = $request->getParam('query', $this->_query);
+    }
+    
+    /**
+     * get query
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->_query;
     }
 
     /**
