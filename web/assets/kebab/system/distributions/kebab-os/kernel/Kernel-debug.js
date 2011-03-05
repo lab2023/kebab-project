@@ -137,6 +137,10 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         return this.baseUrl;
     },
     
+    generateUrl: function(url) {
+        return this.getBaseUrl() + '/' + url;
+    },
+    
     getUser : function(){
         return this.user;
     },

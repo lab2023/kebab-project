@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|web)
+RewriteRule ^(.*)$ index.php [L,NC]
+
+php_flag display_errors off
