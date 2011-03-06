@@ -1,7 +1,7 @@
 Media:
   tableName: system_media
   columns:
-    name:
+    title:
       type: string
       notnull: true
     description:
