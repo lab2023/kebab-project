@@ -1,5 +1,5 @@
 /**
- * RESTfulDataStore extending Ext.data.Store 
+ * RESTfulDataStore extend by Ext.data.Store 
  * 
  * @category    Kebab (kebab-reloaded)
  * @package     Kebab
@@ -8,8 +8,8 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-Ext.namespace('Kebab.library');
-Kebab.library.RESTfulDataStore = Ext.extend(Ext.data.Store, {
+Ext.namespace('Kebab.library.ext');
+Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     
     // Store ID
     id: 'your_entity',
@@ -18,7 +18,7 @@ Kebab.library.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     restful: true,    
     
     // Autoload enable
-    autoLoad: {params:{start:0, limit:25}},
+    autoLoad: false,
     
     // Remote sort enable
     remoteSort: true,
@@ -77,7 +77,7 @@ Kebab.library.RESTfulDataStore = Ext.extend(Ext.data.Store, {
         Ext.applyIf(this, config);
         
         // Call Superclass initComponent() method
-        Kebab.library.RESTfulDataStore.superclass.constructor.apply(this, arguments);
+        Kebab.library.ext.RESTfulDataStore.superclass.constructor.apply(this, arguments);
     },
     
     buildReaderFields: function() {        
