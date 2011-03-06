@@ -182,8 +182,8 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             iconCls : 'icon-status-online',
             template: stdButtonTemplate,
             text: this.kernel.getLanguages('current').text,
-            iconCls: this.kernel.getLanguages('current').iconCls,
-            menu: this.kernel.getLanguages()
+            iconCls: this.kernel.getLanguages('current').iconCls
+            //menu: this.kernel.getLanguages()
         });
         
         this.indicatorsToolbar.add({
@@ -193,14 +193,16 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                text: 'Logout...',
                iconCls: 'icon-door-out',
                handler: function() {
-                    window.location.href= '/auth/logout';
-               }
+                    window.location.href= this.kernel.generateUrl('auth/logout');
+               },
+               scope:this
             }, {
                text: 'Restart...',
                iconCls: 'icon-arrow-refresh',
                handler: function() {
-                    window.location.href= '/main';
-               }
+                    window.location.href= this.kernel.generateUrl('main');
+               },
+               scope:this
             }]
         });
         this.indicatorsToolbar.doLayout();

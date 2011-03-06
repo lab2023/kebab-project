@@ -40,4 +40,10 @@ abstract class Kebab_Rest_Controller extends Zend_Rest_Controller
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
     }
+    
+    public function indexAction(){}  
+    public function getAction(){}
+    public function postAction(){}
+    public function putAction(){}
+    public function deleteAction(){}
 }
