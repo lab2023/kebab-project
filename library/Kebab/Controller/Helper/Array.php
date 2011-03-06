@@ -39,7 +39,7 @@
  * @category   Kebab (kebab-reloaded)
  * @package    Controller
  * @subpackage Helper
- * @author     Onur Özgür ÖZKAN
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @since      1.5.x (kebab-reloaded)
