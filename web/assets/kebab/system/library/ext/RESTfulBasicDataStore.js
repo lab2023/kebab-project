@@ -9,7 +9,7 @@
  * @license     http://www.kebab-project.com/licensing
  */
 Ext.namespace('Kebab.library.ext');
-Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
+Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
     
     // Store ID
     id: 'your_entity',
@@ -20,17 +20,8 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     // Autoload enable
     autoLoad: false,
     
-    // Autodestroy enable
-    autoDestroy: true,
-    
     // Remote sort enable
     remoteSort: true,
-    
-    // Autosave default disable
-    autoSave: false,
-    
-    // Batch editing default enable
-    batch: false,
     
     // System REST API
     restAPI: 'api/url',
@@ -63,24 +54,17 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
             this.buildReaderFields()
         );
         
-        // JSON Writer
-        this.writer = new Ext.data.JsonWriter({
-            encode: true,
-            writeAllFields: false
-        });
-        
         // Base Config
         var config = {
             proxy: this.proxy,
-            reader: this.reader,
-            writer: this.writer
+            reader: this.reader
         }
         
         // Merge initialConfig and base config
         Ext.apply(this, config);
         
         // Call Superclass initComponent() method
-        Kebab.library.ext.RESTfulDataStore.superclass.constructor.apply(this, arguments);
+        Kebab.library.ext.RESTfulBasicDataStore.superclass.constructor.apply(this, arguments);
     },
     
     buildReaderFields: function() {        
@@ -88,11 +72,6 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     },
     
     listeners : {
-        write : function(){
-            var notification = new Kebab.OS.Notification();
-            notification.message('Write title', 'Your message here');
-            this.reload();
-        },
         exception : function(){
             var notification = new Kebab.OS.Notification();
             notification.message('Exception title', 'Your message here');
