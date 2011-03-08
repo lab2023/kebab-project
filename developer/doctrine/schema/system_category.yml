@@ -19,16 +19,6 @@ Category:
       local: image_id
       foreign: id
       foreignType: one
-    Unit:
-      class: Product 
-      foreignAlias: Unit
-      local: id
-      foreign: unit_id
-      foreignType: one
-    Products:
-      foreignAlias: Products
-      class: Product
-      refClass: ProductCategory
    
   actAs:    
     Blameable:

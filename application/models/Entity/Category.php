@@ -45,5 +45,43 @@ class Model_Entity_Category extends Doctrine_Record
         $this->hasOne('Model_Entity_Media as Image', array(
              'local' => 'image_id',
              'foreign' => 'id'));
+
+        $blameable0 = new Doctrine_Template_Blameable();
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $nestedset0 = new Doctrine_Template_NestedSet(array(
+             'hasManyRoots' => true,
+             'rootColumnName' => 'root_id',
+             ));
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'title',
+              1 => 'description',
+             ),
+             'className' => 'SystemCategoryTranslation',
+             'length' => 2,
+             ));
+        $searchable1 = new Doctrine_Template_Searchable(array(
+             'fields' => 
+             array(
+              0 => 'title',
+              1 => 'description',
+             ),
+             'className' => 'SystemCategorySearch',
+             ));
+        $i18n0->addChild($searchable1);
+        $sluggable1 = new Doctrine_Template_Sluggable(array(
+             'unique' => true,
+             'fields' => 
+             array(
+              0 => 'title',
+             ),
+             'canUpdate' => true,
+             ));
+        $i18n0->addChild($sluggable1);
+        $this->actAs($blameable0);
+        $this->actAs($timestampable0);
+        $this->actAs($nestedset0);
+        $this->actAs($i18n0);
     }
 }
