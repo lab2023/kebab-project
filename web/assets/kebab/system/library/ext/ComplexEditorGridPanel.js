@@ -227,11 +227,8 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
      * build BottomToolbar
      */
     buildBbar : function() {
-        return new Ext.PagingToolbar({
-            pageSize: 25,
-            store: this.store,
-            displayInfo: true,
-            plugins: new Ext.ux.SlidingPager()
+        return new Kebab.library.ext.ExtendedPagingToolbar({
+            store: this.store
         });
     },
     
