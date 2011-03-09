@@ -11,9 +11,6 @@
 Ext.namespace('Kebab.library.ext');
 Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
     
-    // Store ID
-    id: 'your_entity',
-    
     // RESTful enable
     restful: true,    
     
