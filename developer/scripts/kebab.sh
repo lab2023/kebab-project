@@ -58,9 +58,11 @@ fi
 tar -zxf $TEMPLATESDIR/$LAYOUT_TEMPLATE.tar.gz
 
 # Changing Application Name in all files
-for file in `ls "$LAYOUT_TEMPLATE"/*/*.*` ; do
-sed -e 's/{APP_NAME}/'"$APPLICATION_NAME"'/g' "$file" > tmp_file
-mv tmp_file "$file"
+for file in `find "$LAYOUT_TEMPLATE"/*` ; do
+	if [ ! -d $file ] ; then
+		sed -e 's/__APP_NAME__/'"$APPLICATION_NAME"'/g' "$file" > tmp_file
+		mv tmp_file "$file"
+	fi
 done
 
 
@@ -75,6 +77,3 @@ else
 	echo "You may manually complete the last step. "
 	echo "Last step : Rename directory with your application name."
 fi
-
-
-
