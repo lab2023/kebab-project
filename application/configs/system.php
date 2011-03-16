@@ -70,7 +70,8 @@ $cfgs = array(
     'database'      => 'database.ini',      // Application DB settings
     'routes'        => 'routes.ini',        // Application routing settings
     'plugins'       => 'plugins.ini',       // Application plugins settings
-    'languages'     => 'languages.ini'      // Languages settings
+    'languages'     => 'languages.ini',     // Languages settings
+    'project'       => 'project.ini'        // Custom project settings
 );
 
 /*
