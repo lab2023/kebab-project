@@ -1,3 +1,4 @@
+Options +FollowSymlinks
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond $1 !^(index\.php|assets|uploads|favicon\.ico|robots\.txt)
