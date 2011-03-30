@@ -69,8 +69,21 @@ class Kebab_Controller_Helper_Array extends Zend_Controller_Action_Helper_Abstra
     }
     
     /**
-     * Convert record array to collection array
+     * First check the array is Record array or Collection array,
+     * If array is record array, convert record array to collection array
      * 
+     * <code>
+     * $a = array(
+     *      'name' => 'Onur',
+     *      'surname' => 'Ozkan'
+     * );
+     * 
+     * $retVal = convertRecordtoCollection($a);
+     * print_r($retVal);
+     * 
+     * //Output array(array('title'=>'onur', 'surname'=>'Ozkan'));
+     * </code>
+     *            
      * @param   array   $data
      * @throws  Kebab_Controller_Helper_Exception
      * @return  boolean 
