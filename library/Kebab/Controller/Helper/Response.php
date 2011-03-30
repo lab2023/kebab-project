@@ -57,7 +57,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
      * 
      * @param  boolean $success
      * @throws Kebab_Controller_Helper_Exception
-     * @return System_Controller_Helper_KebabResponse 
+     * @return System_Controller_Helper_Response 
      */
     public function setSuccess($success)
     {
@@ -78,7 +78,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
      * @param   Traversable   $data
      * @param   string        $name
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_KebabResponse 
+     * @return  System_Controller_Helper_Response 
      */
     public function addData($data, $name = 'data')
     {
@@ -100,7 +100,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
      * @param   integer   $data
      * @param   string    $name 
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System _Controller_Helper_KebabResponse
+     * @return  System _Controller_Helper_Response
      */
     public function addTotal($data, $name = 'total')
     {
@@ -108,6 +108,8 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             throw new Kebab_Controller_Helper_Exception('Only integers may be add to $response[\'total\']');
         }
         $this->_response[$name] = $data;
+        
+        return $this;
     }
 
     /**
@@ -118,7 +120,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
      * @param   Traversable  $errors
      * @param   string       $name
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_KebabResponse 
+     * @return  System_Controller_Helper_KResponse 
      */
     public function setErrors($errors, $name = 'errors')
     {
