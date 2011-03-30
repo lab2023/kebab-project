@@ -10,7 +10,9 @@
  */
 Ext.namespace('Kebab.library.ext');
 Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, {
-    
+
+    emptyRecord: null,
+
     initComponent : function() {
         
         // Base Config
@@ -22,10 +24,9 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             trackMouseOver:true,
             columnLines: true,
             clicksToEdit: true,
-            autoExpandColumn: 'title',
             viewConfig: {
                 emptyText: 'Record not found...',
-                forceFit: true
+                forceFit: false
             }
         }
         
@@ -90,7 +91,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
         return [
             this.selectionModel,
             new Ext.grid.RowNumberer({header:'Series', width:40}),
-            {header: "Identity", dataIndex: 'id', width:30},
+            {header: "Identity", dataIndex: 'id', width:30}
         ];  
     },
 
@@ -98,10 +99,10 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
      * build TopToolbar
      */
     buildTbar : function() {
-        
         this.tbarButtons = [{
             xtype: 'buttongroup',
             title: 'İşlemler',
+            id: this.id + '-operationsButtonGroup',
             defaults: {
                 scale: 'small',
                 iconAlign: 'top',
@@ -135,6 +136,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             }]
         },{
             xtype: 'buttongroup',
+            id: this.id + '-searchButtonGroup',
             title: 'Arama & Filtreleme',
             defaults: {
                 iconAlign: 'top',
@@ -145,20 +147,20 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             },
             items: [{
                 xtype: 'panel',
-                padding:2,
-                items: [{
-                    xtype: 'textfield',
-                    emptyText: 'Anahtar kelime...',
-                    width:100
-                }],
-                width:102
-            },{
-                text: 'Ara',
-                iconCls: 'icon-folder-explore'
-            }]
+                bodyStyle:'height:37px; background:transparent !important;',
+                items: [new Ext.ux.form.SearchField({
+                    store: this.store,
+                    emptyText: 'Anahtar kelime yazınız: ',
+                    width:180
+                })],
+                scope:this,
+                width:180
+            }],
+            scope:this
         },{
             xtype: 'buttongroup',
             title: 'Dışarı Aktar',
+            id: this.id + '-exportButtonGroup',
             defaults: {
                 scale: 'medium',
                 iconAlign: 'top',
@@ -175,6 +177,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
         },{
             xtype: 'buttongroup',
             title: 'Seçenekler',
+            id: this.id + '-optionsButtonGroup',
             defaults: {
                 iconAlign: 'top',
                 scale: 'small',
@@ -193,7 +196,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                 toggleHandler: function(btn, pressed) {
                     this.store.autoSave = pressed;                
                 }
-            }, {
+            },{
                 text: 'Toplu işlem',
                 iconCls: 'icon-database-table',
                 pressed: false,
@@ -202,6 +205,25 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                        + 'hepsini bir seferde sunucuya göndermenizi sağlar.',
                 toggleHandler: function(btn, pressed) {
                     this.store.batch = pressed;
+                }
+            }]
+        },{
+            xtype: 'buttongroup',
+            title: 'Görünüm',
+            id: this.id + '-viewButtonGroup',
+            defaults: {
+                iconAlign: 'top',
+                scale: 'small',
+                width:60,                
+                scope: this
+            },
+            items: [{
+                text: 'Oto. sığdır',
+                iconCls: 'icon-arrow-out',
+                tooltip: 'Bu seçenek listenin kolonlarını, pencere boyutuna '
+                       + ' otomatik olarka sığdırır.',
+                handler: function() {
+                    this.getView().fitColumns();
                 }
             }]
         }];
@@ -236,24 +258,26 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
      * onSave action
      */
     onSave : function(btn, ev) {
-        
-        // Confirmation
-        Ext.Msg.show({
-           icon: Ext.MessageBox.QUESTION,
-           title: 'Değişiklikleri onaylıyor musunuz ?',
-           msg: 'Yapmış olduğunuz değişiklikler sunucuya gönderilecektir.'
-              + '<br/>Lütfen bu işlemi onaylayınız.',
-           buttons: Ext.Msg.YESNO,
-           fn: commitChanges,
-           scope:this
-        });
 
-        // Check message box status and commit store changes to server.
-        function commitChanges(btn) {
-            if(btn == 'yes') {
-                this.store.save();
+        //if (this.store.getModifiedRecords().length > 0) {
+            // Confirmation
+            Ext.Msg.show({
+               icon: Ext.MessageBox.QUESTION,
+               title: 'Değişiklikleri onaylıyor musunuz ?',
+               msg: 'Yapmış olduğunuz değişiklikler sunucuya gönderilecektir.'
+                  + '<br/>Lütfen bu işlemi onaylayınız.',
+               buttons: Ext.Msg.YESNO,
+               fn: commitChanges,
+               scope:this
+            });
+
+            // Check message box status and commit store changes to server.
+            function commitChanges(btn) {
+                if(btn == 'yes') {
+                    this.store.save();
+                }
             }
-        }
+        //}
     },
 
     /**
@@ -289,5 +313,13 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
      */
     onRefresh : function() {                
          this.store.reload();
+    },
+
+    onDisableButtonGroup: function(btnGrpId) {
+        var btnGrp = Ext.getCmp(this.id + '-' + btnGrpId + 'ButtonGroup');
+        Ext.each(btnGrp, function(button) {
+           button.hide();
+           button.disable();
+        });
     }
 });

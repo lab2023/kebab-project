@@ -87,16 +87,11 @@ p.kebab-paragraph {
     padding:2px 0;
 }
 .kebab-opacity {
-    opacity:.85;
-    -moz-opacity:.85;
-    -webkit-opacity:.85;
-    filter:alpha(opacity=85);
+    background:transparent url('images/kernel/container-bg-85.png')  !important;
 }
 .kebab-opacity:hover {
-    opacity:1;
-    -moz-opacity:1;
-    -webkit-opacity:1;
-    filter:alpha(opacity=100);
+    padding:40px;
+    background:#fff !important;
 }
 .kebab-rounded-corners {
     -moz-border-radius: 10px;
@@ -139,4 +134,26 @@ p.kebab-paragraph {
     width:300px;
     z-index:8999;
     padding:10px;
+}
+#project-info {
+    overflow:hidden;
+    background: #111;
+    position:fixed;
+    right:20px;
+    width:120px;
+    height:18px;
+    bottom:20px;
+    padding:5px;
+    cursor:pointer;
+    text-align:center;
+}
+#project-info p, #project-info p strong {
+    color:#fff;
+    font-size:11px;
+    font-style:italic;
+    padding-bottom: 5px;
+    padding-top: 1px;
+}
+#project-info p strong {
+    font-weight:bold;
 }

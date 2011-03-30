@@ -39,3 +39,22 @@ Ext.override(Ext.Window, {
         this.proxy.shift(b);
     }
 });
+
+/**
+ * Tree Node UI setIcon
+ */
+Ext.override(Ext.tree.TreeNodeUI, {
+    setIconCls : function(iconCls) {
+        if(this.iconNode){
+            Ext.fly(this.iconNode).replaceClass(this.node.attributes.iconCls, iconCls);
+        }
+        this.node.attributes.iconCls = iconCls;
+    },
+    setIcon : function(icon) {
+        if(this.iconNode){
+            this.iconNode.src = icon || this.emptyIcon;
+            Ext.fly(this.iconNode)[icon ? 'addClass' : 'removeClass']('x-tree-node-inline-icon');
+        }
+        this.node.attributes.icon = icon;
+    }
+});

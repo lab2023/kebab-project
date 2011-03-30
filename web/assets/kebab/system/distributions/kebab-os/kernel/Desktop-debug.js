@@ -77,10 +77,14 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
     initEvents : function(){
 		Ext.EventManager.onWindowResize(this.layout, this);
         
-        this.kebabOsDesktop.on('contextmenu',
-        function(e) {
-            e.stopEvent();
-            this.contextMenu.showAt(e.getXY());
+        this.kebabOsDesktop.on('contextmenu', function(e) {            
+            if(e.target.id === this.kebabOsDesktop.id){
+                e.stopEvent();
+                if(!this.contextMenu.el){
+                   this.contextMenu.render();
+                }
+                this.contextMenu.showAt(e.getXY());
+            }
         },this);
         
         if (this.kebabOsDesktopShortcuts) {
@@ -122,7 +126,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 maximizable: true,
                 collapsible: true,
                 constrainHeader:true,
-                shim:false,                
+                shim:false,       
                 layout:'fit',
                 animShowCfg: {
                     duration: .0,

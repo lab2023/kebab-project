@@ -17,6 +17,9 @@
 
 Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
     
+    SUCCESS: "Transaction successful",
+    FAIL: "Transaction failed",
+    
     messageContainer: null,
     
     constructor: function(config) { 
@@ -33,12 +36,10 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
             '<p><h3>', t, '</h3>', s, '</p>',
             '</div>'].join('');
         }
-            
-        if(!this.messageContainer){
-            this.messageContainer = Ext.DomHelper.insertFirst('kebab-os-desktop', {
-                cls:'kebab-notifications-body'
-            }, true);
-        }
+
+        this.messageContainer = Ext.DomHelper.insertFirst('kebab-os-desktop', {
+            cls:'kebab-notifications-body'
+        }, true);
 
         this.messageContainer.alignTo('kebab-os-desktop', 'tr-tr');
         
@@ -53,6 +54,7 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
                 duration: .15,
                 callback: function() {
                     this.remove();
+                    this.messageContainer.remove();
                 },
                 scope:this
             });
@@ -65,6 +67,7 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
                     duration: .15,
                     callback: function() {
                         this.remove();
+                        this.messageContainer.remove();
                     },
                     scope:this
                 });

@@ -19,7 +19,7 @@ Kebab.library.ext.ExtendedPagingToolbar = Ext.extend(Ext.PagingToolbar, {
             width: 50,
             store: new Ext.data.ArrayStore({
                 fields: ['id'],
-                data  : [['5'], ['15'],['25'],['50'],['100']]
+                data  : [['5'], ['15'],['25'],['50'],['150']]
             }),
             mode : 'local',
             value: '25',

@@ -11,7 +11,7 @@
 Ext.namespace('Kebab.library.ext');
 Kebab.library.ext.AutocompleteComboBox = Ext.extend(Ext.form.ComboBox, {
 
-    initComponent: function(){
+    constructor: function(){
 
         // Base Config
         var config = {
@@ -35,6 +35,6 @@ Kebab.library.ext.AutocompleteComboBox = Ext.extend(Ext.form.ComboBox, {
         // Merge initialConfig and baseConfig
         Ext.apply(this, config);
 
-        Kebab.library.ext.AutocompleteComboBox.superclass.initComponent.apply(this, arguments);
+        Kebab.library.ext.AutocompleteComboBox.superclass.constructor.apply(this, arguments);
     }
 });
