@@ -38,21 +38,38 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
 {
 
     private   $_request;
+    protected $_sort         = 'id';
+    protected $_dir          = 'DESC';
     protected $_mapping      = array();
-    protected $_sortKey      = 'sort';
-    protected $_sortValue    = 'id';
-    protected $_dirKey       = 'dir';
-    protected $_dirValue     = 'DESC';
-    protected $_orderString;
+    protected $_sortString;
 
     public function init()
     {
-        $this->setRequest($this->getRequest());
-        $this->setSortValue($this->_request->getParam($this->_sortKey, $this->_sortValue));
-        $this->setDirValue($this->_request->getParam($this->_dirKey, $this->_dirValue));
-        $this->setOrderString();
+        $this->_request = $this->getRequest();
+        $this->setSort($this->_request->getParam('sort', $this->_sort));
+        $this->setDir($this->_request->getParam('dir', $this->_dir));
     }
     
+    public function getSortString()     
+    {
+        return $this->_sortString;
+    }
+
+    public function setSortString($sortString = false)
+    {
+        if ($sortString !== false && is_string($sortString)) {
+            $this->_sortString = $sortString;
+        }
+        
+        if (array_key_exists($this->getSort(), $this->_mapping)){
+            $this->_sortString = $this->_mapping[$this->getSort()] . ' ' . $this->getDir();
+        } else {
+            throw new Kebab_Controller_Helper_Exception('Sort value isn\'t at mapping');
+        }
+        
+        return $this;
+    }
+
     public function getMapping()     
     {
         return $this->_mapping;
@@ -63,59 +80,25 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
         $this->_mapping = $_mapping;
     }
 
-        
-    public function setOrderString()
-    {
-        if (array_key_exists($this->_sortValue, $this->_mapping)) {
-            $this->_orderString = $this->_mapping[$this->_orderString] . ' ' . $this->_dirValue; 
-        } else {
-            return false;
-        }
-    }
-    
-    public function getOrderString()
-    {
-        return $this->_orderString;
-    }
-    
-    public function getSortValue()     
+            
+    public function getSort()     
     {
         return $this->_sortValue;
     }
 
-    public function setSortValue($_sortValue)
+    public function setSort($_sortValue)
     {
         $this->_sortValue = $_sortValue;
     }
 
-    public function getSortKey()
-    {
-        return $this->_sortKey;
-    }
-
-    public function setSortKey($_sortKey)
-    {
-        $this->_sortKey = $_sortKey;
-    }
-
-    public function getDirValue()
+    public function getDir()
     {
         return $this->_dirValue;
     }
 
-    public function setDirValue($_dirValue)
+    public function setDir($_dirValue)
     {
         $this->_dirValue = $_dirValue;
-    }
-
-    public function getDirKey()
-    {
-        return $this->_dirKey;
-    }
-
-    public function setDirKey($_dirKey)
-    {
-        $this->_dirKey = $_dirKey;
     }
     
     /**
@@ -123,22 +106,17 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
      * 
      * @return  System_Controller_Helper_Pager
      */
-    public function direct($mapping = false)
+    public function direct($mapping)
     {
+        // Chack that mapping type is array
+        if (!is_array($mapping)) {
+            throw new Kebab_Controller_Helper_Exception('Mapping type should be array.');
+        }
         
-        if ($mapping !== false && is_array($mapping)) {            
-            $this->setMapping($mapping);
-            $this->setOrderString();
-            return $this->getOrderString();
-        } 
-        
-        return false;        
+        $this->setMapping($mapping);
+        $this->setSortString();
+        return $this->getSortString();        
     }    
-    
-    private function setRequest($_request)
-    {
-        $this->_request = $_request;
-    }
 }
 
 

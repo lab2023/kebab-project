@@ -168,14 +168,10 @@ class AuthController extends Kebab_Controller_Action
                     $user->activationKey = $activationKey;
                     $user->save();
 
-                    //KBBTODO move these settings to config file
-                    $smtpServer = 'smtp.gmail.com';
-                    $config = array(
-                        'ssl' => 'tls',
-                        'auth' => 'login',
-                        'username' => 'email@kebab-project.com',
-                        'password' => 'password'
-                    );
+                    //KBBTODO move these settings to config file                    
+                    $configParam = $params = Zend_Registry::get('config')->kebab->mail;
+                    $smtpServer = $configParam->smtpServer;
+                    $config = $configParam->config->toArray();
 
                     // Mail phtml
                     $view = new Zend_View;

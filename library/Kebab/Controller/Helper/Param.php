@@ -37,140 +37,148 @@ if (!defined('BASE_PATH'))
  * @version    1.5.0
  */
 class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstract
-{ 
-    /** 
-     * @var array Parameters detected in raw content body 
-     */ 
-    protected $_bodyParams = array(); 
+{
 
-    /** 
+    /**
+     * @var array Parameters detected in raw content body 
+     */
+    protected $_bodyParams = array();
+    protected $_decodeJsonFieldTypeArray = true; //true is array, false is object
+
+    /**
      * Do detection of content type, and retrieve parameters from raw body if present 
      * 
      * @return void 
-     */ 
-    public function init() 
-    { 
-        $request     = $this->getRequest(); 
-        $rawBody     = $request->getRawBody(); 
-        
-        if (!$rawBody) { 
-            return; 
-        } 
-                
-        if ($request->isPut() || $request->isDelete()) { 
-            parse_str($rawBody, $params); 
-            $this->setBodyParams($params); 
-        }
-         
-    } 
+     */
 
-    /** 
+    public function init()
+    {
+        $request = $this->getRequest();
+        $rawBody = $request->getRawBody();
+
+        if (!$rawBody) {
+            return;
+        }
+
+        if ($request->isPut() || $request->isDelete()) {
+            parse_str($rawBody, $params);
+            $this->setBodyParams($params);
+        }
+    }
+
+    /**
      * Set body params 
      * 
      * @param  array $params 
      * @return Scrummer_Controller_Action 
-     */ 
-    public function setBodyParams(array $params) 
-    { 
-        $this->_bodyParams = $params; 
-        return $this; 
-    } 
+     */
+    public function setBodyParams(array $params)
+    {
+        $this->_bodyParams = $params;
+        return $this;
+    }
 
-    /** 
+    /**
      * Retrieve body parameters 
      * 
      * @return array 
-     */ 
-    public function getBodyParams() 
-    { 
-        return $this->_bodyParams; 
-    } 
+     */
+    public function getBodyParams()
+    {
+        return $this->_bodyParams;
+    }
 
-    /** 
+    /**
      * Get body parameter 
      * 
      * @param  string $name 
      * @return mixed 
-     */ 
-    public function getBodyParam($name) 
-    { 
-        if ($this->hasBodyParam($name)) { 
-            return $this->_bodyParams[$name]; 
-        } 
-        return null; 
-    } 
+     */
+    public function getBodyParam($name)
+    {
+        if ($this->hasBodyParam($name)) {
+            return $this->_bodyParams[$name];
+        }
+        return null;
+    }
 
-    /** 
+    /**
      * Is the given body parameter set? 
      * 
      * @param  string $name 
      * @return bool 
-     */ 
-    public function hasBodyParam($name) 
-    { 
-        if (isset($this->_bodyParams[$name])) { 
-            return true; 
-        } 
-        return false; 
-    } 
+     */
+    public function hasBodyParam($name)
+    {
+        if (isset($this->_bodyParams[$name])) {
+            return true;
+        }
+        return false;
+    }
 
-    /** 
+    /**
      * Do we have any body parameters? 
      * 
      * @return bool 
-     */ 
-    public function hasBodyParams() 
-    { 
-        if (!empty($this->_bodyParams)) { 
-            return true; 
-        } 
-        return false; 
-    } 
+     */
+    public function hasBodyParams()
+    {
+        if (!empty($this->_bodyParams)) {
+            return true;
+        }
+        return false;
+    }
 
-    /** 
+    /**
      * Get submit parameters 
      * 
      * @return array 
-     */ 
-    public function getSubmitParams($decodeJsonData) 
-    { 
+     */
+    public function getSubmitParams($decodeJsonFields)
+    {
         $retVal = array();
-        if ($this->hasBodyParams()) { 
-            $retVal = $this->getBodyParams(); 
-        } else {            
+        if ($this->hasBodyParams()) {
+            $retVal = $this->getBodyParams();
+        } else {
             $retVal = $this->getRequest()->getParams();
-        }  
-        
-        if ($decodeJsonData) {
-            return $this->encodeData($retVal);
         }
-        return retVal;        
-    } 
-    
+
+        if ($decodeJsonFields) {
+            return $this->decodeJsonFields($retVal);
+        }
+        return retVal;
+    }
+
     /**
      *
      * @param array | string
      */
-    public function encodeData($params)
+    public function decodeJsonFields($params)
     {
         if (!is_array($params)) {
             throw new Kebab_Controller_Helper_Exception('$params should be array type');
         }
-        
-        
-        if (array_key_exists('data', $params)) {
-            $params['data'] = json_decode($params['data'], true);
+
+        $retVal = array();
+        foreach ($params as $k => $v) {
+            if ($this->_decodeJsonFieldTypeArray) {
+                $retVal[$k] = is_null(json_decode($v)) ? $v : json_decode($v, true);
+            } else {
+                $retVal[$k] = is_null(json_decode($v)) ? $v : json_decode($v);
+            }
         }
-        
-        return $params;
+
+        return $retVal;
     }
 
     /**
      * direct() : Stragry Design Pattern
      * 
      */
-    public function direct($decodeJsonData = true) 
-    { 
-        return $this->getSubmitParams($decodeJsonData); 
-    } 
-} 
+    public function direct($decodeJsonFields = true)
+    {
+        return $this->getSubmitParams($decodeJsonFields);
+    }
+
+}
+

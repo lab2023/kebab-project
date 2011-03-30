@@ -43,6 +43,7 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
     protected $_limitValue = 25;
     protected $_resultsPerPage;
     protected $_currentPage;
+    protected $_pager;
     
     public function init()
     {
@@ -95,7 +96,7 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
 
     public function getResultsPerPage()
     {
-        return $this->_resultsPerPage;
+        return (int) $this->_resultsPerPage;
     }
 
     public function setResultsPerPage($_resultsPerPage)
@@ -119,14 +120,33 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         }
     }    
 
-    /**
+    public function getPager()     
+    {
+        return $this->_pager;
+    }
+
+    public function setPager($query)
+    {
+        $this->_pager = new Doctrine_Pager(
+            $query,
+            $this->getCurrentPage(),
+            $this->getResultsPerPage()            
+        );
+    }
+
+        /**
      * direct() : Stragry Design Pattern
      * 
      * @return  System_Controller_Helper_Pager
      */
-    public function direct()
+    public function direct($query = null)
     {
-        return $this;
+        if (is_null($query)) {
+            return $this;
+        }
+        
+        $this->setPager($query);
+        return $this->_pager;
     }
     
     private function setRequest($_request)
