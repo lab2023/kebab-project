@@ -20,6 +20,7 @@ Ext.namespace(
     'KebabOS.applications.aboutMe.application',
     'KebabOS.applications.aboutMe.application.controllers',
     'KebabOS.applications.aboutMe.application.models',
+    'KebabOS.applications.aboutMe.application.layouts',
     'KebabOS.applications.aboutMe.application.views',
     'KebabOS.applications.aboutMe.library'
 );

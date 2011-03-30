@@ -8,10 +8,17 @@
     background-image: url(images/shortcut.png);
 }
 
-.aboutMe-application-firstNameSurnameText {
-    font-size:20px; margin-top:10px; font-weight:bold;
+.aboutMe-application-userPicture {
+    background:#fff url(images/shortcut.png) no-repeat center;
+    width:64px !important;
+    height:64px;
+    padding:5px;
+    margin-right:10px;
 }
-.aboutMe-application-emailText {
+.aboutMe-application-firstNameSurnameText {
+    font-size:20px; margin-top:20px; font-weight:bold;
+}
+.aboutMe-application-usernameText {
     font-size:15px;
 }
 
