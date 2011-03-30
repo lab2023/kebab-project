@@ -49,6 +49,10 @@ $this->headScript()
         
         baseUrl         : BASE_URL,
         
+        assets          : <?php echo json_encode($this->variable('assets')->toArray()); ?>,
+
+        settings        : {project: <?php echo json_encode($this->settings('project')->toArray()); ?>},
+        
         languages       : <?php echo json_encode($this->languages); ?>,
         
         user            : <?php echo json_encode($this->user); ?>,

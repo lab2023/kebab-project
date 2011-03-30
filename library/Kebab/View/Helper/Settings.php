@@ -37,27 +37,22 @@ if (!defined('BASE_PATH'))
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
+class Kebab_View_Helper_Settings extends Zend_View_Helper_Abstract
 {
-    protected $_config;
+    protected $_config = array();
     
     public function  __construct()
     {
-        $this->_config = Zend_Registry::get('config')->kebab;
+        $this->_config['kebab'] = Zend_Registry::get('config')->kebab;
+        $this->_config['project'] = Zend_Registry::get('config')->project;
     }
     
-    public function variable($var = null)
+    public function settings($configName = null)
     {
-        if (!is_null($var)) {
-            
-            $vars = new stdClass();
-            $vars->kebabOs = $this->_config->os;
-            $vars->assets = $this->_config->assets;
-            $vars->mapping = $this->_config->mapping;
-
-            return $vars->$var;
+        if (!is_null($configName)) {
+            return $this->_config[$configName];
         } else {
-            return $var;
+            return $configName;
         }
     }
 }

@@ -27,7 +27,6 @@ Kebab.library.ext.AutocompleteComboBox = Ext.extend(Ext.form.ComboBox, {
             lazyRender: false,
             selectOnFocus: true,
             minListWidth: 230,
-            allowBlank: false,
             forceSelection: true,
             minChars: 3,
             pageSize: 25

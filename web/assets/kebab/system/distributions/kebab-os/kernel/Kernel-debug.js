@@ -24,6 +24,7 @@ Kebab.OS.Kernel = function(config){
     this.distribution = 'KebabOS';    
     this.environment = 'production';    
     this.baseUrl = 'http://www.kebab-project.com';    
+    this.assets = null;    
     this.user = null;    
     this.applications = null;    
     this.languages =  [{text: "en", active: true}];
@@ -143,6 +144,10 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     
     getUser : function(){
         return this.user;
+    },
+    
+    getAssets : function(){
+        return this.assets;
     },
     
     getLanguages: function(which) {
