@@ -2,5 +2,5 @@
 Model_Entity_Module:
   Default:
     name: default
-  Preferences:
-    name: preferences
+  Resource:
+    name: resource

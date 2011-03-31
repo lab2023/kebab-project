@@ -16,7 +16,3 @@ Model_Entity_Controller:
     Module: Default
     name: main
     
-  Preferences_AboutMe:
-    Module: Preferences
-    name: about-me
-    

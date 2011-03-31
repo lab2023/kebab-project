@@ -35,7 +35,7 @@ if (!defined('BASE_PATH'))
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Preferences_AboutMeController extends Kebab_Controller_Action
+class Resource_UserController extends Kebab_Rest_Controller
 {
 
     /**
