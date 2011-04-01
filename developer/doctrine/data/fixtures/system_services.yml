@@ -3,4 +3,8 @@ Model_Entity_Service:
   Service_1:
     Story: Access_Desktop
     Action: Default_Main_Index
+  Service_2:
+    Story: Access_Desktop
+    Resource: Resource_User
+
     

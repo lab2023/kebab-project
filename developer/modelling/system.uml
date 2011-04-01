@@ -26,7 +26,7 @@
       <fontname>Dialog</fontname>
       <fontsize>12</fontsize>
       <defaultstereotypeview>0</defaultstereotypeview>
-      <activediagram>Category</activediagram>
+      <activediagram>Authorization</activediagram>
     </settings>
     <searchpath href="PROJECT_DIR" />
     <members>
@@ -71,7 +71,7 @@
               diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
               diagramname="Media" />
       <member type="pgml"
-              name="system_ClassDiagram.pgml"
+              name="system_Category.pgml"
               diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
               diagramname="Category" />
       <member type="todo"
@@ -90,7 +90,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Mar 04 11:53:11 EET 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Apr 01 13:11:21 EEST 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -14754,7 +14754,7 @@ Slug[title]</text>
       justification="Center"
     >+ Category</text>
     <group name="Fig0.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[505, 201, 64, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[505, 201, 124, 0]"
          href="127-0-1-1-dd8c4aa:12e80447542:-8000:0000000000000C46"
          fill="0"
          fillcolor="white"
@@ -14768,7 +14768,7 @@ Slug[title]</text>
       <rectangle name="Fig0.2.0"
         x="505"
         y="201"
-        width="64"
+        width="124"
         height="0"
         fill="0"
         fillcolor="white"
@@ -14949,7 +14949,7 @@ Slug[title]</text>
     <path name="Fig1.2"
       description="org.tigris.gef.presentation.FigPoly"
       fill="1"
-      fillcolor="178 178 178"
+      fillcolor="white"
       stroke="1"
       strokecolor="black"
     >
@@ -14969,6 +14969,7 @@ Slug[title]</text>
          fillcolor="white"
          stroke="0"
          strokecolor="black"
+         visibility="0"
     >
       <private>
       </private>

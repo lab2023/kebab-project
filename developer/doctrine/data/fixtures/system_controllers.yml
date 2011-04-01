@@ -15,4 +15,8 @@ Model_Entity_Controller:
   Default_Main:
     Module: Default
     name: main
+
+  Resource_User:
+    Module: Resource
+    name: user
     
