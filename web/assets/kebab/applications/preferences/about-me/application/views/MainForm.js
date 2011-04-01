@@ -10,7 +10,7 @@
  */
 KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.FormPanel, {
 
-    url: 'user/about-me',
+    url: 'resource/user',
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',
@@ -157,9 +157,12 @@ KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.Fo
 
             this.getForm().submit({
 
-                url: this.url,
-
+                url: this.url + '/' + this.bootstrap.app.getUser().id,
                 method: 'PUT',
+                params : {
+                    id : this.bootstrap.app.getUser().id
+                },
+
                 
                 //waitMsg: 'Updating...',
                 
