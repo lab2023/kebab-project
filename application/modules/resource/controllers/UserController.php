@@ -38,36 +38,94 @@ if (!defined('BASE_PATH'))
 class Resource_UserController extends Kebab_Rest_Controller
 {
 
-    /**
-     * readAction()
-     *
-     * <p></p>
-     *
-     * @return json
-     */
-    public function readAction()
+    public function indexAction()
     {
-        // Session
-        $auth = Zend_Auth::getInstance();
-        if ($auth->hasIdentity()) {
-            $userId = $auth->getIdentity()->id;
+        $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
+        if (in_array('admin', $rolesWithAncestor)) {
+            // Mapping
+            $mapping = array(
+                'id' => 'user.id',
+                'firstName' => 'user.firstName',
+                'lastName' => 'user.lastName',
+                'email' => 'user.email',
+                'language' => 'user.language',
+                'status' => 'user.status',
+                'username' => 'user.username',
+                'created_at' => 'user.created_at',
+                'deleted_at' => 'user.deleted_at',
+                'created_by' => 'user.created_by',
+                'updated_by' => 'user.updated_by',
+                'slug' => 'user.slug'
+            );
 
-            // Doctrine
+            // Query
             $query = Doctrine_Query::create()
-                    ->select('user.firstName, user.lastName, user.username, 
-                        user.email, user.language')
-                    ->where('user.id = ?', $userId)
-                    ->from('Model_User user');
-            
-            $userRecord = $query->fetchOne()->toArray();
+                        ->select('
+                            user.id,
+                            user.firstName,
+                            user.lastName,
+                            user.email,
+                            user.language,
+                            user.status,
+                            user.username,
+                            user.created_at,
+                            user.deleted_at,
+                            user.created_by,
+                            user.updated_by,
+                            user.slug
+                        ')
+                        ->from('Model_Entity_User user')
+                        ->orderBy($this->_helper->sort($mapping));
+
+            // Pager
+            $pager = $this->_helper->pagination($query);
+
+            // Response
+            $responseData = $pager->execute()->toArray();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
                 $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($userRecord)
-                    ->getResponse();
+                        ->setSuccess(true)
+                        ->addTotal($pager->getNumResults())
+                        ->addData($responseData)
+                        ->getResponse()
+            );
         } else {
-            throw new Kebab_Controller_Helper_Exception('Please sign in.');
+            throw new Zend_Exception('You can\'t see all user information');
         }
     }
+    
+    public function getAction()
+    {
+        // Params
+        $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
+        $userId = in_array('admin', $rolesWithAncestor)
+                ? $this->_request->getParam('id')
+                : Zend_Auth::getInstance()->getIdentity()->id;
+
+        // Doctrine
+        $query = Doctrine_Query::create()
+                ->select('user.firstName, user.lastName, user.username,
+                    user.email, user.language')
+                ->from('Model_User user')
+                ->where('user.id = ?', $userId)
+                ->fetchOne();
+
+        // Response
+        $this->getResponse()
+                ->setHttpResponseCode(200)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->addData($query->toArray())
+                    ->getResponse()
+        );
+    }
+
+    public function postAction(){}
+    public function deleteAction(){}
+
 
     /**
      * updateAction()
@@ -76,81 +134,52 @@ class Resource_UserController extends Kebab_Rest_Controller
      *
      * @return json
      */
-    public function updateAction()
+    public function putAction()
     {
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-        // Session
-        $auth = Zend_Auth::getInstance();
-        if ($auth->hasIdentity()
-            && $this->_request->getPost('id') == $auth->getIdentity()->id
-        ) {
-
-            // Get Post
-            $userId = $auth->getIdentity()->id;
-            $firstName = $this->_request->getPost('firstName');
-            $surname = $this->_request->getPost('surname');
-            $email = $this->_request->getPost('email');
-            $locale = $this->_request->getPost('locale');
-
-            // Filter
-            $filter = new Zend_Filter_Int();
-            $userId = $filter->filter($userId);
-            $filter = new Zend_Filter_Alnum($allowWhiteSpace = true);
-            $firstName = $filter->filter($firstName);
-            $surname = $filter->filter($surname);
-            $locale = $filter->filter($locale);
-
-            // Validate
-            $validate = new Zend_Validate_EmailAddress();
-            if (!$validate->isValid($email) || is_null($email)) {
-                $this->_helper->response()
-                    ->addNotification('ERR', 'Email is not true.')
-                    ->getResponse();
-            }
-
-            // Doctrine
-            $query = Doctrine_Query::create()
-                    ->from('Model_User user')
-                    ->select('user.email')
-                    ->where('id != ?', $userId);
-            $emailRecord = $query->execute();
-            $emailRecord = $emailRecord->toArray();
-
-            foreach ($emailRecord as $value) {
-                $emailRecord[] = $value['email'];
-            }
-
-            if (!in_array($email, $emailRecord)) {
-                $query = Doctrine_Query::create()
-                        ->from('Model_User user')
-                        ->where('user.id = ?', $userId)
-                        ->select('user.firstName, user.surname, user.email');
-                $userRecord = $query->execute();
-
-                if (count($userRecord->toArray()) == 1) {
-                    $user = new Model_User();
-                    $user->assignIdentifier($userId);
-                    $user->firstName = $firstName;
-                    $user->surname = $surname;
-                    $user->email = $email;
-                    $user->locale = $locale;
-                    $user->save();
-
-                    $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addNotification('INFO',
-                                          'Profile informations is updated. Restart your choice of language to be effective.')
-                        ->getResponse();
-                }
-            } else {
-                $this->_helper->response()
-                    ->addNotification('ERR', 'Email not available.')
-                    ->getResponse();
-            }
+        // Param
+        $params = $this->_helper->param();
+        
+        // Convert data collection array if not
+        if(array_key_exists('data', $params)) {
+            $collection = $this->_helper->array()->isCollection($params['data'])
+                ? $params['data']
+                : $this->_helper->array()->convertRecordtoCollection($params['data']);
         } else {
-            throw new Kebab_Controller_Helper_Exception('Please sign in.');
+            $collection = $this->_helper->array()->convertRecordtoCollection($params);
         }
+
+        // Doctrine
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+
+            $responseUserIds = array();
+            foreach ($collection as $record) {
+                $user = Doctrine_Core::getTable('Model_Entity_User')->find($record['id']);
+                $user->fromArray($record);
+                $user->save();
+
+                $responseUserIds[] = array('id' => $user->id);
+                unset($user);
+            }
+
+            // Rest Response
+            Doctrine_Manager::connection()->commit();
+            $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addNotification('INFO', 'Record was updated.')
+                        ->getResponse()
+            );
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
     }
 
     /**
