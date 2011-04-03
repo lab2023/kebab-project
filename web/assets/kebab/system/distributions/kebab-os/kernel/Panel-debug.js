@@ -185,7 +185,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             iconCls: this.kernel.getLanguages('current').iconCls
             //menu: this.kernel.getLanguages()
         });
-        
+
         this.indicatorsToolbar.add({
             iconCls : 'icon-shutdown',
             template: stdButtonTemplate,
@@ -193,7 +193,18 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                text: 'Logout...',
                iconCls: 'icon-door-out',
                handler: function() {
-                    window.location.href= this.kernel.generateUrl('auth/logout');
+                   Ext.Ajax.request({
+                            url: this.kernel.generateUrl('resource/session/' + user.id),
+                            method: 'DELETE',
+                            success: function() {
+                                window.location.href = this.kernel.generateUrl('index')
+                            },
+                            failure: function() {
+                                var notification = new Kebab.OS.Notification();
+                                notification.message('Argh! %(', 'Operation failure....');
+                            },
+                            scope: this
+                        }, this);
                },
                scope:this
             }, {

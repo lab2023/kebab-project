@@ -134,12 +134,6 @@ class AuthController extends Kebab_Controller_Action
      */
     public function logoutAction()
     {
-        $auth = Zend_Auth::getInstance();
-        if ($auth->hasIdentity()) {
-            $auth->clearIdentity();
-            Zend_Session::forgetMe();
-        }
-        $this->_redirect('auth/index');
     }
 
     /**

@@ -2,5 +2,9 @@
 Model_Entity_Module:
   Default:
     name: default
-  Resource:
-    name: resource
+  Access:
+    name: access
+  Auth:
+    name: auth
+  User:
+    name: user

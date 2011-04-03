@@ -1,8 +1,14 @@
 #Controllers
 Model_Entity_Controller:
+
+  # DEFAULT MODULE #######################################################
   Default_Auth:
     Module: Default
     name: auth
+    
+  Default_AboutMe:
+    Module: Default
+    name: about-me
 
   Default_Error:
     Module: Default
@@ -16,7 +22,27 @@ Model_Entity_Controller:
     Module: Default
     name: main
 
-  Resource_User:
-    Module: Resource
+
+  # ACCESS MODULE #######################################################
+  Access_UserRole:
+    Module: Access
+    name: user-role
+
+  # AUTH MODULE #########################################################
+  Auth_Session:
+    Module: Auth
+    name: session
+
+  # USER MODULE #########################################################
+  User_Invitation:
+    Module: User
+    name: invitation
+  User_Password:
+    Module: User
+    name: password
+  User_Profile:
+    Module: User
+    name: profile
+  User_User:
+    Module: User
     name: user
-    

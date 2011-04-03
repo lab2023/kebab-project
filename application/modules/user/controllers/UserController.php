@@ -35,7 +35,7 @@ if (!defined('BASE_PATH'))
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Resource_UserController extends Kebab_Rest_Controller
+class User_UserController extends Kebab_Rest_Controller
 {
 
     public function indexAction()
@@ -95,8 +95,9 @@ class Resource_UserController extends Kebab_Rest_Controller
             throw new Zend_Exception('You can\'t see all user information');
         }
     }
+
     
-    public function getAction()
+    public function getOwnUserInfoAction()
     {
         // Params
         $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;

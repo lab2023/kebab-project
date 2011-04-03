@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('BASE_PATH'))
+    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -14,21 +16,26 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    PACKAGE
- * @subpackage SUB_PACKAGE
- * @author     lab2023 Dev Team
+ * @package
+ * @subpackage Controllers
+ * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
 /**
- * Description of AcceptInvitation
+ * Preferences_AboutMeController
  *
- * @author ooo
+ * @category   Kebab (kebab-reloaded)
+ * @package
+ * @subpackage Controllers
+ * @author	   lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
+ * @version    1.5.0
  */
-class AcceptInvitation
+class Access_UserRoleController extends Kebab_Rest_Controller
 {
-    //put your code here
-}
 
+}

@@ -3,4 +3,6 @@ Model_Entity_Action:
   Default_Main_Index:
     Controller: Default_Main
     name: index
-
+  Resource_Session_Delete:
+    Controller: Resource_Session
+    name: delete

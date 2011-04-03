@@ -6,5 +6,12 @@ Model_Entity_Service:
   Service_2:
     Story: Access_Desktop
     Resource: Resource_User
+  Service_2_1:
+    Story: Access_Desktop
+    Resource: Default_AboutMe
+  #logout
+  Service_3:
+    Story: Access_Desktop
+    Action: Resource_Session_Delete
 
     
