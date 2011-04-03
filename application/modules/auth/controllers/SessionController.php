@@ -18,19 +18,19 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package
  * @subpackage Controllers
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
 /**
- * Preferences_AboutMeController
+ * Session controller manage to login, logout and other operation over session
  *
  * @category   Kebab (kebab-reloaded)
- * @package
+ * @package    Session
  * @subpackage Controllers
- * @author	   lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0

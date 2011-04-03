@@ -1,8 +1,11 @@
 #Actions
 Model_Entity_Action:
+  # Access the desktop
   Default_Main_Index:
     Controller: Default_Main
     name: index
-  Resource_Session_Delete:
-    Controller: Resource_Session
+
+  # Logout
+  Auth_Session_Delete:
+    Controller: Auth_Session
     name: delete
