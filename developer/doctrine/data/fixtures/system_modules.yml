@@ -4,7 +4,7 @@ Model_Entity_Module:
     name: default
   Access:
     name: access
-  Auth:
-    name: auth
+  Authentication:
+    name: authentication
   User:
     name: user

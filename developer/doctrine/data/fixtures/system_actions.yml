@@ -6,6 +6,6 @@ Model_Entity_Action:
     name: index
 
   # Logout
-  Auth_Session_Delete:
-    Controller: Auth_Session
+  Authentication_Session_Delete:
+    Controller: Authentication_Session
     name: delete

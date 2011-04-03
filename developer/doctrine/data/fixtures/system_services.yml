@@ -8,7 +8,7 @@ Model_Entity_Service:
   #Logout
   Service_2:
     Story: Access_Desktop
-    Action: Auth_Session_Delete
+    Action: Authentication_Session_Delete
 
   # Change Profile
   Service_3:

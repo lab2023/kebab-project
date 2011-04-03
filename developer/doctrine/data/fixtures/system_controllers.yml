@@ -29,8 +29,8 @@ Model_Entity_Controller:
     name: user-role
 
   # AUTH MODULE #########################################################
-  Auth_Session:
-    Module: Auth
+  Authentication_Session:
+    Module: Authentication
     name: session
 
   # USER MODULE #########################################################
