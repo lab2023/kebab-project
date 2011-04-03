@@ -83,9 +83,9 @@ class AuthController extends Kebab_Controller_Action
         ) {
             // set ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
-            $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_User'));
+            $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('User_Model_User'));
 
-            $authAdapter->setTableName('Model_User u')
+            $authAdapter->setTableName('User_Model_User u')
                 ->setIdentityColumn('username')
                 ->setCredentialColumn('password')
                 ->setCredentialTreatment('MD5(?)')
@@ -102,7 +102,7 @@ class AuthController extends Kebab_Controller_Action
 
                 // Check Acl Plugin is on and write acl and role
                 if (Zend_Registry::get('config')->plugins->kebabAcl) {
-                    $roles                       = Model_User::getUserRoles($identity->id);
+                    $roles                       = User_Model_User::getUserRoles($identity->id);
                     $identity->roles             = $roles['roles'];
                     $identity->rolesWithAncestor = $roles['rolesWithAncestor'];
                     $identity->acl               = new Kebab_Acl();              
