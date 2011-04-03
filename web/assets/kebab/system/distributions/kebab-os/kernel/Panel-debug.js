@@ -194,7 +194,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                iconCls: 'icon-door-out',
                handler: function() {
                    Ext.Ajax.request({
-                            url: this.kernel.generateUrl('resource/session/' + user.id),
+                            url: this.kernel.generateUrl('authentication/session/' + user.id),
                             method: 'DELETE',
                             success: function() {
                                 window.location.href = this.kernel.generateUrl('index')
