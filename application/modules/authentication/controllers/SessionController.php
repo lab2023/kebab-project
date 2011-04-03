@@ -16,7 +16,7 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package
+ * @package    Authentication
  * @subpackage Controllers
  * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -35,7 +35,7 @@ if (!defined('BASE_PATH'))
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Auth_SessionRoleController extends Kebab_Rest_Controller
+class Authentication_SessionController extends Kebab_Rest_Controller
 {
     public function deleteAction()
     {
