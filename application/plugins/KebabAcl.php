@@ -28,14 +28,14 @@
  * @category   Kebab (kebab-reloaded)
  * @package    Application
  * @subpackage Plugins
- * @author	   lab2023 Dev Team
+ * @author       lab2023 Dev Team
  */
 class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
 {
 
     /**
      * __construct
-     * 
+     *
      * @param object Plugin_KebabAuth
      * @param file KebabAuth.php
      */
@@ -45,9 +45,9 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
     }
 
     /**
-     * preDispatch 
-     * 
-     * @param Zend_Controller_Request_Abstract $request 
+     * preDispatch
+     *
+     * @param Zend_Controller_Request_Abstract $request
      * @throws Zend_Exception
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
