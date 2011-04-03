@@ -16,7 +16,7 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    
+ * @package    User Module
  * @subpackage Controllers
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -28,7 +28,7 @@ if (!defined('BASE_PATH'))
  * Preferences_AboutMeController
  *
  * @category   Kebab (kebab-reloaded)
- * @package
+ * @package    Profile
  * @subpackage Controllers
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -37,5 +37,64 @@ if (!defined('BASE_PATH'))
  */
 class User_ProfileController extends Kebab_Rest_Controller
 {
-    
+    public function getAction()
+    {
+        // Param
+        $params = $this->_helper->param();
+        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        // Validation
+
+        // DQL
+        $query = Doctrine_Query::create()
+                ->select('user.id, user.firstName, user.lastName, user.email, user.language, user.username')
+                ->from('User_Model_User user')
+                ->where('user.id = ?', array($userSessionId));
+
+        if (is_object($query->fetchOne())) {
+            $responseData = $query->fetchOne()->toArray();
+        }
+
+        $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->getResponse()
+            );
+    }
+
+    public function putAction()
+    {
+        // Param
+        $params = $this->_helper->param();
+        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        // Validation
+        $firstName = $params['firstName'];
+        $lastName = $params['lastName'];
+        $email = $params['email'];
+        $language = $params['language'];
+        
+        // DQL
+        $profile = new User_Model_User();
+        $profile->assignIdentifier($userSessionId);
+        $profile->firstName = $firstName;
+        $profile->lastName = $lastName;
+        $profile->email = $email;
+        $profile->language = $language;
+        $profile->save();
+        unset($profile);
+
+        // Response
+        $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
+
+    }
 }
