@@ -37,6 +37,9 @@ if (!defined('BASE_PATH'))
  */
 class User_ProfileController extends Kebab_Rest_Controller
 {
+    /**
+     * @return void
+     */
     public function getAction()
     {
         // Param
@@ -65,6 +68,9 @@ class User_ProfileController extends Kebab_Rest_Controller
             );
     }
 
+    /**
+     * @return void
+     */
     public function putAction()
     {
         // Param
