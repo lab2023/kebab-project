@@ -58,7 +58,7 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         $resource = $module . '-' . $controller;
         
         if ($resource !== 'Default-Index'
-            && $resource !== 'Default-Auth'
+            && $resource !== 'Authentication-Session'
             && $resource !== 'Default-Error'
         ) {
             $auth = Zend_Auth::getInstance();

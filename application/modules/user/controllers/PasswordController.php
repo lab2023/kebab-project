@@ -50,7 +50,7 @@ class User_PasswordController extends Kebab_Rest_Controller
         // Validation
         $oldPassword = Doctrine_Core::getTable('User_Model_User')->find($userSessionId)->password;
         if ($oldPassword != md5($params['oldPassword'])) {
-            $this->_helper->response()->addError('oldPassword', 'Eski şifreniz yanlış.')->getResponse();
+            $this->_helper->response()->addError('oldPassword', 'Eski şifrenizi kontrol ediniz!')->getResponse();
         }
 
         // Params
