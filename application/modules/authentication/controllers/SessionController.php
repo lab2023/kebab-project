@@ -37,6 +37,94 @@ if (!defined('BASE_PATH'))
  */
 class Authentication_SessionController extends Kebab_Rest_Controller
 {
+    /**
+     * login Action
+     *
+     * @return json
+     */
+    public function postAction()
+    {
+        /*
+         * If user has identity, user can't see the login page.
+         * We redirect the user backend/desktop. If user haven't
+         * access right to backend/desktop. KebabAcLl plugin redirects the user
+         * UnAuthorize page.
+         */
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_redirect('backend/desktop');
+        }
+
+        // Get params
+        $username = $this->_request->getParam('username');
+        $password = $this->_request->getParam('password');
+        $rememberMe = $this->_request->getParam('remember_me');
+
+        // Check rememberMe checkbox
+        if (is_null($rememberMe)) {
+            Zend_Session::forgetMe();
+        }
+
+        //Filter for SQL Injection
+        $validatorUsername = new Zend_Validate();
+        $validatorUsername->addValidator(new Zend_Validate_StringLength(4, 16))->addValidator(new Zend_Validate_Alnum());
+        $validatorPassword = new Zend_Validate();
+        $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
+
+        if ($this->_request->isPost()
+            && $validatorPassword->isValid($password)
+            && $validatorUsername->isValid($username)
+        ) {
+            // set ZendX_Doctrine_Auth_Adapter
+            $auth = Zend_Auth::getInstance();
+            $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('User_Model_User'));
+
+            $authAdapter->setTableName('User_Model_User u')
+                    ->setIdentityColumn('username')
+                    ->setCredentialColumn('password')
+                    ->setCredentialTreatment('MD5(?)')
+                    ->setIdentity($username)
+                    ->setCredential($password);
+
+            // set Zend_Auth
+            $result = $auth->authenticate($authAdapter);
+
+            // Check Auth Validation
+            if ($result->isValid()) {
+
+                // Remove some fields which are secure!
+                $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
+                $identity = $authAdapter->getResultRowObject(null, $omitColumns);
+
+                // Check Acl Plugin is on and write acl and role
+                if (Zend_Registry::get('config')->plugins->kebabAcl) {
+                    $roles = User_Model_User::getUserRoles($identity->id);
+                    $identity->roles = $roles['roles'];
+                    $identity->rolesWithAncestor = $roles['rolesWithAncestor'];
+                    $identity->acl = new Kebab_Acl();
+                }
+                $auth->getStorage()->write($identity);
+
+                if (!is_null($rememberMe)) {
+                    Zend_Session::rememberMe(604800);
+                }
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse();
+            } else {
+                $this->_helper->response()
+                        ->addNotification('ERR', 'Lütfen kullanıcı adınızı ve şifrenizi kontrol ediniz.')
+                        ->getResponse();
+            }
+        } else {
+            $this->_helper->response()->getResponse();
+        }
+    }
+
+    /**
+     * Logout action
+     *
+     * @return void
+     */
     public function deleteAction()
     {
         if (Zend_Auth::getInstance()->hasIdentity()) {
