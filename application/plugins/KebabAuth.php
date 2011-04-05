@@ -55,6 +55,7 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         $filter = new Zend_Filter_Word_DashToCamelCase();
         $module = $filter->filter($request->getModuleName());
         $controller = $filter->filter($request->getControllerName());
+        $action = $request->getActionName();
         $resource = $module . '-' . $controller;
         
         if ($resource !== 'Default-Index'
