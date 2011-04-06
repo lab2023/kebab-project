@@ -1,0 +1,69 @@
+/* -----------------------------------------------------------------------------
+ Kebab Project 1.5.x (Kebab Reloaded)
+ http://kebab-project.com
+ Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
+ http://www.lab2023.com
+
+    * LICENSE
+    *
+    * This source file is subject to the  Dual Licensing Model that is bundled
+    * with this package in the file LICENSE.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://www.kebab-project.com/licensing
+    * If you did not receive a copy of the license and are unable to
+    * obtain it through the world-wide-web, please send an email
+    * to info@lab2023.com so we can send you a copy immediately.
+----------------------------------------------------------------------------- */
+
+
+/*----------------------------------BASE--------------------------------------*/
+html, body {
+    position: relative;
+    background: #FFF ;
+}
+* {
+    color: #4B4B4B;
+}
+.icon-loader {
+   background: url('images/icon-loader.gif') no-repeat center;
+}
+.debug {
+    background: silver;
+    opacity:.50;
+    -moz-opacity:.50;
+    -webkit-opacity:.50;
+    filter:alpha(opacity=50);
+}
+a {
+    outline: none;
+    font-weight: bold;
+}
+a:hover {
+  text-decoration:none;
+  color: #c1880d;
+}
+.kebab-rounded-corners {
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    border-radius: 15px;
+}
+#kebab-loading-mask {
+    cursor:pointer;
+    width:100%;
+    height:100%;
+    background:#000;
+    position:absolute;
+    z-index:20000;
+    left:0;
+    background: #000;
+    top:0;
+}
+div#beta-ribbon {
+    background: transparent url(images/beta-ribbon.png) no-repeat left top;
+    width:78px;
+    height:75px;
+    position:absolute;
+    left:0;
+    top:0;
+}

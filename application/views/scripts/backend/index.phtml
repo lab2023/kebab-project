@@ -1,0 +1,34 @@
+<?php
+$this->headTitle('Sisteme Giriş');
+
+$this->headLink()
+      ->prependStylesheet($this->asset('login.css')->distribution()->theme()->get());
+
+$this->headScript()
+     ->appendFile($this->asset('login.js')->distribution()->get());
+?>
+
+<div id="kebab-system-backend-login-container" class="kebab-standart-container kebab-rounded-corners kebab-shadow">
+
+    <div id="login-form-wrapper">
+        
+        <h1>Sisteme Giriş</h1>
+
+        <div id="login-form"></div>
+
+    </div>
+
+    <div id="forgotPassword-form-wrapper">
+
+        <h1>Şifre Hatırlatma</h1>
+
+        <div id="forgotPassword-form"></div>
+
+    </div>
+
+    <div id="loader">
+        <h2>Lütfen bekleyiniz...</h2>
+        <a href="backend">Tekrar dene</a>
+    </div>
+
+</div>

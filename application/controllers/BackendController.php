@@ -35,17 +35,37 @@ if (!defined('BASE_PATH'))
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class MainController extends Kebab_Controller_Action
+class BackendController extends Kebab_Controller_Action
 {
+    /**
+     * Controller Initializer
+     * @return void
+     */
+    public function init()
+    {
+        $this->_helper->layout->setLayout('backend');
+    }
 
     /**
-     * indexAction
+     * Backend login screen
+     * 
+     * @return void
      */
     public function indexAction()
     {
+
+    }
+    
+    /**
+     * Desktop 
+     * 
+     * @throws Zend_Exception
+     * @return void
+     */
+    public function desktopAction()
+    {
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
-            
             // Get default language
             $defaultLanguage     = $auth->getIdentity()->language;
             $languagesFromConfig = Zend_Registry::get('config')->languages->translations->toArray();
@@ -54,7 +74,7 @@ class MainController extends Kebab_Controller_Action
                 $languages[] = $v; 
             }
             
-            // Assign paramtemers to view object
+            // Assign params to view object
             $this->view->user           = $auth->getIdentity();
             $this->view->languages      = array_values($languages);
             

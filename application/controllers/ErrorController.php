@@ -54,8 +54,7 @@ class ErrorController extends Kebab_Controller_Action
            $this->xmlHttpRequestErrorAction();
         } else {
            $this->errorAction();
-        }
-        
+        }        
     }
     
     /**
@@ -168,6 +167,29 @@ class ErrorController extends Kebab_Controller_Action
         }
         $log = $bootstrap->getResource('Log');
         return $log;
+    }
+
+    /**
+     * unauthorizedAction
+     *
+     * @return void
+     */
+    public function unauthorizedAction()
+    {
+        // If request is ajax or not
+        if ($this->_request->isXmlHttpRequest()) {
+
+           $responseData = array(
+               'status' => 'unauthorized',
+               'title' => 'Anauthorized Access',
+               'message' => 'You are not authorized to access this area.'
+           );
+
+           $this->_helper->response()
+                 ->addData($responseData)
+                 ->getResponse();
+           return;
+        }
     }
 
 }

@@ -6,42 +6,42 @@
     <meta name="Author" content="lab2023 Dev. Team: http://www.lab2023.com/" />
     <meta name="Author-Corporate" content="lab2023 Dev. Team, 2010 - 2011, http://www.lab2023.com/" />
     <meta name="Copyright" content="lab2023 Dev. Team, 2010 - 2011, http://www.lab2023.com/" />
+    <meta name="Framework" content="Kebab Project - www.kebab-project.com" />
     <meta http-equiv="Accept-encoding" content="gzip,deflate" />
     <?php echo $this->headMeta(); ?>
 
     <?php // TITLE AREA ------------------------------------------------------?>
-    <?php echo $this->headTitle('Kebab Project')->setSeparator(' :: '); ?>
+    <?php echo $this->headTitle('Birekmek.com')->setSeparator(' :: '); ?>
 
     <?php // LINK AREA -------------------------------------------------------?>
-    <link href="<?php echo $this->asset('kernel.css')->distribution()->theme()->get(); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('resources/css/ext-all-notheme.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('resources/css/xtheme-gray.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->assetVendor('css/960-all.css')->get('960gs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('silk/famfamfam-silk-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $this->assetVendor('flags/famfamfam-flag-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <?php echo $this->headLink(); ?>
-
+    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false))); ?>
+    
     <?php // STYLE AREA ------------------------------------------------------?>
     <?php echo $this->headStyle(); ?>
-    <style>
-    body {
-        background:
-            <?php echo $this->variable('kebabOs')->distributions->background->color; ?> 
-            url('<?php echo $this->asset('wallpapers/'.$this->variable('kebabOs')->distributions->background->image)->get(); ?>')
-            center;
-    }
-    </style>
-    
-    <?php // SCRIPT AREA -----------------------------------------------------?>
-    <?php
-    echo $this->headScript()
-        ->prependFile($this->assetVendor('ext-all.js')->get('extjs', false))
-        ->prependFile($this->assetVendor('adapter/ext/ext-base.js')->get('extjs', false));
-    ?>
-    
+
+    <script type="text/javascript">
+    var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";
+    var BASE_URL = "<?php echo BASE_URL; ?>";
+    </script> 
 </head>
 <body>
+
+    <!-- RIBBOn & PAGE LOADER -->
+    <div id="beta-ribbon"></div>
+    <div id="kebab-loading-mask"></div>
     
     <?php echo $this->layout()->content . PHP_EOL; ?>
-    
+
+
+    <?php // SCRIPT AREA -----------------------------------------------------?>
+    <?php echo $this->headScript()
+        ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
+        ->prependFile($this->assetVendor('adapter/ext/ext-base.js')->get('extjs'));
+    ?>
+
 </body>
 </html>

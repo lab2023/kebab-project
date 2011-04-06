@@ -14,3 +14,13 @@
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
+Ext.onReady(function() {
+    // BEGIN PRELOADER---------------------------
+    var preLoader = Ext.get('kebab-loading-mask');
+    preLoader.on('click', function() {removePreLoader(0);});
+    new Ext.util.DelayedTask(function(){removePreLoader(2);}).delay(1000);
+    var removePreLoader = function(duration) {preLoader.slideOut('t', {remove: false, duration:duration});}
+    var showPreLoader = function(duration) {preLoader.slideIn('t', {duration:duration});}
+    // END OF PRELOADER--------------------------    
+    Ext.QuickTips.init();
+});

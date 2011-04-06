@@ -190,30 +190,30 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             iconCls : 'icon-shutdown',
             template: stdButtonTemplate,
             menu: [{
-               text: 'Logout...',
-               iconCls: 'icon-door-out',
-               handler: function() {
-                   Ext.Ajax.request({
-                            url: this.kernel.generateUrl('authentication/session/' + user.id),
-                            method: 'DELETE',
-                            success: function() {
-                                window.location.href = this.kernel.generateUrl('index')
-                            },
-                            failure: function() {
-                                var notification = new Kebab.OS.Notification();
-                                notification.message('Argh! %(', 'Operation failure....');
-                            },
-                            scope: this
-                        }, this);
-               },
-               scope:this
-            }, {
-               text: 'Restart...',
-               iconCls: 'icon-arrow-refresh',
-               handler: function() {
-                    window.location.href= this.kernel.generateUrl('main');
-               },
-               scope:this
+                text: 'Logout...',
+                iconCls: 'icon-door-out',
+                handler: function() {
+                    Ext.Ajax.request({
+                        url: this.kernel.generateUrl('authentication/session/' + user.id),
+                        method: 'DELETE',
+                        success: function() {
+                            window.location.href = this.kernel.generateUrl('backend')
+                        },
+                        failure: function() {
+                            var notification = new Kebab.OS.Notification();
+                            notification.message('Argh! %(', 'Operation failure....');
+                        },
+                        scope: this
+                    }, this);
+                },
+                scope:this
+            },{
+                text: 'Restart...',
+                iconCls: 'icon-arrow-refresh',
+                handler: function() {
+                    window.location.href = this.kernel.generateUrl('backend');
+                },
+                scope:this
             }]
         });
         this.indicatorsToolbar.doLayout();

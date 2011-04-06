@@ -1,13 +1,15 @@
 <?php
-$this->headTitle('Welcome Screen');
+$this->headTitle('Welcome to Kebab Project front-end');
+
+$this->headLink()
+      ->prependStylesheet($this->asset('frontend/index.css')->get(false));
+
+$this->headScript()
+     ->appendFile($this->asset('frontend/index.js')->get(false));
 ?>
-    <div class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">
-        
-        <h1 class="kebab-heading">Welcome to the Kebab Project Reloaded</h1>
 
-        <p class="kebab-paragraph">Congratulations! This is your project's main page.</p>
+<div id="wrapper" class="container_12">
 
-        <br />
-        <p class="kebab-paragraph">Please <a href="<?php echo $this->baseUrl('auth')?>">login</a> this application</p>
-        <p class="kebab-paragraph">Are you <a href="<?php echo $this->baseUrl('auth/forgot-password')?>">forgot password</a>?</p>
-    </div>
+    <p>Welcome to Kebab Project front-end area...</p>
+
+</div>

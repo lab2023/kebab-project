@@ -63,3 +63,6 @@ div.kebab-developer-tools-bottom {
     width:100%;
     border:1px solid;
 }
+
+/* Overrides */
+#project-info {right:15px !important; bottom:50px !important;}

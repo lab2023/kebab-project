@@ -323,4 +323,7 @@ td.ux-taskButtons-edge {
 }
 #kebab-os-desktop-shortcuts dt:hover span {
     color:#fff;
-}  
+}
+#beta-ribbon {
+    top:30px;
+}
