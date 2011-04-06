@@ -58,9 +58,11 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
         $resource = $module . '-' . $controller;
 
         if ($resource !== 'default-index'
-            && $resource !== 'authentication-session'
-            && ($resource !== 'User-Signup' && $action !== 'post')
+            && ($resource !== 'default-backend' && $action !== 'index')
+            && ($resource !== 'authentication-sign-up' && $action !== 'post')
+            && ($resource !== 'authentication-forgot-password' && $action !== 'post')
             && $resource !== 'default-error'
+            && $resource !== 'authentication-session'
         ) {
             if (Zend_Auth::getInstance()->hasIdentity()) {
                 $acl = Zend_Auth::getInstance()->getIdentity()->acl;
