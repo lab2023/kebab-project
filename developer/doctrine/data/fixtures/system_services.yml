@@ -1,9 +1,9 @@
 Model_Entity_Service:
 
   #Access Desktop Stories
-  Dektop_1:
+  Desktop_1:
     Story: Access_Desktop
-    Action: Default_Main_Index
+    Action: Default_Backend_Index
 
   #Logout
   Desktop_2:
@@ -17,6 +17,6 @@ Model_Entity_Service:
   # Change Password
   Profile_2:
     Story: Change_Profile
-    Resource: User_Password
+    Resource: Authentication_Password
 
     

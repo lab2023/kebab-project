@@ -1,8 +1,8 @@
 #Actions
 Model_Entity_Action:
   # Access the desktop
-  Default_Main_Index:
-    Controller: Default_Main
+  Default_Backend_Index:
+    Controller: Default_Backend
     name: index
 
   # Logout
