@@ -9,6 +9,11 @@ Model_Entity_Service:
   Desktop_2:
     Story: Access_Desktop
     Action: Authentication_Session_Delete
+    
+  #Send Feedback
+  Desktop_3:
+    Story: Access_Desktop
+    Resource: Feedback_Feedback
 
   # Change Profile
   Profile_1:

@@ -8,3 +8,5 @@ Model_Entity_Module:
     name: authentication
   User:
     name: user
+  Feedback:
+    name: feedback

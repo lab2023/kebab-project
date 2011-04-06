@@ -40,3 +40,8 @@ Model_Entity_Controller:
   User_User:
     Module: User
     name: user
+    
+  # FEEDBACK MODULE #########################################################
+  Feedback_Feedback:
+    Module: Feedback
+    name: feedback
