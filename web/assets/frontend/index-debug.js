@@ -17,10 +17,11 @@
 Ext.onReady(function() {
     // BEGIN PRELOADER---------------------------
     var preLoader = Ext.get('kebab-loading-mask');
-    preLoader.on('click', function() {removePreLoader(0);});
-    new Ext.util.DelayedTask(function(){removePreLoader(2);}).delay(1000);
+    var preLoaderClicked = false;
+    preLoader.on('click', function() {removePreLoader(0); preLoaderClicked = true;});
+    new Ext.util.DelayedTask(function(){if (!preLoaderClicked)removePreLoader(2);}).delay(800);
     var removePreLoader = function(duration) {preLoader.slideOut('t', {remove: false, duration:duration});}
     var showPreLoader = function(duration) {preLoader.slideIn('t', {duration:duration});}
-    // END OF PRELOADER--------------------------    
+    // END OF PRELOADER--------------------------
     Ext.QuickTips.init();
 });

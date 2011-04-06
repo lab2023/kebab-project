@@ -32,18 +32,18 @@ Ext.onReady(function() {
         defaultType: 'textfield',
         hideLabels: true,
         items: [{
-            emptyText: 'Kullanıcı adınız',
+            emptyText: 'Your username',
             name: 'username',
             allowBlank:false
         },{
-            emptyText: 'Şifreniz',
+            emptyText: 'Your password',
             name: 'password',
             anchor: '78%',
             inputType: 'password',
             allowBlank:false
         }, {
             xtype: 'checkboxgroup',
-            items: [{boxLabel: 'Bu bilgisayarda beni hatırla', name: 'rememberMe', checked: true}]
+            items: [{boxLabel: 'Remember me this computer', name: 'rememberMe', checked: true}]
         }],
         buttons: [{
             width:80,
@@ -56,7 +56,7 @@ Ext.onReady(function() {
             xtype:'panel',
             border:false,
             bodyStyle: 'background:transparent !important;',
-            html: '<a href="#" id="forgotPassword-link">Şifremi unuttum</a>'
+            html: '<a href="#" id="forgotPassword-link">Forgot password</a>'
         }]
     });
 
@@ -74,7 +74,7 @@ Ext.onReady(function() {
         defaultType: 'textfield',
         hideLabels: true,
         items: [{
-            emptyText: 'E-posta adresiniz',
+            emptyText: 'Your e-mail address',
             name: 'email',
             allowBlank:false,
             vtype: 'email'
@@ -90,7 +90,7 @@ Ext.onReady(function() {
             xtype:'panel',
             border:false,
             bodyStyle: 'background:transparent !important;',
-            html: '<a href="#" id="forgotPasswordCancel-link">Vazgeç</a>'
+            html: '<a href="#" id="forgotPasswordCancel-link">Cancel</a>'
         }]
     });
 

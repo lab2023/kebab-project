@@ -57,6 +57,7 @@ a:hover {
     z-index:20000;
     left:0;
     background: #000;
+    background: #000 url(images/indicator.gif) no-repeat center center;
     top:0;
 }
 div#beta-ribbon {
@@ -67,3 +68,5 @@ div#beta-ribbon {
     left:0;
     top:0;
 }
+
+#wrapper {padding: 50px;}

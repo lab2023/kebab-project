@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Welcome to Kebab Project front-end');
+$this->headTitle('Front-end');
 
 $this->headLink()
       ->prependStylesheet($this->asset('frontend/index.css')->get(false));
@@ -10,6 +10,8 @@ $this->headScript()
 
 <div id="wrapper" class="container_12">
 
+    <h1>Kebab Project</h1>
     <p>Welcome to Kebab Project front-end area...</p>
+    <p><a href="<?php echo BASE_URL; ?>/backend">Go to back-end</a></p>
 
 </div>
