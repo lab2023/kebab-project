@@ -324,7 +324,7 @@ class AuthController extends Kebab_Controller_Action
             
            $responseData = array(
                'status' => 'unauthorized',
-               'title' => 'Anauthorized Access',
+               'title' => 'Unauthorized Access',
                'message' => 'You are not authorized to access this area.'
            );
             
