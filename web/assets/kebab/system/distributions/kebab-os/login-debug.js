@@ -48,7 +48,7 @@ Ext.onReady(function() {
         buttons: [{
             width:80,
             iconCls: 'icon-accept',
-            text: 'Gönder',
+            text: 'Send',
             handler: function() {
                 loginAction();
             }
@@ -82,7 +82,7 @@ Ext.onReady(function() {
         buttons: [{
             width:80,
             iconCls: 'icon-accept',
-            text: 'Gönder',
+            text: 'Send',
             handler: function() {
                 forgotPasswordAction();
             }
