@@ -22,7 +22,7 @@
     font-weight: normal;
     src: local('Ubuntu'), 
          local('Ubuntu-Regular'), 
-         url('../fonts/Ubuntu-Regular.ttf') 
+         url('fonts/Ubuntu-Regular.ttf') 
          format('truetype');
 }
 * {

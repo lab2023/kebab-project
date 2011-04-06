@@ -55,11 +55,15 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         $filter = new Zend_Filter_Word_DashToCamelCase();
         $module = $filter->filter($request->getModuleName());
         $controller = $filter->filter($request->getControllerName());
+        $action = $request->getActionName();
         $resource = $module . '-' . $controller;
         
-        if ($resource !== 'Default-Index'
-            && $resource !== 'Authentication-Session'
-            && $resource !== 'Default-Error'
+        if (($resource !== 'Default-Index')
+            && ($resource !== 'Default-Error')
+            && ($resource !== 'Default-Backend' && $action !== 'Index')
+            && ($resource !== 'Authentication-SignUp' && $action !== 'post')
+            && ($resource !== 'Authentication-ForgotPassword' && $action !== 'post')
+            && ($resource !== 'Authentication-Session')
         ) {
             $auth = Zend_Auth::getInstance();
             if (!$auth->hasIdentity()) {
