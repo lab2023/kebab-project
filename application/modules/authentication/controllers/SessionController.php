@@ -112,7 +112,7 @@ class Authentication_SessionController extends Kebab_Rest_Controller
                         ->getResponse();
             } else {
                 $this->_helper->response()
-                        ->addNotification('ERR', 'Lütfen kullanıcı adınızı ve şifrenizi kontrol ediniz.')
+                        ->addNotification('ERR', 'Please check your user name and password!')
                         ->getResponse();
             }
         } else {
