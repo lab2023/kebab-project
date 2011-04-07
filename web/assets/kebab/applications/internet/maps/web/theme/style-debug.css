@@ -1,0 +1,9 @@
+.maps-application-launcher-icon {
+    background-image: url(images/launcher.png);
+}
+.maps-application-gui-icon {
+    background-image: url(images/gui.png);
+}
+#maps-application-shortcut div {
+    background-image: url(images/shortcut.png);
+}
