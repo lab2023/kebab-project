@@ -9,7 +9,173 @@ Model_Entity_Application:
     Translation:
       en:
         title: About Me
-        description: Set your personal information 
+        description: Set your personal information.
       tr:
         title: Kişisel Bilgilerim
-        description: Kişisel bilgilerinizi yönetin
+        description: Kişisel bilgilerinizi yönetin.
+
+  FeedbackApplication:
+    identity: feedback-application
+    className: KebabOS.applications.feedback.application.Bootstrap
+    name: feedback
+    type: system
+    department: administration
+    version: 0.0.1
+    Translation:
+      en:
+        title: Feedback
+        description: Send feedback.
+      tr:
+        title: Geri Bildirim
+        description: Geribildirim yollayın.
+
+  PacManApplication:
+    identity: pacMan-application
+    className: KebabOS.applications.pacMan.application.Bootstrap
+    name: pac-man
+    type: application
+    department: games
+    version: 0.0.1
+    Translation:
+      en:
+        title: Pac-man
+        description: Play pac-man.
+      tr:
+        title: Pac-man
+        description: pac-man oynayın.
+
+  TetrisApplication:
+    identity: tetris-application
+    className: KebabOS.applications.tetris.application.Bootstrap
+    name: tetris
+    type: application
+    department: games
+    version: 0.0.1
+    Translation:
+      en:
+        title: Tetris
+        description: Play tetris.
+      tr:
+        title: Tetris
+        description: Tetris oynayın.
+
+  SnakeApplication:
+    identity: snake-application
+    className: KebabOS.applications.snake.application.Bootstrap
+    name: snake
+    type: application
+    department: games
+    version: 0.0.1
+    Translation:
+      en:
+        title: Snake
+        description: Play snake.
+      tr:
+        title: Snake
+        description: Snake oynayın.
+
+
+  SpaceInvadersApplication:
+    identity: spaceInvaders-application
+    className: KebabOS.applications.spaceInvaders.application.Bootstrap
+    name: space-invaders
+    type: application
+    department: games
+    version: 0.0.1
+    Translation:
+      en:
+        title: Space Invaders
+        description: Play space invaders.
+      tr:
+        title: Space Invaders
+        description: Space Invaders oynayın.
+
+  TicTacToeApplication:
+    identity: ticTacToe-application
+    className: KebabOS.applications.ticTacToe.application.Bootstrap
+    name: tic-tac-toe
+    type: application
+    department: games
+    version: 0.0.1
+    Translation:
+      en:
+        title: Tic Tac Toe
+        description: Play tic tac toe.
+      tr:
+        title: Tic TacT Toe
+        description: Tic tac toe oynayın.
+
+  MarioApplication:
+    identity: mario-application
+    className: KebabOS.applications.mario.application.Bootstrap
+    name: mario
+    type: application
+    department: games
+    version: 0.0.1
+    Translation:
+      en:
+        title: Mario
+        description: Play mario.
+      tr:
+        title: Mario
+        description: Mario oynayın.
+
+  CalculatorApplication:
+    identity: calculator-application
+    className: KebabOS.applications.calculator.application.Bootstrap
+    name: calculator
+    type: application
+    department: accessories
+    version: 0.0.1
+    Translation:
+      en:
+        title: Calculator
+        description: calculate.
+      tr:
+        title: Hesap Makinesi
+        description: Hesaplama yapın.
+
+  MapsApplication:
+    identity: maps-application
+    className: KebabOS.applications.maps.application.Bootstrap
+    name: maps
+    type: application
+    department: internet
+    version: 0.0.1
+    Translation:
+      en:
+        title: Maps
+        description: See maps.
+      tr:
+        title: Haritalar
+        description: Haritalara bakın.
+
+  PixlrApplication:
+    identity: pixlr-application
+    className: KebabOS.applications.pixlr.application.Bootstrap
+    name: pixlr
+    type: application
+    department: graphics
+    version: 0.0.1
+    Translation:
+      en:
+        title: Pixlr
+        description: Edit your photos.
+      tr:
+        title: Pixlr
+        description: Fotoğraflarınızı düzenleyin.
+
+  RadioApplication:
+    identity: radio-application
+    className: KebabOS.applications.radio.application.Bootstrap
+    name: radio
+    type: application
+    department: music
+    version: 0.0.1
+    Translation:
+      en:
+        title: Radio
+        description: Listen to Radio.
+      tr:
+        title: Radyo
+        description: Radyo dinleyin.
