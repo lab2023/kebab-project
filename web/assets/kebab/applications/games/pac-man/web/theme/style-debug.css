@@ -1,0 +1,9 @@
+.pacMan-application-launcher-icon {
+    background-image: url(images/launcher.png);
+}
+.pacMan-application-gui-icon {
+    background-image: url(images/gui.png);
+}
+#pacMan-application-shortcut div {
+    background-image: url(images/shortcut.png);
+}

@@ -1,0 +1,9 @@
+.tetris-application-launcher-icon {
+    background-image: url(images/launcher.png);
+}
+.tetris-application-gui-icon {
+    background-image: url(images/gui.png);
+}
+#tetris-application-shortcut div {
+    background-image: url(images/shortcut.png);
+}
