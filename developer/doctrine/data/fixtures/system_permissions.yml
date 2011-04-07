@@ -3,5 +3,9 @@ Model_Entity_Permission:
     Story: Access_Desktop
     Role: Guest
     rule: allow
+  Permission_2:
+    Story: Change_Profile
+    Role: Guest
+    rule: allow
     
     

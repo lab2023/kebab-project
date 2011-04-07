@@ -28,14 +28,14 @@
  * @category   Kebab (kebab-reloaded)
  * @package    Application
  * @subpackage Plugins
- * @author	   lab2023 Dev Team
+ * @author       lab2023 Dev Team
  */
 class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
 {
 
     /**
      * __construct
-     * 
+     *
      * @param object Plugin_KebabAuth
      * @param file KebabAuth.php
      */
@@ -45,9 +45,9 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
     }
 
     /**
-     * preDispatch 
-     * 
-     * @param Zend_Controller_Request_Abstract $request 
+     * preDispatch
+     *
+     * @param Zend_Controller_Request_Abstract $request
      * @throws Zend_Exception
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
@@ -58,8 +58,11 @@ class Plugin_KebabAcl extends Kebab_Controller_Plugin_Abstract
         $resource = $module . '-' . $controller;
 
         if ($resource !== 'default-index'
-            && $resource !== 'default-auth'
+            && ($resource !== 'default-backend' && $action !== 'index')
+            && ($resource !== 'authentication-sign-up' && $action !== 'post')
+            && ($resource !== 'authentication-forgot-password' && $action !== 'post')
             && $resource !== 'default-error'
+            && $resource !== 'authentication-session'
         ) {
             if (Zend_Auth::getInstance()->hasIdentity()) {
                 $acl = Zend_Auth::getInstance()->getIdentity()->acl;

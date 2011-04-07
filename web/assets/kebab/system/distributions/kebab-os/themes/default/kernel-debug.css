@@ -16,42 +16,15 @@
 ----------------------------------------------------------------------------- */
 
 /*---------------------------------TYPOGRAPHY---------------------------------*/
-/*@font-face {
-    font-family: 'Ubuntu';
-    font-style: italic;
-    font-weight: normal;
-    src: local('Ubuntu Italic'), 
-         local('Ubuntu-Italic'), 
-         url('../fonts/Ubuntu-Italic.ttf')
-         format('truetype');
-}*/
 @font-face {
     font-family: 'Ubuntu';
     font-style: normal;
     font-weight: normal;
     src: local('Ubuntu'), 
          local('Ubuntu-Regular'), 
-         url('../fonts/Ubuntu-Regular.ttf') 
+         url('fonts/Ubuntu-Regular.ttf') 
          format('truetype');
 }
-/*@font-face {
-    font-family: 'Ubuntu';
-    font-style: italic;
-    font-weight: bold;
-    src: local('Ubuntu Bold Italic'), 
-         local('Ubuntu-BoldItalic'), 
-         url('../fonts/Ubuntu-Italic.ttf') 
-         format('truetype');
-}*/
-/*@font-face {
-    font-family: 'Ubuntu';
-    font-style: normal;
-    font-weight: bold;
-    src: local('Ubuntu Bold'),
-         local('Ubuntu-Bold'), 
-         url('../fonts/Ubuntu-Bold.ttf') 
-         format('truetype');
-}*/
 * {
     font-family: Ubuntu, Georgia, "Bitstream Charter", serif;
     font-size: 12.5px;
@@ -70,7 +43,7 @@ html, body {
 .kebab-standart-container {
     position:absolute;
     top:0; bottom:0; left:0; right:0;
-	margin:auto;
+    margin:auto;
     background:#fff;
     border:1px outset #a7a5a6;
     padding:20px;
@@ -90,7 +63,6 @@ p.kebab-paragraph {
     background:transparent url('images/kernel/container-bg-85.png')  !important;
 }
 .kebab-opacity:hover {
-    padding:40px;
     background:#fff !important;
 }
 .kebab-rounded-corners {
@@ -156,4 +128,22 @@ p.kebab-paragraph {
 }
 #project-info p strong {
     font-weight:bold;
+}
+#kebab-loading-mask {
+    width:100%;
+    height:100%;
+    background:#000;
+    position:absolute;
+    z-index:20000;
+    left:0;
+    background: #000 url(images/desktop/indicator.gif) no-repeat center center;
+    top:0;
+}
+#beta-ribbon {
+    background: transparent url(images/desktop/beta-ribbon.png) no-repeat left top;
+    width:78px;
+    height:75px;
+    position:absolute;
+    right:-3px !important;
+    top:0;
 }

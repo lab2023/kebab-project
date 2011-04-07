@@ -1,9 +1,9 @@
-<div class="kebab-standart-container kebab-rounded-corners kebab-shadow">
+<div class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">
     <h1><strong>Kebab Framework Reloaded :: Accept Invitation</strong></h1>
 
     <form method="post" action="<?php echo $this->baseUrl('auth/accept-invitation/check/' . $this->activationKey); ?>">
         <strong>Username</strong>
-        <input type="input" size="20" name="username"><br />
+        <input type="text" size="20" name="username"><br />
         <strong>Password</strong>
         <input type="password" size="20" name="password"><br />
         <strong>Re-type Password</strong>

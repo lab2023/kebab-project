@@ -9,5 +9,16 @@ Model_Entity_Story:
         title: Masaüstüne erişim
         description: Çevirimiçi olduktan sonra masaüstüne erişim
     status: active
+
+  Change_Profile:
+    name: Change Profile
+    Translation:
+      en:
+        title: User can change their profile
+        description: User can change name, surname, language etc.
+      tr:
+        title: Kullanıcılar profil bilgilerini değiştirebilir
+        description: Kullanıcılar isim, soyisim, dil seçimi gibi bilgilerini değiştirebilir.
+    status: active
     
   

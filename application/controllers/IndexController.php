@@ -37,7 +37,20 @@ if (!defined('BASE_PATH'))
  */
 class IndexController extends Kebab_Controller_Action
 {
+    /**
+     * Home Page
+     * @return void
+     */
     public function indexAction()
+    {
+
+    }
+    /**
+     * Shop Page
+     * @return void
+     */
+
+    public function shopAction()
     {
         
     }

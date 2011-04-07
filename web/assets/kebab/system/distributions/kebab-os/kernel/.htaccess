@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond $1 !^(lib-loader\.php|web)
+RewriteRule ^(.*)$ lib-loader.php [L,NC]
+php_flag display_errors off

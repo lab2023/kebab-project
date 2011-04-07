@@ -55,6 +55,8 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
         this.init();
 
+        Ext.get('kebab-loading-mask').fadeOut({remove: true, duration:1});
+
         // Initialize Desktop
         this.desktop = new Kebab.OS.Desktop(this);
 

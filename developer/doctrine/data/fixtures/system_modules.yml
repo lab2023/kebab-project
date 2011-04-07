@@ -2,5 +2,11 @@
 Model_Entity_Module:
   Default:
     name: default
-  Preferences:
-    name: preferences
+  Access:
+    name: access
+  Authentication:
+    name: authentication
+  User:
+    name: user
+  Feedback:
+    name: feedback

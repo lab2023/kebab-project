@@ -1,9 +1,27 @@
 Model_Entity_Service:
+
   #Access Desktop Stories
-  Service_1:
+  Desktop_1:
     Story: Access_Desktop
-    Action: Default_Main_Index
-  Service_2:
+    Action: Default_Backend_Index
+
+  #Logout
+  Desktop_2:
     Story: Access_Desktop
-    Resource: Preferences_AboutMe
+    Action: Authentication_Session_Delete
+    
+  #Send Feedback
+  Desktop_3:
+    Story: Access_Desktop
+    Resource: Feedback_Feedback
+
+  # Change Profile
+  Profile_1:
+    Story: Change_Profile
+    Resource: User_Profile
+  # Change Password
+  Profile_2:
+    Story: Change_Profile
+    Resource: Authentication_Password
+
     
