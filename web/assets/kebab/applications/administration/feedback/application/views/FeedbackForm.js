@@ -81,8 +81,6 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
-        this.addEvents('loadGrid');
-
         KebabOS.applications.feedback.application.views.FeedbackForm.superclass.initComponent.apply(this, arguments);
     },
 
@@ -102,6 +100,8 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
+                    this.fireEvent('loadGrid');
+                    this.getForm().reset();
                 },
 
                 failure : function() {
