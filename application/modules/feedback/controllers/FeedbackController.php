@@ -74,8 +74,8 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
     public function postAction()
     {
         $params = $this->_helper->param();
-        $userId = $params['user_id'];
-        $applicationId = $params['application_id'];
+        $userId = $params['userId'];
+        $applicationIdentity = $params['applicationIdentity'];
         $description = $params['description'];
 
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
@@ -83,8 +83,9 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
             throw new Zend_Exception('User is not valid.');
         }
 
-        $feedback = new Model_Entity_Feedback();
+        $applicationId = Doctrine_Core::getTable('Model_Entity_Application')->findOneByidentity($applicationIdentity)->id;
 
+        $feedback = new Model_Entity_Feedback();
         $feedback->application_id = $applicationId;
         $feedback->description = $description;
         $feedback->user_id = $userId;
