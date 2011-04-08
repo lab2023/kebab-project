@@ -19,6 +19,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
     initComponent: function() {
 
+        var userId = this.bootstrap.app.getUser().id;
 
         var applications = this.bootstrap.app.getApplications();
 
@@ -35,7 +36,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
             }),
             valueField: 'id',
             displayField: 'title',
-            hiddenName: 'application',
+            hiddenName: 'applicationIdentity',
             scope:this
         });
 
@@ -51,14 +52,20 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
                     defaults: {
                         anchor: '100%'
                     },
-                    defaultType: 'textfield',
                     items: [
-                        applicationsCombobox ,{
+                        {
+                            name:'userId',
+                            xtype:'hidden',
+                            value: userId
+                        },
+                        applicationsCombobox ,
+                        {
                             fieldLabel: 'Description',
                             name: 'description',
                             xtype: 'textarea',
                             height:235
-                        }]
+                        }
+                    ]
                 }
             ],
             buttons: [
@@ -74,12 +81,10 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
-        this.addEvents('loadGrid');
-
         KebabOS.applications.feedback.application.views.FeedbackForm.superclass.initComponent.apply(this, arguments);
     },
 
- onSave: function() {
+    onSave: function() {
 
         if (this.getForm().isValid()) {
 
@@ -95,6 +100,8 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
+                    this.fireEvent('loadGrid');
+                    this.getForm().reset();
                 },
 
                 failure : function() {
