@@ -20,7 +20,7 @@ KebabOS.applications.feedback.application.models.FeedbackDataStore = Ext.extend(
     restAPI: BASE_URL + '/feedback/feedback',
 
     readerFields: [
-        {name: 'application_id', type: 'string'},
+        {name: 'Application.name', type: 'string'},
         {name: 'description', type: 'string'},
         {name: 'status', type: 'string'}
     ]
