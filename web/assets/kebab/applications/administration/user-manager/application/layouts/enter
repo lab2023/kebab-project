@@ -1,6 +1,0 @@
-<div style="width:80px; height:80px; float:left;"><img src="{image}" alt="{name} {lastName}"/></div>
-<div style="float:left; height:80px; width:200px;">
-<span>{name} {lastName}</span>
-<span>{userName}, {email}</span>
-<tpl for="role"><span>{.}</span></tpl>
-</div>
