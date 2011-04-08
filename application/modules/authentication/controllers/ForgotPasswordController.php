@@ -51,7 +51,7 @@ class Authentication_ForgotPasswordController extends Kebab_Rest_Controller
 
                 if ($user !== false) {
                     $password = mt_rand(10000, 99999);
-                    $user->password = $password;
+                    $user->password = md5($password);
                     $user->save();
 
                     //KBBTODO move these settings to config file
