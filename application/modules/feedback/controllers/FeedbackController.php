@@ -46,9 +46,10 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         );
 
         $query = Doctrine_Query::create()
-                ->select('feedback.*, user.firstName, user.lastName')
+                ->select('feedback.*, application.identity, application.id, user.firstName, user.lastName')
                 ->from('Model_Entity_Feedback feedback')
                 ->leftJoin('feedback.User user')
+                ->leftJoin('feedback.Application application')
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
