@@ -65,25 +65,23 @@ class BackendController extends Kebab_Controller_Action
     public function desktopAction()
     {
         $auth = Zend_Auth::getInstance();
-        if ($auth->hasIdentity()) {
-            // Get default language
-            $defaultLanguage     = $auth->getIdentity()->language;
-            $languagesFromConfig = Zend_Registry::get('config')->languages->translations->toArray();
-            foreach ($languagesFromConfig as $k => $v) {
-                $v['active'] = $defaultLanguage == $v['language'] ? true : false;
-                $languages[] = $v; 
-            }
-            
-            // Assign params to view object
-            $this->view->user           = $auth->getIdentity();
-            $this->view->languages      = array_values($languages);
-            
-            if (Zend_Registry::get('config')->plugins->kebabAcl) { 
-                $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
-                $this->view->applications  = Model_Application::getApplicationsByPermission($rolesWithAncestor, $defaultLanguage);
-            } else {
-                throw new Zend_Exception('ACL plugin is disable');
-            }
+        // Get default language
+        $defaultLanguage     = $auth->getIdentity()->language;
+        $languagesFromConfig = Zend_Registry::get('config')->languages->translations->toArray();
+        foreach ($languagesFromConfig as $k => $v) {
+            $v['active'] = $defaultLanguage == $v['language'] ? true : false;
+            $languages[] = $v;
+        }
+        
+        // Assign params to view object
+        $this->view->user           = $auth->getIdentity();
+        $this->view->languages      = array_values($languages);
+
+        if (Zend_Registry::get('config')->plugins->kebabAcl) {
+            $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
+            $this->view->applications  = Model_Application::getApplicationsByPermission($rolesWithAncestor, $defaultLanguage);
+        } else {
+            throw new Zend_Exception('ACL plugin is disable');
         }
     }
 }

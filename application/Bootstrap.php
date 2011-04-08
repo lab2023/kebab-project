@@ -191,11 +191,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {      
         // Info Log
         $this->_logging->log('Translator initialized...', Zend_Log::INFO);
-        
-        $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
-                           ? Zend_Auth::getInstance()->getIdentity()->language 
-                           : $this->_config->languages->default;
-        
+
+//        $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
+//                           ? Zend_Auth::getInstance()->getIdentity()->language
+//                           : $this->_config->languages->default;
+        $defaultLanguage = 'en';
+
         $languagePath    = $this->_config->languages->languagePath . '/' . $defaultLanguage . '.php';
         $translator = new Zend_Translate('array', $languagePath, $defaultLanguage);
         

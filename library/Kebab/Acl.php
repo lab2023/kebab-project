@@ -69,7 +69,7 @@ class Kebab_Acl extends Zend_Acl
         foreach ($resources as $resource) {
             parent::add(
                     new Zend_Acl_Resource(
-                        $resource->Module->name . '-' . $resource->name
+                        $resource->Module->name . '_' . $resource->name
                     )
             );
         }
@@ -98,10 +98,10 @@ class Kebab_Acl extends Zend_Acl
             foreach ($services as $service) {
                 $action = !isset($service->Action->name) ? null : $service->Action->name;
                 $resource = (isset($service->Resource)) 
-                          ? $service->Resource->Module->name .'-'. $service->Resource->name 
+                          ? $service->Resource->Module->name .'_'. $service->Resource->name
                           : null;
                 $resource = is_null($resource) && isset($service->Action->Controller)
-                          ? $service->Action->Controller->Module->name .'-'. $service->Action->Controller->name 
+                          ? $service->Action->Controller->Module->name .'_'. $service->Action->Controller->name
                           : $resource;
                 
                 if (isset($service->Story)) {

@@ -3,7 +3,7 @@ Model_Entity_Service:
   #Access Desktop Stories
   Desktop_1:
     Story: Access_Desktop
-    Action: Default_Backend_Index
+    Action: Default_Backend_Desktop
 
   #Logout
   Desktop_2:
