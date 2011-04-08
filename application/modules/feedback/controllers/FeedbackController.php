@@ -46,7 +46,7 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         );
 
         $query = Doctrine_Query::create()
-                ->select('feedback.*, application.identity, application.id, user.firstName, user.lastName')
+                ->select('feedback.*, application.*, user.firstName, user.lastName')
                 ->from('Model_Entity_Feedback feedback')
                 ->leftJoin('feedback.User user')
                 ->leftJoin('feedback.Application application')
