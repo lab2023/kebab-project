@@ -20,5 +20,15 @@ Model_Entity_Story:
         title: Kullanıcılar profil bilgilerini değiştirebilir
         description: Kullanıcılar isim, soyisim, dil seçimi gibi bilgilerini değiştirebilir.
     status: active
-    
+
+  User_Management:
+    name: User add, edit and remove.
+    Translation:
+      en:
+        title: User Management
+        description: User add, edit and remove.
+      tr:
+        title: Kullanıcı Düzenleme
+        description: Kullanıcı ekleyin çıkarın düzenleyin.
+    status: active
   

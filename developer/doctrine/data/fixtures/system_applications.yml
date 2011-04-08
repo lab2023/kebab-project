@@ -179,3 +179,18 @@ Model_Entity_Application:
       tr:
         title: Radyo
         description: Radyo dinleyin.
+
+  userManagerApplication:
+    identity: userManager-application
+    className: KebabOS.applications.userManager.application.Bootstrap
+    name: user-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    Translation:
+      en:
+        title: User Manager
+        description: User add, edit and remove.
+      tr:
+        title: Kullanıcı Müdürü
+        description: Kullanıcı ekleyin çıkarın düzenleyin.

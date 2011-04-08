@@ -3,6 +3,9 @@ Model_Entity_StoryApplication:
     Story: Access_Desktop
     Application: AboutMeApplication
 
+  Record_2:
+    Story: Access_Desktop
+    Application: FeedbackApplication
 
   Record_3:
     Story: Access_Desktop
@@ -43,3 +46,7 @@ Model_Entity_StoryApplication:
   Record_12:
     Story: Access_Desktop
     Application: RadioApplication
+
+  Record_13:
+    Story: User_Management
+    Application: userManagerApplication

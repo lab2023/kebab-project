@@ -7,5 +7,9 @@ Model_Entity_Permission:
     Story: Change_Profile
     Role: Guest
     rule: allow
+  Permission_3:
+    Story: User_Management
+    Role: Admin
+    rule: allow
     
     
