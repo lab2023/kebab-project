@@ -18,86 +18,86 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    System
  * @subpackage Controllers
- * @author	   lab2023 Dev Team
+ * @author       lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
-    
+
 /**
  * Preferences_AboutMeController
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Administration
  * @subpackage Controllers
- * @author	   lab2023 Dev Team
+ * @author       lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 class Feedback_FeedbackController extends Kebab_Rest_Controller
 {
-	public function indexAction()
+    public function indexAction()
     {
-		// Mapping
+        // Mapping
         $mapping = array(
-            'id'                => 'feedback.id'
+            'id' => 'feedback.id'
         );
 
-    	$query = Doctrine_Query::create()
-    			->select('feedback.*, user.firstName, user.lastName')
-    			->from('Model_Entity_Feedback feedback')
-    			->leftJoin('feedback.User user')
-    			->orderBy($this->_helper->sort($mapping));
-        
-    	$pager = $this->_helper->pagination($query);
-        $feedbacks = $pager->execute();  			
-    	
-    	$responseData = array();
-    	
-    	if(is_object($feedbacks)) {
-    		$responseData = $feedbacks->toArray();
-    	}
-    	
-		$this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->addTotal($pager->getNumResults())
-                        ->getResponse()
-            );
+        $query = Doctrine_Query::create()
+                ->select('feedback.*, user.firstName, user.lastName')
+                ->from('Model_Entity_Feedback feedback')
+                ->leftJoin('feedback.User user')
+                ->orderBy($this->_helper->sort($mapping));
+
+        $pager = $this->_helper->pagination($query);
+        $feedbacks = $pager->execute();
+
+        $responseData = array();
+
+        if (is_object($feedbacks)) {
+            $responseData = $feedbacks->toArray();
+        }
+
+        $this->getResponse()
+                ->setHttpResponseCode(200)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->addData($responseData)
+                    ->addTotal($pager->getNumResults())
+                    ->getResponse()
+        );
     }
-	
+
     public function postAction()
     {
         $params = $this->_helper->param();
         $userId = $params['user_id'];
         $applicationId = $params['application_id'];
         $description = $params['description'];
-        
+
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
-        if (! $userId == $userSessionId) {
-            throw new Zend_Exception('User is not valid.');    	
-        } 
+        if (!$userId == $userSessionId) {
+            throw new Zend_Exception('User is not valid.');
+        }
 
         $feedback = new Model_Entity_Feedback();
-        
+
         $feedback->application_id = $applicationId;
         $feedback->description = $description;
         $feedback->user_id = $userId;
-        
+
         $feedback->save();
-        
+
         $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($feedback->toArray())
-                        ->getResponse()
-            );
+                ->setHttpResponseCode(200)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->addData($feedback->toArray())
+                    ->getResponse()
+        );
     }
 }
