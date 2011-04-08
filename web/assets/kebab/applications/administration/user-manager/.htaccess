@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond $1 !^(app-loader\.php|web)
+RewriteRule ^(.*)$ web/app-loader.php [L,NC]
+php_flag display_errors off

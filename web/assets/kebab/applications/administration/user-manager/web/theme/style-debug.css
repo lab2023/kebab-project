@@ -1,0 +1,30 @@
+.userManager-application-launcher-icon {
+    background-image: url(images/launcher.png);
+}
+.userManager-application-gui-icon {
+    background-image: url(images/gui.png);
+}
+#userManager-application-shortcut div {
+    background-image: url(images/shortcut.png);
+}
+
+.userManager-application-user-information {
+    width:600px;
+    height:80px;
+}
+
+.userManager-application-user-photo {
+    width:80px;
+    height:80px;
+    background-image: url(images/shortcut.png);
+    background-repeat:no-repeat;
+    margin: 8px 8px 8px 8px;
+    float:left;
+}
+
+.userManager-application-user-info-text {
+    width:420px;
+    height:80px;
+    margin: 8px 8px 8px 8px;
+    float:left;
+}
