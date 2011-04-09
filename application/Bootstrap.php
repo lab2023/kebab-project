@@ -217,9 +217,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $restRoute   = new Zend_Rest_Route($front, array(),
             array(
                  'access'=> array('user-role'),
-                 'authentication'=> array('session'),
-                 'user'=> array('user', 'profile', 'password', 'manager'),
-                 'feedback'=> array('feedback', 'feedback-manager')
+                 'authentication'=> array('session', 'password', 'forgot-password'),
+                 'feedback'=> array('feedback', 'feedback-manager'),
+                 'user'=> array('profile', 'manager')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);
