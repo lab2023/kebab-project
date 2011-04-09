@@ -26,7 +26,7 @@ if (!defined('BASE_PATH'))
 
 
 /**
- * Feedback_Feedback
+ * Feedback_FeedbackManager
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Administration

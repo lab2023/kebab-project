@@ -48,3 +48,7 @@ Model_Entity_Controller:
   User_Profile:
     Module: User
     name: profile
+
+  User_RoleManager:
+    Module: User
+    name: role-manager
