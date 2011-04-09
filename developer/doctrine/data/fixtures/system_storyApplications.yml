@@ -49,4 +49,8 @@ Model_Entity_StoryApplication:
 
   Record_13:
     Story: User_Management
-    Application: userManagerApplication
+    Application: UserManagerApplication
+
+  Record_14:
+    Story: Feedback_Management
+    Application: FeedbackManagerApplication

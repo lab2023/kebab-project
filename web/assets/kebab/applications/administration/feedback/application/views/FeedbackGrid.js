@@ -36,6 +36,7 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
         this.columns = [
             {
                 header   : 'Application Name',
+                width:50,
                 dataIndex: 'Application.name'
             },
             {

@@ -29,6 +29,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
             triggerAction: 'all',
             forceSelection: true,
             lazyRender:false,
+            allowBlank:false,
             mode: 'local',
             store: new Ext.data.JsonStore({
                 fields: ['name', 'id',{name:'title', type: 'object', mapping: 'launcher.text'}],
@@ -61,6 +62,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
                         applicationsCombobox ,
                         {
                             fieldLabel: 'Description',
+                            allowBlank:false,
                             name: 'description',
                             xtype: 'textarea',
                             height:235
