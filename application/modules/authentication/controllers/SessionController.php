@@ -44,16 +44,6 @@ class Authentication_SessionController extends Kebab_Rest_Controller
      */
     public function postAction()
     {
-        /*
-         * If user has identity, user can't see the login page.
-         * We redirect the user backend/desktop. If user haven't
-         * access right to backend/desktop. KebabAcLl plugin redirects the user
-         * UnAuthorize page.
-         */
-        if (Zend_Auth::getInstance()->hasIdentity()) {
-            $this->_redirect('backend/desktop');
-        }
-
         // Get params
         $username = $this->_request->getParam('username');
         $password = $this->_request->getParam('password');
@@ -127,10 +117,8 @@ class Authentication_SessionController extends Kebab_Rest_Controller
      */
     public function deleteAction()
     {
-        if (Zend_Auth::getInstance()->hasIdentity()) {
-            Zend_Auth::getInstance()->clearIdentity();
-            Zend_Session::forgetMe();
-            $this->_helper->response()->setSuccess(true);
-        }
+        Zend_Auth::getInstance()->clearIdentity();
+        Zend_Session::forgetMe();
+        $this->_helper->response()->setSuccess(true);
     }
 }
