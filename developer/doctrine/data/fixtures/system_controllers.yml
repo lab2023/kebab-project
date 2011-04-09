@@ -37,9 +37,9 @@ Model_Entity_Controller:
   User_Profile:
     Module: User
     name: profile
-  User_User:
+  User_Manager:
     Module: User
-    name: user
+    name: manager
     
   # FEEDBACK MODULE #########################################################
   Feedback_Feedback:

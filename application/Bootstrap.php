@@ -218,7 +218,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             array(
                  'access'=> array('user-role'),
                  'authentication'=> array('session'),
-                 'user'=> array('user', 'profile', 'password'),
+                 'user'=> array('user', 'profile', 'password', 'manager'),
                  'feedback'=> array('feedback', 'feedback-manager')
             )
         );
