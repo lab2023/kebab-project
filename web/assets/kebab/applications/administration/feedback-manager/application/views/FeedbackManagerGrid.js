@@ -8,7 +8,7 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-KebabOS.applications.feedbackManager.application.views.FeedbackGrid = Ext.extend(Ext.grid.EditorGridPanel, {
+KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext.extend(Ext.grid.EditorGridPanel, {
 
     // Application bootstrap
     bootstrap: null,
@@ -59,6 +59,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackGrid = Ext.extend
                         id: c.gridEditor.record.id,
                         status: c.getValue()
                     });
+                    this.fireEvent('loadGrid');
                 },
                 scope: this
             }
@@ -108,7 +109,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackGrid = Ext.extend
 
         this.addEvents('statusChanged');
 
-        KebabOS.applications.feedbackManager.application.views.FeedbackGrid.superclass.initComponent.apply(this, arguments);
+        KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid.superclass.initComponent.apply(this, arguments);
     },
 
     buildBbar: function() {

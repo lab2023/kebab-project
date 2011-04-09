@@ -26,7 +26,8 @@ KebabOS.applications.feedbackManager.application.controllers.Index = Ext.extend(
 
     // Initialize and define routing settings
     init: function() {
-        this.bootstrap.layout.feedbackGrid.on('statusChanged', this.statusChangeAction, this);
+        this.bootstrap.layout.feedbackManagerGrid.on('statusChanged', this.statusChangeAction, this);
+        this.bootstrap.layout.feedbackManagerGrid.on('loadGrid', this.loadGridAction, this);
     },
 
     // Actions -----------------------------------------------------------------
@@ -37,5 +38,9 @@ KebabOS.applications.feedbackManager.application.controllers.Index = Ext.extend(
             method:'PUT',
             params: { id: data.id, status: data.status }
         });
+    },
+
+    loadGridAction: function() {
+        this.bootstrap.layout.feedbackManagerGrid.store.load();
     }
 });
