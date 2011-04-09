@@ -53,6 +53,8 @@ class User_Model_User extends Model_Entity_User
                  ->leftJoin('role.UserRole userrole')
                  ->where('userrole.user_id = ?', $userId);
         $rolesResult = $query->execute();
+        $rolesWithAncestor = array();
+        $roles = array();
         foreach ($rolesResult as $role) {
            $roles[] = $role->name;
            $roleAncestors = Doctrine_Core::getTable('Model_Role')->find($role['id'])->getNode()->getAncestors();
