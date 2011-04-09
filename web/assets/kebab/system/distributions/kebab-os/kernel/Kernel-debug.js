@@ -45,6 +45,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     init : function() {
 
         Ext.QuickTips.init();
+        Ext.apply(Ext.QuickTips.getQuickTip(), {trackMouse: true});
 
         Ext.state.Manager.setProvider(this.stateProvider);
 
