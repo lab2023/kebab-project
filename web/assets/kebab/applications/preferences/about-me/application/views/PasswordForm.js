@@ -15,7 +15,7 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
 
     title:' Change Password',
     iconCls: 'icon-key',
-    url: BASE_URL + '/user/password',
+    url: BASE_URL + '/authentication/password',
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',
