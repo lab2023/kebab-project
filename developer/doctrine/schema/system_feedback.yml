@@ -27,9 +27,6 @@ Feedback:
     Timestampable:
     SoftDelete:
     Blameable:
-    Searchable:
-      fields: [id, user_id, application_id, status]    
-      className: SystemFeedbackSearch
   
   options:
     type: INNODB
