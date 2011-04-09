@@ -45,3 +45,6 @@ Model_Entity_Controller:
   Feedback_Feedback:
     Module: Feedback
     name: feedback
+  Feedback_FeedbackManager:
+    Module: Feedback
+    name: feedback-manager

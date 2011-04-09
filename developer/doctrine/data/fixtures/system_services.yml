@@ -24,4 +24,7 @@ Model_Entity_Service:
     Story: Change_Profile
     Resource: Authentication_Password
 
-    
+  # Manage Feedbacks
+  ManageFeedback_1:
+    Story: Feedback_Management
+    Resource: Feedback_FeedbackManager

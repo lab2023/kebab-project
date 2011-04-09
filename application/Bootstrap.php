@@ -219,7 +219,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                  'access'=> array('user-role'),
                  'authentication'=> array('session'),
                  'user'=> array('user', 'profile', 'password'),
-                 'feedback'=> array('feedback')
+                 'feedback'=> array('feedback', 'feedback-manager')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);
