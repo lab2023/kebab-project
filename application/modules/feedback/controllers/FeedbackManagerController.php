@@ -76,4 +76,31 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
                     ->getResponse()
         );
     }
+    
+    /**
+     * @return void
+     */
+    public function putAction()
+    {
+        // Getting parameters
+        $params = $this->_helper->param();
+        $id = $params['id'];
+        $status = $params['status'];
+        
+        // Updating status
+        $feedback = new Feedback_Model_Feedback();
+        $feedback->assignIdentifier($id);
+        $feedback->status = $status;
+        $feedback->save();
+        unset($feedback);
+
+        // Returning response
+        $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+        	);
+    }
 }
