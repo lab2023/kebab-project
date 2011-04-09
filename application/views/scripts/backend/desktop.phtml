@@ -5,7 +5,14 @@ $this->headLink()
      ->appendStylesheet($this->asset('desktop.css')->distribution()->theme()->get());
 $this->headScript()
      ->appendFile($this->asset('library')->get())
-     ->appendFile($this->asset('kernel')->distribution()->get());
+     ->appendFile($this->asset('kernel/Kernel.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Application.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Desktop.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Panel.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Notification.js')->distribution()->get())             
+     ->appendFile($this->asset('kernel/Translator.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Logger.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/Extras.js')->distribution()->get());
 ?>
 
     <?php 
