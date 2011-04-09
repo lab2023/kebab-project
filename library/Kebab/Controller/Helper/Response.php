@@ -154,7 +154,8 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
         }
 
         $this->_response['errors'][] = array(
-            $id => Zend_Registry::get('translator')->_($value)
+            'id' => $id,
+        	'msg' => Zend_Registry::get('translator')->_($value)
         );
 
         return $this;
