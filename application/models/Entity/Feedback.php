@@ -41,8 +41,6 @@ class Model_Entity_Feedback extends Doctrine_Record
               1 => 'process',
               2 => 'closed',
              ),
-             'default' => 'open',
-             'notnull' => true,
              ));
 
         $this->option('type', 'INNODB');

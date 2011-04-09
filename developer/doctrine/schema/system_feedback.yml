@@ -12,9 +12,7 @@ Feedback:
       type: enum
       length: 7
       values: ['open', 'process', 'closed']
-      default: 'open'
-      notnull: true
-  
+
   relations:
     User:
       class: User

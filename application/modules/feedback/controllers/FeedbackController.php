@@ -58,8 +58,7 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         $query = Doctrine_Query::create()
                 ->select('feedback.*,
                     application.*,
-                    applicationTranslate.title as title,
-                    applicationTranslate.description as description')
+                    applicationTranslate.title as title')
                 ->from('Model_Entity_Feedback feedback')
                 ->leftJoin('feedback.Application application')
                 ->leftJoin('application.Translation applicationTranslate')
@@ -103,6 +102,7 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
 
         $feedback = new Model_Entity_Feedback();
         $feedback->Application = $application;
+        $feedback->status = 'open';
         $feedback->description = $description;
         $feedback->user_id = $userId;
 

@@ -55,8 +55,7 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
                     application.*,
                     user.firstName,
                     user.lastName,
-                    applicationTranslate.title as title,
-                    applicationTranslate.description as description')
+                    applicationTranslate.title as title')
                 ->from('Model_Entity_Feedback feedback')
                 ->leftJoin('feedback.Application application')
                 ->leftJoin('application.Translation applicationTranslate')
@@ -68,7 +67,6 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
         $feedbacks = $pager->execute();
 
         $responseData = array();
-
         if (is_object($feedbacks)) {
             $responseData = $feedbacks->toArray();
         }
@@ -93,21 +91,27 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
         $params = $this->_helper->param();
         $id = $params['id'];
         $status = $params['status'];
-        
-        // Updating status
-        $feedback = new Feedback_Model_Feedback();
-        $feedback->assignIdentifier($id);
-        $feedback->status = $status;
-        $feedback->save();
-        unset($feedback);
 
-        // Returning response
-        $this->getResponse()
-                    ->setHttpResponseCode(201)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
-        	);
+        // Updating status
+        try {
+            $feedback = new Feedback_Model_Feedback();
+            $feedback->assignIdentifier($id);
+            $feedback->set('status', $status);
+            $feedback->save();
+            
+            // Returning response
+            $this->getResponse()
+                        ->setHttpResponseCode(202)
+                        ->appendBody(
+                    $this->_helper->response()
+                            ->setSuccess(true)
+                            ->getResponse()
+                );
+        } catch (Zend_Exception $e) {
+            die('ZE');
+        } catch (Doctrine_Exception $e) {
+            throw $e;
+        }
+
     }
 }
