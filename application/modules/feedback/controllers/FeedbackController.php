@@ -43,6 +43,10 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
      */
     public function indexAction()
     {
+
+
+        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+
         // Mapping
         $mapping = array(
             'id' => 'feedback.id',
@@ -50,13 +54,17 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
             'description' => 'feedback.description'
         );
 
-        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
-
+        // Doctrine
         $query = Doctrine_Query::create()
-                ->select('feedback.*, application.*')
+                ->select('feedback.*,
+                    application.*,
+                    applicationTranslate.title as title,
+                    applicationTranslate.description as description')
                 ->from('Model_Entity_Feedback feedback')
                 ->leftJoin('feedback.Application application')
+                ->leftJoin('application.Translation applicationTranslate')
                 ->where('feedback.user_id = ?', $userSessionId)
+                ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
