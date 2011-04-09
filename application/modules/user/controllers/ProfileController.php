@@ -82,7 +82,23 @@ class User_ProfileController extends Kebab_Rest_Controller
         $lastName = $params['lastName'];
         $email = $params['email'];
         $language = $params['language'];
+
+        $userExistsWithEmail = Doctrine_Query::create()
+        				->from('Model_Entity_User user')
+        				->where('user.email = ?', $email)
+        				->andWhere('user.id != ?', $userSessionId)->fetchOne();
         
+		if (is_object($userExistsWithEmail)) {
+			 // Another User exists with entered email
+	        $this->getResponse()
+	                    ->setHttpResponseCode(201)
+	                    ->appendBody(
+	                $this->_helper->response()
+	                		->set('email', 'Another User with email exists.')
+	                        ->getResponse()
+	            );
+		}
+		
         // DQL
         $profile = new User_Model_User();
         $profile->assignIdentifier($userSessionId);
