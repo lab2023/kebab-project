@@ -18,7 +18,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    System
  * @subpackage Controllers
- * @author       lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
@@ -26,30 +26,37 @@ if (!defined('BASE_PATH'))
 
 
 /**
- * Preferences_AboutMeController
+ * Feedback_Feedback
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Administration
  * @subpackage Controllers
- * @author       lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 class Feedback_FeedbackController extends Kebab_Rest_Controller
 {
+    /**
+     * @return void
+     */
     public function indexAction()
     {
         // Mapping
         $mapping = array(
-            'id' => 'feedback.id'
+            'id' => 'feedback.id',
+            'status' => 'feedback.status',
+            'description' => 'feedback.description'
         );
 
+        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+
         $query = Doctrine_Query::create()
-                ->select('feedback.*, application.*, user.firstName, user.lastName')
+                ->select('feedback.*, application.*')
                 ->from('Model_Entity_Feedback feedback')
-                ->leftJoin('feedback.User user')
                 ->leftJoin('feedback.Application application')
+                ->where('feedback.user_id = ?', $userSessionId)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
