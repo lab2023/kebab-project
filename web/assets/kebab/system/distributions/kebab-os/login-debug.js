@@ -43,7 +43,7 @@ Ext.onReady(function() {
             allowBlank:false
         }, {
             xtype: 'checkboxgroup',
-            items: [{boxLabel: 'Remember me this computer', name: 'rememberMe', checked: true}]
+            items: [{boxLabel: 'Remember me this computer', name: 'rememberMe', checked: false}]
         }],
         buttons: [{
             width:80,
