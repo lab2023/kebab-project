@@ -1,11 +1,13 @@
 #Actions
 Model_Entity_Action:
-  # Access the desktop
-  Default_Backend_Desktop:
-    Controller: Default_Backend
-    name: desktop
 
   # Logout
   Authentication_Session_Delete:
     Controller: Authentication_Session
     name: delete
+    
+  # Access the desktop
+  Default_Backend_Desktop:
+    Controller: Default_Backend
+    name: desktop
+

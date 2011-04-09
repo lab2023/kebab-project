@@ -1,12 +1,14 @@
 #Modules
 Model_Entity_Module:
-  Default:
-    name: default
+
   Access:
     name: access
   Authentication:
     name: authentication
-  User:
-    name: user
+  Default:
+    name: default
   Feedback:
     name: feedback
+  User:
+    name: user
+    

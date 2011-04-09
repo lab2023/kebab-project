@@ -19,6 +19,7 @@ Model_Entity_Service:
   Profile_1:
     Story: Change_Profile
     Resource: User_Profile
+
   # Change Password
   Profile_2:
     Story: Change_Profile

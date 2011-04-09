@@ -1,7 +1,28 @@
 #Controllers
 Model_Entity_Controller:
+  # ACCESS MODULE #######################################################
+  Access_UserRole:
+    Module: Access
+    name: user-role
+
+  # AUTH MODULE #########################################################
+  Authentication_ForgotPassword:
+    Module: Authentication
+    name: forgot-password
+
+  Authentication_Password:
+    Module: Authentication
+    name: password
+
+  Authentication_Session:
+    Module: Authentication
+    name: session
 
   # DEFAULT MODULE #######################################################
+  Default_Backend:
+    Module: Default
+    name: backend
+
   Default_Error:
     Module: Default
     name: error
@@ -9,42 +30,21 @@ Model_Entity_Controller:
   Default_Index:
     Module: Default
     name: index
-
-  Default_Backend:
-    Module: Default
-    name: backend
-
-
-  # ACCESS MODULE #######################################################
-  Access_UserRole:
-    Module: Access
-    name: user-role
-
-  # AUTH MODULE #########################################################
-  Authentication_Session:
-    Module: Authentication
-    name: session
-  Authentication_Signup:
-    Module: Authentication
-    name: sign-up
-  Authentication_Password:
-    Module: Authentication
-
-  # USER MODULE #########################################################
-  User_Invitation:
-    Module: User
-    name: invitation
-  User_Profile:
-    Module: User
-    name: profile
-  User_Manager:
-    Module: User
-    name: manager
     
   # FEEDBACK MODULE #########################################################
   Feedback_Feedback:
     Module: Feedback
     name: feedback
+
   Feedback_FeedbackManager:
     Module: Feedback
     name: feedback-manager
+
+  # USER MODULE #########################################################
+  User_Manager:
+    Module: User
+    name: manager
+
+  User_Profile:
+    Module: User
+    name: profile
