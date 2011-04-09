@@ -64,19 +64,8 @@ class Model_Entity_Feedback extends Doctrine_Record
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $blameable0 = new Doctrine_Template_Blameable();
-        $searchable0 = new Doctrine_Template_Searchable(array(
-             'fields' => 
-             array(
-              0 => 'id',
-              1 => 'user_id',
-              2 => 'application_id',
-              3 => 'status',
-             ),
-             'className' => 'SystemFeedbackSearch',
-             ));
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
         $this->actAs($blameable0);
-        $this->actAs($searchable0);
     }
 }
