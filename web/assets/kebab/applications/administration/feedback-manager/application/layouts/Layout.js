@@ -16,12 +16,12 @@ KebabOS.applications.feedbackManager.application.layouts.Layout = Ext.extend(Ext
     border:false,
 
     initComponent: function() {
-        this.feedbackGrid = new KebabOS.applications.feedbackManager.application.views.FeedbackGrid({
+        this.feedbackManagerGrid = new KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid({
             bootstrap: this.bootstrap
         });
         
         var config = {
-            items:[this.feedbackGrid]
+            items:[this.feedbackManagerGrid]
         }
 
         Ext.apply(this, config);
