@@ -22,7 +22,7 @@ Model_Entity_Story:
     status: active
 
   User_Management:
-    name: User add, edit and remove.
+    name: User Management
     Translation:
       en:
         title: User Management
@@ -31,4 +31,15 @@ Model_Entity_Story:
         title: Kullanıcı Düzenleme
         description: Kullanıcı ekleyin çıkarın düzenleyin.
     status: active
-  
+
+  Feedback_Management:
+    name: Feedback Management
+    Translation:
+      en:
+        title: Feedback Management
+        description: Manage feedbacks
+      tr:
+        title: Geribildirim Yönetimi
+        description: Geribildirimleri yönetin
+    status: active
+    

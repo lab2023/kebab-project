@@ -11,5 +11,8 @@ Model_Entity_Permission:
     Story: User_Management
     Role: Admin
     rule: allow
-    
+  Permission_4:
+    Story: Feedback_Management
+    Role: Admin
+    rule: allow
     
