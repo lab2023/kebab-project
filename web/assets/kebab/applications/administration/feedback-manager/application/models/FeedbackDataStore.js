@@ -17,7 +17,7 @@ KebabOS.applications.feedbackManager.application.models.FeedbackDataStore = Ext.
     readerFields:[
         {name: 'id', type:'integer'},
         {name: 'User', type:'object'},
-        {name:'applicationName', type:'string', mapping: 'Application.name'},
+        {name:'title', type:'string'},
         {name: 'description', type:'string'},
         {name: 'status', type:'string'},
 

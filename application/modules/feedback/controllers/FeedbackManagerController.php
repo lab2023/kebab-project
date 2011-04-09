@@ -51,10 +51,17 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
         );
 
         $query = Doctrine_Query::create()
-                ->select('feedback.*, application.*, user.firstName, user.lastName')
+                ->select('feedback.*,
+                    application.*,
+                    user.firstName,
+                    user.lastName,
+                    applicationTranslate.title as title,
+                    applicationTranslate.description as description')
                 ->from('Model_Entity_Feedback feedback')
                 ->leftJoin('feedback.Application application')
+                ->leftJoin('application.Translation applicationTranslate')
                 ->leftJoin('feedback.User user')
+                ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);

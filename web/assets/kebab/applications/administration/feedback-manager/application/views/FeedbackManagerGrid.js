@@ -34,6 +34,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             }
         }
 
+        //KBBTODO add i18n
         var statusData = [
             ['open', 'Open'],
             ['process', 'Processed'],
@@ -79,7 +80,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             },
             {
                 header   : 'Application Name',
-                dataIndex: 'applicationName'
+                dataIndex: 'title'
             },
             {
                 header   : 'Description',
