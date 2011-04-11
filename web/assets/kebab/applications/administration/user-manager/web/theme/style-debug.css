@@ -9,22 +9,31 @@
 }
 
 .userManager-application-user-information {
-    width:600px;
+    width:670px;
     height:80px;
 }
-
+.userManager-application-user-information:hover{
+    background-color:#E8EDFF;
+}
 .userManager-application-user-photo {
-    width:80px;
-    height:80px;
+    width:64px;
+    height:64px;
     background-image: url(images/shortcut.png);
     background-repeat:no-repeat;
-    margin: 8px 8px 8px 8px;
+    margin: 5px 5px 5px 5px;
     float:left;
 }
 
+
 .userManager-application-user-info-text {
-    width:420px;
-    height:80px;
-    margin: 8px 8px 8px 8px;
+    width:330px;
+    height:64px;
+    margin: 5px 5px 5px 5px;
+    float:left;
+}
+.userManager-application-user-buttons {
+    width:140px;
+    height:64px;
+    margin: 5px 5px 5px 5px;
     float:left;
 }

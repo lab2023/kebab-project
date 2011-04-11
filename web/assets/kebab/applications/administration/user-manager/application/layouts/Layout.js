@@ -12,66 +12,23 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
 
     // Application bootstrap
     bootstrap: null,
+    layout:'fit',
+    border:false,
 
     initComponent: function() {
 
-        // create the data store
-        var store = new Ext.data.ArrayStore({
-            fields: [
-                {name: 'name'},
-                {name: 'lastName'},
-                {name: 'userName'},
-                {name: 'email'},
-                {name: 'role'}
-            ]
-        });
-
-        store.loadData([
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']],
-            ['Yunus', 'ÖZCAN', 'youzncuasn', 'yunus.ozcan@lab2023.com', ['admin', 'guest', 'owner']]
-        ]);
-
-        // Template
-        var tpl = new Ext.XTemplate(
-                '<tpl for=".">',
-                '<div class="userManager-application-user-information">',
-                '<div class="userManager-application-user-photo" "></div>',
-                '<div class="userManager-application-user-info-text">',
-                '<div>{name} {lastName}</div>',
-                '<div><span>{userName}</span><span>{email}</span></div>',
-                '<tpl for="role"> <span>{.}, </span> </tpl>',
-                '</div>',
-                '</div>',
-                '</tpl>'
-                );
-
-        var dataview = new Ext.DataView({
-            store        : store,
-            tpl          : tpl,
-            itemSelector : 'div'
-
+       this.userManagerDataView = new KebabOS.applications.userManager.application.views.UserManagerDataView({
+            bootstrap: this.bootstrap
         });
 
         var config = {
-            items : dataview,
-            tbar :[
-                {
-                    text: 'INVITE',
-                    iconCls:'icon-email'
-                }
-            ]
-        }
+            items : this.userManagerDataView
+        };
 
 
         Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.layouts.Layout.superclass.initComponent.call(this);
     }
+
 });

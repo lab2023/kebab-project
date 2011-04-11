@@ -35,7 +35,9 @@ Ext.extend(KebabOS.applications.userManager.application.Bootstrap, Kebab.OS.Appl
                 width: 600,
                 height: 300,
                 border:false,
-                items: this.layout
+                items: this.layout,
+                resizable: false,
+                maximizable: false
             });
 
         }
