@@ -31,14 +31,11 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '<tr class="userManager-application-user-information">',
                 '<td class="userManager-application-user-photo"></td>',
                 '<td class="userManager-application-user-info-text" ><span style="font-size:18pt;">{firstName} {lastName}</span><br /><span>{username}</span>, <span>{email}</span><br /><span>{Roles}</span></td>',
-                '<td class="userManager-application-user-buttons">{status}</td>',
+                '<td class="userManager-application-user-buttons"><span class="icon-accept" style="background-repeat:no-repeat; width:16px;height:16px; padding-left:20px; font-size:8pt;">{status}</span></td>',
                 '</tr>',
                 '</tpl>',
                 '</table>'
                 );
-
-
-    
 
     Ext.apply(this, config);
 
@@ -49,6 +46,8 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
     listeners: {
         afterRender:function(){
             this.store.load();
+
         }
     }
+
 });

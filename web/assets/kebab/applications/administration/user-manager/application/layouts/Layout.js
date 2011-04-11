@@ -4,7 +4,7 @@
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
  * @namespace   KebabOS.applications.userManager.application.layouts
- * @author      Yunus ÖZCAN <yuns.ozcan@lab2023.com>
+ * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
@@ -17,12 +17,23 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
 
     initComponent: function() {
 
-       this.userManagerDataView = new KebabOS.applications.userManager.application.views.UserManagerDataView({
+        this.userManagerDataView = new KebabOS.applications.userManager.application.views.UserManagerDataView({
             bootstrap: this.bootstrap
         });
 
+        this.inviteUserWindow = new KebabOS.applications.userManager.application.views.InviteUserWindow({
+            bootstrap: this.bootstrap
+        });
+
+        this.userRolesWindow = new KebabOS.applications.userManager.application.views.UserRolesWindow({
+            bootstrap: this.bootstrap
+        });
+
+        this.inviteUserWindow.show();
+        this.userRolesWindow.show();
+
         var config = {
-            items : this.userManagerDataView
+            items : [this.userManagerDataView]
         };
 
 

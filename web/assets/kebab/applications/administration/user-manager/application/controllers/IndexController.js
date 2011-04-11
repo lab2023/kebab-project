@@ -4,7 +4,7 @@
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
  * @namespace   KebabOS.applications.userManager.application.controllers
- * @author      Yunus ÖZCAN <yuns.ozcan@lab2023.com>
+ * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
@@ -26,8 +26,8 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-
+        
     }
 
-    // Actions ----------------------------------------------------------------- 
+    // Actions -----------------------------------------------------------------
 });
