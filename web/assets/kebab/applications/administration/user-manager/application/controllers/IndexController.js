@@ -1,5 +1,5 @@
 /**
- * Kebab Application Bootstrap Class
+ * userManager Application indexController Class
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications

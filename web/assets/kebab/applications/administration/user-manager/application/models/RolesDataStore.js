@@ -1,5 +1,5 @@
 /**
- * userManager Application UserDataStore class
+ * userManager Application RolesDataStore class
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
@@ -8,7 +8,7 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-KebabOS.applications.userManager.application.models.UserDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
+KebabOS.applications.userManager.application.models.RolesDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
 
     // Application Bootstrap
     bootstrap: null,
@@ -18,11 +18,6 @@ KebabOS.applications.userManager.application.models.UserDataStore = Ext.extend(K
 
     readerFields: [
         {name: 'id', type:'integer'},
-        {name: 'firstName', type:'string'},
-        {name: 'lastName', type:'string'},
-        {name: 'email', type:'string'},
-        {name:'username', type:'string'},
-        {name: 'Roles', type:'string'},
-        {name: 'status', type:'string'}
+        {name: 'name', type:'string'}
     ]
 });

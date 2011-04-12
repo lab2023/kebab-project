@@ -7,7 +7,6 @@
 #userManager-application-shortcut div {
     background-image: url(images/shortcut.png);
 }
-
 .userManager-application-user-information {
     width:670px;
     height:80px;
@@ -23,8 +22,6 @@
     margin: 5px 5px 5px 5px;
     float:left;
 }
-
-
 .userManager-application-user-info-text {
     width:330px;
     height:64px;
@@ -32,8 +29,8 @@
     float:left;
 }
 .userManager-application-user-buttons {
-    width:140px;
-    height:64px;
-    margin: 5px 5px 5px 5px;
+    width:118px;
+    padding-left:22px;
+    padding-top:10px;
     float:left;
 }

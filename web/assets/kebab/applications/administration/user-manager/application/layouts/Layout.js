@@ -1,5 +1,5 @@
 /**
- * Kebab Application Bootstrap Class
+ * userManager Application layout Class
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
@@ -29,13 +29,9 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
             bootstrap: this.bootstrap
         });
 
-        this.inviteUserWindow.show();
-        this.userRolesWindow.show();
-
         var config = {
             items : [this.userManagerDataView]
         };
-
 
         Ext.apply(this, config);
 
