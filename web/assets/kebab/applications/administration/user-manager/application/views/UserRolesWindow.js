@@ -12,6 +12,7 @@ KebabOS.applications.userManager.application.views.UserRolesWindow = Ext.extend(
 
     // Application Bootstrap
     bootstrap: null,
+    layout:'fit',
 
     initComponent: function() {
 

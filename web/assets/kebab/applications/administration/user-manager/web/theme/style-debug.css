@@ -1,36 +1,51 @@
 .userManager-application-launcher-icon {
     background-image: url(images/launcher.png);
 }
+
 .userManager-application-gui-icon {
     background-image: url(images/gui.png);
 }
+
 #userManager-application-shortcut div {
     background-image: url(images/shortcut.png);
 }
+
 .userManager-application-user-information {
-    width:670px;
-    height:80px;
+    width: 670px;
+    height: 80px;
 }
-.userManager-application-user-information:hover{
-    background-color:#E8EDFF;
+
+.userManager-application-user-information:hover {
+    background-color: #E8EDFF;
 }
+
 .userManager-application-user-photo {
-    width:64px;
-    height:64px;
+    width: 64px;
+    height: 64px;
     background-image: url(images/shortcut.png);
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     margin: 5px 5px 5px 5px;
-    float:left;
+    float: left;
 }
+
 .userManager-application-user-info-text {
-    width:330px;
-    height:64px;
+    width: 330px;
+    height: 64px;
     margin: 5px 5px 5px 5px;
-    float:left;
+    float: left;
 }
+
 .userManager-application-user-buttons {
-    width:118px;
-    padding-left:22px;
-    padding-top:10px;
-    float:left;
+    width: 118px;
+    padding-left: 22px;
+    padding-top: 10px;
+    float: left;
+}
+
+.userManager-application-user-buttons-style {
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    float: left;
 }

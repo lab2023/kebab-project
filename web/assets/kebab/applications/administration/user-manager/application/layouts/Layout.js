@@ -29,6 +29,14 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
             bootstrap: this.bootstrap
         });
 
+        this.emailForm = new KebabOS.applications.userManager.application.views.EmailForm({
+            bootstrap: this.bootstrap
+        });
+        
+        this.rolesGrid = new KebabOS.applications.userManager.application.views.RolesGrid({
+            bootstrap: this.bootstrap
+        });
+
         var config = {
             items : [this.userManagerDataView]
         };
