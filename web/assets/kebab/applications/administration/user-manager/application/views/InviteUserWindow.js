@@ -27,13 +27,10 @@ KebabOS.applications.userManager.application.views.InviteUserWindow = Ext.extend
             modal:true
         }
 
-
-    
-
-    Ext.apply(this, config);
+        Ext.apply(this, config);
 
 
         KebabOS.applications.userManager.application.views.InviteUserWindow.superclass.initComponent.apply(this, arguments);
     }
-    
+
 });

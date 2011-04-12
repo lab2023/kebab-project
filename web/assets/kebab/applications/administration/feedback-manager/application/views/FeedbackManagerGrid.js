@@ -30,7 +30,6 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             viewConfig: {
                 // To be equal to the width of columns
                 forceFit: true
-
             }
         }
 

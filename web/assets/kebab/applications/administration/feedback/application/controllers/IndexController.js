@@ -27,7 +27,6 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
     // Initialize and define routing settings
     init: function() {
         this.bootstrap.layout.feedbackForm.on('loadGrid', this.loadGridAction, this);
-
     },
 
     // Actions -----------------------------------------------------------------

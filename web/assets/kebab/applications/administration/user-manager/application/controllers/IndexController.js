@@ -26,7 +26,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-        
+
     }
 
     // Actions -----------------------------------------------------------------

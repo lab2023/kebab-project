@@ -78,7 +78,6 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
                     handler : this.onSave
                 }
             ]
-
         }
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));

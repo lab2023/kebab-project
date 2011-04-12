@@ -15,7 +15,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
 
     initComponent: function() {
 
-     // create the data store
+        // create the data store
         this.store = new KebabOS.applications.userManager.application.models.UserDataStore({
             bootstrap:this.bootstrap
         });
@@ -37,14 +37,13 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '</table>'
                 );
 
-    Ext.apply(this, config);
-
+        Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.views.UserManagerDataView.superclass.initComponent.apply(this, arguments);
     },
 
     listeners: {
-        afterRender:function(){
+        afterRender:function() {
             this.store.load();
 
         }

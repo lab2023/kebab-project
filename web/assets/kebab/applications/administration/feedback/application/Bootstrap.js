@@ -39,7 +39,6 @@ Ext.extend(KebabOS.applications.feedback.application.Bootstrap, Kebab.OS.Applica
                 resizable: false,
                 maximizable: false
             });
-
         }
         app.show();
     }
