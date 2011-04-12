@@ -28,20 +28,24 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
         this.userRolesWindow = new KebabOS.applications.userManager.application.views.UserRolesWindow({
             bootstrap: this.bootstrap
         });
-
-        this.emailForm = new KebabOS.applications.userManager.application.views.EmailForm({
-            bootstrap: this.bootstrap
-        });
         
-        this.rolesGrid = new KebabOS.applications.userManager.application.views.RolesGrid({
-            bootstrap: this.bootstrap
-        });
+        /*this.emailForm = new KebabOS.applications.userManager.application.views.EmailForm({
+                    bootstrap: this.bootstrap
+                });
+
+                this.rolesGrid = new KebabOS.applications.userManager.application.views.RolesGrid({
+                    bootstrap: this.bootstrap
+                });*/
 
         var config = {
             items : [this.userManagerDataView]
         };
 
         Ext.apply(this, config);
+
+        this.bbar = new Kebab.library.ext.ExtendedPagingToolbar({
+            store: this.userManagerDataView.store
+        });
 
         KebabOS.applications.userManager.application.layouts.Layout.superclass.initComponent.call(this);
     }

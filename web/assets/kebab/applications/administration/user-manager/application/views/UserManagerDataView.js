@@ -21,52 +21,80 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
         });
 
         var config = {
-            autoScroll:true
+            autoScroll:true,
+            loadMask:true,
+            overClass:'userManager-application-users-over',
+            itemSelector:'div.userManager-application-users'
         }
-
+        
         // Template
         this.tpl = new Ext.XTemplate(
-                '<table cellpadding="0" cellspacing="0" width="100%">',
-                '<tpl for=".">',
-                '<tr class="userManager-application-user-information">',
-                '<td class="userManager-application-user-photo"></td>',
-                '<td class="userManager-application-user-info-text" ><span style="font-size:18pt;">',
-                '{firstName} {lastName}</span><br /><span>{username}</span>, <span>{email}</span><br /><span>{Roles}</span></td>',
-                '<td class="userManager-application-user-buttons">',
-                
-                '<tpl if="status ==\'active\' ">',
-                '<div id="active-{id}" class="icon-accept userManager-application-user-buttons-style" ext:qtip="{status}"></div>',
-                '</tpl>',
-                '<tpl if="status ==\'passive\' ">',
-                '<div id="passive-{id}" class="icon-cancel userManager-application-user-buttons-style" ext:qtip="{status}"></div>',
-                '</tpl>',
+        '<tpl for=".">',
 
-                '<tpl if="status ==\'active\' ">',
-                '<div id="send-password-{id}" class="icon-email userManager-application-user-buttons-style" ext:qtip="Send Password"></div>',
+            '<div class="userManager-application-users">',
+                '<span style="font-size:18pt;">{firstName} {lastName}</span><br />',
+                '<span>{username}</span>, <span>{email}</span><br />',
+                '<tpl for="Roles">',
+                    '<span>{name}</span>   ',
                 '</tpl>',
-                '<tpl if="status ==\'passive\' ">',
-                '<div id="re-invite-{id}" class="icon-email userManager-application-user-buttons-style" ext:qtip="Reinvite {username}"></div>',
-                '</tpl>',
+                '<div class="buttons">',
 
-                '<div id="roles-chance-{id}" class="icon-wrench userManager-application-user-buttons-style" ext:qtip="Chance {username} roles "></div>',
-                '<div id="delete-user-{id}" class="icon-cancel userManager-application-user-buttons-style" ext:qtip="Delete {username}"></div>',
-                '</td>',
-                '</tr>',
-                '</tpl>',
-                '</table>'
-                );
+                    '<tpl if="status ==\'active\' ">',
+                        '<span class="icon-accept" ext:qtip="{status}"></span>',
+                    '</tpl>',
+                    '<tpl if="status ==\'passive\' ">',
+                        '<span class="icon-delete" ext:qtip="{status}"></span>',
+                    '</tpl>',
 
-        this.bbar = this.buildBbar();
+                    '<tpl if="status ==\'active\' ">',
+                        '<span class="icon-email send-password" ext:qtip="Send Password"></span>',
+                    '</tpl>',
+                    '<tpl if="status ==\'passive\' ">',
+                        '<span class="icon-email re-invite" ext:qtip="Reinvite {firstName} {lastName}"></span>',
+                    '</tpl>',
+
+                    '<span class="icon-wrench" ext:qtip="Chance {firstName} {lastName} roles "></span>',
+                    '<span class="icon-cancel" ext:qtip="Delete {firstName} {lastName}"></span>',
+
+                '</div>',
+
+            '</div>',
+        '</tpl>'
+        );
 
         Ext.apply(this, config);
 
-        KebabOS.applications.userManager.application.views.UserManagerDataView.superclass.initComponent.apply(this, arguments);
-    },
+        this.on('click', function(dv,index,node,event) {
 
-    buildBbar: function() {
-        return  new Kebab.library.ext.ExtendedPagingToolbar({
-            store: this.store
-        });
+            if (event.getTarget("span.icon-accept")) {
+
+            }
+
+            if (event.getTarget("span.icon-delete")) {
+
+            }
+
+            if (event.getTarget("span.send-password")) {
+
+            }
+
+            if (event.getTarget("span.re-invite")) {
+
+            }
+
+            if (event.getTarget("span.icon-wrench")) {
+
+            }
+
+            if (event.getTarget("span.icon-cancel")) {
+
+            }
+
+            var recordId = dv.getStore().getAt(index);
+
+        }, this);
+
+        KebabOS.applications.userManager.application.views.UserManagerDataView.superclass.initComponent.apply(this, arguments);
     },
 
     listeners: {

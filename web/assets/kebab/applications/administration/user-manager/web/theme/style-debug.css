@@ -10,42 +10,33 @@
     background-image: url(images/shortcut.png);
 }
 
-.userManager-application-user-information {
-    width: 670px;
+div.userManager-application-users {
+    background: url(images/shortcut.png) no-repeat 10px center;
     height: 80px;
+    padding-left: 80px;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 
-.userManager-application-user-information:hover {
+div.userManager-application-users-over {
     background-color: #E8EDFF;
 }
 
-.userManager-application-user-photo {
-    width: 64px;
-    height: 64px;
-    background-image: url(images/shortcut.png);
-    background-repeat: no-repeat;
-    margin: 5px 5px 5px 5px;
-    float: left;
+div.userManager-application-users div.buttons {visibility:hidden;}
+div.userManager-application-users-over div.buttons {
+    visibility:visible;
+    float:right;
+    position: relative;
+    top:-33px;
+    width: 120px;
+    height: 20px;
 }
 
-.userManager-application-user-info-text {
-    width: 330px;
-    height: 64px;
-    margin: 5px 5px 5px 5px;
-    float: left;
-}
-
-.userManager-application-user-buttons {
-    width: 118px;
-    padding-left: 22px;
-    padding-top: 10px;
-    float: left;
-}
-
-.userManager-application-user-buttons-style {
+div.userManager-application-users-over div.buttons span {
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
     margin-right: 10px;
+    cursor:pointer;
     float: left;
 }

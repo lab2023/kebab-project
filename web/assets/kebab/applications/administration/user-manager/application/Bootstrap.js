@@ -34,10 +34,8 @@ Ext.extend(KebabOS.applications.userManager.application.Bootstrap, Kebab.OS.Appl
                 iconCls: 'userManager-application-gui-icon',
                 width: 600,
                 height: 355,
-                border:false,
+                border:true,
                 items: this.layout,
-                resizable: false,
-                maximizable: false,
                 listeners: {
                     close: function() {
                         this.layout.userRolesWindow.close();

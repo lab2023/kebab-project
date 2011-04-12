@@ -22,7 +22,7 @@ KebabOS.applications.userManager.application.models.UserDataStore = Ext.extend(K
         {name: 'lastName', type:'string'},
         {name: 'email', type:'string'},
         {name:'username', type:'string'},
-        {name: 'Roles', type:'string'},
+        {name: 'Roles', type:'object'},
         {name: 'status', type:'string'}
     ]
 });
