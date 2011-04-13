@@ -18,6 +18,6 @@ KebabOS.applications.userManager.application.models.RolesDataStore = Ext.extend(
 
     readerFields: [
         {name: 'id', type:'integer'},
-        {name: 'name', type:'string'}
+        {name: 'firstName', type:'string'}
     ]
 });

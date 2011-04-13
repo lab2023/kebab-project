@@ -28,17 +28,23 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
         this.userRolesWindow = new KebabOS.applications.userManager.application.views.UserRolesWindow({
             bootstrap: this.bootstrap
         });
-        
-        /*this.emailForm = new KebabOS.applications.userManager.application.views.EmailForm({
-                    bootstrap: this.bootstrap
-                });
 
-                this.rolesGrid = new KebabOS.applications.userManager.application.views.RolesGrid({
-                    bootstrap: this.bootstrap
-                });*/
+        this.emailWindow = new KebabOS.applications.userManager.application.views.EmailWindow({
+            bootstrap: this.bootstrap
+        });
 
         var config = {
-            items : [this.userManagerDataView]
+            items : [this.userManagerDataView],
+            tbar:[
+                 {
+                    text: 'Invite User',
+                    iconCls:'icon-user',
+                    handler: function() {
+                        this.inviteUserWindow.showWindow();
+                    },
+                    scope:this
+                }
+            ]
         };
 
         Ext.apply(this, config);
@@ -49,5 +55,4 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
 
         KebabOS.applications.userManager.application.layouts.Layout.superclass.initComponent.call(this);
     }
-
 });

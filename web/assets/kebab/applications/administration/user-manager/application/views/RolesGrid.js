@@ -16,7 +16,7 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
     initComponent: function() {
 
         // json data store
-        this.store = new KebabOS.applications.feedback.application.models.RolesDataStore({
+        this.store = new KebabOS.applications.userManager.application.models.RolesDataStore({
             bootstrap:this.bootstrap
         });
 
@@ -26,36 +26,25 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
             enableColumnHide:false,
             sortable:true,
             loadMask: true,
+            multiSelect:true,
+            autoScroll:true,
             viewConfig: {
                 // To be equal to the width of columns
                 forceFit: true
             }
         }
-
+        this.sm = new Ext.grid.CheckboxSelectionModel();
         this.columns = [
+           this.sm,
+           //TODO auto select row
             {
-                header   : 'Application Name',
-                width:50,
-                dataIndex: 'name'
+                header   : 'Roles',
+                dataIndex: 'firstName'
             }
         ];
-
-        this.bbar = this.buildBbar();
 
         Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.views.RolesGrid.superclass.initComponent.apply(this, arguments);
-    },
-
-    buildBbar: function() {
-        return  new Kebab.library.ext.ExtendedPagingToolbar({
-            store: this.store
-        });
-    },
-
-    listeners: {
-        afterRender: function() {
-            this.store.load();
-        }
     }
 });

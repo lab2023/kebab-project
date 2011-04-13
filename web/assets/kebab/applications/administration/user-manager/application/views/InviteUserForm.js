@@ -21,7 +21,40 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
 
         // form config
         var config = {
-
+             labelAlign: 'top',
+            defaultType: 'textfield',
+            defaults: {
+                anchor: '100%'
+            },
+            items:[
+                {
+                    fieldLabel: 'First Name',
+                    allowBlank:false,
+                    name: 'firstName'
+                },
+                {
+                   fieldLabel: 'Last Name',
+                    allowBlank:false,
+                    name: 'lastName'
+                },
+                {
+                    fieldLabel: 'Email',
+                    allowBlank:false,
+                    name: 'email'
+                },{
+                    fieldLabel: 'Message',
+                    allowBlank:false,
+                    name: 'message',
+                    xtype: 'textarea',
+                    height:100
+                }
+            ],
+            bbar:[
+                '->',{
+                    text:'Invite Send',
+                    iconCls:'icon-email'
+                }
+            ]
         }
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));

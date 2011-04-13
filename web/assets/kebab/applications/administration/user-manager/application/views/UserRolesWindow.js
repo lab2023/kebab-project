@@ -16,6 +16,10 @@ KebabOS.applications.userManager.application.views.UserRolesWindow = Ext.extend(
 
     initComponent: function() {
 
+        this.rolesGrid = new KebabOS.applications.userManager.application.views.RolesGrid({
+            bootstrap: this.bootstrap
+        });
+        
         var config = {
             width:300,
             height:300,
@@ -24,13 +28,21 @@ KebabOS.applications.userManager.application.views.UserRolesWindow = Ext.extend(
             border:false,
             resizable: false,
             maximizable: false,
+            closeAction: 'hide',
             manager: this.bootstrap.app.getDesktop().getManager(),
-            modal:true
+            modal:true,
+            items:[this.rolesGrid]
         }
 
         Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.views.UserRolesWindow.superclass.initComponent.apply(this, arguments);
+    },
+
+    showWindow: function(user) {
+        this.setTitle(user.firstName + " " + user.lastName + " 's Roles");
+        this.show();
+        this.rolesGrid.store.load({params: {userId: user.id}});
     }
 
 });

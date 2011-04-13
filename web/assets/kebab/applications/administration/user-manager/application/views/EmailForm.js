@@ -15,13 +15,32 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
     //POST url
     url : BASE_URL + '/user/manager',
 
+
     bodyStyle: 'padding:5px 10px;',
 
     initComponent: function() {
 
         // form config
         var config = {
-
+            labelAlign: 'top',
+            defaultType: 'textfield',
+            defaults: {
+                anchor: '100%'
+            },
+            items:[
+                {
+                    fieldLabel: 'Email',
+                    allowBlank:false,
+                    name: 'description',
+                    height:30
+                }
+            ],
+            bbar:[
+                '->',{
+                    text:'Invite Send',
+                    iconCls:'icon-email'
+                }
+            ]
         }
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
