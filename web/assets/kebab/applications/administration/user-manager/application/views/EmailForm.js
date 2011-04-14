@@ -12,8 +12,6 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
 
     // Application bootstrap
     bootstrap: null,
-    //POST url
-    url : BASE_URL + '/user/manager',
 
 
     bodyStyle: 'padding:5px 10px;',
@@ -51,6 +49,10 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
         KebabOS.applications.userManager.application.views.EmailForm.superclass.initComponent.apply(this, arguments);
     },
 
+    setUrl:function(url) {
+        this.url = url;
+    },
+
     onSave: function() {
 
         if (this.getForm().isValid()) {
@@ -67,16 +69,13 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
 
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
-                    this.fireEvent('closeEmailWindow');
                     this.getForm().reset();
+                    this.fireEvent('closeEmailindow');
                 },
 
                 failure : function() {
                     notification.message(this.bootstrap.launcher.text, 'Failure');
-                },
-
-                scope:this
-            });
+                },scope:this});
         }
     }
 });
