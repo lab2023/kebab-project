@@ -35,8 +35,8 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
         }
         this.sm = new Ext.grid.CheckboxSelectionModel();
         this.columns = [
-           this.sm,
-           //TODO auto select row
+            this.sm,
+            //TODO auto select row
             {
                 header   : 'Roles',
                 dataIndex: 'firstName'

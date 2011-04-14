@@ -22,12 +22,16 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         KebabOS.applications.userManager.application.controllers.Index.superclass.constructor.apply(this, arguments);
 
         this.init();
+
     },
 
     // Initialize and define routing settings
     init: function() {
-
-    }
+        this.bootstrap.layout.emailWindow.emailForm.on('hideEmailWindow', this.hideEmailWindow, this);
+    },
 
     // Actions -----------------------------------------------------------------
+    hideEmailWindow: function() {
+        this.bootstrap.layout.emailWindow.hide();
+    }
 });

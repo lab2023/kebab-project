@@ -21,7 +21,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
 
         // form config
         var config = {
-             labelAlign: 'top',
+            labelAlign: 'top',
             defaultType: 'textfield',
             defaults: {
                 anchor: '100%'
@@ -33,26 +33,29 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                     name: 'firstName'
                 },
                 {
-                   fieldLabel: 'Last Name',
+                    fieldLabel: 'Last Name',
                     allowBlank:false,
                     name: 'lastName'
                 },
                 {
                     fieldLabel: 'Email',
                     allowBlank:false,
-                    name: 'email'
-                },{
+                    name: 'email',
+                    vtype:'email'
+                },
+                {
                     fieldLabel: 'Message',
-                    allowBlank:false,
                     name: 'message',
                     xtype: 'textarea',
-                    height:100
+                    height:80
                 }
             ],
-            bbar:[
-                '->',{
-                    text:'Invite Send',
-                    iconCls:'icon-email'
+            buttons: [
+                {
+                    text: 'Send',
+                    iconCls: 'icon-email',
+                    scope: this,
+                    handler : this.onSave
                 }
             ]
         }
@@ -60,5 +63,33 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.userManager.application.views.InviteUserForm.superclass.initComponent.apply(this, arguments);
+    },
+
+    onSave: function() {
+
+        if (this.getForm().isValid()) {
+
+            var notification = new Kebab.OS.Notification();
+
+            this.getForm().submit({
+
+                url: this.url,
+
+                method: 'POST',
+
+                //waitMsg: 'Updating...',
+
+                success : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    this.getForm().reset();
+                },
+
+                failure : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                },
+
+                scope:this
+            });
+        }
     }
 });

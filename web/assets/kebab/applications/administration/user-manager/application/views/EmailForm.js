@@ -31,14 +31,17 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
                 {
                     fieldLabel: 'Email',
                     allowBlank:false,
-                    name: 'description',
-                    height:30
+                    name: 'email',
+                    height:30,
+                    vtype:'email'
                 }
             ],
-            bbar:[
-                '->',{
-                    text:'Invite Send',
-                    iconCls:'icon-email'
+            buttons: [
+                {
+                    text: 'Send',
+                    iconCls: 'icon-email',
+                    scope: this,
+                    handler : this.onSave
                 }
             ]
         }
@@ -46,5 +49,34 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.userManager.application.views.EmailForm.superclass.initComponent.apply(this, arguments);
+    },
+
+    onSave: function() {
+
+        if (this.getForm().isValid()) {
+
+            var notification = new Kebab.OS.Notification();
+
+            this.getForm().submit({
+
+                url: this.url,
+
+                method: 'POST',
+
+                //waitMsg: 'Updating...',
+
+                success : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    this.fireEvent('closeEmailWindow');
+                    this.getForm().reset();
+                },
+
+                failure : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                },
+
+                scope:this
+            });
+        }
     }
 });

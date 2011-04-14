@@ -35,7 +35,6 @@ KebabOS.applications.userManager.application.views.EmailWindow = Ext.extend(Ext.
 
         Ext.apply(this, config);
 
-
         KebabOS.applications.userManager.application.views.EmailWindow.superclass.initComponent.apply(this, arguments);
     }
 

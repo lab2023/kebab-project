@@ -85,11 +85,11 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             }
 
             if (event.getTarget("span.send-password")) {
-                this.bootstrap.layout.emailWindow.show();
+                this.bootstrap.layout.emailWindow.show(record.status);
             }
 
             if (event.getTarget("span.re-invite")) {
-                this.bootstrap.layout.emailWindow.show();
+                this.bootstrap.layout.emailWindow.show(record.status);
             }
 
             if (event.getTarget("span.icon-wrench")) {
