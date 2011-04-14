@@ -209,3 +209,33 @@ Model_Entity_Application:
       tr:
         title: Geri Bildirim Yöneticisi
         description: Geri bildirim düzenleyin.
+
+  StoryManagerApplication:
+    identity: storyManager-application
+    className: KebabOS.applications.storyManager.application.Bootstrap
+    name: story-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    Translation:
+      en:
+        title: Story Manager
+        description: Story status edit.
+      tr:
+        title: Kullanıcı hikayeleri Yöneticisi
+        description: Kullanıcı Hikayelerini düzenleyin.
+
+  RoleManagerApplication:
+    identity: roleManager-application
+    className: KebabOS.applications.roleManager.application.Bootstrap
+    name: role-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    Translation:
+      en:
+        title: Role Manager
+        description: Roles managment.
+      tr:
+        title: Rol Yöneticisi
+        description: Rolleri yönetin.

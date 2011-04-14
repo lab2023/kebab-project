@@ -54,3 +54,11 @@ Model_Entity_StoryApplication:
   Record_14:
     Story: Feedback_Management
     Application: FeedbackManagerApplication
+
+  Record_15:
+    Story: Role_Management
+    Application: RoleManagerApplication
+
+  Record_16:
+    Story: Story_Management
+    Application: StoryManagerApplication

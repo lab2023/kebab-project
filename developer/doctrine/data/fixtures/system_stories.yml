@@ -42,4 +42,25 @@ Model_Entity_Story:
         title: Geribildirim Yönetimi
         description: Geribildirimleri yönetin
     status: active
-    
+
+  Story_Management:
+    name: Story Management
+    Translation:
+      en:
+        title: Story Management
+        description: Story active and passive.
+      tr:
+        title: Kullanıcı Hikayeleribi Düzenleme
+        description: Kullanıcı hikayelerini düzenleyin.
+    status: active
+
+  Role_Management:
+    name: Role Management
+    Translation:
+      en:
+        title: Role Management
+        description: Manage roles
+      tr:
+        title: Rol Yönetimi
+        description: Rolleri yönetin
+    status: active

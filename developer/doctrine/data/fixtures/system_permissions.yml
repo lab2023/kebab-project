@@ -15,4 +15,12 @@ Model_Entity_Permission:
     Story: Feedback_Management
     Role: Admin
     rule: allow
+  Permission_5:
+    Story: Role_Management
+    Role: Admin
+    rule: allow
+  Permission_6:
+    Story: Story_Management
+    Role: Admin
+    rule: allow
     
