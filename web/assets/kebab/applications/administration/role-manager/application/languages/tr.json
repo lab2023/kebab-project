@@ -1,0 +1,8 @@
+{
+    language      : "tr",
+    title         : "Üreticiler ve Markalar",
+    description   : "Üretici ve markalarınızı yönetin",
+    translations  : {
+        "Hello World" : "Merhaba Dünya!"
+    }
+}
