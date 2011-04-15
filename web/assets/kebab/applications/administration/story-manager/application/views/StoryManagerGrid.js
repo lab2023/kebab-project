@@ -12,6 +12,7 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
 
     // Application bootstrap
     bootstrap: null,
+    border:false,
 
     initComponent: function() {
 
@@ -32,19 +33,50 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
                 forceFit: true
             }
         }
-
+        //KBBTODO add i18n
+        var statusData = [
+            ['active', 'Active'],
+            ['passive', 'Passive']
+        ];
+        var statusCombobox = new Ext.form.ComboBox({
+            typeAhead: true,
+            triggerAction: 'all',
+            forceSelection: true,
+            lazyRender:false,
+            mode: 'local',
+            store: new Ext.data.ArrayStore({
+                fields: ['id', 'name'],
+                data: statusData
+            }),
+            valueField: 'id',
+            displayField: 'name',
+            hiddenName: 'status',
+            scope:this,
+            listeners: {
+                select: function(c) {
+                    this.fireEvent('statusChanged', {
+                        id: c.gridEditor.record.id,
+                        status: c.getValue()
+                    });
+                    this.fireEvent('loadGrid');
+                },
+                scope: this
+            }
+        });
         this.columns = [
             {
                 header   : 'Identity',
-                width:40,
+                width:20,
                 dataIndex: 'id'
             },
             {
                 header   : 'Story Name',
+                width:60,
                 dataIndex: 'name'
             },
             {
                 header   : 'Title',
+                width:60,
                 dataIndex: 'title'
             },
             {
@@ -53,7 +85,20 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
             },
             {
                 header   : 'Status',
-                dataIndex: 'status'
+                width:30,
+                dataIndex: 'status',
+                editor: statusCombobox,
+                renderer: function(v) {
+
+                    var retVal = null;
+
+                    Ext.each(statusData, function(status) {
+                        if (v == status[0])
+                            retVal = status[1];
+                    });
+
+                    return retVal;
+                }
             }
         ];
 

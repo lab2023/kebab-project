@@ -12,14 +12,27 @@ KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.Pan
 
     // Application bootstrap
     bootstrap: null,
+    layout:'border',
+    border:false,
 
     initComponent: function() {
-        this.roleManagerGrid = new KebabOS.applications.roleManager.application.views.RoleManagerGrid({
-            bootstrap: this.bootstrap
+        // panels are defined here
+        this.mainCenter = new KebabOS.applications.roleManager.application.views.MainCenter({
+            bootstrap: this.bootstrap,
+            region: 'center'
+        });
+
+        this.south = new KebabOS.applications.roleManager.application.views.South({
+            bootstrap: this.bootstrap,
+            region: 'south',
+            height:200,
+            collapseMode:'mini',
+            collapsed:true,
+            split:true
         });
 
         var config = {
-            items:[this.roleManagerGrid]
+            items:[this.mainCenter,this.south]
         }
 
         Ext.apply(this, config);

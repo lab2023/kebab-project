@@ -12,12 +12,31 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
 
     // Application bootstrap
     bootstrap: null,
-
+    border:false,
+    
     initComponent: function() {
 
         // json data store
         this.store = new KebabOS.applications.roleManager.application.models.RoleManagerStoryDataStore({
-            bootstrap:this.bootstrap
+            bootstrap:this.bootstrap,
+                        listeners: {
+                load: function(store, records) {
+                    //var userId = this.user;
+                    var sm = this.getSelectionModel();
+                    Ext.each(records, function(record) {
+                        //console.log(record);
+                        if (record.id == this.userId) {
+
+                            Ext.each(record.data.Roles, function(role) {
+                                sm.selectRow(role.id - 1);
+
+                            }, this);
+                        }
+
+                    }, this);
+                },
+                scope: this
+            }
         });
 
         // grid config
@@ -33,15 +52,17 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             }
         }
 
+
+
+
+this.sm = new Ext.grid.CheckboxSelectionModel();
         this.columns = [
-            {
-                header   : 'Identity',
-                width:40,
-                dataIndex: 'id'
-            },
+            this.sm,
             {
                 header   : 'Title',
+                width:50,
                 dataIndex: 'title'
+
             },
             {
                 header   : 'Description',
@@ -49,17 +70,9 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             }
         ];
 
-        this.bbar = this.buildBbar();
-
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid.superclass.initComponent.apply(this, arguments);
-    },
-
-    buildBbar: function() {
-        return  new Kebab.library.ext.ExtendedPagingToolbar({
-            store: this.store
-        });
     },
 
     listeners: {

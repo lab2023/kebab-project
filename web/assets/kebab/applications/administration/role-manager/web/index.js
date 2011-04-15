@@ -44,7 +44,7 @@ KebabOS.applications.roleManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Application Title',
+            text: 'Role Manager',
             iconCls: 'roleManager-application-launcher-icon'
         }
     });

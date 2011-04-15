@@ -44,7 +44,7 @@ KebabOS.applications.storyManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Application Title',
+                text: 'Story Manager',
             iconCls: 'storyManager-application-launcher-icon'
         }
     });

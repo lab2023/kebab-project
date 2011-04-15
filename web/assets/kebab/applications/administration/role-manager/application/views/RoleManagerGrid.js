@@ -26,19 +26,18 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             enableColumnResize: false,
             enableColumnHide:false,
             sortable:true,
+            selectRow:true,
             loadMask: true,
+            editor:true,
             viewConfig: {
                 // To be equal to the width of columns
                 forceFit: true
             }
-        }
-
+        };
+        this.sm = new Ext.grid.RowSelectionModel();
+        this.sm.width = 10;
         this.columns = [
-            {
-                header   : 'Identity',
-                width:40,
-                dataIndex: 'id'
-            },
+            this.sm,
             {
                 header   : 'Title',
                 dataIndex: 'title'
@@ -53,22 +52,15 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             }
         ];
 
-        this.bbar = this.buildBbar();
-
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerGrid.superclass.initComponent.apply(this, arguments);
     },
-
-    buildBbar: function() {
-        return  new Kebab.library.ext.ExtendedPagingToolbar({
-            store: this.store
-        });
-    },
-
+    
     listeners: {
         afterRender: function() {
             this.store.load();
         }
     }
+
 });
