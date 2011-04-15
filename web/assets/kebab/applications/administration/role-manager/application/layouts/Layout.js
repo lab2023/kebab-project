@@ -21,18 +21,17 @@ KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.Pan
             bootstrap: this.bootstrap,
             region: 'center'
         });
-
-        this.south = new KebabOS.applications.roleManager.application.views.South({
+        this.roleForm = new KebabOS.applications.roleManager.application.views.RoleForm({
             bootstrap: this.bootstrap,
-            region: 'south',
-            height:200,
+            region: 'west',
+            width:200,
             collapseMode:'mini',
-            collapsed:true,
             split:true
         });
 
+
         var config = {
-            items:[this.mainCenter,this.south]
+            items:[this.mainCenter,this.roleForm]
         }
 
         Ext.apply(this, config);

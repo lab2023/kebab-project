@@ -12,6 +12,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
     // Application bootstrap
     bootstrap: null,
+    border:false,
 
     initComponent: function() {
 
@@ -29,6 +30,8 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             selectRow:true,
             loadMask: true,
             editor:true,
+            title:'Chance role',
+            iconCls:'icon-user',
             viewConfig: {
                 // To be equal to the width of columns
                 forceFit: true
@@ -56,7 +59,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
         KebabOS.applications.roleManager.application.views.RoleManagerGrid.superclass.initComponent.apply(this, arguments);
     },
-    
+
     listeners: {
         afterRender: function() {
             this.store.load();
