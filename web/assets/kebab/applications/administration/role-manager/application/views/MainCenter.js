@@ -12,25 +12,20 @@ KebabOS.applications.roleManager.application.views.MainCenter = Ext.extend(Ext.P
 
     // Application bootstrap
     bootstrap: null,
-    layout:'border',
-    border:false,
 
     initComponent: function() {
         this.roleManagerGrid = new KebabOS.applications.roleManager.application.views.RoleManagerGrid({
-            bootstrap: this.bootstrap,
-            region: 'west',
-            width:400,
-                        split:true
+            bootstrap: this.bootstrap
         });
         this.eastCenter = new KebabOS.applications.roleManager.application.views.EastCenter({
-            bootstrap: this.bootstrap,
-            region: 'center'
-
-
+            bootstrap: this.bootstrap
         });
 
         var config = {
-            items:[this.roleManagerGrid, this.eastCenter]
+            items:[this.roleManagerGrid, this.eastCenter],
+            layout:'border',
+            border:false,
+            region: 'center'
         }
 
         Ext.apply(this, config);

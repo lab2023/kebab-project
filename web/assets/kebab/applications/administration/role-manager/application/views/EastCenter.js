@@ -12,8 +12,6 @@ KebabOS.applications.roleManager.application.views.EastCenter = Ext.extend(Ext.P
 
     // Application bootstrap
     bootstrap: null,
-    layout:'fit',
-    border:false,
 
     initComponent: function() {
         this.roleManagerStoryGrid = new KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid({
@@ -22,7 +20,10 @@ KebabOS.applications.roleManager.application.views.EastCenter = Ext.extend(Ext.P
         var config = {
             iconCls:'icon-page',
             title:'Chance story',
-            items:[this.roleManagerStoryGrid]
+            items:[this.roleManagerStoryGrid],
+            layout:'fit',
+            border:false,
+            region: 'center'
         }
 
         Ext.apply(this, config);

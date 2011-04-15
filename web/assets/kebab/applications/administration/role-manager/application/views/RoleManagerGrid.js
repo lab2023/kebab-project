@@ -12,7 +12,6 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
     // Application bootstrap
     bootstrap: null,
-    border:false,
 
     initComponent: function() {
 
@@ -24,6 +23,10 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
         // grid config
 
         var config = {
+            border:false,
+            region: 'west',
+            width:600,
+            split:true,
             enableColumnResize: false,
             enableColumnHide:false,
             sortable:true,

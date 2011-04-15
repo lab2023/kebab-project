@@ -12,48 +12,47 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
 
     // Application bootstrap
     bootstrap: null,
-    border:false,
     //POST url
     url : BASE_URL + '/role/manager',
-
-    bodyStyle: 'padding:5px 10px;',
 
     initComponent: function() {
 
         // form config
         var config = {
+            title:'Add new role',
+            iconCls:'icon-user-add',
+            region: 'west',
+            width:275,
+            collapseMode:'mini',
+            split:true,
+            border:false,
+            bodyStyle: 'padding:5px 10px;',
+            labelAlign: 'top',
+            defaults: {
+                anchor: '100%'
+            },
 
             items: [
                 {
-                    xtype:'panel',
-                    layout: 'form',
-                    border:false,
-                    labelAlign: 'top',
-                    defaults: {
-                        anchor: '100%'
-                    },
-                    items: [
-                                                    {
-                            fieldLabel: 'Name',
-                            allowBlank:false,
-                            name: 'description',
-                            xtype: 'textfield'
-                        },
-                                                    {
-                            fieldLabel: 'Title',
-                            allowBlank:false,
-                            name: 'description',
-                            xtype: 'textfield'
-                        },
-                                                    {
-                            fieldLabel: 'Description',
-                            allowBlank:false,
-                            name: 'description',
-                            xtype: 'textarea',
-                            height:235
-                        }
-                    ]
+                    fieldLabel: 'Name',
+                    allowBlank:false,
+                    name: 'description',
+                    xtype: 'textfield'
+                },
+                {
+                    fieldLabel: 'Title',
+                    allowBlank:false,
+                    name: 'description',
+                    xtype: 'textfield'
+                },
+                {
+                    fieldLabel: 'Description',
+                    allowBlank:false,
+                    name: 'description',
+                    xtype: 'textarea',
+                    height:235
                 }
+
             ],
             buttons: [
                 {
