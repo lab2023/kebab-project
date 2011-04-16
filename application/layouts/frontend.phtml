@@ -18,7 +18,10 @@
     <link href="<?php echo $this->assetVendor('resources/css/xtheme-gray.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('css/960-all.css')->get('960gs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('silk/famfamfam-silk-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false))); ?>
+    <?php
+        echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false)))
+                ->prependStylesheet($this->asset('frontend/layout.css')->get(false));
+    ?>
     
     <?php // STYLE AREA ------------------------------------------------------?>
     <?php echo $this->headStyle(); ?>
@@ -34,11 +37,19 @@
     <div id="beta-ribbon"></div>
     <div id="kebab-loading-mask"></div>
     
-    <?php echo $this->layout()->content . PHP_EOL; ?>
+    <div id="wrapper" class="container_12">
+
+        <div id="contents" class="container_12">
+            <div class="grid_12"><?php echo $this->layout()->content . PHP_EOL; ?></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
 
 
     <?php // SCRIPT AREA -----------------------------------------------------?>
     <?php echo $this->headScript()
+        ->prependFile($this->asset('frontend/javascripts/init.js')->get(false))
         ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
         ->prependFile($this->assetVendor('adapter/ext/ext-base.js')->get('extjs'));
     ?>

@@ -27,7 +27,7 @@ Ext.onReady(function() {
         buttonAlign:'left',
         border:false,
         renderTo: 'login-form',
-        bodyStyle: 'background:transparent !important',
+        bodyStyle: 'background:transparent;',
         defaults: {anchor: '100%'},
         defaultType: 'textfield',
         hideLabels: true,
@@ -43,7 +43,7 @@ Ext.onReady(function() {
             allowBlank:false
         }, {
             xtype: 'checkboxgroup',
-            items: [{boxLabel: 'Remember me on this computer', name: 'rememberMe', checked: false}]
+            items: [{boxLabel: 'Remember me this computer', name: 'rememberMe', checked: false}]
         }],
         buttons: [{
             width:80,
@@ -55,7 +55,7 @@ Ext.onReady(function() {
         },{
             xtype:'panel',
             border:false,
-            bodyStyle: 'background:transparent !important;',
+            bodyStyle: 'background:transparent;',
             html: '<a href="#" id="forgotPassword-link">Forgot password</a>'
         }]
     });
@@ -69,7 +69,7 @@ Ext.onReady(function() {
         buttonAlign:'left',
         border:false,
         renderTo: 'forgotPassword-form',
-        bodyStyle: 'background:transparent !important',
+        bodyStyle: 'background:transparent;',
         defaults: {anchor: '100%'},
         defaultType: 'textfield',
         hideLabels: true,
@@ -89,7 +89,7 @@ Ext.onReady(function() {
         },{
             xtype:'panel',
             border:false,
-            bodyStyle: 'background:transparent !important;',
+            bodyStyle: 'background:transparent;',
             html: '<a href="#" id="forgotPasswordCancel-link">Cancel</a>'
         }]
     });
