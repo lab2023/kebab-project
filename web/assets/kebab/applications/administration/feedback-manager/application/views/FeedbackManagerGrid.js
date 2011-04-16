@@ -36,7 +36,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
         //KBBTODO add i18n
         var statusData = [
             ['open', 'Open'],
-            ['process', 'Processed'],
+            ['process', 'In Progress'],
             ['closed', 'Closed']
         ];
         var statusCombobox = new Ext.form.ComboBox({
