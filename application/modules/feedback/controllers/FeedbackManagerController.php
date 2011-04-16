@@ -57,9 +57,9 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
                     user.lastName,
                     applicationTranslate.title as title')
                 ->from('Model_Entity_Feedback feedback')
-                ->leftJoin('feedback.Application application')
+                ->innerJoin('feedback.Application application')
                 ->leftJoin('application.Translation applicationTranslate')
-                ->leftJoin('feedback.User user')
+                ->innerJoin('feedback.User user')
                 ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->orderBy($this->_helper->sort($mapping));
 
