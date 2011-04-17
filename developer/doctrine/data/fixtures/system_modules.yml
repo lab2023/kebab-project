@@ -9,6 +9,8 @@ Model_Entity_Module:
     name: default
   Feedback:
     name: feedback
+  Role:
+    name: role
   User:
     name: user
     

@@ -12,6 +12,11 @@ Role:
       type: string(255)
     description:
       type: clob
+    status:
+      type: enum
+      length: 7
+      values: ['active', 'passive']
+      default: 'active' 
       
   actAs:
     Timestampable:

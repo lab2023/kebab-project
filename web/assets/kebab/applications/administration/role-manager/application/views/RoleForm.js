@@ -36,13 +36,13 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
                 {
                     fieldLabel: 'Name',
                     allowBlank:false,
-                    name: 'description',
+                    name: 'name',
                     xtype: 'textfield'
                 },
                 {
                     fieldLabel: 'Title',
                     allowBlank:false,
-                    name: 'description',
+                    name: 'title',
                     xtype: 'textfield'
                 },
                 {
