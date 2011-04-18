@@ -42,7 +42,6 @@ Ext.extend(KebabOS.applications.roleManager.application.Bootstrap, Kebab.OS.Appl
                 border:false,
                 items: this.layout
             });
-
         }
         app.show();
     }

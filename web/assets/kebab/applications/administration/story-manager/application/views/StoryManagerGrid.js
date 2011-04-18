@@ -20,10 +20,16 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
             bootstrap:this.bootstrap
         });
 
+        var expander = new Ext.ux.grid.RowExpander({
+            tpl : new Ext.Template(
+                    '<p><b>Description:</b><br />{description}</p><br>'
+                    )
+        });
+        
         // grid config
         var config = {
+            plugins:expander,
             border:false,
-            enableColumnResize: false,
             enableColumnHide:false,
             sortable:true,
             loadMask: true,
@@ -63,6 +69,7 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
             }
         });
         this.columns = [
+                expander,
             {
                 header   : 'Identity',
                 width:20,
@@ -77,10 +84,6 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
                 header   : 'Title',
                 width:60,
                 dataIndex: 'title'
-            },
-            {
-                header   : 'Description',
-                dataIndex: 'description'
             },
             {
                 header   : 'Status',

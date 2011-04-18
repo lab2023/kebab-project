@@ -56,8 +56,8 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
             ],
             buttons: [
                 {
-                    text: 'Create',
-                    iconCls: 'icon-email',
+                    text: 'Create new role',
+                    iconCls: 'icon-accept',
                     scope: this,
                     handler : this.onSave
                 }
@@ -86,7 +86,7 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
                     this.fireEvent('loadGrid');
-                    this.getForm().reset();
+                   /// this.getForm().reset();
                 },
 
                 failure : function() {

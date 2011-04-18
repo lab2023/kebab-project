@@ -12,7 +12,7 @@ KebabOS.applications.roleManager.application.models.RoleManagerStoryDataStore = 
 
     bootstrap: null,
 
-    restAPI: BASE_URL + '/feedback/feedback-manager',
+    restAPI: BASE_URL + '/role/manager',
 
     readerFields:[
         {name: 'id', type:'integer'},

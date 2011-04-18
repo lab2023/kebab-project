@@ -26,8 +26,11 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
+        this.bootstrap.layout.roleForm.on('loadGrid', this.loadGridAction, this);
+    },
 
+    // Actions -----------------------------------------------------------------
+    loadGridAction: function() {
+        this.bootstrap.mainCenter.roleManagerGrid.store.load();
     }
-
-    // Actions ----------------------------------------------------------------- 
 });

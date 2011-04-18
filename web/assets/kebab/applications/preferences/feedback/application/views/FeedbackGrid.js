@@ -20,11 +20,17 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             bootstrap:this.bootstrap
         });
 
+        var expander = new Ext.ux.grid.RowExpander({
+            tpl : new Ext.Template(
+                    '<p><b>Description:</b><br />{description}</p><br>'
+                    )
+        });
+
         // grid config
         var config = {
             region: 'center',
-            enableColumnResize: false,
             enableColumnHide:false,
+            plugins: expander,
             loadMask: true,
             viewConfig: {
                 // To be equal to the width of columns
@@ -32,16 +38,14 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             }
         }
 
+
         this.columns = [
+            expander,
             {
                 header   : 'Application Name',
                 width:40,
                 dataIndex: 'title',
                 sortable:true
-            },
-            {
-                header   : 'Description',
-                dataIndex: 'description'
             },
             {
                 header   : 'Status',

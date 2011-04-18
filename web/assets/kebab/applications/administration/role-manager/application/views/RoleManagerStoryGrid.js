@@ -12,14 +12,13 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
 
     // Application bootstrap
     bootstrap: null,
-    border:false,
-    
+
     initComponent: function() {
 
         // json data store
         this.store = new KebabOS.applications.roleManager.application.models.RoleManagerStoryDataStore({
             bootstrap:this.bootstrap,
-                        listeners: {
+            listeners: {
                 load: function(store, records) {
                     //var userId = this.user;
                     var sm = this.getSelectionModel();
@@ -32,19 +31,22 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
 
                             }, this);
                         }
-
                     }, this);
-                },
-                scope: this
+                }, scope: this
             }
         });
 
-        // grid config
+        var expander = new Ext.ux.grid.RowExpander({
+            tpl : new Ext.Template(
+                    '<p><b>Description:</b><br />{description}</p><br>'
+                    )
+        });
 
+        // grid config
         var config = {
-            enableColumnResize: false,
+            plugins:expander,
+            border:false,
             enableColumnHide:false,
-            sortable:true,
             loadMask: true,
             viewConfig: {
                 // To be equal to the width of columns
@@ -52,21 +54,21 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             }
         }
 
-
-
-
-this.sm = new Ext.grid.CheckboxSelectionModel();
+        this.sm = new Ext.grid.CheckboxSelectionModel();
         this.columns = [
+            expander,
             this.sm,
             {
                 header   : 'Title',
-                width:50,
-                dataIndex: 'title'
-
-            },
+                dataIndex: 'title',
+                sortable:true
+            }
+        ];
+        this.buttons = [
             {
-                header   : 'Description',
-                dataIndex: 'description'
+                text: 'Save',
+                iconCls: 'icon-accept',
+                handler : this.onSave
             }
         ];
 

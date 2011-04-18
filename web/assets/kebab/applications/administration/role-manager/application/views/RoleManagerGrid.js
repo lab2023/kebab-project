@@ -20,14 +20,17 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             bootstrap:this.bootstrap
         });
 
-        // grid config
+        var expander = new Ext.ux.grid.RowExpander({
+            tpl : new Ext.Template(
+                    '<p><b>Description:</b><br />{description}</p><br>'
+                    )
+        });
 
+        // grid config
         var config = {
+            plugins:expander,
             border:false,
-            region: 'west',
-            width:600,
-            split:true,
-            enableColumnResize: false,
+            region: 'center',
             enableColumnHide:false,
             sortable:true,
             selectRow:true,
@@ -40,21 +43,23 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
                 forceFit: true
             }
         };
-        this.sm = new Ext.grid.RowSelectionModel();
-        this.sm.width = 10;
+        this.sm = new Ext.grid.RowSelectionModel({
+            header:'No',
+            width:25
+        });
+
         this.columns = [
+            expander,
             this.sm,
             {
                 header   : 'Title',
-                dataIndex: 'title'
-            },
-            {
-                header   : 'Description',
-                dataIndex: 'description'
+                dataIndex: 'title',
+                sortable:true
             },
             {
                 header   : 'Status',
-                dataIndex: 'status'
+                dataIndex: 'status',
+                sortable:true
             }
         ];
 

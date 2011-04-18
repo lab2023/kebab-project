@@ -20,10 +20,16 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             bootstrap:this.bootstrap
         });
 
+        var expander = new Ext.ux.grid.RowExpander({
+            tpl : new Ext.Template(
+                    '<p><b>Description:</b><br />{description}</p><br>'
+                    )
+        });
+
         // grid config
         var config = {
-            enableColumnResize: false,
             enableColumnHide:false,
+            plugins: expander,
             sortable:true,
             loadMask: true,
             viewConfig: {
@@ -64,6 +70,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             }
         });
         this.columns = [
+            expander,
             {
                 header   : 'Identity',
                 width:40,
@@ -82,10 +89,6 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 header   : 'Application Name',
                 dataIndex: 'title',
                 sortable:true
-            },
-            {
-                header   : 'Description',
-                dataIndex: 'description'
             },
             {
                 header   : 'Status',

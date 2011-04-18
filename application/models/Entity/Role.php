@@ -12,8 +12,8 @@
  * @property enum $status
  * @property Doctrine_Collection $Users
  * @property Doctrine_Collection $Stories
- * @property Doctrine_Collection $UserRole
  * @property Doctrine_Collection $Permission
+ * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -71,11 +71,11 @@ class Model_Entity_Role extends Doctrine_Record
              'local' => 'role_id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_Entity_UserRole as UserRole', array(
+        $this->hasMany('Model_Entity_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('Model_Entity_Permission as Permission', array(
+        $this->hasMany('Model_Entity_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 
