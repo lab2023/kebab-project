@@ -50,7 +50,7 @@ Model_Entity_Story:
         title: Story Management
         description: Story active and passive.
       tr:
-        title: Kullanıcı Hikayeleribi Düzenleme
+        title: Kullanıcı Hikayeleri Yönetimi
         description: Kullanıcı hikayelerini düzenleyin.
     status: active
 

@@ -40,6 +40,11 @@ Model_Entity_Controller:
     Module: Feedback
     name: feedback-manager
 
+  # ROLE MODULE #########################################################
+  Role_Manager:
+    Module: Role
+    name: manager
+
   # USER MODULE #########################################################
   User_Manager:
     Module: User

@@ -60,10 +60,10 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
                     application.*,
                     applicationTranslate.title as title')
                 ->from('Model_Entity_Feedback feedback')
-                ->leftJoin('feedback.Application application')
+                ->innerJoin('feedback.Application application')
                 ->leftJoin('application.Translation applicationTranslate')
                 ->where('feedback.user_id = ?', $userSessionId)
-                ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                ->andWhere('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
@@ -89,14 +89,10 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
     public function postAction()
     {
         $params = $this->_helper->param();
-        $userId = $params['userId'];
         $applicationIdentity = $params['applicationIdentity'];
         $description = $params['description'];
 
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
-        if (!$userId == $userSessionId) {
-            throw new Zend_Exception('User is not valid.');
-        }
 
         $application = Doctrine_Core::getTable('Model_Entity_Application')->findOneByidentity($applicationIdentity);
 
@@ -104,7 +100,7 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         $feedback->Application = $application;
         $feedback->status = 'open';
         $feedback->description = $description;
-        $feedback->user_id = $userId;
+        $feedback->user_id = $userSessionId;
 
         $feedback->save();
 
