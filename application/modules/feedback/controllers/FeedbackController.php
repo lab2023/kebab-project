@@ -50,6 +50,7 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         // Mapping
         $mapping = array(
             'id' => 'feedback.id',
+            'title' => 'applicationTranslate.title',
             'status' => 'feedback.status',
             'description' => 'feedback.description'
         );

@@ -25,7 +25,6 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             region: 'center',
             enableColumnResize: false,
             enableColumnHide:false,
-            sortable:true,
             loadMask: true,
             viewConfig: {
                 // To be equal to the width of columns
@@ -36,8 +35,9 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
         this.columns = [
             {
                 header   : 'Application Name',
-                width:50,
-                dataIndex: 'title'
+                width:40,
+                dataIndex: 'title',
+                sortable:true
             },
             {
                 header   : 'Description',
@@ -46,7 +46,8 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             {
                 header   : 'Status',
                 width:40,
-                dataIndex: 'status'
+                dataIndex: 'status',
+                sortable:true
             }
         ];
 

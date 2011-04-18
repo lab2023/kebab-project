@@ -47,7 +47,9 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
         $mapping = array(
             'id' => 'feedback.id',
             'status' => 'feedback.status',
-            'description' => 'feedback.description'
+            'description' => 'feedback.description',
+            'title' =>'applicationTranslate',
+            'User' => 'user'
         );
 
         $query = Doctrine_Query::create()

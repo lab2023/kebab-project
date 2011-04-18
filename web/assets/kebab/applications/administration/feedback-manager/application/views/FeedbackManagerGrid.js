@@ -21,7 +21,6 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
         });
 
         // grid config
-
         var config = {
             enableColumnResize: false,
             enableColumnHide:false,
@@ -68,18 +67,21 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             {
                 header   : 'Identity',
                 width:40,
-                dataIndex: 'id'
+                dataIndex: 'id',
+                sortable:true
             },
             {
                 header   : 'User Name',
                 dataIndex: 'User',
+                sortable:true,
                 renderer: function(v) {
                     return v.firstName + ' ' + v.lastName;
                 }
             },
             {
                 header   : 'Application Name',
-                dataIndex: 'title'
+                dataIndex: 'title',
+                sortable:true
             },
             {
                 header   : 'Description',
@@ -88,6 +90,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             {
                 header   : 'Status',
                 dataIndex: 'status',
+                sortable:true,
                 editor: statusCombobox,
                 renderer: function(v) {
 
@@ -97,7 +100,6 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                         if (v == status[0])
                             retVal = status[1];
                     });
-
                     return retVal;
                 }
             }
