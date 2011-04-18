@@ -12,7 +12,7 @@ KebabOS.applications.userManager.application.views.InviteUserWindow = Ext.extend
 
     // Application Bootstrap
     bootstrap: null,
-    layout:'fit',
+
     initComponent: function() {
 
         this.inviteUserForm = new KebabOS.applications.userManager.application.views.InviteUserForm({
@@ -20,6 +20,7 @@ KebabOS.applications.userManager.application.views.InviteUserWindow = Ext.extend
         });
 
         var config = {
+            layout:'fit',
             width:350,
             height:350,
             title:'Invite User',

@@ -40,11 +40,11 @@ KebabOS.applications.userManager.application.views.EmailWindow = Ext.extend(Ext.
 
     showWindow: function(user) {
         if (user.status == 'active') {
-            var title = ' reset password';
-            var requestUrl = '/user/managera';
+            var title = ' Reset password';
+            var requestUrl = '/authentication/forgot-password';
         }
         if (user.status == 'passive') {
-            var title = ' re invite';
+            var title = ' Re invite';
             var requestUrl = '/user/managerb';
         }
         this.setTitle(user.firstName + " " + user.lastName + title);

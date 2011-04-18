@@ -17,6 +17,10 @@ Ext.extend(KebabOS.applications.userManager.application.Bootstrap, Kebab.OS.Appl
 
         if (!app) {
 
+            // desktop width and height
+            var winWidth = parseInt(desktop.getWinWidth() / 1);
+            var winHeight = parseInt(desktop.getWinHeight() / 1);
+            
             // Default layout
             this.layout = new KebabOS.applications.userManager.application.layouts.Layout({
                 bootstrap: this
@@ -32,8 +36,8 @@ Ext.extend(KebabOS.applications.userManager.application.Bootstrap, Kebab.OS.Appl
                 id: this.id,
                 title: this.launcher.text,
                 iconCls: 'userManager-application-gui-icon',
-                width: 600,
-                height: 355,
+                width: winWidth,
+                height: winHeight,
                 border:true,
                 items: this.layout,
                 listeners: {
@@ -44,7 +48,6 @@ Ext.extend(KebabOS.applications.userManager.application.Bootstrap, Kebab.OS.Appl
                     scope:this
                 }
             });
-
         }
         app.show();
     }
