@@ -12,13 +12,14 @@ KebabOS.applications.storyManager.application.layouts.Layout = Ext.extend(Ext.Pa
 
     // Application bootstrap
     bootstrap: null,
-    layout:'fit',
+
     initComponent: function() {
         this.storyManagerGrid = new KebabOS.applications.storyManager.application.views.StoryManagerGrid({
             bootstrap: this.bootstrap
         });
         
         var config = {
+            layout:'fit',
             items : [this.storyManagerGrid]
         }
 

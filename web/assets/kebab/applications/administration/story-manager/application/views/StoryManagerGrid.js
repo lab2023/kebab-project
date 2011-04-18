@@ -12,7 +12,6 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
 
     // Application bootstrap
     bootstrap: null,
-    border:false,
 
     initComponent: function() {
 
@@ -22,8 +21,8 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
         });
 
         // grid config
-
         var config = {
+            border:false,
             enableColumnResize: false,
             enableColumnHide:false,
             sortable:true,

@@ -42,7 +42,6 @@ Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.App
                 border:false,
                 items: this.layout
             });
-
         }
         app.show();
     }

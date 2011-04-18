@@ -12,7 +12,7 @@ KebabOS.applications.storyManager.application.models.StoryManagerDataStore = Ext
 
     bootstrap: null,
 
-    restAPI: BASE_URL + '/feedback/feedback-manager',
+    restAPI: BASE_URL + '/access/story',
 
     readerFields:[
         {name: 'id', type:'integer'},
