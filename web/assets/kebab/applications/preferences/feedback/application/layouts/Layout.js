@@ -12,7 +12,6 @@ KebabOS.applications.feedback.application.layouts.Layout = Ext.extend(Ext.Panel,
 
     // Application bootstrap
     bootstrap: null,
-
     layout: 'border',
     border: false,
 
@@ -20,17 +19,11 @@ KebabOS.applications.feedback.application.layouts.Layout = Ext.extend(Ext.Panel,
 
         // panels are defined here
         this.feedbackForm = new KebabOS.applications.feedback.application.views.FeedbackForm({
-            bootstrap: this.bootstrap,
-            region:'west',
-            split:true,
-            collapseMode:'mini',
-            border:true,
-            width:250
+            bootstrap: this.bootstrap
         });
 
         this.feedbackGrid = new KebabOS.applications.feedback.application.views.FeedbackGrid({
-            bootstrap: this.bootstrap,
-            region: 'center'
+            bootstrap: this.bootstrap
         });
 
         Ext.apply(this, {

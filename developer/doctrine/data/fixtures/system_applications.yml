@@ -19,7 +19,7 @@ Model_Entity_Application:
     className: KebabOS.applications.feedback.application.Bootstrap
     name: feedback
     type: system
-    department: administration
+    department: preferences
     version: 0.0.1
     Translation:
       en:

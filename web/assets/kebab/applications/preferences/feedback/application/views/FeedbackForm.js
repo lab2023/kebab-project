@@ -43,7 +43,11 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
         // form config
         var config = {
-
+            region:'west',
+            split:true,
+            collapseMode:'mini',
+            border:true,
+            width:250,
             items: [
                 {
                     xtype:'panel',
@@ -86,18 +90,12 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
     },
 
     onSave: function() {
-
         if (this.getForm().isValid()) {
-
             var notification = new Kebab.OS.Notification();
 
             this.getForm().submit({
-
                 url: this.url,
-
                 method: 'POST',
-
-                //waitMsg: 'Updating...',
 
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
@@ -107,9 +105,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
                 failure : function() {
                     notification.message(this.bootstrap.launcher.text, 'Failure');
-                },
-
-                scope:this
+                },scope:this
             });
         }
     }

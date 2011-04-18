@@ -22,6 +22,7 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
 
         // grid config
         var config = {
+            region: 'center',
             enableColumnResize: false,
             enableColumnHide:false,
             sortable:true,
@@ -29,7 +30,6 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             viewConfig: {
                 // To be equal to the width of columns
                 forceFit: true
-
             }
         }
 
