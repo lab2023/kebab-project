@@ -75,28 +75,29 @@
         // Simple desktop notifications test...
         Ext.fly('project-info').on('click', function(a, b, c) {
             notification();
-            function RequestPermission (callback){
+            function RequestPermission(callback) {
                 window.webkitNotifications.requestPermission(callback);
             }
-            function notification () {      
-                if (window.webkitNotifications.checkPermission() > 0) {
-                    RequestPermission(notification);
-                }         
-                var icon  = 'http://kebab-project.com/images/favicon.ico';
-                var title = 'Kebab Project';
-                var body   = "<?php echo $this->settings('project')->info; ?>"+
-                    "Version:<?php echo $this->settings('project')->version; ?>" +
-                    "Release Date:<?php echo $this->settings('project')->releaseDate; ?>";
-                var popup = window.webkitNotifications.createNotification(icon, title, body);
-                popup.show();
-                setTimeout(function(){
-                    popup.cancel();
-                }, '5000');
-            }
+
+            function notification() {
+                if (window.webkitNotifications.checkPermission() > 0) {
+                    RequestPermission(notification);
+                }
+                var icon = 'http://kebab-project.com/images/favicon.ico';
+                var title = 'Kebab Project';
+                var body = "<?php echo $this->settings('project')->info; ?>" +
+                        "Version:<?php echo $this->settings('project')->version; ?>" +
+                        "Release Date:<?php echo $this->settings('project')->releaseDate; ?>";
+                var popup = window.webkitNotifications.createNotification(icon, title, body);
+                popup.show();
+                setTimeout(function() {
+                    popup.cancel();
+                }, '5000');
+            }
         });
     });
     </script>
-    
+
     <!-- GMaps v3 that works -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=tr"></script>
 </body>
