@@ -39,7 +39,7 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
                     text: 'Send',
                     iconCls: 'icon-email',
                     scope: this,
-                    handler : this.onSave
+                    handler : this.submitEmailForm
                 }
             ]
         }
@@ -48,34 +48,8 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
 
         KebabOS.applications.userManager.application.views.EmailForm.superclass.initComponent.apply(this, arguments);
     },
-
-    setUrl:function(url) {
-        this.url = url;
-    },
-
-    onSave: function() {
-
-        if (this.getForm().isValid()) {
-
-            var notification = new Kebab.OS.Notification();
-
-            this.getForm().submit({
-
-                url: this.url,
-
-                method: 'POST',
-
-                //waitMsg: 'Updating...',
-
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    this.getForm().reset();
-                    this.fireEvent('closeEmailindow');
-                },
-
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                },scope:this});
-        }
+    
+    submitEmailForm: function(){
+       this.fireEvent('emailFormOnSave', {from:this});
     }
 });

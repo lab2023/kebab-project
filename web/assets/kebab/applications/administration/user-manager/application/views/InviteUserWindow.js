@@ -38,10 +38,6 @@ KebabOS.applications.userManager.application.views.InviteUserWindow = Ext.extend
 
 
         KebabOS.applications.userManager.application.views.InviteUserWindow.superclass.initComponent.apply(this, arguments);
-    },
-
-    showWindow: function() {
-        this.show();
     }
 
 });

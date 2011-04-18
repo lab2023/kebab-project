@@ -71,7 +71,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             if (event.getTarget("span.icon-accept")) {
                 Ext.Msg.confirm('Are you sure?', 'Do you want to passive ' + record.firstName + ' ' + record.lastName, function(button) {
                     if (button == 'yes') {
-                        this.userRequest('PUT', record, 'passive');
+                        this.fireEvent('userRequest', {method:'PUT', user:record, status:'passive'});
                     }
                 }, this);
             }
@@ -79,45 +79,33 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             if (event.getTarget("span.icon-delete")) {
                 Ext.Msg.confirm('Are you sure?', 'Do you want to active ' + record.firstName + ' ' + record.lastName, function(button) {
                     if (button == 'yes') {
-                        this.userRequest('PUT', record, 'active');
+                        this.fireEvent('userRequest', {method:'PUT', user:record, status:'active'});
                     }
                 }, this);
             }
 
             if (event.getTarget("span.send-password")) {
-                this.bootstrap.layout.emailWindow.showWindow(record);
+                this.fireEvent('showEmailWindow', {user:record});
             }
 
             if (event.getTarget("span.re-invite")) {
-                this.bootstrap.layout.emailWindow.showWindow(record);
+                this.fireEvent('showEmailWindow', {user:record});
             }
 
             if (event.getTarget("span.icon-wrench")) {
-                this.bootstrap.layout.userRolesWindow.showWindow(record);
+                this.fireEvent('showUserRoleWindow', {user:record});
             }
 
             if (event.getTarget("span.icon-cancel")) {
                 Ext.Msg.confirm('Are you sure?', 'Do you want to delete ' + record.firstName + ' ' + record.lastName, function(button) {
                     if (button == 'yes') {
-                        this.userRequest('DELETE', record);
+                        this.fireEvent('userRequest', {method:'DELETE', user:record});
                     }
                 }, this);
             }
         }, this);
 
         KebabOS.applications.userManager.application.views.UserManagerDataView.superclass.initComponent.apply(this, arguments);
-    },
-
-    userRequest: function(method, user, status) {
-        Ext.Ajax.request({
-            url: BASE_URL + '/user/manager',
-            method: method,
-            params: {
-                id: user.id,
-                status: status
-            }
-        });
-        this.store.load();
     },
 
     listeners: {

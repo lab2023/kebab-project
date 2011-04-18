@@ -36,19 +36,5 @@ KebabOS.applications.userManager.application.views.EmailWindow = Ext.extend(Ext.
         Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.views.EmailWindow.superclass.initComponent.apply(this, arguments);
-    },
-
-    showWindow: function(user) {
-        if (user.status == 'active') {
-            var title = ' Reset password';
-            var requestUrl = '/authentication/forgot-password';
-        }
-        if (user.status == 'passive') {
-            var title = ' Re invite';
-            var requestUrl = '/user/managerb';
-        }
-        this.setTitle(user.firstName + " " + user.lastName + title);
-        this.emailForm.setUrl(BASE_URL + requestUrl);
-        this.show();
     }
 });

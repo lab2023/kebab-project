@@ -40,7 +40,7 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
                     text: 'Invite User',
                     iconCls:'icon-user',
                     handler: function() {
-                        this.inviteUserWindow.showWindow();
+                        this.fireEvent('showInviteUserWindow', {from:this.inviteUserWindow})
                     },
                     scope:this
                 }

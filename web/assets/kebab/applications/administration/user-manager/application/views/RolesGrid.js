@@ -51,6 +51,19 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
                 forceFit: true
             }
         }
+        this.buttons = [
+            {
+                text: 'Save',
+                iconCls: 'icon-accept',
+                handler : this.onSave
+            },
+            {
+                text: 'Cancel',
+                iconCls: 'icon-cancel',
+                handler : this.onSave
+            }
+        ];
+
         this.sm = new Ext.grid.CheckboxSelectionModel();
         this.columns = [
             this.sm,
@@ -63,8 +76,5 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
         Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.views.RolesGrid.superclass.initComponent.apply(this, arguments);
-    },
-    selectedUserId: function(id) {
-        this.userId = id;
     }
 });

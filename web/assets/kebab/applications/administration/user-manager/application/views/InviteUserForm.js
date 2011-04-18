@@ -55,7 +55,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                     text: 'Send',
                     iconCls: 'icon-email',
                     scope: this,
-                    handler : this.onSave
+                    handler : this.submitInviteForm
                 }
             ]
         }
@@ -65,31 +65,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
         KebabOS.applications.userManager.application.views.InviteUserForm.superclass.initComponent.apply(this, arguments);
     },
 
-    onSave: function() {
-
-        if (this.getForm().isValid()) {
-
-            var notification = new Kebab.OS.Notification();
-
-            this.getForm().submit({
-
-                url: this.url,
-
-                method: 'POST',
-
-                //waitMsg: 'Updating...',
-
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    this.getForm().reset();
-                },
-
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                },
-
-                scope:this
-            });
-        }
+    submitInviteForm: function() {
+        this.fireEvent('inviteUserFormOnSave', {from:this});
     }
 });
