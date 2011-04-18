@@ -37,20 +37,10 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
     // Actions -----------------------------------------------------------------
 
-    /*
-       *
-       *
-       *
-       * */
     hideEmailWindowAction: function() {
         this.bootstrap.layout.emailWindow.hide();
     },
 
-    /*
-       *
-       *
-       *
-       * */
     userRequestAction: function(data) {
         var notification = new Kebab.OS.Notification();
         Ext.Ajax.request({
@@ -71,11 +61,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         });
     },
 
-    /*
-       *
-       *
-       *
-       * */
     showEmailWindowAction: function(data) {
         if (data.user.status == 'active') {
             var title = ' Reset password';
@@ -91,11 +76,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.emailWindow.show();
     },
 
-    /*
-       *
-       *
-       *
-       * */
     FormOnSaveAction: function(data) {
 
         if (data.from.getForm().isValid()) {
@@ -119,11 +99,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         }
     },
 
-    /*
-       *
-       *
-       *
-       * */
     showUserRoleWindowAction: function(data) {
         this.bootstrap.layout.userRolesWindow.setTitle(data.user.firstName + " " + data.user.lastName + " 's Roles");
         this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.user.id;
@@ -132,11 +107,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.userRolesWindow.rolesGrid.store.load({params: {userId: data.user.id}});
     },
 
-    /*
-       *
-       *
-       *
-       * */
     showWindowAction: function(data) {
         data.from.show();
     }
