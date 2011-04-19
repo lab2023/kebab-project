@@ -27,7 +27,7 @@ KebabOS.applications.feedback.application.layouts.Layout = Ext.extend(Ext.Panel,
         });
 
         Ext.apply(this, {
-            items: [this.feedbackForm,this.feedbackGrid]
+            items: [this.feedbackForm, this.feedbackGrid]
         });
 
         KebabOS.applications.feedback.application.layouts.Layout.superclass.initComponent.call(this);

@@ -8,7 +8,7 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.FormPanel, {
+KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
     url: BASE_URL + '/user/profile',
     defaultType: 'textfield',
@@ -80,7 +80,7 @@ KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.Fo
                         iconCls: 'icon-key',
                         text: 'Change Password',
                         handler: function() {
-                            this.fireEvent('showHidePasswordForm');
+                            this.fireEvent('showHidePasswordForm', this.bootstrap.layout.passwordForm);
                         },
                         scope:this
                     }]
@@ -115,15 +115,16 @@ KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.Fo
                 iconCls: 'icon-disk',
                 handler: this.onUpdate,
                 scope: this,
-                handler: this.onSave
+                handler: this.onSubmit
             }]
         }
 
         this.addEvents('showHidePasswordForm');
+        this.addEvents('feedbackFormOnSave');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
         
-        KebabOS.applications.aboutMe.application.views.MainForm.superclass.initComponent.apply(this, arguments);
+        KebabOS.applications.aboutMe.application.views.MainProfileForm.superclass.initComponent.apply(this, arguments);
     },
 
     listeners: {
@@ -141,38 +142,15 @@ KebabOS.applications.aboutMe.application.views.MainForm = Ext.extend(Ext.form.Fo
     onRender:function() {
 
         this.load({
-            url:this.url + '/' + this.bootstrap.app.getUser().id,
+            url: this.url + '/' + this.bootstrap.app.getUser().id,
             method: 'GET'
         });
         
-        KebabOS.applications.aboutMe.application.views.MainForm.superclass.onRender.apply(this, arguments);
+        KebabOS.applications.aboutMe.application.views.MainProfileForm.superclass.onRender.apply(this, arguments);
         
     },
-    
-    onSave: function() {
-        
-        if (this.getForm().isValid()) {
 
-            var notification = new Kebab.OS.Notification();
-
-            this.getForm().submit({
-
-                url: this.url,
-
-                method: 'PUT',
-                
-                //waitMsg: 'Updating...',
-                
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                },
-                
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                },
-                
-                scope:this
-            });
-        }
+    onSubmit: function() {
+        this.fireEvent('mainProfileFormOnSave', {from:this, url:this.url});
     }
 });

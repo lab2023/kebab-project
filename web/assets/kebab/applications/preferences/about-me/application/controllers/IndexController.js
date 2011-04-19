@@ -27,14 +27,40 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
     // Initialize and define routing settings
     init: function() {
 
-        this.bootstrap.layout.mainForm.on('showHidePasswordForm', this.showHidePasswordFormAction, this);
-        this.bootstrap.layout.passwordForm.on('showHidePasswordForm', this.showHidePasswordFormAction, this);
+        this.bootstrap.layout.mainProfileForm.on('showHidePasswordForm', this.toggleCollapseAction, this);
+        this.bootstrap.layout.passwordForm.on('showHidePasswordForm', this.toggleCollapseAction, this);
+        this.bootstrap.layout.mainProfileForm.on('mainProfileFormOnSave', this.formOnSaveAction, this);
+        this.bootstrap.layout.passwordForm.on('passwordFormOnSave', this.formOnSaveAction, this);
 
     },
     
     // Actions -----------------------------------------------------------------
 
-    showHidePasswordFormAction: function() {
-        this.bootstrap.layout.passwordForm.toggleCollapse();
+    toggleCollapseAction: function(from) {
+        from.toggleCollapse();
+    },
+
+    formOnSaveAction: function(data) {
+
+        if (data.from.getForm().isValid()) {
+            var notification = new Kebab.OS.Notification();
+
+            data.from.getForm().submit({
+                url: data.url,
+                method: 'POST',
+
+                success : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    if(data.toggle){
+                        data.from.fireEvent('showHidePasswordForm', data.from);
+                        data.from.getForm().reset();
+                    }
+                },
+
+                failure : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                }, scope:this
+            });
+        }
     }
 });

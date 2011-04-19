@@ -26,11 +26,34 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
 
     // Initialize and define routing settings
     init: function() {
-        this.bootstrap.layout.feedbackForm.on('loadGrid', this.loadGridAction, this);
+        this.bootstrap.layout.feedbackForm.on('loadFeedbackGrid', this.loadGridAction, this);
+        this.bootstrap.layout.feedbackForm.on('feedbackFormOnSave', this.formOnSaveAction, this);
+
     },
 
     // Actions -----------------------------------------------------------------
     loadGridAction: function() {
         this.bootstrap.layout.feedbackGrid.store.load();
+    },
+
+    formOnSaveAction: function(data) {
+
+        if (data.from.getForm().isValid()) {
+            var notification = new Kebab.OS.Notification();
+
+            data.from.getForm().submit({
+                url: data.url,
+                method: 'POST',
+
+                success : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    data.from.getForm().reset();
+                },
+
+                failure : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                }, scope:this
+            });
+        }
     }
 });

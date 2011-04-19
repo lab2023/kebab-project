@@ -26,25 +26,25 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-        this.bootstrap.layout.emailWindow.emailForm.on('hideEmailWindow', this.hideEmailWindowAction, this);
+        this.bootstrap.layout.emailWindow.emailForm.on('hideWindow', this.hideWindowAction, this);
         this.bootstrap.layout.userManagerDataView.on('userRequest', this.userRequestAction, this);
         this.bootstrap.layout.userManagerDataView.on('showEmailWindow', this.showEmailWindowAction, this);
-        this.bootstrap.layout.emailWindow.emailForm.on('emailFormOnSave', this.FormOnSaveAction, this);
-        this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('inviteUserFormOnSave', this.FormOnSaveAction, this);
+        this.bootstrap.layout.emailWindow.emailForm.on('emailFormOnSave', this.formOnSaveAction, this);
+        this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('inviteUserFormOnSave', this.formOnSaveAction, this);
         this.bootstrap.layout.userManagerDataView.on('showUserRoleWindow', this.showUserRoleWindowAction, this);
         this.bootstrap.layout.on('showInviteUserWindow', this.showWindowAction, this);
     },
 
     // Actions -----------------------------------------------------------------
 
-    hideEmailWindowAction: function() {
-        this.bootstrap.layout.emailWindow.hide();
+    hideWindowAction: function(component) {
+        component.hide();
     },
 
     userRequestAction: function(data) {
         var notification = new Kebab.OS.Notification();
         Ext.Ajax.request({
-            url: BASE_URL + '/user/manager',
+            url: BASE_URL + data.url,
             method: data.method,
             params: {
                 id: data.user.id,
@@ -61,53 +61,59 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         });
     },
 
-    showEmailWindowAction: function(data) {
-        if (data.user.status == 'active') {
-            var title = ' Reset password';
-            var requestUrl = '/authentication/forgot-password';
-        }
-        if (data.user.status == 'passive') {
-            var title = ' Re invite';
-            var requestUrl = '/authentication/forgot-password';
-        }
-        this.bootstrap.layout.emailWindow.setTitle(data.user.firstName + " " + data.user.lastName + title);
-        this.bootstrap.layout.emailWindow.emailForm.url = BASE_URL + requestUrl;
-        this.bootstrap.layout.emailWindow.emailForm.getForm().findField('email').setValue(data.user.email);
-        this.bootstrap.layout.emailWindow.show();
-    },
 
-    FormOnSaveAction: function(data) {
+    formOnSaveAction: function(data) {
 
         if (data.from.getForm().isValid()) {
             var notification = new Kebab.OS.Notification();
 
             data.from.getForm().submit({
-                url: data.from.url,
+                url: data.url,
                 method: 'POST',
 
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
                     data.from.getForm().reset();
-                    data.from.fireEvent('hideEmailWindow');
+                    if (data.store) {
+                        data.from.fireEvent('loadFeedbackGrid', data.store);
+                    }
+                    if (data.fromWindow) {
+                        data.from.fireEvent('hideWindow', data.fromWindow);
+                    }
                 },
 
                 failure : function() {
                     notification.message(this.bootstrap.launcher.text, 'Failure');
+                    data.from.fireEvent('hideWindow', data.fromWindow);
                 }, scope:this
             });
-
         }
     },
 
     showUserRoleWindowAction: function(data) {
-        this.bootstrap.layout.userRolesWindow.setTitle(data.user.firstName + " " + data.user.lastName + " 's Roles");
-        this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.user.id;
+        this.bootstrap.layout.userRolesWindow.setTitle(data.firstName + " " + data.lastName + " 's Roles");
+        this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.id;
 
         this.bootstrap.layout.userRolesWindow.show();
-        this.bootstrap.layout.userRolesWindow.rolesGrid.store.load({params: {userId: data.user.id}});
+        this.bootstrap.layout.userRolesWindow.rolesGrid.store.load({params: {userId: data.id}});
     },
 
-    showWindowAction: function(data) {
-        data.from.show();
+    showEmailWindowAction: function(data) {
+        if (data.status == 'active') {
+            var title = ' Reset password';
+            var requestUrl = '/authentication/forgot-password';
+        }
+        if (data.status == 'passive') {
+            var title = ' Re-invite';
+            var requestUrl = '/authentication/forgot-password';
+        }
+        this.bootstrap.layout.emailWindow.setTitle(data.firstName + " " + data.lastName + title);
+        this.bootstrap.layout.emailWindow.emailForm.url = BASE_URL + requestUrl;
+        this.bootstrap.layout.emailWindow.emailForm.getForm().findField('email').setValue(data.email);
+        this.bootstrap.layout.emailWindow.show();
+    },
+    
+    showWindowAction: function(component) {
+        component.show();
     }
 });

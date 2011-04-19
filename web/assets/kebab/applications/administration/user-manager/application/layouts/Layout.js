@@ -12,8 +12,6 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
 
     // Application bootstrap
     bootstrap: null,
-    layout:'fit',
-    border:false,
 
     initComponent: function() {
 
@@ -34,17 +32,10 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
         });
 
         var config = {
-            items : [this.userManagerDataView],
-            tbar:[
-                 {
-                    text: 'Invite User',
-                    iconCls:'icon-user',
-                    handler: function() {
-                        this.fireEvent('showInviteUserWindow', {from:this.inviteUserWindow})
-                    },
-                    scope:this
-                }
-            ]
+            layout:'fit',
+            border:false,
+            items : this.userManagerDataView
+
         };
 
         Ext.apply(this, config);
@@ -52,6 +43,14 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
         this.bbar = new Kebab.library.ext.ExtendedPagingToolbar({
             store: this.userManagerDataView.store
         });
+
+        this.tbar = [{
+            text: 'Invite User',
+            iconCls:'icon-user',
+            handler: function() {
+                this.fireEvent('showInviteUserWindow', this.inviteUserWindow)
+            }, scope:this
+        }];
 
         KebabOS.applications.userManager.application.layouts.Layout.superclass.initComponent.call(this);
     }

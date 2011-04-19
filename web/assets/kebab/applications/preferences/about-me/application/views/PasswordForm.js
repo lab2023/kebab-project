@@ -70,7 +70,7 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
                 text: 'Cancel',
                 iconCls: 'icon-cancel',
                 handler: function() {
-                    this.fireEvent('showHidePasswordForm');
+                    this.fireEvent('showHidePasswordForm', this);
                 },
                 scope: this
             }, {
@@ -78,7 +78,7 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
                 iconCls: 'icon-disk',
                 handler: this.onUpdate,
                 scope: this,
-                handler: this.onSave
+                handler: this.onSubmit
             }]
         }
 
@@ -88,31 +88,8 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
         
         KebabOS.applications.aboutMe.application.views.PasswordForm.superclass.initComponent.apply(this, arguments);
     },
-    
-    onSave: function() {
-        
-        if (this.getForm().isValid()) {
 
-            var notification = new Kebab.OS.Notification();
-
-            this.getForm().submit({
-
-                url: this.url,
-
-                method: 'PUT',
-                
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    this.getForm().reset();
-                    this.fireEvent('showHidePasswordForm');
-                },
-                
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                },
-                
-                scope:this
-            });
-        }
+    onSubmit: function() {
+        this.fireEvent('passwordFormOnSave', {from:this, url:this.url, toggle:'true'});
     }
 });

@@ -13,7 +13,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
     // Application bootstrap
     bootstrap: null,
     //POST url
-    url : BASE_URL + '/user/manager',
+    url : '/user/manager',
 
     bodyStyle: 'padding:5px 10px;',
 
@@ -55,7 +55,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                     text: 'Send',
                     iconCls: 'icon-email',
                     scope: this,
-                    handler : this.submitInviteForm
+                    handler : this.onSubmit
                 }
             ]
         }
@@ -65,7 +65,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
         KebabOS.applications.userManager.application.views.InviteUserForm.superclass.initComponent.apply(this, arguments);
     },
 
-    submitInviteForm: function() {
-        this.fireEvent('inviteUserFormOnSave', {from:this});
+    onSubmit: function() {
+        this.fireEvent('inviteUserFormOnSave', {from:this, fromWindow:this.bootstrap.layout.inviteUserWindow, url:this.url});
     }
 });

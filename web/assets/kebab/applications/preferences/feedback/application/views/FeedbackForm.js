@@ -13,7 +13,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
     // Application bootstrap
     bootstrap: null,
     //POST url
-    url : BASE_URL + '/feedback/feedback',
+    url : '/feedback/feedback',
 
     bodyStyle: 'padding:5px 10px;',
 
@@ -79,7 +79,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
                     text: 'Send',
                     iconCls: 'icon-email',
                     scope: this,
-                    handler : this.onSave
+                    handler : this.onSubmit
                 }
             ]
         }
@@ -89,25 +89,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
         KebabOS.applications.feedback.application.views.FeedbackForm.superclass.initComponent.apply(this, arguments);
     },
 
-    onSave: function() {
-        if (this.getForm().isValid()) {
-            var notification = new Kebab.OS.Notification();
-
-            this.getForm().submit({
-                url: this.url,
-                method: 'POST',
-
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    this.fireEvent('loadGrid');
-                    this.getForm().reset();
-                },
-
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                },scope:this
-            });
-        }
+    onSubmit: function() {
+        this.fireEvent('feedbackFormOnSave', {from:this, url:this.url, store:this.bootstrap.layout.feedbackGrid.store});
     }
-
 });

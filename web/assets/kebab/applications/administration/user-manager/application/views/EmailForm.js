@@ -13,7 +13,6 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
     // Application bootstrap
     bootstrap: null,
 
-
     bodyStyle: 'padding:5px 10px;',
 
     initComponent: function() {
@@ -39,7 +38,7 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
                     text: 'Send',
                     iconCls: 'icon-email',
                     scope: this,
-                    handler : this.submitEmailForm
+                    handler : this.onSubmit
                 }
             ]
         }
@@ -49,7 +48,7 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
         KebabOS.applications.userManager.application.views.EmailForm.superclass.initComponent.apply(this, arguments);
     },
     
-    submitEmailForm: function(){
-       this.fireEvent('emailFormOnSave', {from:this});
+    onSubmit: function(){
+       this.fireEvent('emailFormOnSave', {from:this, fromWindow:this.bootstrap.layout.emailWindow, url:this.url});
     }
 });
