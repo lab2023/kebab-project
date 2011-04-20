@@ -38,7 +38,6 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
 
     loadParamsGridAction: function(data) {
         data.store.load({params: {roleId: data.roleId}});
-        console.log(data.roleId);
     },
 
     formOnSaveAction: function(data) {

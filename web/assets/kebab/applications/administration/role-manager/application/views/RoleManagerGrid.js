@@ -70,9 +70,8 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
         KebabOS.applications.roleManager.application.views.RoleManagerGrid.superclass.initComponent.apply(this, arguments);
 
         this.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
-            console
-            this.fireEvent('loadParamsGrid', {store:this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store, roleId:r.data.id});
-        });
+            this.fireEvent('loadParamsGrid', {store: this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store, roleId:r.data.id});
+        }, this);
     },
 
     listeners: {
