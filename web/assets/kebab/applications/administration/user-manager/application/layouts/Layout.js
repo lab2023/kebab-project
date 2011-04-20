@@ -38,6 +38,8 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
 
         };
 
+        this.addEvents('showInviteUserWindow');
+
         Ext.apply(this, config);
 
         this.bbar = new Kebab.library.ext.ExtendedPagingToolbar({

@@ -39,16 +39,27 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
                     iconCls: 'icon-email',
                     scope: this,
                     handler : this.onSubmit
+                },
+                {
+                    text: 'Cancel',
+                    iconCls: 'icon-cancel',
+                    handler : function() {
+                        this.fireEvent('hideWindow', this.bootstrap.layout.emailWindow);
+                    },
+                    scope:this
                 }
             ]
-        }
+        };
+
+        this.addEvents('emailFormOnSave');
+        this.addEvents('hideWindow');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.userManager.application.views.EmailForm.superclass.initComponent.apply(this, arguments);
     },
-    
-    onSubmit: function(){
-       this.fireEvent('emailFormOnSave', {from:this, fromWindow:this.bootstrap.layout.emailWindow, url:this.url});
+
+    onSubmit: function() {
+        this.fireEvent('emailFormOnSave', {from:this, fromWindow:this.bootstrap.layout.emailWindow, url:this.url});
     }
 });

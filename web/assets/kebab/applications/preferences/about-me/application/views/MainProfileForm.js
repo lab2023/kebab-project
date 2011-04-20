@@ -10,7 +10,7 @@
  */
 KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
-    url: BASE_URL + '/user/profile',
+    url: '/user/profile',
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',
@@ -120,7 +120,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
         }
 
         this.addEvents('showHidePasswordForm');
-        this.addEvents('feedbackFormOnSave');
+        this.addEvents('mainProfileFormOnSave');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
         
@@ -142,12 +142,11 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
     onRender:function() {
 
         this.load({
-            url: this.url + '/' + this.bootstrap.app.getUser().id,
+            url: BASE_URL + this.url + '/' + this.bootstrap.app.getUser().id,
             method: 'GET'
         });
         
         KebabOS.applications.aboutMe.application.views.MainProfileForm.superclass.onRender.apply(this, arguments);
-        
     },
 
     onSubmit: function() {

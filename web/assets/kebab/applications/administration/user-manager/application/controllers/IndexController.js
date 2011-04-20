@@ -27,18 +27,25 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
     // Initialize and define routing settings
     init: function() {
         this.bootstrap.layout.emailWindow.emailForm.on('hideWindow', this.hideWindowAction, this);
+        this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('hideWindow', this.hideWindowAction, this);
+        this.bootstrap.layout.userRolesWindow.rolesGrid.on('hideWindow', this.hideWindowAction, this);
         this.bootstrap.layout.userManagerDataView.on('userRequest', this.userRequestAction, this);
-        this.bootstrap.layout.userManagerDataView.on('showEmailWindow', this.showEmailWindowAction, this);
         this.bootstrap.layout.emailWindow.emailForm.on('emailFormOnSave', this.formOnSaveAction, this);
         this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('inviteUserFormOnSave', this.formOnSaveAction, this);
+        this.bootstrap.layout.userManagerDataView.on('showEmailWindow', this.showEmailWindowAction, this);
         this.bootstrap.layout.userManagerDataView.on('showUserRoleWindow', this.showUserRoleWindowAction, this);
         this.bootstrap.layout.on('showInviteUserWindow', this.showWindowAction, this);
+        this.bootstrap.layout.userManagerDataView.on('loadGrid', this.loadGridAction, this);
     },
 
     // Actions -----------------------------------------------------------------
 
     hideWindowAction: function(component) {
         component.hide();
+    },
+
+    loadGridAction: function(component) {
+        component.load();
     },
 
     userRequestAction: function(data) {
@@ -52,7 +59,9 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
             },
             success : function() {
                 notification.message(this.bootstrap.launcher.text, 'Success');
-                this.bootstrap.layout.userManagerDataView.store.load();
+                if(data.store){
+                    data.from.fireEvent('loadGrid', data.store);
+                }
             },
 
             failure : function() {
@@ -74,9 +83,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
                 success : function() {
                     notification.message(this.bootstrap.launcher.text, 'Success');
                     data.from.getForm().reset();
-                    if (data.store) {
-                        data.from.fireEvent('loadFeedbackGrid', data.store);
-                    }
                     if (data.fromWindow) {
                         data.from.fireEvent('hideWindow', data.fromWindow);
                     }
@@ -84,7 +90,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
                 failure : function() {
                     notification.message(this.bootstrap.launcher.text, 'Failure');
-                    data.from.fireEvent('hideWindow', data.fromWindow);
                 }, scope:this
             });
         }
@@ -116,4 +121,5 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
     showWindowAction: function(component) {
         component.show();
     }
+
 });

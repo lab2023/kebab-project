@@ -48,8 +48,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
             collapseMode:'mini',
             border:true,
             width:250,
-            items: [
-                {
+            items: [{
                     xtype:'panel',
                     layout: 'form',
                     border:false,
@@ -57,33 +56,32 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
                     defaults: {
                         anchor: '100%'
                     },
-                    items: [
-                        {
-                            name:'userId',
-                            xtype:'hidden',
-                            value: userId
-                        },
-                        applicationsCombobox ,
-                        {
-                            fieldLabel: 'Description',
-                            allowBlank:false,
-                            name: 'description',
-                            xtype: 'textarea',
-                            height:235
-                        }
-                    ]
+                    items: [{
+                        name:'userId',
+                        xtype:'hidden',
+                        value: userId
+                    },
+                    applicationsCombobox,
+                    {
+                        fieldLabel: 'Description',
+                        allowBlank:false,
+                        name: 'description',
+                        xtype: 'textarea',
+                        height:235
+                    }]
                 }
             ],
-            buttons: [
-                {
-                    text: 'Send',
-                    iconCls: 'icon-email',
-                    scope: this,
-                    handler : this.onSubmit
-                }
-            ]
-        }
+            buttons: [{
+                text: 'Send',
+                iconCls: 'icon-email',
+                scope: this,
+                handler : this.onSubmit
+            }]
+        };
 
+        this.addEvents('feedbackFormOnSave');
+        this.addEvents('loadGrid');
+        
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.feedback.application.views.FeedbackForm.superclass.initComponent.apply(this, arguments);

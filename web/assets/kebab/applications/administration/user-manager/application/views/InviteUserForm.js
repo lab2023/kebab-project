@@ -56,9 +56,20 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                     iconCls: 'icon-email',
                     scope: this,
                     handler : this.onSubmit
+                },
+                {
+                    text: 'Cancel',
+                    iconCls: 'icon-cancel',
+                    handler : function() {
+                        this.fireEvent('hideWindow', this.bootstrap.layout.inviteUserWindow);
+                    },
+                    scope:this
                 }
             ]
-        }
+        };
+
+        this.addEvents('inviteUserFormOnSave');
+        this.addEvents('hideWindow');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 

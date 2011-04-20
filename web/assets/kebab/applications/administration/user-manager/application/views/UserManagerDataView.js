@@ -62,6 +62,11 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '</tpl>'
                 );
 
+        this.addEvents('userRequest');
+        this.addEvents('loadGrid');
+        this.addEvents('showEmailWindow');
+        this.addEvents('showUserRoleWindow');
+
         Ext.apply(this, config);
 
         this.on('click', function(dv, index, node, event) {
@@ -71,7 +76,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             if (event.getTarget("span.icon-accept")) {
                 Ext.Msg.confirm('Are you sure?', 'Do you want to passive ' + record.firstName + ' ' + record.lastName, function(button) {
                     if (button == 'yes') {
-                        this.fireEvent('userRequest', {method:'PUT', user:record, status:'passive', url:'/user/manager'});
+                        this.fireEvent('userRequest', {from:this, method:'PUT', user:record, status:'passive', url:'/user/manager', store:this.bootstrap.layout.userManagerDataView.store});
                     }
                 }, this);
             }
@@ -79,7 +84,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             if (event.getTarget("span.icon-delete")) {
                 Ext.Msg.confirm('Are you sure?', 'Do you want to active ' + record.firstName + ' ' + record.lastName, function(button) {
                     if (button == 'yes') {
-                        this.fireEvent('userRequest', {method:'PUT', user:record, status:'active', url:'/user/manager'});
+                        this.fireEvent('userRequest', {from:this, method:'PUT', user:record, status:'active', url:'/user/manager', store:this.bootstrap.layout.userManagerDataView.store});
                     }
                 }, this);
             }
@@ -99,7 +104,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             if (event.getTarget("span.icon-cancel")) {
                 Ext.Msg.confirm('Are you sure?', 'Do you want to delete ' + record.firstName + ' ' + record.lastName, function(button) {
                     if (button == 'yes') {
-                        this.fireEvent('userRequest', {method:'DELETE', user:record, url:'/user/manager'});
+                        this.fireEvent('userRequest', {from:this, method:'DELETE', user:record, url:'/user/manager', store:this.bootstrap.layout.userManagerDataView.store});
                     }
                 }, this);
             }

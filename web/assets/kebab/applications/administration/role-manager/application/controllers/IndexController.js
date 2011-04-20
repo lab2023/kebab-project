@@ -26,11 +26,37 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-        this.bootstrap.layout.roleForm.on('loadGrid', this.loadGridAction, this);
+        this.bootstrap.layout.roleForm.on('roleFormOnSave', this.formOnSaveAction, this);
+        this.bootstrap.layout.roleForm.on('loadRoleManagerGrid', this.loadGridAction, this);
     },
 
     // Actions -----------------------------------------------------------------
-    loadGridAction: function() {
-        this.bootstrap.mainCenter.roleManagerGrid.store.load();
+    loadGridAction: function(data) {
+        data.store.load();
+    },
+
+    formOnSaveAction: function(data) {
+
+        if (data.from.getForm().isValid()) {
+            var notification = new Kebab.OS.Notification();
+
+            data.from.getForm().submit({
+                url: data.url,
+                method: 'POST',
+
+                success : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    data.from.getForm().reset();
+                    if (data.grid) {
+                         data.from.fireEvent('loadRoleManagerGrid', data.grid);
+                    }
+                },
+
+                failure : function() {
+                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                }, scope:this
+            });
+        }
     }
+
 });

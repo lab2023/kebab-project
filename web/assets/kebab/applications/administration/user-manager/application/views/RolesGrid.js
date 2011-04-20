@@ -27,7 +27,7 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
                         if (record.id == this.userId) {
 
                             Ext.each(record.data.Roles, function(role) {
-                                sm.selectRow(role.id - 1);
+                                sm.selectRow(role.id);
 
                             }, this);
                         }
@@ -51,18 +51,6 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
                 forceFit: true
             }
         }
-        this.buttons = [
-            {
-                text: 'Save',
-                iconCls: 'icon-accept',
-                handler : this.onSave
-            },
-            {
-                text: 'Cancel',
-                iconCls: 'icon-cancel',
-                handler : this.onSave
-            }
-        ];
 
         this.sm = new Ext.grid.CheckboxSelectionModel();
         this.columns = [
@@ -73,8 +61,31 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
             }
         ];
 
+        this.buttons = [
+            {
+                text: 'Save',
+                iconCls: 'icon-accept',
+                handler : this.onSave,
+                scope:this
+            },
+            {
+                text: 'Cancel',
+                iconCls: 'icon-cancel',
+                handler : function(){
+                    this.fireEvent('hideWindow', this.bootstrap.layout.userRolesWindow);
+                },
+                scope:this
+            }
+        ];
+
+        this.addEvents('closeUserRolesWindow');
+        this.addEvents('hideWindow');
+
         Ext.apply(this, config);
 
         KebabOS.applications.userManager.application.views.RolesGrid.superclass.initComponent.apply(this, arguments);
+    },
+    onSave: function(){
+      console.log(this.selModel.selections.items);
     }
 });

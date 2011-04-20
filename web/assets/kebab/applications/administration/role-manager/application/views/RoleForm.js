@@ -46,6 +46,12 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
                     xtype: 'textfield'
                 },
                 {
+                    fieldLabel: 'Parent role',
+                    allowBlank:false,
+                    name: 'parentRole',
+                    xtype: 'textfield'
+                },
+                {
                     fieldLabel: 'Description',
                     allowBlank:false,
                     name: 'description',
@@ -59,43 +65,21 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
                     text: 'Create new role',
                     iconCls: 'icon-accept',
                     scope: this,
-                    handler : this.onSave
+                    handler : this.onSubmit
                 }
             ]
         }
+
+        this.addEvents('roleFormOnSave');
+        this.addEvents('roleFormOnSave');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.roleManager.application.views.RoleForm.superclass.initComponent.apply(this, arguments);
     },
-
-    onSave: function() {
-
-        if (this.getForm().isValid()) {
-
-            var notification = new Kebab.OS.Notification();
-
-            this.getForm().submit({
-
-                url: this.url,
-
-                method: 'POST',
-
-                //waitMsg: 'Updating...',
-
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    this.fireEvent('loadGrid');
-                   /// this.getForm().reset();
-                },
-
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                },
-
-                scope:this
-            });
-        }
+    
+    onSubmit: function() {
+        this.fireEvent('roleFormOnSave', {from:this, url:this.url, grid: this.bootstrap.layout.roleManagerGrid});
     }
 
 });
