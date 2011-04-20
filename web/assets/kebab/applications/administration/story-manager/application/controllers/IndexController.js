@@ -26,8 +26,21 @@ KebabOS.applications.storyManager.application.controllers.Index = Ext.extend(Ext
 
     // Initialize and define routing settings
     init: function() {
+        this.bootstrap.layout.storyManagerGrid.on('statusChanged', this.statusChangeAction, this);
+        this.bootstrap.layout.storyManagerGrid.on('loadGrid', this.loadGridAction, this);
+    },
 
+    // Actions -----------------------------------------------------------------
+
+    statusChangeAction: function(data) {
+        Ext.Ajax.request({
+            url: BASE_URL + '/access/story',
+            method:'PUT',
+            params: { id: data.id, status: data.status }
+        });
+    },
+
+    loadGridAction: function(data) {
+        data.load();
     }
-
-    // Actions ----------------------------------------------------------------- 
 });

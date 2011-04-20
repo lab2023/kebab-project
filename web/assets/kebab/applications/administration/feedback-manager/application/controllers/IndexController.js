@@ -27,7 +27,7 @@ KebabOS.applications.feedbackManager.application.controllers.Index = Ext.extend(
     // Initialize and define routing settings
     init: function() {
         this.bootstrap.layout.feedbackManagerGrid.on('statusChanged', this.statusChangeAction, this);
-        this.bootstrap.layout.feedbackManagerGrid.on('feedbackManagerloadGrid', this.loadGridAction, this);
+        this.bootstrap.layout.feedbackManagerGrid.on('loadGrid', this.loadGridAction, this);
     },
 
     // Actions -----------------------------------------------------------------

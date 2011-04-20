@@ -104,6 +104,9 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
             }
         ];
 
+        this.addEvents('statusChanged');
+        this.addEvents('loadGrid');
+
         this.bbar = this.buildBbar();
 
         Ext.apply(this, config);

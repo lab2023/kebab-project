@@ -64,7 +64,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                         id: c.gridEditor.record.id,
                         status: c.getValue()
                     });
-                    this.fireEvent('feedbackManagerloadGrid', this.store);
+                    this.fireEvent('loadGrid', this.store);
                 },
                 scope: this
             }
@@ -113,7 +113,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
         Ext.apply(this, config);
 
         this.addEvents('statusChanged');
-        this.addEvents('feedbackManagerloadGrid');
+        this.addEvents('loadGrid');
 
         KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid.superclass.initComponent.apply(this, arguments);
     },

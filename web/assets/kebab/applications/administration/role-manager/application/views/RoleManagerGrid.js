@@ -36,7 +36,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             selectRow:true,
             loadMask: true,
             editor:true,
-            title:'Chance role',
+            title:'Change role',
             iconCls:'icon-user',
             viewConfig: {
                 // To be equal to the width of columns
@@ -63,9 +63,16 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             }
         ];
 
+        this.addEvents('loadParamsGrid');
+
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerGrid.superclass.initComponent.apply(this, arguments);
+
+        this.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
+            console
+            this.fireEvent('loadParamsGrid', {store:this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store, roleId:r.data.id});
+        });
     },
 
     listeners: {

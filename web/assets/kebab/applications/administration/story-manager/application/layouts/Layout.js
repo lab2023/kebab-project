@@ -20,7 +20,7 @@ KebabOS.applications.storyManager.application.layouts.Layout = Ext.extend(Ext.Pa
         
         var config = {
             layout:'fit',
-            items : [this.storyManagerGrid]
+            items : this.storyManagerGrid
         }
 
         Ext.apply(this, config);

@@ -53,7 +53,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '<span class="icon-email re-invite" ext:qtip="Reinvite {firstName} {lastName}"></span>',
                 '</tpl>',
 
-                '<span class="icon-wrench" ext:qtip="Chance {firstName} {lastName} roles "></span>',
+                '<span class="icon-wrench" ext:qtip="Change {firstName} {lastName} roles "></span>',
                 '<span class="icon-cancel" ext:qtip="Delete {firstName} {lastName}"></span>',
 
                 '</div>',

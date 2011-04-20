@@ -13,7 +13,7 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
     // Application bootstrap
     bootstrap: null,
     //POST url
-    url : BASE_URL + '/role/manager',
+    url : '/role/manager',
 
     initComponent: function() {
 
@@ -71,7 +71,7 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
         }
 
         this.addEvents('roleFormOnSave');
-        this.addEvents('roleFormOnSave');
+        this.addEvents('loadGrid');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
@@ -79,7 +79,7 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
     },
     
     onSubmit: function() {
-        this.fireEvent('roleFormOnSave', {from:this, url:this.url, grid: this.bootstrap.layout.roleManagerGrid});
+        this.fireEvent('roleFormOnSave', {from:this, url:this.url, store: this.bootstrap.layout.mainCenter.roleManagerGrid.store});
     }
 
 });

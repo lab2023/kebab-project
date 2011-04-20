@@ -20,7 +20,7 @@ KebabOS.applications.roleManager.application.views.EastCenter = Ext.extend(Ext.P
         var config = {
             width:250,
             iconCls:'icon-page',
-            title:'Chance story',
+            title:'Change story',
             items:[this.roleManagerStoryGrid],
             layout:'fit',
             border:false,
