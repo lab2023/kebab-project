@@ -38,6 +38,25 @@ if (!defined('BASE_PATH'))
  */
 class User_RoleManagerController extends Kebab_Rest_Controller
 {
+    public function indexAction()
+    {
+        $roles = Role_Model_Role::getAllRoles()->execute();
+
+        $responseData = array();
+        if (is_object($roles)) {
+            $responseData = $roles->toArray();
+        }
+
+        $this->getResponse()
+                ->setHttpResponseCode(200)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->addData($responseData)
+                    ->getResponse()
+        );
+    }
+
     public function getAction()
     {
 
@@ -45,6 +64,6 @@ class User_RoleManagerController extends Kebab_Rest_Controller
     
     public function putAction()
     {
-
+        
     }
 }

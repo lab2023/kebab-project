@@ -14,11 +14,11 @@ KebabOS.applications.userManager.application.models.RolesDataStore = Ext.extend(
     bootstrap: null,
 
     // System REST API
-    restAPI: BASE_URL + '/user/manager',
+    restAPI: BASE_URL + '/user/role-manager',
 
     readerFields: [
         {name: 'id', type:'integer'},
-        {name: 'firstName', type:'string'},
-        {name: 'Roles', type:'object'}
+        {name: 'title', type:'string'},
+        {name: 'name', type:'string'}
     ]
 });

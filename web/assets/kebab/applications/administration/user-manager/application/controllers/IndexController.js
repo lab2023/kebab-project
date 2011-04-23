@@ -29,6 +29,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.emailWindow.emailForm.on('hideWindow', this.hideWindowAction, this);
         this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('hideWindow', this.hideWindowAction, this);
         this.bootstrap.layout.userRolesWindow.rolesGrid.on('hideWindow', this.hideWindowAction, this);
+        this.bootstrap.layout.userRolesWindow.rolesGrid.on('userRequest', this.roleUserRequestAction, this);
         this.bootstrap.layout.userManagerDataView.on('userRequest', this.userRequestAction, this);
         this.bootstrap.layout.emailWindow.emailForm.on('emailFormOnSave', this.formOnSaveAction, this);
         this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('inviteUserFormOnSave', this.formOnSaveAction, this);
@@ -54,8 +55,32 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
             url: BASE_URL + data.url,
             method: data.method,
             params: {
+
                 id: data.user.id,
                 status: data.status
+            },
+            success : function() {
+                notification.message(this.bootstrap.launcher.text, 'Success');
+                if(data.store){
+                    data.from.fireEvent('loadGrid', data.store);
+                }
+            },
+
+            failure : function() {
+                notification.message(this.bootstrap.launcher.text, 'Failure');
+            }, scope:this
+        });
+    },
+
+     roleUserRequestAction: function(data) {
+        var notification = new Kebab.OS.Notification();
+        Ext.Ajax.request({
+            url: BASE_URL + data.url,
+            method: data.method,
+            params: {
+
+                id: data.user,
+                roles: data.roles
             },
             success : function() {
                 notification.message(this.bootstrap.launcher.text, 'Success');
@@ -98,6 +123,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
     showUserRoleWindowAction: function(data) {
         this.bootstrap.layout.userRolesWindow.setTitle(data.firstName + " " + data.lastName + " 's Roles");
         this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.id;
+        this.bootstrap.layout.userRolesWindow.rolesGrid.Roles = data.Roles;
 
         this.bootstrap.layout.userRolesWindow.show();
         this.bootstrap.layout.userRolesWindow.rolesGrid.store.load({params: {userId: data.id}});

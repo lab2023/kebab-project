@@ -20,19 +20,36 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
             bootstrap:this.bootstrap,
             listeners: {
                 load: function(store, records) {
-                    //var userId = this.user;
-                    var sm = this.getSelectionModel();
+
+                    var userId = this.userId;
+
+                    var roles = new Array(),rolesID = new Array(), i = 0;
                     Ext.each(records, function(record) {
-                        //console.log(record);
-                        if (record.id == this.userId) {
-
-                            Ext.each(record.data.Roles, function(role) {
-                                sm.selectRow(role.id);
-
-                            }, this);
-                        }
-
+                        roles[i] = record.data.name;
+                        rolesID[i] = record.data.id;
+                        i++;
                     }, this);
+
+                    var userRoles = new Array(), i = 0;
+                    Ext.each(this.Roles, function(role) {
+                        userRoles[i++] = role.name;
+                    });
+
+                    var sm = this.getSelectionModel();
+                    var j = 0, selectRow = new Array();
+                    Ext.each(userRoles, function(userRoles) {
+                        Ext.each(roles, function(role) {
+
+                            if (userRoles == role) {
+                                selectRow[j] = rolesID[j] - 1;
+                            } else {
+                                j++;
+                            }
+
+                        }, this);
+                        j = 0;
+                    }, this);
+                    sm.selectRows(selectRow);
                 },
                 scope: this
             }
@@ -57,7 +74,7 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
             this.sm,
             {
                 header   : 'Roles',
-                dataIndex: 'firstName'
+                dataIndex: 'title'
             }
         ];
 
@@ -86,6 +103,12 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
         KebabOS.applications.userManager.application.views.RolesGrid.superclass.initComponent.apply(this, arguments);
     },
     onSave: function(){
-      console.log(this.selModel.selections.items);
+        var roleIDs = new Array(), i = 0;
+        Ext.each(this.selModel.getSelections(), function(role) {
+           roleIDs[i++] = role.id;
+        });
+        var roles = Ext.util.JSON.encode(roleIDs);
+        
+        this.fireEvent('userRequest',{from:this, method:'PUT', user:this.userId, roles:roles, url:'/user/role-manager'})
     }
 });

@@ -35,5 +35,17 @@ if (!defined('BASE_PATH'))
 
 class Role_Model_Role extends Model_Entity_Role
 {
+    static public function getAllRoles()
+    {
 
+        return $query = Doctrine_Query::create()
+                ->select('role.name,
+                    roleTranslation.title as title,
+                    roleTranslation.description as description,
+                    role.status')
+                ->from('Model_Entity_Role role')
+                ->leftJoin('role.Translation roleTranslation')
+                ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language);
+
+    }
 }
