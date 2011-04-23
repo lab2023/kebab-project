@@ -20,19 +20,20 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             bootstrap:this.bootstrap,
             listeners: {
                 load: function(store, records) {
-                    //var userId = this.user;
-                    var sm = this.getSelectionModel();
+                    var roleId = this.roleId;
+
+                    var selectRow = new Array(), j = 0;
                     Ext.each(records, function(record) {
-                        //console.log(record);
-                        if (record.id == this.userId) {
-
-                            Ext.each(record.data.Roles, function(role) {
-                                sm.selectRow(role.id - 1);
-
-                            }, this);
+                        if (roleId == record.data.role_id) {
+                            selectRow[j] = record.data.id - 1;
                         }
+                        j++;
                     }, this);
-                }, scope: this
+
+                    var sm = this.getSelectionModel();
+                    sm.selectRows(selectRow);
+                },
+                scope: this
             }
         });
 
@@ -68,19 +69,27 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             {
                 text: 'Save',
                 iconCls: 'icon-accept',
-                handler : this.onSave
+                handler : this.onSave,
+                scope: this
             }
         ];
+
+         this.addEvents('request');
 
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid.superclass.initComponent.apply(this, arguments);
     },
 
-    listeners: {
-        afterRender: function() {
-            this.store.load();
-        }
+    onSave: function(){
+        var storyIDs = new Array(), i = 0;
+        Ext.each(this.selModel.getSelections(), function(story) {
+            console.log(arguments);
+           storyIDs[i++] = story.data.id;
+        });
+        var story = Ext.util.JSON.encode(storyIDs);
+
+        this.fireEvent('request',{from:this, method:'PUT', roleId:this.roleId, story:story, url:'/role/story-manager'})
     }
 });
 

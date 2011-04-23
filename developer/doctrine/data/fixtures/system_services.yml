@@ -35,6 +35,10 @@ Model_Entity_Service:
     Story: Role_Management
     Resource: Role_Manager
 
+  ManageRoles_2:
+    Story: Role_Management
+    Resource: Role_StoryManager
+
   # Manage Users
   ManageUsers_1:
     Story: User_Management

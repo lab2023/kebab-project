@@ -45,6 +45,10 @@ Model_Entity_Controller:
     Module: Role
     name: manager
 
+  Role_StoryManager:
+    Module: Role
+    name: story-manager
+
   # USER MODULE #########################################################
   User_Manager:
     Module: User

@@ -12,10 +12,11 @@ KebabOS.applications.roleManager.application.models.RoleManagerStoryDataStore = 
 
     bootstrap: null,
 
-    restAPI: BASE_URL + '/role/manager',
+    restAPI: BASE_URL + '/role/story-manager',
 
     readerFields:[
-        {name: 'id', type:'integer'},
+        {name: 'id', type:'integer', mapping:'Story.id'},
+        {name: 'role_id', type:'integer'},
         {name:'title', type:'string'},
         {name: 'description', type:'string'}
     ]

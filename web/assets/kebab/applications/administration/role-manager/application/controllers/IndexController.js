@@ -28,6 +28,7 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
     init: function() {
         this.bootstrap.layout.roleForm.on('roleFormOnSave', this.formOnSaveAction, this);
         this.bootstrap.layout.roleForm.on('loadGrid', this.loadGridAction, this);
+        this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.on('request', this.requestAction, this);
         this.bootstrap.layout.mainCenter.roleManagerGrid.on('loadParamsGrid', this.loadParamsGridAction, this);
     },
 
@@ -62,6 +63,26 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
                 }, scope:this
             });
         }
+    },
+    
+    requestAction: function(data) {
+        var notification = new Kebab.OS.Notification();
+        Ext.Ajax.request({
+            url: BASE_URL + data.url,
+            method: data.method,
+            params: {
+
+                id: data.roleId,
+                story: data.story
+            },
+            success : function() {
+                notification.message(this.bootstrap.launcher.text, 'Success');
+            },
+
+            failure : function() {
+                notification.message(this.bootstrap.launcher.text, 'Failure');
+            }, scope:this
+        });
     }
 
 });

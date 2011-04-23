@@ -71,6 +71,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
         this.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
             this.fireEvent('loadParamsGrid', {store: this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store, roleId:r.data.id});
+            this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.roleId = r.data.id;
         }, this);
     },
 
