@@ -59,13 +59,13 @@ class User_ProfileController extends Kebab_Rest_Controller
         }
 
         $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->getResponse()
-            );
+                ->setHttpResponseCode(200)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->addData($responseData)
+                    ->getResponse()
+        );
     }
 
     /**
@@ -84,21 +84,21 @@ class User_ProfileController extends Kebab_Rest_Controller
         $language = $params['language'];
 
         $userExistsWithEmail = Doctrine_Query::create()
-        				->from('Model_Entity_User user')
-        				->where('user.email = ?', $email)
-        				->andWhere('user.id != ?', $userSessionId)->fetchOne();
-        
-		if (is_object($userExistsWithEmail)) {
-			 // Another User exists with entered email
-	        $this->getResponse()
-	                    ->setHttpResponseCode(201)
-	                    ->appendBody(
-	                $this->_helper->response()
-	                		->set('email', 'Another User with email exists.')
-	                        ->getResponse()
-	            );
-		}
-		
+                ->from('Model_Entity_User user')
+                ->where('user.email = ?', $email)
+                ->andWhere('user.id != ?', $userSessionId)->fetchOne();
+
+        if (is_object($userExistsWithEmail)) {
+            // Another User exists with entered email
+            $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->set('email', 'Another User with email exists.')
+                        ->getResponse()
+            );
+        }
+
         // DQL
         $profile = new User_Model_User();
         $profile->assignIdentifier($userSessionId);
@@ -111,12 +111,12 @@ class User_ProfileController extends Kebab_Rest_Controller
 
         // Response
         $this->getResponse()
-                    ->setHttpResponseCode(201)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
-            );
+                ->setHttpResponseCode(201)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->getResponse()
+        );
 
     }
 }

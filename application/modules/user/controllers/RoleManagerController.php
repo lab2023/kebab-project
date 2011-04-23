@@ -57,13 +57,8 @@ class User_RoleManagerController extends Kebab_Rest_Controller
         );
     }
 
-    public function getAction()
-    {
-
-    }
-    
     public function putAction()
     {
-        
+
     }
 }
