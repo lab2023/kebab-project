@@ -59,6 +59,22 @@ class User_RoleManagerController extends Kebab_Rest_Controller
 
     public function putAction()
     {
+        // Getting parameters
+        $params = $this->_helper->param();
+        $userId = $params['id'];
+        $rolesId = $params['roles'];
 
+        // Doctrine
+        Doctrine_Query::create()
+                ->delete('Model_Entity_UserRole userRole')
+                ->where('userRole.user_id = ?', $userId)
+                ->execute();
+
+        foreach ($rolesId as $role) {
+            $userRole = new Model_Entity_UserRole();
+            $userRole->user_id = $userId;
+            $userRole->role_id = $role;
+            $userRole->save();
+        }
     }
 }

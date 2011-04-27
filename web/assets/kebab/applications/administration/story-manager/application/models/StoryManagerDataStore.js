@@ -16,7 +16,6 @@ KebabOS.applications.storyManager.application.models.StoryManagerDataStore = Ext
 
     readerFields:[
         {name: 'id', type:'integer'},
-        {name: 'name', type:'string'},
         {name:'title', type:'string'},
         {name: 'description', type:'string'},
         {name: 'status', type:'string'}

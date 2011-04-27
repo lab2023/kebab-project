@@ -16,7 +16,7 @@ KebabOS.applications.roleManager.application.models.RoleManagerDataStore = Ext.e
 
     readerFields:[
         {name: 'id', type:'integer'},
-        {name:'title', type:'string'},
+        {name: 'title', type:'string'},
         {name: 'description', type:'string'},
         {name: 'status', type:'string'}
     ]

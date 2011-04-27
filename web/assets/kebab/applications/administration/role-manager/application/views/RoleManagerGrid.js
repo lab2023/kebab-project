@@ -33,9 +33,9 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             region: 'center',
             enableColumnHide:false,
             sortable:true,
+            editor:true,
             selectRow:true,
             loadMask: true,
-            editor:true,
             title:'Change role',
             iconCls:'icon-user',
             viewConfig: {
@@ -43,27 +43,74 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
                 forceFit: true
             }
         };
+
         this.sm = new Ext.grid.RowSelectionModel({
-            header:'No',
-            width:25
+            sortable:true,
+            header:'Title',
+            dataIndex:'title'
+        });
+
+        var statusData = [
+            ['active', 'Active'],
+            ['passive', 'Passive']
+        ];
+        var statusCombobox = new Ext.form.ComboBox({
+            typeAhead: true,
+            triggerAction: 'all',
+            forceSelection: true,
+            lazyRender:false,
+            mode: 'local',
+            store: new Ext.data.ArrayStore({
+                fields: ['id', 'name'],
+                data: statusData
+            }),
+            valueField: 'id',
+            displayField: 'name',
+            hiddenName: 'status',
+            scope:this,
+            listeners: {
+                select: function(c) {
+                    this.fireEvent('statusChanged', {
+                        id: c.gridEditor.record.id,
+                        status: c.getValue(),
+                        store:this.store,
+                        from:this
+                    });
+                },
+                scope: this
+            }
         });
 
         this.columns = [
             expander,
             this.sm,
             {
-                header   : 'Title',
-                dataIndex: 'title',
-                sortable:true
-            },
-            {
                 header   : 'Status',
                 dataIndex: 'status',
-                sortable:true
+                sortable:true,
+                editor: statusCombobox,
+                renderer: function(v) {
+
+                    var retVal = null;
+
+                    Ext.each(statusData, function(status) {
+                        if (v == status[0])
+                            retVal = status[1];
+                    });
+
+                    return retVal;
+                }
+            },{
+                dataIndex: 'buttons',
+                iconCls:'icon-delete',
+                width:20
             }
         ];
 
+        this.bbar = this.buildBbar();
+
         this.addEvents('loadGrid');
+        this.addEvents('statusChanged', this);
 
         Ext.apply(this, config);
 
@@ -73,6 +120,12 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.roleId = r.data.id;
             this.fireEvent('loadGrid', this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store);
         }, this);
+    },
+
+    buildBbar: function() {
+        return  new Kebab.library.ext.ExtendedPagingToolbar({
+            store: this.store
+        });
     },
 
     listeners: {

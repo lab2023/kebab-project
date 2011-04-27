@@ -63,7 +63,7 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
                         id: c.gridEditor.record.id,
                         status: c.getValue()
                     });
-                    this.fireEvent('loadGrid');
+                    this.fireEvent('loadGrid', this.store);
                 },
                 scope: this
             }
@@ -72,23 +72,18 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
                 expander,
             {
                 header   : 'Identity',
-                width:20,
-                dataIndex: 'id'
-            },
-            {
-                header   : 'Story Name',
-                width:60,
-                dataIndex: 'name'
+                width:10,
+                dataIndex: 'id',
+                sortable:true
             },
             {
                 header   : 'Title',
-                width:60,
                 dataIndex: 'title'
             },
             {
                 header   : 'Status',
-                width:30,
                 dataIndex: 'status',
+                sortable:true,
                 editor: statusCombobox,
                 renderer: function(v) {
 
@@ -104,7 +99,7 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
             }
         ];
 
-        this.addEvents('statusChanged');
+        this.addEvents('statusChanged', this);
         this.addEvents('loadGrid');
 
         this.bbar = this.buildBbar();

@@ -37,6 +37,8 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.userManagerDataView.on('showUserRoleWindow', this.showUserRoleWindowAction, this);
         this.bootstrap.layout.on('showInviteUserWindow', this.showWindowAction, this);
         this.bootstrap.layout.userManagerDataView.on('loadGrid', this.loadGridAction, this);
+        this.bootstrap.layout.userRolesWindow.rolesGrid.on('loadGrid', this.loadGridAction, this);
+        this.bootstrap.layout.userRolesWindow.rolesGrid.on('hideUserRolesWindow', this.hideWindowAction, this);
     },
 
     // Actions -----------------------------------------------------------------

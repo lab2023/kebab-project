@@ -38,6 +38,7 @@ KebabOS.applications.storyManager.application.controllers.Index = Ext.extend(Ext
             method:'PUT',
             params: { id: data.id, status: data.status }
         });
+
     },
 
     loadGridAction: function(data) {

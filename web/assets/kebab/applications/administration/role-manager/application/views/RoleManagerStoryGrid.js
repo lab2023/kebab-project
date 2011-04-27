@@ -75,21 +75,21 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             }
         ];
 
-         this.addEvents('request');
+        this.addEvents('request');
 
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid.superclass.initComponent.apply(this, arguments);
     },
 
-    onSave: function(){
+    onSave: function() {
         var storyIDs = new Array(), i = 0;
         Ext.each(this.selModel.getSelections(), function(story) {
-           storyIDs[i++] = story.data.id;
+            storyIDs[i++] = story.data.id;
         });
         var story = Ext.util.JSON.encode(storyIDs);
 
-        this.fireEvent('request',{from:this, method:'PUT', roleId:this.roleId, story:story, url:'/role/story-manager'})
+        this.fireEvent('request', {from:this, method:'PUT', roleId:this.roleId, story:story, url:'/role/story-manager'})
     }
 });
 

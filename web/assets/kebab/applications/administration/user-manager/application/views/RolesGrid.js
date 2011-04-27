@@ -97,6 +97,8 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
 
         this.addEvents('closeUserRolesWindow');
         this.addEvents('hideWindow');
+        this.addEvents('loadGrid');
+        this.addEvents('hideUserRolesWindow');
 
         Ext.apply(this, config);
 
@@ -110,5 +112,7 @@ KebabOS.applications.userManager.application.views.RolesGrid = Ext.extend(Ext.gr
         var roles = Ext.util.JSON.encode(roleIDs);
         
         this.fireEvent('userRequest',{from:this, method:'PUT', user:this.userId, roles:roles, url:'/user/role-manager'})
+        this.fireEvent('loadGrid', this.bootstrap.layout.userManagerDataView.store);
+        this.fireEvent('hideUserRolesWindow', this.bootstrap.layout.userRolesWindow);
     }
 });
