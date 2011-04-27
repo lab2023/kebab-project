@@ -17,6 +17,26 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
 
     initComponent: function() {
 
+        // combobox data store
+        var store = new KebabOS.applications.roleManager.application.models.RoleManagerDataStore({
+            bootstrap:this.bootstrap
+        });
+
+        // combobox
+        var roleCombobox = new Ext.form.ComboBox({
+            fieldLabel: 'Parent role',
+            typeAhead: true,
+            triggerAction: 'all',
+            forceSelection: true,
+            lazyRender:false,
+            allowBlank:false,
+            store:store,
+            valueField: 'id',
+            displayField: 'title',
+            hiddenName: 'parentRole',
+            scope:this
+        });
+
         // form config
         var config = {
             title:'Add new role',
@@ -45,12 +65,7 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
                     name: 'title',
                     xtype: 'textfield'
                 },
-                {
-                    fieldLabel: 'Parent role',
-                    allowBlank:false,
-                    name: 'parentRole',
-                    xtype: 'textfield'
-                },
+                roleCombobox,
                 {
                     fieldLabel: 'Description',
                     allowBlank:false,

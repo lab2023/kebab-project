@@ -63,15 +63,15 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             }
         ];
 
-        this.addEvents('loadParamsGrid');
+        this.addEvents('loadGrid');
 
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerGrid.superclass.initComponent.apply(this, arguments);
 
         this.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
-            this.fireEvent('loadParamsGrid', {store: this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store, roleId:r.data.id});
             this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.roleId = r.data.id;
+            this.fireEvent('loadGrid', this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store);
         }, this);
     },
 

@@ -34,7 +34,7 @@ KebabOS.applications.storyManager.application.controllers.Index = Ext.extend(Ext
 
     statusChangeAction: function(data) {
         Ext.Ajax.request({
-            url: BASE_URL + '/access/story',
+            url: BASE_URL + '/access/story-manager',
             method:'PUT',
             params: { id: data.id, status: data.status }
         });

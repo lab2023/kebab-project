@@ -21,13 +21,15 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
             listeners: {
                 load: function(store, records) {
                     var roleId = this.roleId;
-
                     var selectRow = new Array(), j = 0;
                     Ext.each(records, function(record) {
-                        if (roleId == record.data.role_id) {
-                            selectRow[j] = record.data.id - 1;
-                        }
-                        j++;
+                        Ext.each(record.data.Permission, function(permission) {
+                            if (roleId == permission.role_id) {
+                                selectRow[j] = record.data.id - 1;
+                            }
+                            j++;
+                        }, this);
+
                     }, this);
 
                     var sm = this.getSelectionModel();
@@ -36,7 +38,6 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
                 scope: this
             }
         });
-
         var expander = new Ext.ux.grid.RowExpander({
             tpl : new Ext.Template(
                     '<p><b>Description:</b><br />{description}</p><br>'
@@ -84,7 +85,6 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
     onSave: function(){
         var storyIDs = new Array(), i = 0;
         Ext.each(this.selModel.getSelections(), function(story) {
-            console.log(arguments);
            storyIDs[i++] = story.data.id;
         });
         var story = Ext.util.JSON.encode(storyIDs);

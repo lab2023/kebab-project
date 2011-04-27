@@ -35,14 +35,14 @@ if (!defined('BASE_PATH'))
 
 class Access_Model_Story extends Model_Entity_Role
 {
-    static public function getStory($roleId)
+    static public function getStory()
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         return $query = Doctrine_Query::create()
-                ->select('permission.story_id, storyTranslation.title as title,
-                    storyTranslation.description as description, permission.role_id, story.id')
-                ->from('Model_Entity_Permission permission')
-                ->leftJoin('permission.Story story')
+                ->select('story.*, storyTranslation.title as title,
+                    storyTranslation.description as description, permission.*')
+                ->from('Model_Entity_Story story')
+                ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', $lang);
     }

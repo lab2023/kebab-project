@@ -29,16 +29,12 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.roleForm.on('roleFormOnSave', this.formOnSaveAction, this);
         this.bootstrap.layout.roleForm.on('loadGrid', this.loadGridAction, this);
         this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.on('request', this.requestAction, this);
-        this.bootstrap.layout.mainCenter.roleManagerGrid.on('loadParamsGrid', this.loadParamsGridAction, this);
+        this.bootstrap.layout.mainCenter.roleManagerGrid.on('loadGrid', this.loadGridAction, this);
     },
 
     // Actions -----------------------------------------------------------------
     loadGridAction: function(component) {
         component.load();
-    },
-
-    loadParamsGridAction: function(data) {
-        data.store.load({params: {roleId: data.roleId}});
     },
 
     formOnSaveAction: function(data) {
@@ -72,8 +68,8 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
             method: data.method,
             params: {
 
-                id: data.roleId,
-                story: data.story
+                roleId: data.roleId,
+                storyId: data.story
             },
             success : function() {
                 notification.message(this.bootstrap.launcher.text, 'Success');
