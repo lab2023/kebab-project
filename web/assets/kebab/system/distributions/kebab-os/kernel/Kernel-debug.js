@@ -110,6 +110,11 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
             this.launcher.add(app.launcher);
             app.app = this;
+
+            // Check launcher auto start flag and call createApplication()
+            if (app.launcher.autoStart) {
+                app.createApplication();
+            }
         }
     },
 
