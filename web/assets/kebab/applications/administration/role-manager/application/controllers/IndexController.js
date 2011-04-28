@@ -31,7 +31,7 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.on('request', this.requestAction, this);
         this.bootstrap.layout.mainCenter.roleManagerGrid.on('loadGrid', this.loadGridAction, this);
         this.bootstrap.layout.mainCenter.roleManagerGrid.on('statusChanged', this.statusChangeAction, this);
-
+        this.bootstrap.layout.mainCenter.roleManagerGrid.on('roleRequest', this.requestAction, this);
     },
 
     // Actions -----------------------------------------------------------------
@@ -52,7 +52,7 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
                     notification.message(this.bootstrap.launcher.text, 'Success');
                     data.from.getForm().reset();
                     if (data.store) {
-                         data.from.fireEvent('loadGrid', data.store);
+                        data.from.fireEvent('loadGrid', data.store);
                     }
                 },
 
@@ -62,7 +62,7 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
             });
         }
     },
-    
+
     requestAction: function(data) {
         var notification = new Kebab.OS.Notification();
         Ext.Ajax.request({
@@ -70,11 +70,13 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
             method: data.method,
             params: {
 
-                roleId: data.roleId,
-                storyId: data.story
+                id: data.roleId
             },
             success : function() {
                 notification.message(this.bootstrap.launcher.text, 'Success');
+                if (data.store) {
+                    data.from.fireEvent('loadGrid', data.store);
+                }
             },
 
             failure : function() {

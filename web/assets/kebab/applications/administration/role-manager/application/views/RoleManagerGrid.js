@@ -46,7 +46,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
         this.sm = new Ext.grid.RowSelectionModel({
             sortable:true,
-            header:'Title',
+            header:'Name',
             dataIndex:'title'
         });
 
@@ -80,7 +80,9 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
                 scope: this
             }
         });
-
+        Ext.select('span.roleManager-application-span').on('click', function() {
+            console.log(arguments);
+        });
         this.columns = [
             expander,
             this.sm,
@@ -102,14 +104,31 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
                 }
             },{
                 dataIndex: 'buttons',
-                iconCls:'icon-delete',
-                width:20
+                width:20,
+                xtype: 'actioncolumn',
+                items: [
+                    {
+                        iconCls:'icon-cancel',
+                        tooltip: 'Delete role',
+                        handler: function(grid, rowIndex) {
+                            var rec = this.store.getAt(rowIndex);
+                            var roleId = rec.id;
+                            Ext.Msg.confirm('Are you sure?', 'Do you want to delete', function(button) {
+                                if (button == 'yes') {
+                                    this.fireEvent('roleRequest', {from:this, method:'DELETE' ,url:'/role/manager', roleId:roleId, store:this.store});
+                                }
+                            }, this);
+                        },
+                        scope:this
+                    }
+                ]
             }
         ];
 
         this.bbar = this.buildBbar();
 
         this.addEvents('loadGrid');
+        this.addEvents('roleRequest');
         this.addEvents('statusChanged', this);
 
         Ext.apply(this, config);

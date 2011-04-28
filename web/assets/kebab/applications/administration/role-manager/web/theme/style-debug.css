@@ -7,12 +7,8 @@
 #roleManager-application-shortcut div {
     background-image: url(images/shortcut.png);
 }
-
-.roleManager-application-span {
-    background-repeat: no-repeat;
+.icon-cancel {
     width: 16px;
     height: 16px;
-    margin-right: 10px;
-    cursor:pointer;
-    float: left;
+    margin:auto;
 }
