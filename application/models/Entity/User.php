@@ -72,10 +72,9 @@ class Model_Entity_User extends Doctrine_Record
              'length' => 7,
              'values' => 
              array(
-              0 => 'active',
-              1 => 'passive',
+              0 => 'passive',
+              1 => 'active',
              ),
-             'default' => 'passive',
              'notnull' => true,
              ));
 

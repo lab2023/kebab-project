@@ -97,7 +97,7 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
                             ->getResponse()
                 );
         } catch (Zend_Exception $e) {
-            die('ZE');
+            throw $e;
         } catch (Doctrine_Exception $e) {
             throw $e;
         }

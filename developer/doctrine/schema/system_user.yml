@@ -26,8 +26,7 @@ User:
     status:
       type: enum
       length: 7
-      values: ['active', 'passive']
-      default: 'passive'
+      values: ['passive', 'active']
       notnull: true
 
   actAs:

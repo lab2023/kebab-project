@@ -38,6 +38,7 @@ KebabOS.applications.feedbackManager.application.controllers.Index = Ext.extend(
             method:'PUT',
             params: { id: data.id, status: data.status }
         });
+        data.from.fireEvent('loadGrid', data.store);
     },
 
     loadGridAction: function(data) {

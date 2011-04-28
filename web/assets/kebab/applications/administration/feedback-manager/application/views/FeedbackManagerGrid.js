@@ -62,9 +62,10 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 select: function(c) {
                     this.fireEvent('statusChanged', {
                         id: c.gridEditor.record.id,
-                        status: c.getValue()
+                        status: c.getValue(),
+                        from:this,
+                        store:this.store
                     });
-                    this.fireEvent('loadGrid', this.store);
                 },
                 scope: this
             }

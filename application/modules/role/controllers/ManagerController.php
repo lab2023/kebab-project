@@ -121,7 +121,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
                         ->getResponse()
             );
         } catch (Zend_Exception $e) {
-            die('ZE');
+            throw $e;
         } catch (Doctrine_Exception $e) {
             throw $e;
         }
@@ -177,7 +177,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
                         ->getResponse()
             );
         } catch (Zend_Exception $e) {
-            die('ZE');
+            throw $e;
         } catch (Doctrine_Exception $e) {
             throw $e;
         }
