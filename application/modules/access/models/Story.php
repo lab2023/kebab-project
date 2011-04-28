@@ -33,7 +33,7 @@ if (!defined('BASE_PATH'))
  * @version    1.5.0
  */
 
-class Access_Model_Story extends Model_Entity_Role
+class Access_Model_Story extends Model_Entity_Story
 {
     static public function getStory()
     {
@@ -44,6 +44,7 @@ class Access_Model_Story extends Model_Entity_Role
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
-                ->where('storyTranslation.lang = ?', $lang);
+                ->where('storyTranslation.lang = ?', $lang)
+                ->where('story.status = ?', 'active');
     }
 }

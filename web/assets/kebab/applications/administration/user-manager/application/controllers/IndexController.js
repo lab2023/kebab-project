@@ -138,7 +138,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         }
         if (data.status == 'passive') {
             var title = ' Re-invite';
-            var requestUrl = '/authentication/forgot-password';
+            var requestUrl = '/authentication/re-invite';
         }
         this.bootstrap.layout.emailWindow.setTitle(data.firstName + " " + data.lastName + title);
         this.bootstrap.layout.emailWindow.emailForm.url = BASE_URL + requestUrl;

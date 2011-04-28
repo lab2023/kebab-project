@@ -113,7 +113,6 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
             buttons: [{
                 text: 'Save',
                 iconCls: 'icon-disk',
-                handler: this.onUpdate,
                 scope: this,
                 handler: this.onSubmit
             }]
@@ -129,6 +128,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
 
     listeners: {
         actioncomplete:function(form, response) {
+            //KBBTODO response error 
             if(response.result.data.id) {
                 this.bootstrap.layout.enable();
                 Ext.getCmp('aboutMe-application-firstNameLastName-text')
