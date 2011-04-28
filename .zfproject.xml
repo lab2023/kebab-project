@@ -16,7 +16,7 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="login"/>
           <actionMethod actionName="logout"/>
-          <actionMethod actionName="forgetPassword"/>
+          <actionMethod actionName="forgotPassword"/>
           <actionMethod actionName="resetPassword"/>
           <actionMethod actionName="resetPasswordExpired"/>
           <actionMethod actionName="acceptInvitation"/>
@@ -81,7 +81,7 @@
             <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Auth">
-            <viewScriptFile forActionName="forgetPassword"/>
+            <viewScriptFile forActionName="forgotPassword"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Auth">
             <viewScriptFile forActionName="resetPassword"/>

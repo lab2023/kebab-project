@@ -28,7 +28,7 @@ if (!defined('BASE_PATH'))
  * Session controller manage to login, logout and other operation over session
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Forget Password
+ * @package    Forgot Password
  * @subpackage Controllers
  * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
