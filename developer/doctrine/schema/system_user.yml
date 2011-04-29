@@ -13,9 +13,8 @@ User:
       type: enum
       length: 2
       values: ['en', 'tr']
-      default: 'en'
     username:
-      type: string(16)
+      type: string(55)
       unique: true
       notnull: true
     password:

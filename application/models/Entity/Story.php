@@ -44,7 +44,6 @@ class Model_Entity_Story extends Doctrine_Record
               0 => 'active',
               1 => 'passive',
              ),
-             'default' => 'active',
              ));
 
         $this->option('type', 'INNODB');

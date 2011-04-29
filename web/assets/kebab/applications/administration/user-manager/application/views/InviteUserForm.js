@@ -13,7 +13,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
     // Application bootstrap
     bootstrap: null,
     //POST url
-    url : '/user/manager',
+    url : '/user/invite',
 
     bodyStyle: 'padding:5px 10px;',
 
@@ -70,6 +70,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
 
         this.addEvents('inviteUserFormOnSave');
         this.addEvents('hideWindow');
+        this.addEvents('loadGrid');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
@@ -77,6 +78,6 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
     },
 
     onSubmit: function() {
-        this.fireEvent('inviteUserFormOnSave', {from:this, fromWindow:this.bootstrap.layout.inviteUserWindow, url:this.url});
+        this.fireEvent('inviteUserFormOnSave', {from:this, fromWindow:this.bootstrap.layout.inviteUserWindow, url:this.url, store:this.bootstrap.layout.userManagerDataView.store});
     }
 });

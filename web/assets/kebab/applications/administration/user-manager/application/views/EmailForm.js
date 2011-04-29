@@ -60,6 +60,6 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
     },
 
     onSubmit: function() {
-        this.fireEvent('emailFormOnSave', {from:this, fromWindow:this.bootstrap.layout.emailWindow, url:this.url});
+        this.fireEvent('emailFormOnSave', {from:this, fromWindow:this.bootstrap.layout.emailWindow, url:this.url, method:this.method});
     }
 });

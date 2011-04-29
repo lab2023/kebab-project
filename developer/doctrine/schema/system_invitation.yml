@@ -7,10 +7,9 @@ Invitation:
       type: string
     message:
       type: text
-    invitedBy:
-      type: integer
 
   actAs:
+    Blameable:
     Timestampable:
     SoftDelete:
 
@@ -18,11 +17,7 @@ Invitation:
     User:
       class: User
       type: one
-
-    InvitedBy:
-      class: User
-      local: invitedBy
-      type: one
+      cascade: [delete]
 
   options:
     type: INNODB

@@ -50,13 +50,12 @@ class Model_Entity_User extends Doctrine_Record
               0 => 'en',
               1 => 'tr',
              ),
-             'default' => 'en',
              ));
-        $this->hasColumn('username', 'string', 16, array(
+        $this->hasColumn('username', 'string', 55, array(
              'type' => 'string',
              'unique' => true,
              'notnull' => true,
-             'length' => '16',
+             'length' => '55',
              ));
         $this->hasColumn('password', 'string', 255, array(
              'type' => 'string',

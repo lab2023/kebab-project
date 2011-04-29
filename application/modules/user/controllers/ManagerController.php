@@ -101,11 +101,17 @@ class User_ManagerController extends Kebab_Rest_Controller
         $params = $this->_helper->param();
         $id = $params['id'];
 
-        // Updating status
+        // delete
         $user = new User_Model_User();
         $user->assignIdentifier($id);
         $user->delete();
         unset($user);
+        
+        // Doctrine
+        Doctrine_Query::create()
+                ->delete('Model_Entity_Invitation invitation')
+                ->where('invitation.user_id = ?', $id)
+                ->execute();
 
         // Returning response
         $this->getResponse()

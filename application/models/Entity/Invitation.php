@@ -8,9 +8,7 @@
  * @property integer $user_id
  * @property string $activationKey
  * @property text $message
- * @property integer $invitedBy
  * @property Model_Entity_User $User
- * @property Model_Entity_User $InvitedBy
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -31,9 +29,6 @@ class Model_Entity_Invitation extends Doctrine_Record
         $this->hasColumn('message', 'text', null, array(
              'type' => 'text',
              ));
-        $this->hasColumn('invitedBy', 'integer', null, array(
-             'type' => 'integer',
-             ));
 
         $this->option('type', 'INNODB');
         $this->option('collate', 'utf8_bin');
@@ -45,14 +40,15 @@ class Model_Entity_Invitation extends Doctrine_Record
         parent::setUp();
         $this->hasOne('Model_Entity_User as User', array(
              'local' => 'user_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'cascade' => array(
+             0 => 'delete',
+             )));
 
-        $this->hasOne('Model_Entity_User as InvitedBy', array(
-             'local' => 'invitedBy',
-             'foreign' => 'id'));
-
+        $blameable0 = new Doctrine_Template_Blameable();
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
+        $this->actAs($blameable0);
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
     }
