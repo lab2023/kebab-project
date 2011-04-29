@@ -103,7 +103,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
         if (data.from.getForm().isValid()) {
             var notification = new Kebab.OS.Notification();
-
             data.from.getForm().submit({
                 url: data.url,
                 method: data.method,
@@ -130,7 +129,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.userRolesWindow.setTitle(data.firstName + " " + data.lastName + " 's Roles");
         this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.id;
         this.bootstrap.layout.userRolesWindow.rolesGrid.Roles = data.Roles;
-
         this.bootstrap.layout.userRolesWindow.show();
         this.bootstrap.layout.userRolesWindow.rolesGrid.store.load({params: {userId: data.id}});
     },
@@ -150,6 +148,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.emailWindow.emailForm.url = BASE_URL + requestUrl;
         this.bootstrap.layout.emailWindow.emailForm.method = method;
         this.bootstrap.layout.emailWindow.emailForm.getForm().findField('email').setValue(data.email);
+        this.bootstrap.layout.emailWindow.emailForm.getForm().findField('id').setValue(data.id);
         this.bootstrap.layout.emailWindow.show();
     },
 

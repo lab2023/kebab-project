@@ -80,7 +80,17 @@ class User_InviteController extends Kebab_Rest_Controller
 
     public function putAction()
     {
+        // params
+        $params = $this->_helper->param();
+        $email = $params['email'];
+        $id = $params['id'];
 
+        $user = new User_Model_User();
+        $user->assignIdentifier($id);
+        $user->email = $email;
+        $user->username = $email;
+        $user->save();
+        unset($user);
     }
 
     public function deleteAction()

@@ -12,7 +12,7 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
 
     // Application bootstrap
     bootstrap: null,
-
+    
     bodyStyle: 'padding:5px 10px;',
 
     initComponent: function() {
@@ -31,6 +31,9 @@ KebabOS.applications.userManager.application.views.EmailForm = Ext.extend(Ext.fo
                     name: 'email',
                     height:30,
                     vtype:'email'
+                },{
+                    name:'id',
+                    xtype:'hidden'
                 }
             ],
             buttons: [
