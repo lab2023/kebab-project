@@ -64,3 +64,14 @@ Model_Entity_Story:
         title: Rol Yönetimi
         description: Rolleri yönetin
     status: active
+
+  System_Backup:
+    name: Database Backup
+    Translation:
+      en:
+        title: Database Backup
+        description: Database Backup
+      tr:
+        title: Database Backup
+        description: Database Backup
+    status: active

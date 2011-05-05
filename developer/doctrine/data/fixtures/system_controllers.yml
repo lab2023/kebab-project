@@ -65,3 +65,8 @@ Model_Entity_Controller:
   User_Invite:
     Module: User
     name: invite
+
+  # SYSTEM MODULE #########################################################
+  System_Backup:
+    Module: System
+    name: backup

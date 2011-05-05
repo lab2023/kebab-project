@@ -23,4 +23,8 @@ Model_Entity_Permission:
     Story: Story_Management
     Role: Admin
     rule: allow
+  Permission_7:
+    Story: System_Backup
+    Role: Admin
+    rule: allow
     

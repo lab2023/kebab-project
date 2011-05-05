@@ -13,4 +13,5 @@ Model_Entity_Module:
     name: role
   User:
     name: user
-    
+  System:
+    name: system

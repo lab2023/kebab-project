@@ -239,3 +239,18 @@ Model_Entity_Application:
       tr:
         title: Rol Yöneticisi
         description: Rolleri yönetin.
+
+  DatabaseBackup:
+    identity: databaseBackup-application
+    className: KebabOS.applications.databaseBackup.application.Bootstrap
+    name: database-backup
+    type: system
+    department: administration
+    version: 0.0.1
+    Translation:
+      en:
+        title: Database Backup
+        description: Database Backup
+      tr:
+        title: Database Backup
+        description: Database Backup

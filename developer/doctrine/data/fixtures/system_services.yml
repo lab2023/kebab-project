@@ -51,3 +51,8 @@ Model_Entity_Service:
   ManageUsers_3:
     Story: User_Management
     Resource: User_Invite
+
+  # Manage Users
+  System_1:
+    Story: System_Backup
+    Resource: System_Backup
