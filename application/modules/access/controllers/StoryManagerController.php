@@ -18,7 +18,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package
  * @subpackage Controllers
- * @author	   lab2023 Dev Team
+ * @author       lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
@@ -30,7 +30,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package
  * @subpackage Controllers
- * @author	   lab2023 Dev Team
+ * @author       lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
@@ -39,39 +39,48 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-         // Mapping
+        // Mapping
         $mapping = array(
             'id' => 'story.id',
             'status' => 'story.status',
             'description' => 'storyTranslation.description',
-            'title' =>'storyTranslation.title',
+            'title' => 'storyTranslation.title',
         );
 
-        $query = Doctrine_Query::create()
-                ->select('story.id, storyTranslation.title as title,
-                    storyTranslation.description as description, story.status')
-                ->from('Model_Entity_Story story')
-                ->leftJoin('story.Translation storyTranslation')
-                ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping));
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $query = Doctrine_Query::create()
+                    ->select('story.id, storyTranslation.title as title,
+                        storyTranslation.description as description, story.status')
+                    ->from('Model_Entity_Story story')
+                    ->leftJoin('story.Translation storyTranslation')
+                    ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                    ->orderBy($this->_helper->sort($mapping));
 
-        $pager = $this->_helper->pagination($query);
-        $story = $pager->execute();
+            $pager = $this->_helper->pagination($query);
+            $story = $pager->execute();
 
-        $responseData = array();
-        if (is_object($story)) {
-            $responseData = $story->toArray();
+            $responseData = array();
+            if (is_object($story)) {
+                $responseData = $story->toArray();
+            }
+            Doctrine_Manager::connection()->commit();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->addTotal($pager->getNumResults())
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->addTotal($pager->getNumResults())
-                    ->getResponse()
-        );
     }
 
     public function putAction()
@@ -82,23 +91,26 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
         $status = $params['status'];
 
         // Updating status
+        Doctrine_Manager::connection()->beginTransaction();
         try {
             $story = new Access_Model_Story();
             $story->assignIdentifier($id);
             $story->set('status', $status);
             $story->save();
-
+            Doctrine_Manager::connection()->commit();
+            unset($story);
             // Returning response
             $this->getResponse()
-                        ->setHttpResponseCode(202)
-                        ->appendBody(
-                    $this->_helper->response()
-                            ->setSuccess(true)
-                            ->getResponse()
-                );
+                    ->setHttpResponseCode(202)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
         } catch (Zend_Exception $e) {
             throw $e;
         } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         }
     }

@@ -40,21 +40,30 @@ class Role_StoryManagerController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $story = Access_Model_Story::getStory()->execute();
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $story = Access_Model_Story::getStory()->execute();
 
-        $responseData = array();
-        if (is_object($story)) {
-            $responseData = $story->toArray();
+            $responseData = array();
+            if (is_object($story)) {
+                $responseData = $story->toArray();
+            }
+            Doctrine_Manager::connection()->commit();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->getResponse()
-        );
     }
 
     public function putAction()
@@ -65,17 +74,28 @@ class Role_StoryManagerController extends Kebab_Rest_Controller
         $storyId = $params['storyId'];
 
         // Doctrine
-        Doctrine_Query::create()
-                ->delete('Model_Entity_Permission permission')
-                ->where('permission.role_id = ?', $roleId)
-                ->execute();
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_Permission permission')
+                    ->where('permission.role_id = ?', $roleId)
+                    ->execute();
 
-        foreach($storyId as $story){
-            $permission = new Model_Entity_Permission();
-            $permission->role_id = $roleId;
-            $permission->story_id = $story;
-            $permission->rule = 'allow';
-            $permission->save();
+            foreach ($storyId as $story) {
+                $permission = new Model_Entity_Permission();
+                $permission->role_id = $roleId;
+                $permission->story_id = $story;
+                $permission->rule = 'allow';
+                $permission->save();
+            }
+            Doctrine_Manager::connection()->commit();
+            unset($permission);
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
 
     }

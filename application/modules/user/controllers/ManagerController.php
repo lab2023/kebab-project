@@ -45,30 +45,39 @@ class User_ManagerController extends Kebab_Rest_Controller
             'id' => 'user.id'
         );
 
-        $query = Doctrine_Query::create()
-                ->select('user.firstName, user.lastName, user.email, user.username, user.status, role.name')
-                ->from('Model_Entity_User user')
-                ->leftJoin('user.Roles role')
-                ->orderBy($this->_helper->sort($mapping));
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $query = Doctrine_Query::create()
+                    ->select('user.firstName, user.lastName, user.email, user.username, user.status, role.name')
+                    ->from('Model_Entity_User user')
+                    ->leftJoin('user.Roles role')
+                    ->orderBy($this->_helper->sort($mapping));
 
-        $pager = $this->_helper->pagination($query);
-        $users = $pager->execute();
+            $pager = $this->_helper->pagination($query);
+            $users = $pager->execute();
 
-        $responseData = array();
+            $responseData = array();
 
-        if (is_object($users)) {
-            $responseData = $users->toArray();
+            if (is_object($users)) {
+                $responseData = $users->toArray();
+            }
+            Doctrine_Manager::connection()->commit();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->addTotal($pager->getNumResults())
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->addTotal($pager->getNumResults())
-                    ->getResponse()
-        );
     }
 
     public function putAction()
@@ -79,20 +88,30 @@ class User_ManagerController extends Kebab_Rest_Controller
         $status = $params['status'];
 
         // Updating status
-        $user = new User_Model_User();
-        $user->assignIdentifier($id);
-        $user->status = $status;
-        $user->save();
-        unset($user);
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $user = new User_Model_User();
+            $user->assignIdentifier($id);
+            $user->status = $status;
+            $user->save();
+            Doctrine_Manager::connection()->commit();
+            unset($user);
 
-        // Returning response
-        $this->getResponse()
-                ->setHttpResponseCode(201)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->getResponse()
-        );
+            // Returning response
+            $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
     }
 
     public function deleteAction()
@@ -102,24 +121,35 @@ class User_ManagerController extends Kebab_Rest_Controller
         $id = $params['id'];
 
         // delete
-        $user = new User_Model_User();
-        $user->assignIdentifier($id);
-        $user->delete();
-        unset($user);
-        
-        // Doctrine
-        Doctrine_Query::create()
-                ->delete('Model_Entity_Invitation invitation')
-                ->where('invitation.user_id = ?', $id)
-                ->execute();
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $user = new User_Model_User();
+            $user->assignIdentifier($id);
+            $user->delete();
 
-        // Returning response
-        $this->getResponse()
-                ->setHttpResponseCode(201)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->getResponse()
-        );
+
+            // Doctrine
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_Invitation invitation')
+                    ->where('invitation.user_id = ?', $id)
+                    ->execute();
+
+            Doctrine_Manager::connection()->commit();
+            unset($user);
+            // Returning response
+            $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
     }
 }

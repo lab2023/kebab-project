@@ -48,42 +48,49 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
             'id' => 'feedback.id',
             'status' => 'feedback.status',
             'description' => 'feedback.description',
-            'title' =>'applicationTranslate',
+            'title' => 'applicationTranslate',
             'User' => 'user'
         );
-
-        $query = Doctrine_Query::create()
-                ->select('feedback.*,
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $query = Doctrine_Query::create()
+                    ->select('feedback.*,
                     application.*,
                     user.firstName,
                     user.lastName,
                     applicationTranslate.title as title')
-                ->from('Model_Entity_Feedback feedback')
-                ->innerJoin('feedback.Application application')
-                ->leftJoin('application.Translation applicationTranslate')
-                ->innerJoin('feedback.User user')
-                ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping));
+                    ->from('Model_Entity_Feedback feedback')
+                    ->innerJoin('feedback.Application application')
+                    ->leftJoin('application.Translation applicationTranslate')
+                    ->innerJoin('feedback.User user')
+                    ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                    ->orderBy($this->_helper->sort($mapping));
 
-        $pager = $this->_helper->pagination($query);
-        $feedbacks = $pager->execute();
+            $pager = $this->_helper->pagination($query);
+            $feedbacks = $pager->execute();
 
-        $responseData = array();
-        if (is_object($feedbacks)) {
-            $responseData = $feedbacks->toArray();
+            $responseData = array();
+            if (is_object($feedbacks)) {
+                $responseData = $feedbacks->toArray();
+            }
+            Doctrine_Manager::connection()->commit();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->addTotal($pager->getNumResults())
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->addTotal($pager->getNumResults())
-                    ->getResponse()
-        );
     }
-    
+
     /**
      * @return void
      */
@@ -95,20 +102,23 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
         $status = $params['status'];
 
         // Updating status
+        Doctrine_Manager::connection()->beginTransaction();
         try {
             $feedback = new Feedback_Model_Feedback();
             $feedback->assignIdentifier($id);
             $feedback->set('status', $status);
             $feedback->save();
-            
+            Doctrine_Manager::connection()->commit();
+            unset($feedback);
+
             // Returning response
             $this->getResponse()
-                        ->setHttpResponseCode(202)
-                        ->appendBody(
-                    $this->_helper->response()
-                            ->setSuccess(true)
-                            ->getResponse()
-                );
+                    ->setHttpResponseCode(202)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
         } catch (Zend_Exception $e) {
             throw $e;
         } catch (Doctrine_Exception $e) {

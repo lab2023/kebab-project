@@ -72,6 +72,8 @@ class User_InviteController extends Kebab_Rest_Controller
             $this->getResponse()->setHttpResponseCode(200)->appendBody(
                 $this->_helper->response()->setSuccess(true)->getResponse()
             );
+        } catch (Zend_Exception $e) {
+            throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -85,15 +87,25 @@ class User_InviteController extends Kebab_Rest_Controller
         $email = $params['email'];
         $id = $params['id'];
 
-        $user = new User_Model_User();
-        $user->assignIdentifier($id);
-        $user->email = $email;
-        $user->username = $email;
-        $user->save();
-        unset($user);
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $user = new User_Model_User();
+            $user->assignIdentifier($id);
+            $user->email = $email;
+            $user->username = $email;
+            $user->save();
+            Doctrine_Manager::connection()->commit();
+            unset($user);
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
     }
 
-    public function deleteAction()
+    public function getAction()
     {
 
     }

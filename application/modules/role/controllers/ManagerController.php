@@ -52,33 +52,43 @@ class Role_ManagerController extends Kebab_Rest_Controller
             'status' => 'role.status'
         );
 
-        $query = Doctrine_Query::create()
-                ->select('role.name, 
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $query = Doctrine_Query::create()
+                    ->select('role.name,
                     roleTranslation.title as title, 
                     roleTranslation.description as description,
                     role.status')
-                ->from('Model_Entity_Role role')
-                ->leftJoin('role.Translation roleTranslation')
-                ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping));
+                    ->from('Model_Entity_Role role')
+                    ->leftJoin('role.Translation roleTranslation')
+                    ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                    ->orderBy($this->_helper->sort($mapping));
 
-        $pager = $this->_helper->pagination($query);
-        $roles = $pager->execute();
+            $pager = $this->_helper->pagination($query);
+            $roles = $pager->execute();
 
-        $responseData = array();
-        if (is_object($roles)) {
-            $responseData = $roles->toArray();
+            Doctrine_Manager::connection()->commit();
+
+            $responseData = array();
+            if (is_object($roles)) {
+                $responseData = $roles->toArray();
+            }
+
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->addTotal($pager->getNumResults())
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->addTotal($pager->getNumResults())
-                    ->getResponse()
-        );
     }
 
     /**
@@ -95,6 +105,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
 
         // Inserting New Role
+        Doctrine_Manager::connection()->beginTransaction();
         try {
             $role = new Role_Model_Role();
             $role->name = $name;
@@ -109,8 +120,9 @@ class Role_ManagerController extends Kebab_Rest_Controller
                 $role->save();
                 $treeObject = Doctrine_Core::getTable('Model_Entity_Role')->getTree();
                 $treeObject->createRoot($role);
+                unset($role);
             }
-
+            Doctrine_Manager::connection()->commit();
 
             // Returning response
             $this->getResponse()
@@ -125,32 +137,6 @@ class Role_ManagerController extends Kebab_Rest_Controller
         } catch (Doctrine_Exception $e) {
             throw $e;
         }
-        /*
-          $param = $this->_helper->param();
-          if (array_key_exists('parentId', $param) && array_key_exists('title', $param)) {
-
-              // Create a new cats
-              $parentCat = Doctrine_Core::getTable('Product_Model_Category')->find($param['parentId']);
-              $cat = new Product_Model_Category();
-              $cat->Translation['tr']->title = $param['title']; //KBBTODO get lang by session or config
-              $cat->getNode()->insertAsLastChildOf($parentCat);
-              $responseData = $cat->toArray();
-
-              // Unset
-              unset($cat);
-
-              // Response
-              $this->getResponse()
-               ->setHttpResponseCode(200)
-               ->appendBody(
-                   $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->addNotification('INFO', 'Record was created.')
-                        ->getResponse()
-               );
-          }
-           */
 
     }
 
@@ -162,12 +148,14 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $status = $params['status'];
 
         // Updating status
+        Doctrine_Manager::connection()->beginTransaction();
         try {
             $role = new Role_Model_Role();
             $role->assignIdentifier($id);
             $role->set('status', $status);
             $role->save();
-
+            Doctrine_Manager::connection()->commit();
+            unset($role);
             // Returning response
             $this->getResponse()
                     ->setHttpResponseCode(202)
@@ -190,24 +178,32 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $id = $params['id'];
 
         // Doctrine
-        Doctrine_Query::create()
-                ->delete('Model_Entity_Permission permission')
-                ->where('permission.role_id = ?', $id)
-                ->execute();
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_Permission permission')
+                    ->where('permission.role_id = ?', $id)
+                    ->execute();
 
-        // delete role
-        $role = new Role_Model_Role();
-        $role->assignIdentifier($id);
-        $role->delete();
-
-        // Returning response
-        $this->getResponse()
-                ->setHttpResponseCode(201)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->getResponse()
-        );
+            // delete role
+            $role = new Role_Model_Role();
+            $role->assignIdentifier($id);
+            $role->delete();
+            Doctrine_Manager::connection()->commit();
+            unset($role);
+            // Returning response
+            $this->getResponse()
+                    ->setHttpResponseCode(201)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            throw $e;
+        }
     }
 
 

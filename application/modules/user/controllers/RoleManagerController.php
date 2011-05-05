@@ -40,21 +40,29 @@ class User_RoleManagerController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $roles = Role_Model_Role::getAllRoles()->execute();
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $roles = Role_Model_Role::getAllRoles()->execute();
+            Doctrine_Manager::connection()->commit();
+            $responseData = array();
+            if (is_object($roles)) {
+                $responseData = $roles->toArray();
+            }
 
-        $responseData = array();
-        if (is_object($roles)) {
-            $responseData = $roles->toArray();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->getResponse()
+            );
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->getResponse()
-        );
     }
 
     public function putAction()
@@ -64,17 +72,27 @@ class User_RoleManagerController extends Kebab_Rest_Controller
         $userId = $params['id'];
         $rolesId = $params['roles'];
 
-        // Doctrine
-        Doctrine_Query::create()
-                ->delete('Model_Entity_UserRole userRole')
-                ->where('userRole.user_id = ?', $userId)
-                ->execute();
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            // Doctrine
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_UserRole userRole')
+                    ->where('userRole.user_id = ?', $userId)
+                    ->execute();
 
-        foreach ($rolesId as $role) {
-            $userRole = new Model_Entity_UserRole();
-            $userRole->user_id = $userId;
-            $userRole->role_id = $role;
-            $userRole->save();
+            foreach ($rolesId as $role) {
+                $userRole = new Model_Entity_UserRole();
+                $userRole->user_id = $userId;
+                $userRole->role_id = $role;
+                $userRole->save();
+            }
+            Doctrine_Manager::connection()->commit();
+            unset($userRole);
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
     }
 }

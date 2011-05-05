@@ -56,35 +56,44 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         );
 
         // Doctrine
-        $query = Doctrine_Query::create()
-                ->select('feedback.*,
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $query = Doctrine_Query::create()
+                    ->select('feedback.*,
                     application.*,
                     applicationTranslate.title as title')
-                ->from('Model_Entity_Feedback feedback')
-                ->innerJoin('feedback.Application application')
-                ->leftJoin('application.Translation applicationTranslate')
-                ->where('feedback.user_id = ?', $userSessionId)
-                ->andWhere('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping));
+                    ->from('Model_Entity_Feedback feedback')
+                    ->innerJoin('feedback.Application application')
+                    ->leftJoin('application.Translation applicationTranslate')
+                    ->where('feedback.user_id = ?', $userSessionId)
+                    ->andWhere('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                    ->orderBy($this->_helper->sort($mapping));
 
-        $pager = $this->_helper->pagination($query);
-        $feedbacks = $pager->execute();
+            $pager = $this->_helper->pagination($query);
+            $feedbacks = $pager->execute();
 
-        $responseData = array();
+            $responseData = array();
 
-        if (is_object($feedbacks)) {
-            $responseData = $feedbacks->toArray();
+            if (is_object($feedbacks)) {
+                $responseData = $feedbacks->toArray();
+            }
+            Doctrine_Manager::connection()->commit();
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($responseData)
+                        ->addTotal($pager->getNumResults())
+                        ->getResponse()
+            );
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
         }
-
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($responseData)
-                    ->addTotal($pager->getNumResults())
-                    ->getResponse()
-        );
     }
 
     public function postAction()
@@ -93,25 +102,36 @@ class Feedback_FeedbackController extends Kebab_Rest_Controller
         $applicationIdentity = $params['applicationIdentity'];
         $description = $params['description'];
 
-        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
 
-        $application = Doctrine_Core::getTable('Model_Entity_Application')->findOneByidentity($applicationIdentity);
+            $application = Doctrine_Core::getTable('Model_Entity_Application')->findOneByidentity($applicationIdentity);
 
-        $feedback = new Model_Entity_Feedback();
-        $feedback->Application = $application;
-        $feedback->status = 'open';
-        $feedback->description = $description;
-        $feedback->user_id = $userSessionId;
+            $feedback = new Model_Entity_Feedback();
+            $feedback->Application = $application;
+            $feedback->status = 'open';
+            $feedback->description = $description;
+            $feedback->user_id = $userSessionId;
 
-        $feedback->save();
+            $feedback->save();
+            Doctrine_Manager::connection()->commit();
 
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($feedback->toArray())
-                    ->getResponse()
-        );
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->addData($feedback->toArray())
+                        ->getResponse()
+            );
+            unset($feedback);
+
+        } catch (Zend_Exception $e) {
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
     }
 }
