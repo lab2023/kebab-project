@@ -22,12 +22,40 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
         KebabOS.applications.databaseBackup.application.controllers.Index.superclass.constructor.apply(this, arguments);
 
         this.init();
+        this.bootstrap.layout.databaseBackupGrid.on('downloadRequest', this.RequestAction, this);
+        this.bootstrap.layout.databaseBackupGrid.on('deleteRequest', this.RequestAction, this);
+        this.bootstrap.layout.databaseBackupGrid.on('backupRequest', this.RequestAction, this);
+        this.bootstrap.layout.databaseBackupGrid.on('loadGrid', this.loadGridAction, this);
     },
 
     // Initialize and define routing settings
     init: function() {
 
-    }
+    },
 
-    // Actions ----------------------------------------------------------------- 
+    // Actions -----------------------------------------------------------------
+    loadGridAction: function(component) {
+        component.load();
+    },
+    RequestAction: function(data) {
+        var notification = new Kebab.OS.Notification();
+        Ext.Ajax.request({
+            url: BASE_URL + data.url,
+            method: data.method,
+            params: {
+
+                name: data.name
+            },
+            success : function() {
+                notification.message(this.bootstrap.launcher.text, 'Success');
+                if (data.store) {
+                    data.from.fireEvent('loadGrid', data.store);
+                }
+            },
+
+            failure : function() {
+                notification.message(this.bootstrap.launcher.text, 'Failure');
+            }, scope:this
+        });
+    }
 });

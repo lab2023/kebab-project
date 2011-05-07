@@ -12,10 +12,11 @@ KebabOS.applications.databaseBackup.application.models.DatabaseBackupDataStore =
 
     bootstrap: null,
 
-    restAPI: BASE_URL + 'system/backup',
+    restAPI: BASE_URL + '/system/backup',
 
     readerFields:[
-        {name:'date', type:'string'}
+        {name:'name', type:'string'},
+        {name:'size', type:'string'}
 
     ]
 });

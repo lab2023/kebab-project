@@ -44,17 +44,19 @@ class System_BackupController extends Kebab_Rest_Controller
         foreach ($dir as $fileinfo) {
             if ($fileinfo->getFilename() != '.') {
                 if ($fileinfo->getFilename() != '..') {
-                    $files = explode(".", $fileinfo->getFilename());
-                    $data['date'] = $files[0];
+                    $data['name'] = $fileinfo->getFilename();
+                    $data['size'] = $fileinfo->getSize()/1024/1024 . ' Mb';
+                    $response[] = $data ;
                 }
             }
+
         }
         $this->getResponse()
                 ->setHttpResponseCode(200)
                 ->appendBody(
             $this->_helper->response()
                     ->setSuccess(true)
-                    ->addData($data)
+                    ->addData($response)
                     ->getResponse()
         );
     }

@@ -32,10 +32,19 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
             }
         }
 
+        this.bbar = new Kebab.library.ext.ExtendedPagingToolbar({
+            store: this.store
+        });
+
         this.columns = [
             {
                 header   : 'Date',
-                dataIndex: 'date',
+                dataIndex: 'name',
+                sortable:true
+            },
+                {
+                header   : 'Size',
+                dataIndex: 'size',
                 sortable:true
             },
             {
@@ -48,12 +57,8 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                         tooltip: 'Download Backup',
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
-                            var roleId = rec.id;
-                            Ext.Msg.confirm('Are you sure?', 'Do you want to delete', function(button) {
-                                if (button == 'yes') {
-                                    this.fireEvent('roleRequest', {from:this, method:'DELETE' ,url:'/role/manager', roleId:roleId, store:this.store});
-                                }
-                            }, this);
+                            var file = rec.data.name;
+                                    this.fireEvent('downloadRequest', {name:file, url:'/system/backup', method:'GET'});
                         },
                         scope:this
                     }
@@ -69,10 +74,10 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                         tooltip: 'Delete Backup',
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
-                            var roleId = rec.id;
-                            Ext.Msg.confirm('Are you sure?', 'Do you want to delete', function(button) {
+                            var file = rec.data.name;
+                            Ext.Msg.confirm('Are you sure?', 'Do you want to ' + file + ' file delete?', function(button) {
                                 if (button == 'yes') {
-                                    this.fireEvent('roleRequest', {from:this, method:'DELETE' ,url:'/role/manager', roleId:roleId, store:this.store});
+                                    this.fireEvent('deleteRequest', {name:file, from:this, store:this.store, url:'/system/backup',method:'DELETE'});
                                 }
                             }, this);
                         },
@@ -81,6 +86,11 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 ]
             }
         ];
+
+        this.addEvents('backupRequest');
+        this.addEvents('deleteRequest');
+        this.addEvents('downloadRequest');
+        this.addEvents('loadGrid');
 
         Ext.apply(this, config);
 
