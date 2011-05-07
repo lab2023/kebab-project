@@ -51,6 +51,11 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
                     name: 'description',
                     xtype: 'textarea',
                     height:235
+                },
+                {
+                    name:'active',
+                    xtype:'hidden',
+                    value: true
                 }
 
             ],
@@ -71,7 +76,7 @@ KebabOS.applications.roleManager.application.views.RoleForm = Ext.extend(Ext.for
 
         KebabOS.applications.roleManager.application.views.RoleForm.superclass.initComponent.apply(this, arguments);
     },
-    
+
     onSubmit: function() {
         this.fireEvent('roleFormOnSave', {from:this, url:this.url, store: this.bootstrap.layout.mainCenter.roleManagerGrid.store});
     }

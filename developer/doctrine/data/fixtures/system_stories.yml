@@ -9,6 +9,7 @@ Model_Entity_Story:
         title: Masaüstüne erişim
         description: Çevirimiçi olduktan sonra masaüstüne erişim
     status: active
+    active: true
 
   Change_Profile:
     name: Change Profile
@@ -20,6 +21,7 @@ Model_Entity_Story:
         title: Kullanıcılar profil bilgilerini değiştirebilir
         description: Kullanıcılar isim, soyisim, dil seçimi gibi bilgilerini değiştirebilir.
     status: active
+    active: true
 
   User_Management:
     name: User Management
@@ -31,6 +33,7 @@ Model_Entity_Story:
         title: Kullanıcı Düzenleme
         description: Kullanıcı ekleyin çıkarın düzenleyin.
     status: active
+    active: true
 
   Feedback_Management:
     name: Feedback Management
@@ -42,6 +45,7 @@ Model_Entity_Story:
         title: Geribildirim Yönetimi
         description: Geribildirimleri yönetin
     status: active
+    active: true
 
   Story_Management:
     name: Story Management
@@ -53,6 +57,7 @@ Model_Entity_Story:
         title: Kullanıcı Hikayeleri Yönetimi
         description: Kullanıcı hikayelerini düzenleyin.
     status: active
+    active: true
 
   Role_Management:
     name: Role Management
@@ -64,6 +69,7 @@ Model_Entity_Story:
         title: Rol Yönetimi
         description: Rolleri yönetin
     status: active
+    active: true
 
   System_Backup:
     name: Database Backup
@@ -75,3 +81,4 @@ Model_Entity_Story:
         title: Database Backup
         description: Database Backup
     status: active
+    active: true

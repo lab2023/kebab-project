@@ -102,6 +102,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $name = $params['name'];
         $title = $params['title'];
         $description = $params['description'];
+        $avtive = $params['active'];
 
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
 
@@ -110,6 +111,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         try {
             $role = new Role_Model_Role();
             $role->name = $name;
+            $role->active = $avtive;
             $role->Translation[$lang]->title = $title;
             $role->Translation[$lang]->description = $description;
 
