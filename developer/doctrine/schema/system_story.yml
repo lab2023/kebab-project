@@ -11,6 +11,10 @@ Story:
       type: enum
       length: 7
       values: ['active', 'passive']
+    active:
+      type: boolean
+      length: 5
+      default: true
       
   actAs:
     Sluggable:

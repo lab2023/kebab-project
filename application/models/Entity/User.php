@@ -13,6 +13,7 @@
  * @property string $password
  * @property string $activationKey
  * @property enum $status
+ * @property boolean $active
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $Invitation
@@ -75,6 +76,11 @@ class Model_Entity_User extends Doctrine_Record
               1 => 'active',
              ),
              'notnull' => true,
+             ));
+        $this->hasColumn('active', 'boolean', 5, array(
+             'type' => 'boolean',
+             'length' => 5,
+             'default' => true,
              ));
 
         $this->option('type', 'INNODB');
