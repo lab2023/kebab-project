@@ -38,5 +38,53 @@ if (!defined('BASE_PATH'))
  */
 class System_BackupController extends Kebab_Rest_Controller
 {
-    
+    public function indexAction()
+    {
+        $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
+        foreach ($dir as $fileinfo) {
+            if ($fileinfo->getFilename() != '.') {
+                if ($fileinfo->getFilename() != '..') {
+                    $files[] = $fileinfo->getFilename();
+                }
+            }
+        }
+
+        $this->getResponse()
+                ->setHttpResponseCode(200)
+                ->appendBody(
+            $this->_helper->response()
+                    ->setSuccess(true)
+                    ->addData($files)
+                    ->getResponse()
+        );
+    }
+
+    public function getAction()
+    {
+          $params = $this->_helper->param();
+          $fileName = $params['fileName'];
+          $str = file_get_contents(APPLICATION_PATH . '/variables/backups'.'/'.$fileName);
+
+          $this->_response->clearBody();
+          $this->_response->clearHeaders();
+          $this->_response
+            ->setHeader('Content-Type', 'image/jpeg')
+            ->setHeader('Content-Disposition', 'attachment; filename="2011-05-05-16-52-13.tar.gz"')
+            ->setHeader("Connection", "close")
+            ->setHeader("Content-Length", strlen($str))
+            ->setHeader("Content-transfer-encoding", "binary")
+            ->setHeader("Cache-control", "private")
+            ->setBody($str);
+
+    }
+
+    public function postAction()
+    {
+        echo date('o-m-d-H-i-s');
+    }
+
+    public function deleteAction()
+    {
+        
+    }
 }
