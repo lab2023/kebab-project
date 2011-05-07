@@ -69,8 +69,8 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
             url: BASE_URL + data.url,
             method: data.method,
             params: {
-
-                id: data.roleId
+                roleId: data.roleId,
+                storyId: data.story
             },
             success : function() {
                 notification.message(this.bootstrap.launcher.text, 'Success');

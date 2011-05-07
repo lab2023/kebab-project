@@ -144,7 +144,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['id'];
+        $id = $params['roleId'];
         $status = $params['status'];
 
         // Updating status
@@ -175,7 +175,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['id'];
+        $id = $params['roleId'];
 
         // Doctrine
         Doctrine_Manager::connection()->beginTransaction();
