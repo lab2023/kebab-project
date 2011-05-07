@@ -30,15 +30,24 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
         // Template
         this.tpl = new Ext.XTemplate(
                 '<tpl for=".">',
-
+                '<tpl if="status ==\'active\' ">',
                 '<div class="userManager-application-users">',
                 '<span style="font-size:18pt;">{firstName} {lastName}</span><br />',
                 '<span>{username}</span>, <span>{email}</span><br />',
                 '<tpl for="Roles">',
                 '<span>[{name}]</span>   ',
                 '</tpl>',
-                '<div class="buttons">',
+                '</tpl>',
+                '<tpl if="status ==\'passive\' ">',
+                '<div class="userManager-application-users userManager-application-users-passive">',
+                '<span style="font-size:18pt;">{firstName} {lastName}</span><br />',
+                '<span>{username}</span>, <span>{email}</span><br />',
+                '<tpl for="Roles">',
+                '<span>[{name}]</span>',
+                '</tpl>',
+                '</tpl>',
 
+                '<div class="buttons">',
                 '<tpl if="status ==\'active\' ">',
                 '<span class="icon-accept" ext:qtip="{status}"></span>',
                 '</tpl>',
