@@ -49,7 +49,6 @@ class Model_Entity_Story extends Doctrine_Record
         $this->hasColumn('active', 'boolean', 5, array(
              'type' => 'boolean',
              'length' => 5,
-             'default' => true,
              ));
 
         $this->option('type', 'INNODB');

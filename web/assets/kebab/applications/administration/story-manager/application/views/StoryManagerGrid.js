@@ -38,36 +38,7 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
                 forceFit: true
             }
         }
-        //KBBTODO add i18n
-        var statusData = [
-            ['active', 'Active'],
-            ['passive', 'Passive']
-        ];
-        var statusCombobox = new Ext.form.ComboBox({
-            typeAhead: true,
-            triggerAction: 'all',
-            forceSelection: true,
-            lazyRender:false,
-            mode: 'local',
-            store: new Ext.data.ArrayStore({
-                fields: ['id', 'name'],
-                data: statusData
-            }),
-            valueField: 'id',
-            displayField: 'name',
-            hiddenName: 'status',
-            scope:this,
-            listeners: {
-                select: function(c) {
-                    this.fireEvent('statusChanged', {
-                        id: c.gridEditor.record.id,
-                        status: c.getValue()
-                    });
-                    this.fireEvent('loadGrid', this.store);
-                },
-                scope: this
-            }
-        });
+
         this.columns = [
                 expander,
             {
@@ -81,25 +52,14 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
                 dataIndex: 'title'
             },
             {
-                header   : 'Status',
-                dataIndex: 'status',
+                header   : 'Active',
+                dataIndex: 'active',
                 sortable:true,
-                editor: statusCombobox,
-                renderer: function(v) {
-
-                    var retVal = null;
-
-                    Ext.each(statusData, function(status) {
-                        if (v == status[0])
-                            retVal = status[1];
-                    });
-
-                    return retVal;
-                }
+                width:12,
+                xtype:'checkcolumn'
             }
         ];
 
-        this.addEvents('statusChanged', this);
         this.addEvents('loadGrid');
 
         this.bbar = this.buildBbar();

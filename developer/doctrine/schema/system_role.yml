@@ -19,7 +19,6 @@ Role:
     active:
       type: boolean
       length: 5
-      default: true
       
   actAs:
     Timestampable:

@@ -30,7 +30,6 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.roleForm.on('loadGrid', this.loadGridAction, this);
         this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.on('request', this.requestAction, this);
         this.bootstrap.layout.mainCenter.roleManagerGrid.on('loadGrid', this.loadGridAction, this);
-        this.bootstrap.layout.mainCenter.roleManagerGrid.on('statusChanged', this.statusChangeAction, this);
         this.bootstrap.layout.mainCenter.roleManagerGrid.on('roleRequest', this.requestAction, this);
     },
 
@@ -83,15 +82,5 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
                 notification.message(this.bootstrap.launcher.text, 'Failure');
             }, scope:this
         });
-    },
-
-    statusChangeAction: function(data) {
-        Ext.Ajax.request({
-            url: BASE_URL + '/role/manager',
-            method:'PUT',
-            params: { id: data.id, status: data.status }
-        });
-        data.from.fireEvent('loadGrid', data.store);
     }
-
 });

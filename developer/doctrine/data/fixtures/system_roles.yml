@@ -9,6 +9,7 @@ Model_Entity_Role:
       tr:
         title: Ziyaretçi
         description: Ziyaretçi Rolü
+    active: true
     
     children:
       Member:
@@ -20,7 +21,8 @@ Model_Entity_Role:
           tr:
             title: Üye
             description: Üye Rolü
-        
+        active: true
+
         children:
           Admin:
             name: admin
@@ -31,7 +33,8 @@ Model_Entity_Role:
               tr:
                 title: Yönetici
                 description: Yönetici Rolü
-            
+            active: true
+
             children:
               Owner:
                 name: owner
@@ -42,3 +45,4 @@ Model_Entity_Role:
                   tr:
                     title: Kurucu
                     description: Kurucu Rolü
+                active: true
