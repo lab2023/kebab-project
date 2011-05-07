@@ -7,6 +7,7 @@ Model_Entity_User:
     email: guest@kebab-project.com
     status: active
     language: en
+    active: '1'
 
   Member:
     username: member
@@ -16,6 +17,7 @@ Model_Entity_User:
     email: member@kebab-project.com
     status: active
     language: en
+    active: '1'
 
   Admin:
     username: admin
@@ -25,6 +27,7 @@ Model_Entity_User:
     email: admin@kebab-project.com
     status: active
     language: en
+    active: '1'
 
   Owner:
     username: owner
@@ -34,3 +37,4 @@ Model_Entity_User:
     email: owner@kebab-project.com
     status: active
     language: en
+    active: '1'
