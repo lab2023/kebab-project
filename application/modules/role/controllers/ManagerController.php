@@ -145,15 +145,15 @@ class Role_ManagerController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['roleId'];
-        $status = $params['status'];
+        $id = $params['data']['id'];
+        $active = $params['data']['active'];
 
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $role = new Role_Model_Role();
             $role->assignIdentifier($id);
-            $role->set('status', $status);
+            $role->set('active', $active);
             $role->save();
             Doctrine_Manager::connection()->commit();
             unset($role);

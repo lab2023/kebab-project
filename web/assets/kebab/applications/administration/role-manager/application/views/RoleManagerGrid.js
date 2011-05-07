@@ -89,7 +89,6 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
         this.addEvents('loadGrid');
         this.addEvents('roleRequest');
-        this.addEvents('statusChanged', this);
 
         Ext.apply(this, config);
 

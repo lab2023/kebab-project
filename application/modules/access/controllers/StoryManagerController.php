@@ -88,15 +88,15 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['id'];
-        $status = $params['status'];
+        $id = $params['data']['id'];
+        $active = $params['data']['active'];
 
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $story = new Access_Model_Story();
             $story->assignIdentifier($id);
-            $story->set('status', $status);
+            $story->set('active', $active);
             $story->save();
             Doctrine_Manager::connection()->commit();
             unset($story);
