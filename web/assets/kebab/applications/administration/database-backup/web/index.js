@@ -44,7 +44,7 @@ KebabOS.applications.databaseBackup.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Application Title',
+            text: 'Backup Manager',
             iconCls: 'databaseBackup-application-launcher-icon'
         }
     });
