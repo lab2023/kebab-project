@@ -43,6 +43,7 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
         $mapping = array(
             'id' => 'story.id',
             'status' => 'story.status',
+            'active' => 'story.active',
             'description' => 'storyTranslation.description',
             'title' => 'storyTranslation.title',
         );
@@ -51,7 +52,7 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
         try {
             $query = Doctrine_Query::create()
                     ->select('story.id, storyTranslation.title as title,
-                        storyTranslation.description as description, story.status')
+                        storyTranslation.description as description, story.status, story.active')
                     ->from('Model_Entity_Story story')
                     ->leftJoin('story.Translation storyTranslation')
                     ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)

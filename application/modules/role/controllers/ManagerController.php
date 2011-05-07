@@ -49,7 +49,8 @@ class Role_ManagerController extends Kebab_Rest_Controller
             'name' => 'role.name',
             'title' => 'role.title',
             'description' => 'role.description',
-            'status' => 'role.status'
+            'status' => 'role.status',
+            'active' => 'role.active'
         );
 
         Doctrine_Manager::connection()->beginTransaction();
@@ -58,7 +59,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
                     ->select('role.name,
                     roleTranslation.title as title, 
                     roleTranslation.description as description,
-                    role.status')
+                    role.status, role.active')
                     ->from('Model_Entity_Role role')
                     ->leftJoin('role.Translation roleTranslation')
                     ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)

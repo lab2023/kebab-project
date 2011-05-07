@@ -18,6 +18,6 @@ KebabOS.applications.storyManager.application.models.StoryManagerDataStore = Ext
         {name: 'id', type:'integer'},
         {name:'title', type:'string'},
         {name: 'description', type:'string'},
-        {name: 'status', type:'string'}
+        {name: 'active', type:'boolean'}
     ]
 });
