@@ -23,7 +23,7 @@
  */
  
  /**
- * Kebab Project Asset Bootstrapper
+ * Kebab Project Application Loader
  *
  * On-Demad load and return all js files
  * @uses SPL - Standard PHP Library :: RecursiveIteratorIterator, RecursiveDirectoryIterator
@@ -35,7 +35,7 @@ ob_start("ob_gzhandler");
 header("Content-type: text/javascript; charset: UTF-8");
 
 // Define root path
-defined('BASE_PATH') || define('BASE_PATH', realpath(dirname(__FILE__) . '/../') . '/');
+defined('BASE_PATH') || define('BASE_PATH', realpath(dirname(__FILE__)) . '/');
 
 // Load index.js once !important
 @readfile(BASE_PATH . 'web/index.js');

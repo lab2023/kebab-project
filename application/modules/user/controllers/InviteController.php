@@ -60,13 +60,40 @@ class User_InviteController extends Kebab_Rest_Controller
             $userId = $user->id;
             unset($user);
 
-            $inviteUser = new Model_Entity_Invitation();
-            $inviteUser->message = $message;
-            $inviteUser->user_id = $userId;
-            $inviteUser->save();
-            unset($inviteUser);
+            $activationKey = md5(mt_rand(10000, 99999));
+            $invitation = new Model_Entity_Invitation();
+            $invitation->message = $message;
+            $invitation->user_id = $userId;
+            $invitation->activationKey = $activationKey;
+            $invitation->save();
+            unset($invitation);
 
             Doctrine_Manager::connection()->commit();
+
+            // Prepare and Send Invitation e-mail here
+            $configParam = $params = Zend_Registry::get('config')->kebab->mail;
+            $smtpServer = $configParam->smtpServer;
+            $config = $configParam->config->toArray();
+
+            // Mail phtml
+            $view = new Zend_View;
+            $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
+
+            $identity = Zend_Auth::getInstance()->getIdentity();
+            //KBBTODO use language file
+            $view->assign('activationKey', $activationKey);
+            $view->assign('firstName', $firstName);
+            $view->assign('fullName', $identity->firstName . ' ' . $identity->lastName);
+            $view->assign('email', $identity->email);
+            $view->assign('message', $message);
+
+            $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+            $mail = new Zend_Mail('UTF-8');
+            $mail->setFrom($configParam->from, 'Kebab Project');
+            $mail->addTo($email, $firstName . ' ' . $lastName);
+            $mail->setSubject('You\'re invited to join ..... ');
+            $mail->setBodyHtml($view->render('send-invitation.phtml'));
+            $mail->send($transport);
 
             // Response
             $this->getResponse()->setHttpResponseCode(200)->appendBody(

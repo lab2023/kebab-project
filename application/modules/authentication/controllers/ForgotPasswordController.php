@@ -43,43 +43,41 @@ class Authentication_ForgotPasswordController extends Kebab_Rest_Controller
         $validatorEmail = new Zend_Validate_EmailAddress();
         $response = $this->_helper->response();
 
-        if ($this->_request->isPost()) {
-            if ($validatorEmail->isValid($email)) {
+        if ($validatorEmail->isValid($email)) {
 
-                // Create user object
-                $user = Doctrine_Core::getTable('User_Model_User')->findOneBy('email', $email);
+            // Create user object
+            $user = Doctrine_Core::getTable('User_Model_User')->findOneBy('email', $email);
 
-                if ($user !== false) {
-                    $password = mt_rand(10000, 99999);
-                    $user->password = md5($password);
-                    $user->save();
+            if ($user !== false) {
+                $activationKey = md5(mt_rand(10000, 99999));
+                $user->activationKey = $activationKey;
+                $user->save();
 
-                    //KBBTODO move these settings to config file
-                    $configParam = $params = Zend_Registry::get('config')->kebab->mail;
-                    $smtpServer = $configParam->smtpServer;
-                    $config = $configParam->config->toArray();
+                //KBBTODO move these settings to config file
+                $configParam = $params = Zend_Registry::get('config')->kebab->mail;
+                $smtpServer = $configParam->smtpServer;
+                $config = $configParam->config->toArray();
 
-                    // Mail phtml
-                    $view = new Zend_View;
-                    $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
+                // Mail phtml
+                $view = new Zend_View;
+                $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
-                    //KBBTODO use language file
-                    $view->assign('password', $password);
+                //KBBTODO use language file
+                $view->assign('activationKey', $activationKey);
 
-                    $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
-                    $mail = new Zend_Mail('UTF-8');
-                    $mail->setFrom('noreply@birekmek.com', 'Bir Ekmek');
-                    $mail->addTo($user->email, $user->firstName . $user->lastName);
-                    $mail->setSubject('Şifre Hatırlatma');
-                    $mail->setBodyHtml($view->render('forgot-password.phtml'));
-                    $mail->send($transport);
-                    $response->setSuccess(true)->getResponse();
-                } else {
-                    $response->addNotification('ERR', 'There isn\'t user with this email')->getResponse();
-                }
+                $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+                $mail = new Zend_Mail('UTF-8');
+                $mail->setFrom($configParam->from, 'Kebab Project');
+                $mail->addTo($user->email, $user->firstName . $user->lastName);
+                $mail->setSubject('Reset Password');
+                $mail->setBodyHtml($view->render('forgot-password.phtml'));
+                $mail->send($transport);
+                $response->setSuccess(true)->getResponse();
             } else {
-                $response->addError('email', 'Invalid email format')->getResponse();
+                $response->addNotification('ERR', 'There isn\'t user with this email')->getResponse();
             }
+        } else {
+            $response->addError('email', 'Invalid email format')->getResponse();
         }
     }
 }

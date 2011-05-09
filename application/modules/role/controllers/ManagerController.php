@@ -49,7 +49,8 @@ class Role_ManagerController extends Kebab_Rest_Controller
             'name' => 'role.name',
             'title' => 'role.title',
             'description' => 'role.description',
-            'status' => 'role.status'
+            'status' => 'role.status',
+            'active' => 'role.active'
         );
 
         Doctrine_Manager::connection()->beginTransaction();
@@ -58,7 +59,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
                     ->select('role.name,
                     roleTranslation.title as title, 
                     roleTranslation.description as description,
-                    role.status')
+                    role.status, role.active')
                     ->from('Model_Entity_Role role')
                     ->leftJoin('role.Translation roleTranslation')
                     ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
@@ -101,6 +102,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $name = $params['name'];
         $title = $params['title'];
         $description = $params['description'];
+        $avtive = $params['active'];
 
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
 
@@ -109,6 +111,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         try {
             $role = new Role_Model_Role();
             $role->name = $name;
+            $role->active = $avtive;
             $role->Translation[$lang]->title = $title;
             $role->Translation[$lang]->description = $description;
 
@@ -144,15 +147,15 @@ class Role_ManagerController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['roleId'];
-        $status = $params['status'];
+        $id = $params['data']['id'];
+        $active = $params['data']['active'];
 
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $role = new Role_Model_Role();
             $role->assignIdentifier($id);
-            $role->set('status', $status);
+            $role->set('active', $active);
             $role->save();
             Doctrine_Manager::connection()->commit();
             unset($role);

@@ -9,6 +9,7 @@
  * @property string $title
  * @property clob $description
  * @property enum $status
+ * @property boolean $active
  * @property Doctrine_Collection $Applications
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $Permission
@@ -44,6 +45,10 @@ class Model_Entity_Story extends Doctrine_Record
               0 => 'active',
               1 => 'passive',
              ),
+             ));
+        $this->hasColumn('active', 'boolean', 5, array(
+             'type' => 'boolean',
+             'length' => 5,
              ));
 
         $this->option('type', 'INNODB');

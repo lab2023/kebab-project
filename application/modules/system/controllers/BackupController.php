@@ -40,21 +40,23 @@ class System_BackupController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
+       $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
         foreach ($dir as $fileinfo) {
             if ($fileinfo->getFilename() != '.') {
                 if ($fileinfo->getFilename() != '..') {
-                    $files[] = $fileinfo->getFilename();
+                    $data['name'] = $fileinfo->getFilename();
+                    $data['size'] = $fileinfo->getSize()/1024/1024 . ' Mb';
+                    $response[] = $data ;
                 }
             }
-        }
 
+        }
         $this->getResponse()
                 ->setHttpResponseCode(200)
                 ->appendBody(
             $this->_helper->response()
                     ->setSuccess(true)
-                    ->addData($files)
+                    ->addData($response)
                     ->getResponse()
         );
     }
@@ -69,7 +71,7 @@ class System_BackupController extends Kebab_Rest_Controller
           $this->_response->clearHeaders();
           $this->_response
             ->setHeader('Content-Type', 'image/jpeg')
-            ->setHeader('Content-Disposition', 'attachment; filename="2011-05-05-16-52-13.tar.gz"')
+            ->setHeader('Content-Disposition', 'attachment; filename="'.$fileName.'"')
             ->setHeader("Connection", "close")
             ->setHeader("Content-Length", strlen($str))
             ->setHeader("Content-transfer-encoding", "binary")

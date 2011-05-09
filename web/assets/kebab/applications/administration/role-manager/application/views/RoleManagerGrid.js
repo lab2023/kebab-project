@@ -49,37 +49,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             header:'Name',
             dataIndex:'title'
         });
-
-        var statusData = [
-            ['active', 'Active'],
-            ['passive', 'Passive']
-        ];
-        var statusCombobox = new Ext.form.ComboBox({
-            typeAhead: true,
-            triggerAction: 'all',
-            forceSelection: true,
-            lazyRender:false,
-            mode: 'local',
-            store: new Ext.data.ArrayStore({
-                fields: ['id', 'name'],
-                data: statusData
-            }),
-            valueField: 'id',
-            displayField: 'name',
-            hiddenName: 'status',
-            scope:this,
-            listeners: {
-                select: function(c) {
-                    this.fireEvent('statusChanged', {
-                        id: c.gridEditor.record.id,
-                        status: c.getValue(),
-                        store:this.store,
-                        from:this
-                    });
-                },
-                scope: this
-            }
-        });
+        
         Ext.select('span.roleManager-application-span').on('click', function() {
             console.log(arguments);
         });
@@ -87,24 +57,14 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
             expander,
             this.sm,
             {
-                header   : 'Status',
-                dataIndex: 'status',
+                header   : 'Active',
+                dataIndex: 'active',
                 sortable:true,
-                editor: statusCombobox,
-                renderer: function(v) {
-
-                    var retVal = null;
-
-                    Ext.each(statusData, function(status) {
-                        if (v == status[0])
-                            retVal = status[1];
-                    });
-
-                    return retVal;
-                }
+                xtype:'checkcolumn',
+                width:12
             },{
                 dataIndex: 'buttons',
-                width:20,
+                width:5,
                 xtype: 'actioncolumn',
                 items: [
                     {
@@ -129,7 +89,6 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
 
         this.addEvents('loadGrid');
         this.addEvents('roleRequest');
-        this.addEvents('statusChanged', this);
 
         Ext.apply(this, config);
 

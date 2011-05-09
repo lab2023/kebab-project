@@ -17,6 +17,10 @@ div.userManager-application-users {
     padding-top:5px;
     padding-bottom:5px;
 }
+div.userManager-application-users-passive {
+    background: url(images/shortcut-gray.png) no-repeat 10px center;
+    color:#808080;
+}
 
 div.userManager-application-users-over {
     background-color: #E8EDFF;

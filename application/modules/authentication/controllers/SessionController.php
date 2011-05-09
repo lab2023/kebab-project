@@ -71,7 +71,7 @@ class Authentication_SessionController extends Kebab_Rest_Controller
             $authAdapter->setTableName('User_Model_User u')
                     ->setIdentityColumn('username')
                     ->setCredentialColumn('password')
-                    ->setCredentialTreatment('MD5(?)')
+                    ->setCredentialTreatment('MD5(?) AND active = 1')
                     ->setIdentity($username)
                     ->setCredential($password);
 

@@ -48,7 +48,7 @@ class User_ManagerController extends Kebab_Rest_Controller
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $query = Doctrine_Query::create()
-                    ->select('user.firstName, user.lastName, user.email, user.username, user.status, role.name')
+                    ->select('user.firstName, user.lastName, user.email, user.username, user.status, role.name, user.active')
                     ->from('Model_Entity_User user')
                     ->leftJoin('user.Roles role')
                     ->orderBy($this->_helper->sort($mapping));
