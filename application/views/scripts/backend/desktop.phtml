@@ -11,8 +11,7 @@ $this->headScript()
      ->appendFile($this->asset('kernel/Panel.js')->distribution()->get())
      ->appendFile($this->asset('kernel/Notification.js')->distribution()->get())             
      ->appendFile($this->asset('kernel/Translator.js')->distribution()->get())
-     ->appendFile($this->asset('kernel/Logger.js')->distribution()->get())
-     ->appendFile($this->asset('kernel/Extras.js')->distribution()->get());
+     ->appendFile($this->asset('kernel/Logger.js')->distribution()->get()); 
 ?>
 
     <?php 
@@ -40,11 +39,8 @@ $this->headScript()
     Ext.namespace('KebabOS', 'KebabOS.kernel');
     KebabOS.kernel = new Kebab.OS.Kernel({
         distribution    : "<?php echo $this->variable('kebabOs')->distributions->current; ?>",
-        environment     : APPLICATION_ENV,
-        baseUrl         : BASE_URL,
         assets          : <?php echo json_encode($this->variable('assets')->toArray()); ?>,
         settings        : {project: <?php echo json_encode($this->settings('project')->toArray()); ?>},
-        languages       : <?php echo json_encode($this->languages); ?>,
         user            : <?php echo json_encode($this->user); ?>,
         apps            : <?php echo json_encode($this->applications); ?>
     });

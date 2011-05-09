@@ -22,13 +22,11 @@ Kebab.OS.Kernel = function(config){
     this.isBooted = false;
     this.serviceAPI = 'api';
     this.distribution = 'KebabOS';
-    this.environment = 'production';
-    this.baseUrl = 'http://www.kebab-project.com';
     this.assets = null;
     this.settings = null;
     this.user = null;
+    this.apps = null;
     this.applications = null;
-    this.languages =  [{text: "en", active: true}];
     this.stateProvider = new Ext.state.CookieProvider();
 
     Ext.apply(this, config);
@@ -44,9 +42,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
     init : function() {
 
-        Ext.QuickTips.init();
-        Ext.apply(Ext.QuickTips.getQuickTip(), {trackMouse: true});
-
         Ext.state.Manager.setProvider(this.stateProvider);
 
         Kebab.OS.Logger.info('KebabOS initialized...');
@@ -56,18 +51,14 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
         this.init();
 
-        Ext.get('kebab-loading-mask').fadeOut({remove: true, duration:1});
-
         // Initialize Desktop
         this.desktop = new Kebab.OS.Desktop(this);
 
-        this.translator = new Kebab.OS.Translator(this.languages);
-
         this.notification = new Kebab.OS.Notification();
 
-		this.launcher = this.desktop.windowList.mainMenu;
+		this.windowList = this.desktop.windowList;
 
-		this.applications = this.applications || this.getApplications();
+		this.applications = this.applications || this.loadApplications();
 
         if(this.applications) {
             this.initApplications();
@@ -81,12 +72,12 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
             Kebab.OS.Logger.info('Kebab.OS.Kernel booted...');
             this.notification.message(
                 'Kebab OS',
-                this.bootMessage || "Welcome to Kebab Project. Have fun!"
+                'Welcome to Kebab Project. Have fun!'
             );
         }
     },
 
-    getApplications: function() {
+    loadApplications: function() {
 
         var i = 0,
             applicationInstances = new Array();
@@ -108,7 +99,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 		for(var i = 0, len = appSC.length; i < len; i++){
             var app = appSC[i];
 
-            this.launcher.add(app.launcher);
+            this.windowList.addLauncherMenuItem(app.launcher, app.type);
             app.app = this;
 
             // Check launcher auto start flag and call createApplication()
@@ -118,16 +109,16 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         }
     },
 
-    getApplication : function(id){
+    getApplication : function(id) {
 
-        Kebab.OS.Logger.info('Kebab.OS.Kernel getApplication call by ' +id+ ' parameter...');
+        Kebab.OS.Logger.info('Kebab.OS.Kernel getApplication call by ' + id + ' parameter...');
 
-    	var app = this.applications;
+        var app = this.applications;
 
-        for(var i = 0, len = app.length; i < len; i++){
-    		if(app[i].id == id || app[i].appType == id){
-    			return app[i];
-			}
+        for (var i = 0, len = app.length; i < len; i++) {
+            if (app[i].id == id || app[i].appType == id) {
+                return app[i];
+            }
         }
         return null;
     },
@@ -137,18 +128,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         if(app){
             cb.call(scope, app)
         }
-    },
-
-    getEnvironment : function(){
-        return this.environment;
-    },
-
-    getBaseUrl : function(){
-        return this.baseUrl;
-    },
-
-    generateUrl: function(url) {
-        return this.getBaseUrl() + '/' + url;
     },
 
     getUser : function(){
@@ -161,30 +140,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
     getSettings : function(){
         return this.settings;
-    },
-
-    getLanguages: function(which) {
-
-        if(which == 'current') {
-
-            var currentLanguage = null;
-
-            Ext.each(this.languages, function(language) {
-                if (language.active) {
-                    currentLanguage = language;
-                    return;
-                }
-            });
-
-            return currentLanguage;
-
-        } else {
-            return this.languages;
-        }
-    },
-
-    getTranslator: function() {
-        return this.translator;
     },
 
     getDesktop : function(){

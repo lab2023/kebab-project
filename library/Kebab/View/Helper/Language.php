@@ -37,7 +37,7 @@ if (!defined('BASE_PATH'))
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
+class Kebab_View_Helper_Language extends Zend_View_Helper_Abstract
 {
     protected $_config;
     
@@ -46,18 +46,23 @@ class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
         $this->_config = Zend_Registry::get('config')->kebab;
     }
     
-    public function variable($var = null)
+    public function language()
     {
-        if (!is_null($var)) {
-            
-            $vars = new stdClass();
-            $vars->kebabOs = $this->_config->os;
-            $vars->assets = $this->_config->assets;
-            $vars->mapping = $this->_config->mapping; // KBBTODO what is this ?
+        // Access to zend auth
+        $auth = Zend_Auth::getInstance();
 
-            return $vars->$var;
-        } else {
-            return $var;
+        // Get default language
+        $defaultLanguage = $auth->hasIdentity()
+                         ? $auth->getIdentity()->language
+                         : Zend_Registry::get('config')->languages->default;
+
+        $languagesFromConfig = Zend_Registry::get('config')->languages->translations->toArray();
+        $languages = array();
+        foreach ($languagesFromConfig as $k => $v) {
+            $v['active'] = $defaultLanguage == $v['language'] ? true : false;
+            $languages[] = $v;
         }
+
+        return $languages;
     }
 }
