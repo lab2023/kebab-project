@@ -36,40 +36,40 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
             store: this.store
         });
 
+        this.tbar = [{
+            text: 'Backup',
+            iconCls:'icon-disk',
+            handler: function() {
+                this.fireEvent('backupRequest', {from:this, url:'/system/backup', method:'POST'})
+            }, scope:this
+        }];
         this.columns = [
             {
                 header   : 'Date',
                 dataIndex: 'name',
                 sortable:true
             },
-                {
+            {
                 header   : 'Size',
                 dataIndex: 'size',
                 sortable:true
             },
             {
                 dataIndex: 'buttons',
-                width:5,
+                width:8,
                 xtype: 'actioncolumn',
                 items: [
+
                     {
                         iconCls:'icon-cancel',
                         tooltip: 'Download Backup',
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
                             var file = rec.data.name;
-                                    this.fireEvent('downloadRequest', {name:file, url:'/system/backup', method:'GET'});
+                            this.fireEvent('downloadRequest', {name:file, url:'/system/backup', method:'GET'});
                         },
                         scope:this
-                    }
-                ]
-            },
-            {
-                dataIndex: 'buttons',
-                width:5,
-                xtype: 'actioncolumn',
-                items: [
-                    {
+                    }, {
                         iconCls:'icon-cancel',
                         tooltip: 'Delete Backup',
                         handler: function(grid, rowIndex) {
@@ -77,11 +77,11 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                             var file = rec.data.name;
                             Ext.Msg.confirm('Are you sure?', 'Do you want to ' + file + ' file delete?', function(button) {
                                 if (button == 'yes') {
-                                    this.fireEvent('deleteRequest', {name:file, from:this, store:this.store, url:'/system/backup',method:'DELETE'});
+                                    this.fireEvent('deleteRequest', {name:file, from:this, store:this.store, url:'/system/backup/',method:'DELETE'});
                                 }
                             }, this);
                         },
-                        scope:this
+                         scope:this
                     }
                 ]
             }
