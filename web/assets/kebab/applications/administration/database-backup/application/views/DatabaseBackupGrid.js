@@ -39,7 +39,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
         this.tbar = [
             {
                 text: 'Backup',
-                iconCls:'icon-disk',
+                iconCls:'icon-database-save',
                 handler: function() {
                     this.fireEvent('backupRequest', {from:this, url:'/system/backup', method:'POST'})
                 }, scope:this
@@ -63,7 +63,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 items: [
 
                     {
-                        iconCls:'icon-cancel',
+                        iconCls:'icon-disk',
                         tooltip: 'Download Backup',
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);

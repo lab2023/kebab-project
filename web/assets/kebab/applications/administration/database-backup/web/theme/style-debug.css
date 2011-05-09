@@ -7,3 +7,8 @@
 #databaseBackup-application-shortcut div {
     background-image: url(images/shortcut.png);
 }
+.icon-disk {
+    width: 16px;
+    height: 16px;
+    margin:auto;
+}
