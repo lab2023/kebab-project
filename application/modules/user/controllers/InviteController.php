@@ -121,9 +121,49 @@ class User_InviteController extends Kebab_Rest_Controller
             $user->email = $email;
             $user->username = $email;
             $user->save();
-            Doctrine_Manager::connection()->commit();
+
+            $firstName = $user->firstName;
+            $lastName = $user->lastName;
             unset($user);
 
+            $invitation = Doctrine_Core::getTable('Model_Entity_Invitation')->findOneBy('user_id', $id);
+            $invitation->save();
+
+            $activationKey = $invitation->activationKey;
+            $message = $invitation->message;
+
+            unset($invitation);
+
+            Doctrine_Manager::connection()->commit();
+
+            // Prepare and Send Invitation e-mail here
+            $configParam = $params = Zend_Registry::get('config')->kebab->mail;
+            $smtpServer = $configParam->smtpServer;
+            $config = $configParam->config->toArray();
+
+            // Mail phtml
+            $view = new Zend_View;
+            $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
+
+            $identity = Zend_Auth::getInstance()->getIdentity();
+            //KBBTODO use language file
+            $view->assign('activationKey', $activationKey);
+            $view->assign('firstName', $firstName);
+            $view->assign('fullName', $identity->firstName . ' ' . $identity->lastName);
+            $view->assign('email', $identity->email);
+            $view->assign('message', $message);
+
+            $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+            $mail = new Zend_Mail('UTF-8');
+            $mail->setFrom($configParam->from, 'Kebab Project');
+            $mail->addTo($email, $firstName . ' ' . $lastName);
+            $mail->setSubject('You\'re invited to join ..... ');
+            $mail->setBodyHtml($view->render('send-invitation.phtml'));
+            $mail->send($transport);
+
+            $this->getResponse()->setHttpResponseCode(200)->appendBody(
+                $this->_helper->response()->setSuccess(true)->getResponse()
+            );
         } catch (Zend_Exception $e) {
             throw $e;
         } catch (Doctrine_Exception $e) {
