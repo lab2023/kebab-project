@@ -13,7 +13,7 @@ KebabOS.applications.databaseBackup.application.layouts.Layout = Ext.extend(Ext.
     // Application bootstrap
     bootstrap: null,
     layout:'fit',
-    
+
     initComponent: function() {
         this.databaseBackupGrid = new KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid({
             bootstrap: this.bootstrap

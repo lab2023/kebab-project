@@ -22,7 +22,6 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
         KebabOS.applications.databaseBackup.application.controllers.Index.superclass.constructor.apply(this, arguments);
 
         this.init();
-        this.bootstrap.layout.databaseBackupGrid.on('downloadRequest', this.RequestAction, this);
         this.bootstrap.layout.databaseBackupGrid.on('deleteRequest', this.RequestAction, this);
         this.bootstrap.layout.databaseBackupGrid.on('backupRequest', this.RequestAction, this);
         this.bootstrap.layout.databaseBackupGrid.on('loadGrid', this.loadGridAction, this);
@@ -40,7 +39,7 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
     RequestAction: function(data) {
         var notification = new Kebab.OS.Notification();
         Ext.Ajax.request({
-            url: BASE_URL + data.url +'/'+data.name,
+            url: BASE_URL + data.url,
             method: data.method,
             params: {
                 fileName: data.name

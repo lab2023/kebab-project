@@ -40,13 +40,13 @@ class System_BackupController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-       $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
+        $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
         foreach ($dir as $fileinfo) {
             if ($fileinfo->getFilename() != '.') {
                 if ($fileinfo->getFilename() != '..') {
                     $data['name'] = $fileinfo->getFilename();
-                    $data['size'] = $fileinfo->getSize()/1024/1024 . ' Mb';
-                    $response[] = $data ;
+                    $data['size'] = $fileinfo->getSize() / 1024 / 1024 . ' Mb';
+                    $response[] = $data;
                 }
             }
 
@@ -63,21 +63,11 @@ class System_BackupController extends Kebab_Rest_Controller
 
     public function getAction()
     {
-          $params = $this->_helper->param();
-          $fileName = $params['fileName'];
-          $str = file_get_contents(APPLICATION_PATH . '/variables/backups'.'/'.$fileName);
-
-          $this->_response->clearBody();
-          $this->_response->clearHeaders();
-          $this->_response
-            ->setHeader('Content-Type', 'image/jpeg')
-            ->setHeader('Content-Disposition', 'attachment; filename="'.$fileName.'"')
-            ->setHeader("Connection", "close")
-            ->setHeader("Content-Length", strlen($str))
-            ->setHeader("Content-transfer-encoding", "binary")
-            ->setHeader("Cache-control", "private")
-            ->setBody($str);
-
+        $params = $this->_helper->param();
+        $fileName = $params['fileName'];
+        header('Content-Type: application/zip');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        readfile(APPLICATION_PATH . '/variables/backups' . '/' . $fileName);
     }
 
     public function postAction()
@@ -87,6 +77,19 @@ class System_BackupController extends Kebab_Rest_Controller
 
     public function deleteAction()
     {
-        
+        $params = $this->_helper->param();
+        $fileName = $params['fileName'];
+        if (unlink(APPLICATION_PATH . '/variables/backups' . '/' . $fileName)) {
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody(
+                $this->_helper->response()
+                        ->setSuccess(true)
+                        ->getResponse()
+            );
+        } else {
+            throw new Zend_Exception('Delete a file failed.');
+        }
+
     }
 }
