@@ -124,7 +124,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
 
     listeners: {
         afterRender:function() {
-            this.store.load({params: {query: '',roleId:''}});
+            this.store.load();
         }
     }
 

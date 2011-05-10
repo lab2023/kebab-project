@@ -45,7 +45,7 @@ class User_ManagerController extends Kebab_Rest_Controller
             'id' => 'user.id'
         );
         $params = $this->_helper->param();
-        $roleId = $params['roleId'];
+        $roleId = array_key_exists('roleId', $params) ? $params['roleId'] : null;
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $ids = $this->_helper->search('Model_Entity_User');
@@ -55,7 +55,7 @@ class User_ManagerController extends Kebab_Rest_Controller
                     ->from('Model_Entity_User user')
                     ->leftJoin('user.Roles role')
                     ->whereIn('user.id', $ids);
-            if($roleId != ''){
+            if(!empty($roleId) && $roleId != ''){
                 $query = $query->where('role.id = ?', $roleId);
             }
             $query =  $query->orderBy($this->_helper->sort($mapping));
