@@ -19,7 +19,7 @@ Kebab.OS.Logger = function() {
             if (APPLICATION_ENV == environment)
                 console.log(data);
         },
-        
+
         /**
          * Info Logs
          */
@@ -27,7 +27,7 @@ Kebab.OS.Logger = function() {
             if (APPLICATION_ENV == environment)
                 console.info(data);
         },
-        
+
         /**
          * Warning Logs
          */

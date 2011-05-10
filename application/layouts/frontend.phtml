@@ -25,17 +25,11 @@
     
     <?php // STYLE AREA ------------------------------------------------------?>
     <?php echo $this->headStyle(); ?>
-
-    <script type="text/javascript">
-    var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";
-    var BASE_URL = "<?php echo BASE_URL; ?>";
-    </script> 
 </head>
 <body>
 
     <!-- RIBBOn & PAGE LOADER -->
     <div id="beta-ribbon"></div>
-    <div id="kebab-loading-mask"></div>
     
     <div id="wrapper" class="container_12">
 
@@ -48,11 +42,6 @@
 
 
     <?php // SCRIPT AREA -----------------------------------------------------?>
-    <?php echo $this->headScript()
-        ->prependFile($this->asset('frontend/javascripts/init.js')->get(false))
-        ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
-        ->prependFile($this->assetVendor('adapter/ext/ext-base.js')->get('extjs'));
-    ?>
-
+    <?php echo $this->headScript();?>
 </body>
 </html>

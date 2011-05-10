@@ -19,238 +19,171 @@ Ext.namespace('Kebab.OS.Panel');
 Kebab.OS.Panel.WindowList = function(kernel){
     this.kernel = kernel;
     this.init();
-}
+};
+
 Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
+
+    user: null,
+    mainMenu: null,
+    applicationsMenu: null,
+    systemMenu: null,
+    buttonTpl:  new Ext.Template(
+        '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
+        '<td><em class="{2}">',
+        '<button class="x-btn-text" type="{0}" style="height:30px;"></button>',
+        '</em></td>',
+        '</tr></tbody></table>'
+    ),
     
     init : function(){
+
+        // Access to active user data
+        this.user = this.kernel.getUser();
         
-        // Only menu! Ext.menu.Menu() object
-        this.mainMenu = new Ext.menu.Menu();
-                
-        this.applications = new Ext.Toolbar({
-            renderTo: 'kebab-os-panel-main-menu'
+        new Kebab.OS.Panel.Container({
+            el: 'kebab-os-panel',
+            layout: 'border',
+            items: [
+                this.buildMainMenuArea(),
+                this.buildWindowListArea(),
+                this.buildIndicatorsArea()
+            ]
         });
-        
-        var applicationsButtonTemplate = new Ext.Template(
-            '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
-            '<td><em class="{2} unselectable="on">',
-            '<button id="kebab-os-panel-main-menu-applications-button" class="x-btn-text" type="{0}" style="height:30px;"></button>',
-            '</em></td>',
-            '</tr></tbody></table>'
-            );
-        var stdButtonTemplate = new Ext.Template(
-            '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
-            '<td><em class="{2} unselectable="on">',
-            '<button class="x-btn-text" type="{0}" style="height:30px;"></button>',
-            '</em></td>',
-            '</tr></tbody></table>'
-            );
-        
-        var applicationsMenu = {
+        return this;
+    },
+
+    /**
+     * Build system main menu area
+     */
+    buildMainMenuArea: function() {
+
+        this.applicationsMenu = {
             text:'Applications',
             id: 'kebab-os-panel-main-menu-applications',
             iconCls: 'icon-kebab-os',
-            template: applicationsButtonTemplate,
-            menu: this.mainMenu
+            template: new Ext.Template(
+                '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
+                '<td><em class="{2}">',
+                '<button id="kebab-os-panel-main-menu-applications-button" class="x-btn-text" type="{0}" style="height:30px;"></button>',
+                '</em></td>',
+                '</tr></tbody></table>'
+            ),
+            menu: new Ext.menu.Menu()
         };
-        
-        var systemMenu = {
+
+        this.systemMenu = {
             text:'System',
             id: 'kebab-os-panel-main-menu-system',
-            template: stdButtonTemplate,
+            template: this.buttonTpl,
             menuWidth: 200,
-            menu: [{
-                id: 'kebab-os-panel-main-menu-system-preferences',
-                text: 'Preferences',
-                iconCls: 'icon-brick',
-                menu: [{
-                    text:'About Me',
-                    iconCls: 'icon-vcard',
-                    handler: function() {
-                        this.kernel.getDesktop().launchApplication('aboutMe-application');
-                    },
-                    scope:this
-                },{
-                    text: 'Apperance',
-                    iconCls: 'icon-palette',
-                    scope: this
-                }]
-            }, {
-               id: 'kebab-os-panel-main-menu-system-administration',
-               text: 'Administration',
-               iconCls: 'icon-award-star-silver-3',
-               menu: [{
-                   text: 'Preparing...',
-                   iconCls: 'icon-hourglass'
-               }]
-            }, '-', {
-               text: 'Help and Support',
-               iconCls: 'icon-book-open',
-               handler: function() {
-                    var desktop = this.kernel.getDesktop();
-                    var app = desktop.getApplication(this.id);
-                    if(!app){
-                        app = desktop.createApplication({
-                            id: this.id,
-                            title:'Help and Support',
-                            width:750,
-                            height:500,
-                            iconCls:'icon-information',
-                            html: '<iframe style="overflow:auto;width:100%;height:100%;" frameborder="0"  src="http://www.kebab-project.com/community"></iframe>'
-                        });
-                    }
-                    app.show();
-               },
-               scope:this
-            }, {
-               text: 'About Kebab',
-               iconCls: 'icon-information',
-               handler: function() {
-                    var desktop = this.kernel.getDesktop();
-                    var app = desktop.getApplication(this.id);
-                    if(!app){
-                        app = desktop.createApplication({
-                            id: this.id,
-                            title:'About Kebab',
-                            width:1024,
-                            height:600,
-                            iconCls:'icon-information',
-                            html: '<iframe style="overflow:auto;width:100%;height:100%;" frameborder="0"  src="http://www.kebab-project.com"></iframe>'
-                        });
-                    }
-                    app.show();
-               },
-               scope:this
-            }, {
-               text: 'About lab2023',
-               iconCls: 'icon-information',
-               handler: function() {
-                    var desktop = this.kernel.getDesktop();
-                    var app = desktop.getApplication(this.id);
-                    if(!app){
-                        app = desktop.createApplication({
-                            id: this.id,
-                            title:'About lab2023',
-                            width:1024,
-                            height:600,
-                            iconCls:'icon-information',
-                            html: '<iframe style="overflow:auto;width:100%;height:100%;" frameborder="0"  src="http://www.lab2023.com"></iframe>'
-                        });
-                    }
-                    app.show();
-               },
-               scope:this
-            }]
+            menu: new Ext.menu.Menu()
         };
-        
-        this.applications.add([
-            applicationsMenu,
-            systemMenu
-        ]);       
-        this.applications.doLayout();
 
-        this.applicationsMenu = new Ext.BoxComponent({
+        this.mainMenu = new Ext.Toolbar({
+            renderTo: 'kebab-os-panel-main-menu',
+            items: [
+                this.applicationsMenu,
+                this.systemMenu
+            ]
+        });
+
+        return this.mainMenuComponent = new Ext.BoxComponent({
             el: 'kebab-os-panel-main-menu',
-            id: 'kebab-os-panel-main-menu',
             region:'west',
             width:185,
             minSize:185,
             maxSize:185,
-            split: true,
-            items: [this.applications]
+            split: true
+        });
+    },
+
+    /**
+     * Window list area
+     */
+    buildWindowListArea: function() {
+
+        return this.windowList = new Kebab.OS.Panel.WindowList.Buttons({
+            el: 'kebab-os-panel-window-list',
+            region:'center'
         });
         
-        var user = this.kernel.getUser();
-        
-        this.indicatorsToolbar = new Ext.Toolbar().render('kebab-os-panel-indicators');
-        this.indicatorsToolbar.add({
-            iconCls : 'icon-status-online',
-            template: stdButtonTemplate,
-            text: user.firstName + ' ' + user.lastName,
-            menu: [{
-                text:'About Me',
-                iconCls: 'icon-vcard',
+    },
+
+    /**
+     * Build system indicators area
+     */
+    buildIndicatorsArea: function() {
+
+        this.indicatorsToolbar = new Ext.Toolbar({
+            renderTo: 'kebab-os-panel-indicators',
+            items: [{
+                iconCls : 'icon-status-online',
+                template: this.buttonTpl,
+                text: this.user.firstName + ' ' + this.user.lastName,
                 handler: function() {
                     this.kernel.getDesktop().launchApplication('aboutMe-application');
                 },
                 scope:this
+            }, {
+                template: this.buttonTpl,
+                text: Kebab.OS.getLanguages('current').text,
+                iconCls: Kebab.OS.getLanguages('current').iconCls
+            }, {
+                iconCls : 'icon-shutdown',
+                template: this.buttonTpl,
+                menu: [{
+                    text: 'Logout...',
+                    iconCls: 'icon-door-out',
+                    handler: function() {
+                        Kebab.OS.logoutAction(this.user.id, true);
+                    },
+                    scope:this
+                },{
+                    text: 'Reboot...',
+                    iconCls: 'icon-arrow-refresh',
+                    handler: function() {
+                        Kebab.OS.rebootAction();
+                    }
+                },{
+                    text: 'Shutdown...',
+                    iconCls: 'icon-shutdown',
+                    handler: function() {
+                        //Kebab.OS.shutDownAction(this.user.id);
+                    },
+                    scope:this
+                }]
             }]
-        });
-        
-        
-        this.indicatorsToolbar.add({
-            iconCls : 'icon-status-online',
-            template: stdButtonTemplate,
-            text: this.kernel.getLanguages('current').text,
-            iconCls: this.kernel.getLanguages('current').iconCls
-            //menu: this.kernel.getLanguages()
         });
 
-        this.indicatorsToolbar.add({
-            iconCls : 'icon-shutdown',
-            template: stdButtonTemplate,
-            menu: [{
-                text: 'Logout...',
-                iconCls: 'icon-door-out',
-                handler: function() {
-                    Ext.Ajax.request({
-                        url: this.kernel.generateUrl('authentication/session/' + user.id),
-                        method: 'DELETE',
-                        success: function() {
-                            window.location.href = this.kernel.generateUrl('backend')
-                        },
-                        failure: function() {
-                            var notification = new Kebab.OS.Notification();
-                            notification.message('Argh! %(', 'Operation failure....');
-                        },
-                        scope: this
-                    }, this);
-                },
-                scope:this
-            },{
-                text: 'Restart...',
-                iconCls: 'icon-arrow-refresh',
-                handler: function() {
-                    window.location.href = this.kernel.generateUrl('backend');
-                },
-                scope:this
-            }]
-        });
-        this.indicatorsToolbar.doLayout();
-        
         /**
-         *Dynamicly calculate indicator items total width
+         * Calculate indicator items total width
          */
         var totalIndicatorsWidth = 5; // Initial value
         this.indicatorsToolbar.items.each(function(item) {
            totalIndicatorsWidth += item.getWidth();
         });
-        
-        this.indicatorsMenu = new Ext.BoxComponent({
+
+        return this.indicatorsAreaComponent = new Ext.BoxComponent({
             el: 'kebab-os-panel-indicators',
-            id: 'kebab-os-panel-indicators',
             width: totalIndicatorsWidth,
             minWidth: totalIndicatorsWidth,
             region:'east',
             split:true
         });
+    },
 
-        this.windowList = new Kebab.OS.Panel.WindowList.Buttons({
-            el: 'kebab-os-panel-window-list',
-            id: 'kebab-os-panel-window-list',
-            region:'center'
-        });
+    /**
+     * Add and separate launcher items to application and system menu area
+     * @param item
+     * @param menu
+     */
+    addLauncherMenuItem: function(item, menu) {
 
-        var kebabOsPanelContainer = new Kebab.OS.Panel.Container({
-            el: 'kebab-os-panel',
-            layout: 'border',
-            items: [
-                this.applicationsMenu, 
-                this.windowList,
-                this.indicatorsMenu                
-            ]
-        });
-        return this;
+        var launcherMenu = (menu == 'application')
+                        ? this.applicationsMenu
+                        : this.systemMenu;
+        
+        launcherMenu.menu.add(item);
     },
 
     addTaskButton : function(win){

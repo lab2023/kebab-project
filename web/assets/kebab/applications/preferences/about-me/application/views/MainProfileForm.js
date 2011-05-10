@@ -22,9 +22,9 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
     initComponent: function() {
 
         var languges = {
-            all: this.bootstrap.app.getLanguages(),
-            current: this.bootstrap.app.getLanguages('current')
-        }
+            all: Kebab.OS.getLanguages(),
+            current: Kebab.OS.getLanguages('current')
+        };
 
         var languagesCombobox = new Ext.form.ComboBox({
             fieldLabel: 'Your language',

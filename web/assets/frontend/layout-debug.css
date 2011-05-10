@@ -24,16 +24,6 @@ html, body {
 * {
     color: #4B4B4B;
 }
-.icon-loader {
-   background: url('images/icon-loader.gif') no-repeat center;
-}
-.debug {
-    background: silver;
-    opacity:.50;
-    -moz-opacity:.50;
-    -webkit-opacity:.50;
-    filter:alpha(opacity=50);
-}
 a {
     outline: none;
     font-weight: bold;
@@ -42,31 +32,12 @@ a:hover {
   text-decoration:none;
   color: #c1880d;
 }
-.kebab-rounded-corners {
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -khtml-border-radius: 15px;
-    border-radius: 15px;
-}
-#kebab-loading-mask {
-    cursor:pointer;
-    width:100%;
-    height:100%;
-    background:#000;
-    position:absolute;
-    z-index:20000;
-    left:0;
-    background: #000;
-    background: #000 url(images/indicator.gif) no-repeat center center;
-    top:0;
-}
 div#beta-ribbon {
-    background: transparent url(images/beta-ribbon.png) no-repeat left top;
+    background: transparent url('images/beta-ribbon.png') no-repeat left top;
     width:78px;
     height:75px;
     position:absolute;
     left:0;
     top:0;
 }
-
 #wrapper {padding: 50px;}

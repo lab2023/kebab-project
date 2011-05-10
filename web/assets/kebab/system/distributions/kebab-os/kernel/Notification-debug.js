@@ -35,7 +35,7 @@ Kebab.OS.Notification = Ext.extend(Ext.util.Observable, {
             return ['<div class="kebab-notifications kebab-shadow-std kebab-rounded-corners">',
             '<p><h3>', t, '</h3>', s, '</p>',
             '</div>'].join('');
-        }
+        };
 
         this.messageContainer = Ext.DomHelper.insertFirst('kebab-os-desktop', {
             cls:'kebab-notifications-body'
