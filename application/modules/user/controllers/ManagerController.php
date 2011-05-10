@@ -44,15 +44,21 @@ class User_ManagerController extends Kebab_Rest_Controller
         $mapping = array(
             'id' => 'user.id'
         );
-
+        $params = $this->_helper->param();
+        $roleId = $params['roleId'];
         Doctrine_Manager::connection()->beginTransaction();
         try {
+            $ids = $this->_helper->search('Model_Entity_User');
+
             $query = Doctrine_Query::create()
                     ->select('user.firstName, user.lastName, user.email, user.username, user.status, role.name, user.active')
                     ->from('Model_Entity_User user')
                     ->leftJoin('user.Roles role')
-                    ->orderBy($this->_helper->sort($mapping));
-
+                    ->whereIn('user.id', $ids);
+            if($roleId != ''){
+                $query = $query->where('role.id = ?', $roleId);
+            }
+            $query =  $query->orderBy($this->_helper->sort($mapping));
             $pager = $this->_helper->pagination($query);
             $users = $pager->execute();
 

@@ -39,20 +39,61 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Pan
         };
 
         this.addEvents('showInviteUserWindow');
+        this.addEvents('roleFilter');
 
         Ext.apply(this, config);
 
         this.bbar = new Kebab.library.ext.ExtendedPagingToolbar({
             store: this.userManagerDataView.store
         });
+        var store = new KebabOS.applications.userManager.application.models.RolesDataStore({
+            bootstrap:this.bootstrap
+        });
+        var SearchField = new Ext.ux.form.SearchField({
+            store: this.userManagerDataView.store,
+            emptyText: 'name, email, etc',
+            width:140,
+            scope:this
+        });
 
-        this.tbar = [{
-            text: 'Invite User',
-            iconCls:'icon-user',
-            handler: function() {
-                this.fireEvent('showInviteUserWindow', this.inviteUserWindow)
-            }, scope:this
-        }];
+        
+        var RoleFilter = new Ext.form.ComboBox({
+            typeAhead: true,
+            emptyText: 'Filter by role',
+            triggerAction: 'all',
+            forceSelection: true,
+            lazyRender:false,
+            store: store,
+            valueField: 'id',
+            displayField: 'title',
+            hiddenName: 'roleFilter',
+            scope:this,
+            width:100,
+            listeners: {
+                select: function(c) {
+                    this.fireEvent('roleFilter', {
+                        id: c.value,
+                        store:this.userManagerDataView.store
+                    });
+                },
+                scope: this
+            }
+        });
+
+        this.tbar = [
+            {
+                text: 'Invite User',
+                iconCls:'icon-user',
+                handler: function() {
+                    this.fireEvent('showInviteUserWindow', this.inviteUserWindow)
+                }, scope:this
+            },
+            '->',
+            SearchField,
+                '-',
+            RoleFilter
+        ];
+
 
         KebabOS.applications.userManager.application.layouts.Layout.superclass.initComponent.call(this);
     }

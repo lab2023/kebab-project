@@ -40,6 +40,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
         this.bootstrap.layout.userRolesWindow.rolesGrid.on('loadGrid', this.loadGridAction, this);
         this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('loadGrid', this.loadGridAction, this);
         this.bootstrap.layout.userRolesWindow.rolesGrid.on('hideUserRolesWindow', this.hideWindowAction, this);
+        this.bootstrap.layout.on('roleFilter', this.roleFilterAction, this);
     },
 
     // Actions -----------------------------------------------------------------
@@ -154,6 +155,10 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
     showWindowAction: function(component) {
         component.show();
+    },
+    
+    roleFilterAction:function(data){
+        data.store.load({params:{roleId:data.id}});
     }
 
 });

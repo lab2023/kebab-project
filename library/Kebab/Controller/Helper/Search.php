@@ -17,7 +17,8 @@
  * @package    PACKAGE
  * @subpackage SUB_PACKAGE
  * @author     lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies
+TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
@@ -29,13 +30,93 @@
  * @package    Controller
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies
+TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Kebab_Controller_Helper_Search extends Zend_Controller_Action_Helper_Abstract
+class Kebab_Controller_Helper_Search extends
+    Zend_Controller_Action_Helper_Abstract
 {
-    //put your code here
+    /**
+     * @var object Zend_Request_Object
+     */
+    private $_request;
+
+    /**
+     * @var string default false
+     */
+    protected $_query = false;
+
+    /**
+     * @var Doctrine table default false
+     */
+    protected $_table = false;
+
+    /**
+     * @return void
+     */
+    public function init()
+    {
+        $this->_request = $this->getRequest();
+        $this->setQuery($this->_request->getParam('query', $this->_query));
+
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function getQuery()
+    {
+        return $this->_query;
+    }
+
+    /**
+     * @param  $_query
+     * @return Kebab_Controller_Helper_Search
+     */
+    public function setQuery($_query)
+    {
+        $_query = strtolower(Doctrine_Inflector::unaccent($_query));
+        if ($_query !== false && is_string($_query)) {
+            $this->_query = '*' . $_query . '*';
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return bool|Doctrine
+     */
+    public function getTable()
+    {
+        return $this->_table;
+    }
+
+    /**
+     * @param  $_table
+     * @return void
+     */
+    public function setTable($_table)
+    {
+        $this->_table = $_table;
+    }
+
+    /**
+     * @param  $_table
+     * @return array
+     */
+    public function direct($_table)
+    {
+        $this->setTable($_table);
+        $table = Doctrine_Core::getTable("$this->_table")->search($this->_query);
+        $ids = array();
+        foreach ($table as $result) {
+            $ids[] = $result['id'];
+        }
+
+        return $ids;
+    }
 }
 
