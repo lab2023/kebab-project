@@ -114,9 +114,41 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
      */
     buildIndicatorsArea: function() {
 
+        var applicationsCombobox = new Ext.form.ComboBox({
+            storeLoaded: false,
+            emptyText: 'Quick start...',
+            typeAhead: true,
+            width:150,
+            triggerAction: 'all',
+            forceSelection: true,
+            hideTrigger:true,
+            lazyRender:false,
+            mode: 'local',
+            store: new Ext.data.JsonStore({
+                fields: ['id', 'name', 'department', {name:'title', type: 'object', mapping: 'launcher.text'}]
+            }),
+            valueField: 'id',
+            displayField: 'title',
+            hiddenName: 'id',
+            listeners: {
+                focus: function(combo) {
+                    if (!combo.storeLoaded) {
+                        console.log(this.kernel.getApplications());
+                        combo.store.loadData(this.kernel.getApplications());
+                        combo.storeLoaded = true;
+                    }
+                },
+                select: function(combo, data) {
+                    this.kernel.getDesktop().launchApplication(data.id);
+                    combo.reset();
+                },
+                scope:this
+            }
+        });
+
         this.indicatorsToolbar = new Ext.Toolbar({
             renderTo: 'kebab-os-panel-indicators',
-            items: [{
+            items: [applicationsCombobox, {
                 iconCls : 'icon-status-online',
                 template: this.buttonTpl,
                 text: this.user.firstName + ' ' + this.user.lastName,

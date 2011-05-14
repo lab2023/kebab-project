@@ -60,9 +60,9 @@ $this->headScript()
     <div id="kebab-os-desktop"> 
         <dl id="kebab-os-desktop-shortcuts">
             <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
-            <dt ext:qtip="<?php echo $application['launchers']['tooltip']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
+            <dt ext:qtip="<?php echo $application['shortcut']['tooltip']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
                 <div></div>
-                <span><?php echo $application['launchers']['text']; ?></span>
+                <span><?php echo $application['shortcut']['text']; ?></span>
             </dt>
             <?php endforeach; ?>      
         </dl>

@@ -88,6 +88,8 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
                 application
             );
         });
+
+        Kebab.OS.Logger.info('Kebab applications loaded...');
         
         return applicationInstances;
     },

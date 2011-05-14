@@ -66,7 +66,7 @@ class Model_Application extends Model_Entity_Application
             $app['department'] = $application->department;
             $app['version'] = $application->version;
             $app['type'] = $application->type;
-            $app['launchers'] = array(
+            $app['shortcut'] = array(
                 'text' => $application->Translation[$defaultLanguage]->title,
                 'tooltip' => $application->Translation[$defaultLanguage]->description
             );

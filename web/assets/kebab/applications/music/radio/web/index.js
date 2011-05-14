@@ -44,10 +44,10 @@ KebabOS.applications.radio.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Radio Oddu',
+            text: 'Radio',
             iconCls: 'radio-application-launcher-icon'
         }
     });
 
     KebabOS.applications.radio.application.Bootstrap.superclass.constructor.call(this);
-}
+};
