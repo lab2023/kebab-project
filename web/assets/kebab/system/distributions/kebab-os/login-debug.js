@@ -140,7 +140,8 @@ Login = function(){
                     text: 'Send',
                     handler: function() {
                         this.forgotPasswordAction();
-                    }
+                    },
+                    scope:this
                 },{
                     xtype:'panel',
                     border:false,
