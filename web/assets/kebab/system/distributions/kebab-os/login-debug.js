@@ -207,7 +207,8 @@ Login = function(){
                             username: msg, password: msg
                         });
                         this.showLoginForm();
-                    }
+                    },
+                    scope:this
                 });
             }
         },
@@ -224,7 +225,8 @@ Login = function(){
                     },
                     failure : function() {
                         this.showForgotPasswordForm();
-                    }
+                    },
+                    scope:this
                 });
             }
         }
