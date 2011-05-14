@@ -123,6 +123,10 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         return null;
     },
 
+    getApplications : function() {
+        return this.applications;
+    },
+
     callApplication : function(id, cb, scope){
         var app = this.getApplication(id);
         if(app){
