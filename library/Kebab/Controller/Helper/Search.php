@@ -105,12 +105,22 @@ class Kebab_Controller_Helper_Search extends
 
     /**
      * @param  $_table
+     * @param bool $i18n
      * @return array
      */
-    public function direct($_table)
+    public function direct($_table, $i18n = false)
     {
         $this->setTable($_table);
-        $table = Doctrine_Core::getTable("$this->_table")->search($this->_query);
+
+        $table = $i18n ? // if i18n is true
+                Doctrine::getTable("$this->_table")
+                        ->getTemplate('Doctrine_Template_I18n')
+                        ->getPlugin()
+                        ->getTable()
+                        ->getGenerator('Doctrine_Search')
+                        ->search($this->_query)
+                : Doctrine_Core::getTable("$this->_table")->search($this->_query);
+
         $ids = array();
         foreach ($table as $result) {
             $ids[] = $result['id'];
