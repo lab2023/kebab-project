@@ -40,46 +40,59 @@ class System_BackupController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
-        foreach ($dir as $fileinfo) {
-            if ($fileinfo->getFilename() != '.') {
-                if ($fileinfo->getFilename() != '..') {
-                    $data['name'] = $fileinfo->getFilename();
-                    $data['size'] = $fileinfo->getSize() / 1024 / 1024 . ' Mb';
-                    $response[] = $data;
+        try {
+            $body = '';
+            $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
+            foreach ($dir as $fileinfo) {
+                if ($fileinfo->getFilename() != '.') {
+                    if ($fileinfo->getFilename() != '..') {
+                        $data['name'] = $fileinfo->getFilename();
+                        $data['size'] = $fileinfo->getSize() / 1024 / 1024 . ' Mb';
+                        $response[] = $data;
+                        if (is_null($response)) {
+                            $response = array();
+                            $body = $this->_helper->response()
+                                    ->setSuccess(true)
+                                    ->addData($response)
+                                    ->getResponse()
+                                    ->addTotal(0);
+                        } else {
+                            $body = $this->_helper->response()
+                                    ->setSuccess(true)
+                                    ->addData($response)
+                                    ->getResponse();
+                        }
+                    }
                 }
             }
-
+            $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody($body);
+        } catch (Exception $e) {
+            throw $e;
+        } catch (Zend_Exception $e) {
+            throw $e;
         }
-        $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody(
-            $this->_helper->response()
-                    ->setSuccess(true)
-                    ->addData($response)
-                    ->getResponse()
-        );
     }
 
     public function getAction()
     {
-        $params = $this->_helper->param();
-        $fileName = $params['fileName'];
-        header('Content-Type: application/zip');
-        header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        readfile(APPLICATION_PATH . '/variables/backups' . '/' . $fileName);
+        try {
+            $params = $this->_helper->param();
+            $fileName = $params['fileName'];
+            header('Content-Type: text/plain');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+            readfile(APPLICATION_PATH . '/variables/backups/' . $fileName);
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function postAction()
     {
-        echo date('o-m-d-H-i-s');
-    }
-
-    public function deleteAction()
-    {
-        $params = $this->_helper->param();
-        $fileName = $params['fileName'];
-        if (unlink(APPLICATION_PATH . '/variables/backups' . '/' . $fileName)) {
+        try {
+            $command = "mysqldump --user root --password=root -C kebab_development > " . APPLICATION_PATH . '/variables/backups/' . date('o-m-d-H-i-s') . ".sql";
+            system($command);
             $this->getResponse()
                     ->setHttpResponseCode(200)
                     ->appendBody(
@@ -87,8 +100,30 @@ class System_BackupController extends Kebab_Rest_Controller
                         ->setSuccess(true)
                         ->getResponse()
             );
-        } else {
-            throw new Zend_Exception('Delete a file failed.');
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function deleteAction()
+    {
+
+        try {
+            $params = $this->_helper->param();
+            $fileName = $params['fileName'];
+            if (unlink(APPLICATION_PATH . '/variables/backups/' . $fileName)) {
+                $this->getResponse()
+                        ->setHttpResponseCode(200)
+                        ->appendBody(
+                    $this->_helper->response()
+                            ->setSuccess(true)
+                            ->getResponse()
+                );
+            } else {
+                throw new Zend_Exception('Delete a file failed.');
+            }
+        } catch (Exception $e) {
+            throw $e;
         }
 
     }

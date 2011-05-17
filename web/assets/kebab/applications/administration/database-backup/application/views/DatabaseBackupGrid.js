@@ -41,7 +41,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 text: 'Backup',
                 iconCls:'icon-database-save',
                 handler: function() {
-                    this.fireEvent('backupRequest', {from:this, url:'/system/backup', method:'POST'})
+                    this.fireEvent('backupRequest', {from:this, url:'/system/backup', method:'POST', store:this.store})
                 }, scope:this
             }
         ];
@@ -58,22 +58,22 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
             },
             {
                 dataIndex: 'buttons',
-                width:8,
+                width:16,
                 xtype: 'actioncolumn',
                 items: [
 
                     {
-                        iconCls:'icon-disk',
+                        iconCls:'icon-disk databaseBackup-icon-icon-disk',
                         tooltip: 'Download Backup',
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
                             var file = rec.data.name;
-                            window.location.href = BASE_URL + '/system/backup/' + file;
+                            window.location.href = BASE_URL + '/system/backup/fileName/' + file;
                         },
                         scope:this
                     },
                     {
-                        iconCls:'icon-cancel',
+                        iconCls:'icon-cancel databaseBackup-icon-cancel',
                         tooltip: 'Delete Backup',
                         handler
                                 :
