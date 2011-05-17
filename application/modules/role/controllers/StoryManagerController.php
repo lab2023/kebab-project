@@ -85,7 +85,6 @@ class Role_StoryManagerController extends Kebab_Rest_Controller
                 $permission = new Model_Entity_Permission();
                 $permission->role_id = $roleId;
                 $permission->story_id = $story;
-                $permission->rule = 'allow';
                 $permission->save();
             }
             Doctrine_Manager::connection()->commit();
