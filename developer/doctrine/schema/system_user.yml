@@ -22,11 +22,6 @@ User:
     activationKey:
       type: string(255)
       unique: true
-    status:
-      type: enum
-      length: 7
-      values: ['passive', 'active']
-      notnull: true
     active:
       type: boolean
       length: 5
