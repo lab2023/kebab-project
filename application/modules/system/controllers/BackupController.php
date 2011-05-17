@@ -68,9 +68,7 @@ class System_BackupController extends Kebab_Rest_Controller
             $this->getResponse()
                     ->setHttpResponseCode(200)
                     ->appendBody($body);
-        } catch (Exception $e) {
-            throw $e;
-        } catch (Zend_Exception $e) {
+        catch (Zend_Exception $e) {
             throw $e;
         }
     }
