@@ -51,7 +51,7 @@ class User_ManagerController extends Kebab_Rest_Controller
             $ids = $this->_helper->search('Model_Entity_User');
 
             $query = Doctrine_Query::create()
-                    ->select('user.firstName, user.lastName, user.email, user.username, user.status, role.name, user.active')
+                    ->select('user.firstName, user.lastName, user.email, user.username, role.name, user.active')
                     ->from('Model_Entity_User user')
                     ->leftJoin('user.Roles role')
                     ->whereIn('user.id', $ids);
