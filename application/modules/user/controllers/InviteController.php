@@ -55,6 +55,7 @@ class User_InviteController extends Kebab_Rest_Controller
             $user->lastName = $lastName;
             $user->email = $email;
             $user->username = $email;
+            $user->active = 0;
             $user->save();
 
             $userId = $user->id;
@@ -71,7 +72,7 @@ class User_InviteController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->commit();
 
             // Prepare and Send Invitation e-mail here
-            $configParam = $params = Zend_Registry::get('config')->kebab->mail;
+            $configParam = Zend_Registry::get('config')->kebab->mail;
             $smtpServer = $configParam->smtpServer;
             $config = $configParam->config->toArray();
 
@@ -100,6 +101,7 @@ class User_InviteController extends Kebab_Rest_Controller
                 $this->_helper->response()->setSuccess(true)->getResponse()
             );
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();
@@ -165,6 +167,7 @@ class User_InviteController extends Kebab_Rest_Controller
                 $this->_helper->response()->setSuccess(true)->getResponse()
             );
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();
