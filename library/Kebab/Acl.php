@@ -40,20 +40,14 @@ class Kebab_Acl extends Zend_Acl
     public function addAllRoles()
     {
         $query = Doctrine_Query::create()
-                ->select('r.name')
-                ->from('Model_Role r')
-                ->useQueryCache($this->_doctrineCaching);
+                    ->select('r.name')
+                    ->from('Model_Role r')
+                    ->useQueryCache($this->_doctrineCaching);
+        
         $roles = $query->execute();
 
         foreach ($roles as $role) {
-            $ancestorRoleName = null;
-            if (Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->hasParent()) {
-                $rolesStack = Doctrine_Core::getTable('Model_Role')->find($role->id)->getNode()->getParent()->toArray();
-                $ancestorRoleName = $rolesStack['name'];
-            }
-            parent::addRole(
-                    new Zend_Acl_Role($role->name), $ancestorRoleName
-            );
+            parent::addRole(new Zend_Acl_Role($role->name));
         }
     }
 
@@ -67,11 +61,7 @@ class Kebab_Acl extends Zend_Acl
         $resources = $query->execute();
 
         foreach ($resources as $resource) {
-            parent::add(
-                    new Zend_Acl_Resource(
-                        $resource->Module->name . '_' . $resource->name
-                    )
-            );
+            parent::add(new Zend_Acl_Resource($resource->Module->name . '_' . $resource->name));
         }
     }
 
@@ -82,7 +72,7 @@ class Kebab_Acl extends Zend_Acl
 
         $query = Doctrine_Query::create()
                 ->select('module.name, acontroller.name, controller.name, action.name, 
-                    service.id, role.id, story.id, permission.rule, role.name, story.name')
+                    service.id, role.id, story.id, permission.*, role.name, story.name')
                 ->from('Model_Service service')
                 ->leftJoin('service.Resource controller')
                 ->leftJoin('controller.Module module')
@@ -96,7 +86,7 @@ class Kebab_Acl extends Zend_Acl
         if (count($services->toArray()) > 0 ) {
             
             foreach ($services as $service) {
-                $action = !isset($service->Action->name) ? null : $service->Action->name;
+                $action   = !isset($service->Action->name) ? null : $service->Action->name;
                 $resource = (isset($service->Resource)) 
                           ? $service->Resource->Module->name .'_'. $service->Resource->name
                           : null;
@@ -108,20 +98,15 @@ class Kebab_Acl extends Zend_Acl
                     foreach ($service->Story->Permission->toArray() as $permission) {
                         if (count($permission) > 0) {
                             Zend_Registry::get('logging')->log(
-                                $permission['rule'] . '-' . 
                                 $permission['Role']['name'] . '-' .
                                 $resource . '-' . 
                                 $action, Zend_Log::DEBUG
                             );
-                            parent::$permission['rule'](
-                                $permission['Role']['name'],  
-                                $resource,  
-                                $action
-                            );
+                            parent::allow($permission['Role']['name'], $resource, $action);
                         }
                     }
                 }
             }
-        }              
-    }// eof function
-} // eof class
+        }
+    }
+} 

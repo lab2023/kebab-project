@@ -7,10 +7,6 @@ Permission:
     story_id:
       type: integer
       primary: true
-    rule:
-      type: enum
-      length: 5
-      values: ['deny', 'allow']
 
   relations:
     Role:

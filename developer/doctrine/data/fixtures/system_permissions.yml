@@ -1,30 +1,30 @@
 Model_Entity_Permission:
-  Permission_1:
+  Member_1:
     Story: Access_Desktop
-    Role: Guest
-    rule: allow
-  Permission_2:
+    Role: Member
+  Member_2:
     Story: Change_Profile
-    Role: Guest
-    rule: allow
-  Permission_3:
+    Role: Member
+
+  Admin_1:
+    Story: Access_Desktop
+    Role: Admin
+  Admin_2:
+    Story: Change_Profile
+    Role: Admin
+  Admin_3:
     Story: User_Management
     Role: Admin
-    rule: allow
-  Permission_4:
+  Admin_4:
     Story: Feedback_Management
     Role: Admin
-    rule: allow
-  Permission_5:
+  Admin_5:
     Story: Role_Management
     Role: Admin
-    rule: allow
-  Permission_6:
+  Admin_6:
     Story: Story_Management
     Role: Admin
-    rule: allow
-  Permission_7:
+  Admin_7:
     Story: System_Backup
     Role: Admin
-    rule: allow
     

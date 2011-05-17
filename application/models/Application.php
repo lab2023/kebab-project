@@ -43,7 +43,7 @@ class Model_Application extends Model_Entity_Application
      * @param  string $defaultLanguage
      * @return array
      */
-    public static function getApplicationsByPermission($rolesWithAncestor, $defaultLanguage)
+    public static function getApplicationsByPermission($roles, $defaultLanguage)
     {
         $query = Doctrine_Query::create()
                 ->from('Model_Application a')
@@ -52,7 +52,7 @@ class Model_Application extends Model_Entity_Application
                 ->leftJoin('sa.Story s')
                 ->leftJoin('s.Permission p')
                 ->leftJoin('p.Role r')
-                ->whereIn('r.name', $rolesWithAncestor)
+                ->whereIn('r.name', $roles)
                 ->andWhere('a.status = ?', array('active'))
                 ->andWhere('s.status = ?', array('active'));
         $applications = $query->execute();

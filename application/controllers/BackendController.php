@@ -69,13 +69,9 @@ class BackendController extends Kebab_Controller_Action
      */
     public function desktopAction()
     {
-        if (Zend_Registry::get('config')->plugins->kebabAcl) {
-            $rolesWithAncestor = Zend_Auth::getInstance()->getIdentity()->rolesWithAncestor;
-            $this->view->applications  = Model_Application::getApplicationsByPermission(
-                $rolesWithAncestor, $this->_auth->getIdentity()->language
-            );
-        } else {
-            throw new Zend_Exception('ACL plugin is disable');
-        }
+        $roles = Zend_Auth::getInstance()->getIdentity()->roles;
+        $this->view->applications  = Model_Application::getApplicationsByPermission(
+            $roles, $this->_auth->getIdentity()->language
+        );
     }
 }

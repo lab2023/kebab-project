@@ -7,7 +7,6 @@
  * 
  * @property integer $role_id
  * @property integer $story_id
- * @property enum $rule
  * @property Model_Entity_Role $Role
  * @property Model_Entity_Story $Story
  * 
@@ -28,15 +27,6 @@ class Model_Entity_Permission extends Doctrine_Record
         $this->hasColumn('story_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
-             ));
-        $this->hasColumn('rule', 'enum', 5, array(
-             'type' => 'enum',
-             'length' => 5,
-             'values' => 
-             array(
-              0 => 'deny',
-              1 => 'allow',
-             ),
              ));
 
         $this->option('type', 'INNODB');

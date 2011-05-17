@@ -1,48 +1,23 @@
 Model_Entity_Role:
-
-  Guest:
-    name: guest
+  Member:
+    name: member
     Translation:
       en:
-        title: Guest
-        description: Guest Role
+        title: Member
+        description: Member Role
       tr:
-        title: Ziyaretçi
-        description: Ziyaretçi Rolü
+        title: Üye
+        description: Üye Rolü
     active: true
-    
-    children:
-      Member:
-        name: member
-        Translation:
-          en:
-            title: Member
-            description: Member Role
-          tr:
-            title: Üye
-            description: Üye Rolü
-        active: true
+  
+  Admin:
+    name: admin
+    Translation:
+      en:
+        title: Admin
+        description: Admin Role
+      tr:
+        title: Yönetici
+        description: Yönetici Rolü
+    active: true
 
-        children:
-          Admin:
-            name: admin
-            Translation:
-              en:
-                title: Admin
-                description: Admin Role
-              tr:
-                title: Yönetici
-                description: Yönetici Rolü
-            active: true
-
-            children:
-              Owner:
-                name: owner
-                Translation:
-                  en:
-                    title: Owner
-                    description: Owner Role
-                  tr:
-                    title: Kurucu
-                    description: Kurucu Rolü
-                active: true

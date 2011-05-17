@@ -24,9 +24,6 @@ Role:
     Timestampable:
     SoftDelete:
     Blameable:
-    NestedSet:
-      hasManyRoots: true
-      rootColumnName: root_id
     I18n:
       fields: [title, description]
       className: RoleTranslation

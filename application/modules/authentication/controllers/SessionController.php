@@ -45,8 +45,8 @@ class Authentication_SessionController extends Kebab_Rest_Controller
     public function postAction()
     {
         // Get params
-        $username = $this->_request->getParam('username');
-        $password = $this->_request->getParam('password');
+        $username   = $this->_request->getParam('username');
+        $password   = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('remember_me');
 
         // Check rememberMe checkbox
@@ -57,6 +57,7 @@ class Authentication_SessionController extends Kebab_Rest_Controller
         //Filter for SQL Injection
         $validatorUsername = new Zend_Validate();
         $validatorUsername->addValidator(new Zend_Validate_StringLength(4, 16))->addValidator(new Zend_Validate_Alnum());
+        
         $validatorPassword = new Zend_Validate();
         $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
 
@@ -87,9 +88,7 @@ class Authentication_SessionController extends Kebab_Rest_Controller
 
                 // Check Acl Plugin is on and write acl and role
                 if (Zend_Registry::get('config')->plugins->kebabAcl) {
-                    $roles = User_Model_User::getUserRoles($identity->id);
-                    $identity->roles = $roles['roles'];
-                    $identity->rolesWithAncestor = $roles['rolesWithAncestor'];
+                    $identity->roles = User_Model_User::getUserRoles($identity->id);
                     $identity->acl = new Kebab_Acl();
                 }
                 $auth->getStorage()->write($identity);
@@ -97,9 +96,8 @@ class Authentication_SessionController extends Kebab_Rest_Controller
                 if (!is_null($rememberMe)) {
                     Zend_Session::rememberMe(604800);
                 }
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse();
+                $this->_helper->response()->setSuccess(true)->getResponse();
+
             } else {
                 $this->_helper->response()
                         ->addNotification('ERR', 'Please check your user name and password!')
