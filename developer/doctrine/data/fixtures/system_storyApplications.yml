@@ -27,10 +27,6 @@ Model_Entity_StoryApplication:
     Story: Access_Desktop
     Application: TicTacToeApplication
 
-  Record_8:
-    Story: Access_Desktop
-    Application: MarioApplication
-
   Record_9:
     Story: Access_Desktop
     Application: CalculatorApplication
@@ -42,10 +38,6 @@ Model_Entity_StoryApplication:
   Record_11:
     Story: Access_Desktop
     Application: PixlrApplication
-
-  Record_12:
-    Story: Access_Desktop
-    Application: RadioApplication
 
   Record_13:
     Story: User_Management

@@ -105,21 +105,6 @@ Model_Entity_Application:
         title: Tic TacT Toe
         description: Tic tac toe oynayın.
 
-  MarioApplication:
-    identity: mario-application
-    className: KebabOS.applications.mario.application.Bootstrap
-    name: mario
-    type: application
-    department: games
-    version: 0.0.1
-    Translation:
-      en:
-        title: Mario
-        description: Play mario.
-      tr:
-        title: Mario
-        description: Mario oynayın.
-
   CalculatorApplication:
     identity: calculator-application
     className: KebabOS.applications.calculator.application.Bootstrap
@@ -164,21 +149,6 @@ Model_Entity_Application:
       tr:
         title: Pixlr
         description: Fotoğraflarınızı düzenleyin.
-
-  RadioApplication:
-    identity: radio-application
-    className: KebabOS.applications.radio.application.Bootstrap
-    name: radio
-    type: application
-    department: music
-    version: 0.0.1
-    Translation:
-      en:
-        title: Radio
-        description: Listen to Radio.
-      tr:
-        title: Radyo
-        description: Radyo dinleyin.
 
   UserManagerApplication:
     identity: userManager-application
