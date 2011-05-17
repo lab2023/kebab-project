@@ -114,17 +114,8 @@ class Role_ManagerController extends Kebab_Rest_Controller
             $role->active = $avtive;
             $role->Translation[$lang]->title = $title;
             $role->Translation[$lang]->description = $description;
-
-            if (array_key_exists('parentRoleId', $params)) {
-                $parentRoleId = $params['parentRoleId'];
-                $parentRole = Doctrine_Core::getTable('Model_Entity_Role')->find($parentRoleId);
-                $role->getNode()->insertAsLastChildOf($parentRole);
-            } else {
-                $role->save();
-                $treeObject = Doctrine_Core::getTable('Model_Entity_Role')->getTree();
-                $treeObject->createRoot($role);
-                unset($role);
-            }
+            $role->save();
+            
             Doctrine_Manager::connection()->commit();
 
             // Returning response
@@ -136,8 +127,10 @@ class Role_ManagerController extends Kebab_Rest_Controller
                         ->getResponse()
             );
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         }
 
