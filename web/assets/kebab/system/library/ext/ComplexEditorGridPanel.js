@@ -272,11 +272,11 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             });
 
             // Check message box status and commit store changes to server.
-            function commitChanges(btn) {
+            var commitChanges = function (btn) {
                 if(btn == 'yes') {
                     this.store.save();
                 }
-            }
+            };
         //}
     },
 
