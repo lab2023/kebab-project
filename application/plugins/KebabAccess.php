@@ -30,26 +30,38 @@
  * @subpackage Plugins
  * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  */
-class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
+class Plugin_KebabAccess extends Kebab_Controller_Plugin_Abstract
 {
-    
     public function __construct()
     {
         parent::__construct(__CLASS__, __FILE__);
     }
 
-    /**
-     * preDispatch
-     * 
-     * @param Zend_Controller_Request_Abstract $request
-     * @return void
-     */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        // Check Auth
-        if($this->_isCheckAuth($request)) {
-            if (!Zend_Auth::getInstance()->hasIdentity()) {
-                //KBBTODO get these form config file
+        // Requests
+        $resource = $request->getModuleName() . '_' . $request->getControllerName();
+        $action = $request->getActionName();
+        
+        // Check Acl
+        if ($this->_isCheckAccess($request)) {
+            if (Zend_Auth::getInstance()->hasIdentity()) {
+                $acl = Zend_Auth::getInstance()->getIdentity()->acl;
+                $roles = Zend_Auth::getInstance()->getIdentity()->roles;
+
+                $isAllowed = false;
+                while (!$isAllowed && list(, $role) = each($roles)) {
+                    $isAllowed = $acl->isAllowed($role, $resource, $action);
+                }
+
+                if (!$isAllowed) {
+                    //KBBTODO get setting from config file
+                    $request->setModuleName('default');
+                    $request->setControllerName('error');
+                    $request->setActionName('unauthorized');
+                }
+            } else {
+                //KBBTODO get setting from config file
                 $request->setModuleName('default');
                 $request->setControllerName('error');
                 $request->setActionName('unauthorized');
@@ -57,16 +69,10 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         }
     }
 
-    /**
-     * Check the request will check from auth plugin
-     * 
-     * @param Zend_Controller_Request_Abstract $request
-     * @return bool
-     */
-    private function _isCheckAuth(Zend_Controller_Request_Abstract $request)
+    private function _isCheckAccess(Zend_Controller_Request_Abstract $request)
     {
         // Default Return Value
-        $isCheckAuth = true;
+        $isCheckAccess = true;
 
         // Requests
         $module = $request->getModuleName();
@@ -82,10 +88,10 @@ class Plugin_KebabAuth extends Kebab_Controller_Plugin_Abstract
         if (in_array($moduleController, $isOmittedConfig)
             || in_array($moduleControllerAction, $isOmittedConfig)
         ) {
-            $isCheckAuth = false;
+            $isCheckAccess = false;
         }
 
-        return $isCheckAuth;
+        return $isCheckAccess;
     }
 
 }

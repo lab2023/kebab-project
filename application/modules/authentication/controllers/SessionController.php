@@ -85,12 +85,9 @@ class Authentication_SessionController extends Kebab_Rest_Controller
                 // Remove some fields which are secure!
                 $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
                 $identity = $authAdapter->getResultRowObject(null, $omitColumns);
+                $identity->roles = User_Model_User::getUserRoles($identity->id);
+                $identity->acl = new Kebab_Acl();
 
-                // Check Acl Plugin is on and write acl and role
-                if (Zend_Registry::get('config')->plugins->kebabAcl) {
-                    $identity->roles = User_Model_User::getUserRoles($identity->id);
-                    $identity->acl = new Kebab_Acl();
-                }
                 $auth->getStorage()->write($identity);
 
                 if (!is_null($rememberMe)) {
