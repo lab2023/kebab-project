@@ -52,9 +52,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             $responseData = $query->fetchOne()->toArray();
         }
 
-        $this->getResponse()->setHttpResponseCode(200)->appendBody(
-            $this->_helper->response(true)->addData($responseData)->getResponse()
-        );
+        $this->_helper->response(true, 200)->addData($responseData)->getResponse();
     }
 
     public function putAction()
@@ -79,9 +77,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
 
             if (is_object($userExistsWithEmail)) {
                 // Another User exists with entered email
-                $this->getResponse()->setHttpResponseCode(201)->appendBody(
-                    $this->_helper->response()->set('email', 'Another User with email exists.')->getResponse()
-                );
+                $this->_helper->response(false, 201)->set('email', 'Another User with email exists.')->getResponse();
             }
 
             // DQL
@@ -96,9 +92,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             unset($profile);
 
             // Response
-            $this->getResponse()->setHttpResponseCode(201)->appendBody(
-                $this->_helper->response(true)->getResponse()
-            );
+            $this->_helper->response(true, 201)->getResponse();
 
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();

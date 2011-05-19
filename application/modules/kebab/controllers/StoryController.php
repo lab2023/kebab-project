@@ -48,34 +48,21 @@ class Kebab_StoryController extends Kebab_Rest_Controller
             'title' => 'storyTranslation.title',
         );
 
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $query = Doctrine_Query::create()
-                    ->select('story.id, storyTranslation.title as title,
-                        storyTranslation.description as description, story.status, story.active')
-                    ->from('Model_Entity_Story story')
-                    ->leftJoin('story.Translation storyTranslation')
-                    ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                    ->orderBy($this->_helper->sort($mapping));
+        //KBBTODO move dql to models
+        $query = Doctrine_Query::create()
+                ->select('story.id, storyTranslation.title as title,
+                    storyTranslation.description as description, story.status, story.active')
+                ->from('Model_Entity_Story story')
+                ->leftJoin('story.Translation storyTranslation')
+                ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                ->orderBy($this->_helper->sort($mapping));
 
-            $pager = $this->_helper->pagination($query);
-            $story = $pager->execute();
+        $pager = $this->_helper->pagination($query);
+        $story = $pager->execute();
 
-            $responseData = array();
-            if (is_object($story)) {
-                $responseData = $story->toArray();
-            }
-            Doctrine_Manager::connection()->commit();
-            $this->getResponse()->setHttpResponseCode(200)->appendBody(
-                $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse()
-            );
+        $responseData = is_object($story) ? $story->toArray() : array();
 
-        } catch (Zend_Exception $e) {
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        }
+        $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
 
     public function putAction()
@@ -95,10 +82,8 @@ class Kebab_StoryController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->commit();
             unset($story);
             
-            // Returning response
-            $this->getResponse()->setHttpResponseCode(202)->appendBody(
-                $this->_helper->response(true)->getResponse()
-            );
+            // Response
+            $this->_helper->response(true, 202)->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
