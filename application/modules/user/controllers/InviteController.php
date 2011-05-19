@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -20,7 +18,7 @@ if (!defined('BASE_PATH'))
  * @subpackage Controllers
  * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -33,7 +31,7 @@ if (!defined('BASE_PATH'))
  * @subpackage Controllers
  * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 class User_InviteController extends Kebab_Rest_Controller
