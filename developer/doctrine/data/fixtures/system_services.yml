@@ -13,7 +13,7 @@ Model_Entity_Service:
   # Send Feedback
   Desktop_3:
     Story: Access_Desktop
-    Resource: Feedback_Feedback
+    Resource: Kebab_Feedback
 
   # Change Profile
   Profile_1:
@@ -28,7 +28,7 @@ Model_Entity_Service:
   # Manage Feedbacks
   ManageFeedbacks_1:
     Story: Feedback_Management
-    Resource: Feedback_FeedbackManager
+    Resource: Kebab_FeedbackManager
 
   # Manage Roles
   ManageRoles_1:

@@ -34,7 +34,7 @@ KebabOS.applications.feedbackManager.application.controllers.Index = Ext.extend(
 
     statusChangeAction: function(data) {
         Ext.Ajax.request({
-            url: BASE_URL + '/feedback/feedback-manager',
+            url: BASE_URL + '/kebab/feedback-manager',
             method:'PUT',
             params: { id: data.id, status: data.status }
         });

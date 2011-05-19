@@ -14,13 +14,7 @@ Model_Entity_Controller:
     name: index
     
   # FEEDBACK MODULE #########################################################
-  Feedback_Feedback:
-    Module: Feedback
-    name: feedback
 
-  Feedback_FeedbackManager:
-    Module: Feedback
-    name: feedback-manager
 
   # ROLE MODULE #########################################################
   Role_Manager:
@@ -69,3 +63,11 @@ Model_Entity_Controller:
   Kebab_Story:
     Module: Kebab
     name: story
+
+  Kebab_Feedback:
+    Module: Kebab
+    name: feedback
+
+  Kebab_FeedbackManager:
+    Module: Kebab
+    name: feedback-manager

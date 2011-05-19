@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -18,7 +16,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    System
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
@@ -26,21 +24,20 @@ if (!defined('BASE_PATH'))
 
 
 /**
- * Feedback_FeedbackManager
+ * FeedbackManager
+ *
+ * System admin can manage the feedback
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Administration
+ * @package    System
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
+class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
 {
-    /**
-     * @return void
-     */
     public function indexAction()
     {
         // Mapping
@@ -51,6 +48,8 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
             'title' => 'applicationTranslate',
             'User' => 'user'
         );
+
+        //KBBTODO move DQL to model class
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $query = Doctrine_Query::create()
@@ -74,19 +73,15 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
                 $responseData = $feedbacks->toArray();
             }
             Doctrine_Manager::connection()->commit();
-            $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->addTotal($pager->getNumResults())
-                        ->getResponse()
+            $this->getResponse()->setHttpResponseCode(200)->appendBody(
+                $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse()
             );
 
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         }
     }
@@ -112,16 +107,14 @@ class Feedback_FeedbackManagerController extends Kebab_Rest_Controller
             unset($feedback);
 
             // Returning response
-            $this->getResponse()
-                    ->setHttpResponseCode(202)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
+            $this->getResponse()->setHttpResponseCode(202)->appendBody(
+                $this->_helper->response(true)->getResponse()
             );
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         }
 

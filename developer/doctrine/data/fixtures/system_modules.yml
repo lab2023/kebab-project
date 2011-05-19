@@ -2,8 +2,6 @@
 Model_Entity_Module:
   Default:
     name: default
-  Feedback:
-    name: feedback
   Role:
     name: role
   User:
