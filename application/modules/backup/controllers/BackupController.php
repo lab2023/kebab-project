@@ -95,7 +95,7 @@ class Backup_BackupController extends Kebab_Rest_Controller
             $database = Zend_Registry::get('config')->database->doctrine->connections->master->dsn;
 
             $database = explode("://", $database);
-            if ($database[0] != 'mysql') {
+            if ($database[0] == 'mysql') {
                 $database = explode(":", $database[1]);
                 $user = $database[0];
                 $database = explode("@", $database[1]);
