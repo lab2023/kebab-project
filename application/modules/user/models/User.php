@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -20,20 +18,23 @@ if (!defined('BASE_PATH'))
  * @subpackage User Model
  * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
 /**
  * Model_User
  *
+ * @category   Kebab (kebab-reloaded)
  * @package    Model
  * @subpackage User Model
- * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
-class User_Model_User extends Model_Entity_User
+class User_Model_User
 {
     /**
      * @static
@@ -45,7 +46,7 @@ class User_Model_User extends Model_Entity_User
         $userId = (int) $userId;
         $query = Doctrine_Query::create()
                     ->select('role.name')
-                    ->from('Model_Role role')
+                    ->from('Model_Entity_Role role')
                     ->leftJoin('role.UserRole userrole')
                     ->where('userrole.user_id = ?', $userId);
 

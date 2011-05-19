@@ -10,7 +10,7 @@
  */
 KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
-    url: '/user/profile',
+    url: '/kebab/profile',
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',

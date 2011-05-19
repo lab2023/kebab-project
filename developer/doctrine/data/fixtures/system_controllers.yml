@@ -13,8 +13,6 @@ Model_Entity_Controller:
     Module: Default
     name: index
     
-  # FEEDBACK MODULE #########################################################
-
 
   # ROLE MODULE #########################################################
   Role_Manager:
@@ -29,10 +27,6 @@ Model_Entity_Controller:
   User_Manager:
     Module: User
     name: manager
-
-  User_Profile:
-    Module: User
-    name: profile
 
   User_RoleManager:
     Module: User
@@ -71,3 +65,7 @@ Model_Entity_Controller:
   Kebab_FeedbackManager:
     Module: Kebab
     name: feedback-manager
+
+  Kebab_Profile:
+    Module: Kebab
+    name: profile

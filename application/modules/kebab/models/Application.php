@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,25 +14,28 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Model
- * @subpackage Application Model
- * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @package    Kebab
+ * @subpackage Model
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
 /**
- * Model_Application
+ * Kebab_Model_Application
  * 
- * @package    Model
- * @subpackage Application Model
- * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @category   Kebab (kebab-reloaded)
+ * @package    Kebab
+ * @subpackage Model
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
 
-class Model_Application extends Model_Entity_Application
+class Kebab_Model_Application
 {
     /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
@@ -46,7 +47,7 @@ class Model_Application extends Model_Entity_Application
     public static function getApplicationsByPermission($roles, $defaultLanguage)
     {
         $query = Doctrine_Query::create()
-                ->from('Model_Application a')
+                ->from('Model_Entity_Application a')
                 ->leftJoin('a.Translation at')
                 ->leftJoin('a.StoryApplication sa')
                 ->leftJoin('sa.Story s')

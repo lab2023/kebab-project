@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,68 +14,49 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    User Module
+ * @package    Kebab
  * @subpackage Controllers
- * @author       lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
 /**
- * Preferences_AboutMeController
+ * Kebab_ProfileController
+ *
+ * Member can change her/his password, first name, last name etc.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Profile
+ * @package    Kebab
  * @subpackage Controllers
- * @author       lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class User_ProfileController extends Kebab_Rest_Controller
+class Kebab_ProfileController extends Kebab_Rest_Controller
 {
-    /**
-     * @return void
-     */
     public function getAction()
     {
         // Param
-        $params = $this->_helper->param();
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
 
-        // DQL
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $query = Doctrine_Query::create()
-                    ->select('user.id, user.firstName, user.lastName, user.email, user.language, user.username')
-                    ->from('User_Model_User user')
-                    ->where('user.id = ?', array($userSessionId));
+        //KBBTODO move DQL to model class
+        $query = Doctrine_Query::create()
+                ->select('user.id, user.firstName, user.lastName, user.email, user.language, user.username')
+                ->from('Model_Entity_User user')
+                ->where('user.id = ?', array($userSessionId));
 
-            if (is_object($query->fetchOne())) {
-                $responseData = $query->fetchOne()->toArray();
-            }
-            Doctrine_Manager::connection()->commit();
-            $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->getResponse()
-            );
-
-        } catch (Zend_Exception $e) {
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
+        if (is_object($query->fetchOne())) {
+            $responseData = $query->fetchOne()->toArray();
         }
+
+        $this->getResponse()->setHttpResponseCode(200)->appendBody(
+            $this->_helper->response(true)->addData($responseData)->getResponse()
+        );
     }
 
-    /**
-     * @return void
-     */
     public function putAction()
     {
         // Param
@@ -90,6 +69,7 @@ class User_ProfileController extends Kebab_Rest_Controller
         $email = $params['email'];
         $language = $params['language'];
 
+        //KBBTODO move DQL to model class
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $userExistsWithEmail = Doctrine_Query::create()
@@ -99,17 +79,13 @@ class User_ProfileController extends Kebab_Rest_Controller
 
             if (is_object($userExistsWithEmail)) {
                 // Another User exists with entered email
-                $this->getResponse()
-                        ->setHttpResponseCode(201)
-                        ->appendBody(
-                    $this->_helper->response()
-                            ->set('email', 'Another User with email exists.')
-                            ->getResponse()
+                $this->getResponse()->setHttpResponseCode(201)->appendBody(
+                    $this->_helper->response()->set('email', 'Another User with email exists.')->getResponse()
                 );
             }
 
             // DQL
-            $profile = new User_Model_User();
+            $profile = new Model_Entity_User();
             $profile->assignIdentifier($userSessionId);
             $profile->firstName = $firstName;
             $profile->lastName = $lastName;
@@ -120,15 +96,12 @@ class User_ProfileController extends Kebab_Rest_Controller
             unset($profile);
 
             // Response
-            $this->getResponse()
-                    ->setHttpResponseCode(201)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
+            $this->getResponse()->setHttpResponseCode(201)->appendBody(
+                $this->_helper->response(true)->getResponse()
             );
 
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();

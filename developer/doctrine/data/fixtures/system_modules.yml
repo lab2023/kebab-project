@@ -2,11 +2,11 @@
 Model_Entity_Module:
   Default:
     name: default
+  Kebab:
+    name: kebab
+  System:
+    name: system
   Role:
     name: role
   User:
     name: user
-  System:
-    name: system
-  Kebab:
-    name: kebab

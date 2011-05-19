@@ -67,7 +67,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
             $auth = Zend_Auth::getInstance();
             $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('User_Model_User'));
 
-            $authAdapter->setTableName('User_Model_User u')
+            $authAdapter->setTableName('Model_Entity_User u')
                     ->setIdentityColumn('username')
                     ->setCredentialColumn('password')
                     ->setCredentialTreatment('MD5(?) AND active = 1')

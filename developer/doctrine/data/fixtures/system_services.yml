@@ -15,10 +15,7 @@ Model_Entity_Service:
     Story: Access_Desktop
     Resource: Kebab_Feedback
 
-  # Change Profile
-  Profile_1:
-    Story: Change_Profile
-    Resource: User_Profile
+
 
   # Change Password
   Profile_2:
@@ -61,3 +58,8 @@ Model_Entity_Service:
   Kebab_Story_1:
     Story: Story_Management
     Resource: Kebab_Story
+
+  # Change Profile
+  Kebab_Profile:
+    Story: Change_Profile
+    Resource: Kebab_Profile
