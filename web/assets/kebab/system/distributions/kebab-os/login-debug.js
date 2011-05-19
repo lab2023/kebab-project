@@ -116,7 +116,7 @@ Login = function(){
          */
         buildForgotPasswordForm: function() {
             forgotPasswordForm = new Ext.FormPanel({
-                url: BASE_URL + '/kebab/forgot-password',
+                url: Kebab.OS.generateUrl('kebab/forgot-password'),
                 method: 'POST',
                 frame:false,
                 labelAlign:'top',
@@ -198,7 +198,7 @@ Login = function(){
                 this.showPreLoader();
                 loginForm.getForm().submit({
                     success : function() {
-                        window.location.href = '/backend/desktop';
+                        Kebab.OS.redirect('backend/desktop');
                     },
                     failure : function() {
                         var msg = "Login failure. Please try again."

@@ -1,5 +1,4 @@
 Model_Entity_UserRole:
-
   Member:
     User: Member
     Role: Member

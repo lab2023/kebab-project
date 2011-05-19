@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,26 +14,26 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Authentication
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
 /**
- * Session controller manage to login, logout and other operation over session
+ * Send the user forgetpassword
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Forgot Password
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Authentication_ForgotPasswordController extends Kebab_Rest_Controller
+class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
 {
     public function postAction()
     {

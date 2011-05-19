@@ -8,7 +8,7 @@ Model_Entity_Service:
   # Logout
   Desktop_2:
     Story: Access_Desktop
-    Action: Authentication_Session_Delete
+    Action: Kebab_Session_Delete
     
   # Send Feedback
   Desktop_3:
@@ -23,7 +23,7 @@ Model_Entity_Service:
   # Change Password
   Profile_2:
     Story: Change_Profile
-    Resource: Authentication_Password
+    Resource: Kebab_Password
 
   # Manage Feedbacks
   ManageFeedbacks_1:
@@ -56,3 +56,8 @@ Model_Entity_Service:
   System_1:
     Story: System_Backup
     Resource: System_Backup
+
+  # Manage Story
+  Kebab_Story_1:
+    Story: Story_Management
+    Resource: Kebab_Story

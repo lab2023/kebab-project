@@ -1,10 +1,5 @@
 #Modules
 Model_Entity_Module:
-
-  Access:
-    name: access
-  Authentication:
-    name: authentication
   Default:
     name: default
   Feedback:
@@ -15,3 +10,5 @@ Model_Entity_Module:
     name: user
   System:
     name: system
+  Kebab:
+    name: kebab

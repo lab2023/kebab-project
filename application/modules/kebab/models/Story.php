@@ -1,4 +1,5 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
+
 /**
  * Kebab Framework
  *
@@ -13,26 +14,40 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Applications
- * @subpackage SysAdministration
- * @author	   lab2023 Dev Team
+ * @package    Kebab
+ * @subpackage Model
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
 /**
- * Kebab SysAdministration Module Bootstrapping Class
+ * Kebab_Model_Story
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Applications
- * @subpackage SysAdministration
- * @author	   lab2023 Dev Team
+ * @package    Kebab
+ * @subpackage Model
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Access_Bootstrap
-    extends Kebab_Application_Module_Bootstrap
+
+class Kebab_Model_Story
 {
+    static public function getStory()
+    {
+        $lang = Zend_Auth::getInstance()->getIdentity()->language;
+        $query = Doctrine_Query::create()
+                ->select('story.*, storyTranslation.title as title,
+                    storyTranslation.description as description, permission.*')
+                ->from('Model_Entity_Story story')
+                ->leftJoin('story.Permission permission')
+                ->leftJoin('story.Translation storyTranslation')
+                ->where('storyTranslation.lang = ?', $lang)
+                ->where('story.status = ?', 'active');
+
+        return $query;
+    }
 }

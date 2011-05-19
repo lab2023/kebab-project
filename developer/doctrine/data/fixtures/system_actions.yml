@@ -2,8 +2,8 @@
 Model_Entity_Action:
 
   # Logout
-  Authentication_Session_Delete:
-    Controller: Authentication_Session
+  Kebab_Session_Delete:
+    Controller: Kebab_Session
     name: delete
     
   # Access the desktop

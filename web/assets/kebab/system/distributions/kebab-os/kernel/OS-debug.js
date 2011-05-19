@@ -159,12 +159,13 @@ Kebab.OS = function(){
 
         // ACTIONS -----------------------------------------------------------------------------------------------------
 
+
         /**
          * Logout action
          */
         logoutAction: function(userId, redirect) {
             Ext.Ajax.request({
-                url: this.generateUrl('authentication/session/' + userId),
+                url: this.generateUrl('kebab/session/' + userId),
                 method: 'DELETE',
                 success: function() {
                     if (redirect) {

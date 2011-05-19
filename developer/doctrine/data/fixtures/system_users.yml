@@ -6,7 +6,6 @@ Model_Entity_User:
     firstName: Member
     lastName: User
     email: member@kebab-project.com
-    status: active
     language: en
     active: '1'
 
@@ -16,6 +15,5 @@ Model_Entity_User:
     firstName: Admin
     lastName: User
     email: admin@kebab-project.com
-    status: active
     language: en
     active: '1'

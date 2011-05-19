@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -15,27 +13,29 @@ if (!defined('BASE_PATH'))
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
- * @package
- * @subpackage Controllers
- * @author       lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
- * @version    1.5.0
+ * @category    Kebab (kebab-reloaded)
+ * @package     Kebab
+ * @subpackage  Controllers
+ * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/licensing
+ * @version     1.5.0
  */
 
 /**
- * Preferences_AboutMeController
+ * Story Manager
  *
- * @category   Kebab (kebab-reloaded)
- * @package
- * @subpackage Controllers
- * @author       lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
- * @version    1.5.0
+ * This service is list all story and set them active and passive.
+ *
+ * @category    Kebab (kebab-reloaded)
+ * @package     Kebab
+ * @subpackage  Controllers
+ * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/licensing
+ * @version     1.5.0
  */
-class Access_StoryManagerController extends Kebab_Rest_Controller
+class Kebab_StoryController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
@@ -66,14 +66,8 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
                 $responseData = $story->toArray();
             }
             Doctrine_Manager::connection()->commit();
-            $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->addTotal($pager->getNumResults())
-                        ->getResponse()
+            $this->getResponse()->setHttpResponseCode(200)->appendBody(
+                $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse()
             );
 
         } catch (Zend_Exception $e) {
@@ -94,21 +88,19 @@ class Access_StoryManagerController extends Kebab_Rest_Controller
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            $story = new Access_Model_Story();
+            $story = new Model_Entity_Story();
             $story->assignIdentifier($id);
             $story->set('active', $active);
             $story->save();
             Doctrine_Manager::connection()->commit();
             unset($story);
+            
             // Returning response
-            $this->getResponse()
-                    ->setHttpResponseCode(202)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
+            $this->getResponse()->setHttpResponseCode(202)->appendBody(
+                $this->_helper->response(true)->getResponse()
             );
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();

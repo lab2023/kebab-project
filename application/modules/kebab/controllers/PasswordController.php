@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -18,25 +16,25 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    Authentication
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
 /**
- * Session controller manage to login, logout and other operation over session
+ * Manage the password resource
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Password
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
-class Authentication_PasswordController extends Kebab_Rest_Controller
+class Kebab_PasswordController extends Kebab_Rest_Controller
 {
     /**
      * @return void
@@ -59,27 +57,20 @@ class Authentication_PasswordController extends Kebab_Rest_Controller
 
         // Filter
         $userPassword = is_null($userPassword) ? null : md5($userPassword);
-        $userPasswordConfirm = is_null($userPasswordConfirm)
-                             ? null
-                             : md5($userPasswordConfirm);
+        $userPasswordConfirm = is_null($userPasswordConfirm) ? null : md5($userPasswordConfirm);
 
         if (!is_null($userPassword)
             && !is_null($userPasswordConfirm)
             && $userPasswordConfirm == $userPassword
         ) {
-            // Doctrine
             $user = new User_Model_User();
             $user->assignIdentifier($userSessionId);
             $user->password = $userPassword;
             $user->save();
-            $this->_helper->response()
-                ->setSuccess(true)
-                ->addNotification('INFO', 'Password successfully changed.')
-                ->getResponse();
+
+            $this->_helper->response(true)->addNotification('INFO', 'Password successfully changed.')->getResponse();
         } else {
-            $this->_helper->response()
-                ->addNotification('ERR', 'Could not change password.')
-                ->getResponse();
+            $this->_helper->response()->addNotification('ERR', 'Could not change password.')->getResponse();
         }
     }
 }

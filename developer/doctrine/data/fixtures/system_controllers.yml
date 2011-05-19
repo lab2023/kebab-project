@@ -1,23 +1,5 @@
 #Controllers
 Model_Entity_Controller:
-  # ACCESS MODULE #######################################################
-  Access_UserRole:
-    Module: Access
-    name: user-role
-
-  # AUTH MODULE #########################################################
-  Authentication_ForgotPassword:
-    Module: Authentication
-    name: forgot-password
-
-  Authentication_Password:
-    Module: Authentication
-    name: password
-
-  Authentication_Session:
-    Module: Authentication
-    name: session
-
   # DEFAULT MODULE #######################################################
   Default_Backend:
     Module: Default
@@ -70,3 +52,20 @@ Model_Entity_Controller:
   System_Backup:
     Module: System
     name: backup
+
+  # KEBAB MODULE #########################################################
+  Kebab_Password:
+    Module: Kebab
+    name: password
+
+  Kebab_Session:
+    Module: Kebab
+    name: session
+
+  Kebab_ForgotPassword:
+    Module: Kebab
+    name: forgot-password
+
+  Kebab_Story:
+    Module: Kebab
+    name: story

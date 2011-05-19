@@ -35,18 +35,18 @@ Model_Entity_Story:
     status: active
     active: true
 
-  Feedback_Management:
-    name: Feedback Management
+  Role_Management:
+    name: Role Management
     Translation:
       en:
-        title: Feedback Management
-        description: Manage feedbacks
+        title: Role Management
+        description: Manage roles
       tr:
-        title: Geribildirim Yönetimi
-        description: Geribildirimleri yönetin
+        title: Rol Yönetimi
+        description: Rolleri yönetin
     status: active
     active: true
-
+    
   Story_Management:
     name: Story Management
     Translation:
@@ -59,15 +59,15 @@ Model_Entity_Story:
     status: active
     active: true
 
-  Role_Management:
-    name: Role Management
+  Application_Management:
+    name: Application Management
     Translation:
       en:
-        title: Role Management
-        description: Manage roles
+        title: Application Management
+        description: Application active and passive.
       tr:
-        title: Rol Yönetimi
-        description: Rolleri yönetin
+        title: Uygulama Yönetimi
+        description: Uygulamaları düzenleyin.
     status: active
     active: true
 
@@ -80,5 +80,17 @@ Model_Entity_Story:
       tr:
         title: Database Backup
         description: Database Backup
+    status: active
+    active: true
+    
+  Feedback_Management:
+    name: Feedback Management
+    Translation:
+      en:
+        title: Feedback Management
+        description: Manage feedbacks
+      tr:
+        title: Geribildirim Yönetimi
+        description: Geribildirimleri yönetin
     status: active
     active: true
