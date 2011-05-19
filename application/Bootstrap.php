@@ -218,7 +218,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             array(
                  'user' => array('manager', 'role-manager', 'invite'),
                  'role' => array('manager', 'story-manager'),
-                 'system' => array('backup'),
+                 'backup' => array('backup'),
                  'kebab' => array('session', 'password', 'forgot-password', 'story', 'feedback', 'feedback-manager', 'profile')
             )
         );

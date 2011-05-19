@@ -12,7 +12,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
 
     // Application bootstrap
     bootstrap: null,
-
+    url: Kebab.OS.generateUrl('backup/backup'),
     initComponent: function() {
 
         // json data store
@@ -41,7 +41,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 text: 'Backup',
                 iconCls:'icon-database-save',
                 handler: function() {
-                    this.fireEvent('backupRequest', {from:this, url:'/system/backup', method:'POST', store:this.store})
+                    this.fireEvent('backupRequest', {from:this, url:this.url, method:'POST', store:this.store})
                 }, scope:this
             }
         ];
@@ -68,7 +68,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
                             var file = rec.data.name;
-                            window.location.href = BASE_URL + '/system/backup/fileName/' + file;
+                            window.location.href = this.url + '/fileName/' + file;
                         },
                         scope:this
                     },
@@ -82,7 +82,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                                     var file = rec.data.name;
                                     Ext.Msg.confirm('Are you sure?', 'Do you want to ' + file + ' file delete?', function(button) {
                                         if (button == 'yes') {
-                                            this.fireEvent('deleteRequest', {name:file, from:this, store:this.store, url:'/system/backup/',method:'DELETE'});
+                                            this.fireEvent('deleteRequest', {name:file, from:this, store:this.store, url:this.url ,method:'DELETE'});
                                         }
                                     }, this);
                                 }

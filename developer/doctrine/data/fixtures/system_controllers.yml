@@ -37,8 +37,8 @@ Model_Entity_Controller:
     name: invite
 
   # SYSTEM MODULE #########################################################
-  System_Backup:
-    Module: System
+  Backup_Backup:
+    Module: Backup
     name: backup
 
   # KEBAB MODULE #########################################################

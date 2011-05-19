@@ -13,7 +13,7 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Administration
+ * @package    Backup
  * @subpackage Languages
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -22,10 +22,10 @@
  */
 
 /**
- * Kebab Administration Module Turkish Translations
+ * Kebab Backup Module Turkish Translations
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Administration
+ * @package    Backup
  * @subpackage Languages
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)

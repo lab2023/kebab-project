@@ -4,8 +4,8 @@ Model_Entity_Module:
     name: default
   Kebab:
     name: kebab
-  System:
-    name: system
+  Backup:
+    name: backup
   Role:
     name: role
   User:

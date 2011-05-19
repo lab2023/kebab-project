@@ -51,8 +51,8 @@ Model_Entity_Service:
 
   # Manage Users
   System_1:
-    Story: System_Backup
-    Resource: System_Backup
+    Story: Backup_Backup
+    Resource: Backup_Backup
 
   # Manage Story
   Kebab_Story_1:

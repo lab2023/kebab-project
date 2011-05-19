@@ -71,7 +71,7 @@ Model_Entity_Story:
     status: active
     active: true
 
-  System_Backup:
+  Backup_Backup:
     name: Database Backup
     Translation:
       en:

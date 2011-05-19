@@ -39,7 +39,7 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
     RequestAction: function(data) {
         var notification = new Kebab.OS.Notification();
         Ext.Ajax.request({
-            url: BASE_URL + data.url,
+            url: data.url,
             method: data.method,
             params: {
                 fileName: data.name

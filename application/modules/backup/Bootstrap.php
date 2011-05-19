@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
 /**
  * Kebab Framework
  *
@@ -14,7 +14,7 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Applications
- * @subpackage SysAdministration
+ * @subpackage Modules
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
@@ -22,17 +22,17 @@
  */
 
 /**
- * Kebab SysAdministration Module Bootstrapping Class
+ * Kebab Backup Module Bootstrapping Class
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Applications
- * @subpackage SysAdministration
+ * @subpackage Modules
  * @author	   lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class System_Bootstrap
+class Backup_Bootstrap
     extends Kebab_Application_Module_Bootstrap
 {
 }
