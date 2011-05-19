@@ -14,11 +14,12 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    PACKAGE
- * @subpackage SUB_PACKAGE
- * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @package    Controller
+ * @subpackage Helper
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>s
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
+ * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
 
@@ -102,13 +103,13 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
     }
     
     /**
-     * direct() : Stragry Design Pattern
+     * direct()
      * 
      * @return  System_Controller_Helper_Pager
      */
     public function direct($mapping)
     {
-        // Chack that mapping type is array
+        // Check that mapping type is array
         if (!is_array($mapping)) {
             throw new Kebab_Controller_Helper_Exception('Mapping type should be array.');
         }

@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -18,15 +16,16 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    Controller Helper
  * @subpackage Response Controller Helper
- * @author     Onur Özgür ÖZKAN 
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
 
+
 /**
  * System_Controller_Helper_KebabResponse
- * 
+ *
  * <p>This controller helper aim is preparing response for the ajax request.
  * You can set the success, total, data, errors, notifications. Also you can add new
  * node to response object.</p>
@@ -34,7 +33,7 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    Controller
  * @subpackage Helper
- * @author     Onur Özgür ÖZKAN
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @since      1.5.x (kebab-reloaded)
@@ -52,12 +51,12 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
     /**
      * setSuccess
-     * 
+     *
      * <p>Set the success node at $_response array.</p>
-     * 
+     *
      * @param  boolean $success
      * @throws Kebab_Controller_Helper_Exception
-     * @return System_Controller_Helper_Response 
+     * @return System_Controller_Helper_KebabResponse
      */
     public function setSuccess($success)
     {
@@ -72,13 +71,13 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
     /**
      * addData
-     * 
+     *
      * <p>Add result data to $_result array</p>
-     * 
+     *
      * @param   Traversable   $data
      * @param   string        $name
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_Response 
+     * @return  System_Controller_Helper_KebabResponse
      */
     public function addData($data, $name = 'data')
     {
@@ -91,16 +90,16 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
         return $this;
     }
-    
+
     /**
      * add Total
-     * 
+     *
      * <p>Addd total value of the data $_result array</p>
-     * 
+     *
      * @param   integer   $data
-     * @param   string    $name 
+     * @param   string    $name
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System _Controller_Helper_Response
+     * @return  System _Controller_Helper_KebabResponse
      */
     public function addTotal($data, $name = 'total')
     {
@@ -108,19 +107,19 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             throw new Kebab_Controller_Helper_Exception('Only integers may be add to $response[\'total\']');
         }
         $this->_response[$name] = $data;
-        
+
         return $this;
     }
 
     /**
      * setErrors
-     * 
+     *
      * <p>Set $_result[errors] elemants</p>
-     * 
+     *
      * @param   Traversable  $errors
      * @param   string       $name
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_KResponse 
+     * @return  System_Controller_Helper_KebabResponse
      */
     public function setErrors($errors, $name = 'errors')
     {
@@ -139,13 +138,13 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
     /**
      * addError
-     * 
+     *
      * <p>Add a new error to $_response[errors] elements</p>
-     * 
+     *
      * @param   string  $id
      * @param   string  $value
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_KebabResponse 
+     * @return  System_Controller_Helper_KebabResponse
      */
     public function addError($id, $value)
     {
@@ -155,7 +154,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
         $this->_response['errors'][] = array(
             'id' => $id,
-        	'msg' => Zend_Registry::get('translator')->_($value)
+            'msg' => Zend_Registry::get('translator')->_($value)
         );
 
         return $this;
@@ -163,15 +162,15 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
     /**
      * addNotification
-     * 
+     *
      * <p>Add a new notification at $_response[notifications] array</p>
-     * 
+     *
      * @param   enum    $notificationType
      * @param   string  $message
      * @param   boolean $autoHide
      * @param   string  $group
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_KebabResponse 
+     * @return  System_Controller_Helper_KebabResponse
      */
     public function addNotification($notificationType, $message, $autoHide = true, $group = null)
     {
@@ -194,11 +193,11 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             Zend_Registry::get('translator')->_($message),
             $autoHide
         );
-        
+
         if($group !== null) {
             $notification[] = (string) $group;
         }
-        
+
         $this->_response['notifications'][] = $notification;
 
         return $this;
@@ -206,45 +205,59 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
 
     /**
      * add
-     * 
+     *
      * <p>Add a unknow element to $_response like $_response[$name] = $data</p>
-     * 
+     *
      * @param   string  $name
      * @param   mixed   $data
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  System_Controller_Helper_KebabResponse 
+     * @return  System_Controller_Helper_KebabResponse
      */
     public function add($name, $data)
     {
         if (!is_string($name)) {
             throw new Kebab_Controller_Helper_Exception('Invalid $name type');
         }
-        
+
         $this->_response[$name] = $data;
         return $this;
     }
 
     /**
+     * setHttpResponseCode
+     *
+     * @param  $code
+     * @return Kebab_Controller_Helper_Response
+     */
+    public function setHttpResponseCode($code)
+    {
+        $response = parent::getResponse();
+        $response->setHttpResponseCode($code);
+    }
+
+    /**
      * getResponse
-     * 
+     *
      * <p>convert the $_response array to json and set the application mine type json</p>
      */
     public function getResponse()
     {
-        //KBBTODO We should write an adaptor for array, xml in future
+        //KBBTODO We should write an adapter for array, xml in future
         $jsonHelper = new Zend_Controller_Action_Helper_Json();
         $jsonHelper->direct($this->_response);
     }
 
     /**
-     * direct() : Stragry Design Pattern
-     * 
-     * @param   boolean $success
-     * @return  System_Controller_Helper_KebabResponse 
+     * direct
+     *
+     * @param bool $success
+     * @param int $code
+     * @return Kebab_Controller_Helper_Response
      */
-    public function direct($success = false)
+    public function direct($success = false, $code = 200)
     {
         $this->setSuccess($success);
+        $this->setHttpResponseCode($code);
         return $this;
     }
 

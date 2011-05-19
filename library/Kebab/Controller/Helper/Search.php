@@ -14,12 +14,12 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    PACKAGE
- * @subpackage SUB_PACKAGE
- * @author     lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies
-TURKEY Inc. (http://www.lab2023.com)
+ * @package    Controller
+ * @subpackage Helper
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
+ * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
 
@@ -30,8 +30,7 @@ TURKEY Inc. (http://www.lab2023.com)
  * @package    Controller
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
- * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies
-TURKEY Inc. (http://www.lab2023.com)
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
