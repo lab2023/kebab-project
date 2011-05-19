@@ -50,40 +50,30 @@ class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
         );
 
         //KBBTODO move DQL to model class
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $query = Doctrine_Query::create()
-                    ->select('feedback.*,
-                    application.*,
-                    user.firstName,
-                    user.lastName,
-                    applicationTranslate.title as title')
-                    ->from('Model_Entity_Feedback feedback')
-                    ->innerJoin('feedback.Application application')
-                    ->leftJoin('application.Translation applicationTranslate')
-                    ->innerJoin('feedback.User user')
-                    ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                    ->orderBy($this->_helper->sort($mapping));
 
-            $pager = $this->_helper->pagination($query);
-            $feedbacks = $pager->execute();
+        $query = Doctrine_Query::create()
+                ->select('feedback.*,
+                application.*,
+                user.firstName,
+                user.lastName,
+                applicationTranslate.title as title')
+                ->from('Model_Entity_Feedback feedback')
+                ->innerJoin('feedback.Application application')
+                ->leftJoin('application.Translation applicationTranslate')
+                ->innerJoin('feedback.User user')
+                ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                ->orderBy($this->_helper->sort($mapping));
 
-            $responseData = array();
-            if (is_object($feedbacks)) {
-                $responseData = $feedbacks->toArray();
-            }
-            Doctrine_Manager::connection()->commit();
-            $this->getResponse()->setHttpResponseCode(200)->appendBody(
-                $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse()
-            );
+        $pager = $this->_helper->pagination($query);
+        $feedbacks = $pager->execute();
 
-        } catch (Zend_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
+        $responseData = array();
+        if (is_object($feedbacks)) {
+            $responseData = $feedbacks->toArray();
         }
+
+        $this->_helper->response(true, 200)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
+
     }
 
     /**
@@ -106,10 +96,9 @@ class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->commit();
             unset($feedback);
 
-            // Returning response
-            $this->getResponse()->setHttpResponseCode(202)->appendBody(
-                $this->_helper->response(true)->getResponse()
-            );
+            // Response
+            $this->_helper->response(true, 202)->getResponse();
+            
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -117,6 +106,5 @@ class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->rollback();
             throw $e;
         }
-
     }
 }

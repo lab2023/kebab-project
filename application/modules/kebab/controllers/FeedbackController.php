@@ -71,9 +71,7 @@ class Kebab_FeedbackController extends Kebab_Rest_Controller
         if (is_object($feedbacks)) {
             $responseData = $feedbacks->toArray();
         }
-        $this->getResponse()->setHttpResponseCode(200)->appendBody(
-            $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse()
-        );
+        $this->_helper->response(true, 200)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
 
     public function postAction()
@@ -95,13 +93,10 @@ class Kebab_FeedbackController extends Kebab_Rest_Controller
             $feedback->status = 'open';
             $feedback->description = $description;
             $feedback->user_id = $userSessionId;
-
             $feedback->save();
             Doctrine_Manager::connection()->commit();
 
-            $this->getResponse()->setHttpResponseCode(200)->appendBody(
-                $this->_helper->response(true)->addData($feedback->toArray())->getResponse()
-            );
+            $this->_helper->response(true, 200)->addData($feedback->toArray())->getResponse();
             unset($feedback);
 
         } catch (Zend_Exception $e) {

@@ -91,12 +91,10 @@ class Kebab_SessionController extends Kebab_Rest_Controller
                 if (!is_null($rememberMe)) {
                     Zend_Session::rememberMe(604800);
                 }
-                $this->_helper->response()->setSuccess(true)->getResponse();
+                $this->_helper->response(true)->getResponse();
 
             } else {
-                $this->_helper->response()
-                        ->addNotification('ERR', 'Please check your user name and password!')
-                        ->getResponse();
+                $this->_helper->response()->addNotification('ERR', 'Please check your user name and password!')->getResponse();
             }
         } else {
             $this->_helper->response()->getResponse();
@@ -112,6 +110,6 @@ class Kebab_SessionController extends Kebab_Rest_Controller
     {
         Zend_Auth::getInstance()->clearIdentity();
         Zend_Session::forgetMe();
-        $this->_helper->response()->setSuccess(true);
+        $this->_helper->response(true);
     }
 }
