@@ -70,7 +70,7 @@ class BackendController extends Kebab_Controller_Action
     public function desktopAction()
     {
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
-        $this->view->applications  = Model_Application::getApplicationsByPermission(
+        $this->view->applications  = Kebab_Model_Application::getApplicationsByPermission(
             $roles, $this->_auth->getIdentity()->language
         );
     }
