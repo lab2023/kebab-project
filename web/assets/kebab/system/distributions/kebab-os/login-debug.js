@@ -64,7 +64,7 @@ Login = function(){
          */
         buildLoginForm: function() {
             loginForm = new Ext.FormPanel({
-                url: BASE_URL + '/authentication/session',
+                url: BASE_URL + '/kebab/session',
                 frame:false,
                 labelAlign:'top',
                 width: 190,
@@ -116,7 +116,7 @@ Login = function(){
          */
         buildForgotPasswordForm: function() {
             forgotPasswordForm = new Ext.FormPanel({
-                url: BASE_URL + '/authentication/forgot-password',
+                url: BASE_URL + '/kebab/forgot-password',
                 method: 'POST',
                 frame:false,
                 labelAlign:'top',

@@ -21,7 +21,7 @@
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
-class Kebab_Acl extends Zend_Acl
+class Kebab_Access extends Zend_Acl
 {
 
     private $_config;

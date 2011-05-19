@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,11 +14,11 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Authentication
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -28,19 +26,20 @@ if (!defined('BASE_PATH'))
  * Session controller manage to login, logout and other operation over session
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Session
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Authentication_SessionController extends Kebab_Rest_Controller
+class Kebab_SessionController extends Kebab_Rest_Controller
 {
+
     /**
-     * login Action
+     * Login
      *
-     * @return json
+     * @return void
      */
     public function postAction()
     {
@@ -57,7 +56,6 @@ class Authentication_SessionController extends Kebab_Rest_Controller
         //Filter for SQL Injection
         $validatorUsername = new Zend_Validate();
         $validatorUsername->addValidator(new Zend_Validate_StringLength(4, 16))->addValidator(new Zend_Validate_Alnum());
-        
         $validatorPassword = new Zend_Validate();
         $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
 
@@ -86,7 +84,7 @@ class Authentication_SessionController extends Kebab_Rest_Controller
                 $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
                 $identity = $authAdapter->getResultRowObject(null, $omitColumns);
                 $identity->roles = User_Model_User::getUserRoles($identity->id);
-                $identity->acl = new Kebab_Acl();
+                $identity->acl = new Kebab_Access();
 
                 $auth->getStorage()->write($identity);
 
