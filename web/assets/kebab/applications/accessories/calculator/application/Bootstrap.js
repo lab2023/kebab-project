@@ -32,7 +32,7 @@ Ext.extend(KebabOS.applications.calculator.application.Bootstrap, Kebab.OS.Appli
                 id: this.id,
                 title: this.launcher.text,                
                 iconCls: 'calculator-application-gui-icon',
-                width: 630,
+                width: 350,
                 height: 320,
                 border:false,
                 items: this.layout,
