@@ -12,30 +12,6 @@ Model_Entity_Controller:
   Default_Index:
     Module: Default
     name: index
-    
-
-  # ROLE MODULE #########################################################
-
-
-
-
-  # USER MODULE #########################################################
-  User_Manager:
-    Module: User
-    name: manager
-
-  User_RoleManager:
-    Module: User
-    name: role-manager
-
-  User_Invite:
-    Module: User
-    name: invite
-
-  # SYSTEM MODULE #########################################################
-  Backup_Backup:
-    Module: Backup
-    name: backup
 
   # KEBAB MODULE #########################################################
   Kebab_Password:
@@ -73,3 +49,20 @@ Model_Entity_Controller:
   Kebab_RoleStory:
     Module: Kebab
     name: role-story
+
+  Kebab_User:
+    Module: Kebab
+    name: user
+
+  Kebab_UserStory:
+    Module: Kebab
+    name: user-story
+
+  Kebab_Invite:
+    Module: Kebab
+    name: invite
+
+  # BACKUP MODULE #########################################################
+  Backup_Backup:
+    Module: Backup
+    name: backup

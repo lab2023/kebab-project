@@ -6,7 +6,3 @@ Model_Entity_Module:
     name: kebab
   Backup:
     name: backup
-  Role:
-    name: role
-  User:
-    name: user

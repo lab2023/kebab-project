@@ -37,20 +37,16 @@ Model_Entity_Service:
   # Manage Users
   ManageUsers_1:
     Story: User_Management
-    Resource: User_Manager
+    Resource: Kebab_User
     
   ManageUsers_2:
     Story: User_Management
-    Resource: User_RoleManager
+    Resource: Kebab_UserStory
 
   ManageUsers_3:
     Story: User_Management
-    Resource: User_Invite
+    Resource: Kebab_Invite
 
-  # Manage Users
-  System_1:
-    Story: Backup_Backup
-    Resource: Backup_Backup
 
   # Manage Story
   Kebab_Story_1:
@@ -61,3 +57,8 @@ Model_Entity_Service:
   Kebab_Profile:
     Story: Change_Profile
     Resource: Kebab_Profile
+
+  # BACKUP
+  System_1:
+    Story: Backup_Backup
+    Resource: Backup_Backup

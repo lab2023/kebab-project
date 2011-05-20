@@ -34,7 +34,7 @@
  * @version    1.5.0
  */
 
-class User_Model_User
+class Kebab_Model_User
 {
     /**
      * @static

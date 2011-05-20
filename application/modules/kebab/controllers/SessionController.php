@@ -65,7 +65,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
         ) {
             // set ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
-            $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('User_Model_User'));
+            $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_Entity_User'));
 
             $authAdapter->setTableName('Model_Entity_User u')
                     ->setIdentityColumn('username')
@@ -83,7 +83,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
                 // Remove some fields which are secure!
                 $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
                 $identity = $authAdapter->getResultRowObject(null, $omitColumns);
-                $identity->roles = User_Model_User::getUserRoles($identity->id);
+                $identity->roles = Kebab_Model_User::getUserRoles($identity->id);
                 $identity->acl = new Kebab_Access();
 
                 $auth->getStorage()->write($identity);

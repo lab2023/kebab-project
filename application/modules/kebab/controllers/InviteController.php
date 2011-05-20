@@ -34,7 +34,7 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class User_InviteController extends Kebab_Rest_Controller
+class Kebab_InviteController extends Kebab_Rest_Controller
 {
     public function postAction()
     {

@@ -34,7 +34,7 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class User_ManagerController extends Kebab_Rest_Controller
+class Kebab_UserController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
@@ -44,39 +44,25 @@ class User_ManagerController extends Kebab_Rest_Controller
         );
         $params = $this->_helper->param();
         $roleId = array_key_exists('roleId', $params) ? $params['roleId'] : null;
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $ids = $this->_helper->search('Model_Entity_User');
 
-            $query = Doctrine_Query::create()
-                    ->select('user.firstName, user.lastName, user.email, user.username, role.name, user.active')
-                    ->from('Model_Entity_User user')
-                    ->leftJoin('user.Roles role')
-                    ->whereIn('user.id', $ids);
-            if(!empty($roleId) && $roleId != ''){
-                $query = $query->where('role.id = ?', $roleId);
-            }
-            $query =  $query->orderBy($this->_helper->sort($mapping));
-            $pager = $this->_helper->pagination($query);
-            $users = $pager->execute();
+        $ids = $this->_helper->search('Model_Entity_User');
 
-            $responseData = array();
-
-            if (is_object($users)) {
-                $responseData = $users->toArray();
-            }
-            Doctrine_Manager::connection()->commit();
-            $this->getResponse()->setHttpResponseCode(200)->appendBody(
-                $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse()
-            );
-
-        } catch (Zend_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
+        //KBBTODO Move dql to models
+        $query = Doctrine_Query::create()
+                ->select('user.firstName, user.lastName, user.email, user.username, role.name, user.active')
+                ->from('Model_Entity_User user')
+                ->leftJoin('user.Roles role')
+                ->whereIn('user.id', $ids);
+        if(!empty($roleId) && $roleId != ''){
+            $query = $query->where('role.id = ?', $roleId);
         }
+        $query =  $query->orderBy($this->_helper->sort($mapping));
+        $pager = $this->_helper->pagination($query);
+        $users = $pager->execute();
+
+        $responseData = is_object($users) ? $users->toArray() : array();
+
+        $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
 
     public function putAction()
@@ -87,6 +73,7 @@ class User_ManagerController extends Kebab_Rest_Controller
         $status = $params['status'];
 
         // Updating status
+        //KBBTODO move doctrine to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $user = new User_Model_User();
@@ -96,10 +83,8 @@ class User_ManagerController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->commit();
             unset($user);
 
-            // Returning response
-            $this->getResponse()->setHttpResponseCode(201)->appendBody(
-                $this->_helper->response(true)->getResponse()
-            );
+            // Response
+            $this->_helper->response(true, 201)->getResponse();
 
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
@@ -119,10 +104,10 @@ class User_ManagerController extends Kebab_Rest_Controller
         // delete
         Doctrine_Manager::connection()->beginTransaction();
         try {
+
             $user = new User_Model_User();
             $user->assignIdentifier($id);
             $user->delete();
-
 
             // Doctrine
             Doctrine_Query::create()
@@ -132,10 +117,9 @@ class User_ManagerController extends Kebab_Rest_Controller
 
             Doctrine_Manager::connection()->commit();
             unset($user);
-            // Returning response
-            $this->getResponse()->setHttpResponseCode(201)->appendBody(
-                $this->_helper->response(true)->getResponse()
-            );
+
+            // Response
+            $this->_helper->response(true, 201)->getResponse();
 
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
