@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -18,9 +16,9 @@ if (!defined('BASE_PATH'))
  * @category   Kebab (kebab-reloaded)
  * @package    Core
  * @subpackage Plugins
- * @author	   lab2023 Dev Team
+ * @author       Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -28,9 +26,12 @@ if (!defined('BASE_PATH'))
  * Plugin_KebabDeveloperTools
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Application
+ * @package    Core
  * @subpackage Plugins
- * @author	   lab2023 Dev Team
+ * @author       Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
  */
 class Plugin_KebabDeveloperTools extends Kebab_Controller_Plugin_Abstract
 {
@@ -44,7 +45,7 @@ class Plugin_KebabDeveloperTools extends Kebab_Controller_Plugin_Abstract
     {
         if ($request->getParam('error_handler'))
             return; // By-pass to errors
-           
+
         // Access active viewRenderer helper
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')->view;
         $view->addScriptPath($this->_pluginPath . '/views');
@@ -54,6 +55,7 @@ class Plugin_KebabDeveloperTools extends Kebab_Controller_Plugin_Abstract
         $data->position = $this->_pluginConfig->position;
         $data->scriptExecutingTime = number_format((microtime(true) - SCRIPT_START_TIME), 5, '.', ',');
         $data->memoryPeakUsage = number_format(memory_get_peak_usage(true));
+        $data->resource = $this->getAllResource();
 
         // Assign view data
         $view->assign('data', $data);
@@ -62,4 +64,40 @@ class Plugin_KebabDeveloperTools extends Kebab_Controller_Plugin_Abstract
         $this->getResponse()->appendBody($view->render('index.phtml'));
     }
 
+    private function getAllResource()
+    {
+        $front = Zend_Controller_Front::getInstance();
+        $resource = array();
+
+        foreach ($front->getControllerDirectory() as $module => $path) {
+
+            foreach (scandir($path) as $file) {
+
+                if (strstr($file, "Controller.php") !== false) {
+
+                    include_once $path . DIRECTORY_SEPARATOR . $file;
+
+                    foreach (get_declared_classes() as $class) {
+
+                        if (is_subclass_of($class, 'Zend_Controller_Action')) {
+
+                            $controller = strtolower(substr($class, 0, strpos($class, "Controller")));
+                            $actions = array();
+
+                            foreach (get_class_methods($class) as $action) {
+
+                                if (strstr($action, "Action") !== false) {
+                                    $actions[] = $action;
+                                }
+                            }
+                        }
+                    }
+
+                    $resource[$module][$controller] = $actions;
+                }
+            }
+        }
+
+        return $resource;
+    }
 }
