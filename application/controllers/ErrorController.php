@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
-
 /**
  * Kebab Framework
  *
@@ -42,9 +39,6 @@ if (!defined('BASE_PATH'))
  */
 class ErrorController extends Kebab_Controller_Action
 {
-    /**
-     * init
-     */
     public function init()
     {
         $this->_helper->layout->disableLayout();
@@ -57,10 +51,6 @@ class ErrorController extends Kebab_Controller_Action
         }        
     }
     
-    /**
-     *
-     * @return type 
-     */
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -103,10 +93,6 @@ class ErrorController extends Kebab_Controller_Action
         );
     }
     
-    /**
-     *
-     * @return json
-     */
     public function xmlHttpRequestErrorAction()
     {
         if ($this->_request->isXmlHttpRequest()) {
@@ -155,10 +141,6 @@ class ErrorController extends Kebab_Controller_Action
         }
     }
     
-    /**
-     *
-     * @return Zend_Log
-     */
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');
@@ -185,10 +167,7 @@ class ErrorController extends Kebab_Controller_Action
                'message' => 'You are not authorized to access this area.'
            );
 
-           $this->_helper->response()
-                 ->addData($responseData)
-                 ->getResponse();
-           return;
+           $this->_helper->response()->addData($responseData)->getResponse();
         }
     }
 
