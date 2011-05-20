@@ -26,7 +26,37 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-    }
+        this.bootstrap.layout.roleGrid.on('roleSelected', this.showRoleStoryAction, this);
+
+    },
 
     // Actions -----------------------------------------------------------------
+
+    showRoleStoryAction: function(role) {
+
+        if (role.length > 0) {
+
+            // Each the selected diseases
+            Ext.each(role, function(role) {
+
+                if (role.data.id) { // Is really record
+
+                    // Create new disease detail tab
+                    var roleDetail = new KebabOS.applications.roleManager.application.views.RoleStoryGrid({
+                        id: 'role-' + role.id,
+                        roleId: role.id,
+                        closable:true,
+                        title: role.id + ' # ' + role.data.title,
+                        iconCls: 'icon-application-view-detail',
+                        bootstrap: this.bootstrap,
+                        border: false
+                    });
+
+                    // Add and activate tab
+                    this.bootstrap.layout.add(roleDetail);
+                    this.bootstrap.layout.setActiveTab(1);
+                }
+            }, this);
+        }
+    }
 });

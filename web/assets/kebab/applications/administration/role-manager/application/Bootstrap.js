@@ -18,10 +18,6 @@ Ext.extend(KebabOS.applications.roleManager.application.Bootstrap, Kebab.OS.Appl
 
         if (!app) {
 
-            // desktop width and height
-            var winWidth = parseInt(desktop.getWinWidth() / 1);
-            var winHeight = parseInt(desktop.getWinHeight() / 1);
-
             // Default layout
             this.layout = new KebabOS.applications.roleManager.application.layouts.Layout({
                 bootstrap: this
@@ -37,8 +33,8 @@ Ext.extend(KebabOS.applications.roleManager.application.Bootstrap, Kebab.OS.Appl
                 id: this.id,
                 title: this.launcher.text,
                 iconCls: 'roleManager-application-gui-icon',
-                width: winWidth,
-                height: winHeight,
+                width: 920,
+                height: 500,
                 border:false,
                 items: this.layout
             });

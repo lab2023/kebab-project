@@ -1,5 +1,5 @@
 /**
- * roleManager Application RoleManagerDataStore class
+ * roleManager Application RoleDataStore class
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
@@ -8,16 +8,18 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/cms/licensing
  */
-KebabOS.applications.roleManager.application.models.RoleManagerDataStore = Ext.extend(Kebab.library.ext.RESTfulDataStore, {
+KebabOS.applications.roleManager.application.models.RoleDataStore = Ext.extend(Kebab.library.ext.RESTfulDataStore, {
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('role/manager'),
+    restAPI: Kebab.OS.generateUrl('kebab/role'),
 
     readerFields:[
         {name: 'id', type:'integer'},
         {name: 'title', type:'string'},
         {name: 'description', type:'string'},
+        {name: 'usersNumber', type:'integer'},
+        {name: 'storiesNumber', type:'integer'},
         {name: 'active', type:'boolean'}
     ]
 });
