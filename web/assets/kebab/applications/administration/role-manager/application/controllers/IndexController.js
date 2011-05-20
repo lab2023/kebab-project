@@ -33,13 +33,13 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
     // Actions -----------------------------------------------------------------
 
     showRoleStoryAction: function(role) {
-
+        
         if (role.length > 0) {
 
             // Each the selected diseases
             Ext.each(role, function(role) {
 
-                if (role.data.id) { // Is really record
+                if (role.id) { // Is really record
 
                     // Create new disease detail tab
                     var roleDetail = new KebabOS.applications.roleManager.application.views.RoleStoryGrid({

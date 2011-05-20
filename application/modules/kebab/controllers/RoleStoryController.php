@@ -38,9 +38,15 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $story = Kebab_Model_Story::getStory()->execute();
+        $params = $this->_helper->param();
+        $roleId = $params['roleId'];
+        $query = Kebab_Model_Story::getStory($roleId);
+
+        $pager = $this->_helper->pagination($query);
+        $story = $pager->execute();
+
         $responseData = is_object($story) ? $story->toArray() : array();
-        $this->_helper->response(true, 200)->addData($responseData)->getResponse();
+        $this->_helper->response(true, 200)->addData($responseData)->addTotal(count($responseData))->getResponse();
     }
 
     public function putAction()

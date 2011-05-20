@@ -36,14 +36,16 @@
 
 class Kebab_Model_Story
 {
-    static public function getStory()
+    static public function getStory($roleId)
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query = Doctrine_Query::create()
                 ->select('story.*,
                     storyTranslation.title as title,
                     storyTranslation.description as description,
-                    permission.*')
+                    permission.role_id')
+                ->addSelect('(SELECT COUNT(p.role_id) FROM Model_Entity_Permission p
+                                WHERE p.role_id = '.$roleId.' and p.story_id = story.id) as allow')
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')

@@ -33,7 +33,7 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
                 this.buildExtraTbarButtons();
             }
         },
-        
+
         afterRender: function() {
             this.store.load({params:{start:0, limit:25}});
             this.onDisableButtonGroup('export');
@@ -43,29 +43,33 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
     },
     buildExtraTbarButtonsData: function() {
 
-        return [{
-            xtype: 'buttongroup',
-            title: 'Extra',
-            defaults: {
-                iconAlign: 'top',
-                scale: 'small',
-                width:50,
-                scope: this
-            },
-            items: [{
-                text: 'See details',
-                tooltip: 'See the selected record(s) details',
-                iconCls: 'icon-application-view-detail',
-                handler: function() { // Records selected
-                    var sm = this.getSelectionModel();
-                    if (sm.getCount()) {
-                        this.fireEvent('roleSelected', sm.getSelections());
+        return [
+            {
+                xtype: 'buttongroup',
+                title: 'Extra',
+                defaults: {
+                    iconAlign: 'top',
+                    scale: 'small',
+                    width:50,
+                    scope: this
+                },
+                items: [
+                    {
+                        text: 'See details',
+                        tooltip: 'See the selected record(s) details',
+                        iconCls: 'icon-application-view-detail',
+                        handler: function() { // Records selected
+                            var sm = this.getSelectionModel();
+                            if (sm.getCount()) {
+                                this.fireEvent('roleSelected', sm.getSelections());
+                            }
+                        }
                     }
-                }
-            }]
-        }];
+                ]
+            }
+        ];
     },
-    
+
     buildColumns: function() {
 
         this.editorTextField = new Ext.form.TextField({});
@@ -73,7 +77,11 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
 
         return [
             this.selectionModel,
-            new Ext.grid.RowNumberer({header:'No', width:40}), {
+            {
+                header : 'ID',
+                dataIndex :'id',
+                width:10
+            }, {
                 header : 'Role Title',
                 dataIndex :'title',
                 editor:this.editorTextField,
@@ -84,12 +92,12 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
                 editor:this.editorTextArea,
                 width:120
             },{
-                header   : 'Users Number',
-                dataIndex: 'usersNumber',
+                header   : 'User Number',
+                dataIndex: 'num_user',
                 width:30
             },{
-                header   : 'Stories Number',
-                dataIndex: 'storiesNumber',
+                header   : 'Story Number',
+                dataIndex: 'num_story',
                 width:30
             },{
                 header   : 'Active ?',

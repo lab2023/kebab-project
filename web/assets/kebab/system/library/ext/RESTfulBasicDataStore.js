@@ -71,7 +71,7 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
     listeners : {
         exception : function(){
             var notification = new Kebab.OS.Notification();
-            notification.message('Exception title', 'Your message here');
+            notification.message('Error', 'Operation was not performed.');
         }
     }
 });

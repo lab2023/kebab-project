@@ -20,20 +20,12 @@ KebabOS.applications.roleManager.application.views.RoleStoryGrid = Ext.extend(Ke
             bootstrap:this.bootstrap
         });
 
-        this.expander = new Ext.ux.grid.RowExpander({
-            tpl : new Ext.Template(
-                    '<p><b>Description:</b><br />{description}</p><br>'
-                    )
-        });
-
-        // grid config
-        this.config.plugins = this.expander;
-
         KebabOS.applications.roleManager.application.views.RoleStoryGrid.superclass.initComponent.apply(this, arguments);
     },
 
     listeners: {
         afterRender: function() {
+            this.store.setBaseParam('roleId', this.roleId);
             this.store.load({params:{start:0, limit:25}});
             this.onDisableButtonGroup('export');
             this.batchButton.toggle();
@@ -42,46 +34,28 @@ KebabOS.applications.roleManager.application.views.RoleStoryGrid = Ext.extend(Ke
     },
 
     buildColumns: function() {
-        var roleStoydataStore = new KebabOS.applications.roleManager.application.models.RoleStoryDataStore({
-            bootstrap:this.bootstrap
-        });
-        var editorComboBox = new Kebab.library.ext.AutocompleteComboBox({
-            typeAhead: true,
-            triggerAction: 'all',
-            forceSelection: true,
-            lazyRender:false,
-            mode: 'remote',
-            store:roleStoydataStore,
-            valueField: 'id',
-            displayField: 'title',
-            hiddenName: 'symptom',
-            scope:this,
-            gridRenderer : function(combo) {
-                return function(value, meta, record) {
-                    var comboRecord = combo.findRecord(combo.valueField, value);
-                    try {
-                        var displayValue = record.data.title;
-                        return comboRecord ?
-                                comboRecord.get(combo.displayField) : displayValue
-                    } catch (exception) {
-                        combo.setValue(value);
-                        return combo.getRawValue();
-                    }
-                }
-            }
-        });
 
         return [
-            this.expander,
-            new Ext.grid.RowNumberer({header:'No', width:50}),
+            {
+                header : 'ID',
+                dataIndex :'id',
+                width:20
+            },
             {
                 header : 'Story Title',
-                dataIndex :'title'
-            },{
+                dataIndex :'title',
+                width:60
+            },
+            {
+                header : 'Story Description',
+                dataIndex :'description',
+                width:150
+            },
+            {
                 header   : 'Allow ?',
                 dataIndex: 'allow',
                 xtype:'checkcolumn',
-                width:10
+                width:20
             }
         ]
     }

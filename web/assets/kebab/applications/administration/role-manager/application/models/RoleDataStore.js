@@ -19,8 +19,8 @@ KebabOS.applications.roleManager.application.models.RoleDataStore = Ext.extend(K
         {name: 'id', type:'integer'},
         {name: 'title', type:'string'},
         {name: 'description', type:'string'},
-        {name: 'usersNumber', type:'integer'},
-        {name: 'storiesNumber', type:'integer'},
+        {name: 'num_story', type:'integer'},
+        {name: 'num_user', type:'integer'},
         {name: 'active', type:'boolean'}
     ]
 });

@@ -87,12 +87,12 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     listeners : {
         write : function(){
             var notification = new Kebab.OS.Notification();
-            notification.message('Write title', 'Your message here');
+            notification.message('Success', 'Operation was performed successfully.');
             this.reload();
         },
         exception : function(){
             var notification = new Kebab.OS.Notification();
-            notification.message('Exception title', 'Your message here');
+            notification.message('Error', 'Operation was not performed.');
         }
     }
 });
