@@ -52,6 +52,6 @@ class IndexController extends Kebab_Controller_Action
      */
     public function shopAction()
     {
-        
+       
     }
 }
