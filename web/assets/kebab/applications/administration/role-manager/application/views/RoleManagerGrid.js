@@ -8,7 +8,7 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(Ext.grid.EditorGridPanel, {
+KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(Kebab.library.ext.ComplexEditorGridPanel, {
 
     // Application bootstrap
     bootstrap: null,
@@ -16,100 +16,65 @@ KebabOS.applications.roleManager.application.views.RoleManagerGrid = Ext.extend(
     initComponent: function() {
 
         // json data store
-        this.store = new KebabOS.applications.roleManager.application.models.RoleManagerDataStore({
+        this.dataStore = new KebabOS.applications.roleManager.application.models.RoleManagerDataStore({
             bootstrap:this.bootstrap
         });
 
-        var expander = new Ext.ux.grid.RowExpander({
+        this.editorTextField = new Ext.form.TextField({
+
+        });
+
+        this.expander = new Ext.ux.grid.RowExpander({
             tpl : new Ext.Template(
-                    '<p><b>Description:</b><br />{description}</p><br>'
+                    '<b>Description:</b><br />{description}<br>'
                     )
         });
 
-        // grid config
         var config = {
-            plugins:expander,
-            border:false,
-            region: 'center',
-            enableColumnHide:false,
-            sortable:true,
-            editor:true,
-            selectRow:true,
+            plugins:this.expander,
+            iconCls: 'icon-application-view-list',
+            stateful: true,
             loadMask: true,
-            title:'Change role',
-            iconCls:'icon-user',
+            stripeRows: true,
+            trackMouseOver:true,
+            columnLines: true,
+            clicksToEdit: true,
             viewConfig: {
-                // To be equal to the width of columns
-                forceFit: true
+                emptyText: 'Record not found...',
+                forceFit: false
             }
-        };
-
-        this.sm = new Ext.grid.RowSelectionModel({
-            sortable:true,
-            header:'Name',
-            dataIndex:'title'
-        });
-        
-        Ext.select('span.roleManager-application-span').on('click', function() {
-            console.log(arguments);
-        });
-        this.columns = [
-            expander,
-            this.sm,
-            {
-                header   : 'Active',
-                dataIndex: 'active',
-                sortable:true,
-                xtype:'checkcolumn',
-                width:12
-            },{
-                dataIndex: 'buttons',
-                width:5,
-                xtype: 'actioncolumn',
-                items: [
-                    {
-                        iconCls:'icon-cancel',
-                        tooltip: 'Delete role',
-                        handler: function(grid, rowIndex) {
-                            var rec = this.store.getAt(rowIndex);
-                            var roleId = rec.id;
-                            Ext.Msg.confirm('Are you sure?', 'Do you want to delete', function(button) {
-                                if (button == 'yes') {
-                                    this.fireEvent('roleRequest', {from:this, method:'DELETE' ,url:'/role/manager', roleId:roleId, store:this.store});
-                                }
-                            }, this);
-                        },
-                        scope:this
-                    }
-                ]
-            }
-        ];
-
-        this.bbar = this.buildBbar();
-
-        this.addEvents('loadGrid');
-        this.addEvents('roleRequest');
+        }
 
         Ext.apply(this, config);
 
         KebabOS.applications.roleManager.application.views.RoleManagerGrid.superclass.initComponent.apply(this, arguments);
-
-        this.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
-            this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.roleId = r.data.id;
-            this.fireEvent('loadGrid', this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.store);
-        }, this);
-    },
-
-    buildBbar: function() {
-        return  new Kebab.library.ext.ExtendedPagingToolbar({
-            store: this.store
-        });
     },
 
     listeners: {
         afterRender: function() {
-            this.store.load();
+            this.store.load({params:{start:0, limit:25}});
+            this.onDisableButtonGroup('export');
+            this.batchButton.toggle();
+            this.getView().fitColumns();
         }
+    },
+
+    buildColumns: function() {
+        return [this.expander,
+            this.selectionModel,
+            new Ext.grid.RowNumberer({header:'NO', width:50}), {
+                header : 'Role Title',
+                dataIndex :'title',
+                flex:true,
+                editor:this.editorTextField
+            },{
+                header   : 'Active',
+                dataIndex: 'active',
+                sortable:true,
+                xtype:'checkcolumn',
+                width:10
+            }
+        ]
     }
 
 });

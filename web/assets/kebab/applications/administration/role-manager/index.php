@@ -14,15 +14,15 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    System
- * @subpackage 
- * @author	   lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - 
+ * @subpackage
+ * @author       lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 -
  *             internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/licensing
  * @version    1.5.0
  */
- 
- /**
+
+/**
  * Kebab Project Asset Bootstrapper
  *
  * On-Demad load and return all js files
@@ -44,12 +44,12 @@ print PHP_EOL;
 // Recursive scan directory and files
 $scanner = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(BASE_PATH));
 
-while($scanner->valid()) {
+while ($scanner->valid()) {
 
     if (!$scanner->isDot() && $scanner->isFile()) {
-        
+
         $pathInfo = pathinfo($scanner->key());
-        
+
         if (@$pathInfo['extension'] == 'js' && $scanner->getFilename() !== 'index.js') {
             @readfile($scanner->key());
             print PHP_EOL;

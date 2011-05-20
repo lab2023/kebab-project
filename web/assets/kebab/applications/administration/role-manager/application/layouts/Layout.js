@@ -8,23 +8,23 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.Panel, {
+KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.TabPanel, {
 
     // Application bootstrap
     bootstrap: null,
 
     initComponent: function() {
         // panels are defined here
-        this.mainCenter = new KebabOS.applications.roleManager.application.views.MainCenter({
-            bootstrap: this.bootstrap
-        });
-        this.roleForm = new KebabOS.applications.roleManager.application.views.RoleForm({
-            bootstrap: this.bootstrap
+        this.roleManagerGrid = new KebabOS.applications.roleManager.application.views.RoleManagerGrid({
+            bootstrap: this.bootstrap,
+            title: 'Roles',
+            iconCls: 'icon-application-view-list',
+            border:false
         });
 
         var config = {
-            items:[this.mainCenter,this.roleForm],
-            layout:'border'
+            items:this.roleManagerGrid,
+            activeTab: 0
         }
 
         Ext.apply(this, config);

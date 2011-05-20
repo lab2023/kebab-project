@@ -26,61 +26,7 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-        this.bootstrap.layout.roleForm.on('roleFormOnSave', this.formOnSaveAction, this);
-        this.bootstrap.layout.roleForm.on('loadGrid', this.loadGridAction, this);
-        this.bootstrap.layout.mainCenter.eastCenter.roleManagerStoryGrid.on('request', this.requestAction, this);
-        this.bootstrap.layout.mainCenter.roleManagerGrid.on('loadGrid', this.loadGridAction, this);
-        this.bootstrap.layout.mainCenter.roleManagerGrid.on('roleRequest', this.requestAction, this);
-    },
+    }
 
     // Actions -----------------------------------------------------------------
-    loadGridAction: function(component) {
-        component.load();
-    },
-
-    formOnSaveAction: function(data) {
-
-        if (data.from.getForm().isValid()) {
-            var notification = new Kebab.OS.Notification();
-
-            data.from.getForm().submit({
-                url: data.url,
-                method: 'POST',
-
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    data.from.getForm().reset();
-                    if (data.store) {
-                        data.from.fireEvent('loadGrid', data.store);
-                    }
-                },
-
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                }, scope:this
-            });
-        }
-    },
-
-    requestAction: function(data) {
-        var notification = new Kebab.OS.Notification();
-        Ext.Ajax.request({
-            url: BASE_URL + data.url,
-            method: data.method,
-            params: {
-                roleId: data.roleId,
-                storyId: data.story
-            },
-            success : function() {
-                notification.message(this.bootstrap.launcher.text, 'Success');
-                if (data.store) {
-                    data.from.fireEvent('loadGrid', data.store);
-                }
-            },
-
-            failure : function() {
-                notification.message(this.bootstrap.launcher.text, 'Failure');
-            }, scope:this
-        });
-    }
 });

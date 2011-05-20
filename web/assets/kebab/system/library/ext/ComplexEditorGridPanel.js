@@ -1,6 +1,6 @@
 /**
- * ComplexEditorGridPanel extend by Ext.grid.EditorGridPanel 
- * 
+ * ComplexEditorGridPanel extend by Ext.grid.EditorGridPanel
+ *
  * @category    Kebab (kebab-reloaded)
  * @package     Kebab
  * @namespace   Kebab.library
@@ -14,7 +14,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
     emptyRecord: null,
 
     initComponent : function() {
-        
+
         // Base Config
         var config = {
             iconCls: 'icon-application-view-list',
@@ -28,11 +28,11 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                 emptyText: 'Record not found...',
                 forceFit: false
             }
-        }
-        
+        };
+
         // Merge initialConfig and baseConfig
         Ext.apply(this, config);
-        
+
         // Grid Selectionmodel instance
         this.selectionModel = new Ext.grid.CheckboxSelectionModel({
             listeners: {
@@ -54,191 +54,207 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             },
             columns: this.buildColumns()
         });
-        
+
         // Grid selection model & column model and store
         this.sm = this.selectionModel
         this.store = this.dataStore;
         this.cm = this.columnModel;
-        
+
         // Build Toolbars and Buttons.
         this.tbar = this.buildTbar();
         this.bbar = this.buildBbar();
-        
+
         // Call Superclass initComponent() method
         Kebab.library.ext.ComplexEditorGridPanel.superclass.initComponent.call(this);
     },
-    
+
     /**
      * grid Listeners
      */
     listeners: {
-        beforeRender: function() {            
-            if(this.extraTbarButtons) {
+        beforeRender: function() {
+            if (this.extraTbarButtons) {
                 this.buildExtraTbarButtons();
-            }            
+            }
         },
         afterRender: function() {
             this.store.load({params:{start:0, limit:25}});
             this.batchButton.toggle();
         }
     },
-    
+
     /**
      * build grid Columns
      */
-    buildColumns: function() {        
-        
+    buildColumns: function() {
+
         return [
             this.selectionModel,
             new Ext.grid.RowNumberer({header:'Series', width:40}),
             {header: "Identity", dataIndex: 'id', width:30}
-        ];  
+        ];
     },
 
     /**
      * build TopToolbar
      */
     buildTbar : function() {
-        this.tbarButtons = [{
-            xtype: 'buttongroup',
-            title: 'İşlemler',
-            id: this.id + '-operationsButtonGroup',
-            defaults: {
-                scale: 'small',
-                iconAlign: 'top',
-                width:50,                
-                scope: this
+        this.tbarButtons = [
+            {
+                xtype: 'buttongroup',
+                title: 'Operations',
+                id: this.id + '-operationsButtonGroup',
+                defaults: {
+                    scale: 'small',
+                    iconAlign: 'top',
+                    width:50,
+                    scope: this
+                },
+                items: [
+                    {
+                        text: 'Save',
+                        tooltip: 'Save changes now',
+                        iconCls: 'icon-disk',
+                        ref: '../../saveButton',
+                        handler: this.onSave
+                    },
+                    {
+                        text: 'Add',
+                        tooltip: 'Add new record',
+                        iconCls: 'icon-add',
+                        ref: '../../addButton',
+                        handler: this.onAdd
+                    },
+                    {
+                        text: 'Remove',
+                        tooltip: 'Remove selected records',
+                        iconCls: 'icon-delete',
+                        ref: '../../removeButton',
+                        disabled: true,
+                        handler: this.onRemove
+                    },
+                    {
+                        text: 'Refresh',
+                        tooltip: 'Refresh the grid list',
+                        iconCls: 'icon-arrow-refresh',
+                        handler: this.onRefresh
+                    }
+                ]
             },
-            items: [{
-                text: 'Kaydet',
-                tooltip: 'Değişiklikleri kaydedin',
-                iconCls: 'icon-disk',
-                ref: '../../saveButton',
-                handler: this.onSave
-            },{
-                text: 'Ekle',
-                tooltip: 'Yeni kayıt ekleyin',
-                iconCls: 'icon-add',
-                ref: '../../addButton',
-                handler: this.onAdd
-            },{
-                text: 'Çıkar',
-                tooltip: 'Seçili kayıt(ları) kaldırın',
-                iconCls: 'icon-delete',
-                ref: '../../removeButton',
-                disabled: true,
-                handler: this.onRemove
-            },{
-                text: 'Tazele',
-                tooltip: 'Listeyi tazeleyin',
-                iconCls: 'icon-arrow-refresh',
-                handler: this.onRefresh
-            }]
-        },{
-            xtype: 'buttongroup',
-            id: this.id + '-searchButtonGroup',
-            title: 'Arama & Filtreleme',
-            defaults: {
-                iconAlign: 'top',
-                scale: 'small',
-                width:50,                
-                scope: this,
-                border:false
+            {
+                xtype: 'buttongroup',
+                id: this.id + '-searchButtonGroup',
+                title: 'Search & Filter',
+                defaults: {
+                    iconAlign: 'top',
+                    scale: 'small',
+                    width:50,
+                    scope: this,
+                    border:false
+                },
+                items: [
+                    {
+                        xtype: 'panel',
+                        bodyStyle:'height:37px; background:transparent !important;',
+                        items: [new Ext.ux.form.SearchField({
+                            store: this.store,
+                            emptyText: 'Please type keyword here...',
+                            width:180
+                        })],
+                        scope:this,
+                        width:180
+                    }
+                ],
+                scope:this
             },
-            items: [{
-                xtype: 'panel',
-                bodyStyle:'height:37px; background:transparent !important;',
-                items: [new Ext.ux.form.SearchField({
-                    store: this.store,
-                    emptyText: 'Anahtar kelime yazınız: ',
-                    width:180
-                })],
-                scope:this,
-                width:180
-            }],
-            scope:this
-        },{
-            xtype: 'buttongroup',
-            title: 'Dışarı Aktar',
-            id: this.id + '-exportButtonGroup',
-            defaults: {
-                scale: 'medium',
-                iconAlign: 'top',
-                scale: 'small',
-                width:50,                
-                scope: this
+            {
+                xtype: 'buttongroup',
+                title: 'Export',
+                id: this.id + '-exportButtonGroup',
+                defaults: {
+                    iconAlign: 'top',
+                    scale: 'small',
+                    width:50,
+                    scope: this
+                },
+                items: [
+                    {
+                        text: 'Export to Excel',
+                        tooltip: 'Export selected records to excel',
+                        iconCls: 'icon-page-white-excel',
+                        ref: '../../excelExportButton'
+                    }
+                ]
             },
-            items: [{
-                text: 'Excel Aktar',
-                tooltip: 'Seçili excele aktarın',
-                iconCls: 'icon-page-white-excel',
-                ref: '../../excelExportButton'
-            }]
-        },{
-            xtype: 'buttongroup',
-            title: 'Seçenekler',
-            id: this.id + '-optionsButtonGroup',
-            defaults: {
-                iconAlign: 'top',
-                scale: 'small',
-                width:60,                
-                scope: this,
-                enableToggle: true
+            {
+                xtype: 'buttongroup',
+                title: 'Options',
+                id: this.id + '-optionsButtonGroup',
+                defaults: {
+                    iconAlign: 'top',
+                    scale: 'small',
+                    width:60,
+                    scope: this,
+                    enableToggle: true
+                },
+                items: [
+                    {
+                        text: 'Auto save',
+                        iconCls: 'icon-database-lightning',
+                        pressed: false,
+                        ref: '../../autoSaveButton',
+                        tooltip: 'Automatically saves your changes or you request it. ' +
+                                'Recommended to be used in tasks requiring heavy traffic.',
+                        toggleHandler: function(btn, pressed) {
+                            this.store.autoSave = pressed;
+                        }
+                    },
+                    {
+                        text: 'Batch processing',
+                        iconCls: 'icon-database-table',
+                        pressed: false,
+                        ref: '../../batchButton',
+                        tooltip: 'This option allows you to send in a change to the server at a time or all of the records.',
+                        toggleHandler: function(btn, pressed) {
+                            this.store.batch = pressed;
+                        }
+                    }
+                ]
             },
-            items: [{
-                text: 'Oto. kayıt',
-                iconCls: 'icon-database-lightning',
-                pressed: false,
-                ref: '../../autoSaveButton',
-                tooltip: 'Yaptığınız her değişikliğin otomatik olarak veya siz ' 
-                       + 'istediğinizde kaydedilmesini sağlar. '
-                       + 'Yoğun trafik gerektiren işlerde kullanılmaması önerilir.',
-                toggleHandler: function(btn, pressed) {
-                    this.store.autoSave = pressed;                
-                }
-            },{
-                text: 'Toplu işlem',
-                iconCls: 'icon-database-table',
-                pressed: false,
-                ref: '../../batchButton',
-                tooltip: 'Bu seçenek yanlızca değişiklik olan kayıtları veya '
-                       + 'hepsini bir seferde sunucuya göndermenizi sağlar.',
-                toggleHandler: function(btn, pressed) {
-                    this.store.batch = pressed;
-                }
-            }]
-        },{
-            xtype: 'buttongroup',
-            title: 'Görünüm',
-            id: this.id + '-viewButtonGroup',
-            defaults: {
-                iconAlign: 'top',
-                scale: 'small',
-                width:60,                
-                scope: this
-            },
-            items: [{
-                text: 'Oto. sığdır',
-                iconCls: 'icon-arrow-out',
-                tooltip: 'Bu seçenek listenin kolonlarını, pencere boyutuna '
-                       + ' otomatik olarka sığdırır.',
-                handler: function() {
-                    this.getView().fitColumns();
-                }
-            }]
-        }];
-        
+            {
+                xtype: 'buttongroup',
+                title: 'Appearance',
+                id: this.id + '-viewButtonGroup',
+                defaults: {
+                    iconAlign: 'top',
+                    scale: 'small',
+                    width:60,
+                    scope: this
+                },
+                items: [
+                    {
+                        text: 'Auto fit',
+                        iconCls: 'icon-arrow-out',
+                        tooltip: 'This option list, columns, automatically fit the size of the window.',
+                        handler: function() {
+                            this.getView().fitColumns();
+                        }
+                    }
+                ]
+            }
+        ];
+
         var buttons = [], i = 0;
-        Ext.each(this.tbarButtons, function(button){
+        Ext.each(this.tbarButtons, function(button) {
             buttons[i++] = button;
         });
-        
+
         return buttons;
     },
-    
+
     buildExtraTbarButtons: function() {
-        
-        if(this.extraTbarButtons) {            
+
+        if (this.extraTbarButtons) {
             Ext.each(this.extraTbarButtons, function(button) {
                 this.getTopToolbar().addButton(button);
             }, this);
@@ -253,30 +269,31 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             store: this.store
         });
     },
-    
+
     /**
      * onSave action
      */
     onSave : function(btn, ev) {
 
         //if (this.store.getModifiedRecords().length > 0) {
-            // Confirmation
-            Ext.Msg.show({
-               icon: Ext.MessageBox.QUESTION,
-               title: 'Değişiklikleri onaylıyor musunuz ?',
-               msg: 'Yapmış olduğunuz değişiklikler sunucuya gönderilecektir.'
-                  + '<br/>Lütfen bu işlemi onaylayınız.',
-               buttons: Ext.Msg.YESNO,
-               fn: commitChanges,
-               scope:this
-            });
+        // Confirmation
+        Ext.Msg.show({
+            icon: Ext.MessageBox.QUESTION,
+            title: 'Do you approve of the changes?',
+            msg: 'Changes you have made will be sent to the server.'
+                    + '<br/>Please confirm this action.',
+            buttons: Ext.Msg.YESNO,
+            fn: commitChanges,
+            scope:this
+        });
 
-            // Check message box status and commit store changes to server.
-            function commitChanges (btn) {
-                if(btn == 'yes') {
-                    this.store.save();
-                }
-            };
+        // Check message box status and commit store changes to server.
+        function commitChanges(btn) {
+            if (btn == 'yes') {
+                this.store.save();
+            }
+        }
+
         //}
     },
 
@@ -284,7 +301,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
      * onAdd action
      */
     onAdd : function(btn, ev) {
-        
+
         var record = new this.store.recordType(this.emptyRecord);
         this.stopEditing();
         this.store.insert(0, record);
@@ -295,31 +312,31 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
      * onDelete
      */
     onRemove : function(btn, ev) {
-                
+
         var sm = this.getSelectionModel();
-        
+
         if (!sm.getCount()) {
             return false;
-        } else {            
+        } else {
             sm.each(function(selection) {
                 this.store.remove(selection);
-            }, this);             
+            }, this);
         }
-        
+
     },
-    
+
     /**
      * onRefresh
      */
-    onRefresh : function() {                
-         this.store.reload();
+    onRefresh : function() {
+        this.store.reload();
     },
 
     onDisableButtonGroup: function(btnGrpId) {
         var btnGrp = Ext.getCmp(this.id + '-' + btnGrpId + 'ButtonGroup');
         Ext.each(btnGrp, function(button) {
-           button.hide();
-           button.disable();
+            button.hide();
+            button.disable();
         });
     }
 });

@@ -11,9 +11,8 @@
 KebabOS.applications.roleManager.application.models.RoleManagerDataStore = Ext.extend(Kebab.library.ext.RESTfulDataStore, {
 
     bootstrap: null,
-    autoSave: true,
 
-    restAPI: BASE_URL + '/role/manager',
+    restAPI: Kebab.OS.generateUrl('role/manager'),
 
     readerFields:[
         {name: 'id', type:'integer'},
