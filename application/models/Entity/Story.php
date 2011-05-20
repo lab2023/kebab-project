@@ -8,12 +8,11 @@
  * @property string $name
  * @property string $title
  * @property clob $description
- * @property enum $status
  * @property boolean $active
  * @property Doctrine_Collection $Applications
  * @property Doctrine_Collection $Roles
- * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $Service
+ * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $StoryApplication
  * 
  * @package    ##PACKAGE##
@@ -37,18 +36,8 @@ class Model_Entity_Story extends Doctrine_Record
         $this->hasColumn('description', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('status', 'enum', 7, array(
-             'type' => 'enum',
-             'length' => 7,
-             'values' => 
-             array(
-              0 => 'active',
-              1 => 'passive',
-             ),
-             ));
-        $this->hasColumn('active', 'boolean', 5, array(
+        $this->hasColumn('active', 'boolean', null, array(
              'type' => 'boolean',
-             'length' => 5,
              ));
 
         $this->option('type', 'INNODB');
@@ -69,11 +58,11 @@ class Model_Entity_Story extends Doctrine_Record
              'local' => 'story_id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('Model_Entity_Permission as Permission', array(
+        $this->hasMany('Model_Entity_Service as Service', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_Entity_Service as Service', array(
+        $this->hasMany('Model_Entity_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'story_id'));
 

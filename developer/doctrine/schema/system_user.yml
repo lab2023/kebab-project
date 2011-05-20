@@ -24,7 +24,6 @@ User:
       unique: true
     active:
       type: boolean
-      length: 5
 
   actAs:
     Timestampable:

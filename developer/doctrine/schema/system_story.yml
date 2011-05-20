@@ -7,13 +7,8 @@ Story:
       type: string(255)
     description:
       type: clob
-    status:
-      type: enum
-      length: 7
-      values: ['active', 'passive']
     active:
       type: boolean
-      length: 5
       
   actAs:
     Sluggable:

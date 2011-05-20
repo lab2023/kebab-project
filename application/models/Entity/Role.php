@@ -9,12 +9,11 @@
  * @property string $name
  * @property string $title
  * @property clob $description
- * @property enum $status
  * @property boolean $active
  * @property Doctrine_Collection $Users
  * @property Doctrine_Collection $Stories
- * @property Doctrine_Collection $Permission
  * @property Doctrine_Collection $UserRole
+ * @property Doctrine_Collection $Permission
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -43,18 +42,8 @@ class Model_Entity_Role extends Doctrine_Record
         $this->hasColumn('description', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('status', 'enum', 7, array(
-             'type' => 'enum',
-             'length' => 7,
-             'values' => 
-             array(
-              0 => 'active',
-              1 => 'passive',
-             ),
-             ));
-        $this->hasColumn('active', 'boolean', 5, array(
+        $this->hasColumn('active', 'boolean', null, array(
              'type' => 'boolean',
-             'length' => 5,
              ));
 
         $this->option('type', 'INNODB');
@@ -75,11 +64,11 @@ class Model_Entity_Role extends Doctrine_Record
              'local' => 'role_id',
              'foreign' => 'story_id'));
 
-        $this->hasMany('Model_Entity_Permission as Permission', array(
+        $this->hasMany('Model_Entity_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 
-        $this->hasMany('Model_Entity_UserRole as UserRole', array(
+        $this->hasMany('Model_Entity_Permission as Permission', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 

@@ -60,8 +60,8 @@ class Kebab_UserController extends Kebab_Rest_Controller
         $pager = $this->_helper->pagination($query);
         $users = $pager->execute();
 
+        // Response
         $responseData = is_object($users) ? $users->toArray() : array();
-
         $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
 

@@ -42,7 +42,6 @@ class Kebab_StoryController extends Kebab_Rest_Controller
         // Mapping
         $mapping = array(
             'id' => 'story.id',
-            'status' => 'story.status',
             'active' => 'story.active',
             'description' => 'storyTranslation.description',
             'title' => 'storyTranslation.title',
@@ -51,7 +50,7 @@ class Kebab_StoryController extends Kebab_Rest_Controller
         //KBBTODO move dql to models
         $query = Doctrine_Query::create()
                 ->select('story.id, storyTranslation.title as title,
-                    storyTranslation.description as description, story.status, story.active')
+                    storyTranslation.description as description, story.active')
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
@@ -60,8 +59,8 @@ class Kebab_StoryController extends Kebab_Rest_Controller
         $pager = $this->_helper->pagination($query);
         $story = $pager->execute();
 
+        // Response
         $responseData = is_object($story) ? $story->toArray() : array();
-
         $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
 

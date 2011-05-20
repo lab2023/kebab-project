@@ -13,7 +13,7 @@
  * @property enum $type
  * @property string $title
  * @property clob $description
- * @property enum $status
+ * @property boolean $active
  * @property Doctrine_Collection $Application
  * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $StoryApplication
@@ -66,15 +66,8 @@ class Model_Entity_Application extends Doctrine_Record
         $this->hasColumn('description', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('status', 'enum', 7, array(
-             'type' => 'enum',
-             'length' => 7,
-             'values' => 
-             array(
-              0 => 'active',
-              1 => 'passive',
-             ),
-             'default' => 'active',
+        $this->hasColumn('active', 'boolean', null, array(
+             'type' => 'boolean',
              ));
 
         $this->option('type', 'INNODB');

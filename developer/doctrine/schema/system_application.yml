@@ -21,11 +21,8 @@ Application:
       type: string(255)
     description:
       type: clob    
-    status:
-      type: enum
-      length: 7
-      values: ['active', 'passive']
-      default: 'active'      
+    active:
+      type: boolean
   actAs:
     I18n:
       fields: [title, description]

@@ -46,7 +46,7 @@ class Kebab_Model_Story
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', $lang)
-                ->where('story.status = ?', 'active');
+                ->where('story.active = 1');
 
         return $query;
     }
