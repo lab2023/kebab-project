@@ -15,7 +15,7 @@ KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.Tab
 
     initComponent: function() {
         // panels are defined here
-        this.roleManagerGrid = new KebabOS.applications.roleManager.application.views.RoleManagerGrid({
+        this.roleGrid = new KebabOS.applications.roleManager.application.views.RoleGrid({
             bootstrap: this.bootstrap,
             title: 'Roles',
             iconCls: 'icon-application-view-list',
@@ -23,7 +23,7 @@ KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.Tab
         });
 
         var config = {
-            items:this.roleManagerGrid,
+            items:this.roleGrid,
             activeTab: 0
         }
 
