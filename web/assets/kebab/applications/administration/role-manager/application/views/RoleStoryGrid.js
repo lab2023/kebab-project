@@ -28,6 +28,7 @@ KebabOS.applications.roleManager.application.views.RoleStoryGrid = Ext.extend(Ke
             this.store.setBaseParam('roleId', this.roleId);
             this.store.load({params:{start:0, limit:25}});
             this.onDisableButtonGroup('export');
+            this.onDisableButton('add');
             this.batchButton.toggle();
             this.getView().fitColumns();
         }

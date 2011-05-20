@@ -115,6 +115,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         text: 'Save',
                         tooltip: 'Save changes now',
                         iconCls: 'icon-disk',
+                        id: this.id + '-saveButton',
                         ref: '../../saveButton',
                         handler: this.onSave
                     },
@@ -122,6 +123,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         text: 'Add',
                         tooltip: 'Add new record',
                         iconCls: 'icon-add',
+                        id: this.id + '-addButton',
                         ref: '../../addButton',
                         handler: this.onAdd
                     },
@@ -129,6 +131,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         text: 'Remove',
                         tooltip: 'Remove selected records',
                         iconCls: 'icon-delete',
+                        id: this.id + '-removeButton',
                         ref: '../../removeButton',
                         disabled: true,
                         handler: this.onRemove
@@ -136,6 +139,8 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                     {
                         text: 'Refresh',
                         tooltip: 'Refresh the grid list',
+                        id: this.id + '-refreshButton',
+                        ref: '../../refreshButton',
                         iconCls: 'icon-arrow-refresh',
                         handler: this.onRefresh
                     }
@@ -182,6 +187,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         text: 'Export to Excel',
                         tooltip: 'Export selected records to excel',
                         iconCls: 'icon-page-white-excel',
+                        id: this.id + '-excelExportButton',
                         ref: '../../excelExportButton'
                     }
                 ]
@@ -202,6 +208,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         text: 'Auto save',
                         iconCls: 'icon-database-lightning',
                         pressed: false,
+                        id: this.id + '-autoSaveButton',
                         ref: '../../autoSaveButton',
                         tooltip: 'Automatically saves your changes or you request it. ' +
                                 'Recommended to be used in tasks requiring heavy traffic.',
@@ -213,6 +220,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         text: 'Batch processing',
                         iconCls: 'icon-database-table',
                         pressed: false,
+                        id: this.id + '-batchButton',
                         ref: '../../batchButton',
                         tooltip: 'This option allows you to send in a change to the server at a time or all of the records.',
                         toggleHandler: function(btn, pressed) {
@@ -235,6 +243,8 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                     {
                         text: 'Auto fit',
                         iconCls: 'icon-arrow-out',
+                        id: this.id + '-autoFitButton',
+                        ref: '../../autoFitButton',
                         tooltip: 'This option list, columns, automatically fit the size of the window.',
                         handler: function() {
                             this.getView().fitColumns();
@@ -338,5 +348,11 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             button.hide();
             button.disable();
         });
+    },
+
+    onDisableButton: function(btnId) {
+        var button = Ext.getCmp(this.id + '-' + btnId + 'Button');
+        button.hide();
+        button.disable();
     }
 });
