@@ -89,7 +89,7 @@ KebabOS.applications.roleManager.application.views.RoleManagerStoryGrid = Ext.ex
         });
         var story = Ext.util.JSON.encode(storyIDs);
 
-        this.fireEvent('request', {from:this, method:'PUT', roleId:this.roleId, story:story, url:'/role/story-manager'})
+        this.fireEvent('request', {from:this, method:'PUT', roleId:this.roleId, story:story, url:'/kebab/role-story'})
     }
 });
 

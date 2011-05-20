@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,27 +14,27 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    System
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
 
 /**
- * Role_Manager
+ * Kebbab_Role
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Administration
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Role_ManagerController extends Kebab_Rest_Controller
+class Kebab_RoleController extends Kebab_Rest_Controller
 {
     /**
      * @return void
@@ -53,43 +51,27 @@ class Role_ManagerController extends Kebab_Rest_Controller
             'active' => 'role.active'
         );
 
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $query = Doctrine_Query::create()
-                    ->select('role.name,
-                    roleTranslation.title as title, 
-                    roleTranslation.description as description,
-                    role.status, role.active')
-                    ->from('Model_Entity_Role role')
-                    ->leftJoin('role.Translation roleTranslation')
-                    ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                    ->orderBy($this->_helper->sort($mapping));
+        //KBBTODO move dql to model
+        $query = Doctrine_Query::create()
+                ->select('role.name,
+                roleTranslation.title as title,
+                roleTranslation.description as description,
+                role.status, role.active')
+                ->from('Model_Entity_Role role')
+                ->leftJoin('role.Translation roleTranslation')
+                ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                ->orderBy($this->_helper->sort($mapping));
 
-            $pager = $this->_helper->pagination($query);
-            $roles = $pager->execute();
+        $pager = $this->_helper->pagination($query);
+        $roles = $pager->execute();
 
-            Doctrine_Manager::connection()->commit();
-
-            $responseData = array();
-            if (is_object($roles)) {
-                $responseData = $roles->toArray();
-            }
-
-            $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->addTotal($pager->getNumResults())
-                        ->getResponse()
-            );
-
-        } catch (Zend_Exception $e) {
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            throw $e;
+        $responseData = array();
+        if (is_object($roles)) {
+            $responseData = $roles->toArray();
         }
+
+        $this->_helper->response(true, 200)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
+
     }
 
     /**
@@ -107,6 +89,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
 
         // Inserting New Role
+        //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $role = new Role_Model_Role();
@@ -118,14 +101,9 @@ class Role_ManagerController extends Kebab_Rest_Controller
             
             Doctrine_Manager::connection()->commit();
 
-            // Returning response
-            $this->getResponse()
-                    ->setHttpResponseCode(202)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
-            );
+            // Response
+            $this->_helper->response(true, 202)->getResponse();
+            
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -133,7 +111,6 @@ class Role_ManagerController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->rollback();
             throw $e;
         }
-
     }
 
     public function putAction()
@@ -144,25 +121,23 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $active = $params['data']['active'];
 
         // Updating status
+        //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            $role = new Role_Model_Role();
+            $role = new Model_Entity_Role();
             $role->assignIdentifier($id);
             $role->set('active', $active);
             $role->save();
             Doctrine_Manager::connection()->commit();
             unset($role);
-            // Returning response
-            $this->getResponse()
-                    ->setHttpResponseCode(202)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
-            );
+
+            // Response
+            $this->_helper->response(true, 202)->getResponse();
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         }
     }
@@ -173,7 +148,7 @@ class Role_ManagerController extends Kebab_Rest_Controller
         $params = $this->_helper->param();
         $id = $params['roleId'];
 
-        // Doctrine
+        //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
             Doctrine_Query::create()
@@ -188,16 +163,12 @@ class Role_ManagerController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->commit();
             unset($role);
             // Returning response
-            $this->getResponse()
-                    ->setHttpResponseCode(201)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->getResponse()
-            );
+            $this->_helper->response(true, 201)->getResponse();
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         }
     }

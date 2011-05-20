@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -16,11 +14,11 @@ if (!defined('BASE_PATH'))
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    System
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -29,41 +27,20 @@ if (!defined('BASE_PATH'))
  * User_RoleManager
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Administration
+ * @package    Kebab
  * @subpackage Controllers
- * @author     lab2023 Dev Team
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Role_StoryManagerController extends Kebab_Rest_Controller
+class Kebab_RoleStoryController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $story = Access_Model_Story::getStory()->execute();
-
-            $responseData = array();
-            if (is_object($story)) {
-                $responseData = $story->toArray();
-            }
-            Doctrine_Manager::connection()->commit();
-            $this->getResponse()
-                    ->setHttpResponseCode(200)
-                    ->appendBody(
-                $this->_helper->response()
-                        ->setSuccess(true)
-                        ->addData($responseData)
-                        ->getResponse()
-            );
-
-        } catch (Zend_Exception $e) {
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        }
+        $story = Kebab_Model_Story::getStory()->execute();
+        $responseData = is_object($story) ? $story->toArray() : array();
+        $this->_helper->response(true, 200)->addData($responseData)->getResponse();
     }
 
     public function putAction()
@@ -74,6 +51,7 @@ class Role_StoryManagerController extends Kebab_Rest_Controller
         $storyId = $params['storyId'];
 
         // Doctrine
+        //KBBTODO move dql to models
         Doctrine_Manager::connection()->beginTransaction();
         try {
             Doctrine_Query::create()
@@ -91,6 +69,7 @@ class Role_StoryManagerController extends Kebab_Rest_Controller
             unset($permission);
 
         } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();

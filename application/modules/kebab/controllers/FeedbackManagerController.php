@@ -89,7 +89,7 @@ class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            $feedback = new Feedback_Model_Feedback();
+            $feedback = new Model_Entity_Feedback();
             $feedback->assignIdentifier($id);
             $feedback->set('status', $status);
             $feedback->save();

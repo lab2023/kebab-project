@@ -15,13 +15,9 @@ Model_Entity_Controller:
     
 
   # ROLE MODULE #########################################################
-  Role_Manager:
-    Module: Role
-    name: manager
 
-  Role_StoryManager:
-    Module: Role
-    name: story-manager
+
+
 
   # USER MODULE #########################################################
   User_Manager:
@@ -69,3 +65,11 @@ Model_Entity_Controller:
   Kebab_Profile:
     Module: Kebab
     name: profile
+
+  Kebab_Role:
+    Module: Kebab
+    name: role
+
+  Kebab_RoleStory:
+    Module: Kebab
+    name: role-story

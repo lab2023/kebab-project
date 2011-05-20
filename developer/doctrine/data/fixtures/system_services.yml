@@ -14,9 +14,7 @@ Model_Entity_Service:
   Desktop_3:
     Story: Access_Desktop
     Resource: Kebab_Feedback
-
-
-
+    
   # Change Password
   Profile_2:
     Story: Change_Profile
@@ -30,11 +28,11 @@ Model_Entity_Service:
   # Manage Roles
   ManageRoles_1:
     Story: Role_Management
-    Resource: Role_Manager
+    Resource: Kebab_Role
 
   ManageRoles_2:
     Story: Role_Management
-    Resource: Role_StoryManager
+    Resource: Kebab_RoleStory
 
   # Manage Users
   ManageUsers_1:

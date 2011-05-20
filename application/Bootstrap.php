@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BASE_PATH'))
-    exit('No direct script access allowed');
 /**
  * Kebab Framework
  *
@@ -17,11 +15,10 @@ if (!defined('BASE_PATH'))
  *
  * @category   Kebab (kebab-reloaded)
  * @package    System
- * @subpackage 
- * @author	   lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - 
- *             internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @subpackage Bootstrap
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -30,11 +27,10 @@ if (!defined('BASE_PATH'))
  *
  * @category   Kebab (kebab-reloaded)
  * @package    System
- * @subpackage 
- * @author	   lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 -
- *             internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @subpackage Bootstrap
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
@@ -216,10 +212,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front = Zend_Controller_Front::getInstance();
         $restRoute = new Zend_Rest_Route($front, array(),
             array(
-                 'user' => array('manager', 'role-manager', 'invite'),
+                 'user' => array('invite'),
                  'role' => array('manager', 'story-manager'),
                  'backup' => array('backup'),
-                 'kebab' => array('session', 'password', 'forgot-password', 'story', 'feedback', 'feedback-manager', 'profile')
+                 'kebab' => array('session', 'password', 'forgot-password', 'story', 'feedback', 'feedback-manager', 'profile', 'role','role-story')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);
