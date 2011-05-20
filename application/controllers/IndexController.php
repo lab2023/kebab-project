@@ -45,28 +45,4 @@ class IndexController extends Kebab_Controller_Action
     {
        
     }
-    
-    /**
-     * Shop Page
-     * @return void
-     */
-    public function shopAction()
-    {
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-        
-       //KBBTODO move dql to model
-        $query = Doctrine_Query::create()
-                ->select('
-                role.name,
-                roleTranslation.title as title,
-                roleTranslation.description as description,
-                role.status, role.active')
-                ->addSelect('(SELECT COUNT(permission.story_id) FROM Model_Entity_Permission permission WHERE role.id = permission.role_id) as num_story')
-                ->addSelect('(SELECT COUNT(userRole.role_id) FROM Model_Entity_UserRole userRole WHERE userRole.role_id = role.id) as num_user')
-                ->from('Model_Entity_Role role')
-                ->leftJoin('role.Translation roleTranslation')
-                ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language);
-        Zend_Debug::dump($query->execute()->toArray());
-    }
 }

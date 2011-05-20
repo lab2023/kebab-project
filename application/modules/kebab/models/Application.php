@@ -44,8 +44,11 @@ class Kebab_Model_Application
      * @param  string $defaultLanguage
      * @return array
      */
-    public static function getApplicationsByPermission($roles, $defaultLanguage)
+    public static function getApplicationsByPermission()
     {
+
+        $lang  = Zend_Auth::getInstance()->getIdentity()->language;
+        $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()
                 ->from('Model_Entity_Application a')
                 ->leftJoin('a.Translation at')
@@ -67,8 +70,8 @@ class Kebab_Model_Application
             $app['version'] = $application->version;
             $app['type'] = $application->type;
             $app['shortcut'] = array(
-                'text' => $application->Translation[$defaultLanguage]->title,
-                'tooltip' => $application->Translation[$defaultLanguage]->description
+                'text' => $application->Translation[$lang]->title,
+                'tooltip' => $application->Translation[$lang]->description
             );
             foreach ($application->StoryApplication as $story) {
                 $app['permission'][] = $story->Story->slug;
