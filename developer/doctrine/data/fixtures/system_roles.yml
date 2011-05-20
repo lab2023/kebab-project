@@ -1,6 +1,5 @@
 Model_Entity_Role:
   Member:
-    name: member
     active: 1
     Translation:
       en:
@@ -11,7 +10,6 @@ Model_Entity_Role:
         description: Üye Rolü
   
   Admin:
-    name: admin
     active: 1
     Translation:
       en:

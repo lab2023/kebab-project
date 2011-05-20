@@ -40,19 +40,22 @@ class Kebab_Model_Story
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query = Doctrine_Query::create()
-                ->select('story.*, storyTranslation.title as title,
-                    storyTranslation.description as description, permission.*')
+                ->select('story.*,
+                    storyTranslation.title as title,
+                    storyTranslation.description as description,
+                    permission.*')
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', $lang)
-                ->where('story.active = 1');
+                ->andWhere('story.active = 1');
 
         return $query;
     }
 
     static public function getStories()
     {
+
         $lang  = Zend_Auth::getInstance()->getIdentity()->language;
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()
@@ -62,7 +65,7 @@ class Kebab_Model_Story
                     ->leftJoin('s.Translation st')
                     ->where('st.lang = ?', $lang)
                     ->andWhere('s.active = 1')
-                    ->whereIn('p.role_id', $roles);
+                    ->andWhereIn('p.role_id', $roles);
         return $query->execute();
     }
 }

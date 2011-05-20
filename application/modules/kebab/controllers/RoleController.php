@@ -44,20 +44,17 @@ class Kebab_RoleController extends Kebab_Rest_Controller
         // Mapping
         $mapping = array(
             'id' => 'role.id',
-            'name' => 'role.name',
-            'title' => 'role.title',
-            'description' => 'role.description',
-            'status' => 'role.status',
+            'title' => 'title',
+            'description' => 'description',
             'active' => 'role.active'
         );
 
         //KBBTODO move dql to model
         $query = Doctrine_Query::create()
                 ->select('
-                    role.name,
                     roleTranslation.title as title,
                     roleTranslation.description as description,
-                    role.status, role.active')
+                    role.active')
                     ->addSelect('(SELECT COUNT(permission.story_id)
                                   FROM Model_Entity_Permission permission
                                   WHERE role.id = permission.role_id) as num_story')
@@ -83,31 +80,39 @@ class Kebab_RoleController extends Kebab_Rest_Controller
      */
     public function postAction()
     {
-        // Getting parameters
+        // Get Data and convert them array
         $params = $this->_helper->param();
-        $name = $params['name'];
-        $title = $params['title'];
-        $description = $params['description'];
-        $active = $params['active'];
-
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
 
-        // Inserting New Role
+        // Convert data collection array if not
+        $collection = $this->_helper->array()->isCollection($params['data'])
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+
+        // Updating status
         //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            $role = new Role_Model_Role();
-            $role->name = $name;
-            $role->active = $active;
-            $role->Translation[$lang]->title = $title;
-            $role->Translation[$lang]->description = $description;
-            $role->save();
-            
-            Doctrine_Manager::connection()->commit();
+            // Doctrine
+            foreach ($collection as $record) {
+                $role = new Model_Entity_Role();
+                if (array_key_exists('active', $record)) {
+                    $role->active = $record['active'];
+                }
 
+                if (array_key_exists('title', $record)) {
+                    $role->Translation[$lang]->title = $record['title'];
+                }
+
+                if (array_key_exists('description', $record)) {
+                    $role->Translation[$lang]->description = $record['description'];
+                }
+
+                $role->save();
+            }
+            Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 202)->getResponse();
-            
+            $this->_helper->response(true, 200)->addNotification('INFO', 'Record was created.')->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -119,24 +124,42 @@ class Kebab_RoleController extends Kebab_Rest_Controller
 
     public function putAction()
     {
-        // Getting parameters
+        // Get Data and convert them array
         $params = $this->_helper->param();
-        $id = $params['data']['id'];
-        $active = $params['data']['active'];
+        $lang = Zend_Auth::getInstance()->getIdentity()->language;
+
+        // Convert data collection array if not
+        $collection = $this->_helper->array()->isCollection($params['data'])
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Updating status
         //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            $role = new Model_Entity_Role();
-            $role->assignIdentifier($id);
-            $role->set('active', $active);
-            $role->save();
-            Doctrine_Manager::connection()->commit();
-            unset($role);
+            // Doctrine
+            foreach ($collection as $record) {
+                $role = new Model_Entity_Role();
+                $role->assignIdentifier($record['id']);
+                unset($record['id']);
 
+                if (array_key_exists('active', $record)) {
+                    $role->active = $record['active'];
+                }
+
+                if (array_key_exists('title', $record)) {
+                    $role->Translation[$lang]->title = $record['title'];
+                }
+
+                if (array_key_exists('description', $record)) {
+                    $role->Translation[$lang]->description = $record['description'];
+                }
+
+                $role->save();
+            }
+            Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 202)->getResponse();
+            $this->_helper->response(true, 201)->addNotification('INFO', 'Record was updated.')->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;

@@ -98,10 +98,8 @@ class Model_Entity_Application extends Doctrine_Record
               1 => 'description',
              ),
              'className' => 'ApplicationTranslation',
-             'length' => 5,
+             'length' => 2,
              ));
-        $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($i18n0);
-        $this->actAs($softdelete0);
     }
 }
