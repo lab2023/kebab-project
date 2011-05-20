@@ -27,7 +27,7 @@ Application:
     I18n:
       fields: [title, description]
       className: ApplicationTranslation
-      length: tr
+      length: 2
       
   options:
     type: INNODB
