@@ -27,8 +27,7 @@ Application:
     I18n:
       fields: [title, description]
       className: ApplicationTranslation
-      length: 5
-    SoftDelete:
+      length: tr
       
   options:
     type: INNODB

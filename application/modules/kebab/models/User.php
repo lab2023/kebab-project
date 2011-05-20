@@ -45,16 +45,16 @@ class Kebab_Model_User
     {
         $userId = (int) $userId;
         $query = Doctrine_Query::create()
-                    ->select('role.name')
+                    ->select('role.id')
                     ->from('Model_Entity_Role role')
-                    ->leftJoin('role.UserRole userrole')
-                    ->where('userrole.user_id = ?', $userId);
+                    ->leftJoin('role.UserRole userRole')
+                    ->where('userRole.user_id = ?', $userId);
 
         $rolesResult = $query->execute();
         
         $roles = array();
         foreach ($rolesResult as $role) {
-           $roles[] = $role->name;
+           $roles[] = $role->id;
         }
         
         return $roles;

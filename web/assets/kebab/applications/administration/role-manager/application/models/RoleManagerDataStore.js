@@ -5,6 +5,7 @@
  * @package     Applications
  * @namespace   KebabOS.applications.roleManager.application.models
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>
+ * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/cms/licensing
  */
@@ -12,7 +13,7 @@ KebabOS.applications.roleManager.application.models.RoleManagerDataStore = Ext.e
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('role/manager'),
+    restAPI: Kebab.OS.generateUrl('kebab/role'),
 
     readerFields:[
         {name: 'id', type:'integer'},

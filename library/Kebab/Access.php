@@ -40,14 +40,14 @@ class Kebab_Access extends Zend_Acl
     public function addAllRoles()
     {
         $query = Doctrine_Query::create()
-                    ->select('r.name')
+                    ->select('r.id')
                     ->from('Model_Entity_Role r')
                     ->useQueryCache($this->_doctrineCaching);
         
         $roles = $query->execute();
 
         foreach ($roles as $role) {
-            parent::addRole(new Zend_Acl_Role($role->name));
+            parent::addRole(new Zend_Acl_Role($role->id));
         }
     }
 
@@ -72,7 +72,7 @@ class Kebab_Access extends Zend_Acl
 
         $query = Doctrine_Query::create()
                 ->select('module.name, acontroller.name, controller.name, action.name, 
-                    service.id, role.id, story.id, permission.*, role.name, story.name')
+                    service.id, role.id, story.id, permission.*, story.name')
                 ->from('Model_Entity_Service service')
                 ->leftJoin('service.Resource controller')
                 ->leftJoin('controller.Module module')
@@ -98,11 +98,11 @@ class Kebab_Access extends Zend_Acl
                     foreach ($service->Story->Permission->toArray() as $permission) {
                         if (count($permission) > 0) {
                             Zend_Registry::get('logging')->log(
-                                $permission['Role']['name'] . '-' .
+                                $permission['Role']['id'] . '-' .
                                 $resource . '-' . 
                                 $action, Zend_Log::DEBUG
                             );
-                            parent::allow($permission['Role']['name'], $resource, $action);
+                            parent::allow($permission['Role']['id'], $resource, $action);
                         }
                     }
                 }

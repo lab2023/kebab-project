@@ -44,7 +44,7 @@ class Kebab_Model_Application
      * @param  string $defaultLanguage
      * @return array
      */
-    public static function getApplicationsByPermission()
+    public static function getApplicationsByPermission($defaultLanguage)
     {
 
         $lang  = Zend_Auth::getInstance()->getIdentity()->language;
@@ -56,7 +56,7 @@ class Kebab_Model_Application
                 ->leftJoin('sa.Story s')
                 ->leftJoin('s.Permission p')
                 ->leftJoin('p.Role r')
-                ->whereIn('r.name', $roles)
+                ->whereIn('r.id', $roles)
                 ->andWhere('a.active = 1 AND s.active = 1');
         $applications = $query->execute();
 
@@ -68,7 +68,6 @@ class Kebab_Model_Application
             $app['type'] = $application->type;
             $app['department'] = $application->department;
             $app['version'] = $application->version;
-            $app['type'] = $application->type;
             $app['shortcut'] = array(
                 'text' => $application->Translation[$lang]->title,
                 'tooltip' => $application->Translation[$lang]->description

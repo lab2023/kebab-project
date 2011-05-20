@@ -5,9 +5,6 @@ Role:
       type: integer
       primary: true
       autoincrement: true
-    name:
-      type: string(255)      
-      unique: true
     title:
       type: string(255)
     description:
