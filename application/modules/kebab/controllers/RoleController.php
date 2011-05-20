@@ -173,23 +173,33 @@ class Kebab_RoleController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['roleId'];
+        $ids = $params['data'];
 
         //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
+
+            // Delete permission
             Doctrine_Query::create()
                     ->delete('Model_Entity_Permission permission')
-                    ->where('permission.role_id = ?', $id)
+                    ->whereIn('permission.role_id', $ids)
                     ->execute();
 
-            // delete role
-            $role = new Role_Model_Role();
-            $role->assignIdentifier($id);
-            $role->delete();
+            // Delete permission
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_UserRole userRole')
+                    ->whereIn('userRole.role_id', $ids)
+                    ->execute();
+
+            // Delete Role
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_Role role')
+                    ->whereIn('role.id', $ids)
+                    ->execute();
+            
             Doctrine_Manager::connection()->commit();
-            unset($role);
-            // Returning response
+
+            // Response
             $this->_helper->response(true, 201)->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
