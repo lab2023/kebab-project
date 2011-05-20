@@ -14,12 +14,11 @@ Role:
       
   actAs:
     Timestampable:
-    SoftDelete:
     Blameable:
     I18n:
       fields: [title, description]
       className: RoleTranslation
-      length: 5
+      length: 2
       actAs:
         Searchable:
           fields: [title]
