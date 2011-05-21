@@ -35,7 +35,7 @@
  */
 SignUp = function(){
 
-    var signUpAPI = Kebab.OS.generateUrl('kebab/user'),
+    var signUpAPI = Kebab.OS.generateUrl('kebab/user-sign-up'),
         signUpForm = null;
 
     return {
