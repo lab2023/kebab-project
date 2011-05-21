@@ -36,12 +36,12 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 // To be equal to the width of columns
                 forceFit: true
             }
-        }
+        };
 
         //KBBTODO add i18n
         var statusData = [
             ['open', 'Open'],
-            ['process', 'In Progress'],
+            ['progress', 'In Progress'],
             ['closed', 'Closed']
         ];
         var statusCombobox = new Ext.form.ComboBox({
@@ -97,9 +97,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 sortable:true,
                 editor: statusCombobox,
                 renderer: function(v) {
-
                     var retVal = null;
-
                     Ext.each(statusData, function(status) {
                         if (v == status[0])
                             retVal = status[1];

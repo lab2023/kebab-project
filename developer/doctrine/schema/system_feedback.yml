@@ -11,7 +11,7 @@ Feedback:
     status:
       type: enum
       length: 7
-      values: ['open', 'process', 'closed']
+      values: ['open', 'progress', 'closed']
 
   relations:
     User:
