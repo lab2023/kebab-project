@@ -19,7 +19,7 @@
     <link href="<?php echo $this->assetVendor('css/960-all.css')->get('960gs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('silk/famfamfam-silk-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <?php
-        echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false)))
+        echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->getWeb()))
                 ->prependStylesheet($this->asset('frontend/layout.css')->get(false));
     ?>
     

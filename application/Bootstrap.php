@@ -8,7 +8,7 @@
  * This source file is subject to the  Dual Licensing Model that is bundled
  * with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
- * http://www.kebab-project.com/licensing
+ * http://www.kebab-project.com/cms/licensing
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
@@ -17,6 +17,7 @@
  * @package    System
  * @subpackage Bootstrap
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
@@ -29,6 +30,7 @@
  * @package    System
  * @subpackage Bootstrap
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
@@ -184,19 +186,37 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @return Zend_Translate 
      */
     public function _initTranslator()
-    {      
+    {
+        $translator = null;
+        
         // Info Log
         $this->_logging->log('Translator initialized...', Zend_Log::INFO);
 
-//        $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
-//                           ? Zend_Auth::getInstance()->getIdentity()->language
-//                           : $this->_config->languages->default;
-        $defaultLanguage = 'en';
+        $defaultLanguage = Zend_Auth::getInstance()->hasIdentity()
+                           ? Zend_Auth::getInstance()->getIdentity()->language
+                           : $this->_config->languages->default;
 
-        $languagePath    = $this->_config->languages->languagePath . '/' . $defaultLanguage . '.php';
-        $translator = new Zend_Translate('array', $languagePath, $defaultLanguage);
-        
-        Zend_Registry::set('translator', $translator);
+        $locale = new Zend_Locale($defaultLanguage);
+        Zend_Registry::set('Zend_Locale', $locale);
+
+        if (file_exists($this->_config->languages->languagePath . '/' . $locale . '.php')) {
+            $languagePath    = $this->_config->languages->languagePath . '/' . $locale . '.php';
+            $translator = new Zend_Translate('array', $languagePath, $locale);
+
+            // Translation loging enable ?
+            if ($this->_config->languages->enableLoging) {
+                $translator->setOptions(
+                    array(
+                        'log'             => $this->_logging,
+                        'logMessage'      => "Missing '%message%' within locale '%locale%'",
+                        'logPriority'     => Zend_Log::ALERT,
+                        'logUntranslated' => true
+                    )
+                );
+            }
+
+            Zend_Registry::set('Zend_Translate', $translator);
+        }
         
         return $translator;
     }

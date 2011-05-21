@@ -8,7 +8,7 @@
  * This source file is subject to the  Dual Licensing Model that is bundled
  * with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
- * http://www.kebab-project.com/licensing
+ * http://www.kebab-project.com/cms/licensing
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
@@ -49,7 +49,7 @@ class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
         if (!is_null($var)) {
             
             $vars = new stdClass();
-            $vars->kebabOs = $this->_config->os;
+            $vars->os = $this->_config->os;
             $vars->assets = $this->_config->assets;
             $vars->mapping = $this->_config->mapping; // KBBTODO what is this ?
 

@@ -1,0 +1,252 @@
+/* -----------------------------------------------------------------------------
+ Kebab Project 1.5.x (Kebab Reloaded)
+ http://kebab-project.com
+ Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
+ http://www.lab2023.com
+
+    * LICENSE
+    * 
+    * This source file is subject to the  Dual Licensing Model that is bundled
+    * with this package in the file LICENSE.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://www.kebab-project.com/cms/licensing
+    * If you did not receive a copy of the license and are unable to
+    * obtain it through the world-wide-web, please send an email
+    * to info@lab2023.com so we can send you a copy immediately.
+----------------------------------------------------------------------------- */
+
+/*---------------------------------TYPOGRAPHY---------------------------------*/
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Ubuntu'), 
+         local('Ubuntu-Regular'), 
+         url('fonts/Ubuntu-Regular.ttf') 
+         format('truetype');
+}
+* {
+    font-family: Ubuntu, Georgia, "Bitstream Charter", serif;
+    font-size: 12.5px;
+    font-style: normal;
+}
+/*----------------------------------BASE--------------------------------------*/
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+* {
+    margin:0;
+    padding:0;
+}
+
+/*---------------------------------CLASSES------------------------------------*/
+h1.kebab-heading {
+    font-size:27px !important;
+    margin-bottom:10px !important;
+    text-shadow: #CCC 2px 3px 0;
+    color:#222;
+}
+p.kebab-paragraph {
+    margin:2px 0;
+    padding:2px 0;
+}
+.kebab-container {
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+    margin:auto;
+    background:#fff;
+    border:1px outset #a7a5a6;
+    padding:20px;
+    width:400px;
+    height:250px;
+    text-align:center;
+}
+.kebab-container  input[type=text], .kebab-container input[type=text], .kebab-container input[type=password] {
+    font-size: 20px !important;
+    height: 30px !important;
+}
+.kebab-container button {
+    height: 25px !important;
+    font-size: 15px !important;
+}
+.kebab-container .x-btn {
+    margin-left:-8px !important;
+}
+.kebab-container .x-btn .x-form-cb-label, .kebab-container .x-form-cb-label {
+    color: #333 !important;
+}
+.kebab-transparent {
+    background: transparent !important;
+}
+.kebab-container .x-form-check-wrap {
+    text-align:left;
+    font-size:15px;
+}
+.kebab-opacity {
+    background:transparent url('images/os/container-bg-85.png')  !important;
+}
+.kebab-opacity:hover {
+    background:#fff !important;
+}
+.kebab-rounded-corners {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+.kebab-shadow-std {
+    -moz-box-shadow: 0px 5px 15px #222;
+    -webkit-box-shadow: 0px 5px 15px #222;
+    box-shadow: 0px 5px 15px #222;
+}
+.kebab-shadow {
+    -moz-box-shadow: 0px 10px 20px #111;
+    -webkit-box-shadow: 0px 10px 20px #111;
+    box-shadow: 0px 10px 20px #111;
+}
+.kebab-debug {
+    border:1px dashed red;
+}
+.icon-kebab-os {
+    background-image: url('images/os/os.png') !important;
+}
+.kebab-notifications {
+    font-size:14px;
+    cursor:pointer;
+    background:#fff;
+    padding: 10px;
+}
+.kebab-notifications:hover {
+    opacity:.85;
+    -moz-opacity:.85;
+    -webkit-opacity:.85;
+    filter:alpha(opacity=85);
+}
+.kebab-notifications-body {
+    position:absolute;
+    right:35%;
+    top:10px;
+    width:300px;
+    z-index:8999;
+    padding:10px;
+}
+
+/*---------------------------------ELEMENTS------------------------------------*/
+
+/* Modal Mask Loader */
+#kebab-loading-mask {
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:20000;
+    left:0;
+    background: #000 url('images/os/indicator.gif') no-repeat center center;
+    top:0;
+}
+
+/* Beta Ribbon */
+#beta-ribbon {
+    background: transparent url('images/os/beta-ribbon.png') no-repeat left top;
+    width:78px;
+    height:75px;
+    position:absolute;
+    right:-3px !important;
+    top:0;
+}
+
+/* Kebab Progress Bar */
+#kebab-progress-bar {
+    background: url('images/os/progress-bar.gif') no-repeat 48% 30px;
+    visibility:hidden;
+    text-align:center;
+    width:228px;
+    height:50px;
+    margin:auto;
+}
+#kebab-progress-bar h2 {
+    font-size:20px !important;
+    margin-bottom:25px !important;
+    text-shadow: #CCC 2px 3px 0;
+    color:#222;
+}
+
+/* Project Info Bubble */
+#project-info {
+    overflow:hidden;
+    background: #111;
+    position:fixed;
+    right:20px;
+    width:120px;
+    height:18px;
+    bottom:20px;
+    padding:5px;
+    cursor:pointer;
+    text-align:center;
+}
+#project-info p, #project-info p strong {
+    color:#fff;
+    font-size:11px;
+    font-style:italic;
+    padding-bottom: 5px;
+    padding-top: 1px;
+}
+#project-info p strong {
+    font-weight:bold;
+}
+
+/* Sign-in screen */
+#kebab-system-backend-signIn-container {
+    width:330px;
+    overflow:hidden;
+    height:220px;
+}
+div#signIn-form-wrapper, div#forgotPassword-form-wrapper{
+    position: absolute;
+    text-align: left;
+}
+div#forgotPassword-form-wrapper {
+    width:360px;
+}
+div#signIn-form-wrapper {
+    width:330px;
+    height:220px;
+    background: url('images/os/sign-in.png') no-repeat 100% 20px;
+}
+div#forgotPassword-form-wrapper {
+    height:128px;
+    visibility:hidden;
+    background: url('images/os/forgot-password.png') no-repeat 100% 22px;
+}
+
+/* Sign-up Screen */
+#kebab-system-backend-signUp-container {
+    width:330px;
+    overflow:hidden;
+    height:175px;
+}
+div#signUp-form-wrapper{
+    position: absolute;
+    text-align: left;
+}
+div#signUp-form-wrapper {
+    width:330px;
+    height:175px;
+    background: url('images/os/sign-up.png') no-repeat 100% 30px;
+}
+
+/* Activation Screen */
+#kebab-system-backend-activation-container {
+    width:330px;
+    overflow:hidden;
+    height:175px;
+}
+div#activation-form-wrapper{
+    position: absolute;
+    text-align: left;
+}
+div#activation-form-wrapper {
+    width:330px;
+    height:175px;
+    background: url('images/os/activation.png') no-repeat 100% 30px;
+}

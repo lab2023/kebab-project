@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Desktop');
+$this->headTitle($this->translate('Desktop'));
 
 $this->headLink()
      ->appendStylesheet($this->asset('desktop.css')->distribution()->theme()->get());
@@ -16,7 +16,7 @@ $this->headScript()
 
     <?php 
     // BEGIN: Kernel Boot & All Applications Load ------------------------------
-    foreach ($this->applications as $application) {
+    foreach ($this->applications as $application) {  // KBBTODO Move to DOM
         
         // TODO Load on-demand
         $this->headLink()->appendStylesheet(
@@ -38,18 +38,19 @@ $this->headScript()
     
     Ext.namespace('KebabOS', 'KebabOS.kernel');
     KebabOS.kernel = new Kebab.OS.Kernel({
-        distribution    : "<?php echo $this->variable('kebabOs')->distributions->current; ?>",
+        distribution    : "<?php echo $this->variable('os')->distributions->current; ?>",
         assets          : <?php echo json_encode($this->variable('assets')->toArray()); ?>,
         settings        : {project: <?php echo json_encode($this->settings('project')->toArray()); ?>},
         user            : <?php echo json_encode($this->user); ?>,
-        apps            : <?php echo json_encode($this->applications); ?>
+        apps            : <?php echo json_encode($this->applications); ?>,
+        stories         : <?php echo json_encode($this->stories); ?>
     });
     </script>
     <?php // END: Kernel Boot & All Applications Load ------------------------?>
 
     <?php // BEGIN: OS Panel -------------------------------------------------?>
-    <div id="kebab-os-panel" class="kebab-shadow-std"> 
-        <div id="kebab-os-panel-main-menu"></div> 
+    <div id="kebab-os-panel" class="kebab-shadow-std">
+        <div id="kebab-os-panel-main-menu"></div>
         <div id="kebab-os-panel-window-list"></div>
         <div id="kebab-os-panel-indicators"></div>
         <div class="kebab-os-panel-clear"></div> 
@@ -59,7 +60,7 @@ $this->headScript()
     <?php // BEGIN: OS Desktop Environment -----------------------------------?>
     <div id="kebab-os-desktop"> 
         <dl id="kebab-os-desktop-shortcuts">
-            <?php foreach ($this->applications as $application): // TODO Move to DOM ?>
+            <?php foreach ($this->applications as $application): // KBBTODO Move to DOM ?>
             <dt ext:qtip="<?php echo $application['shortcut']['tooltip']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
                 <div></div>
                 <span><?php echo $application['shortcut']['text']; ?></span>

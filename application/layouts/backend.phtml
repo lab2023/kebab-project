@@ -14,21 +14,21 @@
     <?php echo $this->headTitle('Kebab Project - Back-end')->setSeparator(' :: '); ?>
 
     <?php // LINK AREA -------------------------------------------------------?>
-    <link href="<?php echo $this->asset('kernel.css')->distribution()->theme()->get(); ?>" media="screen" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->asset('os.css')->distribution()->theme()->get(); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('resources/css/ext-all-notheme.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('resources/css/xtheme-gray.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('examples/ux/css/ux-all.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('silk/famfamfam-silk-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('flags/famfamfam-flag-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false))); ?>
+    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->getWeb())); ?>
 
     <?php // STYLE AREA ------------------------------------------------------?>
     <?php echo $this->headStyle(); ?>
     <style type="text/css">
     body {
         background:
-            <?php echo $this->variable('kebabOs')->distributions->background->color; ?> 
-            url('<?php echo $this->asset('wallpapers/'.$this->variable('kebabOs')->distributions->background->image)->get(); ?>')
+            <?php echo $this->variable('os')->distributions->background->color; ?>
+            url('<?php echo $this->asset('wallpapers/'.$this->variable('os')->distributions->background->image)->get(); ?>')
             center;
     }
     </style>

@@ -9,7 +9,7 @@
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
-    * http://www.kebab-project.com/licensing
+    * http://www.kebab-project.com/cms/licensing
     * If you did not receive a copy of the license and are unable to
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
@@ -25,17 +25,17 @@
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
-    * http://www.kebab-project.com/licensing
+    * http://www.kebab-project.com/cms/licensing
     * If you did not receive a copy of the license and are unable to
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
 /**
- * Login Singleton Object
+ * Sign up Singleton Object
  */
-Login = function(){
+SignIn = function(){
 
-    var loginForm = null,
+    var signInForm = null,
         forgotPasswordForm = null;
 
     return {
@@ -43,18 +43,8 @@ Login = function(){
         init: function(){
 
             // Call builders
-            this.buildLoginForm();
+            this.buildSignInForm();
             this.buildForgotPasswordForm();
-
-            // Add events
-            Ext.fly('forgotPassword-link').on('click', function(e) {
-                e.stopEvent();
-                this.showForgotPasswordForm();
-            }, this);
-            Ext.fly('forgotPasswordCancel-link').on('click', function(e) {
-                e.stopEvent();
-                this.showLoginForm();
-            }, this)
         },
 
         // BUILDERS ----------------------------------------------------------------------------------------------------
@@ -62,27 +52,27 @@ Login = function(){
         /**
          * Login form builder
          */
-        buildLoginForm: function() {
-            loginForm = new Ext.FormPanel({
-                url: BASE_URL + '/kebab/session',
+        buildSignInForm: function() {
+            signInForm = new Ext.FormPanel({
+                renderTo: 'signIn-form',
+                bodyCssClass: 'kebab-transparent',
+                url: Kebab.OS.generateUrl('kebab/session'),
                 frame:false,
                 labelAlign:'top',
-                width: 190,
+                width: '100%',
                 buttonAlign:'left',
                 border:false,
-                renderTo: 'login-form',
-                bodyStyle: 'background:transparent;',
-                defaults: {anchor: '100%'},
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
-                    emptyText: 'Your username',
+                    emptyText: 'Your user name',
                     name: 'userName',
+                    width: 180,
                     allowBlank:false
                 },{
                     emptyText: 'Your password',
                     name: 'password',
-                    anchor: '78%',
+                    width: 140,
                     inputType: 'password',
                     allowBlank:false
                 }, {
@@ -94,20 +84,35 @@ Login = function(){
                     iconCls: 'icon-accept',
                     text: 'Send',
                     handler: function() {
-                        this.loginAction();
+                        this.signInAction();
                     },
                     scope:this
                 },{
                     xtype:'panel',
                     border:false,
-                    bodyStyle: 'background:transparent;',
-                    html: '<a href="#" id="forgotPassword-link">Forgot password</a>'
+                    bodyCssClass: 'kebab-transparent',
+                    html: '<a href="#" id="singUp-link">Sign-up</a> or <a href="#" id="forgotPassword-link">Forgot password</a>'
                 }],
                 keys:[{
                     key: [Ext.EventObject.ENTER], handler: function() {
-                        this.loginAction();
+                        this.signInAction();
                     }, scope:this
-                }]
+                }],
+                listeners: {
+                    afterRender: function(){
+                        // Add events
+                        Ext.fly('singUp-link').on('click', function(e) {
+                            e.stopEvent();
+                            Kebab.OS.redirect('backend/sign-up');
+                        }, this);
+                        
+                        Ext.fly('forgotPassword-link').on('click', function(e) {
+                            e.stopEvent();
+                            this.showForgotPasswordForm();
+                        }, this);
+                    },
+                    scope:this
+                }
             });
         },
 
@@ -116,21 +121,21 @@ Login = function(){
          */
         buildForgotPasswordForm: function() {
             forgotPasswordForm = new Ext.FormPanel({
+                renderTo: 'forgotPassword-form',
+                bodyCssClass: 'kebab-transparent',
                 url: Kebab.OS.generateUrl('kebab/forgot-password'),
                 method: 'POST',
                 frame:false,
                 labelAlign:'top',
-                width: 290,
+                width: '100%',
                 buttonAlign:'left',
                 border:false,
-                renderTo: 'forgotPassword-form',
-                bodyStyle: 'background:transparent;',
-                defaults: {anchor: '100%'},
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
                     emptyText: 'Your e-mail address',
                     name: 'email',
+                    width:285,
                     allowBlank:false,
                     vtype: 'email'
                 }],
@@ -145,68 +150,73 @@ Login = function(){
                 },{
                     xtype:'panel',
                     border:false,
-                    bodyStyle: 'background:transparent;',
+                    bodyCssClass: 'kebab-transparent',
                     html: '<a href="#" id="forgotPasswordCancel-link">Cancel</a>'
                 }],
                 keys:[{
                     key: [Ext.EventObject.ENTER], handler: function() {
                         this.forgotPasswordAction();
                     }, scope:this
-                }]
+                }],
+                listeners: {
+                    afterRender: function(){
+                        // Add events
+                        Ext.fly('forgotPasswordCancel-link').on('click', function(e) {
+                            e.stopEvent();
+                            this.showSignInForm();
+                        }, this)
+                    },
+                    scope:this
+                }
             });
         },
 
         // UTILS -------------------------------------------------------------------------------------------------------
 
         /**
-         * Show the preloader
+         * Show the pre-loader
          */
         showPreLoader: function() {
-            Ext.fly('loader').fadeIn();
-            Ext.fly('login-form-wrapper').fadeOut();
+            Ext.fly('kebab-progress-bar').fadeIn();
+            Ext.fly('signIn-form-wrapper').fadeOut();
             Ext.fly('forgotPassword-form-wrapper').fadeOut();
-            Ext.fly('kebab-system-backend-login-container').scale(270,[65]);
+            Ext.fly('kebab-system-backend-signIn-container').scale(270,[65]);
         },
 
         /**
          * Show the login form
          */
-        showLoginForm: function() {
-            Ext.fly('loader').fadeOut();
-            Ext.fly('login-form-wrapper').fadeIn();
+        showSignInForm: function() {
+            Ext.fly('kebab-progress-bar').fadeOut();
+            Ext.fly('signIn-form-wrapper').fadeIn();
             Ext.fly('forgotPassword-form-wrapper').fadeOut();
-            Ext.fly('kebab-system-backend-login-container').scale([330],[220]);
+            Ext.fly('kebab-system-backend-signIn-container').scale([330],[220]);
         },
 
         /**
          * Show the forgot password form
          */
         showForgotPasswordForm: function() {
-            Ext.fly('loader').fadeOut();
-            Ext.fly('login-form-wrapper').fadeOut();
+            Ext.fly('kebab-progress-bar').fadeOut();
+            Ext.fly('signIn-form-wrapper').fadeOut();
             Ext.fly('forgotPassword-form-wrapper').fadeIn();
-            Ext.fly('kebab-system-backend-login-container').scale(400,[128]);
+            Ext.fly('kebab-system-backend-signIn-container').scale(400,[128]);
         },
 
         // ACTIONS -----------------------------------------------------------------------------------------------------
 
         /**
-         * Login action
+         * Sign in action
          */
-        loginAction: function() {
-            if (loginForm.getForm().isValid()) {
+        signInAction: function() {
+            if (signInForm.getForm().isValid()) {
                 this.showPreLoader();
-                loginForm.getForm().submit({
+                signInForm.getForm().submit({
                     success : function() {
                         Kebab.OS.redirect('backend/desktop');
                     },
                     failure : function() {
-                        var msg = "Login failure. Please try again."
-                        loginForm.getForm().reset();
-                        loginForm.getForm().markInvalid({
-                            username: msg, password: msg
-                        });
-                        this.showLoginForm();
+                        this.showSignInForm();
                     },
                     scope:this
                 });
@@ -221,7 +231,7 @@ Login = function(){
                 this.showPreLoader();
                 forgotPasswordForm.getForm().submit({
                     success : function() {
-                        this.showLoginForm();
+                        this.showSignInForm();
                     },
                     failure : function() {
                         this.showForgotPasswordForm();
@@ -233,4 +243,4 @@ Login = function(){
     };
 }();
 
-Ext.onReady(Login.init, Login);
+Ext.onReady(SignIn.init, SignIn);

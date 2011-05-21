@@ -6,7 +6,7 @@
  * @namespace   KebabOS.applications.snake.application
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  */
 Ext.extend(KebabOS.applications.snake.application.Bootstrap, Kebab.OS.Application, {
 
