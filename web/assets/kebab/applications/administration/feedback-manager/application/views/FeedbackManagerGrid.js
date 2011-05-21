@@ -83,7 +83,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 dataIndex: 'User',
                 sortable:true,
                 renderer: function(v) {
-                    return v.firstName + ' ' + v.lastName;
+                    return v.fullName;
                 }
             },
             {

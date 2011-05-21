@@ -28,14 +28,9 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
             },
             items:[
                 {
-                    fieldLabel: 'First Name',
+                    fieldLabel: 'Fullname',
                     allowBlank:false,
-                    name: 'firstName'
-                },
-                {
-                    fieldLabel: 'Last Name',
-                    allowBlank:false,
-                    name: 'lastName'
+                    name: 'fullName'
                 },
                 {
                     fieldLabel: 'Email',

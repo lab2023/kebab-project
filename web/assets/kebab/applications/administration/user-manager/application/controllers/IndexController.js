@@ -127,7 +127,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
     },
 
     showUserRoleWindowAction: function(data) {
-        this.bootstrap.layout.userRolesWindow.setTitle(data.firstName + " " + data.lastName + " 's Roles");
+        this.bootstrap.layout.userRolesWindow.setTitle(data.fullName + " 's Roles");
         this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.id;
         this.bootstrap.layout.userRolesWindow.rolesGrid.Roles = data.Roles;
         this.bootstrap.layout.userRolesWindow.show();
@@ -145,7 +145,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
             var requestUrl = '/user/invite';
             var method = 'PUT';
         }
-        this.bootstrap.layout.emailWindow.setTitle(data.firstName + " " + data.lastName + title);
+        this.bootstrap.layout.emailWindow.setTitle(data.fullName + title);
         this.bootstrap.layout.emailWindow.emailForm.url = BASE_URL + requestUrl;
         this.bootstrap.layout.emailWindow.emailForm.method = method;
         this.bootstrap.layout.emailWindow.emailForm.getForm().findField('email').setValue(data.email);

@@ -95,12 +95,8 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                 autoHeight:true,
                 defaultType: 'textfield',
                 items: [{
-                    fieldLabel: 'First name',
-                    name: 'firstName',
-                    allowBlank: false
-                },{
-                    fieldLabel: 'Last name',
-                    name: 'lastName',
+                    fieldLabel: 'Fullname',
+                    name: 'fullName',
                     allowBlank: false
                 },{
                     fieldLabel: 'E-mail',
@@ -132,7 +128,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
             if(response.result.data.id) {
                 this.bootstrap.layout.enable();
                 Ext.getCmp('aboutMe-application-firstNameLastName-text')
-                   .update(response.result.data.firstName + " " + response.result.data.lastName);
+                   .update(response.result.data.fullName);
                 Ext.getCmp('aboutMe-application-userName-text')
                    .update(response.result.data.userName);
             }

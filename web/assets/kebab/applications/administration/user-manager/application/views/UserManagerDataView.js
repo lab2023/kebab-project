@@ -32,7 +32,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '<tpl for=".">',
                 '<tpl if="status ==\'active\' ">',
                 '<div class="userManager-application-users">',
-                '<span style="font-size:18pt;">{firstName} {lastName}</span><br />',
+                '<span style="font-size:18pt;">{fullName}</span><br />',
                 '<span>{userName}</span>, <span>{email}</span><br />',
                 '<tpl for="Roles">',
                 '<span>[{name}]</span>   ',
@@ -40,7 +40,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '</tpl>',
                 '<tpl if="status ==\'passive\' ">',
                 '<div class="userManager-application-users userManager-application-users-passive">',
-                '<span style="font-size:18pt;">{firstName} {lastName}</span><br />',
+                '<span style="font-size:18pt;">{fullName}</span><br />',
                 '<span>{userName}</span>, <span>{email}</span><br />',
                 '<tpl for="Roles">',
                 '<span>[{name}]</span>',
@@ -59,11 +59,11 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
                 '<span class="icon-email send-password" ext:qtip="Send Password"></span>',
                 '</tpl>',
                 '<tpl if="status ==\'passive\' ">',
-                '<span class="icon-email re-invite" ext:qtip="Reinvite {firstName} {lastName}"></span>',
+                '<span class="icon-email re-invite" ext:qtip="Reinvite {fullName}"></span>',
                 '</tpl>',
 
-                '<span class="icon-wrench" ext:qtip="Change {firstName} {lastName} roles "></span>',
-                '<span class="icon-cancel" ext:qtip="Delete {firstName} {lastName}"></span>',
+                '<span class="icon-wrench" ext:qtip="Change {fullName} roles "></span>',
+                '<span class="icon-cancel" ext:qtip="Delete {fullName}"></span>',
 
                 '</div>',
 
@@ -83,7 +83,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             var record = dv.getStore().getAt(index).data;
 
             if (event.getTarget("span.icon-accept")) {
-                Ext.Msg.confirm('Are you sure?', 'Do you want to passive ' + record.firstName + ' ' + record.lastName, function(button) {
+                Ext.Msg.confirm('Are you sure?', 'Do you want to passive ' + record.fullName, function(button) {
                     if (button == 'yes') {
                         this.fireEvent('userRequest', {from:this, method:'PUT', user:record, status:'passive', url:'/user/manager', store:this.bootstrap.layout.userManagerDataView.store});
                     }
@@ -91,7 +91,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             }
 
             if (event.getTarget("span.icon-delete")) {
-                Ext.Msg.confirm('Are you sure?', 'Do you want to active ' + record.firstName + ' ' + record.lastName, function(button) {
+                Ext.Msg.confirm('Are you sure?', 'Do you want to active ' + record.fullName, function(button) {
                     if (button == 'yes') {
                         this.fireEvent('userRequest', {from:this, method:'PUT', user:record, status:'active', url:'/user/manager', store:this.bootstrap.layout.userManagerDataView.store});
                     }
@@ -111,7 +111,7 @@ KebabOS.applications.userManager.application.views.UserManagerDataView = Ext.ext
             }
 
             if (event.getTarget("span.icon-cancel")) {
-                Ext.Msg.confirm('Are you sure?', 'Do you want to delete ' + record.firstName + ' ' + record.lastName, function(button) {
+                Ext.Msg.confirm('Are you sure?', 'Do you want to delete ' + record.fullName, function(button) {
                     if (button == 'yes') {
                         this.fireEvent('userRequest', {from:this, method:'DELETE', user:record, url:'/user/manager', store:this.bootstrap.layout.userManagerDataView.store});
                     }
