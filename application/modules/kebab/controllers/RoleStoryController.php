@@ -54,24 +54,32 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
         // Getting parameters
         $params = $this->_helper->param();
         $roleId = $params['roleId'];
-        $storyId = $params['storyId'];
+
+        // Convert data collection array if not
+        $collection = $this->_helper->array()->isCollection($params['data'])
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Doctrine
         //KBBTODO move dql to models
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            Doctrine_Query::create()
-                    ->delete('Model_Entity_Permission permission')
-                    ->where('permission.role_id = ?', $roleId)
-                    ->execute();
-
-            foreach ($storyId as $story) {
-                $permission = new Model_Entity_Permission();
-                $permission->role_id = $roleId;
-                $permission->story_id = $story;
-                $permission->save();
+            foreach ($collection as $story) {
+                $recordExist = is_object(Doctrine_Core::getTable('Model_Entity_Permission')->findOneBystory_idAndrole_id($story['id'], $roleId));
+                if ($story['allow'] && !$recordExist) {
+                    $permission = new Model_Entity_Permission();
+                    $permission->story_id = $story['id'];
+                    $permission->role_id = $roleId;
+                    $permission->save();
+                } elseif (!$story['allow'] && $recordExist) {
+                    Doctrine_Query::create()
+                        ->delete('Model_Entity_Permission p')
+                        ->where('p.role_id = ? AND p.story_id = ?', array($roleId, $story['id']))
+                        ->execute();
+                }
             }
             Doctrine_Manager::connection()->commit();
+            $this->_helper->response(true, 201)->getResponse();
             unset($permission);
 
         } catch (Zend_Exception $e) {
