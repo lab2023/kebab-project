@@ -133,4 +133,40 @@ class Kebab_Model_User
 
         return $retVal;
     }
+
+    public static function activate($userName, $password, $key)
+    {
+        $retVal = false;
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            $id = Doctrine_Core::getTable('Model_Entity_User')->findOneByactivationKey($key)->id;
+            $user = new Model_Entity_User();
+            $user->assignIdentifier($id);
+            $user->userName = $userName;
+            $user->password = md5($password);
+            $user->activationKey = NULL;
+            $user->status = 'approved';
+            $user->active = 1;
+            $user->save();
+
+            $userRole = new Model_Entity_UserRole();
+            $userRole->role_id = 1;
+            $userRole->user_id = $user->id;
+            $userRole->save();
+
+            $retVal = Doctrine_Manager::connection()->commit() ? $user : false;
+            
+            unset($userRole);
+            unset($id);
+            
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
+        return $retVal;
+    }
 }
