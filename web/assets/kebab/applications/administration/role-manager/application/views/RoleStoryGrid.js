@@ -40,7 +40,7 @@ KebabOS.applications.roleManager.application.views.RoleStoryGrid = Ext.extend(Ke
             {
                 header : 'ID',
                 dataIndex :'id',
-                width:20
+                width: 12
             },
             {
                 header : 'Story Title',

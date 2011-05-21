@@ -3,12 +3,12 @@
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
- * @namespace   KebabOS.applications.storyManager.application.controllers
+ * @namespace   KebabOS.applications.applicationManager.application.controllers
  * @author      Yunus ÖZCAN <yuns.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-KebabOS.applications.storyManager.application.controllers.Index = Ext.extend(Ext.util.Observable, {
+KebabOS.applications.applicationManager.application.controllers.Index = Ext.extend(Ext.util.Observable, {
 
     // Application bootstrap
     bootstrap: null,
@@ -19,7 +19,7 @@ KebabOS.applications.storyManager.application.controllers.Index = Ext.extend(Ext
         Ext.apply(this, config || {});
 
         // Call Superclass initComponent() method
-        KebabOS.applications.storyManager.application.controllers.Index.superclass.constructor.apply(this, arguments);
+        KebabOS.applications.applicationManager.application.controllers.Index.superclass.constructor.apply(this, arguments);
 
         this.init();
     },
@@ -29,6 +29,5 @@ KebabOS.applications.storyManager.application.controllers.Index = Ext.extend(Ext
 
     }
 
-    // Actions -----------------------------------------------------------------
-
+    // Actions ----------------------------------------------------------------- 
 });

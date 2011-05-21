@@ -3,12 +3,12 @@
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
- * @namespace   KebabOS.applications.storyManager.application
+ * @namespace   KebabOS.applications.applicationManager.application
  * @author      Yunus ÖZCAN <yuns.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/licensing
  */
-Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.Application, {
+Ext.extend(KebabOS.applications.applicationManager.application.Bootstrap, Kebab.OS.Application, {
 
     createApplication : function() {
 
@@ -19,12 +19,12 @@ Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.App
         if (!app) {
 
             // Default layout
-            this.layout = new KebabOS.applications.storyManager.application.layouts.Layout({
+            this.layout = new KebabOS.applications.applicationManager.application.layouts.Layout({
                 bootstrap: this
             });
 
             // Default controlller
-            this.defaultController = new KebabOS.applications.storyManager.application.controllers.Index({
+            this.defaultController = new KebabOS.applications.applicationManager.application.controllers.Index({
                 bootstrap: this
             });
 
@@ -32,12 +32,13 @@ Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.App
             app = desktop.createApplication({
                 id: this.id,
                 title: this.launcher.text,
-                iconCls: 'storyManager-application-gui-icon',
+                iconCls: 'applicationManager-application-gui-icon',
                 width: 850,
                 height: 500,
                 border:false,
                 items: this.layout
             });
+
         }
         app.show();
     }

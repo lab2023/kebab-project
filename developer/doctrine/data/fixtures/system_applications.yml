@@ -239,3 +239,19 @@ Model_Entity_Application:
       tr:
         title: Database Backup
         description: Database Backup
+
+  ApplicationManager:
+    identity: applicationManager-application
+    className: KebabOS.applications.applicationManager.application.Bootstrap
+    name: application-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Application Manager
+        description: Application Manager
+      tr:
+        title: Application Manager
+        description: Application Manager

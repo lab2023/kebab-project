@@ -80,7 +80,8 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
             {
                 header : 'ID',
                 dataIndex :'id',
-                width:10
+                align:'center',
+                width:12
             }, {
                 header : 'Role Title',
                 dataIndex :'title',
@@ -94,10 +95,12 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
             },{
                 header   : 'User Number',
                 dataIndex: 'num_user',
+                align:'center',
                 width:30
             },{
                 header   : 'Story Number',
                 dataIndex: 'num_story',
+                align:'center',
                 width:30
             },{
                 header   : 'Active ?',
