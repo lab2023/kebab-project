@@ -44,16 +44,13 @@ class Kebab_UserSignUpController extends Kebab_Rest_Controller
      */
     public function postAction()
     {
-        // Getting parameters
         $params = $this->_helper->param();
-        switch ($params['type']) {
-            case 'signUp':
-                $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
-                if (is_object($user)) {
-                    $this->sendSignUpMail($user);
-                    $this->_helper->response(true, 200);
-                }
-            default:
+        $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
+        if (is_object($user)) {
+            $this->sendSignUpMail($user);
+            $this->_helper->response(true, 200);
+        } else {
+            $this->_helper->response();
         }
     }
 
