@@ -144,7 +144,7 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
         if ($decodeJsonFields) {
             return $this->decodeJsonFields($retVal);
         }
-        return retVal;
+        return $retVal;
     }
 
     /**
