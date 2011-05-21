@@ -100,6 +100,15 @@ class Model_Entity_Application extends Doctrine_Record
              'className' => 'ApplicationTranslation',
              'length' => 2,
              ));
+        $searchable1 = new Doctrine_Template_Searchable(array(
+             'fields' => 
+             array(
+              0 => 'title',
+              1 => 'description',
+             ),
+             'className' => 'SystemApplicationSearch',
+             ));
+        $i18n0->addChild($searchable1);
         $this->actAs($i18n0);
     }
 }

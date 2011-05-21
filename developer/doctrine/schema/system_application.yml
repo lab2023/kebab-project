@@ -28,6 +28,10 @@ Application:
       fields: [title, description]
       className: ApplicationTranslation
       length: 2
+      actAs:
+        Searchable:
+          fields: [title, description]
+          className: SystemApplicationSearch
       
   options:
     type: INNODB
