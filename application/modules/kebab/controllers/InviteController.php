@@ -40,8 +40,7 @@ class Kebab_InviteController extends Kebab_Rest_Controller
     {
         // params
         $params = $this->_helper->param();
-        $firstName = $params['firstName'];
-        $lastName = $params['lastName'];
+        $fullName = $params['fullName'];
         $email = $params['email'];
         $message = $params['message'];
 
@@ -49,8 +48,7 @@ class Kebab_InviteController extends Kebab_Rest_Controller
         Doctrine_Manager::connection()->beginTransaction();
         try {
             $user = new Model_Entity_User();
-            $user->firstName = $firstName;
-            $user->lastName = $lastName;
+            $user->fullName= $fullName;
             $user->email = $email;
             $user->userName = $email;
             $user->active = 0;
@@ -81,15 +79,14 @@ class Kebab_InviteController extends Kebab_Rest_Controller
             $identity = Zend_Auth::getInstance()->getIdentity();
             //KBBTODO use language file
             $view->assign('activationKey', $activationKey);
-            $view->assign('firstName', $firstName);
-            $view->assign('fullName', $identity->firstName . ' ' . $identity->lastName);
+            $view->assign('fullName', $identity->fullName);
             $view->assign('email', $identity->email);
             $view->assign('message', $message);
 
             $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
             $mail = new Zend_Mail('UTF-8');
             $mail->setFrom($configParam->from, 'Kebab Project');
-            $mail->addTo($email, $firstName . ' ' . $lastName);
+            $mail->addTo($email, $fullName);
             $mail->setSubject('You\'re invited to join ..... ');
             $mail->setBodyHtml($view->render('send-invitation.phtml'));
             $mail->send($transport);
@@ -122,8 +119,7 @@ class Kebab_InviteController extends Kebab_Rest_Controller
             $user->userName = $email;
             $user->save();
 
-            $firstName = $user->firstName;
-            $lastName = $user->lastName;
+            $firstName = $user->fullName;
             unset($user);
 
             $invitation = Doctrine_Core::getTable('Model_Entity_Invitation')->findOneBy('user_id', $id);
@@ -148,15 +144,14 @@ class Kebab_InviteController extends Kebab_Rest_Controller
             $identity = Zend_Auth::getInstance()->getIdentity();
             //KBBTODO use language file
             $view->assign('activationKey', $activationKey);
-            $view->assign('firstName', $firstName);
-            $view->assign('fullName', $identity->firstName . ' ' . $identity->lastName);
+            $view->assign('fullName', $identity->fullName);
             $view->assign('email', $identity->email);
             $view->assign('message', $message);
 
             $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
             $mail = new Zend_Mail('UTF-8');
             $mail->setFrom($configParam->from, 'Kebab Project');
-            $mail->addTo($email, $firstName . ' ' . $lastName);
+            $mail->addTo($email, $fullName);
             $mail->setSubject('You\'re invited to join ..... ');
             $mail->setBodyHtml($view->render('send-invitation.phtml'));
             $mail->send($transport);

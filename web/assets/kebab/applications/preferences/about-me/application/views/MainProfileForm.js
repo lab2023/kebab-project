@@ -6,7 +6,7 @@
  * @namespace   KebabOS.applications.aboutMe.application.views
  * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  */
 KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
@@ -71,8 +71,8 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                     bodyStyle: 'text-align:center; margin-top:5px;',
                     defaults:{border:false},
                     items: [{
-                        bodyCssClass: 'aboutMe-application-usernameText',
-                        id: 'aboutMe-application-username-text',
+                        bodyCssClass: 'aboutMe-application-userNameText',
+                        id: 'aboutMe-application-userName-text',
                         html: '-'
                     },{
                         xtype: 'button',
@@ -95,12 +95,8 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                 autoHeight:true,
                 defaultType: 'textfield',
                 items: [{
-                    fieldLabel: 'First name',
-                    name: 'firstName',
-                    allowBlank: false
-                },{
-                    fieldLabel: 'Last name',
-                    name: 'lastName',
+                    fieldLabel: 'Fullname',
+                    name: 'fullName',
                     allowBlank: false
                 },{
                     fieldLabel: 'E-mail',
@@ -132,8 +128,8 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
             if(response.result.data.id) {
                 this.bootstrap.layout.enable();
                 Ext.getCmp('aboutMe-application-firstNameLastName-text')
-                   .update(response.result.data.firstName + " " + response.result.data.lastName);
-                Ext.getCmp('aboutMe-application-username-text')
+                   .update(response.result.data.fullName);
+                Ext.getCmp('aboutMe-application-userName-text')
                    .update(response.result.data.userName);
             }
         }

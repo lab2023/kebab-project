@@ -52,7 +52,7 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $user->save();
 
                 //KBBTODO move these settings to config file
-                $configParam = $params = Zend_Registry::get('config')->kebab->mail;
+                $configParam = Zend_Registry::get('config')->kebab->mail;
                 $smtpServer = $configParam->smtpServer;
                 $config = $configParam->config->toArray();
 
@@ -66,7 +66,7 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setFrom($configParam->from, 'Kebab Project');
-                $mail->addTo($user->email, $user->firstName . $user->lastName);
+                $mail->addTo($user->email, $user->fullName);
                 $mail->setSubject('Reset Password');
                 $mail->setBodyHtml($view->render('forgot-password.phtml'));
                 $mail->send($transport);

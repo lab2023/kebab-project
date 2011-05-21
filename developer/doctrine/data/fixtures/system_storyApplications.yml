@@ -58,3 +58,7 @@ Model_Entity_StoryApplication:
   Record_17:
     Story: Backup_Backup
     Application: DatabaseBackup
+
+  Record_17:
+    Story: Application_Management
+    Application: ApplicationManager

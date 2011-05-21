@@ -6,7 +6,7 @@
  * @namespace   KebabOS.applications.storyManager.application
  * @author      Yunus ÖZCAN <yuns.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  */
 Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.Application, {
 
@@ -17,10 +17,6 @@ Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.App
         var app = desktop.getApplication(this.id);
 
         if (!app) {
-
-            // desktop width and height
-            var winWidth = parseInt(desktop.getWinWidth() / 1);
-            var winHeight = parseInt(desktop.getWinHeight() / 1);
 
             // Default layout
             this.layout = new KebabOS.applications.storyManager.application.layouts.Layout({
@@ -37,8 +33,8 @@ Ext.extend(KebabOS.applications.storyManager.application.Bootstrap, Kebab.OS.App
                 id: this.id,
                 title: this.launcher.text,
                 iconCls: 'storyManager-application-gui-icon',
-                width: winWidth,
-                height: winHeight,
+                width: 850,
+                height: 500,
                 border:false,
                 items: this.layout
             });

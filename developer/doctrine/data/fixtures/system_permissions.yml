@@ -27,4 +27,7 @@ Model_Entity_Permission:
   Admin_7:
     Story: Backup_Backup
     Role: Admin
+  Admin_7:
+    Story: Application_Management
+    Role: Admin
     

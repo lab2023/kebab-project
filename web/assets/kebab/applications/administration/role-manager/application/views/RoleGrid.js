@@ -6,7 +6,7 @@
  * @namespace   KebabOS.applications.roleManager.application.views
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  */
 KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.library.ext.ComplexEditorGridPanel, {
 
@@ -80,7 +80,8 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
             {
                 header : 'ID',
                 dataIndex :'id',
-                width:10
+                align:'center',
+                width:12
             }, {
                 header : 'Role Title',
                 dataIndex :'title',
@@ -94,10 +95,12 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
             },{
                 header   : 'User Number',
                 dataIndex: 'num_user',
+                align:'center',
                 width:30
             },{
                 header   : 'Story Number',
                 dataIndex: 'num_story',
+                align:'center',
                 width:30
             },{
                 header   : 'Active ?',

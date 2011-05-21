@@ -129,4 +129,49 @@ class Kebab_UserController extends Kebab_Rest_Controller
             throw $e;
         }
     }
+
+    /**
+     * User can invited or sign-up
+     * @return void
+     */
+    public function postAction()
+    {
+        // Getting parameters
+        $params = $this->_helper->param();
+
+        switch ($params['type']) {
+            case 'signUp':
+                $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
+                if (is_object($user)) {
+                    $this->sendSignUpMail($user);
+                    $this->_helper->response(true, 200);
+                }
+            default:
+        }
+
+
+    }
+
+    private function sendSignUpMail($user)
+    {
+        $configParam = Zend_Registry::get('config')->kebab->mail;
+        $smtpServer = $configParam->smtpServer;
+        $config = $configParam->config->toArray();
+
+        // Mail phtml
+        $view = new Zend_View;
+        $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
+
+        //KBBTODO use language file
+        $view->assign('fullName', $user->fullName);
+        $view->assign('activationKey', $user->activationKey);
+
+        $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+        $mail = new Zend_Mail('UTF-8');
+        $mail->setFrom($configParam->from, 'Kebab Project');
+        $mail->addTo($user->email, $user->fullName);
+        $mail->setSubject('Welcome to Kebab Project');
+        $mail->setBodyHtml($view->render('sign-up.phtml'));
+        $mail->send($transport);
+    }
 }

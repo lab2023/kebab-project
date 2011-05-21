@@ -19,7 +19,7 @@
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -34,7 +34,7 @@
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 class ErrorController extends Kebab_Controller_Action
@@ -130,12 +130,10 @@ class ErrorController extends Kebab_Controller_Action
             if ($this->getInvokeArg('displayExceptions') == true) {
                 $responseData['exception']['message']        = $errors->exception->getMessage();
                 $responseData['exception']['traceAsSttring'] = $errors->exception->getTraceAsString();
-                $responseData['request']['params']         = $errors->request->getParams();
+                $responseData['request']['params']           = $errors->request->getParams();
             }
             
-            $this->_helper->response()
-                 ->addData($responseData)
-                 ->getResponse();
+            $this->_helper->response()->addData($responseData)->getResponse();
         } else {
             throw new Zend_Exception('Request isn\'t ajax');
         }

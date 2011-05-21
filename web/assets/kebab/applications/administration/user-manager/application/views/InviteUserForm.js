@@ -6,7 +6,7 @@
  * @namespace   KebabOS.applications.userManager.application.views
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  */
 KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(Ext.form.FormPanel, {
 
@@ -28,14 +28,9 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
             },
             items:[
                 {
-                    fieldLabel: 'First Name',
+                    fieldLabel: 'Fullname',
                     allowBlank:false,
-                    name: 'firstName'
-                },
-                {
-                    fieldLabel: 'Last Name',
-                    allowBlank:false,
-                    name: 'lastName'
+                    name: 'fullName'
                 },
                 {
                     fieldLabel: 'Email',

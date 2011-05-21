@@ -14,11 +14,9 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    System
- * @subpackage 
- * @author	   lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - 
- *             internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @author     lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
@@ -29,11 +27,9 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Core
- * @subpackage 
- * @author	   lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 -
- *             internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license    http://www.kebab-project.com/licensing
+ * @author     lab2023 Dev Team
+ * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 final class Kebab_Version

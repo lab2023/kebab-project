@@ -1,0 +1,8 @@
+{
+    languages   : ['tr'],
+    info  : {
+        "author"    : "John Doe",
+        "url"       : "http://www.example.com",
+        "version"   : "0.0.1"
+    }
+}
