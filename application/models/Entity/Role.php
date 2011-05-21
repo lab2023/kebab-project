@@ -67,7 +67,6 @@ class Model_Entity_Role extends Doctrine_Record
              'foreign' => 'role_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $softdelete0 = new Doctrine_Template_SoftDelete();
         $blameable0 = new Doctrine_Template_Blameable();
         $i18n0 = new Doctrine_Template_I18n(array(
              'fields' => 
@@ -76,7 +75,7 @@ class Model_Entity_Role extends Doctrine_Record
               1 => 'description',
              ),
              'className' => 'RoleTranslation',
-             'length' => 5,
+             'length' => 2,
              ));
         $searchable1 = new Doctrine_Template_Searchable(array(
              'fields' => 
@@ -87,7 +86,6 @@ class Model_Entity_Role extends Doctrine_Record
              ));
         $i18n0->addChild($searchable1);
         $this->actAs($timestampable0);
-        $this->actAs($softdelete0);
         $this->actAs($blameable0);
         $this->actAs($i18n0);
     }
