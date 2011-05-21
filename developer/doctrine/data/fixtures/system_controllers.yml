@@ -62,6 +62,10 @@ Model_Entity_Controller:
     Module: Kebab
     name: invite
 
+  Kebab_Application:
+    Module: Kebab
+    name: application
+
   # BACKUP MODULE #########################################################
   Backup_Backup:
     Module: Backup

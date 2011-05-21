@@ -40,11 +40,10 @@ class Kebab_Model_Application
     /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
      * 
-     * @param  array  $rolesWithAncestor
-     * @param  string $defaultLanguage
+     * @static
      * @return array
      */
-    public static function getApplicationsByPermission($defaultLanguage)
+    public static function getApplicationsByPermission()
     {
 
         $lang  = Zend_Auth::getInstance()->getIdentity()->language;

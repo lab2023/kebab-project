@@ -224,7 +224,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                   'role-story',
                                   'user',
                                   'user-role',
-                                  'invite')
+                                  'invite',
+                                  'application')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);
