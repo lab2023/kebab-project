@@ -44,11 +44,10 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
         if ($validatorEmail->isValid($email)) {
 
             // Create user object
-            $user = Doctrine_Core::getTable('User_Model_User')->findOneBy('email', $email);
+            $user = Doctrine_Core::getTable('Model_Entity_User')->findOneBy('email', $email);
 
             if ($user !== false) {
-                $activationKey = md5(mt_rand(10000, 99999));
-                $user->activationKey = $activationKey;
+                $user->password = Kebab_Security::createPassword();
                 $user->save();
 
                 //KBBTODO move these settings to config file
@@ -61,7 +60,7 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
                 //KBBTODO use language file
-                $view->assign('activationKey', $activationKey);
+                $view->assign('password', $user->password);
 
                 $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
                 $mail = new Zend_Mail('UTF-8');
