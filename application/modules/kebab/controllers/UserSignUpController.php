@@ -48,9 +48,9 @@ class Kebab_UserSignUpController extends Kebab_Rest_Controller
         $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
         if (is_object($user)) {
             $this->sendSignUpMail($user);
-            $this->_helper->response(true, 200);
+            $this->_helper->response(true, 200)->getResponse();
         } else {
-            $this->_helper->response();
+            $this->_helper->response()->getResponse();
         }
     }
 
@@ -65,10 +65,12 @@ class Kebab_UserSignUpController extends Kebab_Rest_Controller
         $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
         //KBBTODO use language file
+        $view->assign('id', $user->id);
         $view->assign('fullName', $user->fullName);
         $view->assign('activationKey', $user->activationKey);
 
         $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+        Zend_Mail::setDefaultTransport($transport);
         $mail = new Zend_Mail('UTF-8');
         $mail->setFrom($configParam->from, 'Kebab Project');
         $mail->addTo($user->email, $user->fullName);
