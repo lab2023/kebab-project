@@ -139,7 +139,7 @@ class Kebab_UserController extends Kebab_Rest_Controller
         // Getting parameters
         $params = $this->_helper->param();
 
-        switch ($params['type']) {
+        switch ($params['action']) {
             case 'signUp':
                 $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
                 if (is_object($user)) {
