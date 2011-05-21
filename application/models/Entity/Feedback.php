@@ -38,7 +38,7 @@ class Model_Entity_Feedback extends Doctrine_Record
              'values' => 
              array(
               0 => 'open',
-              1 => 'process',
+              1 => 'progress',
               2 => 'closed',
              ),
              ));

@@ -1,27 +1,29 @@
 User:
   tableName: system_user
   columns:
-    firstName:
+    fullName:
       type: string(255)
-    lastName:
-      type: string(255)
+    userName:
+      type: string(55)
+      unique: true
+      notnull: true
     email:
       type: string(255)
       unique: true
       notnull: true
+    password:
+      type: string(255)
     language:
       type: enum
       length: 2
       values: ['en', 'tr']
-    username:
-      type: string(55)
-      unique: true
-      notnull: true
-    password:
-      type: string(255)
     activationKey:
       type: string(255)
       unique: true
+    status:
+      type: enum
+      length: 8
+      values: ['pending', 'banned', 'approved']
     active:
       type: boolean
 
@@ -30,9 +32,9 @@ User:
     SoftDelete:
     Blameable:
     Sluggable:
-      fields: [firstName, lastName]
+      fields: [fullName]
     Searchable:
-      fields: [firstName, lastName, username, email]    
+      fields: [fullName, userName, email]
       className: SystemUserSearch
 
   relations:
@@ -42,6 +44,7 @@ User:
       refClass: UserRole
 
   options:
+    type: INNODB
     type: INNODB
     collate: utf8_bin
     charset: utf8

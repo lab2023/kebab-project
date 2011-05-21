@@ -44,7 +44,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
     public function postAction()
     {
         // Get params
-        $username   = $this->_request->getParam('username');
+        $username   = $this->_request->getParam('userName');
         $password   = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('remember_me');
 
@@ -61,17 +61,17 @@ class Kebab_SessionController extends Kebab_Rest_Controller
 
         if ($this->_request->isPost()
             && $validatorPassword->isValid($password)
-            && $validatorUsername->isValid($username)
+            && $validatorUsername->isValid($userName)
         ) {
             // set ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
             $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_Entity_User'));
 
             $authAdapter->setTableName('Model_Entity_User u')
-                    ->setIdentityColumn('username')
+                    ->setIdentityColumn('userName')
                     ->setCredentialColumn('password')
                     ->setCredentialTreatment('MD5(?) AND active = 1')
-                    ->setIdentity($username)
+                    ->setIdentity($userName)
                     ->setCredential($password);
 
             // set Zend_Auth

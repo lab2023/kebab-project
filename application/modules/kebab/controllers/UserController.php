@@ -49,7 +49,7 @@ class Kebab_UserController extends Kebab_Rest_Controller
 
         //KBBTODO Move dql to models
         $query = Doctrine_Query::create()
-                ->select('user.firstName, user.lastName, user.email, user.username, role.name, user.active')
+                ->select('user.fullName, user.email, user.userName, role.name, user.active')
                 ->from('Model_Entity_User user')
                 ->leftJoin('user.Roles role')
                 ->whereIn('user.id', $ids);

@@ -134,7 +134,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                 Ext.getCmp('aboutMe-application-firstNameLastName-text')
                    .update(response.result.data.firstName + " " + response.result.data.lastName);
                 Ext.getCmp('aboutMe-application-username-text')
-                   .update(response.result.data.username);
+                   .update(response.result.data.userName);
             }
         }
     },

@@ -77,7 +77,7 @@ Login = function(){
                 hideLabels: true,
                 items: [{
                     emptyText: 'Your username',
-                    name: 'username',
+                    name: 'userName',
                     allowBlank:false
                 },{
                     emptyText: 'Your password',

@@ -44,7 +44,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
 
         //KBBTODO move DQL to model class
         $query = Doctrine_Query::create()
-                ->select('user.id, user.firstName, user.lastName, user.email, user.language, user.username')
+                ->select('user.id, user.firstName, user.lastName, user.email, user.language, user.userName')
                 ->from('Model_Entity_User user')
                 ->where('user.id = ?', array($userSessionId));
 

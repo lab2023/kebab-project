@@ -52,7 +52,7 @@ class Kebab_InviteController extends Kebab_Rest_Controller
             $user->firstName = $firstName;
             $user->lastName = $lastName;
             $user->email = $email;
-            $user->username = $email;
+            $user->userName = $email;
             $user->active = 0;
             $user->save();
 
@@ -119,7 +119,7 @@ class Kebab_InviteController extends Kebab_Rest_Controller
             $user = new User_Model_User();
             $user->assignIdentifier($id);
             $user->email = $email;
-            $user->username = $email;
+            $user->userName = $email;
             $user->save();
 
             $firstName = $user->firstName;
