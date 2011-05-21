@@ -44,7 +44,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
 
         //KBBTODO move DQL to model class
         $query = Doctrine_Query::create()
-                ->select('user.id, user.firstName, user.lastName, user.email, user.language, user.userName')
+                ->select('user.id, user.fullName, user.email, user.language, user.userName')
                 ->from('Model_Entity_User user')
                 ->where('user.id = ?', array($userSessionId));
 
@@ -62,8 +62,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
 
         // Validation
-        $firstName = $params['firstName'];
-        $lastName = $params['lastName'];
+        $fullName = $params['fullName'];
         $email = $params['email'];
         $language = $params['language'];
 
@@ -83,8 +82,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             // DQL
             $profile = new Model_Entity_User();
             $profile->assignIdentifier($userSessionId);
-            $profile->firstName = $firstName;
-            $profile->lastName = $lastName;
+            $profile->fullName = $fullName;
             $profile->email = $email;
             $profile->language = $language;
             $profile->save();

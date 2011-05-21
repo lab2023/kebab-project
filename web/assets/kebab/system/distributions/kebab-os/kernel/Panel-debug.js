@@ -151,7 +151,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             items: [applicationsCombobox, {
                 iconCls : 'icon-status-online',
                 template: this.buttonTpl,
-                text: this.user.firstName + ' ' + this.user.lastName,
+                text: this.user.fullName,
                 handler: function() {
                     this.kernel.getDesktop().launchApplication('aboutMe-application');
                 },

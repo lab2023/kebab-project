@@ -66,7 +66,7 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setFrom($configParam->from, 'Kebab Project');
-                $mail->addTo($user->email, $user->firstName . $user->lastName);
+                $mail->addTo($user->email, $user->fullName);
                 $mail->setSubject('Reset Password');
                 $mail->setBodyHtml($view->render('forgot-password.phtml'));
                 $mail->send($transport);

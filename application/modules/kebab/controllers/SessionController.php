@@ -44,7 +44,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
     public function postAction()
     {
         // Get params
-        $username   = $this->_request->getParam('userName');
+        $userName   = $this->_request->getParam('userName');
         $password   = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('remember_me');
 
@@ -54,14 +54,14 @@ class Kebab_SessionController extends Kebab_Rest_Controller
         }
 
         //Filter for SQL Injection
-        $validatorUsername = new Zend_Validate();
-        $validatorUsername->addValidator(new Zend_Validate_StringLength(4, 16))->addValidator(new Zend_Validate_Alnum());
+        $validatorUserName = new Zend_Validate();
+        $validatorUserName->addValidator(new Zend_Validate_StringLength(4, 16))->addValidator(new Zend_Validate_Alnum());
         $validatorPassword = new Zend_Validate();
         $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
 
         if ($this->_request->isPost()
             && $validatorPassword->isValid($password)
-            && $validatorUsername->isValid($userName)
+            && $validatorUserName->isValid($userName)
         ) {
             // set ZendX_Doctrine_Auth_Adapter
             $auth = Zend_Auth::getInstance();
