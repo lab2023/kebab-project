@@ -1,0 +1,18 @@
+<?php
+$this->headTitle($this->translate('Sign-up'));
+$this->headScript()->appendFile($this->asset('sign-up.js')->distribution()->get());
+?>
+
+<div id="kebab-system-backend-signUp-container" class="kebab-container kebab-rounded-corners kebab-shadow">
+
+    <div id="signUp-form-wrapper">
+        
+        <h1 class="kebab-heading"><?php echo $this->translate('Sign-up'); ?></h1>
+
+        <div id="signUp-form"></div>
+
+    </div>
+
+    <?php echo $this->render('backend/_progress-bar.phtml'); ?>
+    
+</div>

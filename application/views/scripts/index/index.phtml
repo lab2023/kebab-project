@@ -1,11 +1,11 @@
 <?php
-$this->headTitle('Front-end');
+$this->headTitle($this->translate('Front-end'));
 ?>
 
 <div id="wrapper" class="container_12">
 
     <h1>Kebab Project</h1>
-    <p>Welcome to Kebab Project front-end area...</p>
+    <p><?php $this->translate('Welcome to Kebab Project front-end area...'); ?></p>
     <p>
         <a href="<?php echo $this->baseUrl('backend'); ?>">Go to back-end</a> or visit
         <a href="http://www.kebab-project.com" target="_blank">Kebab Project's web site</a>

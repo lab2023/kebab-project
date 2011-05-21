@@ -33,7 +33,7 @@
  * @version    1.5.0
  */
 return array(
-    'Hello World' => 'Merhaba Dünya tr',
+    'Hello World!' => 'Merhaba Dünya!',
     
     // REST CRUD
     'Record was created.'                               => 'Kayıt eklendi.',
