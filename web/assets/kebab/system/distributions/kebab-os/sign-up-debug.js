@@ -35,7 +35,8 @@
  */
 SignUp = function(){
 
-    var signUpForm = null;
+    var signUpAPI = Kebab.OS.generateUrl('kebab/user'),
+        signUpForm = null;
 
     return {
 
@@ -59,7 +60,7 @@ SignUp = function(){
             signUpForm = new Ext.FormPanel({
                 renderTo: 'signUp-form',
                 bodyCssClass: 'kebab-transparent',
-                url: Kebab.OS.generateUrl('kebab/user'),
+                url: signUpAPI,
                 frame:false,
                 labelAlign:'top',
                 width: '100%',
@@ -72,16 +73,18 @@ SignUp = function(){
                     hidden:true,
                     value: 'signUp'
                 },{
+                    fieldLabel: 'Your full name',
                     emptyText: 'Your full name',
                     name: 'fullName',
                     allowBlank:false,
-                    width:260
+                    anchor:'100%'
                 },{
+                    fieldLabel: 'Your e-mail address',
                     emptyText: 'Your e-mail address',
                     name: 'email',
                     allowBlank:false,
                     vtype: 'email',
-                    width:330
+                    anchor:'100%'
                 }],
                 buttons: [{
                     width:80,

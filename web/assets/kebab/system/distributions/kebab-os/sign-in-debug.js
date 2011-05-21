@@ -35,7 +35,9 @@
  */
 SignIn = function(){
 
-    var signInForm = null,
+    var signInAPI = Kebab.OS.generateUrl('kebab/session'),
+        forgotPasswordAPI = Kebab.OS.generateUrl('kebab/forgot-password'),
+        signInForm = null,
         forgotPasswordForm = null;
 
     return {
@@ -56,7 +58,7 @@ SignIn = function(){
             signInForm = new Ext.FormPanel({
                 renderTo: 'signIn-form',
                 bodyCssClass: 'kebab-transparent',
-                url: Kebab.OS.generateUrl('kebab/session'),
+                url: signInAPI,
                 frame:false,
                 labelAlign:'top',
                 width: '100%',
@@ -65,11 +67,13 @@ SignIn = function(){
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
+                    fieldLabel: 'Your user name',
                     emptyText: 'Your user name',
                     name: 'userName',
                     width: 180,
                     allowBlank:false
                 },{
+                    fielLabel: 'Your password',
                     emptyText: 'Your password',
                     name: 'password',
                     width: 140,
@@ -77,7 +81,7 @@ SignIn = function(){
                     allowBlank:false
                 }, {
                     xtype: 'checkboxgroup',
-                    items: [{boxLabel: 'Remember me', name: 'rememberMe', checked: false}]
+                    items: [{boxLabel: 'Keep signed in', name: 'rememberMe', checked: false}]
                 }],
                 buttons: [{
                     width:80,
@@ -123,7 +127,7 @@ SignIn = function(){
             forgotPasswordForm = new Ext.FormPanel({
                 renderTo: 'forgotPassword-form',
                 bodyCssClass: 'kebab-transparent',
-                url: Kebab.OS.generateUrl('kebab/forgot-password'),
+                url: forgotPasswordAPI,
                 method: 'POST',
                 frame:false,
                 labelAlign:'top',
@@ -133,9 +137,10 @@ SignIn = function(){
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
+                    fieldLabel: 'Your e-mail address',
                     emptyText: 'Your e-mail address',
                     name: 'email',
-                    width:285,
+                    anchor:'100%',
                     allowBlank:false,
                     vtype: 'email'
                 }],
@@ -190,7 +195,7 @@ SignIn = function(){
             Ext.fly('kebab-progress-bar').fadeOut();
             Ext.fly('signIn-form-wrapper').fadeIn();
             Ext.fly('forgotPassword-form-wrapper').fadeOut();
-            Ext.fly('kebab-system-backend-signIn-container').scale([330],[220]);
+            Ext.fly('kebab-system-backend-signIn-container').scale([330],[245]);
         },
 
         /**
@@ -200,7 +205,7 @@ SignIn = function(){
             Ext.fly('kebab-progress-bar').fadeOut();
             Ext.fly('signIn-form-wrapper').fadeOut();
             Ext.fly('forgotPassword-form-wrapper').fadeIn();
-            Ext.fly('kebab-system-backend-signIn-container').scale(400,[128]);
+            Ext.fly('kebab-system-backend-signIn-container').scale(400,[175]);
         },
 
         // ACTIONS -----------------------------------------------------------------------------------------------------

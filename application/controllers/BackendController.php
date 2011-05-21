@@ -70,6 +70,17 @@ class BackendController extends Kebab_Controller_Action
     {
 
     }
+
+    /**
+     * Sign-up screen
+     *
+     * @return void
+     */
+    public function activationAction()
+    {
+        // Bind activation key to view layer
+        $this->view->activationKey = $this->_request->getParam('key') ? $this->_request->getParam('key') : 0;
+    }
     
     /**
      * Desktop screen

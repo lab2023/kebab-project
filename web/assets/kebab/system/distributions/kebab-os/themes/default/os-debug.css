@@ -43,7 +43,7 @@ html, body {
 /*---------------------------------CLASSES------------------------------------*/
 h1.kebab-heading {
     font-size:27px !important;
-    margin-bottom:10px !important;
+    margin-bottom:5px !important;
     text-shadow: #CCC 2px 3px 0;
     color:#222;
 }
@@ -62,16 +62,33 @@ p.kebab-paragraph {
     height:250px;
     text-align:center;
 }
-.kebab-container  input[type=text], .kebab-container input[type=text], .kebab-container input[type=password] {
+.kebab-container, 
+.kebab-container button,
+.kebab-container p,
+.kebab-container strong,
+.kebab-container .x-fieldset-header-text,
+.kebab-container .x-form-check-wrap {
+    font-size: 15px !important;
+}
+.kebab-container input[type=text], .kebab-container input[type=text], .kebab-container input[type=password] {
     font-size: 20px !important;
     height: 30px !important;
 }
 .kebab-container button {
     height: 25px !important;
-    font-size: 15px !important;
+}
+.kebab-container p {
+    margin-bottom:10px;
+}
+.kebab-container strong {
+    font-weight:bold;
 }
 .kebab-container .x-btn {
     margin-left:-8px !important;
+}
+.kebab-container .x-form-composite {
+    border:0 !important;
+    background:transparent !important;
 }
 .kebab-container .x-btn .x-form-cb-label, .kebab-container .x-form-cb-label {
     color: #333 !important;
@@ -81,7 +98,6 @@ p.kebab-paragraph {
 }
 .kebab-container .x-form-check-wrap {
     text-align:left;
-    font-size:15px;
 }
 .kebab-opacity {
     background:transparent url('images/os/container-bg-85.png')  !important;
@@ -199,7 +215,7 @@ p.kebab-paragraph {
 #kebab-system-backend-signIn-container {
     width:330px;
     overflow:hidden;
-    height:220px;
+    height:245px;
 }
 div#signIn-form-wrapper, div#forgotPassword-form-wrapper{
     position: absolute;
@@ -210,20 +226,20 @@ div#forgotPassword-form-wrapper {
 }
 div#signIn-form-wrapper {
     width:330px;
-    height:220px;
-    background: url('images/os/sign-in.png') no-repeat 100% 20px;
+    height:245px;
+    background: url('images/os/sign-in.png') no-repeat right 43px;
 }
 div#forgotPassword-form-wrapper {
     height:128px;
     visibility:hidden;
-    background: url('images/os/forgot-password.png') no-repeat 100% 22px;
+    background: url('images/os/forgot-password.png') no-repeat right top;
 }
 
 /* Sign-up Screen */
 #kebab-system-backend-signUp-container {
     width:330px;
     overflow:hidden;
-    height:175px;
+    height:220px;
 }
 div#signUp-form-wrapper{
     position: absolute;
@@ -231,22 +247,22 @@ div#signUp-form-wrapper{
 }
 div#signUp-form-wrapper {
     width:330px;
-    height:175px;
-    background: url('images/os/sign-up.png') no-repeat 100% 30px;
+    height:220px;
+    background: url('images/os/sign-up.png') no-repeat right top;
 }
 
 /* Activation Screen */
 #kebab-system-backend-activation-container {
-    width:330px;
+    width:300px;
     overflow:hidden;
-    height:175px;
+    height:385px;
 }
 div#activation-form-wrapper{
     position: absolute;
     text-align: left;
 }
 div#activation-form-wrapper {
-    width:330px;
-    height:175px;
-    background: url('images/os/activation.png') no-repeat 100% 30px;
+    width:300px;
+    height:385px;
+    background: url('images/os/activation.png') no-repeat right top;
 }

@@ -1,0 +1,23 @@
+<?php
+$this->headTitle($this->translate('Activation'));
+$this->headScript()->appendFile($this->asset('activation.js')->distribution()->get());
+?>
+
+<div id="kebab-system-backend-activation-container" class="kebab-container kebab-rounded-corners kebab-shadow">
+
+    <div id="activation-form-wrapper">
+        
+        <h1 class="kebab-heading"><?php echo $this->translate('Activation'); ?></h1>
+
+        <p>
+            Welcome back, please fill this form<br />to complete your sign-up process.
+        </p>
+
+        <div id="activation-form"></div>
+        <input type="hidden" id="activation-key" value="<?php echo $this->activationKey; ?>" />
+
+    </div>
+
+    <?php echo $this->render('backend/_progress-bar.phtml'); ?>
+    
+</div>
