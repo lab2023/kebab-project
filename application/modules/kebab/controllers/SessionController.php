@@ -60,39 +60,12 @@ class Kebab_SessionController extends Kebab_Rest_Controller
         $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
 
         if ($this->_request->isPost()
-            && $validatorPassword->isValid($password)
             && $validatorUserName->isValid($userName)
+            && $validatorPassword->isValid($password)
         ) {
-            // set ZendX_Doctrine_Auth_Adapter
-            $auth = Zend_Auth::getInstance();
-            $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_Entity_User'));
-
-            $authAdapter->setTableName('Model_Entity_User u')
-                    ->setIdentityColumn('userName')
-                    ->setCredentialColumn('password')
-                    ->setCredentialTreatment('MD5(?) AND active = 1')
-                    ->setIdentity($userName)
-                    ->setCredential($password);
-
-            // set Zend_Auth
-            $result = $auth->authenticate($authAdapter);
-
-            // Check Auth Validation
-            if ($result->isValid()) {
-
-                // Remove some fields which are secure!
-                $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
-                $identity = $authAdapter->getResultRowObject(null, $omitColumns);
-                $identity->roles = Kebab_Model_User::getUserRoles($identity->id);
-                $identity->acl = new Kebab_Access();
-
-                $auth->getStorage()->write($identity);
-
-                if (!is_null($rememberMe)) {
-                    Zend_Session::rememberMe(604800);
-                }
-                $this->_helper->response(true)->getResponse();
-
+            $hasIdentity = Kebab_Authentication::signIn($userName, $password, !is_null($rememberMe));
+            if ($hasIdentity) {
+                $this->_helper->response(true, 200)->getResponse();
             } else {
                 $this->_helper->response()->addNotification('ERR', 'Please check your user name and password!')->getResponse();
             }
