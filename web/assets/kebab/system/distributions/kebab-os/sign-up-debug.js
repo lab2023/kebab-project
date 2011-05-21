@@ -68,7 +68,7 @@ SignUp = function(){
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
-                    name: 'action',
+                    name: 'type',
                     hidden:true,
                     value: 'signUp'
                 },{
