@@ -71,20 +71,7 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
             $response->addNotification('ERR', 'This username or email already at system.')->getResponse();
         }
 
-        $id = Doctrine_Core::getTable('Model_Entity_User')->findOneByactivationKey($params['key'])->id;
-        $user = new Model_Entity_User();
-        $user->assignIdentifier($id);
-        $user->userName = $params['userName'];
-        $user->password = md5($params['password']);
-        $user->activationKey = NULL;
-        $user->status = 'approved';
-        $user->active = 1;
-        $user->save();
-
-        $userRole = new Model_Entity_UserRole();
-        $userRole->role_id = 1;
-        $userRole->user_id = $user->id;
-        $userRole->save();
+        $user = Kebab_Model_User::activate($params['userName'], $params['password'], $params['key']);
 
         Kebab_Authentication::signIn($user->userName, $params['userName']);
         
