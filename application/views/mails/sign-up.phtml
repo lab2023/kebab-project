@@ -1,0 +1,19 @@
+    <h1>You're invited to join .............. </h1>
+
+    <p>Hi <?php echo $this->fullName; ?>,</p>
+
+    <p><?php echo $this->fullName; ?> just set up an account for you.</p>
+
+    <strong>All you need to do is choose a username and password.
+    It only takes a few seconds.
+    Click this link to get started:</strong>
+    <p><a href="<?php echo $this->baseUrl('backend/accept-invitation/') . $this->activationKey; ?>"><?php echo $this->baseUrl('backend/accept-invitation/') . $this->activationKey; ?></a></p>
+
+    <hr />
+    <strong><?php echo $this->fullName; ?> says:</strong>
+    <p><?php echo $this->message; ?></p>
+
+    <p>Have questions? Contact <?php echo $this->fullName; ?> at <?php echo $this->email; ?></p>
+
+
+    <?php echo $this->baseUrl(''); ?>

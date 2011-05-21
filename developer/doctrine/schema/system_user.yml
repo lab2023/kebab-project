@@ -6,7 +6,6 @@ User:
     userName:
       type: string(55)
       unique: true
-      notnull: true
     email:
       type: string(255)
       unique: true

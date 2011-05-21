@@ -59,4 +59,78 @@ class Kebab_Model_User
         
         return $roles;
     }
+
+    /**
+     * @static
+     * @throws Doctrine_Exception|Zend_Exception
+     * @param string $fullName
+     * @param string $email
+     * @param string $language
+     * @return bool|Model_Entity_User
+     */
+    public static function signUp($fullName, $email, $language = 'en')
+    {
+        $retVal = false;
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+
+            $userSignUp = new Model_Entity_User();
+            $userSignUp->fullName = $fullName;
+            $userSignUp->email = $email;
+            $userSignUp->language = $language;
+            $userSignUp->activationKey = Kebab_Security::createActivationKey();
+            $userSignUp->status = 'pending';
+            $userSignUp->active = 0;
+            $userSignUp->save();
+
+            $retVal = $userSignUp;
+            Doctrine_Manager::connection()->commit();
+            unset($userSignUp);
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
+        return $retVal;
+    }
+
+    /**
+     * @static
+     * @throws Doctrine_Exception|Zend_Exception
+     * @param string $fullName
+     * @param string $email
+     * @param string $language
+     * @return bool|Model_Entity_User
+     */
+    public static function invite($fullName, $email, $language = 'en')
+    {
+        $retVal = false;
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+
+            $userSignUp = new Model_Entity_User();
+            $userSignUp->fullName = $fullName;
+            $userSignUp->email = $email;
+            $userSignUp->language = $language;
+            $userSignUp->activationKey = Kebab_Security::createActivationKey();
+            $userSignUp->status = 'pending';
+            $userSignUp->active = 0;
+            $userSignUp->save();
+
+            $retVal = $userSignUp;
+            Doctrine_Manager::connection()->commit();
+            unset($userSignUp);
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
+        return $retVal;
+    }
 }

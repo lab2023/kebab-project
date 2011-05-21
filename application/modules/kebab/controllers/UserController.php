@@ -129,4 +129,54 @@ class Kebab_UserController extends Kebab_Rest_Controller
             throw $e;
         }
     }
+
+    /**
+     * User can invited or sign-up
+     * @return void
+     */
+    public function postAction()
+    {
+        $retVal = false;
+
+        // Params
+        $fullName = 'Onur Özgür ÖZKAN';
+        $email    = 'onur.ozgur.ozkan@lab2023.com';
+        $type     = 'signUp';
+
+        switch ($type) {
+            case 'signUp':
+                $user = Kebab_Model_User::signUp($fullName, $email);
+            case 'invite':
+                $user = Kebab_Model_User::invite($fullName, $email);
+            default:
+        }
+
+        if (is_object($retVal)) {
+            $this->sendSignUpMail($user);
+        }
+    }
+
+    private function sendSignUpMail($user)
+    {
+        //KBBTODO move these settings to config file
+        $configParam = Zend_Registry::get('config')->kebab->mail;
+        $smtpServer = $configParam->smtpServer;
+        $config = $configParam->config->toArray();
+
+        // Mail phtml
+        $view = new Zend_View;
+        $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
+
+        //KBBTODO use language file
+        $view->assign('fullName', $user->fullName);
+        $view->assign('email', $user->email);
+
+        $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
+        $mail = new Zend_Mail('UTF-8');
+        $mail->setFrom($configParam->from, 'Kebab Project');
+        $mail->addTo($user->email, $user->fullName);
+        $mail->setSubject('Welcome to Kebab Project');
+        $mail->setBodyHtml($view->render('sign-up.phtml'));
+        $mail->send($transport);
+    }
 }
