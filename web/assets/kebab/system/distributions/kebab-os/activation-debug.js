@@ -205,7 +205,7 @@ Activation = function(){
         showPreLoader: function() {
             Ext.fly('kebab-progress-bar').fadeIn();
             Ext.fly('activation-form-wrapper').fadeOut();
-            Ext.fly('kebab-system-backend-activation-container').scale(175,[65]);
+            Ext.fly('kebab-system-backend-activation-container').scale(270,[65]);
         },
 
         /**
