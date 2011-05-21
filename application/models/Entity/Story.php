@@ -83,8 +83,17 @@ class Model_Entity_Story extends Doctrine_Record
               1 => 'description',
              ),
              'className' => 'StoryTranslation',
-             'length' => 5,
+             'length' => 2,
              ));
+        $searchable1 = new Doctrine_Template_Searchable(array(
+             'fields' => 
+             array(
+              0 => 'title',
+              1 => 'description',
+             ),
+             'className' => 'SystemStorySearch',
+             ));
+        $i18n0->addChild($searchable1);
         $this->actAs($sluggable0);
         $this->actAs($i18n0);
     }

@@ -18,7 +18,7 @@
  * @subpackage  Controllers
  * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  * @version     1.5.0
  */
 
@@ -32,7 +32,7 @@
  * @subpackage  Controllers
  * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
- * @license     http://www.kebab-project.com/licensing
+ * @license     http://www.kebab-project.com/cms/licensing
  * @version     1.5.0
  */
 class Kebab_StoryController extends Kebab_Rest_Controller
@@ -44,16 +44,18 @@ class Kebab_StoryController extends Kebab_Rest_Controller
             'id' => 'story.id',
             'active' => 'story.active',
             'description' => 'storyTranslation.description',
-            'title' => 'storyTranslation.title',
+            'title' => 'title',
         );
 
         //KBBTODO move dql to models
+        $ids = $this->_helper->search('Model_Entity_Story', true);
         $query = Doctrine_Query::create()
                 ->select('story.id, storyTranslation.title as title,
                     storyTranslation.description as description, story.active')
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                ->whereIn('story.id', $ids)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
@@ -68,16 +70,22 @@ class Kebab_StoryController extends Kebab_Rest_Controller
     {
         // Getting parameters
         $params = $this->_helper->param();
-        $id = $params['data']['id'];
-        $active = $params['data']['active'];
+
+        // Convert data collection array if not
+        $collection = $this->_helper->array()->isCollection($params['data'])
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            $story = new Model_Entity_Story();
-            $story->assignIdentifier($id);
-            $story->set('active', $active);
-            $story->save();
+             // Doctrine
+            foreach ($collection as $record) {
+                $story = new Model_Entity_Story();
+                $story->assignIdentifier($record['id']);
+                $story->set('active', $record['active']);
+                $story->save();
+            }
             Doctrine_Manager::connection()->commit();
             unset($story);
             

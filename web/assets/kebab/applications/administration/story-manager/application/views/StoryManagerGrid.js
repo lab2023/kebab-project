@@ -30,8 +30,6 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
         var config = {
             plugins:expander,
             border:false,
-            enableColumnHide:false,
-            sortable:true,
             loadMask: true,
             viewConfig: {
                 // To be equal to the width of columns
@@ -49,7 +47,8 @@ KebabOS.applications.storyManager.application.views.StoryManagerGrid = Ext.exten
             },
             {
                 header   : 'Title',
-                dataIndex: 'title'
+                dataIndex: 'title',
+                sortable:true
             },
             {
                 header   : 'Active',
