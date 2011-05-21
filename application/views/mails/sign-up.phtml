@@ -1,8 +1,5 @@
-    <h1>Welcome <?php echo $this->fullName; ?></h1>
+    <h3>Welcome <?php echo $this->fullName; ?></h3>
 
     <p>
-        Please click the link for activation
-        <a href="<?php echo BASE_URL . '/backend/activation/activationKey/' . $this->activationKey; ?>">Link</a>
+        Please click the <a href="<?php echo BASE_URL . '/backend/activation/id/' . $this->id; . '/key/' . $this->activationKey; ?>" target="_blank">link</a> for activation.
     </p>
-
-    <?php echo $this->baseUrl(''); ?>
