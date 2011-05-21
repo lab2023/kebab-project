@@ -35,8 +35,7 @@
  * @since      1.5.x (kebab-reloaded)
  * @version    1.5.0
  */
-class Kebab_Controller_Helper_Search extends
-    Zend_Controller_Action_Helper_Abstract
+class Kebab_Controller_Helper_Search extends Zend_Controller_Action_Helper_Abstract
 {
     /**
      * @var object Zend_Request_Object
