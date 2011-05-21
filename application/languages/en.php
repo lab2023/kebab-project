@@ -33,14 +33,5 @@
  * @version    1.5.0
  */
 return array(
-    'Hello World' => 'Hello World en',
-    
-    // REST CRUD
-    'Record was created.'                               => 'Record was created.',
-    'Record couldn\'t be created.'                      => 'Record couldn\'t be created.',
-    'Record was updated.'                               => 'Record was updated.',
-    'Record couldn\'t be updated.'                      => 'Record couldn\'t be updated.',
-    'Record was deleted.'                               => 'Record was deleted.',
-    'First you have to delete related datas.'           => 'First you have to delete related datas.',
-    'Record couldn\'t be deleted.'                      => 'Record couldn\'t be deleted.'
+    'Hello World!' => 'Hello World!',
 );

@@ -93,6 +93,13 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         return $this->_generate();
     }
 
+    public function getWeb()
+    {
+        $this->_asset[0] = WEB_PATH;
+
+        return $this->_generate();
+    }
+
     // ------------------------------Utils--------------------------------------
 
     protected function _root()

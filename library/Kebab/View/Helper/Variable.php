@@ -49,7 +49,7 @@ class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
         if (!is_null($var)) {
             
             $vars = new stdClass();
-            $vars->kebabOs = $this->_config->os;
+            $vars->os = $this->_config->os;
             $vars->assets = $this->_config->assets;
             $vars->mapping = $this->_config->mapping; // KBBTODO what is this ?
 
