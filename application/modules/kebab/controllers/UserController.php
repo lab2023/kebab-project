@@ -136,29 +136,24 @@ class Kebab_UserController extends Kebab_Rest_Controller
      */
     public function postAction()
     {
-        $retVal = false;
+        // Getting parameters
+        $params = $this->_helper->param();
 
-        // Params
-        $fullName = 'Onur Özgür ÖZKAN';
-        $email    = 'onur.ozgur.ozkan@lab2023.com';
-        $type     = 'signUp';
-
-        switch ($type) {
+        switch ($params['type']) {
             case 'signUp':
-                $user = Kebab_Model_User::signUp($fullName, $email);
-            case 'invite':
-                $user = Kebab_Model_User::invite($fullName, $email);
+                $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
+                if (is_object($user)) {
+                    $this->sendSignUpMail($user);
+                    $this->_helper->response(true, 200);
+                }
             default:
         }
 
-        if (is_object($retVal)) {
-            $this->sendSignUpMail($user);
-        }
+
     }
 
     private function sendSignUpMail($user)
     {
-        //KBBTODO move these settings to config file
         $configParam = Zend_Registry::get('config')->kebab->mail;
         $smtpServer = $configParam->smtpServer;
         $config = $configParam->config->toArray();
@@ -169,7 +164,7 @@ class Kebab_UserController extends Kebab_Rest_Controller
 
         //KBBTODO use language file
         $view->assign('fullName', $user->fullName);
-        $view->assign('email', $user->email);
+        $view->assign('activationKey', $user->activationKey);
 
         $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
         $mail = new Zend_Mail('UTF-8');
