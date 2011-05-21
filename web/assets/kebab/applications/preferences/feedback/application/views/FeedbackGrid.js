@@ -36,9 +36,16 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
                 // To be equal to the width of columns
                 forceFit: true
             }
-        }
+        };
 
 
+        //KBBTODO add i18n
+        var statusData = [
+            ['open', 'Open'],
+            ['progress', 'In Progress'],
+            ['closed', 'Closed']
+        ];
+        
         this.columns = [
             expander,
             {
@@ -51,7 +58,15 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
                 header   : 'Status',
                 width:40,
                 dataIndex: 'status',
-                sortable:true
+                sortable:true,
+                renderer: function(v) {
+                    var retVal = null;
+                    Ext.each(statusData, function(status) {
+                        if (v == status[0])
+                            retVal = status[1];
+                    });
+                    return retVal;
+                }
             }
         ];
 
