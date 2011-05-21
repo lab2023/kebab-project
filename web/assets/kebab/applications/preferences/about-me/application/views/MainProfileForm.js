@@ -71,8 +71,8 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                     bodyStyle: 'text-align:center; margin-top:5px;',
                     defaults:{border:false},
                     items: [{
-                        bodyCssClass: 'aboutMe-application-usernameText',
-                        id: 'aboutMe-application-username-text',
+                        bodyCssClass: 'aboutMe-application-userNameText',
+                        id: 'aboutMe-application-userName-text',
                         html: '-'
                     },{
                         xtype: 'button',
@@ -129,7 +129,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                 this.bootstrap.layout.enable();
                 Ext.getCmp('aboutMe-application-firstNameLastName-text')
                    .update(response.result.data.fullName);
-                Ext.getCmp('aboutMe-application-username-text')
+                Ext.getCmp('aboutMe-application-userName-text')
                    .update(response.result.data.userName);
             }
         }
