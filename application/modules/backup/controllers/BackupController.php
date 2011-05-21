@@ -41,30 +41,20 @@ class Backup_BackupController extends Kebab_Rest_Controller
      */
     public function indexAction()
     {
-        try {
-            //KBBTODO pagination
-            $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
-            foreach ($dir as $fileinfo) {
-                if ($fileinfo->getFilename() != '.' && $fileinfo->getFilename() != '..') {
-                    $data['name'] = $fileinfo->getFilename();
-                    $data['size'] = $fileinfo->getSize() / 1024 / 1024 . ' Mb';
-                    $response[] = $data;
-                }
+        //KBBTODO pagination
+        $dir = new DirectoryIterator(APPLICATION_PATH . '/variables/backups');
+        foreach ($dir as $fileinfo) {
+            if ($fileinfo->getFilename() != '.' && $fileinfo->getFilename() != '..') {
+                $data['name'] = $fileinfo->getFilename();
+                $data['size'] = $fileinfo->getSize() / 1024 / 1024 . ' Mb';
+                $response[] = $data;
             }
-            if (@is_null($response)) {
-                $response = array();
-                $this->_helper->response(true, 200)
-                        ->addTotal(0)
-                        ->addData($response)
-                        ->getResponse();
-            } else {
-                $this->_helper->response(true, 200)
-                        ->addTotal(count($response))
-                        ->addData($response)
-                        ->getResponse();
-            }
-        } catch (Zend_Exception $e) {
-            throw $e;
+        }
+        if (@is_null($response)) {
+            $response = array();
+            $this->_helper->response(true, 200)->addTotal(0)->addData($response)->getResponse();
+        } else {
+            $this->_helper->response(true, 200)->addTotal(count($response))->addData($response)->getResponse();
         }
     }
 
@@ -74,15 +64,11 @@ class Backup_BackupController extends Kebab_Rest_Controller
      */
     public function getAction()
     {
-        try {
-            $params = $this->_helper->param();
-            $fileName = $params['fileName'];
-            header('Content-Type: text/plain');
-            header('Content-Disposition: attachment; filename="' . $fileName . '"');
-            readfile(APPLICATION_PATH . '/variables/backups/' . $fileName);
-        } catch (Zend_Exception $e) {
-            throw $e;
-        }
+        $params = $this->_helper->param();
+        $fileName = $params['fileName'];
+        header('Content-Type: text/plain');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        readfile(APPLICATION_PATH . '/variables/backups/' . $fileName);
     }
 
     /**
@@ -91,27 +77,22 @@ class Backup_BackupController extends Kebab_Rest_Controller
      */
     public function postAction()
     {
-        try {
-            $database = Zend_Registry::get('config')->database->doctrine->connections->master->dsn;
+        $database = Zend_Registry::get('config')->database->doctrine->connections->master->dsn;
 
-            $database = explode("://", $database);
-            if ($database[0] == 'mysql') {
-                $database = explode(":", $database[1]);
-                $user = $database[0];
-                $database = explode("@", $database[1]);
-                $pass = $database[0];
-                $database = explode("/", $database[1]);
-                $dbName = $database[1];
-                $command = "mysqldump --user " . $user . " --password=" . $pass . " -C " . $dbName . " > " . APPLICATION_PATH . '/variables/backups/' . date('o-m-d-H-i-s') . ".sql";
-                system($command);
-                $this->_helper->response(true, 200)
-                        ->getResponse();
-            } else {
-                throw new Zend_Exception('backup only works with mysql databases.');
-            }
-
-        } catch (Zend_Exception $e) {
-            throw $e;
+        $database = explode("://", $database);
+        if ($database[0] == 'mysql') {
+            $database = explode(":", $database[1]);
+            $user = $database[0];
+            $database = explode("@", $database[1]);
+            $pass = $database[0];
+            $database = explode("/", $database[1]);
+            $dbName = $database[1];
+            $command = "mysqldump --user " . $user . " --password=" . $pass . " -C " . $dbName . " > " . APPLICATION_PATH . '/variables/backups/' . date('o-m-d-H-i-s') . ".sql";
+            system($command);
+            $this->_helper->response(true, 200)
+                    ->getResponse();
+        } else {
+            throw new Zend_Exception('backup only works with mysql databases.');
         }
     }
 
@@ -121,17 +102,12 @@ class Backup_BackupController extends Kebab_Rest_Controller
      */
     public function deleteAction()
     {
-        try {
-            $params = $this->_helper->param();
-            $fileName = $params['fileName'];
-            if (unlink(APPLICATION_PATH . '/variables/backups/' . $fileName)) {
-                $this->_helper->response(true, 204)
-                        ->getResponse();
-            } else {
-                throw new Zend_Exception('Delete a file failed.');
-            }
-        } catch (Zend_Exception $e) {
-            throw $e;
+        $params = $this->_helper->param();
+        $fileName = $params['fileName'];
+        if (unlink(APPLICATION_PATH . '/variables/backups/' . $fileName)) {
+            $this->_helper->response(true, 204)->getResponse();
+        } else {
+            throw new Zend_Exception('Delete a file failed.');
         }
     }
 }
