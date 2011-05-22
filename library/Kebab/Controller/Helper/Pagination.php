@@ -134,8 +134,8 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         );
     }
 
-        /**
-     * direct() : Stragry Design Pattern
+    /**
+     * direct()
      * 
      * @return  System_Controller_Helper_Pager
      */
