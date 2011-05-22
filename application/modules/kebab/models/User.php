@@ -171,14 +171,14 @@ class Kebab_Model_User
         return $retVal;
     }
 
-    public static function getAll(Array $searchUser = array(), String $order = '')
+    public static function getAll($searchUser = array(), $order = "user.id")
     {
+
          $query = Doctrine_Query::create()
                     ->select('user.id, user.fullName, user.userName, user.email, user.language, user.status, user.active')
                     ->from('Model_Entity_User user')
                     ->whereIn('user.id', $searchUser)
-                    ->orderBy($order);
-
+                    ->orderBy("$order");
         return $query;
     }
 
