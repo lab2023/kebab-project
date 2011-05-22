@@ -134,7 +134,7 @@ class Kebab_Model_User
         return $retVal;
     }
 
-    public static function activate($userName, $password, $key)
+    public static function activate($userName, $password, $fullName, $key)
     {
         $retVal = false;
         Doctrine_Manager::connection()->beginTransaction();
@@ -143,6 +143,7 @@ class Kebab_Model_User
             $user = new Model_Entity_User();
             $user->assignIdentifier($id);
             $user->userName = $userName;
+            $user->fullName = $fullName;
             $user->password = md5($password);
             $user->activationKey = NULL;
             $user->status = 'approved';
