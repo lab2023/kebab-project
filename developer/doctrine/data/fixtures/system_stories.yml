@@ -1,88 +1,88 @@
 Model_Entity_Story:
   Access_Desktop:
-    name: Desktop
+    name: Access to desktop
     Translation:
       en:
-        title: Desktop Manager
+        title: Access to desktop
         description: Access the desktop after login. 
       tr:
-        title: Masaüstü Yöneticisi
+        title: Masaüstüne erişim
         description: Çevirimiçi olduktan sonra masaüstüne erişim
     active: true
 
   Change_Profile:
-    name: Profile
+    name: Profile management
     Translation:
       en:
-        title: Profile Manager
+        title: Profile management
         description: User can change name, surname, language etc.
       tr:
-        title: Profil Yöneticisi
+        title: Profil yönetimi
         description: Kullanıcılar isim, soyisim, dil seçimi gibi bilgilerini değiştirebilir.
     active: true
 
   User_Management:
-    name: User Manager
+    name: User management
     active: 1
     Translation:
       en:
-        title: User Manager
+        title: User management
         description: User add, edit and remove.
       tr:
-        title: Kullanıcı Yöneticisi
+        title: Kullanıcı yönetimi
         description: Kullanıcı ekleyin çıkarın düzenleyin.
 
   Role_Management:
-    name: Role Manager
+    name: Role management
     active: 1
     Translation:
       en:
-        title: Role Manager
-        description: Manage roles
+        title: Role management
+        description: Manage system roles
       tr:
-        title: Rol Yönetimi
-        description: Rolleri yönetin
+        title: Rol yönetimi
+        description: Sistem rollerini yönetin
     
   Story_Management:
-    name: Story Manager
+    name: Story management
     active: 1
     Translation:
       en:
-        title: User Story Manager
-        description: Story active and passive.
+        title: Story management
+        description: Manage the user stories.
       tr:
-        title: Kullanıcı Hikayesi Yöneticisi
-        description: Kullanıcı hikayelerini düzenleyin.
+        title: Kullanım hikayeleri yönetimi
+        description: Kullanıcı hikayelerini yönetin.
 
   Application_Management:
-    name: Application Manager
+    name: Application management
     active: 1
     Translation:
       en:
-        title: Application Manager
-        description: Application active and passive.
+        title: Application management
+        description: Manage Kebab applications.
       tr:
         title: Uygulama Yöneticisi
-        description: Uygulamaları düzenleyin.
+        description: Kebab uygulamalarını yönetin.
 
   Backup_Backup:
-    name: Database Backup
+    name: Database backup management
     active: 1
     Translation:
       en:
-        title: Database Backup Manager
-        description: Database Backup
+        title: Database backup management
+        description: Manage database backups
       tr:
-        title: Veritabanı Yedekleme Yöneticisi
-        description: Database Backup
+        title: Veritabanı yedekleme yönetimi
+        description: Veri tabanı yedeklerinizi yönetin
     
   Feedback_Management:
-    name: Feedback Manager
+    name: Feedback management
     active: 1
     Translation:
       en:
-        title: Feedback Manager
-        description: Manage feedbacks
+        title: Feedback management
+        description: Manage user feedbacks
       tr:
-        title: Geribildirim Yöneticisi
-        description: Geribildirimleri yönetin
+        title: Geribildirim yönetimi
+        description: Kullanıcı geri bildirimlerini yönetin

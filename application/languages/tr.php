@@ -33,6 +33,10 @@
  * @version    1.5.0
  */
 return array(
+    'English' => 'İngilizce',
+    'Turkish' => 'Türkçe',
+
+    // Sample
     'Hello World!' => 'Merhaba Dünya!',
     
     // REST CRUD

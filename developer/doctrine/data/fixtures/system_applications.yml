@@ -29,7 +29,7 @@ Model_Entity_Application:
         description: Send feedback.
       tr:
         title: Geri Bildirim
-        description: Geribildirim yollayın.
+        description: Geribildirim gönderin.
 
   PacManApplication:
     identity: pacMan-application
@@ -78,7 +78,6 @@ Model_Entity_Application:
       tr:
         title: Snake
         description: Snake oynayın.
-
 
   SpaceInvadersApplication:
     identity: spaceInvaders-application
@@ -203,10 +202,10 @@ Model_Entity_Application:
     Translation:
       en:
         title: Story Manager
-        description: Story status edit.
+        description: Manage system stories.
       tr:
-        title: Kullanıcı hikayeleri Yöneticisi
-        description: Kullanıcı Hikayelerini düzenleyin.
+        title: Kullanıcı Hikayeleri Yöneticisi
+        description: Kullanıcı hikayelerini düzenleyin.
 
   RoleManagerApplication:
     identity: roleManager-application
@@ -235,10 +234,10 @@ Model_Entity_Application:
     Translation:
       en:
         title: Database Backup
-        description: Database Backup
+        description: Manage your database backups
       tr:
-        title: Database Backup
-        description: Database Backup
+        title: Veri Tabanı Yöneticisi
+        description: Veri tabanı yedeklerinizi yönetin
 
   ApplicationManager:
     identity: applicationManager-application
@@ -251,7 +250,7 @@ Model_Entity_Application:
     Translation:
       en:
         title: Application Manager
-        description: Application Manager
+        description: Manage Kebab applications
       tr:
-        title: Application Manager
-        description: Application Manager
+        title: Uygulama Yöneticisi
+        description: Kebab uygulamalarını yönetin
