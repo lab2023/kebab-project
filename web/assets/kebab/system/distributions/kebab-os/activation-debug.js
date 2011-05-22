@@ -72,6 +72,9 @@ Activation = function(){
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
+                    name: 'activationKey',
+                    hidden: true
+                },{
                     fieldLabel: 'Your full name',
                     emptyText: 'Your full name',
                     name: 'fullName',
@@ -99,9 +102,7 @@ Activation = function(){
                     items :[{
                         fieldLabel: 'User name',
                         emptyText: 'User name',
-                        name: 'email',
-                        readOnly: true,
-                        vtype: 'email'
+                        name: 'userName'
                     },{
                         xtype: 'compositefield',
                         hideLabels: true,
@@ -226,6 +227,7 @@ Activation = function(){
             this.showPreLoader();
             form.getForm().load({
                 method: 'GET',
+                url: activationAPI + '/key/' + this.getActivationKey(),
                 success : function() {
                     console.log(arguments);
                     this.showActivationForm();
