@@ -36,7 +36,7 @@
 
 class Kebab_Model_Story
 {
-    static public function getStory($roleId)
+    static public function getStory($roleId, Array $whereInIds = array())
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query = Doctrine_Query::create()
@@ -50,6 +50,7 @@ class Kebab_Model_Story
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', $lang)
+                ->whereIn('story.id', $whereInIds)
                 ->andWhere('story.active = 1');
 
         return $query;
@@ -57,7 +58,6 @@ class Kebab_Model_Story
 
     static public function getStories()
     {
-
         $lang  = Zend_Auth::getInstance()->getIdentity()->language;
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()

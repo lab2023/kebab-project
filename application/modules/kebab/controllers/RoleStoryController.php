@@ -40,7 +40,9 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
     {
         $params = $this->_helper->param();
         $roleId = $params['roleId'];
-        $query = Kebab_Model_Story::getStory($roleId);
+
+        $ids = $this->_helper->search('Model_Entity_Story', true);
+        $query = Kebab_Model_Story::getStory($roleId, $ids);
 
         $pager = $this->_helper->pagination($query);
         $story = $pager->execute();
