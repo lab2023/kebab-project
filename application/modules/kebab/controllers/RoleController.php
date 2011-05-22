@@ -50,6 +50,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
         );
 
         //KBBTODO move dql to model
+        $ids = $this->_helper->search('Model_Entity_Role', true);
         $query = Doctrine_Query::create()
                 ->select('
                     roleTranslation.title as title,
@@ -64,6 +65,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
                 ->from('Model_Entity_Role role')
                 ->leftJoin('role.Translation roleTranslation')
                 ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
+                ->whereIn('role.id', $ids)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
@@ -71,7 +73,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
 
         // Response
         $responseData = is_object($roles) ? $roles->toArray() : array();
-        $this->_helper->response(true, 200)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
+        $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
 
     }
 
