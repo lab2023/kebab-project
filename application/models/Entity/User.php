@@ -15,7 +15,6 @@
  * @property boolean $active
  * @property Doctrine_Collection $Roles
  * @property Doctrine_Collection $Feedback
- * @property Doctrine_Collection $Invitation
  * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
@@ -89,10 +88,6 @@ class Model_Entity_User extends Doctrine_Record
              'foreign' => 'role_id'));
 
         $this->hasMany('Model_Entity_Feedback as Feedback', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('Model_Entity_Invitation as Invitation', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
