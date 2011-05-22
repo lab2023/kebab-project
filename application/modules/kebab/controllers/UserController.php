@@ -24,7 +24,7 @@
 
 
 /**
- * User_Manager
+ * Kebab_UserController
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
@@ -40,94 +40,23 @@ class Kebab_UserController extends Kebab_Rest_Controller
     {
         // Mapping
         $mapping = array(
-            'id' => 'user.id'
+            'id'        => 'user.id',
+            'fullName'  => 'user.fullName',
+            'userName'  => 'user.userName',
+            'email'     => 'user.email',
+            'language'  => 'user.language',
+            'status'    => 'user.status',
+            'active'    => 'user.active'
         );
-        $params = $this->_helper->param();
-        $roleId = array_key_exists('roleId', $params) ? $params['roleId'] : null;
 
-        $ids = $this->_helper->search('Model_Entity_User');
-
-        //KBBTODO Move dql to models
-        $query = Doctrine_Query::create()
-                ->select('user.fullName, user.email, user.userName, role.name, user.active')
-                ->from('Model_Entity_User user')
-                ->leftJoin('user.Roles role')
-                ->whereIn('user.id', $ids);
-        if(!empty($roleId) && $roleId != ''){
-            $query = $query->where('role.id = ?', $roleId);
-        }
-        $query =  $query->orderBy($this->_helper->sort($mapping));
-        $pager = $this->_helper->pagination($query);
-        $users = $pager->execute();
+        $searchUser = $this->_helper->search('Model_Entity_User');
+        $order      = $this->_helper->sort($mapping);
+        $query      = Kebab_Model_User::getAll($searchUser, $order);
+        $pager      = $this->_helper->pagination($query);
+        $user       = $pager->execute();
 
         // Response
-        $responseData = is_object($users) ? $users->toArray() : array();
+        $responseData = is_object($user) ? $user->toArray() : array();
         $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
-
-    public function putAction()
-    {
-        // Getting parameters
-        $params = $this->_helper->param();
-        $id = $params['id'];
-        $status = $params['status'];
-
-        // Updating status
-        //KBBTODO move doctrine to model
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $user = new User_Model_User();
-            $user->assignIdentifier($id);
-            $user->status = $status;
-            $user->save();
-            Doctrine_Manager::connection()->commit();
-            unset($user);
-
-            // Response
-            $this->_helper->response(true, 201)->getResponse();
-
-        } catch (Zend_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        }
-    }
-
-    public function deleteAction()
-    {
-        // Getting parameters
-        $params = $this->_helper->param();
-        $id = $params['id'];
-
-        // delete
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-
-            $user = new User_Model_User();
-            $user->assignIdentifier($id);
-            $user->delete();
-
-            // Doctrine
-            Doctrine_Query::create()
-                    ->delete('Model_Entity_Invitation invitation')
-                    ->where('invitation.user_id = ?', $id)
-                    ->execute();
-
-            Doctrine_Manager::connection()->commit();
-            unset($user);
-
-            // Response
-            $this->_helper->response(true, 201)->getResponse();
-
-        } catch (Zend_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        }
-    }
-
 }
