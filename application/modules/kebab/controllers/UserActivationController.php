@@ -42,7 +42,6 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
         // Getting parameters
         $params = $this->_helper->param();
         $response = $this->_helper->response(true, 200);
-
         $user = Doctrine_Core::getTable('Model_Entity_User')->findOneByactivationKey($params['key']);
         if (is_object($user)) {
             $responseData = $user->toArray();
@@ -64,16 +63,16 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
         // Getting parameters
         $params = $this->_helper->param();
         $response = $this->_helper->response(true);
-
+        
         // Check username dublicate
-        $user = Doctrine_Core::getTable('Model_Entity_User')->findByuserNameOremail($params['userName'], $params['email']);
+        $user = Doctrine_Core::getTable('Model_Entity_User')->findOneByuserName(array($params['userName']));
         if (is_object($user)) {
-            $response->addNotification('ERR', 'This username or email already at system.')->getResponse();
+            $response->setSuccess(false)->addNotification('ERR', 'This username is already at system.')->getResponse();
         }
 
-        $user = Kebab_Model_User::activate($params['userName'], $params['password'], $params['key']);
+        $user = Kebab_Model_User::activate($params['userName'], $params['password'], $params['fullName'], $params['activationKey']);
 
-        Kebab_Authentication::signIn($user->userName, $params['userName']);
+        Kebab_Authentication::signIn($user->userName, $params['password']);
         
         $response->getResponse();
     }
