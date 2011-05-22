@@ -197,28 +197,32 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                            : $this->_config->languages->default;
 
         $locale = new Zend_Locale($defaultLanguage);
-        Zend_Registry::set('Zend_Locale', $locale);
+        $translations = APPLICATION_PATH . '/languages/' . $locale . '.php';
 
-        if (file_exists($this->_config->languages->languagePath . '/' . $locale . '.php')) {
-            $languagePath    = $this->_config->languages->languagePath . '/' . $locale . '.php';
-            $translator = new Zend_Translate('array', $languagePath, $locale);
+        try {
+            $translator = new Zend_Translate('array', $translations, $locale);
 
             // Translation loging enable ?
             if ($this->_config->languages->enableLoging) {
                 $translator->setOptions(
                     array(
-                        'log'             => $this->_logging,
-                        'logMessage'      => "Missing '%message%' within locale '%locale%'",
-                        'logPriority'     => Zend_Log::ALERT,
-                        'logUntranslated' => true
+                     'log'             => $this->_logging,
+                     'logMessage'      => "Missing '%message%' within locale '%locale%'",
+                     'logPriority'     => Zend_Log::ALERT,
+                     'logUntranslated' => true
                     )
                 );
             }
-
+            
             Zend_Registry::set('Zend_Translate', $translator);
+
+            return $translator;
+
+        } catch (Zend_Exception $e) {
+            // Error Log
+            $this->_logging->log('Translations not loading...', Zend_Log::ERR);
+            throw new Zend_Translate_Exception('Translations not loading...');
         }
-        
-        return $translator;
     }
 
     /**

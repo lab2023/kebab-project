@@ -33,5 +33,6 @@
  * @version    1.5.0
  */
 return array(
-    'Hello World!' => 'Hello World!',
+    // Sample
+    'Hello World!' => 'Merhaba Dünya!',
 );

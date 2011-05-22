@@ -354,5 +354,9 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
         var button = Ext.getCmp(this.id + '-' + btnId + 'Button');
         button.hide();
         button.disable();
+    },
+
+    onGetButton: function(btnId) {
+        return Ext.getCmp(this.id + '-' + btnId + 'Button');
     }
 });

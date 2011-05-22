@@ -72,7 +72,7 @@ class BackendController extends Kebab_Controller_Action
     }
 
     /**
-     * Sign-up screen
+     * Sign-up activation screen
      *
      * @return void
      */

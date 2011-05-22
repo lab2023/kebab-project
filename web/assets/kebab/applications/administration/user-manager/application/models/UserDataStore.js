@@ -9,20 +9,18 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/cms/licensing
  */
-KebabOS.applications.userManager.application.models.UserDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
+KebabOS.applications.userManager.application.models.UserDataStore = Ext.extend(Kebab.library.ext.RESTfulDataStore, {
 
-    // Application Bootstrap
     bootstrap: null,
 
-    // System REST API
-    restAPI: BASE_URL + '/kebab/user',
+    restAPI: Kebab.OS.generateUrl('kebab/user'),
 
-    readerFields: [
+    readerFields:[
         {name: 'id', type:'integer'},
         {name: 'fullName', type:'string'},
-        {name: 'email', type:'string'},
         {name: 'userName', type:'string'},
-        {name: 'Roles', type:'object'},
-        {name: 'status', type:'string'}
+        {name: 'email', type:'string'},
+        {name: 'status', type:'string'},
+        {name: 'active', type:'boolean'}
     ]
 });

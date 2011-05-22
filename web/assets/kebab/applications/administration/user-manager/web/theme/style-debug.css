@@ -1,46 +1,9 @@
 .userManager-application-launcher-icon {
     background-image: url(images/launcher.png);
 }
-
 .userManager-application-gui-icon {
     background-image: url(images/gui.png);
 }
-
 #userManager-application-shortcut div {
     background-image: url(images/shortcut.png);
-}
-
-div.userManager-application-users {
-    background: url(images/shortcut.png) no-repeat 10px center;
-    height: 80px;
-    padding-left: 80px;
-    padding-top:5px;
-    padding-bottom:5px;
-}
-div.userManager-application-users-passive {
-    background: url(images/shortcut-gray.png) no-repeat 10px center;
-    color:#808080;
-}
-
-div.userManager-application-users-over {
-    background-color: #E8EDFF;
-}
-
-div.userManager-application-users div.buttons {visibility:hidden;}
-div.userManager-application-users-over div.buttons {
-    visibility:visible;
-    float:right;
-    position: relative;
-    top:-33px;
-    width: 120px;
-    height: 20px;
-}
-
-div.userManager-application-users-over div.buttons span {
-    background-repeat: no-repeat;
-    width: 16px;
-    height: 16px;
-    margin-right: 10px;
-    cursor:pointer;
-    float: left;
 }
