@@ -1,5 +1,5 @@
 /**
- * userManager Application RolesDataStore class
+ * userManager Application UserRoleDataStore class
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
@@ -9,17 +9,16 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/cms/licensing
  */
-KebabOS.applications.userManager.application.models.RolesDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
+KebabOS.applications.userManager.application.models.UserRoleDataStore = Ext.extend(Kebab.library.ext.RESTfulDataStore, {
 
-    // Application Bootstrap
     bootstrap: null,
 
-    // System REST API
-    restAPI: BASE_URL + '/kebab/user-role',
+    restAPI: Kebab.OS.generateUrl('kebab/user-role'),
 
-    readerFields: [
+    readerFields:[
         {name: 'id', type:'integer'},
         {name: 'title', type:'string'},
-        {name: 'name', type:'string'}
+        {name: 'description',type:'string'},
+        {name: 'allow', type:'boolean'}
     ]
 });

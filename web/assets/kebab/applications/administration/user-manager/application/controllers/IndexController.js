@@ -1,5 +1,5 @@
 /**
- * userManager Application indexController Class
+ * Kebab Application Bootstrap Class
  *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
@@ -26,139 +26,38 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
     // Initialize and define routing settings
     init: function() {
-        this.bootstrap.layout.emailWindow.emailForm.on('hideWindow', this.hideWindowAction, this);
-        this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('hideWindow', this.hideWindowAction, this);
-        this.bootstrap.layout.userRolesWindow.rolesGrid.on('hideWindow', this.hideWindowAction, this);
-        this.bootstrap.layout.userRolesWindow.rolesGrid.on('userRequest', this.roleUserRequestAction, this);
-        this.bootstrap.layout.userManagerDataView.on('userRequest', this.userRequestAction, this);
-        this.bootstrap.layout.emailWindow.emailForm.on('emailFormOnSave', this.formOnSaveAction, this);
-        this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('inviteUserFormOnSave', this.formOnSaveAction, this);
-        this.bootstrap.layout.userManagerDataView.on('showEmailWindow', this.showEmailWindowAction, this);
-        this.bootstrap.layout.userManagerDataView.on('showUserRoleWindow', this.showUserRoleWindowAction, this);
-        this.bootstrap.layout.on('showInviteUserWindow', this.showWindowAction, this);
-        this.bootstrap.layout.userManagerDataView.on('loadGrid', this.loadGridAction, this);
-        this.bootstrap.layout.userRolesWindow.rolesGrid.on('loadGrid', this.loadGridAction, this);
-        this.bootstrap.layout.inviteUserWindow.inviteUserForm.on('loadGrid', this.loadGridAction, this);
-        this.bootstrap.layout.userRolesWindow.rolesGrid.on('hideUserRolesWindow', this.hideWindowAction, this);
-        this.bootstrap.layout.on('roleFilter', this.roleFilterAction, this);
+
+        this.bootstrap.layout.userGrid.on('userSelected', this.showUserRoleAction, this);
+
     },
 
     // Actions -----------------------------------------------------------------
 
-    hideWindowAction: function(component) {
-        component.hide();
-    },
+    showUserRoleAction: function(user) {
 
-    loadGridAction: function(component) {
-        component.load();
-    },
+        if (user.length > 0) {
 
-    userRequestAction: function(data) {
-        var notification = new Kebab.OS.Notification();
-        Ext.Ajax.request({
-            url: BASE_URL + data.url,
-            method: data.method,
-            params: {
+            // Each the selected diseases
+            Ext.each(user, function(user) {
 
-                id: data.user.id,
-                status: data.status
-            },
-            success : function() {
-                notification.message(this.bootstrap.launcher.text, 'Success');
-                if (data.store) {
-                    data.from.fireEvent('loadGrid', data.store);
+                if (user.id) { // Is really record
+
+                    // Create new disease detail tab
+                    var userDetail = new KebabOS.applications.userManager.application.views.UserRoleGrid({
+                        id: 'user-' + user.id,
+                        userId: user.id,
+                        closable:true,
+                        title: user.id + ' # ' + user.data.title,
+                        iconCls: 'icon-application-view-detail',
+                        bootstrap: this.bootstrap,
+                        border: false
+                    });
+
+                    // Add and activate tab
+                    this.bootstrap.layout.add(userDetail);
+                    this.bootstrap.layout.setActiveTab(1);
                 }
-            },
-
-            failure : function() {
-                notification.message(this.bootstrap.launcher.text, 'Failure');
-            }, scope:this
-        });
-    },
-
-    roleUserRequestAction: function(data) {
-        var notification = new Kebab.OS.Notification();
-        Ext.Ajax.request({
-            url: BASE_URL + data.url,
-            method: data.method,
-            params: {
-
-                id: data.user,
-                roles: data.roles
-            },
-            success : function() {
-                notification.message(this.bootstrap.launcher.text, 'Success');
-                if (data.store) {
-                    data.from.fireEvent('loadGrid', data.store);
-                }
-            },
-
-            failure : function() {
-                notification.message(this.bootstrap.launcher.text, 'Failure');
-            }, scope:this
-        });
-    },
-
-
-    formOnSaveAction: function(data) {
-
-        if (data.from.getForm().isValid()) {
-            var notification = new Kebab.OS.Notification();
-            data.from.getForm().submit({
-                url: data.url,
-                method: data.method,
-
-                success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
-                    data.from.getForm().reset();
-                    if (data.fromWindow) {
-                        data.from.fireEvent('hideWindow', data.fromWindow);
-                    }
-                    if (data.store) {
-                        data.from.fireEvent('loadGrid', data.store);
-                    }
-                },
-
-                failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
-                }, scope:this
-            });
+            }, this);
         }
-    },
-
-    showUserRoleWindowAction: function(data) {
-        this.bootstrap.layout.userRolesWindow.setTitle(data.fullName + " 's Roles");
-        this.bootstrap.layout.userRolesWindow.rolesGrid.userId = data.id;
-        this.bootstrap.layout.userRolesWindow.rolesGrid.Roles = data.Roles;
-        this.bootstrap.layout.userRolesWindow.show();
-        this.bootstrap.layout.userRolesWindow.rolesGrid.store.load({params: {userId: data.id}});
-    },
-
-    showEmailWindowAction: function(data) {
-        if (data.status == 'active') {
-            var title = ' Reset password';
-            var requestUrl = '/authentication/forgot-password';
-            var method = 'POST';
-        }
-        if (data.status == 'passive') {
-            var title = ' Re-invite';
-            var requestUrl = '/user/invite';
-            var method = 'PUT';
-        }
-        this.bootstrap.layout.emailWindow.setTitle(data.fullName + title);
-        this.bootstrap.layout.emailWindow.emailForm.url = BASE_URL + requestUrl;
-        this.bootstrap.layout.emailWindow.emailForm.method = method;
-        this.bootstrap.layout.emailWindow.emailForm.getForm().findField('email').setValue(data.email);
-        this.bootstrap.layout.emailWindow.emailForm.getForm().findField('id').setValue(data.id);
-        this.bootstrap.layout.emailWindow.show();
-    },
-
-    showWindowAction: function(component) {
-        component.show();
-    },
-    
-    roleFilterAction:function(data){
-        data.store.load({params:{roleId:data.id}});
     }
-
 });
