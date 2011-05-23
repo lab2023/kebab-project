@@ -36,6 +36,13 @@
 
 class Kebab_Model_UserRole
 {
+    /**
+     * @static
+     * @param  $userId
+     * @param  $searchRoleId
+     * @param  $sort
+     * @return Doctrine_Query
+     */
     public static function getUserRoles($userId, $searchRoleId, $sort)
     {
         $query = Doctrine_Query::create()
@@ -53,6 +60,13 @@ class Kebab_Model_UserRole
         return $query;
     }
 
+    /**
+     * @static
+     * @param  $userId
+     * @param  $collection
+     * @return void
+     * @return void
+     */
     public static function update($userId, $collection)
     {
         foreach ($collection as $item) {
