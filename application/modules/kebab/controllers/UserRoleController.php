@@ -44,7 +44,8 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
         $mapping = array(
             'id' => 'role.id',
             'title' => 'roleTranslation.title',
-            'description' => 'roleTranslation.description'
+            'description' => 'roleTranslation.description',
+            'allow' => 'allow'
         );
 
         $searchRole = $this->_helper->search('Model_Entity_Role', true);
