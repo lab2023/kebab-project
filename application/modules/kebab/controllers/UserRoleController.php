@@ -70,20 +70,20 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
 
             // Convert data collection array if not
             $collection = $this->_helper->array()->isCollection($params['data'])
-                    ? $params['data']
-                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                        ? $params['data']
+                        : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
-            $responseData = Kebab_Model_UserRole::update($userId, $collection);
+            Kebab_Model_UserRole::update($userId, $collection);
 
             Doctrine_Manager::connection()->commit();
 
             // Rest Response
-            $this->_helper->response(true, 201)->addData($responseData)->addNotification('INFO', 'Record was updated.')->getResponse();
+            $this->_helper->response(true, 201)->addNotification('INFO', 'Record was updated.')->getResponse();
 
             unset($collection);
             unset($responseData);
         } catch (Zend_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
+           // Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();

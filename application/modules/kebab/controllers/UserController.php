@@ -99,4 +99,30 @@ class Kebab_UserController extends Kebab_Rest_Controller
             throw $e;
         }
     }
+
+    public function deleteAction()
+    {
+        // Getting parameters
+        $params = $this->_helper->param();
+
+        // Convert data collection array if not
+        $ids = $this->_helper->array()->convertArray($params['data']);
+
+        // Updating status
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+
+            Doctrine_Query::create()->delete()->from('Model_Entity_User user')->whereIn('user.id', $ids)->execute();
+            Doctrine_Manager::connection()->commit();
+            // Delete Record and Return REST Response
+            $this->_helper->response(true, 204)->addNotification('INFO', 'Record was deleted.')->getResponse();
+
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+    }
 }

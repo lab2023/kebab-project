@@ -52,4 +52,70 @@ class Kebab_Model_UserRole
 
         return $query;
     }
+
+    public static function update($userId, $collection)
+    {
+        foreach ($collection as $item) {
+
+            if ($item['allow'] == 1 && !self::has($userId, $item['id'])) {
+                self::insert($userId, $item['id']);
+            }
+
+            if ($item['allow'] == 0 && self::has($userId, $item['id'])) {
+                self::delete($userId, $item['id']);
+            }
+        }
+    }
+
+    /**
+     * @static
+     * @param  $userId
+     * @param  $roleId
+     * @return bool
+     */
+    public static function has($userId, $roleId)
+    {
+        return Doctrine_Core::getTable('Model_Entity_UserRole')->findByuser_idAndrole_id($userId, $roleId)->count() > 0;
+    }
+
+    /**
+     * @static
+     * @param  $userId
+     * @param  $roleId
+     * @return bool|Model_Entity_UserRole
+     */
+    public static function insert($userId, $roleId)
+    {
+        $retVal = false;
+        if (!self::has($userId, $roleId)) {
+            $userRole = new Model_Entity_UserRole();
+            $userRole->user_id = $userId;
+            $userRole->role_id = $roleId;
+            $userRole->save();
+            $retVal = $userRole;
+            unset($userRole);
+        }
+
+        return $retVal;
+    }
+
+    /**
+     * @static
+     * @param  $userId
+     * @param  $roleId
+     * @return bool
+     */
+    public static function delete($userId, $roleId)
+    {
+        $retVal = false;
+        if (self::has($userId, $roleId)) {
+            Doctrine_Query::create()
+                    ->delete('Model_Entity_UserRole userRole')
+                    ->where('userRole.user_id = ? AND userRole.role_id = ?', array($userId, $roleId))
+                    ->execute();
+            $retVal = true;
+        }
+
+        return $retVal;
+    }
 }
