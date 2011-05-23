@@ -36,14 +36,15 @@
 
 class Kebab_Model_UserRole
 {
-    public static function getUserRoles($searchRoleId, $sort)
+    public static function getUserRoles($userId, $searchRoleId, $sort)
     {
         $query = Doctrine_Query::create()
-                ->select('
-                    role.id,
+                ->select('role.id,
                     roleTranslation.title as title,
-                    roleTranslation.description as description')
+                    roleTranslation.description as description,
+                    IF(userRole.user_id > 0, true, false) as allow')
                 ->from('Model_Entity_Role role')
+                ->leftJoin('role.UserRole userRole ON userRole.role_id = role.id AND userRole.user_id = ?', $userId)
                 ->leftJoin('role.Translation roleTranslation')
                 ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->whereIn('role.id', $searchRoleId)

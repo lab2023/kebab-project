@@ -38,23 +38,24 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-//        // Mapping
-//        $mapping = array(
-//            'id'        => 'user.id',
-//            'fullName'  => 'user.fullName',
-//            'userName'  => 'user.userName',
-//            'active'    => 'user.active'
-//        );
-//
-//        $searchUser = $this->_helper->search('Model_Entity_UserRole');
-//        $order      = $this->_helper->sort($mapping);
-//        $query      = Kebab_Model_UserRole::getUserRoles($searchUser, $order);
-//        $pager      = $this->_helper->pagination($query);
-//        $userRole   = $pager->execute();
-//
-//
-//        $responseData = is_object($userRole) ? $userRole->toArray() : array();
-//        $this->_helper->response(true)->addData($responseData)->getResponse();
+        $userId = $this->_request->userId;
+
+        // Mapping
+        $mapping = array(
+            'id' => 'role.id',
+            'title' => 'roleTranslation.title',
+            'description' => 'roleTranslation.description'
+        );
+
+        $searchRole = $this->_helper->search('Model_Entity_Role', true);
+        $order      = $this->_helper->sort($mapping);
+        $query      = Kebab_Model_UserRole::getUserRoles($userId, $searchRole, $order);
+        $pager      = $this->_helper->pagination($query);
+        $userRole   = $pager->execute();
+
+
+        $responseData = is_object($userRole) ? $userRole->toArray() : array();
+        $this->_helper->response(true)->addData($responseData)->getResponse();
     }
 
     public function putAction()
