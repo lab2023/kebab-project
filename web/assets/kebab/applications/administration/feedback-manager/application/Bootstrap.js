@@ -17,10 +17,6 @@ Ext.extend(KebabOS.applications.feedbackManager.application.Bootstrap, Kebab.OS.
         var app = desktop.getApplication(this.id);
 
         if (!app) {
-            
-            // desktop width and height
-            var winWidth = parseInt(desktop.getWinWidth() / 1);
-            var winHeight = parseInt(desktop.getWinHeight() / 1);
 
             // Default layout
             this.layout = new KebabOS.applications.feedbackManager.application.layouts.Layout({
@@ -37,8 +33,8 @@ Ext.extend(KebabOS.applications.feedbackManager.application.Bootstrap, Kebab.OS.
                 id: this.id,
                 title: this.launcher.text,
                 iconCls: 'feedbackManager-application-gui-icon',
-                width: winWidth,
-                height: winHeight,
+                width: 900,
+                height: 500,
                 border:false,
                 items: this.layout
             });

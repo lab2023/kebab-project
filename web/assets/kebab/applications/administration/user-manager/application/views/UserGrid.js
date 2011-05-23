@@ -73,6 +73,39 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
     },
 
     buildColumns: function() {
+        var statusData = [
+            ['pending','Pending'],
+            ['banned','Banned'],
+            ['approved','Approved']
+        ];
+        this.editorComboBox = new Ext.form.ComboBox({
+            typeAhead: true,
+            triggerAction: 'all',
+            forceSelection: true,
+            lazyRender:false,
+            mode: 'local',
+            store:new Ext.data.ArrayStore({
+                fields: ['id', 'title'],
+                data: statusData
+            }),
+            valueField: 'id',
+            displayField: 'title',
+            hiddenName: 'status',
+            scope:this,
+            gridRenderer : function(combo) {
+                return function(value, meta, record) {
+                    var comboRecord = combo.findRecord(combo.valueField, value);
+                    try {
+                        var displayValue = record.data.title;
+                        return comboRecord ?
+                                comboRecord.get(combo.displayField) : displayValue
+                    } catch (exception) {
+                        combo.setValue(value);
+                        return combo.getRawValue();
+                    }
+                }
+            }
+        });
 
         return [
             this.selectionModel,
@@ -96,6 +129,8 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
             },{
                 header   : 'Status',
                 dataIndex: 'status',
+                editor:this.editorComboBox,
+                renderer: this.editorComboBox.gridRenderer(this.editorComboBox),
                 width:30
             },{
                 header   : 'Active ?',
@@ -104,14 +139,6 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
                 width:20
             }
         ]
-    },
-
-    /**
-     * onAdd action
-     */
-    onAdd : function(btn, ev) {
-
-        alert('addd');
     }
 
 });

@@ -73,8 +73,8 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
         this.columns = [
             expander,
             {
-                header   : 'Identity',
-                width:40,
+                header   : 'ID',
+                width:12,
                 dataIndex: 'id',
                 sortable:true
             },

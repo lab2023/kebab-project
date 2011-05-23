@@ -109,6 +109,21 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
                 width:20
             }
         ]
+    },
+
+    onRemove : function(btn, ev) {
+
+        var sm = this.getSelectionModel();
+
+        if (!sm.getCount()) {
+            return false;
+        } else {
+            sm.each(function(selection) {
+                if (selection.data.num_user == 0  & selection.data.num_story == 0) { // just remove the unbound records
+                   this.store.remove(selection);
+                }
+            }, this);
+        }
     }
 
 });
