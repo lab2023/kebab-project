@@ -41,7 +41,7 @@ Model_Entity_Service:
     
   ManageUsers_2:
     Story: User_Management
-    Resource: Kebab_UserStory
+    Resource: Kebab_UserRole
 
   ManageUsers_3:
     Story: User_Management

@@ -40,10 +40,10 @@ class Kebab_Model_Role
     {
 
         $query = Doctrine_Query::create()
-                    ->select('role.name,
+                    ->select('role.id,
                         roleTranslation.title as title,
                         roleTranslation.description as description,
-                        role.status')
+                        role.active')
                     ->from('Model_Entity_Role role')
                     ->leftJoin('role.Translation roleTranslation')
                     ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language);
