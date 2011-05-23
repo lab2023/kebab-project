@@ -59,4 +59,44 @@ class Kebab_UserController extends Kebab_Rest_Controller
         $responseData = is_object($user) ? $user->toArray() : array();
         $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
+
+    public function putAction()
+    {
+        // Getting parameters
+        $params = $this->_helper->param();
+
+        // Convert data collection array if not
+        $collection = $this->_helper->array()->isCollection($params['data'])
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+
+        // Updating status
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+             // Doctrine
+            foreach ($collection as $record) {
+                $user = new Model_Entity_User();
+                $user->assignIdentifier($record['id']);
+                if (array_key_exists('active', $record)) {
+                    $user->set('active', $record['active']);
+                }
+
+                if (array_key_exists('status', $record)) {
+                    $user->set('status', $record['status']);
+                }
+                $user->save();
+            }
+            Doctrine_Manager::connection()->commit();
+            unset($user);
+
+            // Response
+            $this->_helper->response(true, 202)->getResponse();
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+    }
 }

@@ -38,35 +38,49 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $roles = Role_Model_Role::getAllRoles()->execute();
-        $responseData = is_object($roles) ? $roles->toArray() : array();
-        $this->_helper->response(true)->addData($responseData)->getResponse();
+//        // Mapping
+//        $mapping = array(
+//            'id'        => 'user.id',
+//            'fullName'  => 'user.fullName',
+//            'userName'  => 'user.userName',
+//            'active'    => 'user.active'
+//        );
+//
+//        $searchUser = $this->_helper->search('Model_Entity_UserRole');
+//        $order      = $this->_helper->sort($mapping);
+//        $query      = Kebab_Model_UserRole::getUserRoles($searchUser, $order);
+//        $pager      = $this->_helper->pagination($query);
+//        $userRole   = $pager->execute();
+//
+//
+//        $responseData = is_object($userRole) ? $userRole->toArray() : array();
+//        $this->_helper->response(true)->addData($responseData)->getResponse();
     }
 
     public function putAction()
     {
-        // Getting parameters
-        $params = $this->_helper->param();
-        $userId = $params['id'];
-        $rolesId = $params['roles'];
 
-        //KBBTODO move doctrine to models
         Doctrine_Manager::connection()->beginTransaction();
         try {
-            // Doctrine
-            Doctrine_Query::create()
-                    ->delete('Model_Entity_UserRole userRole')
-                    ->where('userRole.user_id = ?', $userId)
-                    ->execute();
 
-            foreach ($rolesId as $role) {
-                $userRole = new Model_Entity_UserRole();
-                $userRole->user_id = $userId;
-                $userRole->role_id = $role;
-                $userRole->save();
-            }
+            // Get Data and convert them array
+            $params = $this->_helper->param();
+            $userId = $params['userId'];
+
+            // Convert data collection array if not
+            $collection = $this->_helper->array()->isCollection($params['data'])
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+
+            $responseData = Kebab_Model_UserRole::update($userId, $collection);
+
             Doctrine_Manager::connection()->commit();
-            unset($userRole);
+
+            // Rest Response
+            $this->_helper->response(true, 201)->addData($responseData)->addNotification('INFO', 'Record was updated.')->getResponse();
+
+            unset($collection);
+            unset($responseData);
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
