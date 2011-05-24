@@ -38,14 +38,46 @@ class Kebab_UserInvitationController extends Kebab_Rest_Controller
 {
     public function postAction()
     {
+        // Params
         $params = $this->_helper->param();
-        $user = Kebab_Model_User::invite($params['fullName'], $params['email']);
-        if (is_object($user)) {
-            $this->sendInviteMail($user, $params['message']);
-            $this->_helper->response(true, 200)->getResponse();
-        } else {
-            $this->_helper->response()->getResponse();
+        $response = $this->_helper->response();
+        $valid = true;
+
+        // Validatation
+
+        // Exist user
+        $count = Doctrine_Core::getTable('Model_Entity_User')->findByemail($params['email'])->count();
+        if ($count > 0) {
+            $response->addNotification('ERR', 'There is a user with this email');
+            $valid = false;
         }
+
+        // Invalid email address
+        $validator = new Zend_Validate_EmailAddress();
+        if (!$validator->isValid($params['email'])) {
+            $response->addNotification('ERR', 'Invalid email address');
+            $valid = false;
+        }
+
+        // Check Fullname only Alpha chracter enable
+        $validator = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));
+        if (!$validator->isValid($params['fullName'])) {
+            $response->addNotification('ERR', 'Only alpha character enable.');
+            $valid = false;
+        }
+
+        // Model
+        if ($valid) {
+            $user = Kebab_Model_User::invite($params['fullName'], $params['email']);
+        }        
+
+        // Response
+        if ($valid && is_object($user)) {
+            $this->sendInviteMail($user, $params['message']);
+            $response->setSuccess(true);
+        }
+
+        $response->getResponse();
     }
 
     private function sendInviteMail($user, $message)
