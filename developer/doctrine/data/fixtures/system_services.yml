@@ -45,7 +45,7 @@ Model_Entity_Service:
 
   ManageUsers_3:
     Story: User_Management
-    Resource: Kebab_Invite
+    Resource: Kebab_UserInvitation
 
 
   # Manage Story

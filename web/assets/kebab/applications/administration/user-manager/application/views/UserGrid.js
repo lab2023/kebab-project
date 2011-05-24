@@ -139,6 +139,10 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
                 width:20
             }
         ]
+    },
+
+    onAdd : function() {
+        this.bootstrap.layout.inviteUserWindow.show();
     }
 
 });

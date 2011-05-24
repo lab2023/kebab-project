@@ -39,7 +39,6 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
 
             // Each the selected diseases
             Ext.each(user, function(user) {
-
                 if (user.id) { // Is really record
 
                     // Create new disease detail tab
@@ -47,7 +46,7 @@ KebabOS.applications.userManager.application.controllers.Index = Ext.extend(Ext.
                         id: 'user-' + user.id,
                         userId: user.id,
                         closable:true,
-                        title: user.id + ' # ' + user.data.title,
+                        title: user.id + ' # ' + user.data.fullName,
                         iconCls: 'icon-application-view-detail',
                         bootstrap: this.bootstrap,
                         border: false
