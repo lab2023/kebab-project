@@ -35,7 +35,7 @@
 
 final class Kebab_Authentication
 {
-    public static function signIn($userName, $password, $rememberMe = false)
+    public static function signIn($userName, $password, $rememberMe = false, $md5 = true)
     {
         $retVal = false;
         
@@ -43,10 +43,11 @@ final class Kebab_Authentication
         $auth = Zend_Auth::getInstance();
         $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_Entity_User'));
 
+        $password = $md5 ? md5($password) : $password;
         $authAdapter->setTableName('Model_Entity_User u')
                 ->setIdentityColumn('userName')
                 ->setCredentialColumn('password')
-                ->setCredentialTreatment('MD5(?) AND active = 1')
+                ->setCredentialTreatment('? AND active = 1')
                 ->setIdentity($userName)
                 ->setCredential($password);
 
@@ -70,5 +71,11 @@ final class Kebab_Authentication
 
         }
         return $retVal;
+    }
+
+    public static function signOut()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        Zend_Session::forgetMe();
     }
 }

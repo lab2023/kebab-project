@@ -87,6 +87,10 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             $profile->language = $language;
             $profile->save();
             Doctrine_Manager::connection()->commit();
+
+            Kebab_Authentication::signOut();
+            Kebab_Authentication::signIn($profile->userName, $profile->password, false, false);
+
             unset($profile);
 
             // Response
