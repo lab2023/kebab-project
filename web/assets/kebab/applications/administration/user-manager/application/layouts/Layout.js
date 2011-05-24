@@ -23,6 +23,10 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Tab
             border:false
         });
 
+        this.inviteUserWindow = new KebabOS.applications.userManager.application.views.InviteUserWindow({
+            bootstrap: this.bootstrap
+        });
+
         var config = {
             items:this.userGrid,
             activeTab: 0

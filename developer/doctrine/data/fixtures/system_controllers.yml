@@ -58,9 +58,9 @@ Model_Entity_Controller:
     Module: Kebab
     name: user-role
 
-  Kebab_Invite:
+  Kebab_UserInvitation:
     Module: Kebab
-    name: invite
+    name: user-invitation
 
   Kebab_Application:
     Module: Kebab

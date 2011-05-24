@@ -250,7 +250,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                   'user-role',
                                   'user-sign-up',
                                   'user-activation',
-                                  'invite',
+                                  'user-invitation',
                                   'application')
             )
         );
