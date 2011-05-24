@@ -125,7 +125,7 @@ SignUp = function(){
         showSignUpForm: function() {
             Ext.fly('kebab-progress-bar').fadeOut();
             Ext.fly('signUp-form-wrapper').fadeIn();
-            Ext.fly('kebab-system-backend-signUp-container').scale([330],[175]);
+            Ext.fly('kebab-system-backend-signUp-container').scale([330],[220]);
         },
 
         // ACTIONS -----------------------------------------------------------------------------------------------------
