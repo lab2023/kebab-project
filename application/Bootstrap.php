@@ -154,10 +154,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $connection->setListener(new Imind_Profiler_Doctrine_Firebug('Doctrine Profiler'));
         }
 
-        if (!IS_CLI) {
+        try { // Protect it CLI operations for this settings
             $connection->setCollate($this->_config->database->doctrine->connections->master->collate);
             $connection->setCharset($this->_config->database->doctrine->connections->master->charset);
+        } catch (Exception $e) {}
 
+        if (!IS_CLI) {
             // Caching Enabled ?
             if ($this->_config->database->doctrine->caching->enable) {
 
