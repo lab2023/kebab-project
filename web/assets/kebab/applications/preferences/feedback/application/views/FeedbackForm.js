@@ -13,7 +13,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
     // Application bootstrap
     bootstrap: null,
     //POST url
-    url : '/kebab/feedback',
+    url : Kebab.OS.generateUrl('kebab/feedback'),
 
     bodyStyle: 'padding:5px 10px;',
 
