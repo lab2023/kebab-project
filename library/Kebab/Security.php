@@ -35,16 +35,31 @@
 
 final class Kebab_Security
 {
+    /**
+     * @static
+     * @param int $lenght
+     * @return string
+     */
     public static function createActivationKey($lenght = 15)
     {
         return self::generate($lenght);
     }
 
+    /**
+     * @static
+     * @param int $lenght
+     * @return string
+     */
     public static function createPassword($lenght = 8)
     {
         return self::generate($lenght);
     }
 
+    /**
+     * @static
+     * @param  $lenght
+     * @return string
+     */
     public static function generate($lenght)
     {
         $chars = "abcdefghijkmnopqrstuvwxyz023456789";
