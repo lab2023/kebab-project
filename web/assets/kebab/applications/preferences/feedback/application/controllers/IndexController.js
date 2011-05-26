@@ -42,7 +42,7 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
             var notification = new Kebab.OS.Notification();
 
             data.from.getForm().submit({
-                url: BASE_URL + data.url,
+                url: data.url,
                 method: 'POST',
 
                 success : function() {

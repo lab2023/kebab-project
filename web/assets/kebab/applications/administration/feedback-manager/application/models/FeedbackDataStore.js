@@ -12,7 +12,7 @@ KebabOS.applications.feedbackManager.application.models.FeedbackDataStore = Ext.
 
     bootstrap: null,
 
-    restAPI: BASE_URL + '/kebab/feedback-manager',
+    restAPI: Kebab.OS.generateUrl('kebab/feedback-manager'),
 
     readerFields:[
         {name: 'id', type:'integer'},

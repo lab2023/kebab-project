@@ -46,7 +46,7 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
             var notification = new Kebab.OS.Notification();
 
             data.from.getForm().submit({
-                url: BASE_URL + data.url,
+                url: data.url,
                 method: 'PUT',
 
                 success : function() {

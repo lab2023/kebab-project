@@ -10,7 +10,7 @@
  */
 KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
-    url: '/kebab/profile',
+    url: Kebab.OS.generateUrl('kebab/profile'),
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',
@@ -138,7 +138,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
     onRender:function() {
 
         this.load({
-            url: BASE_URL + this.url + '/' + this.bootstrap.app.getUser().id,
+            url: this.url + '/' + this.bootstrap.app.getUser().id,
             method: 'GET'
         });
         
