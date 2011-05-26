@@ -44,7 +44,6 @@ User:
 
   options:
     type: INNODB
-    type: INNODB
     collate: utf8_bin
     charset: utf8
     
