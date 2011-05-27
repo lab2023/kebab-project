@@ -12,7 +12,7 @@ KebabOS.applications.storyManager.application.models.StoryDataStore = Ext.extend
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('kebab/story'),
+    restAPI: 'kebab/story',
 
     readerFields:[
         {name: 'id', type:'integer'},

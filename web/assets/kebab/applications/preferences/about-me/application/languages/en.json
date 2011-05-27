@@ -1,8 +1,0 @@
-{
-    language      : "en_US",
-    title         : "Application Title",
-    description   : "Application descriptions here",
-    translations  : {
-        "Hello" : "Hello World!"
-    }
-}

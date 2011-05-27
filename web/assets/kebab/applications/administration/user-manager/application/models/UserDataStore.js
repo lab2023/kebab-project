@@ -13,7 +13,7 @@ KebabOS.applications.userManager.application.models.UserDataStore = Ext.extend(K
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('kebab/user'),
+    restAPI: 'kebab/user',
 
     readerFields:[
         {name: 'id', type:'integer'},

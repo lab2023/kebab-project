@@ -12,7 +12,7 @@ KebabOS.applications.applicationManager.application.models.ApplicationDataStore 
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('kebab/application'),
+    restAPI: 'kebab/application',
 
     readerFields:[
         {name: 'id', type:'integer'},

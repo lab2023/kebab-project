@@ -16,6 +16,16 @@
 ----------------------------------------------------------------------------- */
 
 Ext.namespace('Kebab.OS.Kernel');
+
+/**
+ * Kebab.OS.Kernel
+ *
+ * @namespace   Kebab.OS
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
 Kebab.OS.Kernel = function(config){
 
     // Initial Configs
@@ -26,6 +36,7 @@ Kebab.OS.Kernel = function(config){
     this.settings = null;
     this.user = null;
     this.apps = null;
+    this.stories = null;
     this.applications = null;
     this.stateProvider = new Ext.state.CookieProvider();
 
@@ -44,7 +55,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
         Ext.state.Manager.setProvider(this.stateProvider);
 
-        Kebab.OS.Logger.info('KebabOS initialized...');
+        Kebab.helper.log('Kebab.OS.Kernel initialized...');
     },
 
     boot : function(){
@@ -53,8 +64,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
         // Initialize Desktop
         this.desktop = new Kebab.OS.Desktop(this);
-
-        this.notification = new Kebab.OS.Notification();
 
 		this.windowList = this.desktop.windowList;
 
@@ -69,11 +78,8 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         this.isBooted = true;
 
         if (this.isBooted) {
-            Kebab.OS.Logger.info('Kebab.OS.Kernel booted...');
-            this.notification.message(
-                'Kebab OS',
-                'Welcome to Kebab Project. Have fun!'
-            );
+            Kebab.helper.log('Kebab.OS.Kernel booted...');
+            Kebab.helper.translate('Welcome to Kebab Project. Have fun!');
         }
     },
 
@@ -83,13 +89,14 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
             applicationInstances = new Array();
 
         Ext.each(this.apps, function(application) {
-            applicationInstances[i++] = Ext.apply(
+            
+            applicationInstances[i++] = Ext.applyIf(
                 eval('new ' + application.className + '()'),
                 application
             );
         });
 
-        Kebab.OS.Logger.info('Kebab applications loaded...');
+        Kebab.helper.log('Kebab applications loaded...');
         
         return applicationInstances;
     },
@@ -98,10 +105,12 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
         var appSC = this.applications;
 
-		for(var i = 0, len = appSC.length; i < len; i++){
+        for(var i = 0, len = appSC.length; i < len; i++){
             var app = appSC[i];
 
-            this.windowList.addLauncherMenuItem(app.launcher, app.type);
+            var launcher = Ext.apply(app.launcher, app.title);
+
+            this.windowList.addLauncherMenuItem(launcher, app.type);
             app.app = this;
 
             // Check launcher auto start flag and call createApplication()
@@ -112,8 +121,6 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
     },
 
     getApplication : function(id) {
-
-        Kebab.OS.Logger.info('Kebab.OS.Kernel getApplication call by ' + id + ' parameter...');
 
         var app = this.applications;
 

@@ -19,6 +19,7 @@ Ext.namespace(
     'KebabOS.applications.aboutMe',
     'KebabOS.applications.aboutMe.application',
     'KebabOS.applications.aboutMe.application.controllers',
+    'KebabOS.applications.aboutMe.application.languages',
     'KebabOS.applications.aboutMe.application.models',
     'KebabOS.applications.aboutMe.application.layouts',
     'KebabOS.applications.aboutMe.application.views',
@@ -30,19 +31,18 @@ Ext.namespace(
  * @namespace KebabOS.applications.producer
  */
 KebabOS.applications.aboutMe.application.Bootstrap = function() {
-    
+
+    // Application ID
+    this.id = 'aboutMe-application';
+
+    // Merge launcher settings
     Ext.apply(this, {
-        
-        // Application ID
-        id : 'aboutMe-application',
-        
         // Application Launcher Settings
         launcher: {
-            text: 'About Me',
             iconCls: 'aboutMe-application-launcher-icon',
-            autoStart:true
+            autoStart: true
         }
     });
-    
+
     KebabOS.applications.aboutMe.application.Bootstrap.superclass.constructor.call(this);
-}
+};

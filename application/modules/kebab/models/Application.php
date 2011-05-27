@@ -67,9 +67,9 @@ class Kebab_Model_Application
             $app['type'] = $application->type;
             $app['department'] = $application->department;
             $app['version'] = $application->version;
-            $app['shortcut'] = array(
+            $app['title'] = array(
                 'text' => $application->Translation[$lang]->title,
-                'tooltip' => $application->Translation[$lang]->description
+                'description' => $application->Translation[$lang]->description
             );
             foreach ($application->StoryApplication as $story) {
                 $app['permission'][] = $story->Story->slug;

@@ -15,7 +15,7 @@
  * @category   Kebab (kebab-reloaded)
  * @package    System
  * @subpackage 
- * @author	   lab2023 Dev Team
+ * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - 
  *             internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -23,12 +23,12 @@
  */
  
  /**
- * Kebab Project Asset Bootstrapper
+ * Kebab Project Asset Loader
  *
  * On-Demad load and return all js files
  * @uses SPL - Standard PHP Library :: RecursiveIteratorIterator, RecursiveDirectoryIterator
  */
-if (phpversion() < 5) exit('/* Kebab Project Asset Bootstrapper requires PHP5 or greater. */');
+if (phpversion() < 5) exit('/* Kebab Project Asset Loader requires PHP5 or greater. */');
 
 ob_start("ob_gzhandler");
 
@@ -54,6 +54,5 @@ while($scanner->valid()) {
 
     $scanner->next();
 }
-
 
 ob_end_flush();

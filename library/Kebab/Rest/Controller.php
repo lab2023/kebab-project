@@ -26,6 +26,7 @@
  *
  * @category    Kebab
  * @package     Kebab_Rest
+ * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @see         Zend_Rest_Route
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/cms/licensing

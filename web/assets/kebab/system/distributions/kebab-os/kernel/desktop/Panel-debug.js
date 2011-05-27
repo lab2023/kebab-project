@@ -16,6 +16,16 @@
 ----------------------------------------------------------------------------- */
 
 Ext.namespace('Kebab.OS.Panel');
+
+/**
+ * Kebab.OS.Panel.WindowList
+ *
+ * @namespace   Kebab.OS.Panel
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
 Kebab.OS.Panel.WindowList = function(kernel){
     this.kernel = kernel;
     this.init();
@@ -58,7 +68,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
     buildMainMenuArea: function() {
 
         this.applicationsMenu = {
-            text:'Applications',
+            text: Kebab.helper.translate('Applications'),
             id: 'kebab-os-panel-main-menu-applications',
             iconCls: 'icon-kebab-os',
             template: new Ext.Template(
@@ -72,7 +82,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         };
 
         this.systemMenu = {
-            text:'System',
+            text: Kebab.helper.translate('System'),
             id: 'kebab-os-panel-main-menu-system',
             template: this.buttonTpl,
             menuWidth: 200,
@@ -116,7 +126,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
 
         var applicationsCombobox = new Ext.form.ComboBox({
             storeLoaded: false,
-            emptyText: 'Quick start...',
+            emptyText: Kebab.helper.translate('Quick start...'),
             typeAhead: true,
             width:150,
             triggerAction: 'all',
@@ -158,8 +168,8 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                 scope:this
             }, {
                 template: this.buttonTpl,
-                text: Kebab.OS.getLanguages('current').text,
-                iconCls: Kebab.OS.getLanguages('current').iconCls
+                text: Kebab.helper.translate(Kebab.getOS().getTranslator().getLanguages('active').text),
+                iconCls: Kebab.getOS().getTranslator().getLanguages('active').iconCls
             }, {
                 iconCls : 'icon-shutdown',
                 template: this.buttonTpl,
@@ -167,20 +177,20 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                     text: 'Logout...',
                     iconCls: 'icon-door-out',
                     handler: function() {
-                        Kebab.OS.logoutAction(this.user.id, true);
+                        Kebab.getOS().logoutAction(this.user.id, true);
                     },
                     scope:this
                 },{
                     text: 'Reboot...',
                     iconCls: 'icon-arrow-refresh',
                     handler: function() {
-                        Kebab.OS.rebootAction();
+                        Kebab.getOS().rebootAction();
                     }
                 },{
                     text: 'Shutdown...',
                     iconCls: 'icon-shutdown',
                     handler: function() {
-                        //Kebab.OS.shutDownAction(this.user.id);
+                        //Kebab.getOS().shutDownAction(this.user.id);
                     },
                     scope:this
                 }]
@@ -231,6 +241,15 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
     }
 });
 
+/**
+ * Kebab.OS.Panel.Container
+ *
+ * @namespace   Kebab.OS.Panel
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
 Kebab.OS.Panel.Container = Ext.extend(Ext.Container, {
     
     initComponent : function() {
@@ -260,6 +279,15 @@ Kebab.OS.Panel.Container = Ext.extend(Ext.Container, {
     }
 });
 
+/**
+ * Kebab.OS.Panel.WindowList.Buttons
+ *
+ * @namespace   Kebab.OS.Panel.WindowList
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
 Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
     activeButton: null,
     enableScroll: true,
@@ -524,6 +552,15 @@ Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
     }
 });
 
+/**
+ * Kebab.OS.Panel.WindowList.TaskButton
+ *
+ * @namespace   Kebab.OS.Panel.WindowList
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
 Kebab.OS.Panel.WindowList.TaskButton = function(win, el){
     
     this.win = win;
@@ -531,6 +568,7 @@ Kebab.OS.Panel.WindowList.TaskButton = function(win, el){
     Kebab.OS.Panel.WindowList.TaskButton.superclass.constructor.call(this, {
         iconCls: win.iconCls,
         text: Ext.util.Format.ellipsis(win.title, 18),
+        tooltip: win.description,
         renderTo: el,
         handler : function(){
             if(win.minimized || win.hidden){
@@ -544,11 +582,11 @@ Kebab.OS.Panel.WindowList.TaskButton = function(win, el){
         clickEvent:'mousedown',
         template: new Ext.Template(
             '<table cellspacing="0" class="x-btn {3}"><tbody><tr>',
-            '<td class="ux-taskbutton-left"><i>&#160;</i></td>',
+            '<td class="ux-taskbutton-left"><em>&#160;</em></td>',
             '<td class="ux-taskbutton-center"><em class="{5} unselectable="on">',
                 '<button class="x-btn-text {2}" type="{1}" style="height:28px;">{0}</button>',
             '</em></td>',
-            '<td class="ux-taskbutton-right"><i>&#160;</i></td>',
+            '<td class="ux-taskbutton-right"><em>&#160;</em></td>',
             "</tr></tbody></table>")
     });
 };

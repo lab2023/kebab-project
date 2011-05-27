@@ -14,7 +14,7 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
     // RESTful enable
     restful: true,    
     
-    // Autoload enable
+    // Auto-load enable
     autoLoad: false,
     
     // Remote sort enable
@@ -30,7 +30,8 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
         totalProperty: 'total',
         messageProperty: 'notifications'
     },
-    
+
+    // JSON Reader fields
     readerFields: [
         {name: 'id', type: 'int'},
         {name: 'title', type: 'string', allowBlank: false},
@@ -42,7 +43,7 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
         
         // HTTP Proxy
         this.proxy = new Ext.data.HttpProxy({
-            url : this.restAPI
+            url : Kebab.helper.url(this.restAPI)
         });
         
         // JSON Reader
@@ -55,7 +56,7 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
         var config = {
             proxy: this.proxy,
             reader: this.reader
-        }
+        };
         
         // Merge initialConfig and base config
         Ext.apply(this, config);
@@ -69,9 +70,18 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
     },
     
     listeners : {
+        write : function(){
+            Kebab.helper.message(
+                Kebab.helper.translate('Success'),
+                Kebab.helper.translate('Operation was performed successfully')
+            );
+        },
         exception : function(){
-            var notification = new Kebab.OS.Notification();
-            notification.message('Error', 'Operation was not performed.');
+            Kebab.helper.message(
+                Kebab.helper.translate('Error'),
+                Kebab.helper.translate('Operation was not performed'),
+                true
+            );
         }
     }
 });

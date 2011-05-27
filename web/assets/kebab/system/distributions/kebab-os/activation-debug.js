@@ -35,7 +35,7 @@
  */
 Activation = function(){
 
-    var activationAPI = Kebab.OS.generateUrl('kebab/user-activation'),
+    var activationAPI = null,
         activationForm = null,
         activationKey = 0;
 
@@ -43,12 +43,15 @@ Activation = function(){
 
         init: function(){
 
+            // API setup
+            activationAPI = Kebab.helper.url('kebab/user-activation');
+
             // Call builders
             this.buildActivationForm();
             
             Ext.fly('login-link').on('click', function(e) {
                 e.stopEvent();
-                Kebab.OS.redirect('backend');
+                Kebab.helper.redirect('backend');
             }, this)
         },
 
@@ -249,7 +252,7 @@ Activation = function(){
                 activationForm.getForm().submit({
                     method: 'POST',
                     success : function() {
-                        Kebab.OS.redirect('backend/desktop');
+                        Kebab.helper.redirect('backend/desktop');
                     },
                     failure : function() {
                         this.showActivationForm();

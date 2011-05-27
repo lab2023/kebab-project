@@ -39,14 +39,13 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
     formOnSaveAction: function(data) {
 
         if (data.from.getForm().isValid()) {
-            var notification = new Kebab.OS.Notification();
 
             data.from.getForm().submit({
-                url: data.url,
+                url: Kebab.helper.url(data.url),
                 method: 'POST',
 
                 success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Success');
                     data.from.getForm().reset();
                     if(data.store){
                         data.from.fireEvent('loadGrid', data.store);
@@ -54,7 +53,7 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
                 },
 
                 failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
                 }, scope:this
             });
         }

@@ -10,7 +10,7 @@
  */
 KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
-    url: Kebab.OS.generateUrl('kebab/profile'),
+    url: null,
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',
@@ -21,13 +21,15 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
     
     initComponent: function() {
 
+        this.url = Kebab.helper.url('kebab/profile');
+
         var languges = {
-            all: Kebab.OS.getLanguages(),
-            current: Kebab.OS.getLanguages('current')
+            all: Kebab.getOS().getTranslator().getLanguages(),
+            current: Kebab.getOS().getTranslator().getLanguages('current')
         };
 
         var languagesCombobox = new Ext.form.ComboBox({
-            fieldLabel: 'Your language',
+            fieldLabel: Kebab.helper.translate('Your language'),
             typeAhead: true,
             triggerAction: 'all',
             forceSelection: true,
@@ -95,7 +97,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                 autoHeight:true,
                 defaultType: 'textfield',
                 items: [{
-                    fieldLabel: 'Fullname',
+                    fieldLabel: Kebab.helper.translate('Full name'),
                     name: 'fullName',
                     allowBlank: false
                 },{
@@ -107,12 +109,12 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                 ]
             }],
             buttons: [{
-                text: 'Save',
+                text: Kebab.helper.translate('Save'),
                 iconCls: 'icon-disk',
                 scope: this,
                 handler: this.onSubmit
             }]
-        }
+        };
 
         this.addEvents('showHidePasswordForm');
         this.addEvents('mainProfileFormOnSave');

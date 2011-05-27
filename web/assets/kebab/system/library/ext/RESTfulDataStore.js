@@ -14,16 +14,16 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     // RESTful enable
     restful: true,    
     
-    // Autoload enable
+    // Auto-load enable
     autoLoad: false,
     
-    // Autodestroy enable
+    // Auto-destroy enable
     autoDestroy: true,
     
     // Remote sort enable
     remoteSort: true,
     
-    // Autosave default disable
+    // Auto-save default disable
     autoSave: false,
     
     // Batch editing default enable
@@ -39,7 +39,8 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
         totalProperty: 'total',
         messageProperty: 'notifications'
     },
-    
+
+    // JSON Reader fields
     readerFields: [
         {name: 'id', type: 'int'},
         {name: 'title', type: 'string', allowBlank: false},
@@ -51,7 +52,7 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
         
         // HTTP Proxy
         this.proxy = new Ext.data.HttpProxy({
-            url : this.restAPI
+            url : Kebab.helper.url(this.restAPI)
         });
         
         // JSON Reader
@@ -71,7 +72,7 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
             proxy: this.proxy,
             reader: this.reader,
             writer: this.writer
-        }
+        };
         
         // Merge initialConfig and base config
         Ext.apply(this, config);
@@ -86,13 +87,17 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
     
     listeners : {
         write : function(){
-            var notification = new Kebab.OS.Notification();
-            notification.message('Success', 'Operation was performed successfully.');
-            this.reload();
+            Kebab.helper.message(
+                Kebab.helper.translate('Success'),
+                Kebab.helper.translate('Operation was performed successfully')
+            );
         },
         exception : function(){
-            var notification = new Kebab.OS.Notification();
-            notification.message('Error', 'Operation was not performed.');
+            Kebab.helper.message(
+                Kebab.helper.translate('Error'),
+                Kebab.helper.translate('Operation was not performed'),
+                true
+            );
         }
     }
 });

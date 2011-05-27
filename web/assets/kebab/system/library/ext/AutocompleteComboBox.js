@@ -30,7 +30,7 @@ Kebab.library.ext.AutocompleteComboBox = Ext.extend(Ext.form.ComboBox, {
             forceSelection: true,
             minChars: 3,
             pageSize: 25
-        }
+        };
 
         // Merge initialConfig and baseConfig
         Ext.apply(this, config);

@@ -16,6 +16,16 @@
 ----------------------------------------------------------------------------- */
 
 Ext.namespace('Kebab.OS.Desktop');
+
+/**
+ * Kebab.OS.Desktop
+ *
+ * @namespace   Kebab.OS
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
 Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
     
     kernel: null,
@@ -27,19 +37,19 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
     contextMenu :null,
     
     constructor : function(kernel){
-		
-		this.kernel = kernel;
-        
+
+        this.kernel = kernel;
+
         this.windowList = new Kebab.OS.Panel.WindowList(kernel);
         this.el = Ext.getBody().createChild({tag: 'div', cls: 'x-desktop'});
-        
-        this.xTickSize = this.yTickSize = 1;
-        
-        this.kebabOsPanel = Ext.get('kebab-os-panel');
-		this.kebabOsDesktop = Ext.get('kebab-os-desktop');
-		this.kebabOsDesktopShortcuts = Ext.get('kebab-os-desktop-shortcuts');
 
-		// todo: fix bug where Ext.Msg are not displayed properly
+        this.xTickSize = this.yTickSize = 1;
+
+        this.kebabOsPanel = Ext.get('kebab-os-panel');
+        this.kebabOsDesktop = Ext.get('kebab-os-desktop');
+        this.kebabOsDesktopShortcuts = Ext.get('kebab-os-desktop-shortcuts');
+
+        // todo: fix bug where Ext.Msg are not displayed properly
         this.applicationWindowManager.zseed = 7000; //10000;
         
         this.contextMenu = new Ext.menu.Menu([{
@@ -68,14 +78,14 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
             scope: this
         }]);
 
-		Kebab.OS.Desktop.superclass.constructor.call(this);
-        
+        Kebab.OS.Desktop.superclass.constructor.call(this);
+
         this.initEvents();
-		this.layout();
-	},
+        this.layout();
+    },
     
     initEvents : function(){
-		Ext.EventManager.onWindowResize(this.layout, this);
+        Ext.EventManager.onWindowResize(this.layout, this);
         
         this.kebabOsDesktop.on('contextmenu', function(e) {            
             if(e.target.id === this.kebabOsDesktop.id){
@@ -100,16 +110,16 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 }
             },this);
         }
-	},
+    },
     
-   layout: function() {
-        this.kebabOsDesktop.setHeight(Ext.lib.Dom.getViewHeight() - this.kebabOsPanel.getHeight());
+    layout: function() {
+       this.kebabOsDesktop.setHeight(Ext.lib.Dom.getViewHeight() - this.kebabOsPanel.getHeight());
     },
     
     createApplication : function(config, cls) {
-        
+
         var appWin = new(cls || Ext.Window)(
-        
+
             Ext.applyIf(config || {},
             {
                 renderTo: this.kebabOsDesktop,
@@ -118,7 +128,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 maximizable: true,
                 collapsible: true,
                 constrainHeader:true,
-                shim:false,       
+                shim:false,
                 layout:'fit',
                 animShowCfg: {
                     duration: .0,
@@ -132,7 +142,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                     id:'gear',
                     qtip: 'Send feedback this application',
                     handler: function(event, toolEl, panel) {
-                       // TODO
+                       // KBBTODO Kebab.helper.log(arguments);
                     },
                     scope:this
                 }]
@@ -156,7 +166,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
 
         appWin.on({
             'activate': {
-                fn: this.markActive, 
+                fn: this.markActive,
                 scope: this
             },
             'beforeshow': {
@@ -178,12 +188,12 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         });
 
         this.layout();
-        
-        this.kernel.notification.message('Kebab OS', '\'' +appWin.title + '\' initialized...');
-        
+
+        Kebab.helper.message('Kebab Project', Kebab.helper.translate('{0} initialized...', appWin.title));
+
         return appWin;
     },
-    
+
     getManager: function() {
         return this.applicationWindowManager;
     },
@@ -219,7 +229,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
     },
 
     setTickSize: function(xTickSize, yTickSize) {
-        
+
         this.xTickSize = xTickSize;
         if (arguments.length == 1) {
             this.yTickSize = xTickSize;
@@ -234,7 +244,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         },
         this);
     },
-    
+
     minimizeApplication: function(appWin) {
         appWin.minimized = true;
         appWin.hide();
@@ -261,20 +271,20 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this.windowList.removeTaskButton(appWin.taskButton);
         this.layout();
     },
-    
-    
+
+
     closeApplications : function() {
         this.applicationWindowManager.each(function(app) {
             app.close();
         }, this);
     },
-   
+
     minimizeApplications : function() {
         this.applicationWindowManager.each(function(app) {
             this.minimizeApplication(app);
         }, this);
     },
-    
+
     cascadeApplications: function() {
         var x = 0,
         y = 0;
@@ -310,23 +320,23 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         },
         this);
     },
-    
-    /**
-	 * @param {string} hex The hexidecimal number for the color.
-	 */
-	setBackgroundColor : function(hex){
-		if(hex){
-			Ext.get(document.body).setStyle('background-color', '#'+hex);
-		}
-	},
 
-	/**
-	 * @param {string} hex The hexidecimal number for the color.
-	 */
-	setFontColor : function(hex){
-		if(hex){
+    /**
+     * @param {string} hex The hexadecimal number for the color.
+     */
+    setBackgroundColor : function(hex){
+        if(hex){
+            Ext.get(document.body).setStyle('background-color', '#'+hex);
+        }
+    },
+
+    /**
+     * @param {string} hex The hexadecimal number for the color.
+     */
+    setFontColor : function(hex){
+        if(hex){
             // KBBTODO find shortcut class and replace
-			Ext.util.CSS.updateRule('.ux-shortcut-btn-text', 'color', '#'+hex);
-		}
-	}
+            Ext.util.CSS.updateRule('.ux-shortcut-btn-text', 'color', '#'+hex);
+        }
+    }
 });

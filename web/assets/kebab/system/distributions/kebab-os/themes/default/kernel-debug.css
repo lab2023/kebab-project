@@ -100,7 +100,7 @@ p.kebab-paragraph {
     text-align:left;
 }
 .kebab-opacity {
-    background:transparent url('images/os/container-bg-85.png')  !important;
+    background:transparent url('images/kernel/container-bg-85.png')  !important;
 }
 .kebab-opacity:hover {
     background:#fff !important;
@@ -125,7 +125,15 @@ p.kebab-paragraph {
     border:1px dashed red;
 }
 .icon-kebab-os {
-    background-image: url('images/os/os.png') !important;
+    background-image: url('images/kernel/os.png') !important;
+}
+.kebab-notifications-body {
+    position:absolute;
+    right:35%;
+    top:10px;
+    width:300px;
+    z-index:8999;
+    padding:10px;
 }
 .kebab-notifications {
     font-size:14px;
@@ -139,14 +147,6 @@ p.kebab-paragraph {
     -webkit-opacity:.85;
     filter:alpha(opacity=85);
 }
-.kebab-notifications-body {
-    position:absolute;
-    right:35%;
-    top:10px;
-    width:300px;
-    z-index:8999;
-    padding:10px;
-}
 
 /*---------------------------------ELEMENTS------------------------------------*/
 
@@ -157,13 +157,13 @@ p.kebab-paragraph {
     position:absolute;
     z-index:20000;
     left:0;
-    background: #000 url('images/os/indicator.gif') no-repeat center center;
+    background: #000 url('images/kernel/indicator.gif') no-repeat center center;
     top:0;
 }
 
 /* Beta Ribbon */
 #beta-ribbon {
-    background: transparent url('images/os/beta-ribbon.png') no-repeat left top;
+    background: transparent url('images/kernel/beta-ribbon.png') no-repeat left top;
     width:78px;
     height:75px;
     position:absolute;
@@ -173,7 +173,7 @@ p.kebab-paragraph {
 
 /* Kebab Progress Bar */
 #kebab-progress-bar {
-    background: url('images/os/progress-bar.gif') no-repeat 48% 30px;
+    background: url('images/kernel/progress-bar.gif') no-repeat 48% 30px;
     visibility:hidden;
     text-align:center;
     width:228px;
@@ -210,6 +210,9 @@ p.kebab-paragraph {
 #project-info p strong {
     font-weight:bold;
 }
+#project-info a {
+    text-decoration:none;
+}
 
 /* Sign-in screen */
 #kebab-system-backend-signIn-container {
@@ -227,12 +230,12 @@ div#forgotPassword-form-wrapper {
 div#signIn-form-wrapper {
     width:330px;
     height:245px;
-    background: url('images/os/sign-in.png') no-repeat right 43px;
+    background: url('images/kernel/sign-in.png') no-repeat right 43px;
 }
 div#forgotPassword-form-wrapper {
     height:128px;
     visibility:hidden;
-    background: url('images/os/forgot-password.png') no-repeat right top;
+    background: url('images/kernel/forgot-password.png') no-repeat right top;
 }
 
 /* Sign-up Screen */
@@ -248,7 +251,7 @@ div#signUp-form-wrapper{
 div#signUp-form-wrapper {
     width:330px;
     height:220px;
-    background: url('images/os/sign-up.png') no-repeat right top;
+    background: url('images/kernel/sign-up.png') no-repeat right top;
 }
 
 /* Activation Screen */
@@ -264,5 +267,5 @@ div#activation-form-wrapper{
 div#activation-form-wrapper {
     width:300px;
     height:385px;
-    background: url('images/os/activation.png') no-repeat right top;
+    background: url('images/kernel/activation.png') no-repeat right top;
 }

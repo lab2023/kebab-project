@@ -13,7 +13,7 @@ KebabOS.applications.roleManager.application.models.RoleStoryDataStore = Ext.ext
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('kebab/role-story'),
+    restAPI: 'kebab/role-story',
 
     readerFields:[
         {name: 'id', type:'integer'},

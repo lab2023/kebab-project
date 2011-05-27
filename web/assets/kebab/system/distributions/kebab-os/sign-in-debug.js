@@ -35,14 +35,18 @@
  */
 SignIn = function(){
 
-    var signInAPI = Kebab.OS.generateUrl('kebab/session'),
-        forgotPasswordAPI = Kebab.OS.generateUrl('kebab/forgot-password'),
+    var signInAPI = null,
+        forgotPasswordAPI = null,
         signInForm = null,
         forgotPasswordForm = null;
 
     return {
 
         init: function(){
+
+            // API Setup
+            signInAPI = Kebab.helper.url('kebab/session');
+            forgotPasswordAPI = Kebab.helper.url('kebab/forgot-password');
 
             // Call builders
             this.buildSignInForm();
@@ -107,7 +111,7 @@ SignIn = function(){
                         // Add events
                         Ext.fly('singUp-link').on('click', function(e) {
                             e.stopEvent();
-                            Kebab.OS.redirect('backend/sign-up');
+                            Kebab.helper.redirect('backend/sign-up');
                         }, this);
                         
                         Ext.fly('forgotPassword-link').on('click', function(e) {
@@ -218,7 +222,7 @@ SignIn = function(){
                 this.showPreLoader();
                 signInForm.getForm().submit({
                     success : function() {
-                        Kebab.OS.redirect('backend/desktop');
+                        Kebab.helper.redirect('backend/desktop');
                     },
                     failure : function() {
                         this.showSignInForm();

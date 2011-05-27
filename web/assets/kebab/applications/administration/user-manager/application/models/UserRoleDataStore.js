@@ -13,7 +13,7 @@ KebabOS.applications.userManager.application.models.UserRoleDataStore = Ext.exte
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('kebab/user-role'),
+    restAPI: 'kebab/user-role',
 
     readerFields:[
         {name: 'id', type:'integer'},

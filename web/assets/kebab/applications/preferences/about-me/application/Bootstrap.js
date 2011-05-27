@@ -10,6 +10,10 @@
  */
 Ext.extend(KebabOS.applications.aboutMe.application.Bootstrap, Kebab.OS.Application, {
 
+    constructor: function() {
+        KebabOS.applications.aboutMe.application.Bootstrap.superclass.constructor.call(this);
+    },
+
     createApplication : function(){
 
         var desktop = this.app.getDesktop();
@@ -25,14 +29,15 @@ Ext.extend(KebabOS.applications.aboutMe.application.Bootstrap, Kebab.OS.Applicat
                 bootstrap: this
             });
 
-            // Default controlller
+            // Default controller
             this.defaultController = new KebabOS.applications.aboutMe.application.controllers.Index({
                 bootstrap: this
             });
 
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'aboutMe-application-gui-icon',
                 width: winWidth,
                 height: winHeight,

@@ -59,5 +59,4 @@ while($scanner->valid()) {
     $scanner->next();
 }
 
-
 ob_end_flush();

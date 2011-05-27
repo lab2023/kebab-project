@@ -12,7 +12,9 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
 
     // Application bootstrap
     bootstrap: null,
-    url: Kebab.OS.generateUrl('backup/backup'),
+
+    url: 'backup/backup',
+
     initComponent: function() {
 
         // json data store
@@ -30,21 +32,20 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 // To be equal to the width of columns
                 forceFit: true
             }
-        }
+        };
 
         this.bbar = new Kebab.library.ext.ExtendedPagingToolbar({
             store: this.store
         });
 
-        this.tbar = [
-            {
-                text: 'Backup',
-                iconCls:'icon-database-save',
-                handler: function() {
-                    this.fireEvent('backupRequest', {from:this, url:this.url, method:'POST', store:this.store})
-                }, scope:this
-            }
-        ];
+        this.tbar = [{
+            text: 'Backup',
+            iconCls:'icon-database-save',
+            handler: function() {
+                this.fireEvent('backupRequest', {from:this, url:this.url, method:'POST', store:this.store})
+            }, scope:this
+        }];
+        
         this.columns = [
             {
                 header   : 'Date',
@@ -60,40 +61,38 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 dataIndex: 'buttons',
                 width:16,
                 xtype: 'actioncolumn',
-                items: [
-
-                    {
+                items: [{
                         iconCls:'icon-disk databaseBackup-icon-icon-disk',
                         tooltip: 'Download Backup',
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
                             var file = rec.data.name;
-                            window.location.href = this.url + '/fileName/' + file;
+                            window.location.href = Kebab.helper.url(this.url + '/fileName/' + file);
                         },
                         scope:this
-                    },
-                    {
+                    }, {
                         iconCls:'icon-cancel databaseBackup-icon-cancel',
                         tooltip: 'Delete Backup',
-                        handler
-                                :
-                                function(grid, rowIndex) {
-                                    var rec = this.store.getAt(rowIndex);
-                                    var file = rec.data.name;
-                                    Ext.Msg.confirm('Are you sure?', 'Do you want to ' + file + ' file delete?', function(button) {
-                                        if (button == 'yes') {
-                                            this.fireEvent('deleteRequest', {name:file, from:this, store:this.store, url:this.url ,method:'DELETE'});
-                                        }
-                                    }, this);
+                        handler: function(grid, rowIndex) {
+                            var rec = this.store.getAt(rowIndex);
+                            var file = rec.data.name;
+                            Ext.Msg.confirm('Are you sure?', 'Do you want to ' + file + ' file delete?', function(button) {
+                                if (button == 'yes') {
+                                    this.fireEvent('deleteRequest', {
+                                        name:file,
+                                        from:this,
+                                        store:this.store,
+                                        url:this.url ,
+                                        method:'DELETE'
+                                    });
                                 }
-
-                        ,
+                            }, this);
+                        },
                         scope:this
                     }
                 ]
             }
-        ]
-                ;
+        ];
 
         this.addEvents('backupRequest');
         this.addEvents('deleteRequest');
@@ -109,5 +108,4 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
             this.store.load();
         }
     }
-})
-        ;
+});

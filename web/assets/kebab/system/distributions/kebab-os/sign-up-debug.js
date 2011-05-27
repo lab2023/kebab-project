@@ -35,19 +35,22 @@
  */
 SignUp = function(){
 
-    var signUpAPI = Kebab.OS.generateUrl('kebab/user-sign-up'),
+    var signUpAPI = null,
         signUpForm = null;
 
     return {
 
         init: function(){
 
+            //API Setup
+            signUpAPI = Kebab.helper.url('kebab/user-sign-up');
+
             // Call builders
             this.buildSignUpForm();
             
             Ext.fly('login-link').on('click', function(e) {
                 e.stopEvent();
-                Kebab.OS.redirect('backend');
+                Kebab.helper.redirect('backend');
             }, this)
         },
 
@@ -138,7 +141,7 @@ SignUp = function(){
                 this.showPreLoader();
                 signUpForm.getForm().submit({
                     success : function() {
-                        Kebab.OS.redirect('backend');
+                        Kebab.helper.redirect('backend');
                     },
                     failure : function() {
                         this.showSignUpForm();

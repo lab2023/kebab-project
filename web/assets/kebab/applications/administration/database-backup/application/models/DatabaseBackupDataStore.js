@@ -12,7 +12,7 @@ KebabOS.applications.databaseBackup.application.models.DatabaseBackupDataStore =
 
     bootstrap: null,
 
-    restAPI: Kebab.OS.generateUrl('backup/backup'),
+    restAPI: 'backup/backup',
 
     readerFields:[
         {name:'name', type:'string'},

@@ -189,8 +189,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     public function _initTranslator()
     {
-        $translator = null;
-        
         // Info Log
         $this->_logging->log('Translator initialized...', Zend_Log::INFO);
 

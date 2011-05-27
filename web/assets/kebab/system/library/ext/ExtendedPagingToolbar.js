@@ -46,7 +46,7 @@ Kebab.library.ext.ExtendedPagingToolbar = Ext.extend(Ext.PagingToolbar, {
                 this.perPageCombo
             ],
             plugins: new Ext.ux.SlidingPager()
-        }
+        };
 
         // Merge initialConfig and baseConfig
         Ext.apply(this, config);

@@ -13,19 +13,6 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
     // Application bootstrap
     bootstrap: null,
 
-    title:' Change Password',
-    iconCls: 'icon-key',
-    url: Kebab.OS.generateUrl('kebab/password'),
-    defaultType: 'textfield',
-    border:false,
-    bodyStyle: 'padding:5px 10px;',
-    defaults: {
-        labelAlign: 'top',
-        anchor: '100%',
-        inputType: 'password',
-        allowBlank: false
-    },
-
     initComponent: function() {
 
         Ext.apply(Ext.form.VTypes, {
@@ -36,10 +23,22 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
                 }
                 return true;
             },
-            passwordText : 'Passwords do not match!'
+            passwordText : Kebab.helper.translate('Passwords do not match!')
         });
 
         var config = {
+            title: Kebab.helper.translate('Change Password'),
+            iconCls: 'icon-key',
+            url: Kebab.helper.url('kebab/password'),
+            defaultType: 'textfield',
+            border:false,
+            bodyStyle: 'padding:5px 10px;',
+            defaults: {
+                labelAlign: 'top',
+                anchor: '100%',
+                inputType: 'password',
+                allowBlank: false
+            },
             items: [{
                 xtype:'panel',
                 layout: 'form',
@@ -76,11 +75,10 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
             }, {
                 text: 'Save',
                 iconCls: 'icon-disk',
-                handler: this.onUpdate,
                 scope: this,
                 handler: this.onSubmit
             }]
-        }
+        };
 
         this.addEvents('showHidePasswordForm');
         this.addEvents('passwordFormOnSave');

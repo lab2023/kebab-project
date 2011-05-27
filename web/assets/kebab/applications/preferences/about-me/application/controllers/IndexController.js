@@ -43,20 +43,17 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
     formOnSaveAction: function(data) {
 
         if (data.from.getForm().isValid()) {
-            var notification = new Kebab.OS.Notification();
-
+            
             data.from.getForm().submit({
                 url: data.url,
                 method: 'PUT',
-
                 success : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Success');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Success');
                     if(data.toggle){
                         data.from.fireEvent('showHidePasswordForm', data.from);
                         data.from.getForm().reset();
                     }
                 },
-
                 failure : function() {
                     notification.message(this.bootstrap.launcher.text, 'Failure');
                 }, scope:this

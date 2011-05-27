@@ -81,8 +81,6 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
         $this->setOptions($config->toArray());
 
         Zend_Registry::set($this->_module['folder'] . 'Config', $this->_config = $config);
-
-        $this->setOptions($config->toArray());
     }
 
     /**

@@ -14,190 +14,256 @@
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
-/**
- * Kebab OS Singleton Object
- */
-Ext.namespace('Kebab', 'Kebab.OS');
-Kebab.OS = function(){
 
+Ext.namespace('Kebab.OS');
+
+/**
+ * Kebab.OS
+ *
+ * @namespace   Kebab.OS
+ * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
+ * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
+ * @license     http://www.kebab-project.com/cms/licensing
+ * @version    1.5.0
+ */
+Kebab.OS = function(kebab){
+    
     /**
-     * Base variables and constants accessors
+     * Base variables
      */
-    var applicationEnvironment = APPLICATION_ENV,
-        baseUrl = BASE_URL,
-        languages = LANGUAGES,
-        preLoader = null,
+    var preLoader = null,
         preLoaderHidden = false,
         delay = 300;
 
-    return {
+    /**
+     * Kebab object
+     * @type Kebab
+     */
+    this.kebab = null;
 
-        /**
-         * Kebab OS initializer
-         */
-        init: function(){
+    /**
+     * Logger function
+     * @type Kebab.Logger
+     */
+    this.logger = Ext.emptyFn;
 
-            // Quick tips setup
-            Ext.QuickTips.init();
-            Ext.apply(Ext.QuickTips.getQuickTip(), {trackMouse: true});
-            
-            preLoader = Ext.get('kebab-loading-mask');
+    /**
+     * Translator function
+     * @type Kebab.Translator
+     */
+    this.translator =  Ext.emptyFn;
 
+    /**
+     * Kebab OS initializer
+     * @return object
+     */
+    this.init = function(kebab){
+
+        // Bind kebab object
+        this.kebab = kebab;
+
+        // Quick tips setup
+        Ext.QuickTips.init();
+        Ext.apply(Ext.QuickTips.getQuickTip(), {trackMouse: true});
+
+        // Builders
+        try {
+            this.buildBaseObjects();
             this.buildProjectInfo();
-            
-            preLoader.on('click', function() {
-                this.hidePreLoader(.5);
-            }, this);
+        } catch(e) {
+            Kebab.helper.log('Kebab.OS builders not loaded...', 'ERR');
+        }
 
-            new Ext.util.DelayedTask(function(){
-                this.hidePreLoader(.5);
-            }, this).delay(delay);
-        },
+        // Get pre-loader element
+        preLoader = Ext.get('kebab-loading-mask');
+        preLoader.on('click', function() {
+            this.hidePreLoader(.5);
+        }, this);
 
-        // BUILDERS ----------------------------------------------------------------------------------------------------
-
-        /**
-         * Build project info
-         */
-        buildProjectInfo: function() {
-            Ext.fly('project-info').on('mouseenter', function(a, b, c) {
-                Ext.fly('project-info').scale([150],[Ext.isChrome ? 95 : 85], {
-                    easing: 'elasticOut', duration: .6,
-                    callback: function() {
-                        new Ext.util.DelayedTask(function(){
-                             Ext.fly('project-info').scale([120],[18], {
-                                easing: 'easeIn', duration: .1
-                            });
-                        }).delay(3000);
-                    }
-                });
-            });
-        },
-
-        // HELPERS ----------------------------------------------------------------------------------------------------
-
-        /**
-         * Hide the pre-loader
-         * @param d
-         */
-        hidePreLoader: function(d){
-            if (!preLoaderHidden)  {
-                preLoader.fadeOut({remove: false, duration:d});
-                preLoaderHidden = true;
-            }
-        },
-
-        /**
-         * Show the page pre-loader
-         * @param d
-         */
-        showPreLoader: function(d) {
-            preLoader.fadeIn({duration:d});
-            preLoaderHidden = false;
-        },
-
-        /**
-         * Redirect to url
-         * @param url
-         */
-        redirect: function(url) {
-
-            Kebab.OS.showPreLoader(0);
-            
-            new Ext.util.DelayedTask(function(){
-                window.location.href = this.generateUrl(url);
-            }, this).delay(delay);
-        },
-
-        /**
-         * Generate full url
-         * @param url
-         */
-        generateUrl: function(url) {
-            return this.getBaseUrl() + '/' + url;
-        },
-
-        // GETTERS -----------------------------------------------------------------------------------------------------
-
-        /**
-         * Get current languages
-         * @param which
-         */
-        getLanguages: function(which) {
-
-            if(which == 'current') {
-
-                var currentLanguage = null;
-
-                Ext.each(languages, function(language) {
-                    if (language.active) {
-                        currentLanguage = language;
-                        return null;
-                    }
-                });
-
-                return currentLanguage;
-
-            } else {
-                return languages;
-            }
-        },
+        // Delay and hide
+        new Ext.util.DelayedTask(function(){
+            this.hidePreLoader(.5);
+        }, this).delay(delay);
         
-        /**
-         * Get site base url
-         */
-        getBaseUrl: function() {
-            return baseUrl;
-        },
+        Kebab.helper.log('Kebab.OS initialized...');
 
-        /**
-         * Get Application Environment
-         */
-        getEnvironment: function() {
-            return applicationEnvironment;
-        },
+        return this;
+    };
 
-        // ACTIONS -----------------------------------------------------------------------------------------------------
+    // BUILDERS ----------------------------------------------------------------------------------------------------
 
+    /**
+     * Build the base objects
+     * @return void
+     */
+    this.buildBaseObjects = function() {
 
-        /**
-         * Logout action
-         */
-        logoutAction: function(userId, redirect) {
-            Ext.Ajax.request({
-                url: this.generateUrl('kebab/session/' + userId),
-                method: 'DELETE',
-                success: function() {
-                    if (redirect) {
-                        this.redirect('backend');
-                    } else {
-                        return true;
-                    }
-                },
-                failure: function() {
-                    var notification = new Kebab.OS.Notification();
-                    notification.message('Argh! %(', 'Operation failure....');
-                    return false;
-                },
-                scope: this
-            }, this)
-        },
+        // Set translator object
+        this.translator = new Kebab.Translator(this.getKebab().i18n);
+        
+        // Set logger object
+        this.logger = new Kebab.Logger(this.getKebab().applicationEnvironment);
 
-        /**
-         * Shutdown and exit (close browser window)
-         */
-        shutDownAction: function(userId) {
-            if(this.logoutAction(userId, false)) {
-                window.close();
-            }
-        },
+        // Set notification object
+        this.notification = new Kebab.Notification();
+    };
 
-        /**
-         * Reboot system (reload)
-         */
-        rebootAction: function() {
-            this.redirect('backend/desktop');
+    /**
+     * Build project info
+     * @return void
+     */
+    this.buildProjectInfo = function() {
+        Ext.fly('project-info').on('mouseenter', function(a, b, c) {
+            Ext.fly('project-info').scale([150],[Ext.isChrome ? 95 : 85], {
+                easing: 'elasticOut', duration: .6,
+                callback: function() {
+                    new Ext.util.DelayedTask(function(){
+                         Ext.fly('project-info').scale([120],[18], {
+                            easing: 'easeIn', duration: .1
+                        });
+                    }).delay(3000);
+                }
+            });
+        });
+    };
+
+    // HELPERS ----------------------------------------------------------------------------------------------------
+
+    /**
+     * Hide the pre-loader
+     * @param d
+     * @return void
+     */
+    this.hidePreLoader = function(d){
+        if (!preLoaderHidden)  {
+            preLoader.fadeOut({remove: false, duration:d});
+            preLoaderHidden = true;
         }
     };
-}();
-Ext.onReady(Kebab.OS.init, Kebab.OS);
+
+    /**
+     * Show the page pre-loader
+     * @param d
+     * @return void
+     */
+    this.showPreLoader = function(d) {
+        preLoader.fadeIn({duration:d});
+        preLoaderHidden = false;
+    };
+
+    /**
+     * Redirect to url
+     * @param url
+     * @return void
+     */
+    this.redirect = function(url) {
+
+        this.showPreLoader(0);
+
+        new Ext.util.DelayedTask(function(){
+            window.location.href = this.generateUrl(url);
+        }, this).delay(delay);
+    };
+
+    /**
+     * Generate full url
+     * @param url
+     * @return string
+     */
+    this.generateUrl = function(url) {
+        return this.getBaseUrl() + '/' + url;
+    },
+
+    // GETTERS -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Get the kebab object
+     * @return object
+     */
+    this.getKebab = function() {
+        return this.kebab;
+    };
+
+    /**
+     * Get the translator object
+     * @return object
+     */
+    this.getTranslator = function() {
+        return this.translator;
+    };
+
+    /**
+     * Get the logger object
+     * @return object
+     */
+    this.getLogger = function() {
+        return this.logger;
+    };
+
+    /**
+     * Get the notification object
+     * @return object
+     */
+    this.getNotification = function() {
+        return this.notification;
+    };
+
+    /**
+     * Get site base url
+     * @return string
+     */
+    this.getBaseUrl = function() {
+        return this.getKebab().baseUrl;
+    };
+
+    /**
+     * Get Application Environment
+     * @return string
+     */
+    this.getEnvironment = function() {
+        return this.getKebab().applicationEnvironment;
+    };
+
+    // ACTIONS -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Logout action
+     * @return void
+     */
+    this.logoutAction = function(userId, redirect) {
+        Ext.Ajax.request({
+            url: this.generateUrl('kebab/session/' + userId),
+            method: 'DELETE',
+            success: function() {
+                if (redirect) {
+                    this.redirect('backend');
+                } else {
+                    return true;
+                }
+            },
+            failure: function() {
+                this.getNotification().message('Argh! %(', 'Operation failure....');
+                return false;
+            },
+            scope: this
+        }, this)
+    };
+
+    /**
+     * Shutdown and exit (close browser window)
+     * @return void
+     */
+    this.shutDownAction = function(userId) {
+        if(this.logoutAction(userId, false)) {
+            window.close();
+        }
+    };
+
+    /**
+     * Reboot system (reload)
+     * @return void
+     */
+    this.rebootAction = function() {
+        this.redirect('backend/desktop');
+    }
+};

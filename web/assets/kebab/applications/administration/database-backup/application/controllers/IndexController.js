@@ -22,8 +22,8 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
         KebabOS.applications.databaseBackup.application.controllers.Index.superclass.constructor.apply(this, arguments);
 
         this.init();
-        this.bootstrap.layout.databaseBackupGrid.on('deleteRequest', this.RequestAction, this);
-        this.bootstrap.layout.databaseBackupGrid.on('backupRequest', this.RequestAction, this);
+        this.bootstrap.layout.databaseBackupGrid.on('deleteRequest', this.requestAction, this);
+        this.bootstrap.layout.databaseBackupGrid.on('backupRequest', this.requestAction, this);
         this.bootstrap.layout.databaseBackupGrid.on('loadGrid', this.loadGridAction, this);
     },
 
@@ -36,23 +36,23 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
     loadGridAction: function(component) {
         component.load();
     },
-    RequestAction: function(data) {
-        var notification = new Kebab.OS.Notification();
+    
+    requestAction: function(data) {
         Ext.Ajax.request({
-            url: data.url,
+            url: Kebab.helper.url(data.url),
             method: data.method,
             params: {
                 fileName: data.name
             },
             success : function() {
-                notification.message(this.bootstrap.launcher.text, 'Success');
+                Kebab.helper.message(this.bootstrap.launcher.text, 'Success');
                 if (data.store) {
                     data.from.fireEvent('loadGrid', data.store);
                 }
             },
 
             failure : function() {
-                notification.message(this.bootstrap.launcher.text, 'Failure');
+                Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
             }, scope:this
         });
     }
