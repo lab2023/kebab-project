@@ -61,7 +61,7 @@ final class Kebab_Authentication
             $omitColumns = array('password', 'activationKey', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by');
             $identity = $authAdapter->getResultRowObject(null, $omitColumns);
             $identity->roles = Kebab_Model_User::getUserRoles($identity->id);
-            $identity->acl = new Kebab_Access();
+            $identity->acl = new Kebab_Access_Acl();
 
             $auth->getStorage()->write($identity);
             if ($rememberMe) {

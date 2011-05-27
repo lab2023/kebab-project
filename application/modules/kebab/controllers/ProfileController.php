@@ -88,6 +88,7 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             $profile->save();
             Doctrine_Manager::connection()->commit();
 
+            // Reset Session
             Kebab_Authentication::signOut();
             Kebab_Authentication::signIn($profile->userName, $profile->password, false, false);
 

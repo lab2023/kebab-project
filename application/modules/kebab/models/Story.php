@@ -56,18 +56,27 @@ class Kebab_Model_Story
         return $query;
     }
 
-    static public function getStories()
+    /**
+     * Return user's role's stories's slug.
+     *
+     * @static
+     * @return array
+     */
+    static public function getStoriesSlug()
     {
-        $lang  = Zend_Auth::getInstance()->getIdentity()->language;
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()
-                    ->select('s.*')
+                    ->select('s.slug')
                     ->from('Model_Entity_Story s')
                     ->leftJoin('s.Permission p')
-                    ->leftJoin('s.Translation st')
-                    ->where('st.lang = ?', $lang)
                     ->andWhere('s.active = 1')
                     ->andWhereIn('p.role_id', $roles);
-        return $query->execute();
+
+        $retVal = array();
+        foreach ($query->execute()->toArray() as $story) {
+            $retVal[] = $story['slug'];
+        }
+
+        return $retVal;
     }
 }
