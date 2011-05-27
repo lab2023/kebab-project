@@ -14,10 +14,10 @@ http://www.kebab-project.com/wiki/en/Kebab_Reloaded:Requirements_for_Kebab_1.5.x
 
 Suggessions
 -----------
-We offer unix-linux operation systems, 
-PHP 5.3.4 (with APC or eAccelerator, memcached or xcache enabled better performance),
-Nginx or Apache 2.2.x for application server. 
-If you use CDN (yeah Kebab Project supports CDN) you can use Nginx for static content.
+    * We offer unix-linux operation systems,
+    * PHP 5.3.4 (with APC or eAccelerator, memcached or xcache enabled better performance),
+    * Nginx or Apache 2.2.x for application server.
+    * If you use CDN (yeah Kebab Project supports CDN) you can use Nginx for static content.
 
 Installation
 -----------
