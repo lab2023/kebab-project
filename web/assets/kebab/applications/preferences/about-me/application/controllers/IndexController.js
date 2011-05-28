@@ -55,7 +55,7 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
                     }
                 },
                 failure : function() {
-                    notification.message(this.bootstrap.launcher.text, 'Failure');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
                 }, scope:this
             });
         }

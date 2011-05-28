@@ -28,22 +28,22 @@ Kebab.i18n.translations = {
 
     // Desktop-debug.js
     'Welcome to Kebab Project. Have fun!' : 'Kebab Project\'e hoşgeldiniz. Keyfini çıkarın!',
-    '{0} initialized...' : '{0} yüklendi...',
+    'Initialized...' : 'Yüklendi...',
     'Close All' : 'Hepsini kapat',
     'Hide All' : 'Hepsini gizle',
     'Tile Applications' : 'Uygulamaları diz',
-    'Cascade Applications' : 'Uygulamaları kademeli diz',
+    'Cascade Applications' : 'Uygulamaları döşe',
     'Appearance' : 'Görünüm',
-    'Send feedback this application' : 'Bu uygulama için geribildirim gönder',
+    'Send feedback this application' : 'Bu uygulama için geribildirim gönderin',
 
     // Panel-debug.js
     'Close' : 'Kapat',
     'Maximize' : 'Maksimum yap',
     'Minimize' : 'Minimum yap',
     'Restore' : 'Eski haline getir',
-    'Shutdown...' : 'Kapat...',
-    'Reboot...' : 'Yeniden yükle...',
-    'Logout...' : 'Çıkış yap...',
+    'Shutdown...' : 'Kapat ve çık...',
+    'Reboot...' : 'Yeniden başlat...',
+    'Logout...' : 'Ourumu kapat...',
     'Applications' : 'Uygulamalar',
     'System' : 'Sistem',
     'Quick start...' : 'Hızlı başlat...',

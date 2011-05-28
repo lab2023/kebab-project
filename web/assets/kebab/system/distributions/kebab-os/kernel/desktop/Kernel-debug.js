@@ -89,7 +89,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
             applicationInstances = new Array();
 
         Ext.each(this.apps, function(application) {
-            
+
             try {
                 applicationInstances[i++] = Ext.applyIf(
                     eval('new ' + application.className + '()'),
