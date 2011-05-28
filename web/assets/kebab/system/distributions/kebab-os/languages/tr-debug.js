@@ -75,7 +75,6 @@ Kebab.i18n.translations = {
     'Automatically saves your changes or you request it. Recommended to be used in tasks requiring heavy traffic.' : 'Yaptığınız her değişikliğin otomatik olarak veya siz istediğinizde kaydedilmesini sağlar. Yoğun trafik gerektiren işlerde kullanılmaması önerilir.',
     'Batch processing' : 'Toplu işlem',
     'This option allows you to send in a change to the server at a time or all of the records.' : 'Bu seçenek yanlızca değişiklik olan kayıtları veya hepsini bir seferde sunucuya göndermenizi sağlar.',
-    'Appearance' : 'Görünüm',
     'Auto fit' : 'Oto. sığdır',
     'This option list, columns, automatically fit the size of the window.' : 'Bu seçenek listenin kolonlarını, pencere boyutuna otomatik olarka sığdırır.',
     'Do you approve of the changes?' : 'Değişiklikleri onaylıyor musunuz?',
@@ -103,6 +102,4 @@ Kebab.i18n.translations = {
     'Confirm password' : 'Şifre tekrar',
     'Passwords do not match!' : 'Şifreler uyuşmuyor!',
     'Invalid activation key!' : 'Geçersiz etkinleştirme anahtarı!'
-
-
 };
