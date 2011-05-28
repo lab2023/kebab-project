@@ -18,7 +18,7 @@ KebabOS.applications.userManager.application.layouts.Layout = Ext.extend(Ext.Tab
         // panels are defined here
         this.userGrid = new KebabOS.applications.userManager.application.views.UserGrid({
             bootstrap: this.bootstrap,
-            title: 'Users',
+            title: Kebab.helper.translate('Users'),
             iconCls: 'icon-application-view-list',
             border:false
         });

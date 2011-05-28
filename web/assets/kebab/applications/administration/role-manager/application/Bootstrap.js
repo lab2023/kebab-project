@@ -31,7 +31,8 @@ Ext.extend(KebabOS.applications.roleManager.application.Bootstrap, Kebab.OS.Appl
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'roleManager-application-gui-icon',
                 width: 920,
                 height: 500,

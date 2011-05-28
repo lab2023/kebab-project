@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.feedback',
         'KebabOS.applications.feedback.application',
         'KebabOS.applications.feedback.application.controllers',
+        'KebabOS.applications.feedback.application.languages',
         'KebabOS.applications.feedback.application.layouts',
         'KebabOS.applications.feedback.application.models',
         'KebabOS.applications.feedback.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.feedback.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Feedback',
             iconCls: 'feedback-application-launcher-icon'
         }
     });

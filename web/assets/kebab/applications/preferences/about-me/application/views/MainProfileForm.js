@@ -80,7 +80,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                         xtype: 'button',
                         width: '100%',
                         iconCls: 'icon-key',
-                        text: 'Change Password',
+                        text: Kebab.helper.translate('Change password'),
                         handler: function() {
                             this.fireEvent('showHidePasswordForm', this.bootstrap.layout.passwordForm);
                         },
@@ -101,7 +101,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                     name: 'fullName',
                     allowBlank: false
                 },{
-                    fieldLabel: 'E-mail',
+                    fieldLabel: Kebab.helper.translate('E-mail'),
                     name: 'email',
                     vtype: 'email',
                     allowBlank: false

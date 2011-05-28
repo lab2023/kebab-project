@@ -22,7 +22,7 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
 
         var expander = new Ext.ux.grid.RowExpander({
             tpl : new Ext.Template(
-                    '<p><b>Description:</b><br />{description}</p><br>'
+                    '<p><b>' + Kebab.helper.translate('Description') + ':</b><br />{description}</p><br>'
                     )
         });
 
@@ -38,24 +38,22 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             }
         };
 
-
-        //KBBTODO add i18n
         var statusData = [
-            ['open', 'Open'],
-            ['progress', 'In Progress'],
-            ['closed', 'Closed']
+            ['open', Kebab.helper.translate('Open')],
+            ['progress', Kebab.helper.translate('In Progress')],
+            ['closed', Kebab.helper.translate('Closed')]
         ];
         
         this.columns = [
             expander,
             {
-                header   : 'Application Name',
+                header   : Kebab.helper.translate('Application name'),
                 width:40,
                 dataIndex: 'title',
                 sortable:true
             },
             {
-                header   : 'Status',
+                header   : Kebab.helper.translate('Status'),
                 width:40,
                 dataIndex: 'status',
                 sortable:true,

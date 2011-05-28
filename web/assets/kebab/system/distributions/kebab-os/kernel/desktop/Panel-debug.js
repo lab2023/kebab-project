@@ -174,20 +174,20 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                 iconCls : 'icon-shutdown',
                 template: this.buttonTpl,
                 menu: [{
-                    text: 'Logout...',
+                    text: Kebab.helper.translate('Logout...'),
                     iconCls: 'icon-door-out',
                     handler: function() {
                         Kebab.getOS().logoutAction(this.user.id, true);
                     },
                     scope:this
                 },{
-                    text: 'Reboot...',
+                    text: Kebab.helper.translate('Reboot...'),
                     iconCls: 'icon-arrow-refresh',
                     handler: function() {
                         Kebab.getOS().rebootAction();
                     }
                 },{
-                    text: 'Shutdown...',
+                    text: Kebab.helper.translate('Shutdown...'),
                     iconCls: 'icon-shutdown',
                     handler: function() {
                         //Kebab.getOS().shutDownAction(this.user.id);
@@ -597,7 +597,7 @@ Ext.extend(Kebab.OS.Panel.WindowList.TaskButton, Ext.Button, {
 
         this.cmenu = new Ext.menu.Menu({
             items: [{
-                text: 'Restore',
+                text: Kebab.helper.translate('Restore'),
                 handler: function(){
                     if(!this.win.isVisible()){
                         this.win.show();
@@ -607,15 +607,15 @@ Ext.extend(Kebab.OS.Panel.WindowList.TaskButton, Ext.Button, {
                 },
                 scope: this
             },{
-                text: 'Minimize',
+                text: Kebab.helper.translate('Minimize'),
                 handler: this.win.minimize,
                 scope: this.win
             },{
-                text: 'Maximize',
+                text: Kebab.helper.translate('Maximize'),
                 handler: this.win.maximize,
                 scope: this.win
             }, '-', {
-                text: 'Close',
+                text: Kebab.helper.translate('Close'),
                 handler: this.closeWin.createDelegate(this, this.win, true),
                 scope: this.win
             }]

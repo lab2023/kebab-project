@@ -30,7 +30,8 @@ Ext.extend(KebabOS.applications.tetris.application.Bootstrap, Kebab.OS.Applicati
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'tetris-application-gui-icon',
                 width: 382,
                 height: 420,

@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.roleManager',
         'KebabOS.applications.roleManager.application',
         'KebabOS.applications.roleManager.application.controllers',
+        'KebabOS.applications.roleManager.application.languages',
         'KebabOS.applications.roleManager.application.layouts',
         'KebabOS.applications.roleManager.application.models',
         'KebabOS.applications.roleManager.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.roleManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Role Manager',
             iconCls: 'roleManager-application-launcher-icon'
         }
     });

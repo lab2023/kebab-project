@@ -14,22 +14,7 @@
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
-/* -----------------------------------------------------------------------------
- Kebab Project 1.5.x (Kebab Reloaded)
- http://kebab-project.com
- Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
- http://www.lab2023.com
 
-    * LICENSE
-    *
-    * This source file is subject to the  Dual Licensing Model that is bundled
-    * with this package in the file LICENSE.txt.
-    * It is also available through the world-wide-web at this URL:
-    * http://www.kebab-project.com/cms/licensing
-    * If you did not receive a copy of the license and are unable to
-    * obtain it through the world-wide-web, please send an email
-    * to info@lab2023.com so we can send you a copy immediately.
------------------------------------------------------------------------------ */
 /**
  * Sign-up Singleton Object
  */
@@ -76,14 +61,14 @@ SignUp = function(){
                     hidden:true,
                     value: 'signUp'
                 },{
-                    fieldLabel: 'Your full name',
-                    emptyText: 'Your full name',
+                    fieldLabel: Kebab.helper.translate('Your full name'),
+                    emptyText: Kebab.helper.translate('Your full name'),
                     name: 'fullName',
                     allowBlank:false,
                     anchor:'100%'
                 },{
-                    fieldLabel: 'Your e-mail address',
-                    emptyText: 'Your e-mail address',
+                    fieldLabel: Kebab.helper.translate('Your e-mail address'),
+                    emptyText: Kebab.helper.translate('Your e-mail address'),
                     name: 'email',
                     allowBlank:false,
                     vtype: 'email',
@@ -92,7 +77,7 @@ SignUp = function(){
                 buttons: [{
                     width:80,
                     iconCls: 'icon-accept',
-                    text: 'Send',
+                    text: Kebab.helper.translate('Send'),
                     handler: function() {
                         this.signUpAction();
                     },
@@ -101,7 +86,7 @@ SignUp = function(){
                     xtype:'panel',
                     border:false,
                     bodyCssClass: 'kebab-transparent',
-                    html: '<a href="#" id="login-link">Login</a>'
+                    html: '<a href="#" id="login-link">' + Kebab.helper.translate('Login') + '</a>'
                 }],
                 keys:[{
                     key: [Ext.EventObject.ENTER], handler: function() {

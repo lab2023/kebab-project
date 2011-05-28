@@ -22,7 +22,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
 
         var expander = new Ext.ux.grid.RowExpander({
             tpl : new Ext.Template(
-                    '<p><b>Description:</b><br />{description}</p><br>'
+                    '<p><b>'+Kebab.helper.translate('Description')+':</b><br />{description}</p><br>'
                     )
         });
 
@@ -38,12 +38,12 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             }
         };
 
-        //KBBTODO add i18n
         var statusData = [
-            ['open', 'Open'],
-            ['progress', 'In Progress'],
-            ['closed', 'Closed']
+            ['open', Kebab.helper.translate('Open')],
+            ['progress', Kebab.helper.translate('In Progress')],
+            ['closed', Kebab.helper.translate('Closed')]
         ];
+        
         var statusCombobox = new Ext.form.ComboBox({
             typeAhead: true,
             triggerAction: 'all',
@@ -79,7 +79,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 sortable:true
             },
             {
-                header   : 'User Name',
+                header   : Kebab.helper.translate('User name'),
                 dataIndex: 'User',
                 sortable:true,
                 renderer: function(v) {
@@ -87,12 +87,12 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
                 }
             },
             {
-                header   : 'Application Name',
+                header   : Kebab.helper.translate('Application name'),
                 dataIndex: 'title',
                 sortable:true
             },
             {
-                header   : 'Status',
+                header   : Kebab.helper.translate('Status'),
                 dataIndex: 'status',
                 sortable:true,
                 editor: statusCombobox,

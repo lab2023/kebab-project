@@ -1,5 +1,5 @@
-    <h3>Welcome <?php echo $this->fullName; ?></h3>
+    <h3><?php echo $this->translate('Welcome'); echo' '; echo $this->fullName; ?></h3>
 
     <p>
-        Please click the <a href="<?php echo BASE_URL . '/backend/activation/key/' . $this->activationKey; ?>" target="_blank">link</a> for activation.
+        <?php printf($this->translate('Please click the %s link %s for activation.'),"<a href=" . BASE_URL . '/backend/activation/key/' . $this->activationKey . 'target="_blank">', "</a>")?>
     </p>

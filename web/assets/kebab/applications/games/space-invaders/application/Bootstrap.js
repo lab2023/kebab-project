@@ -30,7 +30,8 @@ Ext.extend(KebabOS.applications.spaceInvaders.application.Bootstrap, Kebab.OS.Ap
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'spaceInvaders-application-gui-icon',
                 width: 500,
                 height: 400,

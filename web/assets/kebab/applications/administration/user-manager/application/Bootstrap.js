@@ -31,7 +31,8 @@ Ext.extend(KebabOS.applications.userManager.application.Bootstrap, Kebab.OS.Appl
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'userManager-application-gui-icon',
                 width: 1000,
                 height: 500,

@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.databaseBackup',
         'KebabOS.applications.databaseBackup.application',
         'KebabOS.applications.databaseBackup.application.controllers',
+        'KebabOS.applications.databaseBackup.application.languages',
         'KebabOS.applications.databaseBackup.application.layouts',
         'KebabOS.applications.databaseBackup.application.models',
         'KebabOS.applications.databaseBackup.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.databaseBackup.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Database Backup',
             iconCls: 'databaseBackup-application-launcher-icon'
         }
     });

@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.calculator',
         'KebabOS.applications.calculator.application',
         'KebabOS.applications.calculator.application.controllers',
+        'KebabOS.applications.calculator.application.languages',
         'KebabOS.applications.calculator.application.layouts',
         'KebabOS.applications.calculator.application.models',
         'KebabOS.applications.calculator.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.calculator.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Calculator',
             iconCls: 'calculator-application-launcher-icon'
         }
     });

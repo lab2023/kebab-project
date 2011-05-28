@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.applicationManager',
         'KebabOS.applications.applicationManager.application',
         'KebabOS.applications.applicationManager.application.controllers',
+        'KebabOS.applications.applicationManager.application.languages',
         'KebabOS.applications.applicationManager.application.layouts',
         'KebabOS.applications.applicationManager.application.models',
         'KebabOS.applications.applicationManager.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.applicationManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Application Title',
             iconCls: 'applicationManager-application-launcher-icon'
         }
     });

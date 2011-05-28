@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.snake',
         'KebabOS.applications.snake.application',
         'KebabOS.applications.snake.application.controllers',
+        'KebabOS.applications.snake.application.languages',
         'KebabOS.applications.snake.application.layouts',
         'KebabOS.applications.snake.application.models',
         'KebabOS.applications.snake.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.snake.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Snake',
             iconCls: 'snake-application-launcher-icon'
         }
     });

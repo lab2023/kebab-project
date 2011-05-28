@@ -23,7 +23,7 @@ KebabOS.applications.userManager.application.views.InviteUserWindow = Ext.extend
             layout:'fit',
             width:350,
             height:350,
-            title:'Invite User',
+            title:Kebab.helper.translate('Invite user'),
             iconCls: 'userManager-application-gui-icon',
             border:false,
             resizable: false,

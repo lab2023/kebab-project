@@ -34,7 +34,8 @@ Ext.extend(KebabOS.applications.pixlr.application.Bootstrap, Kebab.OS.Applicatio
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'pixlr-application-gui-icon',
                 width: winWidth,
                 height: winHeight,

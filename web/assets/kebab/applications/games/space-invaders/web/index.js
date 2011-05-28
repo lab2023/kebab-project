@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.spaceInvaders',
         'KebabOS.applications.spaceInvaders.application',
         'KebabOS.applications.spaceInvaders.application.controllers',
+        'KebabOS.applications.spaceInvaders.application.languages',
         'KebabOS.applications.spaceInvaders.application.layouts',
         'KebabOS.applications.spaceInvaders.application.models',
         'KebabOS.applications.spaceInvaders.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.spaceInvaders.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Space Invaders',
             iconCls: 'spaceInvaders-application-launcher-icon'
         }
     });

@@ -46,7 +46,7 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
         return [
             {
                 xtype: 'buttongroup',
-                title: 'Extra',
+                title: Kebab.helper.translate('Extra'),
                 defaults: {
                     iconAlign: 'top',
                     scale: 'small',
@@ -55,8 +55,8 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
                 },
                 items: [
                     {
-                        text: 'See details',
-                        tooltip: 'See the selected record(s) details',
+                        text: Kebab.helper.translate('See details'),
+                        tooltip: Kebab.helper.translate('See the selected record(s) details'),
                         iconCls: 'icon-application-view-detail',
                         handler: function() { // Records selected
                             var sm = this.getSelectionModel();
@@ -83,27 +83,27 @@ KebabOS.applications.roleManager.application.views.RoleGrid = Ext.extend(Kebab.l
                 align:'center',
                 width:12
             }, {
-                header : 'Role Title',
+                header : Kebab.helper.translate('Role title'),
                 dataIndex :'title',
                 editor:this.editorTextField,
                 width:30
             },{
-                header : 'Role Description',
+                header : Kebab.helper.translate('Role description'),
                 dataIndex :'description',
                 editor:this.editorTextArea,
                 width:120
             },{
-                header   : 'User Number',
+                header   : Kebab.helper.translate('User number'),
                 dataIndex: 'num_user',
                 align:'center',
                 width:30
             },{
-                header   : 'Story Number',
+                header   : Kebab.helper.translate('Story number'),
                 dataIndex: 'num_story',
                 align:'center',
                 width:30
             },{
-                header   : 'Active ?',
+                header   : Kebab.helper.translate('Active ?'),
                 dataIndex: 'active',
                 xtype:'checkcolumn',
                 width:20

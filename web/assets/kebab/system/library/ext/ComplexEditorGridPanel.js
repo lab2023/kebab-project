@@ -25,7 +25,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             columnLines: true,
             clicksToEdit: true,
             viewConfig: {
-                emptyText: 'Record not found...',
+                emptyText: Kebab.helper.translate('Record not found...'),
                 forceFit: false
             }
         };
@@ -102,7 +102,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
         this.tbarButtons = [
             {
                 xtype: 'buttongroup',
-                title: 'Operations',
+                title: Kebab.helper.translate('Operations'),
                 id: this.id + '-operationsButtonGroup',
                 defaults: {
                     scale: 'small',
@@ -112,24 +112,24 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                 },
                 items: [
                     {
-                        text: 'Save',
-                        tooltip: 'Save changes now',
+                        text: Kebab.helper.translate('Save'),
+                        tooltip: Kebab.helper.translate('Save changes now'),
                         iconCls: 'icon-disk',
                         id: this.id + '-saveButton',
                         ref: '../../saveButton',
                         handler: this.onSave
                     },
                     {
-                        text: 'Add',
-                        tooltip: 'Add new record',
+                        text: Kebab.helper.translate('Add'),
+                        tooltip: Kebab.helper.translate('Add new record'),
                         iconCls: 'icon-add',
                         id: this.id + '-addButton',
                         ref: '../../addButton',
                         handler: this.onAdd
                     },
                     {
-                        text: 'Remove',
-                        tooltip: 'Remove selected records',
+                        text: Kebab.helper.translate('Remove'),
+                        tooltip: Kebab.helper.translate('Remove selected records'),
                         iconCls: 'icon-delete',
                         id: this.id + '-removeButton',
                         ref: '../../removeButton',
@@ -137,8 +137,8 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         handler: this.onRemove
                     },
                     {
-                        text: 'Refresh',
-                        tooltip: 'Refresh the grid list',
+                        text: Kebab.helper.translate('Refresh'),
+                        tooltip: Kebab.helper.translate('Refresh the grid list'),
                         id: this.id + '-refreshButton',
                         ref: '../../refreshButton',
                         iconCls: 'icon-arrow-refresh',
@@ -149,7 +149,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             {
                 xtype: 'buttongroup',
                 id: this.id + '-searchButtonGroup',
-                title: 'Search & Filter',
+                title: Kebab.helper.translate('Search & Filter'),
                 defaults: {
                     iconAlign: 'top',
                     scale: 'small',
@@ -163,7 +163,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                         bodyStyle:'height:37px; background:transparent !important;',
                         items: [new Ext.ux.form.SearchField({
                             store: this.store,
-                            emptyText: 'Please type keyword here...',
+                            emptyText: Kebab.helper.translate('Please type keyword here...'),
                             width:180
                         })],
                         scope:this,
@@ -174,7 +174,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             },
             {
                 xtype: 'buttongroup',
-                title: 'Export',
+                title: Kebab.helper.translate('Export'),
                 id: this.id + '-exportButtonGroup',
                 defaults: {
                     iconAlign: 'top',
@@ -184,8 +184,8 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                 },
                 items: [
                     {
-                        text: 'Export to Excel',
-                        tooltip: 'Export selected records to excel',
+                        text: Kebab.helper.translate('Export to Excel'),
+                        tooltip: Kebab.helper.translate('Export selected records to excel'),
                         iconCls: 'icon-page-white-excel',
                         id: this.id + '-excelExportButton',
                         ref: '../../excelExportButton'
@@ -194,7 +194,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             },
             {
                 xtype: 'buttongroup',
-                title: 'Options',
+                title: Kebab.helper.translate('Options'),
                 id: this.id + '-optionsButtonGroup',
                 defaults: {
                     iconAlign: 'top',
@@ -205,24 +205,23 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                 },
                 items: [
                     {
-                        text: 'Auto save',
+                        text: Kebab.helper.translate('Auto save'),
                         iconCls: 'icon-database-lightning',
                         pressed: false,
                         id: this.id + '-autoSaveButton',
                         ref: '../../autoSaveButton',
-                        tooltip: 'Automatically saves your changes or you request it. ' +
-                                'Recommended to be used in tasks requiring heavy traffic.',
+                        tooltip: Kebab.helper.translate('Automatically saves your changes or you request it. Recommended to be used in tasks requiring heavy traffic.'),
                         toggleHandler: function(btn, pressed) {
                             this.store.autoSave = pressed;
                         }
                     },
                     {
-                        text: 'Batch processing',
+                        text: Kebab.helper.translate('Batch processing'),
                         iconCls: 'icon-database-table',
                         pressed: false,
                         id: this.id + '-batchButton',
                         ref: '../../batchButton',
-                        tooltip: 'This option allows you to send in a change to the server at a time or all of the records.',
+                        tooltip: Kebab.helper.translate('This option allows you to send in a change to the server at a time or all of the records.'),
                         toggleHandler: function(btn, pressed) {
                             this.store.batch = pressed;
                         }
@@ -231,7 +230,7 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
             },
             {
                 xtype: 'buttongroup',
-                title: 'Appearance',
+                title: Kebab.helper.translate('Appearance'),
                 id: this.id + '-viewButtonGroup',
                 defaults: {
                     iconAlign: 'top',
@@ -241,11 +240,11 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
                 },
                 items: [
                     {
-                        text: 'Auto fit',
+                        text: Kebab.helper.translate('Auto fit'),
                         iconCls: 'icon-arrow-out',
                         id: this.id + '-autoFitButton',
                         ref: '../../autoFitButton',
-                        tooltip: 'This option list, columns, automatically fit the size of the window.',
+                        tooltip: Kebab.helper.translate('This option list, columns, automatically fit the size of the window.'),
                         handler: function() {
                             this.getView().fitColumns();
                         }
@@ -289,9 +288,8 @@ Kebab.library.ext.ComplexEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel, 
         // Confirmation
         Ext.Msg.show({
             icon: Ext.MessageBox.QUESTION,
-            title: 'Do you approve of the changes?',
-            msg: 'Changes you have made will be sent to the server.'
-                    + '<br/>Please confirm this action.',
+            title: Kebab.helper.translate('Do you approve of the changes?'),
+            msg: Kebab.helper.translate('Changes you have made will be sent to the server. <br/>Please confirm this action.'),
             buttons: Ext.Msg.YESNO,
             fn: commitChanges,
             scope:this

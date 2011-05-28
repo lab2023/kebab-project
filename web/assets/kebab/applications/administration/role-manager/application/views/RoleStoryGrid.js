@@ -43,17 +43,17 @@ KebabOS.applications.roleManager.application.views.RoleStoryGrid = Ext.extend(Ke
                 width: 12
             },
             {
-                header : 'Story Title',
+                header : Kebab.helper.translate('Story title'),
                 dataIndex :'title',
                 width:60
             },
             {
-                header : 'Story Description',
+                header : Kebab.helper.translate('Story description'),
                 dataIndex :'description',
                 width:150
             },
             {
-                header   : 'Allow ?',
+                header   : Kebab.helper.translate('Allow ?'),
                 dataIndex: 'allow',
                 xtype:'checkcolumn',
                 width:20

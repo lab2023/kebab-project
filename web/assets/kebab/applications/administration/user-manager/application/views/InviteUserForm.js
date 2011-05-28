@@ -25,23 +25,23 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                 anchor: '100%'
             },
             items:[{
-                fieldLabel: 'Fullname',
+                fieldLabel: Kebab.helper.translate('Full name'),
                 allowBlank:false,
                 name: 'fullName'
             },{
-                fieldLabel: 'Email',
+                fieldLabel: Kebab.helper.translate('E-mail'),
                 allowBlank:false,
                 name: 'email',
                 vtype:'email'
             }, {
-                fieldLabel: 'Message',
+                fieldLabel: Kebab.helper.translate('Message'),
                 name: 'message',
                 xtype: 'textarea',
-                emptyText:'Hi',
+                emptyText:Kebab.helper.translate('Message'),
                 height:80
             }],
             buttons: [{
-                text: 'Send',
+                text: Kebab.helper.translate('Send'),
                 iconCls: 'icon-email',
                 scope: this,
                 handler : function() {
@@ -61,7 +61,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                     }
                 }
             },{
-                text: 'Cancel',
+                text: Kebab.helper.translate('Cancel'),
                 iconCls: 'icon-cancel',
                 handler : function() {
                     this.bootstrap.layout.inviteUserWindow.hide();

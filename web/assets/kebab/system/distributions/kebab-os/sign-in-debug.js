@@ -14,22 +14,7 @@
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
-/* -----------------------------------------------------------------------------
- Kebab Project 1.5.x (Kebab Reloaded)
- http://kebab-project.com
- Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
- http://www.lab2023.com
 
-    * LICENSE
-    *
-    * This source file is subject to the  Dual Licensing Model that is bundled
-    * with this package in the file LICENSE.txt.
-    * It is also available through the world-wide-web at this URL:
-    * http://www.kebab-project.com/cms/licensing
-    * If you did not receive a copy of the license and are unable to
-    * obtain it through the world-wide-web, please send an email
-    * to info@lab2023.com so we can send you a copy immediately.
------------------------------------------------------------------------------ */
 /**
  * Sign up Singleton Object
  */
@@ -71,26 +56,26 @@ SignIn = function(){
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
-                    fieldLabel: 'Your user name',
-                    emptyText: 'Your user name',
+                    fieldLabel: Kebab.helper.translate('Your user name'),
+                    emptyText: Kebab.helper.translate('Your user name'),
                     name: 'userName',
                     width: 180,
                     allowBlank:false
                 },{
-                    fielLabel: 'Your password',
-                    emptyText: 'Your password',
+                    fielLabel: Kebab.helper.translate('Your password'),
+                    emptyText: Kebab.helper.translate('Your password'),
                     name: 'password',
                     width: 140,
                     inputType: 'password',
                     allowBlank:false
                 }, {
                     xtype: 'checkboxgroup',
-                    items: [{boxLabel: 'Keep signed in', name: 'rememberMe', checked: false}]
+                    items: [{boxLabel: Kebab.helper.translate('Keep signed in'), name: 'rememberMe', checked: false}]
                 }],
                 buttons: [{
                     width:80,
                     iconCls: 'icon-accept',
-                    text: 'Send',
+                    text: Kebab.helper.translate('Send'),
                     handler: function() {
                         this.signInAction();
                     },
@@ -99,7 +84,9 @@ SignIn = function(){
                     xtype:'panel',
                     border:false,
                     bodyCssClass: 'kebab-transparent',
-                    html: '<a href="#" id="singUp-link">Sign-up</a> or <a href="#" id="forgotPassword-link">Forgot password</a>'
+                    html: '<a href="#" id="singUp-link">' + Kebab.helper.translate('Sign-up') + '</a>' +
+                            Kebab.helper.translate(' or ') + '<a href="#" id="forgotPassword-link">' +
+                            Kebab.helper.translate('Forgot password') + '</a>'
                 }],
                 keys:[{
                     key: [Ext.EventObject.ENTER], handler: function() {
@@ -141,8 +128,8 @@ SignIn = function(){
                 defaultType: 'textfield',
                 hideLabels: true,
                 items: [{
-                    fieldLabel: 'Your e-mail address',
-                    emptyText: 'Your e-mail address',
+                    fieldLabel: Kebab.helper.translate('Your e-mail address'),
+                    emptyText: Kebab.helper.translate('Your e-mail address'),
                     name: 'email',
                     anchor:'100%',
                     allowBlank:false,
@@ -151,7 +138,7 @@ SignIn = function(){
                 buttons: [{
                     width:80,
                     iconCls: 'icon-accept',
-                    text: 'Send',
+                    text: Kebab.helper.translate('Send'),
                     handler: function() {
                         this.forgotPasswordAction();
                     },
@@ -160,7 +147,7 @@ SignIn = function(){
                     xtype:'panel',
                     border:false,
                     bodyCssClass: 'kebab-transparent',
-                    html: '<a href="#" id="forgotPasswordCancel-link">Cancel</a>'
+                    html: '<a href="#" id="forgotPasswordCancel-link">' + Kebab.helper.translate('Cancel') + '</a>'
                 }],
                 keys:[{
                     key: [Ext.EventObject.ENTER], handler: function() {

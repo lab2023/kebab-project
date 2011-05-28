@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.feedbackManager',
         'KebabOS.applications.feedbackManager.application',
         'KebabOS.applications.feedbackManager.application.controllers',
+        'KebabOS.applications.feedbackManager.application.languages',
         'KebabOS.applications.feedbackManager.application.layouts',
         'KebabOS.applications.feedbackManager.application.models',
         'KebabOS.applications.feedbackManager.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.feedbackManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Feedback Manager',
             iconCls: 'feedbackManager-application-launcher-icon'
         }
     });

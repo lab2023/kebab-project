@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.userManager',
         'KebabOS.applications.userManager.application',
         'KebabOS.applications.userManager.application.controllers',
+        'KebabOS.applications.userManager.application.languages',
         'KebabOS.applications.userManager.application.layouts',
         'KebabOS.applications.userManager.application.models',
         'KebabOS.applications.userManager.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.userManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'User Manager',
             iconCls: 'userManager-application-launcher-icon'
         }
     });

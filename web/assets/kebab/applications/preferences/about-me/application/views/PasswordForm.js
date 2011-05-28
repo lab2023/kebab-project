@@ -52,28 +52,28 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
                 autoHeight:true,
                 defaultType: 'textfield',
                 items: [{
-                    fieldLabel: 'Your current password',
+                    fieldLabel: Kebab.helper.translate('Your current password'),
                     name: 'oldPassword'
                 },{
-                    fieldLabel: 'New password',
+                    fieldLabel: Kebab.helper.translate('New password'),
                     name: 'newPassword',
                     id: 'aboutMe-application-newPasword'
                 },{
-                    fieldLabel: 'Confirm new password',
+                    fieldLabel: Kebab.helper.translate('Confirm new password'),
                     name: 'newPasswordConfirm',
                     vtype: 'password',
                     initialPassField: 'aboutMe-application-newPasword'
                 }]
             }],
             buttons: [{
-                text: 'Cancel',
+                text: Kebab.helper.translate('Cancel'),
                 iconCls: 'icon-cancel',
                 handler: function() {
                     this.fireEvent('showHidePasswordForm', this);
                 },
                 scope: this
             }, {
-                text: 'Save',
+                text: Kebab.helper.translate('Save'),
                 iconCls: 'icon-disk',
                 scope: this,
                 handler: this.onSubmit

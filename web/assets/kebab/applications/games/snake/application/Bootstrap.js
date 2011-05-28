@@ -30,7 +30,8 @@ Ext.extend(KebabOS.applications.snake.application.Bootstrap, Kebab.OS.Applicatio
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'snake-application-gui-icon',
                 width: 450,
                 height: 375,

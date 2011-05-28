@@ -74,7 +74,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         }
 
         Ext.EventManager.on(window, 'beforeunload', this.onUnload, this);
-		this.fireEvent('booted', this);
+        this.fireEvent('booted', this);
         this.isBooted = true;
 
         if (this.isBooted) {

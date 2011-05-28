@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.storyManager',
         'KebabOS.applications.storyManager.application',
         'KebabOS.applications.storyManager.application.controllers',
+        'KebabOS.applications.storyManager.application.languages',
         'KebabOS.applications.storyManager.application.layouts',
         'KebabOS.applications.storyManager.application.models',
         'KebabOS.applications.storyManager.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.storyManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-                text: 'Story Manager',
             iconCls: 'storyManager-application-launcher-icon'
         }
     });

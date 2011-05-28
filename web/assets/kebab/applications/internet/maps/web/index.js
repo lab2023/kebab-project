@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.maps',
         'KebabOS.applications.maps.application',
         'KebabOS.applications.maps.application.controllers',
+        'KebabOS.applications.maps.application.languages',
         'KebabOS.applications.maps.application.layouts',
         'KebabOS.applications.maps.application.models',
         'KebabOS.applications.maps.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.maps.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Google Maps',
             iconCls: 'maps-application-launcher-icon'
         }
     });

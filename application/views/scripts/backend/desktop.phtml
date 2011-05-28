@@ -11,7 +11,7 @@ $this->headScript()
      ->appendFile($this->asset('kernel/desktop/Kernel.js')->distribution()->get());
 ?>
 
-    <?php 
+    <?php
     // BEGIN: Kernel Boot & All Applications Load ------------------------------
     foreach ($this->applications as $application) {  // KBBTODO Move to DOM
         
@@ -61,7 +61,7 @@ $this->headScript()
                 <div></div>
                 <span><?php echo strlen($application['title']['text']) > 23 ? substr($application['title']['text'], 0, 23). '...' : $application['title']['text']; ?></span>
             </dt>
-            <?php endforeach; ?>      
+            <?php endforeach; ?>
         </dl>
         
     </div>

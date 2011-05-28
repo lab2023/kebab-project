@@ -31,7 +31,8 @@ Ext.extend(KebabOS.applications.feedbackManager.application.Bootstrap, Kebab.OS.
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'feedbackManager-application-gui-icon',
                 width: 900,
                 height: 500,

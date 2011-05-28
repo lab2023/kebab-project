@@ -30,7 +30,8 @@ Ext.extend(KebabOS.applications.ticTacToe.application.Bootstrap, Kebab.OS.Applic
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'ticTacToe-application-gui-icon',
                 width: 300,
                 height: 400,

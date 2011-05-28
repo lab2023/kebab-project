@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.tetris',
         'KebabOS.applications.tetris.application',
         'KebabOS.applications.tetris.application.controllers',
+        'KebabOS.applications.tetris.application.languages',
         'KebabOS.applications.tetris.application.layouts',
         'KebabOS.applications.tetris.application.models',
         'KebabOS.applications.tetris.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.tetris.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Tetris',
             iconCls: 'tetris-application-launcher-icon'
         }
     });

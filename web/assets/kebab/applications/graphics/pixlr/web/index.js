@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.pixlr',
         'KebabOS.applications.pixlr.application',
         'KebabOS.applications.pixlr.application.controllers',
+        'KebabOS.applications.pixlr.application.languages',
         'KebabOS.applications.pixlr.application.layouts',
         'KebabOS.applications.pixlr.application.models',
         'KebabOS.applications.pixlr.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.pixlr.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Pixlr Photo Editor',
             iconCls: 'pixlr-application-launcher-icon'
         }
     });

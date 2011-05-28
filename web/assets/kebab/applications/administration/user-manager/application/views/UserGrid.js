@@ -48,7 +48,7 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
         return [
             {
                 xtype: 'buttongroup',
-                title: 'Extra',
+                title: Kebab.helper.translate('Extra'),
                 defaults: {
                     iconAlign: 'top',
                     scale: 'small',
@@ -57,8 +57,8 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
                 },
                 items: [
                     {
-                        text: 'See details',
-                        tooltip: 'See the selected record(s) details',
+                        text: Kebab.helper.translate('See details'),
+                        tooltip: Kebab.helper.translate('See the selected record(s) details'),
                         iconCls: 'icon-application-view-detail',
                         handler: function() { // Records selected
                             var sm = this.getSelectionModel();
@@ -74,9 +74,9 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
 
     buildColumns: function() {
         var statusData = [
-            ['pending','Pending'],
-            ['banned','Banned'],
-            ['approved','Approved']
+            ['pending',Kebab.helper.translate('Pending')],
+            ['banned',Kebab.helper.translate('Banned')],
+            ['approved',Kebab.helper.translate('Approved')]
         ];
         this.editorComboBox = new Ext.form.ComboBox({
             typeAhead: true,
@@ -115,25 +115,25 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
                 align:'center',
                 width:12
             }, {
-                header : 'Full Name',
+                header : Kebab.helper.translate('Full name'),
                 dataIndex :'fullName',
                 width:40
             },{
-                header : 'User Name',
+                header : Kebab.helper.translate('User name'),
                 dataIndex :'userName',
                 width:40
             },{
-                header   : 'Email',
+                header   : Kebab.helper.translate('E-mail'),
                 dataIndex: 'email',
                 width:60
             },{
-                header   : 'Status',
+                header   : Kebab.helper.translate('Status'),
                 dataIndex: 'status',
                 editor:this.editorComboBox,
                 renderer: this.editorComboBox.gridRenderer(this.editorComboBox),
                 width:30
             },{
-                header   : 'Active ?',
+                header   : Kebab.helper.translate('Active ?'),
                 dataIndex: 'active',
                 xtype:'checkcolumn',
                 width:20

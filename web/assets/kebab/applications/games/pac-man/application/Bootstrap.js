@@ -30,7 +30,8 @@ Ext.extend(KebabOS.applications.pacMan.application.Bootstrap, Kebab.OS.Applicati
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'pacMan-application-gui-icon',
                 width: 374,
                 height: 456,

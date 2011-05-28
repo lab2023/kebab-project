@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.pacMan',
         'KebabOS.applications.pacMan.application',
         'KebabOS.applications.pacMan.application.controllers',
+        'KebabOS.applications.pacMan.application.languages',
         'KebabOS.applications.pacMan.application.layouts',
         'KebabOS.applications.pacMan.application.models',
         'KebabOS.applications.pacMan.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.pacMan.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Pac-Man',
             iconCls: 'pacMan-application-launcher-icon'
         }
     });

@@ -17,7 +17,7 @@ KebabOS.applications.roleManager.application.layouts.Layout = Ext.extend(Ext.Tab
         // panels are defined here
         this.roleGrid = new KebabOS.applications.roleManager.application.views.RoleGrid({
             bootstrap: this.bootstrap,
-            title: 'Roles',
+            title: Kebab.helper.translate('Roles'),
             iconCls: 'icon-application-view-list',
             border:false
         });

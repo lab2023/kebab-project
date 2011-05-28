@@ -32,17 +32,17 @@ KebabOS.applications.storyManager.application.views.StoryGrid = Ext.extend(Kebab
                 width:12
             },
             {
-                header : 'Story Title',
+                header : Kebab.helper.translate('Story title'),
                 dataIndex :'title',
                 width:50
             },
             {
-                header : 'Story Description',
+                header : Kebab.helper.translate('Story description'),
                 dataIndex :'description',
                 width:120
             },
             {
-                header   : 'Active ?',
+                header   : Kebab.helper.translate('Active ?'),
                 dataIndex: 'active',
                 xtype:'checkcolumn',
                 width:20

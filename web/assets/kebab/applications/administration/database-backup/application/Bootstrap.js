@@ -35,7 +35,8 @@ Ext.extend(KebabOS.applications.databaseBackup.application.Bootstrap, Kebab.OS.A
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'databaseBackup-application-gui-icon',
                 width: winWidth,
                 height: winHeight,

@@ -32,17 +32,17 @@ KebabOS.applications.applicationManager.application.views.ApplicationGrid = Ext.
                 width:12
             },
             {
-                header : 'Application Title',
+                header : Kebab.helper.translate('Application title'),
                 dataIndex :'title',
                 width:60
             },
             {
-                header : 'Application Description',
+                header : Kebab.helper.translate('Application description'),
                 dataIndex :'description',
                 width:120
             },
             {
-                header   : 'Active ?',
+                header   : Kebab.helper.translate('Active ?'),
                 dataIndex: 'active',
                 xtype:'checkcolumn',
                 width:20

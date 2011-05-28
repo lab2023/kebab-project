@@ -19,6 +19,7 @@ Ext.namespace(
         'KebabOS.applications.ticTacToe',
         'KebabOS.applications.ticTacToe.application',
         'KebabOS.applications.ticTacToe.application.controllers',
+        'KebabOS.applications.ticTacToe.application.languages',
         'KebabOS.applications.ticTacToe.application.layouts',
         'KebabOS.applications.ticTacToe.application.models',
         'KebabOS.applications.ticTacToe.application.views',
@@ -44,7 +45,6 @@ KebabOS.applications.ticTacToe.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            text: 'Tic Tac Toe',
             iconCls: 'ticTacToe-application-launcher-icon'
         }
     });

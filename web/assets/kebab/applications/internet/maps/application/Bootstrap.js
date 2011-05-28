@@ -34,7 +34,8 @@ Ext.extend(KebabOS.applications.maps.application.Bootstrap, Kebab.OS.Application
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'maps-application-gui-icon',
                 width: winWidth,
                 height: winHeight,

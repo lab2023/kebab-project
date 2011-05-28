@@ -43,17 +43,17 @@ KebabOS.applications.userManager.application.views.UserRoleGrid = Ext.extend(Keb
                 width: 12
             },
             {
-                header : 'Role Title',
+                header : Kebab.helper.translate('Role title'),
                 dataIndex :'title',
                 width:60
             },
             {
-                header : 'Role Description',
+                header : Kebab.helper.translate('Role description'),
                 dataIndex :'description',
                 width:150
             },
             {
-                header   : 'Allow ?',
+                header   : Kebab.helper.translate('Allow ?'),
                 dataIndex: 'allow',
                 xtype:'checkcolumn',
                 width:20

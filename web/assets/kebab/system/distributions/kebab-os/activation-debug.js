@@ -14,22 +14,7 @@
     * obtain it through the world-wide-web, please send an email
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
-/* -----------------------------------------------------------------------------
- Kebab Project 1.5.x (Kebab Reloaded)
- http://kebab-project.com
- Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc.
- http://www.lab2023.com
 
-    * LICENSE
-    *
-    * This source file is subject to the  Dual Licensing Model that is bundled
-    * with this package in the file LICENSE.txt.
-    * It is also available through the world-wide-web at this URL:
-    * http://www.kebab-project.com/cms/licensing
-    * If you did not receive a copy of the license and are unable to
-    * obtain it through the world-wide-web, please send an email
-    * to info@lab2023.com so we can send you a copy immediately.
------------------------------------------------------------------------------ */
 /**
  * Activation Singleton Object
  */
@@ -78,14 +63,14 @@ Activation = function(){
                     name: 'activationKey',
                     hidden: true
                 },{
-                    fieldLabel: 'Your full name',
-                    emptyText: 'Your full name',
+                    fieldLabel: Kebab.helper.translate('Your full name'),
+                    emptyText: Kebab.helper.translate('Your full name'),
                     name: 'fullName',
                     allowBlank:false,
                     anchor:'100%'
                 },{
-                    fieldLabel: 'Your e-mail address',
-                    emptyText: 'Your e-mail address',
+                    fieldLabel: Kebab.helper.translate('Your e-mail address'),
+                    emptyText: Kebab.helper.translate('Your e-mail address'),
                     name: 'email',
                     allowBlank:false,
                     readOnly: true,
@@ -93,7 +78,7 @@ Activation = function(){
                     anchor:'100%'
                 },{
                     xtype:'fieldset',
-                    title: 'Your user name & password',
+                    title: Kebab.helper.translate('Your user name & password'),
                     collapsible: false,
                     autoHeight:true,
                     hideLabels: true,
@@ -103,8 +88,8 @@ Activation = function(){
                         anchor:'100%'
                     },
                     items :[{
-                        fieldLabel: 'User name',
-                        emptyText: 'User name',
+                        fieldLabel: Kebab.helper.translate('User name'),
+                        emptyText: Kebab.helper.translate('User name'),
                         name: 'userName'
                     },{
                         xtype: 'compositefield',
@@ -115,13 +100,13 @@ Activation = function(){
                             inputType: 'password'
                         },
                         items: [{
-                            fieldLabel: 'Password',
-                            emptyText: 'Password',
+                            fieldLabel: Kebab.helper.translate('Password'),
+                            emptyText: Kebab.helper.translate('Password'),
                             name: 'password',
                             id: 'activation-password'
                         },{
-                            fieldLabel: 'Confirm password',
-                            emptyText: 'Confirm password',
+                            fieldLabel: Kebab.helper.translate('Confirm password'),
+                            emptyText: Kebab.helper.translate('Confirm password'),
                             name: 'confirmPassword',
                             vtype: 'password',
                             initialPassField: 'activation-password'
@@ -131,7 +116,7 @@ Activation = function(){
                 buttons: [{
                     width:80,
                     iconCls: 'icon-accept',
-                    text: 'Send',
+                    text: Kebab.helper.translate('Send'),
                     handler: function() {
                         this.activationAction();
                     },
@@ -140,7 +125,7 @@ Activation = function(){
                     xtype:'panel',
                     border:false,
                     bodyCssClass: 'kebab-transparent',
-                    html: '<a href="#" id="login-link">Login</a>'
+                    html: '<a href="#" id="login-link">' + Kebab.helper.translate('Login') + '</a>'
                 }],
                 keys: [{
                     key: [Ext.EventObject.ENTER], handler: function() {
@@ -165,7 +150,7 @@ Activation = function(){
                                 }
                                 return true;
                             },
-                            passwordText : 'Passwords do not match!'
+                            passwordText : Kebab.helper.translate('Passwords do not match!')
                         });
                         this.checkActivationKeyAction(form);
                     },
@@ -191,7 +176,7 @@ Activation = function(){
             }, this);
 
             form.buttons[0].setIconClass('icon-cancel');
-            form.buttons[0].setText('Invalid activation key !&nbsp;');
+            form.buttons[0].setText(Kebab.helper.translate('Invalid activation key !&nbsp;'));
             form.buttons[0].disable();
         },
                 

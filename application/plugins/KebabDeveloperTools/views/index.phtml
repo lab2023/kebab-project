@@ -3,7 +3,7 @@ $this->headLink()
      ->appendStylesheet($this->asset('plugins/kebab-developer-tools/stylesheets/style.css')->get());
 ?>
 
-<div id="kebab-developer-tools" class="kebab-shadow-std kebab-developer-tools-<?php echo $this->data->position; ?>" title="Kebab Developer Tools v.0.1">
+<div id="kebab-developer-tools" class="kebab-shadow-std kebab-developer-tools-<?php echo $this->data->position; ?>" title="Kebab <?php echo $this->translate('Developer Tools'); ?> v.0.1">
     <?php if ($this->data->position == "top"): ?>
         <?php echo $this->render('console.phtml'); ?>
     <?php endif; ?>
@@ -39,7 +39,7 @@ $this->headLink()
         <strong>Zend Version :</strong>
         <span><?php echo Zend_Version::VERSION; ?></span>
     </p>
-    <em title="Kebab Framework Developer Tools v.0.1">Kebab Developer Tools v.0.1</em>
+    <em title="Kebab Framework <?php echo $this->translate('Developer Tools'); ?> v.0.1">Kebab <?php echo $this->translate('Developer Tools'); ?>  v.0.1</em>
 
     <?php if ($this->data->position == "bottom"): ?>
         <?php echo $this->render('console.phtml'); ?>

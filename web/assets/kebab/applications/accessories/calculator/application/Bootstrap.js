@@ -30,10 +30,12 @@ Ext.extend(KebabOS.applications.calculator.application.Bootstrap, Kebab.OS.Appli
             // create window
             app = desktop.createApplication({
                 id: this.id,
-                title: this.launcher.text,                
+                title: this.title.text,
+                description: this.title.description,
                 iconCls: 'calculator-application-gui-icon',
-                width: 350,
-                height: 320,
+                width: 380,
+                height: 310,
+                resizable:false,
                 border:false,
                 items: this.layout,
                 maximizable: false

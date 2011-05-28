@@ -53,27 +53,27 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this.applicationWindowManager.zseed = 7000; //10000;
         
         this.contextMenu = new Ext.menu.Menu([{
-            text: 'Close All',
+            text: Kebab.helper.translate('Close All'),
             iconCls: 'icon-application-delete',
             handler: this.closeApplications,
             scope: this
         },{
-            text: 'Hide All',
+            text: Kebab.helper.translate('Hide All'),
             iconCls: 'icon-application-put',
             handler: this.minimizeApplications,
             scope: this
         },'-',{
-            text: 'Tile Applications',
+            text: Kebab.helper.translate('Tile Applications'),
             iconCls: 'icon-application-tile-horizontal',
             handler: this.tileApplications,
             scope: this
         },{
-            text: 'Cascade Applications',
+            text: Kebab.helper.translate('Cascade Applications'),
             iconCls: 'icon-application-cascade',
             handler: this.cascadeApplications,
             scope: this
         },'-',{
-            text: 'Apperance',
+            text: Kebab.helper.translate('Appearance'),
             iconCls: 'icon-palette',
             scope: this
         }]);
@@ -140,7 +140,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 },
                 tools: [{
                     id:'gear',
-                    qtip: 'Send feedback this application',
+                    qtip: Kebab.helper.translate('Send feedback this application'),
                     handler: function(event, toolEl, panel) {
                        // KBBTODO Kebab.helper.log(arguments);
                     },

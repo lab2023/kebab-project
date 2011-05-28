@@ -39,7 +39,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
         });
 
         this.tbar = [{
-            text: 'Backup',
+            text: Kebab.helper.translate('Backup'),
             iconCls:'icon-database-save',
             handler: function() {
                 this.fireEvent('backupRequest', {from:this, url:this.url, method:'POST', store:this.store})
@@ -48,12 +48,12 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
         
         this.columns = [
             {
-                header   : 'Date',
+                header   : Kebab.helper.translate('Date'),
                 dataIndex: 'name',
                 sortable:true
             },
             {
-                header   : 'Size',
+                header   : Kebab.helper.translate('Size'),
                 dataIndex: 'size',
                 sortable:true
             },
@@ -63,7 +63,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 xtype: 'actioncolumn',
                 items: [{
                         iconCls:'icon-disk databaseBackup-icon-icon-disk',
-                        tooltip: 'Download Backup',
+                        tooltip: Kebab.helper.translate('Download backup'),
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
                             var file = rec.data.name;
@@ -72,11 +72,11 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                         scope:this
                     }, {
                         iconCls:'icon-cancel databaseBackup-icon-cancel',
-                        tooltip: 'Delete Backup',
+                        tooltip: Kebab.helper.translate('Delete backup'),
                         handler: function(grid, rowIndex) {
                             var rec = this.store.getAt(rowIndex);
                             var file = rec.data.name;
-                            Ext.Msg.confirm('Are you sure?', 'Do you want to ' + file + ' file delete?', function(button) {
+                            Ext.Msg.confirm(Kebab.helper.translate('Are you sure?'), Kebab.helper.translate('Do you want to {0} backup file delete?', file), function(button) {
                                 if (button == 'yes') {
                                     this.fireEvent('deleteRequest', {
                                         name:file,

@@ -1,13 +1,14 @@
-<?php $this->headTitle('Yetkisiz Erişim'); ?>
+<?php
+$this->headTitle($this->translate('Unauthorized Access')); ?>
 
 <div id="kebab-system-auth-container" class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">
 
-    <h1 class="kebab-heading">Yetkisiz Erişim</h1>
+    <h1 class="kebab-heading"><?php echo $this->translate('Unauthorized Access'); ?></h1>
 
-    <p class="kebab-paragraph">Bu alanı görmeye yetkiniz bulunmamaktadır.</p>
+    <p class="kebab-paragraph"><?php echo $this->translate('You are not authorized to see this field.'); ?></p>
 
     <br />
-    <p class="kebab-paragraph">Lütfen sisteme <a href="<?php echo $this->baseUrl('auth')?>">oturum açınız.</a></p>
-    <p class="kebab-paragraph"><a href="<?php echo $this->baseUrl('auth/forgot-password')?>">Şifrenizi mi unuttunuz ?</a></p>
+    <p class="kebab-paragraph"><?php echo $this->translate('Please'); ?> <a href="<?php echo $this->baseUrl('auth')?>"><?php $this->translate('Sign in'); ?></a></p>
+    <p class="kebab-paragraph"><a href="<?php echo $this->baseUrl('auth/forgot-password')?>"><?php echo $this->translate('Did Forgot your password?'); ?></a></p>
     
 </div>
