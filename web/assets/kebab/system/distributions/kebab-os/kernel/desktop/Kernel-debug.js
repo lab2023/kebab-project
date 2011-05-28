@@ -65,21 +65,21 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         // Initialize Desktop
         this.desktop = new Kebab.OS.Desktop(this);
 
-		this.windowList = this.desktop.windowList;
+        this.windowList = this.desktop.windowList;
 
-		this.applications = this.applications || this.loadApplications();
+        this.applications = this.applications || this.loadApplications();
 
         if(this.applications) {
             this.initApplications();
         }
 
         Ext.EventManager.on(window, 'beforeunload', this.onUnload, this);
-		this.fireEvent('booted', this);
+        this.fireEvent('booted', this);
         this.isBooted = true;
 
         if (this.isBooted) {
             Kebab.helper.log('Kebab.OS.Kernel booted...');
-            Kebab.helper.translate('Welcome to Kebab Project. Have fun!');
+            Kebab.helper.message('Kebab Project', 'Welcome to Kebab Project. Have fun!');
         }
     },
 
@@ -90,10 +90,14 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
 
         Ext.each(this.apps, function(application) {
             
-            applicationInstances[i++] = Ext.applyIf(
-                eval('new ' + application.className + '()'),
-                application
-            );
+            try {
+                applicationInstances[i++] = Ext.applyIf(
+                    eval('new ' + application.className + '()'),
+                    application
+                );
+            } catch(e) {
+                Kebab.helper.log(application.className + ' not loaded...', 'ERR');
+            }
         });
 
         Kebab.helper.log('Kebab applications loaded...');
