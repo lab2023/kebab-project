@@ -27,6 +27,7 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
         });
 
         var config = {
+            frame:true,
             title: Kebab.helper.translate('Change Password'),
             iconCls: 'icon-key',
             url: Kebab.helper.url('kebab/password'),

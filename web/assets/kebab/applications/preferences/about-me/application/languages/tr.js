@@ -28,7 +28,7 @@ KebabOS.applications.aboutMe.application.languages.tr = {
     'Your language' : 'Konuşma diliniz',
     'Full name' : 'Tam adınız',
     'Passwords do not match!' : 'Şifreler uyuşmuyor!',
-    'Change password' : 'Şifre değiştir',
+    'Change Password' : 'Şifre Değiştir',
     'Your current password' : 'Mevcut şifreniz',
     'New password' : 'Yeni şifre',
     'Confirm new password' : 'Tekrar yeni şifre',

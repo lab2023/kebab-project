@@ -66,16 +66,16 @@ Kebab.Translator = function(i18n) {
      * Get current locale
      */
     this.getLocale = function() {
-        return this.getLanguages('active').language;
+        return this.getLanguages(true).language;
     },
 
     /**
      * Get current languages or active language
-     * @param which
+     * @param active
      */
-    this.getLanguages = function(which) {
+    this.getLanguages = function(active) {
 
-        if(which == 'active') {
+        if(active) {
 
             var currentLanguage = null;
 

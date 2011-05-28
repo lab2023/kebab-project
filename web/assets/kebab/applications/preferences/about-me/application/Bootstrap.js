@@ -21,8 +21,8 @@ Ext.extend(KebabOS.applications.aboutMe.application.Bootstrap, Kebab.OS.Applicat
 
         if(!app){
 
-            var winWidth = 600;
-            var winHeight = 400;
+            var winWidth = 500;
+            var winHeight = 350;
 
             // Default layout
             this.layout = new KebabOS.applications.aboutMe.application.layouts.Layout({

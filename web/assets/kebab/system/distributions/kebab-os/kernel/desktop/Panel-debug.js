@@ -171,8 +171,8 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                 scope:this
             }, {
                 template: this.buttonTpl,
-                text: Kebab.helper.translate(Kebab.getOS().getTranslator().getLanguages('active').text),
-                iconCls: Kebab.getOS().getTranslator().getLanguages('active').iconCls
+                text: Kebab.helper.translate(Kebab.getOS().getTranslator().getLanguages(true).text),
+                iconCls: Kebab.getOS().getTranslator().getLanguages(true).iconCls
             }, {
                 iconCls : 'icon-shutdown',
                 template: this.buttonTpl,

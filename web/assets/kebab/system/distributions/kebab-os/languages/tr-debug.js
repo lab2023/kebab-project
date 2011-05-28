@@ -28,22 +28,22 @@ Kebab.i18n.translations = {
 
     // Desktop-debug.js
     'Welcome to Kebab Project. Have fun!' : 'Kebab Project\'e hoşgeldiniz. Keyfini çıkarın!',
-    '{0} initialized...' : '{0} yüklendi...',
+    'Initialized...' : 'Yüklendi...',
     'Close All' : 'Hepsini kapat',
     'Hide All' : 'Hepsini gizle',
     'Tile Applications' : 'Uygulamaları diz',
-    'Cascade Applications' : 'Uygulamaları kademeli diz',
+    'Cascade Applications' : 'Uygulamaları sırala',
     'Appearance' : 'Görünüm',
-    'Send feedback this application' : 'Bu uygulama için geribildirim gönder',
+    'Send feedback this application' : 'Bu uygulama için geribildirim gönderin',
 
     // Panel-debug.js
     'Close' : 'Kapat',
     'Maximize' : 'Maksimum yap',
     'Minimize' : 'Minimum yap',
     'Restore' : 'Eski haline getir',
-    'Shutdown...' : 'Kapat...',
-    'Reboot...' : 'Yeniden yükle...',
-    'Logout...' : 'Çıkış yap...',
+    'Shutdown...' : 'Kapat ve çık...',
+    'Reboot...' : 'Yeniden başlat...',
+    'Logout...' : 'Ourumu kapat...',
     'Applications' : 'Uygulamalar',
     'System' : 'Sistem',
     'Quick start...' : 'Hızlı başlat...',
@@ -75,7 +75,6 @@ Kebab.i18n.translations = {
     'Automatically saves your changes or you request it. Recommended to be used in tasks requiring heavy traffic.' : 'Yaptığınız her değişikliğin otomatik olarak veya siz istediğinizde kaydedilmesini sağlar. Yoğun trafik gerektiren işlerde kullanılmaması önerilir.',
     'Batch processing' : 'Toplu işlem',
     'This option allows you to send in a change to the server at a time or all of the records.' : 'Bu seçenek yanlızca değişiklik olan kayıtları veya hepsini bir seferde sunucuya göndermenizi sağlar.',
-    'Appearance' : 'Görünüm',
     'Auto fit' : 'Oto. sığdır',
     'This option list, columns, automatically fit the size of the window.' : 'Bu seçenek listenin kolonlarını, pencere boyutuna otomatik olarka sığdırır.',
     'Do you approve of the changes?' : 'Değişiklikleri onaylıyor musunuz?',
@@ -103,6 +102,4 @@ Kebab.i18n.translations = {
     'Confirm password' : 'Şifre tekrar',
     'Passwords do not match!' : 'Şifreler uyuşmuyor!',
     'Invalid activation key!' : 'Geçersiz etkinleştirme anahtarı!'
-
-
 };

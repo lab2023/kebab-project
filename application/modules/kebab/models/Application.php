@@ -56,7 +56,9 @@ class Kebab_Model_Application
                 ->leftJoin('s.Permission p')
                 ->leftJoin('p.Role r')
                 ->whereIn('r.id', $roles)
-                ->andWhere('a.active = 1 AND s.active = 1');
+                ->andWhere('a.active = 1 AND s.active = 1')
+                ->orderBy('a.name DESC')
+                ->orderBy('a.department DESC');
         $applications = $query->execute();
 
         $returnData = array();

@@ -31,7 +31,7 @@ KebabOS.applications.aboutMe.application.layouts.Layout = Ext.extend(Ext.Panel, 
             collapseMode:'mini',
             collapsed:true,
             border:true,
-            height:360
+            height:318
         });
 
         Ext.apply(this, {

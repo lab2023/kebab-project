@@ -28,6 +28,9 @@ Ext.namespace('Kebab.OS.Application');
  */
 Kebab.OS.Application = function(){
 
+    // Application translations
+    this.translations = null;
+
     // Base Application Launcher Settings
     this.launcher = Ext.applyIf(this.launcher, {
         text: 'Default Application' ,
@@ -39,12 +42,12 @@ Kebab.OS.Application = function(){
     // Run init methods
     this.init();
     this.initResources();
-    this.initLanguages();
+    this.initTranslations();
 
     // Call constructor
     Kebab.OS.Application.superclass.constructor.call(this);
 
-    this.resources.logger.log(this.id + ' application initialized...');
+    Kebab.helper.log(this.id + ' application initialized...');
 };
 
 Ext.extend(Kebab.OS.Application, Ext.util.Observable, {
@@ -57,9 +60,15 @@ Ext.extend(Kebab.OS.Application, Ext.util.Observable, {
     initResources: function() {
         try { // Kebab OS resources
             this.resources = {
-                translator: Kebab.getOS().getTranslator(),
-                logger: Kebab.getOS().getLogger(),
-                notification: Kebab.getOS().getNotification()
+                getTranslator: function() {
+                    return Kebab.getOS().getTranslator();
+                },
+                getLogger: function() {
+                    return Kebab.getOS().getLogger();
+                },
+                getNotification: function() {
+                    return Kebab.getOS().getNotification();
+                }
             };
         } catch(e) {
             Kebab.getOS().getLogger().log(this.id + ' resources not loaded...', 'ERR');
@@ -69,20 +78,44 @@ Ext.extend(Kebab.OS.Application, Ext.util.Observable, {
     /**
      * Init application languages
      */
-    initLanguages: function() {
-        try { // Application translations
+    initTranslations: function() {
 
-            // Application name replacement
-            var appName = this.id.replace('-application', '').trim();
-            var _replaceNameSpace = function() {
-                return "KebabOS.applications.APP_NAME.application.languages".replace('APP_NAME', appName).trim();
-            };
+        // Application name replacement
+        var appName = this.id.replace('-application', '').trim();
+        var _replaceNameSpace = function() {
+            return "KebabOS.applications.APP_NAME.application.languages".replace('APP_NAME', appName).trim();
+        };
 
-            var languages = eval(_replaceNameSpace());
-            this.resources.translator.addTranslations(languages[this.resources.translator.getLocale()]);
+        // Load translations
+        var translations = eval(_replaceNameSpace());
 
-        } catch(e) {
-            this.resources.logger.log(this.id + ' translations not loaded...', 'ERR');
-        }
+        // Add translations to translator object
+        this.getResources().getTranslator().addTranslations(translations[this.getResources().getTranslator().getLocale()]);
+
+        // Set the translations
+        this.setTranslations(translations);
+    },
+
+    /**
+     * Set application translations
+     */
+    setTranslations: function(translations) {
+        this.translations = translations;
+    },
+
+    /**
+     * Get application's active or all translations
+     * @param active boolean
+     */
+    getTranslations: function(active) {
+        return active ? this.translations[this.getResources().getTranslator().getLocale()]
+                      : this.translations;
+    },
+
+    /**
+     * Get the application resources
+     */
+    getResources: function() {
+        return this.resources;
     }
 });
