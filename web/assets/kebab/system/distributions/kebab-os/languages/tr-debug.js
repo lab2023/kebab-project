@@ -32,7 +32,7 @@ Kebab.i18n.translations = {
     'Close All' : 'Hepsini kapat',
     'Hide All' : 'Hepsini gizle',
     'Tile Applications' : 'Uygulamaları diz',
-    'Cascade Applications' : 'Uygulamaları döşe',
+    'Cascade Applications' : 'Uygulamaları sırala',
     'Appearance' : 'Görünüm',
     'Send feedback this application' : 'Bu uygulama için geribildirim gönderin',
 
