@@ -125,6 +125,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
     buildIndicatorsArea: function() {
 
         var applicationsCombobox = new Ext.form.ComboBox({
+            tpl:'<tpl for="."><div ext:qtip="{description}" class="x-combo-list-item">{title}</div></tpl>',
             storeLoaded: false,
             emptyText: Kebab.helper.translate('Quick start...'),
             typeAhead: true,
@@ -135,7 +136,10 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             lazyRender:false,
             mode: 'local',
             store: new Ext.data.JsonStore({
-                fields: ['id', 'name', 'department', {name:'title', type: 'object', mapping: 'launcher.text'}]
+                fields: [
+                    'id', 'name', 'department', {name:'title', type: 'object', mapping: 'title.text'},
+                    {name:'description', type: 'object', mapping: 'title.description'}
+                ]
             }),
             valueField: 'id',
             displayField: 'title',
@@ -143,7 +147,6 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             listeners: {
                 focus: function(combo) {
                     if (!combo.storeLoaded) {
-                        console.log(this.kernel.getApplications());
                         combo.store.loadData(this.kernel.getApplications());
                         combo.storeLoaded = true;
                     }

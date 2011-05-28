@@ -189,7 +189,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
 
         this.layout();
 
-        Kebab.helper.message('Kebab Project', Kebab.helper.translate('{0} initialized...', appWin.title));
+        Kebab.helper.message(appWin.title, 'Initialized...');
 
         return appWin;
     },

@@ -70,7 +70,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
         
         var messageEl = Ext.DomHelper.append(this.messageContainer, {
             cls: 'kebab-notifications kebab-shadow-std kebab-rounded-corners',
-            html: messageBody(title, message),
+            html: messageBody(Kebab.helper.translate(title), Kebab.helper.translate(message)),
             alignTo: [0, 33]
         }, true);
 
@@ -115,8 +115,8 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
         
         Ext.Msg.show({
             modal:true,
-            title: title,
-            msg: message,
+            title: Kebab.helper.translate(title),
+            msg: Kebab.helper.translate(message),
             icon: icon,
             buttons: Ext.Msg.OK
         });

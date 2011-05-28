@@ -70,12 +70,6 @@ Kebab.library.ext.RESTfulBasicDataStore = Ext.extend(Ext.data.Store, {
     },
     
     listeners : {
-        write : function(){
-            Kebab.helper.message(
-                Kebab.helper.translate('Success'),
-                Kebab.helper.translate('Operation was performed successfully')
-            );
-        },
         exception : function(){
             Kebab.helper.message(
                 Kebab.helper.translate('Error'),
