@@ -69,7 +69,7 @@ class Kebab_UserInvitationController extends Kebab_Rest_Controller
         // Model
         if ($valid) {
             $user = Kebab_Model_User::invite($params['fullName'], $params['email']);
-        }        
+        }
 
         // Response
         if ($valid && is_object($user)) {

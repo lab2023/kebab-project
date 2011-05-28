@@ -40,20 +40,20 @@ class Kebab_UserController extends Kebab_Rest_Controller
     {
         // Mapping
         $mapping = array(
-            'id'        => 'user.id',
-            'fullName'  => 'user.fullName',
-            'userName'  => 'user.userName',
-            'email'     => 'user.email',
-            'language'  => 'user.language',
-            'status'    => 'user.status',
-            'active'    => 'user.active'
+            'id' => 'user.id',
+            'fullName' => 'user.fullName',
+            'userName' => 'user.userName',
+            'email' => 'user.email',
+            'language' => 'user.language',
+            'status' => 'user.status',
+            'active' => 'user.active'
         );
 
         $searchUser = $this->_helper->search('Model_Entity_User');
-        $order      = $this->_helper->sort($mapping);
-        $query      = Kebab_Model_User::getAll($searchUser, $order);
-        $pager      = $this->_helper->pagination($query);
-        $user       = $pager->execute();
+        $order = $this->_helper->sort($mapping);
+        $query = Kebab_Model_User::getAll($searchUser, $order);
+        $pager = $this->_helper->pagination($query);
+        $user = $pager->execute();
 
         // Response
         $responseData = is_object($user) ? $user->toArray() : array();
@@ -67,13 +67,13 @@ class Kebab_UserController extends Kebab_Rest_Controller
 
         // Convert data collection array if not
         $collection = $this->_helper->array()->isCollection($params['data'])
-                    ? $params['data']
-                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                ? $params['data']
+                : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
-             // Doctrine
+            // Doctrine
             foreach ($collection as $record) {
                 $user = new Model_Entity_User();
                 $user->assignIdentifier($record['id']);

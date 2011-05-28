@@ -16,7 +16,7 @@
  * @category   Kebab (kebab-reloaded)
  * @package    Model
  * @subpackage User Model
- * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @author       Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
@@ -28,7 +28,7 @@
  * @category   Kebab (kebab-reloaded)
  * @package    Model
  * @subpackage User Model
- * @author	   Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @author       Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
@@ -43,20 +43,20 @@ class Kebab_Model_User
      */
     public static function getUserRoles($userId)
     {
-        $userId = (int) $userId;
+        $userId = (int)$userId;
         $query = Doctrine_Query::create()
-                    ->select('role.id')
-                    ->from('Model_Entity_Role role')
-                    ->leftJoin('role.UserRole userRole')
-                    ->where('userRole.user_id = ?', $userId);
+                ->select('role.id')
+                ->from('Model_Entity_Role role')
+                ->leftJoin('role.UserRole userRole')
+                ->where('userRole.user_id = ?', $userId);
 
         $rolesResult = $query->execute();
-        
+
         $roles = array();
         foreach ($rolesResult as $role) {
-           $roles[] = $role->id;
+            $roles[] = $role->id;
         }
-        
+
         return $roles;
     }
 
@@ -156,10 +156,10 @@ class Kebab_Model_User
             $userRole->save();
 
             $retVal = Doctrine_Manager::connection()->commit() ? $user : false;
-            
+
             unset($userRole);
             unset($id);
-            
+
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -174,11 +174,11 @@ class Kebab_Model_User
     public static function getAll($searchUser = array(), $order = "user.id")
     {
 
-         $query = Doctrine_Query::create()
-                    ->select('user.id, user.fullName, user.userName, user.email, user.language, user.status, user.active')
-                    ->from('Model_Entity_User user')
-                    ->whereIn('user.id', $searchUser)
-                    ->orderBy("$order");
+        $query = Doctrine_Query::create()
+                ->select('user.id, user.fullName, user.userName, user.email, user.language, user.status, user.active')
+                ->from('Model_Entity_User user')
+                ->whereIn('user.id', $searchUser)
+                ->orderBy("$order");
         return $query;
     }
 

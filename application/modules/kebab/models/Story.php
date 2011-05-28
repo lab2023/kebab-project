@@ -45,7 +45,7 @@ class Kebab_Model_Story
                     storyTranslation.description as description,
                     permission.role_id')
                 ->addSelect('(SELECT COUNT(p.role_id) FROM Model_Entity_Permission p
-                                WHERE p.role_id = '.$roleId.' and p.story_id = story.id) as allow')
+                                WHERE p.role_id = ' . $roleId . ' and p.story_id = story.id) as allow')
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
@@ -66,11 +66,11 @@ class Kebab_Model_Story
     {
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()
-                    ->select('s.slug')
-                    ->from('Model_Entity_Story s')
-                    ->leftJoin('s.Permission p')
-                    ->andWhere('s.active = 1')
-                    ->andWhereIn('p.role_id', $roles);
+                ->select('s.slug')
+                ->from('Model_Entity_Story s')
+                ->leftJoin('s.Permission p')
+                ->andWhere('s.active = 1')
+                ->andWhereIn('p.role_id', $roles);
 
         $retVal = array();
         foreach ($query->execute()->toArray() as $story) {

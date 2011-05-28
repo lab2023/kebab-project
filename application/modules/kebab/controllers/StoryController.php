@@ -73,13 +73,13 @@ class Kebab_StoryController extends Kebab_Rest_Controller
 
         // Convert data collection array if not
         $collection = $this->_helper->array()->isCollection($params['data'])
-                    ? $params['data']
-                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                ? $params['data']
+                : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
-             // Doctrine
+            // Doctrine
             foreach ($collection as $record) {
                 $story = new Model_Entity_Story();
                 $story->assignIdentifier($record['id']);
@@ -88,7 +88,7 @@ class Kebab_StoryController extends Kebab_Rest_Controller
             }
             Doctrine_Manager::connection()->commit();
             unset($story);
-            
+
             // Response
             $this->_helper->response(true, 202)->getResponse();
         } catch (Zend_Exception $e) {

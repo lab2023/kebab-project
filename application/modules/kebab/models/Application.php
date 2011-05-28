@@ -24,7 +24,7 @@
 
 /**
  * Kebab_Model_Application
- * 
+ *
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
  * @subpackage Model
@@ -39,14 +39,14 @@ class Kebab_Model_Application
 {
     /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
-     * 
+     *
      * @static
      * @return array
      */
     public static function getApplicationsByPermission()
     {
 
-        $lang  = Zend_Auth::getInstance()->getIdentity()->language;
+        $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()
                 ->from('Model_Entity_Application a')
