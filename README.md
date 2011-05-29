@@ -22,6 +22,6 @@ Kebab Framework Ubuntu installation article is here:
 
 Documentation
 -------------
-- http://www.kebab-project.com/wiki/en
+- http://www.kebab-project.com/wiki/en or http://www.kebab-project.com/wiki/tr
 
 [1]: http://kebab-project.com
