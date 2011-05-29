@@ -22,11 +22,6 @@ Kebab Framework Ubuntu installation article is here:
 
 Documentation
 -------------
-Directories:
-    - application: your application is here
-    -   |-modules: installed modules here
-    - developer: installation files and developer tools here (doctrineCLI etc.)
-    - library: kebab and 3rd. party libraries here (PEAR v.s.)
-    - web: public html folder
+- http://www.kebab-project.com/wiki/en
 
 [1]: http://kebab-project.com
