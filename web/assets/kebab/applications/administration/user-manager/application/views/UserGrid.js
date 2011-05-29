@@ -37,7 +37,8 @@ KebabOS.applications.userManager.application.views.UserGrid = Ext.extend(Kebab.l
         afterRender: function() {
             this.store.load({params:{start:0, limit:25}});
             this.onDisableButtonGroup('export');
-            this.onGetButton('add').setText('Invite User');
+            this.onGetButton('add').setText(Kebab.helper.translate('Invite user'));
+            this.onGetButton('add').setTooltip(Kebab.helper.translate('New user invite'));
             this.onGetButton('add').setIconClass('icon-user-add');
             this.batchButton.toggle();
             this.getView().fitColumns();

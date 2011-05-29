@@ -15,5 +15,6 @@ KebabOS.applications.userManager.application.languages.tr = {
 'Active ?':'Aktif ?',
 'Role title':'Rol başlığı',
 'Role description':'Rol açıklaması',
-'Allow ?':'İzin ?'
+'Allow ?':'İzin ?',
+'New user invite':'Yeni kullanıcı davet et'
 };
