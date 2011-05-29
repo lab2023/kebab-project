@@ -55,7 +55,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
                             },
 
                             failure : function() {
-                                Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
+                                Kebab.helper.message(this.bootstrap.launcher.text, 'Failure', true);
                             }, scope:this
                         });
                     }

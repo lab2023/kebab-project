@@ -1,7 +1,7 @@
     <h3><?php echo $this->translate('Welcome'); echo' '; echo $this->fullName; ?></h3>
 
     <p>
-        <?php printf($this->translate('Please click the %s link %s for activation.'),"<a href=" . BASE_URL . '/backend/activation/id/' . $this->id . '/key/' . $this->activationKey . 'target="_blank">', "</a>")?>
+        <?php printf($this->translate('Please click the %s link %s for activation.'),"<a href=" . BASE_URL . '/backend/activation/id/' . $this->id . '/key/' . $this->activationKey . '" target="_blank">', "</a>")?>
     </p>
 
     <p><?php echo $this->message; ?></p>
