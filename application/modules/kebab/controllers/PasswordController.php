@@ -46,7 +46,7 @@ class Kebab_PasswordController extends Kebab_Rest_Controller
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
 
         // Validation
-        $oldPassword = Doctrine_Core::getTable('User_Model_User')->find($userSessionId)->password;
+        $oldPassword = Doctrine_Core::getTable('Model_Entity_User')->find($userSessionId)->password;
         if ($oldPassword != md5($params['oldPassword'])) {
             $this->_helper->response()->addError('oldPassword', 'Eski şifreniz yanlış.')->getResponse();
         }
@@ -63,7 +63,7 @@ class Kebab_PasswordController extends Kebab_Rest_Controller
             && !is_null($userPasswordConfirm)
             && $userPasswordConfirm == $userPassword
         ) {
-            $user = new User_Model_User();
+            $user = new Model_Entity_User();
             $user->assignIdentifier($userSessionId);
             $user->password = $userPassword;
             $user->save();
