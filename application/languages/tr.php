@@ -33,8 +33,14 @@
  * @version    1.5.0
  */
 return array(
+    // Languages
     'English' => 'İngilizce',
     'Turkish' => 'Türkçe',
+
+    // Project Titles
+    'Kebab Project' => 'Kebab Project',
+    'Kebab Project • Web Operation System' => 'Kebab Project • Web İşletim Sistemi',
+    'Kebab Project • Front-end Area' => 'Kebab Project • Ön-uç Alanı',
 
     // Sample
     'Hello World!' => 'Merhaba Dünya!',
@@ -48,6 +54,9 @@ return array(
     'First you have to delete related datas.' => 'İlk önce ilişkili verileri silmelisiniz.',
     'Record couldn\'t be deleted.' => 'Kayıt silinemedi.',
 
+    // Desktop
+    'Desktop' => 'Masaüstü',
+    
     //sign-in
     'Sign-in' => 'Giriş',
     'Welcome to Kebab Project' => 'Kebab Project\'e hoşgeldiniz',
