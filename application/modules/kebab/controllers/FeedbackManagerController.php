@@ -97,7 +97,7 @@ class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
 
             // Response
             $this->_helper->response(true, 202)->getResponse();
-            
+
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;

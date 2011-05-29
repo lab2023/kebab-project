@@ -49,10 +49,10 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
         );
 
         $searchRole = $this->_helper->search('Model_Entity_Role', true);
-        $order      = $this->_helper->sort($mapping);
-        $query      = Kebab_Model_UserRole::getUserRoles($userId, $searchRole, $order);
-        $pager      = $this->_helper->pagination($query);
-        $userRole   = $pager->execute();
+        $order = $this->_helper->sort($mapping);
+        $query = Kebab_Model_UserRole::getUserRoles($userId, $searchRole, $order);
+        $pager = $this->_helper->pagination($query);
+        $userRole = $pager->execute();
 
 
         $responseData = is_object($userRole) ? $userRole->toArray() : array();
@@ -71,8 +71,8 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
 
             // Convert data collection array if not
             $collection = $this->_helper->array()->isCollection($params['data'])
-                        ? $params['data']
-                        : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                    ? $params['data']
+                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
             Kebab_Model_UserRole::update($userId, $collection);
 
@@ -84,7 +84,7 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
             unset($collection);
             unset($responseData);
         } catch (Zend_Exception $e) {
-           // Doctrine_Manager::connection()->rollback();
+            // Doctrine_Manager::connection()->rollback();
             throw $e;
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();

@@ -59,8 +59,8 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
 
         // Convert data collection array if not
         $collection = $this->_helper->array()->isCollection($params['data'])
-                    ? $params['data']
-                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                ? $params['data']
+                : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Doctrine
         //KBBTODO move dql to models
@@ -75,9 +75,9 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
                     $permission->save();
                 } elseif (!$story['allow'] && $recordExist) {
                     Doctrine_Query::create()
-                        ->delete('Model_Entity_Permission p')
-                        ->where('p.role_id = ? AND p.story_id = ?', array($roleId, $story['id']))
-                        ->execute();
+                            ->delete('Model_Entity_Permission p')
+                            ->where('p.role_id = ? AND p.story_id = ?', array($roleId, $story['id']))
+                            ->execute();
                 }
             }
             Doctrine_Manager::connection()->commit();

@@ -39,7 +39,7 @@ class Kebab_UserSignUpController extends Kebab_Rest_Controller
 
     /**
      * User can invited or sign-up
-     * 
+     *
      * @return void
      */
     public function postAction()

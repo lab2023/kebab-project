@@ -35,5 +35,5 @@
  */
 class Kebab_Bootstrap extends Kebab_Application_Module_Bootstrap
 {
-    
+
 }

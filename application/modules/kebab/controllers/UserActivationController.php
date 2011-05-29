@@ -52,7 +52,7 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
 
         $response->getResponse();
     }
-    
+
     /**
      * User can invited or sign-up
      *
@@ -63,7 +63,7 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
         // Getting parameters
         $params = $this->_helper->param();
         $response = $this->_helper->response(true);
-        
+
         // Check username dublicate
         $user = Doctrine_Core::getTable('Model_Entity_User')->findOneByuserName(array($params['userName']));
         if (is_object($user)) {
@@ -73,7 +73,7 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
         $user = Kebab_Model_User::activate($params['userName'], $params['password'], $params['fullName'], $params['activationKey']);
 
         Kebab_Authentication::signIn($user->userName, $params['password']);
-        
+
         $response->getResponse();
     }
 }

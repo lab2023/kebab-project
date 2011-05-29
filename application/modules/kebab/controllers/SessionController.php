@@ -44,8 +44,8 @@ class Kebab_SessionController extends Kebab_Rest_Controller
     public function postAction()
     {
         // Get params
-        $userName   = $this->_request->getParam('userName');
-        $password   = $this->_request->getParam('password');
+        $userName = $this->_request->getParam('userName');
+        $password = $this->_request->getParam('password');
         $rememberMe = $this->_request->getParam('remember_me');
 
         // Check rememberMe checkbox

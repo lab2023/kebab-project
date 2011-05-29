@@ -11,6 +11,7 @@
 KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
 
     url: null,
+    frame:true,
     defaultType: 'textfield',
     border:false,
     bodyStyle: 'padding:5px 10px;',
@@ -25,7 +26,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
 
         var languges = {
             all: Kebab.getOS().getTranslator().getLanguages(),
-            current: Kebab.getOS().getTranslator().getLanguages('current')
+            active: Kebab.getOS().getTranslator().getLanguages(true)
         };
 
         var languagesCombobox = new Ext.form.ComboBox({
@@ -45,12 +46,11 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
             scope:this,
             listeners: {
                 afterRender: function() {
-                    this.setValue(languges.current.language);
+                    this.setValue(languges.active.language);
                 }
             }
         });
-
-
+        
         var config = {
             items: [{
                 layout:'column',
@@ -80,7 +80,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                         xtype: 'button',
                         width: '100%',
                         iconCls: 'icon-key',
-                        text: Kebab.helper.translate('Change password'),
+                        text: Kebab.helper.translate('Change Password'),
                         handler: function() {
                             this.fireEvent('showHidePasswordForm', this.bootstrap.layout.passwordForm);
                         },

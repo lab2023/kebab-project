@@ -56,10 +56,10 @@ class Kebab_RoleController extends Kebab_Rest_Controller
                     roleTranslation.title as title,
                     roleTranslation.description as description,
                     role.active')
-                    ->addSelect('(SELECT COUNT(permission.story_id)
+                ->addSelect('(SELECT COUNT(permission.story_id)
                                   FROM Model_Entity_Permission permission
                                   WHERE role.id = permission.role_id) as num_story')
-                    ->addSelect('(SELECT COUNT(userRole.role_id)
+                ->addSelect('(SELECT COUNT(userRole.role_id)
                                   FROM Model_Entity_UserRole userRole
                                   WHERE userRole.role_id = role.id) as num_user')
                 ->from('Model_Entity_Role role')
@@ -88,8 +88,8 @@ class Kebab_RoleController extends Kebab_Rest_Controller
 
         // Convert data collection array if not
         $collection = $this->_helper->array()->isCollection($params['data'])
-                    ? $params['data']
-                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                ? $params['data']
+                : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Updating status
         //KBBTODO move dql to model
@@ -132,8 +132,8 @@ class Kebab_RoleController extends Kebab_Rest_Controller
 
         // Convert data collection array if not
         $collection = $this->_helper->array()->isCollection($params['data'])
-                    ? $params['data']
-                    : $this->_helper->array()->convertRecordtoCollection($params['data']);
+                ? $params['data']
+                : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
         // Updating status
         //KBBTODO move dql to model
@@ -198,7 +198,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
                     ->delete('Model_Entity_Role role')
                     ->whereIn('role.id', $ids)
                     ->execute();
-            
+
             Doctrine_Manager::connection()->commit();
 
             // Response
