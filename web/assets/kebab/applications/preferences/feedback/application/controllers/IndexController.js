@@ -53,7 +53,7 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
                 },
 
                 failure : function() {
-                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure', true);
                 }, scope:this
             });
         }

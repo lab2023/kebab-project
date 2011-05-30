@@ -92,10 +92,9 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             Kebab_Authentication::signOut();
             Kebab_Authentication::signIn($profile->userName, $profile->password, false, false);
 
-            unset($profile);
-
             // Response
-            $this->_helper->response(true, 201)->getResponse();
+            $this->_helper->response(true, 201)->addData(array('userName' => $profile->userName, 'fullName' =>$profile->fullName))->getResponse();
+            unset($profile);
 
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();

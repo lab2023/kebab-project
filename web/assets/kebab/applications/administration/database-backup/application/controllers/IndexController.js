@@ -52,7 +52,7 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
             },
 
             failure : function() {
-                Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
+                Kebab.helper.message(this.bootstrap.launcher.text, 'Failure', true);
             }, scope:this
         });
     }

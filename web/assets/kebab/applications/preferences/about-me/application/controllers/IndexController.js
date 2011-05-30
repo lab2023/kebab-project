@@ -47,15 +47,16 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
             data.from.getForm().submit({
                 url: data.url,
                 method: 'PUT',
-                success : function() {
+                success : function(a,b) {
                     Kebab.helper.message(this.bootstrap.launcher.text, 'Success');
                     if(data.toggle){
                         data.from.fireEvent('showHidePasswordForm', data.from);
                         data.from.getForm().reset();
                     }
+                        data.from.fireEvent('actioncomplete', data.from.getForm(), b);
                 },
                 failure : function() {
-                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure', true);
                 }, scope:this
             });
         }

@@ -242,7 +242,7 @@ Kebab.OS = function(kebab){
                 }
             },
             failure: function() {
-                this.getNotification().message('Argh! %(', 'Operation failure....');
+                this.getNotification().message('Argh! %(', 'Operation failure....', true);
                 return false;
             },
             scope: this

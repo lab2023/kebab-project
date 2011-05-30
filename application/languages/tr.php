@@ -71,7 +71,7 @@ return array(
 
     //activation
     'Activation' => 'Aktivasyon',
-    'Welcome back, please fill this form<br />to complete your sign-up process.' => 'Oturum açma işlemini tamamlamak için bu formu doldurunuz, Aramıza hoşgeldin.',
+    'Welcome back, please fill this form<br />to complete your sign-up process.' => 'Tekrar hoşgeldiniz, kayıt sürecinizi<br />tamamlamak için bu formu doldurunuz.',
 
     //unauthorized
     'Unauthorized Access' => 'Yetkisiz erişim',
@@ -82,13 +82,13 @@ return array(
 
     //index
     'Front-end' => 'Ön-yüz',
-    'Welcome to Kebab Project front-end area...' => 'Kebab Project\'in ön yüzüne hoşgeldin...',
+    'Welcome to Kebab Project front-end area...' => 'Kebab Project\'in ön yüzüne hoşgeldiniz...',
     'Go to back-end' => 'Arka-yüz\'e git',
     ' or ' => ' veya ',
     'Visit Kebab Project\'s web site' => 'Kebab Project\'in web sitesini ziyaret et.',
 
     //sign-up mail
-    'Welcome' => 'Hoşgeldin',
+    'Welcome' => 'Hoşgeldiniz',
     'Please click the %s link %s for activation.' => 'Lütfen aktivasyon %s linkine %s tıklayın.',
 
     // forgot password mail
@@ -96,7 +96,7 @@ return array(
     'Hi' => 'Merhaba',
     'Can\'t remember your password? Don\'t worry about it — it happens.' => 'Şifrenizi hatırlamıyor musun? Dert etmeyin — Herşey hallolur.',
     'Your password' => 'Şifreniz',
-    'Eat fish to improve your memory. :)' => 'Hafızanızı geliştirmek için balık yiyin. :)',
+    'Eat fish to improve your memory. :)' => 'Daha iyi bir hafıza için daha çok balık tüketebilirsiniz. :)',
 
     // developer tool
     'Developer Tools' => 'Geliştirici Araçları',
