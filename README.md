@@ -20,6 +20,11 @@ Installation
 Kebab Framework Ubuntu installation article is here:
     - http://www.kebab-project.com/wiki/en/Kebab_Reloaded:Install_Kebab_1.5.x_on_Ubuntu_Apache_2.x
 
+Other Repositories
+-----------
+Kebab Application Templates:
+    - https://github.com/lab2023/kebab-application-templates
+
 Documentation
 -------------
 - http://www.kebab-project.com/wiki/en or http://www.kebab-project.com/wiki/tr
