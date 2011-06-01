@@ -162,6 +162,26 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         this.indicatorsToolbar = new Ext.Toolbar({
             renderTo: 'kebab-os-panel-indicators',
             items: [applicationsCombobox, {
+                template: this.buttonTpl,
+                text: Kebab.helper.translate(Kebab.getOS().getTranslator().getLanguages(true).text),
+                iconCls: Kebab.getOS().getTranslator().getLanguages(true).iconCls
+            }, {
+                template: this.buttonTpl,
+                text: new Date().format('d-m-Y, G:i'),
+                iconCls: 'icon-clock',
+                menu:  new Ext.menu.DateMenu(),
+                listeners: {
+                    afterRender: function(p) {
+                        var systemTimeTask = {
+                            run: function(){
+                                p.setText(new Date().format('d-m-Y, G:i'));
+                            },
+                            interval: 60000 //1 minute
+                        };
+                        Ext.TaskMgr.start(systemTimeTask);
+                    }
+                }
+            }, {
                 iconCls : 'icon-status-online',
                 template: this.buttonTpl,
                 text: this.user.fullName,
@@ -169,10 +189,6 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
                     this.kernel.getDesktop().launchApplication('aboutMe-application');
                 },
                 scope:this
-            }, {
-                template: this.buttonTpl,
-                text: Kebab.helper.translate(Kebab.getOS().getTranslator().getLanguages(true).text),
-                iconCls: Kebab.getOS().getTranslator().getLanguages(true).iconCls
             }, {
                 iconCls : 'icon-shutdown',
                 template: this.buttonTpl,
