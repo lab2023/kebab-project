@@ -26,18 +26,16 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
     
     // Initialize and define routing settings
     init: function() {
-
-        this.bootstrap.layout.mainProfileForm.on('showHidePasswordForm', this.toggleCollapseAction, this);
-        this.bootstrap.layout.passwordForm.on('showHidePasswordForm', this.toggleCollapseAction, this);
-        this.bootstrap.layout.mainProfileForm.on('mainProfileFormOnSave', this.formOnSaveAction, this);
-        this.bootstrap.layout.passwordForm.on('passwordFormOnSave', this.formOnSaveAction, this);
-
+        this.bootstrap.layout.profileForm.on('showHideForms', this.showHideFormsAction, this);
+        this.bootstrap.layout.profileForm.on('formOnSave', this.formOnSaveAction, this);
+        this.bootstrap.layout.passwordForm.on('showHideForms', this.showHideFormsAction, this);
+        this.bootstrap.layout.passwordForm.on('formOnSave', this.formOnSaveAction, this);
     },
     
     // Actions -----------------------------------------------------------------
 
-    toggleCollapseAction: function(from) {
-        from.toggleCollapse();
+    showHideFormsAction: function(item) {
+        this.bootstrap.layout.getLayout().setActiveItem(item);
     },
 
     formOnSaveAction: function(data) {
@@ -47,16 +45,15 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
             data.from.getForm().submit({
                 url: data.url,
                 method: 'PUT',
-                success : function(a,b) {
-                    Kebab.helper.message(this.bootstrap.launcher.text, 'Success');
-                    if(data.toggle){
-                        data.from.fireEvent('showHidePasswordForm', data.from);
+                success : function() {
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Operation was performed successfully');
+                    if(data.goBack == 0){ // Go back profile form
+                        data.from.fireEvent('showHideForms', 0);
                         data.from.getForm().reset();
                     }
-                        data.from.fireEvent('actioncomplete', data.from.getForm(), b);
                 },
                 failure : function() {
-                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure', true);
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Operation was not performed', true);
                 }, scope:this
             });
         }

@@ -41,7 +41,7 @@ Ext.extend(KebabOS.applications.aboutMe.application.Bootstrap, Kebab.OS.Applicat
                 iconCls: 'aboutMe-application-gui-icon',
                 width: winWidth,
                 height: winHeight,
-                resizable: false,
+                resizable: true,
                 maximizable: false,
                 border: false,
                 items: this.layout

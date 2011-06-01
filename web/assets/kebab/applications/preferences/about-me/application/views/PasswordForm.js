@@ -70,7 +70,7 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
                 text: Kebab.helper.translate('Cancel'),
                 iconCls: 'icon-cancel',
                 handler: function() {
-                    this.fireEvent('showHidePasswordForm', this);
+                    this.fireEvent('showHideForms', 0);
                 },
                 scope: this
             }, {
@@ -81,8 +81,8 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
             }]
         };
 
-        this.addEvents('showHidePasswordForm');
-        this.addEvents('passwordFormOnSave');
+        this.addEvents('showHideForms');
+        this.addEvents('formOnSave');
         
         Ext.apply(this, Ext.apply(this.initialConfig, config));
         
@@ -90,6 +90,6 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
     },
 
     onSubmit: function() {
-        this.fireEvent('passwordFormOnSave', {from:this, url:this.url, toggle:'true'});
+        this.fireEvent('formOnSave', {from:this, url:this.url, goBack:0});
     }
 });

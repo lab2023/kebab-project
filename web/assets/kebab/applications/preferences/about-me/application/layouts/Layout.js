@@ -13,29 +13,22 @@ KebabOS.applications.aboutMe.application.layouts.Layout = Ext.extend(Ext.Panel, 
     // Application bootstrap
     bootstrap: null,
     
-    layout: 'border',
-    disabled:true,
+    layout: 'card',
+    activeItem: 0,
     border: false,
     
     initComponent: function() {
 
-        this.mainProfileForm = new KebabOS.applications.aboutMe.application.views.MainProfileForm({
-            bootstrap: this.bootstrap,
-            region: 'center'
+        this.profileForm = new KebabOS.applications.aboutMe.application.views.ProfileForm({
+            bootstrap: this.bootstrap
         });
 
         this.passwordForm = new KebabOS.applications.aboutMe.application.views.PasswordForm({
-            bootstrap: this.bootstrap,
-            region:'south',
-            collapsible:true,
-            collapseMode:'mini',
-            collapsed:true,
-            border:true,
-            height:318
+            bootstrap: this.bootstrap
         });
 
         Ext.apply(this, {
-            items: [this.mainProfileForm,this.passwordForm]
+            items: [this.profileForm,this.passwordForm]
         });
 
         KebabOS.applications.aboutMe.application.layouts.Layout.superclass.initComponent.call(this);

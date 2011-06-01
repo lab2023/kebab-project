@@ -8,7 +8,7 @@
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license     http://www.kebab-project.com/cms/licensing
  */
-KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.form.FormPanel, {
+KebabOS.applications.aboutMe.application.views.ProfileForm = Ext.extend(Ext.form.FormPanel, {
 
     url: null,
     frame:true,
@@ -82,7 +82,7 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
                         iconCls: 'icon-key',
                         text: Kebab.helper.translate('Change Password'),
                         handler: function() {
-                            this.fireEvent('showHidePasswordForm', this.bootstrap.layout.passwordForm);
+                            this.fireEvent('showHideForms', 1);
                         },
                         scope:this
                     }]
@@ -116,12 +116,12 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
             }]
         };
 
-        this.addEvents('showHidePasswordForm');
-        this.addEvents('mainProfileFormOnSave');
+        this.addEvents('showHideForms');
+        this.addEvents('formOnSave');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
         
-        KebabOS.applications.aboutMe.application.views.MainProfileForm.superclass.initComponent.apply(this, arguments);
+        KebabOS.applications.aboutMe.application.views.ProfileForm.superclass.initComponent.apply(this, arguments);
     },
 
     listeners: {
@@ -143,10 +143,10 @@ KebabOS.applications.aboutMe.application.views.MainProfileForm = Ext.extend(Ext.
             method: 'GET'
         });
         
-        KebabOS.applications.aboutMe.application.views.MainProfileForm.superclass.onRender.apply(this, arguments);
+        KebabOS.applications.aboutMe.application.views.ProfileForm.superclass.onRender.apply(this, arguments);
     },
 
     onSubmit: function() {
-        this.fireEvent('mainProfileFormOnSave', {from:this, url:this.url});
+        this.fireEvent('formOnSave', {from:this, url:this.url});
     }
 });
