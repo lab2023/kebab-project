@@ -45,7 +45,7 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
                 method: 'POST',
 
                 success : function() {
-                    Kebab.helper.message(this.bootstrap.launcher.text, 'Success');
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Operation was performed successfully');
                     data.from.getForm().reset();
                     if(data.store){
                         data.from.fireEvent('loadGrid', data.store);
@@ -53,7 +53,7 @@ KebabOS.applications.feedback.application.controllers.Index = Ext.extend(Ext.uti
                 },
 
                 failure : function() {
-                    Kebab.helper.message(this.bootstrap.launcher.text, 'Failure', true);
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'Operation was not performed', true);
                 }, scope:this
             });
         }

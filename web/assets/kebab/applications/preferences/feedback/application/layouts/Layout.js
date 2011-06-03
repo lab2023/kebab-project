@@ -12,18 +12,26 @@ KebabOS.applications.feedback.application.layouts.Layout = Ext.extend(Ext.Panel,
 
     // Application bootstrap
     bootstrap: null,
-    layout: 'border',
+    layout: {
+        type: 'vbox',
+        pack: 'start',
+        align: 'stretch'
+    },
     border: false,
 
     initComponent: function() {
 
         // panels are defined here
         this.feedbackForm = new KebabOS.applications.feedback.application.views.FeedbackForm({
-            bootstrap: this.bootstrap
+            bootstrap: this.bootstrap,
+            border:false,
+            height:270
         });
 
         this.feedbackGrid = new KebabOS.applications.feedback.application.views.FeedbackGrid({
-            bootstrap: this.bootstrap
+            bootstrap: this.bootstrap,
+            flex:2,
+            layout:'fit'
         });
 
         Ext.apply(this, {

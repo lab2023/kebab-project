@@ -142,7 +142,10 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                     id:'gear',
                     qtip: Kebab.helper.translate('Send feedback this application'),
                     handler: function(event, toolEl, panel) {
-                       // KBBTODO Kebab.helper.log(arguments);
+                        /* KBBTODO Sending custom parameters to another application
+                        (application wiring & event listening)
+                         */
+                       this.launchApplication('feedback-application');
                     },
                     scope:this
                 }]

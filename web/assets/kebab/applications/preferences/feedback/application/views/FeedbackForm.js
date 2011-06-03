@@ -25,6 +25,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
         var applications = this.bootstrap.app.getApplications();
 
         var applicationsCombobox = new Ext.form.ComboBox({
+            emptyText: Kebab.helper.translate('Please choose a application...'),
             fieldLabel: Kebab.helper.translate('Application name'),
             typeAhead: true,
             triggerAction: 'all',
@@ -44,11 +45,6 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
         // form config
         var config = {
-            region:'west',
-            split:true,
-            collapseMode:'mini',
-            border:true,
-            width:250,
             items: [{
                     xtype:'panel',
                     layout: 'form',
@@ -64,11 +60,11 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
                     },
                     applicationsCombobox,
                     {
-                        fieldLabel: Kebab.helper.translate('Description'),
+                        fieldLabel: Kebab.helper.translate('Your feedbacks'),
                         allowBlank:false,
                         name: 'description',
                         xtype: 'textarea',
-                        height:235
+                        height:150
                     }]
                 }
             ],

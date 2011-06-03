@@ -33,8 +33,8 @@ Ext.extend(KebabOS.applications.feedback.application.Bootstrap, Kebab.OS.Applica
                 title: this.title.text,
                 description: this.title.description,
                 iconCls: 'feedback-application-gui-icon',
-                width: 900,
-                height: 500,
+                width: 600,
+                height: 550,
                 border:false,
                 items: this.layout
             });

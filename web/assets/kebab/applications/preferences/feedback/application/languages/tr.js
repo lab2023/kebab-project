@@ -28,7 +28,8 @@ KebabOS.applications.feedback.application.languages.tr = {
     'Open':'Açık',
     'In Progress':'Devam Ediyor',
     'Closed':'Kapandı',
+    'Please choose a application...':'Lütfen bir uygulama seçiniz...',
     'Application name':'Uygulama adı',
     'Status':'Durum',
-    'Description':'Açıklama'
+    'Your feedbacks':'Görüşleriniz'
 };
