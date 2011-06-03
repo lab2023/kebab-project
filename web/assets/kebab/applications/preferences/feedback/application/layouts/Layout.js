@@ -29,6 +29,7 @@ KebabOS.applications.feedback.application.layouts.Layout = Ext.extend(Ext.Panel,
         });
 
         this.feedbackGrid = new KebabOS.applications.feedback.application.views.FeedbackGrid({
+            title: Kebab.helper.translate('Your Feedback History'),
             bootstrap: this.bootstrap,
             flex:2,
             layout:'fit'

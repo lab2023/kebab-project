@@ -31,5 +31,6 @@ KebabOS.applications.feedback.application.languages.tr = {
     'Please choose a application...':'Lütfen bir uygulama seçiniz...',
     'Application name':'Uygulama adı',
     'Status':'Durum',
-    'Your feedbacks':'Görüşleriniz'
+    'Your feedbacks':'Görüşleriniz',
+    'Your Feedback History':'Önceki Görüşleriniz'
 };
