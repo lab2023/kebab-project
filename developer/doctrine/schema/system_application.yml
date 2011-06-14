@@ -15,8 +15,7 @@ Application:
     type:
       type: enum
       length: 11
-      values: ['system', 'application']
-      default: 'application'  
+      values: ['application', 'system']
     title:
       type: string(255)
     description:
