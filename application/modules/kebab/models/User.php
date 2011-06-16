@@ -48,7 +48,8 @@ class Kebab_Model_User
                 ->select('role.id')
                 ->from('Model_Entity_Role role')
                 ->leftJoin('role.UserRole userRole')
-                ->where('userRole.user_id = ?', $userId);
+                ->where('userRole.user_id = ?', $userId)
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $rolesResult = $query->execute();
 
@@ -178,7 +179,8 @@ class Kebab_Model_User
                 ->select('user.id, user.fullName, user.userName, user.email, user.language, user.status, user.active')
                 ->from('Model_Entity_User user')
                 ->whereIn('user.id', $searchUser)
-                ->orderBy("$order");
+                ->orderBy("$order")
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
         return $query;
     }
 

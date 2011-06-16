@@ -378,11 +378,12 @@ class ZendX_Doctrine_Auth_Adapter implements Zend_Auth_Adapter_Interface
             $this->_credentialTreatment = '?';
         }
 
-		$dbSelect = Doctrine_Query::create($this->getConnection())
-					->from($this->_tableName)
-					->select('*, ('.$this->_credentialColumn.' = '.str_replace('?',
-						$this->getConnection()->quote($this->_credential), $this->_credentialTreatment).') AS zend_auth_credential_match')
-					->addWhere($this->_identityColumn .' = ?', $this->_identity);
+        $dbSelect = Doctrine_Query::create($this->getConnection())
+                ->from($this->_tableName)
+                ->select('*, (' . $this->_credentialColumn . ' = ' . str_replace('?',
+                    $this->getConnection()->quote($this->_credential), $this->_credentialTreatment) . ') AS zend_auth_credential_match')
+                ->addWhere($this->_identityColumn . ' = ?', $this->_identity)
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         return $dbSelect;
     }

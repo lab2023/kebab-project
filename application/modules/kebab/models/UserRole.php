@@ -55,7 +55,8 @@ class Kebab_Model_UserRole
                 ->leftJoin('role.Translation roleTranslation')
                 ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->whereIn('role.id', $searchRoleId)
-                ->orderBy($sort);
+                ->orderBy($sort)
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         return $query;
     }
@@ -126,6 +127,7 @@ class Kebab_Model_UserRole
             Doctrine_Query::create()
                     ->delete('Model_Entity_UserRole userRole')
                     ->where('userRole.user_id = ? AND userRole.role_id = ?', array($userId, $roleId))
+                    ->useQueryCache(Kebab_Cache_Query::isEnable())
                     ->execute();
             $retVal = true;
         }

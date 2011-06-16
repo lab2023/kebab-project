@@ -37,6 +37,11 @@
  */
 class Kebab_StoryController extends Kebab_Rest_Controller
 {
+
+
+    /**
+     * @return void
+     */
     public function indexAction()
     {
         // Mapping
@@ -49,13 +54,7 @@ class Kebab_StoryController extends Kebab_Rest_Controller
 
         //KBBTODO move dql to models
         $ids = $this->_helper->search('Model_Entity_Story', true);
-        $query = Doctrine_Query::create()
-                ->select('story.id, storyTranslation.title as title,
-                    storyTranslation.description as description, story.active')
-                ->from('Model_Entity_Story story')
-                ->leftJoin('story.Translation storyTranslation')
-                ->where('storyTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->whereIn('story.id', $ids)
+        $query = Kebab_Model_Story::getStory($ids)
                 ->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);

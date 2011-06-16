@@ -55,7 +55,7 @@ class Kebab_Access_Acl extends Zend_Acl
         $query = Doctrine_Query::create()
                     ->select('r.id')
                     ->from('Model_Entity_Role r')
-                    ->useQueryCache($this->_doctrineCaching);
+                    ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $roles = $query->execute();
 
@@ -73,7 +73,7 @@ class Kebab_Access_Acl extends Zend_Acl
                 ->select('c.name, m.name')
                 ->from('Model_Entity_Controller c')
                 ->leftJoin('c.Module m')
-                ->useQueryCache($this->_doctrineCaching);
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
         $resources = $query->execute();
 
         foreach ($resources as $resource) {
@@ -99,7 +99,8 @@ class Kebab_Access_Acl extends Zend_Acl
                 ->leftJoin('action.Controller acontroller')
                 ->leftJoin('service.Story story')
                 ->leftJoin('story.Permission permission')
-                ->leftJoin('permission.Role role');
+                ->leftJoin('permission.Role role')
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
         $services = $query->execute();
 
         if (count($services->toArray()) > 0 ) {

@@ -36,7 +36,7 @@
 
 class Kebab_Model_Story
 {
-    static public function getStory($roleId, Array $whereInIds = array())
+    static public function getStory(Array $whereInIds = array(), $roleId = '')
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query = Doctrine_Query::create()
@@ -44,15 +44,17 @@ class Kebab_Model_Story
                     storyTranslation.title as title,
                     storyTranslation.description as description,
                     permission.role_id')
-                ->addSelect('(SELECT COUNT(p.role_id) FROM Model_Entity_Permission p
-                                WHERE p.role_id = ' . $roleId . ' and p.story_id = story.id) as allow')
                 ->from('Model_Entity_Story story')
                 ->leftJoin('story.Permission permission')
                 ->leftJoin('story.Translation storyTranslation')
                 ->where('storyTranslation.lang = ?', $lang)
                 ->whereIn('story.id', $whereInIds)
-                ->andWhere('story.active = 1');
-
+                ->andWhere('story.active = 1')
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
+        if ($roleId) {
+            $query->addSelect('(SELECT COUNT(p.role_id) FROM Model_Entity_Permission p
+                                WHERE p.role_id = ' . $roleId . ' and p.story_id = story.id) as allow');
+        }
         return $query;
     }
 
@@ -70,7 +72,8 @@ class Kebab_Model_Story
                 ->from('Model_Entity_Story s')
                 ->leftJoin('s.Permission p')
                 ->andWhere('s.active = 1')
-                ->andWhereIn('p.role_id', $roles);
+                ->andWhereIn('p.role_id', $roles)
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $retVal = array();
         foreach ($query->execute()->toArray() as $story) {

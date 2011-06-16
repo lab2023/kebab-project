@@ -61,7 +61,8 @@ class Kebab_FeedbackController extends Kebab_Rest_Controller
                 ->leftJoin('application.Translation applicationTranslate')
                 ->where('feedback.user_id = ?', $userSessionId)
                 ->andWhere('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping));
+                ->orderBy($this->_helper->sort($mapping))
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $pager = $this->_helper->pagination($query);
         $feedbacks = $pager->execute();

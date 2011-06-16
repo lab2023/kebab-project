@@ -148,6 +148,7 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
                 try {
                     $default = Doctrine_Query::create()
                         ->parseDqlQuery($this->_options['default'])
+                        ->useQueryCache(Kebab_Cache_Query::isEnable())
                         ->fetchOne($this->_options['params']);
     
                     $this->_default = $default[$this->_options['blameVar']];

@@ -42,7 +42,7 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
         $roleId = $params['roleId'];
 
         $ids = $this->_helper->search('Model_Entity_Story', true);
-        $query = Kebab_Model_Story::getStory($roleId, $ids);
+        $query = Kebab_Model_Story::getStory($ids, $roleId);
 
         $pager = $this->_helper->pagination($query);
         $story = $pager->execute();
@@ -77,6 +77,7 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
                     Doctrine_Query::create()
                             ->delete('Model_Entity_Permission p')
                             ->where('p.role_id = ? AND p.story_id = ?', array($roleId, $story['id']))
+                            ->useQueryCache(Kebab_Cache_Query::isEnable())
                             ->execute();
                 }
             }

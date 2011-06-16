@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Framework
  *
@@ -15,7 +14,7 @@
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
- * @subpackage Model
+ * @subpackage Library
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -23,31 +22,25 @@
  */
 
 /**
- * Kebab_Model_Role
+ * Kebab_Caching
  *
  * @category   Kebab (kebab-reloaded)
  * @package    Kebab
- * @subpackage Model
- * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @subpackage Library
+ * @author     Yunus ÖZCAN <yunus.ozcan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
 
-class Kebab_Model_Role
+final class Kebab_Cache_Query
 {
-    static public function getAllRoles()
+    /**
+     * @static
+     * @return bool
+     */
+    public static function isEnable()
     {
-
-        $query = Doctrine_Query::create()
-                ->select('role.id,
-                        roleTranslation.title as title,
-                        roleTranslation.description as description,
-                        role.active')
-                ->from('Model_Entity_Role role')
-                ->leftJoin('role.Translation roleTranslation')
-                ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->useQueryCache(Kebab_Cache_Query::isEnable());
-        return $query;
+        return (boolean) Zend_Registry::get('config')->database->doctrine->caching->enable;
     }
 }

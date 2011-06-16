@@ -46,7 +46,8 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
         $query = Doctrine_Query::create()
                 ->select('user.id, user.fullName, user.email, user.language, user.userName')
                 ->from('Model_Entity_User user')
-                ->where('user.id = ?', array($userSessionId));
+                ->where('user.id = ?', array($userSessionId))
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         if (is_object($query->fetchOne())) {
             $responseData = $query->fetchOne()->toArray();
@@ -72,7 +73,9 @@ class Kebab_ProfileController extends Kebab_Rest_Controller
             $userExistsWithEmail = Doctrine_Query::create()
                     ->from('Model_Entity_User user')
                     ->where('user.email = ?', $email)
-                    ->andWhere('user.id != ?', $userSessionId)->fetchOne();
+                    ->andWhere('user.id != ?', $userSessionId)
+                    ->useQueryCache(Kebab_Cache_Query::isEnable())
+                    ->fetchOne();
 
             if (is_object($userExistsWithEmail)) {
                 // Another User exists with entered email

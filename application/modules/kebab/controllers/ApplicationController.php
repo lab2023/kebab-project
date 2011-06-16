@@ -58,7 +58,8 @@ class Kebab_ApplicationController extends Kebab_Rest_Controller
                 ->leftJoin('application.Translation applicationTranslation')
                 ->where('applicationTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->whereIn('application.id', $ids)
-                ->orderBy($this->_helper->sort($mapping));
+                ->orderBy($this->_helper->sort($mapping))
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $pager = $this->_helper->pagination($query);
         $story = $pager->execute();

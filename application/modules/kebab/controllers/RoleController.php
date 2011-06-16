@@ -66,7 +66,8 @@ class Kebab_RoleController extends Kebab_Rest_Controller
                 ->leftJoin('role.Translation roleTranslation')
                 ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
                 ->whereIn('role.id', $ids)
-                ->orderBy($this->_helper->sort($mapping));
+                ->orderBy($this->_helper->sort($mapping))
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $pager = $this->_helper->pagination($query);
         $roles = $pager->execute();
@@ -185,18 +186,21 @@ class Kebab_RoleController extends Kebab_Rest_Controller
             Doctrine_Query::create()
                     ->delete('Model_Entity_Permission permission')
                     ->whereIn('permission.role_id', $ids)
+                    ->useQueryCache(Kebab_Cache_Query::isEnable())
                     ->execute();
 
             // Delete permission
             Doctrine_Query::create()
                     ->delete('Model_Entity_UserRole userRole')
                     ->whereIn('userRole.role_id', $ids)
+                    ->useQueryCache(Kebab_Cache_Query::isEnable())
                     ->execute();
 
             // Delete Role
             Doctrine_Query::create()
                     ->delete('Model_Entity_Role role')
                     ->whereIn('role.id', $ids)
+                    ->useQueryCache(Kebab_Cache_Query::isEnable())
                     ->execute();
 
             Doctrine_Manager::connection()->commit();

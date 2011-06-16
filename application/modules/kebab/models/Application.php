@@ -58,7 +58,9 @@ class Kebab_Model_Application
                 ->whereIn('r.id', $roles)
                 ->andWhere('a.active = 1 AND s.active = 1')
                 ->orderBy('a.name DESC')
-                ->orderBy('a.department DESC');
+                ->orderBy('a.department DESC')
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
+
         $applications = $query->execute();
 
         $returnData = array();
