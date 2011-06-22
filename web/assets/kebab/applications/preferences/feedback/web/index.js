@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.feedback',
         'KebabOS.applications.feedback.application',
+        'KebabOS.applications.feedback.application.configs',
         'KebabOS.applications.feedback.application.controllers',
         'KebabOS.applications.feedback.application.languages',
         'KebabOS.applications.feedback.application.layouts',

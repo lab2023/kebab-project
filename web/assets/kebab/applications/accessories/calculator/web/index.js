@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.calculator',
         'KebabOS.applications.calculator.application',
+        'KebabOS.applications.calculator.application.configs',
         'KebabOS.applications.calculator.application.controllers',
         'KebabOS.applications.calculator.application.languages',
         'KebabOS.applications.calculator.application.layouts',

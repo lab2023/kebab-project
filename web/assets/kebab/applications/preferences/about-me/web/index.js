@@ -18,6 +18,7 @@
 Ext.namespace(
     'KebabOS.applications.aboutMe',
     'KebabOS.applications.aboutMe.application',
+    'KebabOS.applications.aboutMe.application.configs',
     'KebabOS.applications.aboutMe.application.controllers',
     'KebabOS.applications.aboutMe.application.languages',
     'KebabOS.applications.aboutMe.application.models',

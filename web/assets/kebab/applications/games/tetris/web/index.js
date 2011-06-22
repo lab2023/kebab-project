@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.tetris',
         'KebabOS.applications.tetris.application',
+        'KebabOS.applications.tetris.application.configs',
         'KebabOS.applications.tetris.application.controllers',
         'KebabOS.applications.tetris.application.languages',
         'KebabOS.applications.tetris.application.layouts',

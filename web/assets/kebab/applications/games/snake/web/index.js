@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.snake',
         'KebabOS.applications.snake.application',
+        'KebabOS.applications.snake.application.configs',
         'KebabOS.applications.snake.application.controllers',
         'KebabOS.applications.snake.application.languages',
         'KebabOS.applications.snake.application.layouts',

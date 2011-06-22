@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.maps',
         'KebabOS.applications.maps.application',
+        'KebabOS.applications.maps.application.configs',
         'KebabOS.applications.maps.application.controllers',
         'KebabOS.applications.maps.application.languages',
         'KebabOS.applications.maps.application.layouts',

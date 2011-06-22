@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.pacMan',
         'KebabOS.applications.pacMan.application',
+        'KebabOS.applications.pacMan.application.configs',
         'KebabOS.applications.pacMan.application.controllers',
         'KebabOS.applications.pacMan.application.languages',
         'KebabOS.applications.pacMan.application.layouts',

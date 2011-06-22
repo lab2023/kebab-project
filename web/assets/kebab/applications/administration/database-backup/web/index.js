@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.databaseBackup',
         'KebabOS.applications.databaseBackup.application',
+        'KebabOS.applications.databaseBackup.application.configs',
         'KebabOS.applications.databaseBackup.application.controllers',
         'KebabOS.applications.databaseBackup.application.languages',
         'KebabOS.applications.databaseBackup.application.layouts',

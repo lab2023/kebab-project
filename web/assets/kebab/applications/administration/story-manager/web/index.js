@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.storyManager',
         'KebabOS.applications.storyManager.application',
+        'KebabOS.applications.storyManager.application.configs',
         'KebabOS.applications.storyManager.application.controllers',
         'KebabOS.applications.storyManager.application.languages',
         'KebabOS.applications.storyManager.application.layouts',

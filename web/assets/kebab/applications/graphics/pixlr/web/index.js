@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.pixlr',
         'KebabOS.applications.pixlr.application',
+        'KebabOS.applications.pixlr.application.configs',
         'KebabOS.applications.pixlr.application.controllers',
         'KebabOS.applications.pixlr.application.languages',
         'KebabOS.applications.pixlr.application.layouts',

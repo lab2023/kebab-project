@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.ticTacToe',
         'KebabOS.applications.ticTacToe.application',
+        'KebabOS.applications.ticTacToe.application.configs',
         'KebabOS.applications.ticTacToe.application.controllers',
         'KebabOS.applications.ticTacToe.application.languages',
         'KebabOS.applications.ticTacToe.application.layouts',

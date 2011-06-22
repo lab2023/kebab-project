@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.userManager',
         'KebabOS.applications.userManager.application',
+        'KebabOS.applications.userManager.application.configs',
         'KebabOS.applications.userManager.application.controllers',
         'KebabOS.applications.userManager.application.languages',
         'KebabOS.applications.userManager.application.layouts',

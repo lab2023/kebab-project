@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.roleManager',
         'KebabOS.applications.roleManager.application',
+        'KebabOS.applications.roleManager.application.configs',
         'KebabOS.applications.roleManager.application.controllers',
         'KebabOS.applications.roleManager.application.languages',
         'KebabOS.applications.roleManager.application.layouts',

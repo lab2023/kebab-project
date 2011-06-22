@@ -18,6 +18,7 @@
 Ext.namespace(
         'KebabOS.applications.spaceInvaders',
         'KebabOS.applications.spaceInvaders.application',
+        'KebabOS.applications.spaceInvaders.application.configs',
         'KebabOS.applications.spaceInvaders.application.controllers',
         'KebabOS.applications.spaceInvaders.application.languages',
         'KebabOS.applications.spaceInvaders.application.layouts',
