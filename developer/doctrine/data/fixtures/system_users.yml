@@ -5,7 +5,7 @@ Model_Entity_User:
     password: aa08769cdcb26674c6706093503ff0a3
     fullName: Member User
     email: member@kebab-project.com
-    language: en
+    language: tr
     status: approved
     active: '1'
 
