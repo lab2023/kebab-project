@@ -24,7 +24,7 @@
  * @version    1.5.0
  */
 KebabOS.applications.ticTacToe.application.configs.application = {
-"author"          : "Lab2023 Internet Technologies",
+"author"          : "lab2023 internet technologies",
 "email"           : "info@lab2023.com",
 "url"             : "http://www.lab2023.com/",
 "version"         : "0.0.1",
