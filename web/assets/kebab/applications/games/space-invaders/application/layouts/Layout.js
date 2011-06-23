@@ -21,7 +21,7 @@ KebabOS.applications.spaceInvaders.application.layouts.Layout = Ext.extend(Ext.P
         Ext.apply(this, {
             items: [
                 {
-                    html: '<object width="100%" height="100%"><param name="movie" value="http://info.al/lojra/Neave_Invaders.swf"><embed src="http://info.al/lojra/Neave_Invaders.swf" width="100%" height="100%"> </embed> </object>'
+                    html: '<object width="100%" height="100%"><param name="wmode" value="opaque"><param name="movie" value="http://info.al/lojra/Neave_Invaders.swf"><embed src="http://info.al/lojra/Neave_Invaders.swf" width="100%" height="100%"> </embed> </object>'
                 }
             ]
         });

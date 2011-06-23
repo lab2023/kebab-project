@@ -21,7 +21,7 @@ KebabOS.applications.pacMan.application.layouts.Layout = Ext.extend(Ext.Panel, {
         Ext.apply(this, {
             items: [
                 {
-                    html: '<object width="100%" height="100%"><param name="movie" value="http://www.neave.com/games/pacman/pacman.swf"><embed src="http://www.neave.com/games/pacman/pacman.swf" width="100%" height="100%"> </embed> </object>'
+                    html: '<object width="100%" height="100%"><param name="wmode" value="opaque"><param name="movie" value="http://www.neave.com/games/pacman/pacman.swf"><embed src="http://www.neave.com/games/pacman/pacman.swf" width="100%" height="100%"> </embed> </object>'
                 }
             ]
         });

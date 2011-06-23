@@ -21,7 +21,7 @@ KebabOS.applications.tetris.application.layouts.Layout = Ext.extend(Ext.Panel, {
         Ext.apply(this, {
             items: [
                 {
-                    html: '<object width="100%" height="100%"><param name="movie" value="http://owdata.tetrisfriends.com/data/nblox/nblox.swf"><embed src="http://owdata.tetrisfriends.com/data/nblox/nblox.swf" width="100%" height="100%"> </embed> </object>'
+                    html: '<object width="100%" height="100%"><param name="wmode" value="opaque"><param name="movie" value="http://owdata.tetrisfriends.com/data/nblox/nblox.swf"><embed src="http://owdata.tetrisfriends.com/data/nblox/nblox.swf" width="100%" height="100%"> </embed> </object>'
                 }
             ]
         });
