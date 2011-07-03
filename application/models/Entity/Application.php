@@ -14,9 +14,9 @@
  * @property string $title
  * @property clob $description
  * @property boolean $active
- * @property Doctrine_Collection $Application
- * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $StoryApplication
+ * @property Doctrine_Collection $Feedback
+ * @property Doctrine_Collection $Application
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -54,10 +54,9 @@ class Model_Entity_Application extends Doctrine_Record
              'length' => 11,
              'values' => 
              array(
-              0 => 'system',
-              1 => 'application',
+              0 => 'application',
+              1 => 'system',
              ),
-             'default' => 'application',
              ));
         $this->hasColumn('title', 'string', 255, array(
              'type' => 'string',
@@ -78,18 +77,18 @@ class Model_Entity_Application extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Model_Entity_Story as Application', array(
-             'refClass' => 'Model_Entity_StoryApplication',
-             'local' => 'application_id',
-             'foreign' => 'story_id'));
+        $this->hasMany('Model_Entity_StoryApplication as StoryApplication', array(
+             'local' => 'id',
+             'foreign' => 'application_id'));
 
         $this->hasMany('Model_Entity_Feedback as Feedback', array(
              'local' => 'id',
              'foreign' => 'application_id'));
 
-        $this->hasMany('Model_Entity_StoryApplication as StoryApplication', array(
-             'local' => 'id',
-             'foreign' => 'application_id'));
+        $this->hasMany('Model_Entity_Story as Application', array(
+             'refClass' => 'Model_Entity_StoryApplication',
+             'local' => 'application_id',
+             'foreign' => 'story_id'));
 
         $i18n0 = new Doctrine_Template_I18n(array(
              'fields' => 

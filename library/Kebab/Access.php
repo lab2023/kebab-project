@@ -23,17 +23,13 @@
  */
 class Kebab_Access
 {
-    /**
-     * @static
-     * @param string $story
-     * @return bool
-     */
-    public static function allow(string $storySlug)
+    public static function allow($storyName)
     {
         $retVal = false;
+        
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            $storiesSlug = Kebab_Model_Story::getStoriesSlug();
-            $retVal = in_array($storySlug, $storiesSlug);
+            $userStoriesName = Zend_Auth::getInstance()->getIdentity()->stories;
+            $retVal = in_array($storyName, $userStoriesName);
         }
 
         return $retVal;
