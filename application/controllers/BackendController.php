@@ -39,6 +39,7 @@ class BackendController extends Kebab_Controller_Action
 {
     /**
      * Controller Initializer
+     *
      * @return void
      */
     public function init()
