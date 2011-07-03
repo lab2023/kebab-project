@@ -52,12 +52,6 @@
  */
 class Kebab_List
 {
-    /**
-     * List items that all elements on lists
-     *
-     * @var bool|Array
-     */
-    protected $_listItems = false;
 
     /**
      * Rules should be array otherwise its value is false
@@ -66,34 +60,6 @@ class Kebab_List
      */
     protected $_rules = false;
 
-    /**
-     * Set listItems
-     *
-     * @throws Kebab_List_Exception
-     * @param  $listItems
-     * @return void
-     */
-    public function setListItems($listItems)
-    {
-        // Type validation
-        if (!is_array($listItems)) {
-            throw new Kebab_List_Exception("Lists items should be array. $listItems type isn't array.");
-        }
-
-        $this->_listItems = $listItems;
-    }
-
-    /**
-     * Return listItems
-     *
-     * If it is set, it's type should be Array otherwise boolean and value will be false.
-     *
-     * @return Array|bool
-     */
-    public function getListItems()
-    {
-        return $this->_listItems;
-    }
 
     /**
      * Set rules
@@ -138,10 +104,10 @@ class Kebab_List
      */
     public function hasItem($item)
     {
-        if (!is_array($this->getListItems())) {
+        if (!array_key_exists($item, $this->getRules())) {
             throw new Kebab_List_Exception("List items haven't been initialized");
         }
-        return in_array($item, $this->getListItems());
+        return array_key_exists($item, $this->getRules());
     }
 
     /**
@@ -154,7 +120,6 @@ class Kebab_List
     public function canPass($from, $to)
     {
         $retVal = false;
-        
         if ($this->hasItem($from)) {
             $rules = $this->getRules();
             $retVal = in_array($to, $rules[$from]);
