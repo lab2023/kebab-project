@@ -107,7 +107,40 @@ class Kebab_List
         if (!array_key_exists($item, $this->getRules())) {
             throw new Kebab_List_Exception("List items haven't been initialized");
         }
+
         return array_key_exists($item, $this->getRules());
+    }
+
+    /**
+     * Get item from $_rules
+     *
+     * @throws Kebab_List_Exception
+     * @param  string $item
+     * @return array
+     */
+    public function getItem($item)
+    {
+        if (!array_key_exists($item, $this->getRules())) {
+            throw new Kebab_List_Exception("List items haven't been initialized");
+        }
+
+        $rules = $this->getRules();
+
+        return $rules[$item];
+    }
+
+    /**
+     * Set items at $_rules
+     *
+     * @param  string $item
+     * @param  array $rule
+     * @return Kebab_List
+     */
+    public function setItem($item, $rule)
+    {
+        $this->_rules[$item] = $rule;
+
+        return $this;
     }
 
     /**
