@@ -14,8 +14,8 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Controller Helper
- * @subpackage Array Helper
+ * @package    Library
+ * @subpackage Controller Helper
  * @author     Onur Özgür ÖZKAN
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -37,8 +37,8 @@
  * </p>
  *
  * @category   Kebab (kebab-reloaded)
- * @package    Controller
- * @subpackage Helper
+ * @package    Library
+ * @subpackage Controller Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -117,10 +117,7 @@ class Kebab_Controller_Helper_Array extends Zend_Controller_Action_Helper_Abstra
     }
     
     /**
-     * direct() : Stragry Design Pattern
-     * 
-     * @param   boolean $success
-     * @return  System_Controller_Helper_Array
+     * @return Kebab_Controller_Helper_Array
      */
     public function direct()
     {
