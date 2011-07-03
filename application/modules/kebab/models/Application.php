@@ -46,20 +46,20 @@ class Kebab_Model_Application
     public static function getApplicationsByPermission()
     {
 
-        $lang = Zend_Auth::getInstance()->getIdentity()->language;
+        $lang  = Zend_Auth::getInstance()->getIdentity()->language;
         $roles = Zend_Auth::getInstance()->getIdentity()->roles;
         $query = Doctrine_Query::create()
-                ->from('Model_Entity_Application a')
-                ->leftJoin('a.Translation at')
-                ->leftJoin('a.StoryApplication sa')
-                ->leftJoin('sa.Story s')
-                ->leftJoin('s.Permission p')
-                ->leftJoin('p.Role r')
-                ->whereIn('r.id', $roles)
-                ->andWhere('a.active = 1 AND s.active = 1')
-                ->orderBy('a.name DESC')
-                ->orderBy('a.department DESC')
-                ->useQueryCache(Kebab_Cache_Query::isEnable());
+                    ->from('Model_Entity_Application a')
+                    ->leftJoin('a.Translation at')
+                    ->leftJoin('a.StoryApplication sa')
+                    ->leftJoin('sa.Story s')
+                    ->leftJoin('s.Permission p')
+                    ->leftJoin('p.Role r')
+                    ->whereIn('r.id', $roles)
+                    ->andWhere('a.active = 1 AND s.active = 1')
+                    ->orderBy('a.name DESC')
+                    ->orderBy('a.department DESC')
+                    ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $applications = $query->execute();
 
@@ -75,9 +75,6 @@ class Kebab_Model_Application
                 'text' => $application->Translation[$lang]->title,
                 'description' => $application->Translation[$lang]->description
             );
-            foreach ($application->StoryApplication as $story) {
-                $app['permission'][] = $story->Story->slug;
-            }
             $returnData[] = $app;
         }
 
