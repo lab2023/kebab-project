@@ -36,6 +36,13 @@
 
 class Kebab_Model_Story
 {
+    /**
+     *
+     * @static
+     * @param array $whereInIds
+     * @param string $roleId
+     * @return Doctrine_Query
+     */
     static public function getStory(Array $whereInIds = array(), $roleId = '')
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
@@ -58,26 +65,20 @@ class Kebab_Model_Story
         return $query;
     }
 
-    /**
-     * Return user's role's stories's slug.
-     *
-     * @static
-     * @return array
-     */
-    static public function getStoriesSlug()
+    static public function getUserStoriesName($roles = false)
     {
-        $roles = Zend_Auth::getInstance()->getIdentity()->roles;
+        $userRoles = ($roles == false) ? Zend_Auth::getInstance()->getIdentity()->roles : $roles;
         $query = Doctrine_Query::create()
-                ->select('s.slug')
+                ->select('s.name')
                 ->from('Model_Entity_Story s')
                 ->leftJoin('s.Permission p')
                 ->andWhere('s.active = 1')
-                ->andWhereIn('p.role_id', $roles)
+                ->andWhereIn('p.role_id', $userRoles)
                 ->useQueryCache(Kebab_Cache_Query::isEnable());
 
         $retVal = array();
         foreach ($query->execute()->toArray() as $story) {
-            $retVal[] = $story['slug'];
+            $retVal[] = $story['name'];
         }
 
         return $retVal;

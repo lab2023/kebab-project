@@ -39,6 +39,7 @@ class BackendController extends Kebab_Controller_Action
 {
     /**
      * Controller Initializer
+     *
      * @return void
      */
     public function init()
@@ -89,7 +90,7 @@ class BackendController extends Kebab_Controller_Action
      */
     public function desktopAction()
     {
-        $this->view->stories = Kebab_Model_Story::getStoriesSlug();
+        $this->view->stories = Kebab_Model_Story::getUserStoriesName();
         $this->view->applications  = Kebab_Model_Application::getApplicationsByPermission();
     }
 }

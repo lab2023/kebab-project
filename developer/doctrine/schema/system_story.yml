@@ -11,8 +11,6 @@ Story:
       type: boolean
       
   actAs:
-    Sluggable:
-      fields: [name]
     I18n:
       fields: [title, description]
       className: StoryTranslation

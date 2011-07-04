@@ -103,13 +103,13 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
                     case 'numeric' :
                         switch ($compare) {
                             case 'eq' :
-                                $query->andWhere("$mapping[$field] = '$value'"); 
+                                $query->andWhere("$mapping[$field] = $value"); 
                                 break;
                             case 'lt' :
-                                $query->andWhere("$mapping[$field] < '$value'");
+                                $query->andWhere("$mapping[$field] < $value");
                                 break;
                             case 'gt' :
-                                $query->andWhere("$mapping[$field] > '$value'");
+                                $query->andWhere("$mapping[$field] > $value");
                                 break;
                         }
                         break;
