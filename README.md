@@ -23,7 +23,7 @@ Kebab Framework Ubuntu installation article is here:
 Other Repositories
 -----------
 Kebab Application Templates:
-    - https://github.com/lab2023/kebab-application-templates
+    - https://github.com/kebab-project/application-templates
 
 Documentation
 -------------
