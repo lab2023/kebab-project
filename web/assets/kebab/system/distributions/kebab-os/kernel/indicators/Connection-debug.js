@@ -111,7 +111,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      * @param options
      */
     requestCompleteAction: function(connection, response, options) {
-        // KBBTODO Sniff and notice requests for server side messages
+        // KBBTODO Listen and notice requests for server side messages
 
         this.reqStop = new Date();
         

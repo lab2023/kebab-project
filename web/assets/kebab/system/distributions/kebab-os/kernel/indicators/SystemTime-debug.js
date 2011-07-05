@@ -16,7 +16,7 @@
 ----------------------------------------------------------------------------- */
 
 /**
- * Kebab.OS.Indicators.Language
+ * Kebab.OS.Indicators.SystemTime
  *
  * @namespace   Kebab
  * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
