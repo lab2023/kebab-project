@@ -66,7 +66,7 @@ class Kebab_List
      *
      * @throws Kebab_List_Exception
      * @param  $rules
-     * @return void
+     * @return Kebab_List
      */
     public function setRules($rules)
     {
@@ -82,6 +82,8 @@ class Kebab_List
         }
         
         $this->_rules = $rules;
+
+        return $this;
     }
 
 
