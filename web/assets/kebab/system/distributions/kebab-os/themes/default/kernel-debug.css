@@ -269,3 +269,8 @@ div#activation-form-wrapper {
     height:385px;
     background: url('images/kernel/activation.png') no-repeat right top;
 }
+.icon-loading {
+    width:16px;
+    height:16px;
+    background: url('images/kernel/loading.gif') no-repeat center;
+}

@@ -6,6 +6,13 @@ $this->headLink()
 $this->headScript()
      ->appendFile($this->asset('library')->get())
      ->appendFile($this->asset('kernel/desktop/Application.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/desktop/Indicator.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/Session.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/Connection.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/User.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/SystemTime.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/QuickStart.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/Language.js')->distribution()->get())
      ->appendFile($this->asset('kernel/desktop/Panel.js')->distribution()->get())
      ->appendFile($this->asset('kernel/desktop/Desktop.js')->distribution()->get())
      ->appendFile($this->asset('kernel/desktop/Kernel.js')->distribution()->get());
@@ -63,6 +70,5 @@ $this->headScript()
             </dt>
             <?php endforeach; ?>
         </dl>
-        
     </div>
     <?php // END: OS Desktop Environment -------------------------------------?>

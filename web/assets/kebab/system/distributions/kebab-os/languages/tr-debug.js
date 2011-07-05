@@ -48,11 +48,13 @@ Kebab.i18n.translations = {
     'System' : 'Sistem',
     'Quick start...' : 'Hızlı başlat...',
 
-    // RESTfulDataStore.js / RESTfulBasicDataStore.js
+    // RESTfulDataStore.js / RESTfulBasicDataStore.js and messages
     'Success' : 'Başarılı',
     'Error' : 'Hata',
     'Operation was performed successfully' : 'İşlem başarıyla gerçekleştirildi',
     'Operation was not performed' : 'İşlem gerçekleştirilemedi',
+    'Connection Error' : 'Bağlantı Hatası',
+    'There was a connection problem. Please try again' : 'Bir bağlantı problemi oluştu. Lütfen tekrar deneyiniz',
 
     // ComplexEditorGridPanel.js
     'Record not found...' : 'Kayıt Bulunamadı...',

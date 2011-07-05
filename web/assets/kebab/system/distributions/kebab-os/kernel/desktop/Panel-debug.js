@@ -35,7 +35,9 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
 
     user: null,
     mainMenu: null,
+    mainMenuComponent: null,
     applicationsMenu: null,
+    indicatorsAreaComponent: null,
     systemMenu: null,
     buttonTpl:  new Ext.Template(
         '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
@@ -49,7 +51,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
 
         // Access to active user data
         this.user = this.kernel.getUser();
-        
+
         new Kebab.OS.Panel.Container({
             el: 'kebab-os-panel',
             layout: 'border',
@@ -123,97 +125,21 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
      * Build system indicators area
      */
     buildIndicatorsArea: function() {
+        
+        // Indicator Objects
+        var indicators = [
+            new Kebab.OS.Indicators.QuickStart({kernel: this.kernel}),
+            new Kebab.OS.Indicators.Connection({kernel: this.kernel}),
+            new Kebab.OS.Indicators.Language({kernel: this.kernel}),
+            new Kebab.OS.Indicators.SystemTime({kernel: this.kernel}),
+            new Kebab.OS.Indicators.User({kernel: this.kernel, user:this.user}),
+            new Kebab.OS.Indicators.Session({kernel: this.kernel, user:this.user})
+        ];
 
-        var applicationsCombobox = new Ext.form.ComboBox({
-            tpl:'<tpl for="."><div ext:qtip="{description}" class="x-combo-list-item">{title}</div></tpl>',
-            storeLoaded: false,
-            emptyText: Kebab.helper.translate('Quick start...'),
-            typeAhead: true,
-            width:150,
-            triggerAction: 'all',
-            forceSelection: true,
-            hideTrigger:true,
-            lazyRender:false,
-            mode: 'local',
-            store: new Ext.data.JsonStore({
-                fields: [
-                    'id', 'name', 'department', {name:'title', type: 'object', mapping: 'title.text'},
-                    {name:'description', type: 'object', mapping: 'title.description'}
-                ]
-            }),
-            valueField: 'id',
-            displayField: 'title',
-            hiddenName: 'id',
-            listeners: {
-                focus: function(combo) {
-                    if (!combo.storeLoaded) {
-                        combo.store.loadData(this.kernel.getApplications());
-                        combo.storeLoaded = true;
-                    }
-                },
-                select: function(combo, data) {
-                    this.kernel.getDesktop().launchApplication(data.id);
-                    combo.reset();
-                },
-                scope:this
-            }
-        });
-
+        // Build Toolbar
         this.indicatorsToolbar = new Ext.Toolbar({
             renderTo: 'kebab-os-panel-indicators',
-            items: [applicationsCombobox, {
-                template: this.buttonTpl,
-                text: Kebab.helper.translate(Kebab.getOS().getTranslator().getLanguages(true).text),
-                iconCls: Kebab.getOS().getTranslator().getLanguages(true).iconCls
-            }, {
-                template: this.buttonTpl,
-                text: new Date().format('d-m-Y, G:i'),
-                iconCls: 'icon-clock',
-                menu:  new Ext.menu.DateMenu(),
-                listeners: {
-                    afterRender: function(p) {
-                        var systemTimeTask = {
-                            run: function(){
-                                p.setText(new Date().format('d-m-Y, G:i'));
-                            },
-                            interval: 60000 //1 minute
-                        };
-                        Ext.TaskMgr.start(systemTimeTask);
-                    }
-                }
-            }, {
-                iconCls : 'icon-status-online',
-                template: this.buttonTpl,
-                text: this.user.fullName,
-                handler: function() {
-                    this.kernel.getDesktop().launchApplication('aboutMe-application');
-                },
-                scope:this
-            }, {
-                iconCls : 'icon-shutdown',
-                template: this.buttonTpl,
-                menu: [{
-                    text: Kebab.helper.translate('Logout...'),
-                    iconCls: 'icon-door-out',
-                    handler: function() {
-                        Kebab.getOS().logoutAction(this.user.id, true);
-                    },
-                    scope:this
-                },{
-                    text: Kebab.helper.translate('Reboot...'),
-                    iconCls: 'icon-arrow-refresh',
-                    handler: function() {
-                        Kebab.getOS().rebootAction();
-                    }
-                },{
-                    text: Kebab.helper.translate('Shutdown...'),
-                    iconCls: 'icon-shutdown',
-                    handler: function() {
-                        //Kebab.getOS().shutDownAction(this.user.id);
-                    },
-                    scope:this
-                }]
-            }]
+            items: indicators
         });
 
         /**
@@ -313,16 +239,14 @@ Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
     scrollIncrement: 0,
     scrollRepeatInterval: 400,
     scrollDuration: .35,
-    animScroll: true,
+    animScroll: false,
     resizeButtons: true,
-    buttonWidth: 168,
-    minButtonWidth: 118,
+    buttonWidth: 40,
+    minButtonWidth: 40,
     buttonMargin: 2,
     buttonWidthSet: false,
 
     initComponent : function() {
-        
-        Kebab.OS.Panel.WindowList.Buttons.superclass.initComponent.call(this);
         
         this.on('resize', this.delegateUpdates);
         
@@ -346,6 +270,9 @@ Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
         this.strip.createChild({
             cls:'x-clear'
         });
+        
+        Kebab.OS.Panel.WindowList.Buttons.superclass.initComponent.call(this);
+
     },
 
     addButton : function(win){
@@ -586,8 +513,8 @@ Kebab.OS.Panel.WindowList.TaskButton = function(win, el){
     
     Kebab.OS.Panel.WindowList.TaskButton.superclass.constructor.call(this, {
         iconCls: win.iconCls,
-        text: Ext.util.Format.ellipsis(win.title, 18),
-        tooltip: win.description,
+        //text: Ext.util.Format.ellipsis(win.title, 18),
+        tooltip: '<strong>' + win.title + '</strong><br/>' + win.description,
         renderTo: el,
         handler : function(){
             if(win.minimized || win.hidden){
