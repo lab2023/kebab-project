@@ -29,7 +29,7 @@ Kebab.OS.Indicator = Ext.extend(Ext.Button, {
 
     kernel: null,
     tpl:  new Ext.Template(
-        '<table cellspacing="0" class="AAAAAAAAAA x-btn"><tbody class="{1}"><tr>',
+        '<table cellspacing="0" class="x-btn"><tbody class="{1}"><tr>',
         '<td><em class="{2}">',
         '<button class="x-btn-text" type="{0}" style="height:30px;"></button>',
         '</em></td>',
