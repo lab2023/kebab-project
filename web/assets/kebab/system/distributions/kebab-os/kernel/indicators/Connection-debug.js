@@ -28,6 +28,11 @@ Ext.namespace('Kebab.OS.Indicators.Connection');
 Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
 
     /**
+     * Component identity
+     */
+    id: 'kebab-os-panel-indicators-connection',
+
+    /**
      * Initialize the component
      */
     initComponent : function() {// Setup Indicator Config
@@ -139,9 +144,18 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
     /**
      * Request exception action
      */
-    requestExceptionAction: function() {
-        this.setIconClass('icon-disconnect');
-        Kebab.helper.dialog('Connection Error', 'There was a connection problem. Please try again.', 'ERR');
+    requestExceptionAction: function(connection, response, options) {
+
+        this.setIconClass('icon-server-disconnect');
+        if (response.status == 401) {
+            // KBBTODO This way is too bad but time is everything :( I will review code and implement observer design pattern later.
+            var sessionIndicator = Ext.getCmp('kebab-os-panel-indicators-session');
+            if (sessionIndicator) {
+                sessionIndicator.showLockScreenAction();
+            }
+        } else {
+            Kebab.helper.dialog('Connection Error', 'There was a connection problem. Please try again.', 'ERR');
+        }
     },
 
     /**
@@ -160,7 +174,6 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
     showWindowAction: function() {
 
         if (!this.window) { // If window not created
-
             // Detail window
             this.window = new Kebab.OS.Indicator.Window({
                 title: Kebab.helper.translate('Kebab Connection'),
@@ -173,7 +186,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
             });
             this.window.show();
         } else {
-            this.window.show();
+            this.window.hidden ? this.window.show() : this.window.hide();
         }
     }
 });
