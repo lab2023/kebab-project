@@ -274,11 +274,13 @@ div#activation-form-wrapper {
     height:16px;
     background: url('images/kernel/loading.gif') no-repeat center;
 }
+.action-column {
+    width:16px;
+    height:16px;
+}
 /*
 ExtJS Style Edits
 */
-
-/* ExtJS Mask Layer */
 /* Window resize proxy */
 .x-resizable-proxy{
     background:#C7DFFC;

@@ -54,6 +54,7 @@ Kebab.i18n.translations = {
 
     // RESTfulDataStore.js / RESTfulBasicDataStore.js and messages
     'Success' : 'Başarılı',
+    'Failure' : 'Başarısız',
     'Error' : 'Hata',
     'Operation was performed successfully' : 'İşlem başarıyla gerçekleştirildi',
     'Operation was not performed' : 'İşlem gerçekleştirilemedi',

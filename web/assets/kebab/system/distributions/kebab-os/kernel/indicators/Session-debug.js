@@ -156,7 +156,7 @@ Kebab.OS.Indicators.Session = Ext.extend(Kebab.OS.Indicator, {
         var form = this.unlockForm.getForm();
         if (form.isValid()) {
             form.submit({
-                waitMsg: 'Unlocking your screen...',
+                waitMsg: Kebab.helper.translate('Unlocking your screen...'),
                 success : function() {
                     this.window.hide();
                     form.reset();
