@@ -274,3 +274,19 @@ div#activation-form-wrapper {
     height:16px;
     background: url('images/kernel/loading.gif') no-repeat center;
 }
+.action-column {
+    width:16px;
+    height:16px;
+}
+/*
+ExtJS Style Edits
+*/
+/* Window resize proxy */
+.x-resizable-proxy{
+    background:#C7DFFC;
+    opacity:.5;
+    -moz-opacity:.5;
+    -webkit-opacity:.5;
+    filter:alpha(opacity=50);
+    border: 2px solid #fff;
+}

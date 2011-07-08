@@ -269,16 +269,6 @@ td.ux-taskButtons-edge {
 	width:8px;
 }
 
-/* Window resize proxy */
-.x-resizable-proxy{
-    background:#C7DFFC;
-    opacity:.5;
-    -moz-opacity:.5;
-    -webkit-opacity:.5;
-    filter:alpha(opacity=50);
-    border: 2px solid #fff;
-}
-
 /* Desktop Shortcuts */
 #kebab-os-desktop-shortcuts {
     margin: 10px;

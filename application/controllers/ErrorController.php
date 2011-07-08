@@ -160,12 +160,11 @@ class ErrorController extends Kebab_Controller_Action
         if ($this->_request->isXmlHttpRequest()) {
 
            $responseData = array(
-               'status' => 'unauthorized',
                'title' => 'Anauthorized Access',
                'message' => 'You are not authorized to access this area.'
            );
 
-           $this->_helper->response()->addData($responseData)->getResponse();
+           $this->_helper->response(false, 401)->addData($responseData)->getResponse();
         }
     }
 
