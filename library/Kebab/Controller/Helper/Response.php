@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -14,8 +13,8 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    Controller Helper
- * @subpackage Response Controller Helper
+ * @package    Controller
+ * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -94,7 +93,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
     /**
      * add Total
      *
-     * <p>Addd total value of the data $_result array</p>
+     * <p>Add total value of the data $_result array</p>
      *
      * @param   integer   $data
      * @param   string    $name
@@ -114,9 +113,9 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
     /**
      * setErrors
      *
-     * <p>Set $_result[errors] elemants</p>
+     * <p>Set $_result[errors] elements</p>
      *
-     * @param   Traversable  $errors
+     * @param   traversable  $errors
      * @param   string       $name
      * @throws  Kebab_Controller_Helper_Exception
      * @return  System_Controller_Helper_KebabResponse
