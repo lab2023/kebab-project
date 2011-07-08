@@ -1,7 +1,7 @@
 /**
  * Kebab Application PasswordForm
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.aboutMe.application.views
  * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>

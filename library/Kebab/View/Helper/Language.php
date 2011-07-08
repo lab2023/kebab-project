@@ -13,7 +13,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    View
  * @subpackage Helper
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
@@ -26,7 +26,7 @@
  * Kebab_View_Helper_Language
  * Return user or system default language
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    View
  * @subpackage Helper
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>

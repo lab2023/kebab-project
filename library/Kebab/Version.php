@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    System
  * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -25,7 +25,7 @@
  * 
  * Class to store and retrieve the version of Zend Framework.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Core
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)

@@ -28,7 +28,7 @@
  * 
  * <p>If the request is ajax, response's type is json or html/text </p>
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Controller
  * @subpackage Error
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>

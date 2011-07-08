@@ -1,7 +1,7 @@
 /**
  * userManager Application UserRoleDataStore class
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.userManager.application.models
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>

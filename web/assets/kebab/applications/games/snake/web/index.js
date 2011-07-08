@@ -30,7 +30,7 @@ Ext.namespace(
 /**
  * Kebab Application Base Class
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.snake.application
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>

@@ -1,7 +1,7 @@
 /**
  * FeedbackManager Application Layout Class
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.feedbackManager.application.layouts
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>

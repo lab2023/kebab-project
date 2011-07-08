@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Kebab_Application
  * @subpackage Module
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
@@ -25,7 +25,7 @@
  * Application Module Bootstrapping Abstract Class
  * This class contains common module bootstrapping operations
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Kebab
  * @subpackage Application_Module_Bootstrap
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>

@@ -13,7 +13,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Library
  * @subpackage List
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
@@ -42,7 +42,7 @@
  *
  * This mean that pending can pass to active and block, active can pass approve and block, etc.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Library
  * @subpackage List
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>

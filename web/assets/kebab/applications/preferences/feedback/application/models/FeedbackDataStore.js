@@ -1,7 +1,7 @@
 /**
  * Feedback Application FeedbackDataStore
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.feedback.application.models
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>

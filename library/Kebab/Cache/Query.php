@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Kebab
  * @subpackage Library
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
@@ -24,7 +24,7 @@
 /**
  * Kebab_Caching
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Kebab
  * @subpackage Library
  * @author     Yunus ÖZCAN <yunus.ozcan@lab2023.com>

@@ -13,7 +13,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Action Helper
  * @subpackage Filter
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
@@ -30,7 +30,7 @@
  *
  * This helper add andWhere query to DQL from client filter. 
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Controller
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>

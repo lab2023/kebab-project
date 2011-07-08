@@ -1,7 +1,7 @@
 /**
  * applicationManager Application ApplicationGrid class
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.applicationManager.application.views
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>

@@ -13,7 +13,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Controller Helper
  * @subpackage Response Controller Helper
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -25,7 +25,7 @@
 /**
  * System_Controller_Helper_Param
  * 
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Controller
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>

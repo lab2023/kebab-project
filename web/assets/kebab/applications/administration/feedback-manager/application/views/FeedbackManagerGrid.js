@@ -1,7 +1,7 @@
 /**
  * FeedbackManagerApplication FeedbackGrid
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.feedback.application.views
  * @author      Yunus ÖZCAN <yunus.ozcan@lab2023.com>

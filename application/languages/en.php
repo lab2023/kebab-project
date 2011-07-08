@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Languages
  * @subpackage Application
  * @author	   lab2023 Dev Team
@@ -24,7 +24,7 @@
 /**
  * Kebab Application Turkish Language File
  *
- * @category   Kebab (kebab-reloaded)
+ * @category   Kebab
  * @package    Languages
  * @subpackage Application
  * @author	   lab2023 Dev Team

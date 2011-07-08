@@ -1,7 +1,7 @@
 /**
  * ComplexEditorGridPanel extend by Ext.grid.EditorGridPanel
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Kebab
  * @namespace   Kebab.library
  * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>

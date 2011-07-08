@@ -13,7 +13,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Kebab
  * @subpackage  Controllers
  * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
@@ -27,7 +27,7 @@
  *
  * This service is list all story and set them active and passive.
  *
- * @category    Kebab (kebab-reloaded)
+ * @category    Kebab
  * @package     Kebab
  * @subpackage  Controllers
  * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
