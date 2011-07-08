@@ -62,6 +62,8 @@ class Kebab_Model_User
     }
 
     /**
+     * Sign a new user 
+     * 
      * @static
      * @throws Doctrine_Exception|Zend_Exception
      * @param string $fullName
@@ -71,7 +73,6 @@ class Kebab_Model_User
      */
     public static function signUp($fullName, $email, $language = 'en')
     {
-        $retVal = false;
         Doctrine_Manager::connection()->beginTransaction();
         try {
 
@@ -84,9 +85,10 @@ class Kebab_Model_User
             $userSignUp->active = 0;
             $userSignUp->save();
 
-            $retVal = $userSignUp;
+            $retVal = is_object($userSignUp) ? $userSignUp : false;
             Doctrine_Manager::connection()->commit();
             unset($userSignUp);
+
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;

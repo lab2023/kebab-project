@@ -23,7 +23,7 @@
 
 
 /**
- * Kebab_UserSignUpController
+ * UserSignUp Controller
  *
  * @category   Kebab
  * @package    Kebab
@@ -35,22 +35,29 @@
  */
 class Kebab_UserSignUpController extends Kebab_Rest_Controller
 {
-
-    /**
-     * User can invited or sign-up
-     *
-     * @return void
-     */
     public function postAction()
     {
         $params = $this->_helper->param();
-        $user = Kebab_Model_User::signUp($params['fullName'], $params['email']);
-        if (is_object($user)) {
-            $this->sendSignUpMail($user);
-            $this->_helper->response(true, 200)->getResponse();
-        } else {
-            $this->_helper->response()->getResponse();
+        $response = $this->_helper->response();
+
+        // Check email
+        $emailValidation = new Zend_Validate_EmailAddress();
+        $isValidEmail  = $emailValidation->isValid($params['email']);
+        $isUnusedEmail = is_object(Doctrine_Core::getTable('Model_Entity_User')->findOneByemail($params['email']));
+
+        if (!$isValidEmail) {
+            throw new Kebab_Exception("Invalid email wanna to signup.");
         }
+
+        if (!$isUnusedEmail) {
+            $user   = Kebab_Model_User::signUp($params['fullName'], $params['email']);
+            $this->sendSignUpMail($user);
+            $response->setSuccess(true)->getResponse();
+        } else {
+            $response->addError('email', 'An other user uses this email');
+        }
+        
+        $response->getResponse();
     }
 
     private function sendSignUpMail($user)

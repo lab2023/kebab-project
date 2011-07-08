@@ -34,5 +34,7 @@
  * @version    1.5.0
  */
 return array(
-    'Key' => 'Value'
+
+    // SignUpController
+    'An other user uses this email.' => 'An other user uses this email.'
 );
