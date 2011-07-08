@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Kebab Framework
+ * Kebab Project
  *
  * LICENSE
  *

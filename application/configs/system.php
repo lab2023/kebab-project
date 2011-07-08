@@ -1,6 +1,6 @@
 <?php
 /**
- * Kebab Framework
+ * Kebab Project
  *
  * LICENSE
  *
@@ -66,7 +66,7 @@ $paths = array(
  */
 $cfgs = array(
     'application'   => 'application.ini',   // Zend Framework application settings
-    'kebab'         => 'kebab.ini',         // Kebab Framework global settings
+    'kebab'         => 'kebab.ini',         // Kebab Project global settings
     'database'      => 'database.ini',      // Application DB settings
     'routes'        => 'routes.ini',        // Application routing settings
     'plugins'       => 'plugins.ini',       // Application plugins settings
