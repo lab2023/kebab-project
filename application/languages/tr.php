@@ -1,4 +1,4 @@
-<?php if (!defined('BASE_PATH')) exit('No direct script access allowed');
+<?php
 /**
  * Kebab Project
  *
@@ -15,7 +15,7 @@
  * @category   Kebab
  * @package    Languages
  * @subpackage Application
- * @author       lab2023 Dev Team
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
@@ -25,9 +25,9 @@
  * Kebab Application Turkish Language File
  *
  * @category   Kebab
- * @package    Languages
- * @subpackage Application
- * @author       lab2023 Dev Team
+ * @package    Default
+ * @subpackage Language
+ * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -14,9 +13,9 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    Model
- * @subpackage User Model
- * @author       Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @package    Kebab
+ * @subpackage Model
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
@@ -26,9 +25,9 @@
  * Model_User
  *
  * @category   Kebab
- * @package    Model
- * @subpackage User Model
- * @author       Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
+ * @package    Kebab
+ * @subpackage Model
+ * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
