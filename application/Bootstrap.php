@@ -236,7 +236,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front = Zend_Controller_Front::getInstance();
         $restRoute = new Zend_Rest_Route($front, array(),
             array(
-                 'backup' => array('backup'),
                  'kebab' => array('session',
                                   'password',
                                   'forgot-password',

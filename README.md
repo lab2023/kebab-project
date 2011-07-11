@@ -2,7 +2,7 @@ Requirements
 ------------
 Kebab Project 1.5.x is only supported on PHP 5.3.3 and up.
 
-    - Zend Framework 1.11.1 (http://framework.zend.com)
+    - Zend Framework 1.11.8 (http://framework.zend.com)
     - Doctrine 1.2.3        (http://www.doctrine-project.org)
     - ExtJS 3.3.1           (http://www.sencha.com)
 More info is here: 

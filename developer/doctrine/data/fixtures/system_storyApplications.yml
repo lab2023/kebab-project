@@ -8,57 +8,21 @@ Model_Entity_StoryApplication:
     Application: FeedbackApplication
 
   Record_3:
-    Story: Access_Desktop
-    Application: PacManApplication
-
-  Record_4:
-    Story: Access_Desktop
-    Application: TetrisApplication
-
-  Record_5:
-    Story: Access_Desktop
-    Application: SnakeApplication
-
-  Record_6:
-    Story: Access_Desktop
-    Application: SpaceInvadersApplication
-
-  Record_7:
-    Story: Access_Desktop
-    Application: TicTacToeApplication
-
-  Record_9:
-    Story: Access_Desktop
-    Application: CalculatorApplication
-
-  Record_10:
-    Story: Access_Desktop
-    Application: MapsApplication
-
-  Record_11:
-    Story: Access_Desktop
-    Application: PixlrApplication
-
-  Record_13:
     Story: User_Management
     Application: UserManagerApplication
 
-  Record_14:
+  Record_4:
     Story: Feedback_Management
     Application: FeedbackManagerApplication
 
-  Record_15:
+  Record_5:
     Story: Role_Management
     Application: RoleManagerApplication
 
-  Record_16:
+  Record_6:
     Story: Story_Management
     Application: StoryManagerApplication
 
-  Record_17:
-    Story: Backup_Backup
-    Application: DatabaseBackup
-
-  Record_18:
+  Record_7:
     Story: Application_Management
     Application: ApplicationManager

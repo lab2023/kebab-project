@@ -62,8 +62,3 @@ Model_Entity_Service:
   Kebab_Application:
     Story: Application_Management
     Resource: Kebab_Application
-
-  # BACKUP
-  System_1:
-    Story: Backup_Backup
-    Resource: Backup_Backup
