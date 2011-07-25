@@ -4,5 +4,3 @@ Model_Entity_Module:
     name: default
   Kebab:
     name: kebab
-  Backup:
-    name: backup

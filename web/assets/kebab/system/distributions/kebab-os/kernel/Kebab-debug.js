@@ -126,8 +126,8 @@ Kebab = function() {
              * @param title
              * @param message
              */
-            message: function(title, message, keep) {
-                os.getNotification().message(title, message, keep);
+            message: function(title, message, keep, type) {
+                os.getNotification().message(title, message, keep, type);
             },
 
             /**

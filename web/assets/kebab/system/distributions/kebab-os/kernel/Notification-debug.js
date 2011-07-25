@@ -51,10 +51,8 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
      * @param message
      * @param keep
      */
-    message : function(title, message, keep){
+    message : function(title, message, keep, type){
 
-        // KBBTODO add icon support
-        
         var qtipMsg = Kebab.helper.translate('Click to hide');
         
         var messageBody = function(t, s){
@@ -69,7 +67,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
         }, true).alignTo(document.body, 'tr-tr', [-15, 50]);
         
         var messageEl = Ext.DomHelper.append(this.messageContainer, {
-            cls: 'kebab-notifications kebab-shadow-std kebab-rounded-corners',
+            cls: 'kebab-notifications kebab-shadow-std kebab-rounded-corners ' + this.getColor(type),
             html: messageBody(Kebab.helper.translate(title), Kebab.helper.translate(message)),
             alignTo: [0, 33]
         }, true);
@@ -143,5 +141,36 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
         }
 
         return icon;
+    },
+
+    getColor: function(type) {
+        console.log(type);
+
+        var color = null;
+
+        switch (type) {
+            case 'ALERT':
+                color = 'notify-alert';
+                break;
+            case 'CRIT':
+                color = 'notify-critic';
+                break;
+            case 'ERR':
+                color = 'notify-error';
+                break;
+            case 'WARN':
+                color = 'notify-warning';
+                break;
+            case 'NOTICE':
+                color = 'notify-notice';
+                break;
+            default:
+                color = 'notify-info';
+                break;
+        }
+
+        console.log(color);
+
+        return color;
     }
 });

@@ -8,6 +8,7 @@
     <meta name="Copyright" content="lab2023 Dev. Team, 2010 - 2011, http://www.lab2023.com/" />
     <meta http-equiv="Accept-encoding" content="gzip,deflate" />
     <meta name="Framework" content="Kebab Project - www.kebab-project.com" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <?php echo $this->headMeta(); ?>
 
     <?php // TITLE AREA ------------------------------------------------------?>
@@ -34,9 +35,15 @@
     var BASE_URL = "<?php echo BASE_URL; ?>";
     var LANGUAGES = <?php echo json_encode($this->language()); ?>;
     </script>
+
+    <!--[if IE]>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+        <style type="text/css">.chromeFrameInstallDefaultStyle {width: 100%;}</style>
+        <script type="text/javascript">window.attachEvent("onload", function() {CFInstall.check({mode: "overlay", node: "prompt"});});</script>
+    <![endif]-->
+
     <?php
     echo $this->headScript()
-        ->appendFile('http://maps.google.com/maps/api/js?sensor=false&language=' . $this->translate()->getLocale())
         ->prependFile($this->asset('languages/'.$this->translate()->getLocale().'.js')->distribution()->get())
         ->prependFile($this->asset('kernel/Logger.js')->distribution()->get())
         ->prependFile($this->asset('kernel/Notification.js')->distribution()->get())
@@ -50,6 +57,8 @@
     ?>
 </head>
 <body>
+
+    <!--[if IE]><div id="prompt"></div><![endif]-->
 
     <!-- RIBBON & PAGE LOADER -->
     <div id="beta-ribbon"></div>

@@ -65,17 +65,6 @@ Model_Entity_Story:
         title: Uygulama Yöneticisi
         description: Kebab uygulamalarını yönetin.
 
-  Backup_Backup:
-    name: backup_management
-    active: 1
-    Translation:
-      en:
-        title: Database backup management
-        description: Manage database backups
-      tr:
-        title: Veritabanı yedekleme yönetimi
-        description: Veri tabanı yedeklerinizi yönetin
-    
   Feedback_Management:
     name: feedback_management
     active: 1

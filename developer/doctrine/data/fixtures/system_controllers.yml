@@ -65,8 +65,3 @@ Model_Entity_Controller:
   Kebab_Application:
     Module: Kebab
     name: application
-
-  # BACKUP MODULE #########################################################
-  Backup_Backup:
-    Module: Backup
-    name: backup

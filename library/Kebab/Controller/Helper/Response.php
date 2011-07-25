@@ -188,13 +188,13 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
         }
 
         $notification = array(
-            $notificationType,
-            Zend_Registry::get('Zend_Translate')->_($message),
-            $autoHide
+            'type' => $notificationType,
+            'message' => Zend_Registry::get('Zend_Translate')->_($message),
+            'autoHide' => $autoHide
         );
 
         if($group !== null) {
-            $notification[] = (string) $group;
+            $notification['group'] = (string) $group;
         }
 
         $this->_response['notifications'][] = $notification;
@@ -205,7 +205,7 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
     /**
      * add
      *
-     * <p>Add a unknow element to $_response like $_response[$name] = $data</p>
+     * <p>Add a unknown element to $_response like $_response[$name] = $data</p>
      *
      * @param   string  $name
      * @param   mixed   $data

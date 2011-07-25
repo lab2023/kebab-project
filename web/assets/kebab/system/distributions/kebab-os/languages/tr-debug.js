@@ -56,6 +56,7 @@ Kebab.i18n.translations = {
     'Success' : 'Başarılı',
     'Failure' : 'Başarısız',
     'Error' : 'Hata',
+    'Server Message' : 'Sunucu Mesajı',
     'Operation was performed successfully' : 'İşlem başarıyla gerçekleştirildi',
     'Operation was not performed' : 'İşlem gerçekleştirilemedi',
     'Connection Error' : 'Bağlantı Hatası',

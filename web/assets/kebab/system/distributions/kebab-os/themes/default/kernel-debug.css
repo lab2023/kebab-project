@@ -148,6 +148,22 @@ p.kebab-paragraph {
     filter:alpha(opacity=85);
 }
 
+.notify-info {
+    background-color:#fff !important;
+}
+.notify-warning, .notify-critic {
+    background-color:#ffb941 !important;
+    color:#fff;
+}
+.notify-error, .notify-alert {
+    background-color:#880000 !important;
+    color:#fff;
+}
+.notify-notice {
+    background-color:#006400 !important;
+    color:#fff;
+}
+
 /*---------------------------------ELEMENTS------------------------------------*/
 
 /* Modal Mask Loader */
@@ -278,6 +294,7 @@ div#activation-form-wrapper {
     width:16px;
     height:16px;
 }
+
 /*
 ExtJS Style Edits
 */
