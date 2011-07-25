@@ -51,32 +51,34 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
 
         // todo: fix bug where Ext.Msg are not displayed properly
         this.applicationWindowManager.zseed = 7000; //10000;
-        
-        this.contextMenu = new Ext.menu.Menu([{
-            text: Kebab.helper.translate('Close All'),
-            iconCls: 'icon-application-delete',
-            handler: this.closeApplications,
-            scope: this
-        },{
-            text: Kebab.helper.translate('Hide All'),
-            iconCls: 'icon-application-put',
-            handler: this.minimizeApplications,
-            scope: this
-        },'-',{
-            text: Kebab.helper.translate('Tile Applications'),
-            iconCls: 'icon-application-tile-horizontal',
-            handler: this.tileApplications,
-            scope: this
-        },{
-            text: Kebab.helper.translate('Cascade Applications'),
-            iconCls: 'icon-application-cascade',
-            handler: this.cascadeApplications,
-            scope: this
-        },'-',{
-            text: Kebab.helper.translate('Appearance'),
-            iconCls: 'icon-palette',
-            scope: this
-        }]);
+
+        this.contextMenu = new Ext.menu.Menu({
+            items: [{
+                text: Kebab.helper.translate('Close All'),
+                iconCls: 'icon-application-delete',
+                handler: this.closeApplications,
+                scope: this
+            },{
+                text: Kebab.helper.translate('Hide All'),
+                iconCls: 'icon-application-put',
+                handler: this.minimizeApplications,
+                scope: this
+            },'-',{
+                text: Kebab.helper.translate('Tile Applications'),
+                iconCls: 'icon-application-tile-horizontal',
+                handler: this.tileApplications,
+                scope: this
+            },{
+                text: Kebab.helper.translate('Cascade Applications'),
+                iconCls: 'icon-application-cascade',
+                handler: this.cascadeApplications,
+                scope: this
+            },'-',{
+                text: Kebab.helper.translate('Appearance'),
+                iconCls: 'icon-palette',
+                scope: this
+            }]
+        });
 
         Kebab.OS.Desktop.superclass.constructor.call(this);
 

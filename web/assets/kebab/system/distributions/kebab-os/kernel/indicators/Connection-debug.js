@@ -131,7 +131,6 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
 
             if (responseData.notifications.length > 0 ) {
                 Ext.each(responseData.notifications, function(notification) {
-                    console.log(notification.type);
                     Kebab.helper.message('Server Message', notification.message, notification.autoHide, notification.type);
                 });
             }

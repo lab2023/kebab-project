@@ -144,7 +144,6 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
     },
 
     getColor: function(type) {
-        console.log(type);
 
         var color = null;
 
@@ -168,8 +167,6 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
                 color = 'notify-info';
                 break;
         }
-
-        console.log(color);
 
         return color;
     }
