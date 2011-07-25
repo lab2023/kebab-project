@@ -117,7 +117,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      */
     requestCompleteAction: function(connection, response, options) {
         // KBBTODO Listen and notice requests for server side messages
-
+        
         this.reqStop = new Date();
         
         // Request diff time
@@ -128,6 +128,14 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
 
         try { // Populate and log data
             var responseData = Ext.util.JSON.decode(response.responseText);
+
+            if (responseData.notifications.length > 0 ) {
+                Ext.each(responseData.notifications, function(notification) {
+                    console.log(notification.type);
+                    Kebab.helper.message('Server Message', notification.message, notification.autoHide, notification.type);
+                });
+            }
+
             this.logAction({
                 url: options.url,
                 method: options.method,
@@ -145,7 +153,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      * Request exception action
      */
     requestExceptionAction: function(connection, response, options) {
-
+        
         this.setIconClass('icon-server-disconnect');
         if (response.status == 401) {
             // KBBTODO This way is too bad but time is everything :( I will review code and implement observer design pattern later.
