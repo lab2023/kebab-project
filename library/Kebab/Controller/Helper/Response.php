@@ -166,12 +166,12 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
      *
      * @param   enum    $notificationType
      * @param   string  $message
-     * @param   boolean $autoHide
+     * @param   boolean $keep
      * @param   string  $group
      * @throws  Kebab_Controller_Helper_Exception
      * @return  System_Controller_Helper_KebabResponse
      */
-    public function addNotification($notificationType, $message, $autoHide = true, $group = null)
+    public function addNotification($notificationType, $message, $keep = false, $group = null)
     {
         $type = array('ALERT', 'CRIT', 'ERR', 'WARN', 'NOTICE', 'INFO');
 
@@ -183,14 +183,14 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             throw new Kebab_Controller_Helper_Exception('Invalid notification string');
         }
 
-        if (!is_bool($autoHide)) {
+        if (!is_bool($keep)) {
             throw new Kebab_Controller_Helper_Exception('Invalid autoHide type');
         }
 
         $notification = array(
             'type' => $notificationType,
             'message' => Zend_Registry::get('Zend_Translate')->_($message),
-            'autoHide' => $autoHide
+            'keep' => $keep
         );
 
         if($group !== null) {
