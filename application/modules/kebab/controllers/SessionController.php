@@ -81,6 +81,6 @@ class Kebab_SessionController extends Kebab_Rest_Controller
     public function deleteAction()
     {
         Kebab_Authentication::signOut();
-        $this->_helper->response(true);
+        $this->_helper->response(true, 204)->getResponse();
     }
 }
