@@ -15,8 +15,8 @@
  * @property clob $description
  * @property boolean $active
  * @property Doctrine_Collection $StoryApplication
- * @property Doctrine_Collection $Feedback
  * @property Doctrine_Collection $Application
+ * @property Doctrine_Collection $Feedback
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -81,14 +81,14 @@ class Model_Entity_Application extends Doctrine_Record
              'local' => 'id',
              'foreign' => 'application_id'));
 
-        $this->hasMany('Model_Entity_Feedback as Feedback', array(
-             'local' => 'id',
-             'foreign' => 'application_id'));
-
         $this->hasMany('Model_Entity_Story as Application', array(
              'refClass' => 'Model_Entity_StoryApplication',
              'local' => 'application_id',
              'foreign' => 'story_id'));
+
+        $this->hasMany('Model_Entity_Feedback as Feedback', array(
+             'local' => 'id',
+             'foreign' => 'application_id'));
 
         $i18n0 = new Doctrine_Template_I18n(array(
              'fields' => 
