@@ -40,8 +40,16 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
         $params = $this->_helper->param();
         $roleId = $params['roleId'];
 
+        // Mapping for order
+        $mapping = array(
+            'id' => 'story.id',
+            'title' => 'storyTranslation.title',
+            'description' => 'storyTranslation.description',
+            'allow' => 'allow'
+        );
+        $order = $this->_helper->sort($mapping);
         $ids = $this->_helper->search('Model_Entity_Story', true);
-        $query = Kebab_Model_Story::getStory($ids, $roleId);
+        $query = Kebab_Model_Story::getStory($ids, $roleId)->orderBy($order);
 
         $pager = $this->_helper->pagination($query);
         $story = $pager->execute();
