@@ -52,21 +52,17 @@ class Kebab_SessionController extends Kebab_Rest_Controller
             Zend_Session::forgetMe();
         }
 
-        //Filter for SQL Injection
-        $validatorUserName = new Zend_Validate();
-        $validatorUserName->addValidator(new Zend_Validate_StringLength(4, 16))->addValidator(new Zend_Validate_Alnum());
-        $validatorPassword = new Zend_Validate();
-        $validatorPassword->addValidator(new Zend_Validate_NotEmpty());
-
-        if ($this->_request->isPost()
-            && $validatorUserName->isValid($userName)
-            && $validatorPassword->isValid($password)
+        if ($this->getRequest()->isPost()
+            && Kebab_Validation_UserName::isValid($userName)
+            && Kebab_Validation_Password::isValid($password)
         ) {
             $hasIdentity = Kebab_Authentication::signIn($userName, $password, !is_null($rememberMe));
             if ($hasIdentity) {
                 $this->_helper->response(true, 200)->getResponse();
             } else {
-                $this->_helper->response()->addNotification(Kebab_Notification::ERR, 'Please check your user name and password!')->getResponse();
+                $this->_helper->response()
+                        ->addNotification(Kebab_Notification::ERR, 'Please check your user name and password!')
+                        ->getResponse();
             }
         } else {
             $this->_helper->response()->getResponse();
