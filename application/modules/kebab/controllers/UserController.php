@@ -114,7 +114,7 @@ class Kebab_UserController extends Kebab_Rest_Controller
             Doctrine_Query::create()->delete()->from('Model_Entity_User user')->whereIn('user.id', $ids)->useQueryCache(Kebab_Cache_Query::isEnable())->execute();
             Doctrine_Manager::connection()->commit();
             // Delete Record and Return REST Response
-            $this->_helper->response(true, 204)->addNotification('INFO', 'Record was deleted.')->getResponse();
+            $this->_helper->response(true, 204)->addNotification(Kebab_Notification::INFO, 'Record was deleted.')->getResponse();
 
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();

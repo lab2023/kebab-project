@@ -66,7 +66,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
             if ($hasIdentity) {
                 $this->_helper->response(true, 200)->getResponse();
             } else {
-                $this->_helper->response()->addNotification('ERR', 'Please check your user name and password!')->getResponse();
+                $this->_helper->response()->addNotification(Kebab_Notification::ERR, 'Please check your user name and password!')->getResponse();
             }
         } else {
             $this->_helper->response()->getResponse();

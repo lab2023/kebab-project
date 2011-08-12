@@ -46,7 +46,7 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
             $responseData = $user->toArray();
             $response->addData($responseData);
         } else {
-            $response->addNotification('ERR', 'Invalid activation key');
+            $response->addNotification(Kebab_Notification::ERR, 'Invalid activation key');
         }
 
         $response->getResponse();
@@ -66,7 +66,7 @@ class Kebab_UserActivationController extends Kebab_Rest_Controller
         // Check username dublicate
         $user = Doctrine_Core::getTable('Model_Entity_User')->findOneByuserName(array($params['userName']));
         if (is_object($user)) {
-            $response->setSuccess(false)->addNotification('ERR', 'This username is already at system.')->getResponse();
+            $response->setSuccess(false)->addNotification(Kebab_Notification::ERR, 'This username is already at system.')->getResponse();
         }
 
         $user = Kebab_Model_User::activate($params['userName'], $params['password'], $params['fullName'], $params['activationKey']);

@@ -72,7 +72,7 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $mail->send($transport);
                 $response->setSuccess(true)->getResponse();
             } else {
-                $response->addNotification('ERR', 'There isn\'t user with this email')->getResponse();
+                $response->addNotification(Kebab_Notification::ERR, 'There isn\'t user with this email')->getResponse();
             }
         } else {
             $response->addError('email', 'Invalid email format')->getResponse();

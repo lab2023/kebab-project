@@ -76,7 +76,7 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
             Doctrine_Manager::connection()->commit();
 
             // Rest Response
-            $this->_helper->response(true, 201)->addNotification('INFO', 'Record was updated.')->getResponse();
+            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->getResponse();
 
             unset($collection);
             unset($responseData);
