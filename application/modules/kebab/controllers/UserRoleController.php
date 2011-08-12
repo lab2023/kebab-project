@@ -37,25 +37,23 @@ class Kebab_UserRoleController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $userId = $this->_request->userId;
+        $userId = $this->getRequest()->getParam('userId');
 
-        // Mapping
+        // Mapping for order
         $mapping = array(
             'id' => 'role.id',
             'title' => 'roleTranslation.title',
             'description' => 'roleTranslation.description',
             'allow' => 'allow'
         );
-
-        $searchRole = $this->_helper->search('Model_Entity_Role', true);
         $order = $this->_helper->sort($mapping);
-        $query = Kebab_Model_UserRole::getUserRoles($userId, $searchRole, $order);
+        $ids   = $this->_helper->search('Model_Entity_Role', true);
+        $query = Kebab_Model_Role::getRoles($ids, $userId)->orderBy($order);
+
         $pager = $this->_helper->pagination($query);
-        $userRole = $pager->execute();
+        $responseData = $pager->execute(array(), Doctrine::HYDRATE_ARRAY);
 
-
-        $responseData = is_object($userRole) ? $userRole->toArray() : array();
-        $this->_helper->response(true)->addData($responseData)->getResponse();
+        $this->_helper->response(true)->addData($responseData)->addTotal(count($responseData))->getResponse();
     }
 
     public function putAction()

@@ -38,31 +38,6 @@ class Kebab_Model_UserRole
     /**
      * @static
      * @param  $userId
-     * @param  $searchRoleId
-     * @param  $sort
-     * @return Doctrine_Query
-     */
-    public static function getUserRoles($userId, $searchRoleId, $sort)
-    {
-        $query = Doctrine_Query::create()
-                ->select('role.id,
-                    roleTranslation.title as title,
-                    roleTranslation.description as description,
-                    IF(userRole.user_id > 0, true, false) as allow')
-                ->from('Model_Entity_Role role')
-                ->leftJoin('role.UserRole userRole ON userRole.role_id = role.id AND userRole.user_id = ?', $userId)
-                ->leftJoin('role.Translation roleTranslation')
-                ->where('roleTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->whereIn('role.id', $searchRoleId)
-                ->orderBy($sort)
-                ->useQueryCache(Kebab_Cache_Query::isEnable());
-
-        return $query;
-    }
-
-    /**
-     * @static
-     * @param  $userId
      * @param  $collection
      * @return void
      * @return void
