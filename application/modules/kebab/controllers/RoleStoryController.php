@@ -47,7 +47,7 @@ class Kebab_RoleStoryController extends Kebab_Rest_Controller
         $story = $pager->execute();
 
         $responseData = is_object($story) ? $story->toArray() : array();
-        $this->_helper->response(true, 200)->addData($responseData)->addTotal(count($responseData))->getResponse();
+        $this->_helper->response(true)->addData($responseData)->addTotal(count($responseData))->getResponse();
     }
 
     public function putAction()
