@@ -38,10 +38,9 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
     public function postAction()
     {
         $email = $this->_request->getParam('email');
-        $validatorEmail = new Zend_Validate_EmailAddress();
         $response = $this->_helper->response();
 
-        if ($validatorEmail->isValid($email)) {
+        if (Kebab_Validation_Email::isValid($email)) {
 
             // Create user object
             $user = Doctrine_Core::getTable('Model_Entity_User')->findOneBy('email', $email);
