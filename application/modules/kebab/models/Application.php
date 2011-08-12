@@ -37,6 +37,30 @@
 class Kebab_Model_Application
 {
     /**
+     * @static
+     * @param array $ids
+     * @param $order
+     * @return Doctrine_Query
+     */
+    public static function getAll(Array $ids = array(), $order)
+    {
+        $lang  = Zend_Auth::getInstance()->getIdentity()->language;
+        $query = Doctrine_Query::create()
+                ->select('application.id,
+                    applicationTranslation.title as title,
+                    applicationTranslation.description as description,
+                    application.active')
+                ->from('Model_Entity_Application application')
+                ->leftJoin('application.Translation applicationTranslation')
+                ->where('applicationTranslation.lang = ?', $lang)
+                ->whereIn('application.id', $ids)
+                ->orderBy($order)
+                ->useQueryCache(Kebab_Cache_Query::isEnable());
+
+        return $query;
+    }
+    
+    /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
      *
      * @static

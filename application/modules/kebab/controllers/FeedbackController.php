@@ -53,9 +53,10 @@ class Kebab_FeedbackController extends Kebab_Rest_Controller
 
         //KBBTODO move DQL to models
         $query = Doctrine_Query::create()
-                ->select('feedback.*,
-                application.*,
-                applicationTranslate.title as title')
+                ->select('
+                    feedback.*,
+                    application.*,
+                    applicationTranslate.title as title')
                 ->from('Model_Entity_Feedback feedback')
                 ->innerJoin('feedback.Application application')
                 ->leftJoin('application.Translation applicationTranslate')

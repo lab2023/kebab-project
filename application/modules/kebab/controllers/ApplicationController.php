@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -14,7 +13,7 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category    Kebab
- * @package     Kebab
+ * @package     Modules
  * @subpackage  Controllers
  * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -28,7 +27,7 @@
  * This service is list all application and set them active and passive.
  *
  * @category    Kebab
- * @package     Kebab
+ * @package     Modules
  * @subpackage  Controllers
  * @author      Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -46,26 +45,15 @@ class Kebab_ApplicationController extends Kebab_Rest_Controller
             'description' => 'applicationTranslation.description',
             'title' => 'title',
         );
-
-        //KBBTODO move dql to models
+        
         $ids = $this->_helper->search('Model_Entity_Application', true);
-        $query = Doctrine_Query::create()
-                ->select('application.id,
-                    applicationTranslation.title as title,
-                    applicationTranslation.description as description,
-                    application.active')
-                ->from('Model_Entity_Application application')
-                ->leftJoin('application.Translation applicationTranslation')
-                ->where('applicationTranslation.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->whereIn('application.id', $ids)
-                ->orderBy($this->_helper->sort($mapping))
-                ->useQueryCache(Kebab_Cache_Query::isEnable());
+        $order = $this->_helper->sort($mapping);
 
+        $query = Kebab_Model_Application::getAll($ids, $order);
         $pager = $this->_helper->pagination($query);
-        $story = $pager->execute();
+        $responseData = $pager->execute(array(), Doctrine::HYDRATE_ARRAY);
 
         // Response
-        $responseData = is_object($story) ? $story->toArray() : array();
         $this->_helper->response(true)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
     }
 

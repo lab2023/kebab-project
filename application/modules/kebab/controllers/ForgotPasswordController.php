@@ -50,7 +50,6 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $user->password = md5($password);
                 $user->save();
 
-                //KBBTODO move these settings to config file
                 $configParam = Zend_Registry::get('config')->kebab->mail;
                 $smtpServer = $configParam->smtpServer;
                 $config = $configParam->config->toArray();
@@ -59,7 +58,6 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $view = new Zend_View;
                 $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
-                //KBBTODO use language file
                 $view->assign('password', $password);
 
                 $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);

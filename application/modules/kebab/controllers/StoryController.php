@@ -53,8 +53,7 @@ class Kebab_StoryController extends Kebab_Rest_Controller
 
         //KBBTODO move dql to models
         $ids = $this->_helper->search('Model_Entity_Story', true);
-        $query = Kebab_Model_Story::getStory($ids)
-                ->orderBy($this->_helper->sort($mapping));
+        $query = Kebab_Model_Story::getStory($ids)->orderBy($this->_helper->sort($mapping));
 
         $pager = $this->_helper->pagination($query);
         $story = $pager->execute();
