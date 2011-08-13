@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -15,7 +14,7 @@
  *
  * @category   Kebab
  * @package    Library
- * @subpackage Controller Helper
+ * @subpackage Helper
  * @author     Onur Özgür ÖZKAN
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -38,7 +37,7 @@
  *
  * @category   Kebab
  * @package    Library
- * @subpackage Controller Helper
+ * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing

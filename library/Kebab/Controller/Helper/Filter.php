@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -14,8 +13,8 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    Action Helper
- * @subpackage Filter
+ * @package    Library
+ * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @author     Ali BAKAN
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -31,7 +30,7 @@
  * This helper add andWhere query to DQL from client filter. 
  *
  * @category   Kebab
- * @package    Controller
+ * @package    Library
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @author     Ali BAKAN
@@ -135,7 +134,9 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
     }
     
     /**
-     * direct() : Strategy Design Pattern
+     * @param $query
+     * @param $mapping
+     * @return 
      */
     public function direct($query, $mapping)
     {
