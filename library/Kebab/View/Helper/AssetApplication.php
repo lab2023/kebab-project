@@ -68,7 +68,7 @@ class Kebab_View_Helper_AssetApplication extends Kebab_View_Helper_Asset
     public function get()
     {
         $this->_asset[0] = $this->_root() 
-                         . '/kebab/' 
+                         . DIRECTORY_SEPARATOR . 'kebab' . DIRECTORY_SEPARATOR
                          . $this->_config->os->applications->path;
         
         return $this->_generate();
