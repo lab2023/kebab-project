@@ -112,13 +112,11 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
     protected function _debug($file)
     {
         // KBBTODO: Check is really file
-        $file = explode('.', $file);
-
         $pathInfo = pathinfo($file);
-        $isCssOrJS = (in_array($pathInfo['extension'], array('js','css')));
+        $isCssOrJS = (in_array(@$pathInfo['extension'], array('js','css')));
 
         return ($this->_config->assets->debug->enable && $isCssOrJS)
-                    ? $pathInfo['dirname'] . DIRECTORY_SEPARATOR . $pathInfo['filename'] . '-debug.' . $pathInfo['extension']
+                    ? $pathInfo['dirname'] . DIRECTORY_SEPARATOR . $pathInfo['filename'] . '-debug.' . @$pathInfo['extension']
                     : $file ;
     }
 
