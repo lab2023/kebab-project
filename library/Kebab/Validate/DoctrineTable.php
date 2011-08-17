@@ -22,7 +22,22 @@
  */
 
 /**
+ * Kebab_Validate_DoctrineTable
  *
+ * <code>
+ *     $test = new Model_Entity_Test();
+ *     $test->email = 'asdf#$½2';
+ *     $test->minlength = '123';
+ *     $test->range = '101';
+ *     $test->regexp = 'asdf#£$½£#½';
+ *
+ *     $validator = new Kebab_Validate_DoctrineTable($test, 'Model_Entity_Test');
+ *     if(!$validator->isValid()) {
+ *         Zend_Debug::dump($validator->getErrors());
+ *     } else {
+ *         echo 'ok';
+ *     }
+ * </code>
  *
  * @category   Kebab
  * @package    Validate
