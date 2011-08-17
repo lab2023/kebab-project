@@ -50,6 +50,7 @@
         ->prependFile($this->asset('kernel/Translator.js')->distribution()->get())
         ->prependFile($this->asset('kernel/OS.js')->distribution()->get())
         ->prependFile($this->asset('kernel/Kebab.js')->distribution()->get())
+        ->prependFile($this->asset('library')->get())
         ->prependFile($this->assetVendor('src/locale/ext-lang-'.$this->translate()->getLocale().'.js')->get('extjs', true))
         ->prependFile($this->assetVendor('examples/ux/ux-all.js')->get('extjs'))
         ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
