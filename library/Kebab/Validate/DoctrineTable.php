@@ -94,10 +94,12 @@ class Kebab_Validate_DoctrineTable
             $dirtyColumns[strtolower($key)] = $value;
         }
 
+        #die(Zend_Debug::dump($tableColumns));
+        
         foreach ($tableColumns as $columnName => $columnStructure) {
             if (array_key_exists($columnName, $dirtyColumns)) {
 
-                $validatorChain = new Kebab_Validate();
+                $validatorChain = new Zend_Validate();
 
                 // Notnull
                 if (array_key_exists('notnull', $columnStructure)) {
@@ -107,10 +109,30 @@ class Kebab_Validate_DoctrineTable
                 }
 
                 // Email
+                if (array_key_exists('email', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_EmailAddress()
+                    );
+                }
 
                 // Notblank
+                if (array_key_exists('notblank', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Kebab_Validate_NotBlank()  
+                    );
+                }
 
                 // Nospace
+                if (array_key_exists('nospace', $columnStructure)) {
+                    // check null
+                    $validatorChain->addValidator(
+                        new Zend_Validate_NotEmpty(array('null' => true))
+                    );
+                    // check space
+                    $validatorChain->addValidator(
+                        new Zend_Validate_Regex(array('pattern' => '/\s/'))
+                    );
+                }
 
                 // Past
 
@@ -126,20 +148,55 @@ class Kebab_Validate_DoctrineTable
                 // Country
 
                 // Ip
+                if (array_key_exists('ip', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_Ip()
+                    );
+                }
 
                 // HtmlColor
 
                 // Range
+                if (array_key_exists('range', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_Between(
+                            array(
+                                'min' => $columnStructure['range'][0],
+                                'max' => $columnStructure['range'][1]
+                            )
+                        )
+                    );
+                }
 
                 // Unique
 
                 // Regex
+                if (array_key_exists('regexp', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_Regex(array('pattern' => $columnStructure['regexp']))
+                    );
+                }
 
                 // Digits
+                if (array_key_exists('digits', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_Digits()
+                    );
+                }
 
                 // Date
+                if (array_key_exists('date', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_Date()
+                    );
+                }
 
                 // CC
+                if (array_key_exists('cc', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Zend_Validate_CreditCard()
+                    );
+                }
 
                 // Unsigned
 
