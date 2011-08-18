@@ -1,7 +1,7 @@
 Ext.ns('Ext.ux');
 
 /**
- * This simple plugin will brings to webkit speech feature is activated.
+ * This simple plugin is brings to webkit speech feature activated.
  *
  * @author      Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright   Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
