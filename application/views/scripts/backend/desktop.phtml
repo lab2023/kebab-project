@@ -4,7 +4,6 @@ $this->headTitle($this->translate('Desktop'));
 $this->headLink()
      ->appendStylesheet($this->asset('desktop.css')->distribution()->theme()->get());
 $this->headScript()
-     ->appendFile($this->asset('library')->get())
      ->appendFile($this->asset('kernel/desktop/Application.js')->distribution()->get())
      ->appendFile($this->asset('kernel/desktop/Indicator.js')->distribution()->get())
      ->appendFile($this->asset('kernel/indicators/Session.js')->distribution()->get())
