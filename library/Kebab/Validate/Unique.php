@@ -88,7 +88,7 @@ class Kebab_Validate_Unique extends Zend_Validate_Abstract
         if ( ! ($state == Doctrine_Record::STATE_TDIRTY || $state == Doctrine_Record::STATE_TCLEAN)) {
             foreach ((array) $this->_table->getIdentifierColumnNames() as $pk) {
                 if (!is_null($this->_table->$pk)) {
-                    $query->andWhere("$pk = ?", $this->_table->$pk);
+                    $query->andWhere("$pk != ?", $this->_table->$pk);
                 }
             }
         }
