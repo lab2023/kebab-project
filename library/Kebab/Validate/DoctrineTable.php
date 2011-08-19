@@ -14,7 +14,7 @@
  *
  * @category   Kebab
  * @package    Validate
- * @subpackage Doctrine_Table
+ * @subpackage DoctrineTable
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -41,7 +41,7 @@
  *
  * @category   Kebab
  * @package    Validate
- * @subpackage Doctrine_Table
+ * @subpackage DoctrineTable
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -81,7 +81,7 @@ class Kebab_Validate_DoctrineTable
      */
     protected function _setTable($data, $table = null)
     {
-        if (is_null($table) && (($data instanceof Doctrine_Record) || ($data instanceof Doctrine_Collection))) {
+        if (is_null($table) && (($data instanceof Doctrine_Record))) {
             $this->_table = $data->getTable();
         }
 
@@ -183,7 +183,12 @@ class Kebab_Validate_DoctrineTable
                     );
                 }
 
-                // Unique
+                //Unique
+                if (array_key_exists('unique', $columnStructure)) {
+                    $validatorChain->addValidator(
+                        new Kebab_Validate_Unique($columnName, $this->_data)
+                    );
+                }
 
                 // Regex
                 if (array_key_exists('regexp', $columnStructure)) {
