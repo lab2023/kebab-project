@@ -40,73 +40,47 @@ class Kebab_FeedbackController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        // Get User Id
+        // Params
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
-
-        // Mapping
-        $mapping = array(
+        $mapping       = array(
             'id' => 'feedback.id',
             'title' => 'applicationTranslate.title',
             'status' => 'feedback.status',
             'description' => 'feedback.description'
         );
+        $mapping       = $this->_helper->sort($mapping);
+        $options       = array('sort' => $mapping);
 
-        //KBBTODO move DQL to models
-        $query = Doctrine_Query::create()
-                ->select('
-                    feedback.*,
-                    application.*,
-                    applicationTranslate.title as title')
-                ->from('Model_Entity_Feedback feedback')
-                ->innerJoin('feedback.Application application')
-                ->leftJoin('application.Translation applicationTranslate')
-                ->where('feedback.user_id = ?', $userSessionId)
-                ->andWhere('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping))
-                ->useQueryCache(Kebab_Cache_Query::isEnable());
+        // Model
+        $query         = Kebab_Model_Feedback::getFeedbackByUserId($userSessionId, $options);
+        $pager         = $this->_helper->pagination($query);
+        $retData       = $pager->execute(array(), Doctrine::HYDRATE_ARRAY);
 
-        $pager = $this->_helper->pagination($query);
-        $feedbacks = $pager->execute();
-
-        $responseData = array();
-
-        if (is_object($feedbacks)) {
-            $responseData = $feedbacks->toArray();
-        }
-        $this->_helper->response(true, 200)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
+        // Response
+        $this->_helper->response(true, 200)->addData($retData)->addTotal($pager->getNumResults())->getResponse();
     }
 
     public function postAction()
     {
-        // Get Params
+        // Params
         $params = $this->_helper->param();
+        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
         $applicationIdentity = $params['applicationIdentity'];
         $description = $params['description'];
 
-        //KBBTODO move dql to model class
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-            $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+        // Model
+        $feedback = Kebab_Model_Feedback::insert($userSessionId, $applicationIdentity, $description);
 
-            $application = Doctrine_Core::getTable('Model_Entity_Application')->findOneByidentity($applicationIdentity);
-
-            $feedback = new Model_Entity_Feedback();
-            $feedback->Application = $application;
-            $feedback->status = 'open';
-            $feedback->description = $description;
-            $feedback->user_id = $userSessionId;
-            $feedback->save();
-            Doctrine_Manager::connection()->commit();
-
-            $this->_helper->response(true, 200)->addData($feedback->toArray())->getResponse();
-            unset($feedback);
-
-        } catch (Zend_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
-        } catch (Doctrine_Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            throw $e;
+        // Response
+        if ($feedback instanceof Doctrine_Record) {
+            $this->_helper->response(true, 200)
+                    ->addNotification(Kebab_Notification::NOTICE, 'Feedback is created')
+                    ->addData($feedback->toArray())
+                    ->getResponse();
+        } else {
+            $this->_helper->response(true)
+                ->addNotification(Kebab_Notification::ERR, 'Feedback is not created')
+                ->getResponse();
         }
     }
 }

@@ -103,4 +103,32 @@ class Kebab_Model_Application
 
         return $returnData;
     }
+
+    /**
+     * Update applications status
+     * 
+     * @static
+     * @throws Doctrine_Exception|Zend_Exception
+     * @param $collection
+     * @return bool
+     */
+    public static function update($collection)
+    {
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+            foreach ($collection as $record) {
+                $application = new Model_Entity_Application();
+                $application->assignIdentifier($record['id']);
+                $application->set('active', $record['active']);
+                $application->save();
+            }
+            return Doctrine_Manager::connection()->commit() ? true : false;
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+    }
 }
