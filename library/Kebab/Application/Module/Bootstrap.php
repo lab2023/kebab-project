@@ -106,4 +106,24 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
             throw new Zend_Translate_Exception($this->_module['class']  . ' module translations not loading...');
         }
     }
+
+    /**
+     * Create a new layer for Validations
+     * 
+     * @return Zend_Loader_Autoloader_Resource
+     */
+    protected function _initResource()
+    {
+        $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
+            'basePath'      => MODULES_PATH . '/' . $this->_module['folder'],
+            'namespace'     => $this->getModuleName(),
+            'resourceTypes' => array(
+                'validation' => array(
+                    'path'      => 'validations/',
+                    'namespace' => 'Validation'
+                )
+            ),
+        ));
+        return $resourceLoader;
+    }
 }

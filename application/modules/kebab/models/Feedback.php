@@ -1,5 +1,5 @@
 <?php
-
+ 
 /**
  * Kebab Project
  *
@@ -13,93 +13,62 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab
- * @package    Kebab
- * @subpackage Controllers
+ * @category   
+ * @package    
+ * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-
-
+ 
 /**
- * FeedbackManager
+ * 
  *
- * System admin can manage the feedback
- *
- * @category   Kebab
- * @package    Kebab
- * @subpackage Controllers
+ * @category   
+ * @package    
+ * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Kebab_FeedbackManagerController extends Kebab_Rest_Controller
+class Kebab_Model_Feedback 
 {
-    public function indexAction()
+    public static function getFeedbackByUserId($userId, $options)
     {
-        // Mapping
-        $mapping = array(
-            'id' => 'feedback.id',
-            'status' => 'feedback.status',
-            'description' => 'feedback.description',
-            'title' => 'applicationTranslate',
-            'User' => 'user'
-        );
-
-        //KBBTODO move DQL to model class
-
+        $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query = Doctrine_Query::create()
                 ->select('
                     feedback.*,
                     application.*,
-                    user.fullName,
                     applicationTranslate.title as title')
                 ->from('Model_Entity_Feedback feedback')
                 ->innerJoin('feedback.Application application')
                 ->leftJoin('application.Translation applicationTranslate')
-                ->innerJoin('feedback.User user')
-                ->where('applicationTranslate.lang = ?', Zend_Auth::getInstance()->getIdentity()->language)
-                ->orderBy($this->_helper->sort($mapping))
+                ->where('feedback.user_id = ?', $userId)
+                ->andWhere('applicationTranslate.lang = ?', $lang)
                 ->useQueryCache(Kebab_Cache_Query::isEnable());
 
-        $pager = $this->_helper->pagination($query);
-        $feedbacks = $pager->execute();
-
-        $responseData = array();
-        if (is_object($feedbacks)) {
-            $responseData = $feedbacks->toArray();
+        if (array_key_exists('sort', $options)) {
+            $query->orderBy($options['sort']);
         }
 
-        $this->_helper->response(true, 200)->addData($responseData)->addTotal($pager->getNumResults())->getResponse();
-
+        return $query;
     }
 
-    /**
-     * @return void
-     */
-    public function putAction()
+    public static function insert($userSessionId, $applicationIdentity, $description)
     {
-        // Getting parameters
-        $params = $this->_helper->param();
-        $id = $params['id'];
-        $status = $params['status'];
-
-        // Updating status
         Doctrine_Manager::connection()->beginTransaction();
         try {
+            $application = Doctrine_Core::getTable('Model_Entity_Application')->findOneByidentity($applicationIdentity);
             $feedback = new Model_Entity_Feedback();
-            $feedback->assignIdentifier($id);
-            $feedback->set('status', $status);
+            $feedback->Application = $application;
+            $feedback->status = 'open';
+            $feedback->description = $description;
+            $feedback->user_id = $userSessionId;
             $feedback->save();
-            Doctrine_Manager::connection()->commit();
-            unset($feedback);
-
-            // Response
-            $this->_helper->response(true, 202)->getResponse();
-
+            return Doctrine_Manager::connection()->commit() ? $feedback : false;
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;

@@ -47,21 +47,20 @@ class Kebab_UserInvitationController extends Kebab_Rest_Controller
         // Exist user
         $count = Doctrine_Core::getTable('Model_Entity_User')->findByemail($params['email'])->count();
         if ($count > 0) {
-            $response->addNotification('ERR', 'There is a user with this email');
+            $response->addNotification(Kebab_Notification::ERR, 'There is a user with this email');
             $valid = false;
         }
 
         // Invalid email address
-        $validator = new Zend_Validate_EmailAddress();
-        if (!$validator->isValid($params['email'])) {
-            $response->addNotification('ERR', 'Invalid email address');
+        if (!Kebab_Validation_Email::isValid($params['email'])) {
+            $response->addNotification(Kebab_Notification::ERR, 'Invalid email address');
             $valid = false;
         }
 
         // Check Fullname only Alpha chracter enable
-        $validator = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));
-        if (!$validator->isValid($params['fullName'])) {
-            $response->addNotification('ERR', 'Only alpha character enable.');
+
+        if (!Kebab_Validation_FullName::isValid($params['fullName'])) {
+            $response->addNotification(Kebab_Notification::ERR, 'Only alpha character enable.');
             $valid = false;
         }
 

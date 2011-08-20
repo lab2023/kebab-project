@@ -117,7 +117,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
             }
             Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 201)->addNotification('INFO', 'Record was updated.')->getResponse();
+            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -164,7 +164,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
             }
             Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 201)->addNotification('INFO', 'Record was updated.')->getResponse();
+            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;

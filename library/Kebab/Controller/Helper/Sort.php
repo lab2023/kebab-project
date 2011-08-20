@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -14,7 +13,7 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    Controller
+ * @package    Librar
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>s
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -27,7 +26,7 @@
  * System_Controller_Helper_Sort
  *
  * @category   Kebab
- * @package    Controller
+ * @package    Library
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>s
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -38,24 +37,54 @@
 class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstract
 {
 
-    private   $_request;
-    protected $_sort         = 'id';
-    protected $_dir          = 'DESC';
-    protected $_mapping      = array();
+    /**
+     * @var Zend_Controller_Request_Abstract
+     */
+    private $_request;
+
+    /**
+     * @var string
+     */
+    protected $_sort = 'id';
+
+    /**
+     * @var string
+     */
+    protected $_dir = 'DESC';
+
+    /**
+     * @var array
+     */
+    protected $_mapping = array();
+
+    /**
+     * @var
+     */
     protected $_sortString;
 
+    /**
+     * @return void
+     */
     public function init()
     {
         $this->_request = $this->getRequest();
         $this->setSort($this->_request->getParam('sort', $this->_sort));
         $this->setDir($this->_request->getParam('dir', $this->_dir));
     }
-    
+
+    /**
+     * @return string
+     */
     public function getSortString()     
     {
         return $this->_sortString;
     }
 
+    /**
+     * @throws Kebab_Controller_Helper_Exception
+     * @param bool $sortString
+     * @return Kebab_Controller_Helper_Sort
+     */
     public function setSortString($sortString = false)
     {
         if ($sortString !== false && is_string($sortString)) {
@@ -71,41 +100,61 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getMapping()     
     {
         return $this->_mapping;
     }
 
+    /**
+     * @param $_mapping
+     * @return void
+     */
     public function setMapping($_mapping)
     {
         $this->_mapping = $_mapping;
     }
 
-            
+    /**
+     * @return string
+     */
     public function getSort()     
     {
         return $this->_sortValue;
     }
 
+    /**
+     * @param $_sortValue
+     * @return void
+     */
     public function setSort($_sortValue)
     {
         $this->_sortValue = $_sortValue;
     }
 
+    /**
+     * @return string
+     */
     public function getDir()
     {
         return $this->_dirValue;
     }
 
+    /**
+     * @param $_dirValue
+     * @return void
+     */
     public function setDir($_dirValue)
     {
         $this->_dirValue = $_dirValue;
     }
     
     /**
-     * direct()
-     * 
-     * @return  System_Controller_Helper_Pager
+     * @throws Kebab_Controller_Helper_Exception
+     * @param $mapping
+     * @return string
      */
     public function direct($mapping)
     {

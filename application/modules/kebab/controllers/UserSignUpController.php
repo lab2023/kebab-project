@@ -41,8 +41,7 @@ class Kebab_UserSignUpController extends Kebab_Rest_Controller
         $response = $this->_helper->response();
 
         // Check email
-        $emailValidation = new Zend_Validate_EmailAddress();
-        $isValidEmail  = $emailValidation->isValid($params['email']);
+        $isValidEmail  = Kebab_Validation_Email::isValid($params['email']);
         $isUnusedEmail = is_object(Doctrine_Core::getTable('Model_Entity_User')->findOneByemail($params['email']));
 
         if (!$isValidEmail) {

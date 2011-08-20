@@ -44,6 +44,7 @@ final class Kebab_Authentication
         $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_Entity_User'));
 
         $password = $md5 ? md5($password) : $password;
+
         $authAdapter->setTableName('Model_Entity_User u')
                 ->setIdentityColumn('userName')
                 ->setCredentialColumn('password')
@@ -52,7 +53,7 @@ final class Kebab_Authentication
                 ->setCredential($password);
 
         // set Zend_Auth
-        $result = $auth->authenticate($authAdapter);
+        $result = $auth->authenticate($authAdapter); 
 
         // Check Auth Validation
         if ($result->isValid()) {

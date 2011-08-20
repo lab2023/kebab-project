@@ -44,6 +44,7 @@
 
     <?php
     echo $this->headScript()
+        ->prependFile($this->asset('library')->get())
         ->prependFile($this->asset('languages/'.$this->translate()->getLocale().'.js')->distribution()->get())
         ->prependFile($this->asset('kernel/Logger.js')->distribution()->get())
         ->prependFile($this->asset('kernel/Notification.js')->distribution()->get())

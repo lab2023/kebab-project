@@ -9,8 +9,8 @@
  * @property string $name
  * @property Model_Entity_Module $Module
  * @property Doctrine_Collection $Actions
- * @property Doctrine_Collection $Action
  * @property Doctrine_Collection $Service
+ * @property Doctrine_Collection $Action
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -46,11 +46,11 @@ class Model_Entity_Controller extends Doctrine_Record
              'local' => 'action_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Model_Entity_Action as Action', array(
+        $this->hasMany('Model_Entity_Service as Service', array(
              'local' => 'id',
              'foreign' => 'controller_id'));
 
-        $this->hasMany('Model_Entity_Service as Service', array(
+        $this->hasMany('Model_Entity_Action as Action', array(
              'local' => 'id',
              'foreign' => 'controller_id'));
     }

@@ -68,9 +68,9 @@ class Kebab_PasswordController extends Kebab_Rest_Controller
             $user->password = $userPassword;
             $user->save();
 
-            $this->_helper->response(true)->addNotification('INFO', 'Password successfully changed.')->getResponse();
+            $this->_helper->response(true)->addNotification(Kebab_Notification::INFO, 'Password successfully changed.')->getResponse();
         } else {
-            $this->_helper->response()->addNotification('ERR', 'Could not change password.')->getResponse();
+            $this->_helper->response()->addNotification(Kebab_Notification::ERR, 'Could not change password.')->getResponse();
         }
     }
 }

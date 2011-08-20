@@ -38,10 +38,9 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
     public function postAction()
     {
         $email = $this->_request->getParam('email');
-        $validatorEmail = new Zend_Validate_EmailAddress();
         $response = $this->_helper->response();
 
-        if ($validatorEmail->isValid($email)) {
+        if (Kebab_Validation_Email::isValid($email)) {
 
             // Create user object
             $user = Doctrine_Core::getTable('Model_Entity_User')->findOneBy('email', $email);
@@ -51,7 +50,6 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $user->password = md5($password);
                 $user->save();
 
-                //KBBTODO move these settings to config file
                 $configParam = Zend_Registry::get('config')->kebab->mail;
                 $smtpServer = $configParam->smtpServer;
                 $config = $configParam->config->toArray();
@@ -60,7 +58,6 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $view = new Zend_View;
                 $view->setScriptPath(APPLICATION_PATH . '/views/mails/');
 
-                //KBBTODO use language file
                 $view->assign('password', $password);
 
                 $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
@@ -72,7 +69,7 @@ class Kebab_ForgotPasswordController extends Kebab_Rest_Controller
                 $mail->send($transport);
                 $response->setSuccess(true)->getResponse();
             } else {
-                $response->addNotification('ERR', 'There isn\'t user with this email')->getResponse();
+                $response->addNotification(Kebab_Notification::ERR, 'There isn\'t user with this email')->getResponse();
             }
         } else {
             $response->addError('email', 'Invalid email format')->getResponse();

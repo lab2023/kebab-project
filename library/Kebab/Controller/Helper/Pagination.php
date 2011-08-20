@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -14,8 +13,8 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    PACKAGE
- * @subpackage SUB_PACKAGE
+ * @package    Library
+ * @subpackage Helper
  * @author     lab2023 Dev Team
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -26,8 +25,8 @@
  * System_Controller_Helper_Pagination
  *
  * @category   Kebab
- * @package    Controller
- * @subpackage Helper
+ * @package    Helper
+ * @subpackage Library
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -36,15 +35,49 @@
  */
 class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_Abstract
 {
+    /**
+     * @var 
+     */
     protected $_request;
+
+    /**
+     * @var string
+     */
     protected $_startKey = 'start';
+
+    /**
+     * @var int
+     */
     protected $_startValue = 0;
+
+    /**
+     * @var string
+     */
     protected $_limitKey = 'limit';
+
+    /**
+     * @var int
+     */
     protected $_limitValue = 25;
+
+    /**
+     * @var
+     */
     protected $_resultsPerPage;
+
+    /**
+     * @var
+     */
     protected $_currentPage;
+
+    /**
+     * @var
+     */
     protected $_pager;
-    
+
+    /**
+     * @return void
+     */
     public function init()
     {
         $this->setRequest($this->getRequest());
@@ -53,62 +86,103 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         $this->setResultsPerPage($this->_limitValue);
         $this->setCurrentPage();     
     }
-    
+
+    /**
+     * @return string
+     */
     public function getStartKey()     
     {
         return $this->_startKey;
     }
 
+    /**
+     * @param $_startKey
+     * @return void
+     */
     public function setStartKey($_startKey)
     {
         $this->_startKey = $_startKey;
     }
 
+    /**
+     * @return int
+     */
     public function getStartValue()
     {
         return $this->_startValue;
     }
 
+    /**
+     * @param $_startValue
+     * @return void
+     */
     public function setStartValue($_startValue)
     {
         $this->_startValue = $_startValue;
     }
 
+    /**
+     * @return string
+     */
     public function getLimitKey()
     {
         return $this->_limitKey;
     }
 
+    /**
+     * @param $_limitKey
+     * @return void
+     */
     public function setLimitKey($_limitKey)
     {
         $this->_limitKey = $_limitKey;
     }
 
+    /**
+     * @return int
+     */
     public function getLimitValue()
     {
         return $this->_limitValue;
     }
 
+    /**
+     * @param $_limitValue
+     * @return void
+     */
     public function setLimitValue($_limitValue)
     {
         $this->_limitValue = $_limitValue;
     }
 
+    /**
+     * @return int
+     */
     public function getResultsPerPage()
     {
         return (int) $this->_resultsPerPage;
     }
 
+    /**
+     * @param $_resultsPerPage
+     * @return void
+     */
     public function setResultsPerPage($_resultsPerPage)
     {
         $this->_resultsPerPage = $_resultsPerPage;
     }
 
+    /**
+     * @return 
+     */
     public function getCurrentPage()
     {
         return $this->_currentPage;
     }
 
+    /**
+     * @return void
+     */
     public function setCurrentPage()
     {
         if ($this->_startValue < $this->_limitValue) {
@@ -120,11 +194,18 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         }
     }    
 
+    /**
+     * @return
+     */
     public function getPager()     
     {
         return $this->_pager;
     }
 
+    /**
+     * @param $query
+     * @return void
+     */
     public function setPager($query)
     {
         $this->_pager = new Doctrine_Pager(
@@ -135,9 +216,8 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
     }
 
     /**
-     * direct()
-     * 
-     * @return  System_Controller_Helper_Pager
+     * @param null $query
+     * @return Kebab_Controller_Helper_Pagination
      */
     public function direct($query = null)
     {
@@ -148,7 +228,11 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         $this->setPager($query);
         return $this->_pager;
     }
-    
+
+    /**
+     * @param $_request
+     * @return void
+     */
     private function setRequest($_request)
     {
         $this->_request = $_request;
