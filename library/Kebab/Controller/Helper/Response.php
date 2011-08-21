@@ -13,7 +13,7 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    Controller
+ * @package    Library
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -30,7 +30,7 @@
  * node to response object.</p>
  *
  * @category   Kebab
- * @package    Controller
+ * @package    Library
  * @subpackage Helper
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -132,6 +132,8 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             $this->_response[$name][$key] = Zend_Registry::get('Zend_Translate')->_($value);
         }
 
+        $this->setSuccess(false);
+
         return $this;
     }
 
@@ -155,6 +157,8 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
             'id' => $id,
             'msg' => Zend_Registry::get('Zend_Translate')->_($value)
         );
+        
+        $this->setSuccess(false);
 
         return $this;
     }
