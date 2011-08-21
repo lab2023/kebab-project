@@ -49,10 +49,7 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
     
     
     /**
-     * __construct
-     *
-     * @param string $options 
-     * @return void
+     * @param array $options
      */
     public function __construct(array $options)
     {
@@ -86,9 +83,7 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
     }
 
     /**
-     * Set updated Blameable column when a record is updated
-     *
-     * @param Doctrine_Event $evet
+     * @param Doctrine_Event $event
      * @return void
      */
     public function preUpdate(Doctrine_Event $event)
@@ -103,9 +98,7 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
     }
 
     /**
-     * Set the updated field for dql update queries
-     *
-     * @param Doctrine_Event $evet
+     * @param Doctrine_Event $event
      * @return void
      */
     public function preDqlUpdate(Doctrine_Event $event)
@@ -134,8 +127,12 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
         if (PHP_SAPI === 'cli') {
             $ident = 0;
         } else {
-            $ident = is_object($identity) ? $identity->id : null;     
+            $ident = is_object($identity) ? isset($identity ->agent_id)
+                                                ? $identity ->agent_id
+                                                : $identity->id
+                                          : NULL;
         }
+                
         
         if (is_null($ident) && $this->_options['default'] !== false) {
             if (is_null($this->_default)) {
@@ -159,7 +156,6 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
             $ident = $this->_default;
         }
         
-        return $ident;    
-        
+        return $ident;
     }
 }
