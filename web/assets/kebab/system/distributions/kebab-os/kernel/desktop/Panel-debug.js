@@ -544,6 +544,7 @@ Ext.extend(Kebab.OS.Panel.WindowList.TaskButton, Ext.Button, {
         this.cmenu = new Ext.menu.Menu({
             items: [{
                 text: Kebab.helper.translate('Restore'),
+                iconCls: 'icon-arrow-inout',
                 handler: function(){
                     if(!this.win.isVisible()){
                         this.win.show();
@@ -554,14 +555,17 @@ Ext.extend(Kebab.OS.Panel.WindowList.TaskButton, Ext.Button, {
                 scope: this
             },{
                 text: Kebab.helper.translate('Minimize'),
+                iconCls: 'icon-arrow-in',
                 handler: this.win.minimize,
                 scope: this.win
             },{
                 text: Kebab.helper.translate('Maximize'),
+                iconCls: 'icon-arrow-out',
                 handler: this.win.maximize,
                 scope: this.win
             }, '-', {
                 text: Kebab.helper.translate('Close'),
+                iconCls: 'icon-cancel',
                 handler: this.closeWin.createDelegate(this, this.win, true),
                 scope: this.win
             }]
