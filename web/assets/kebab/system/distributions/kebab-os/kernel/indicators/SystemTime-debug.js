@@ -15,6 +15,7 @@
     * to info@lab2023.com so we can send you a copy immediately.
 ----------------------------------------------------------------------------- */
 
+Ext.namespace('Kebab.OS.Indicators.SystemTime');
 /**
  * Kebab.OS.Indicators.SystemTime
  *

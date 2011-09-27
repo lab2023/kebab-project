@@ -21,7 +21,7 @@
     <link href="<?php echo $this->assetVendor('examples/ux/css/ux-all.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('silk/famfamfam-silk-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('flags/famfamfam-flag-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->getWeb())); ?>
+    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false))); ?>
 
     <?php // STYLE AREA ------------------------------------------------------?>
     <style type="text/css">
@@ -46,11 +46,7 @@
     echo $this->headScript()
         ->prependFile($this->asset('library')->get())
         ->prependFile($this->asset('languages/'.$this->translate()->getLocale().'.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Logger.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Notification.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Translator.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/OS.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Kebab.js')->distribution()->get())
+        ->prependFile($this->asset('kernel/kernel-all.js')->distribution()->get())
         ->prependFile($this->assetVendor('src/locale/ext-lang-'.$this->translate()->getLocale().'.js')->get('extjs', true))
         ->prependFile($this->assetVendor('examples/ux/ux-all.js')->get('extjs'))
         ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
@@ -69,7 +65,7 @@
 
     <!-- PROJECT INFO BUBBLE -->
     <div id="project-info" class="kebab-rounded-corners kebab-shadow">
-        <a href="http://www.kebab-project.com" target="_blank">
+        <a href="<?php echo $this->settings('project')->url; ?>" target="_blank">
             <p><?php echo $this->settings('project')->info; ?></p>
             <p><strong>Version:</strong><br/><?php echo $this->settings('project')->version; ?></p>
             <p><strong>Release Date:</strong><br/><?php echo $this->settings('project')->releaseDate; ?></p>
