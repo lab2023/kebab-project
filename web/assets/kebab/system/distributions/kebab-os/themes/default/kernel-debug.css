@@ -296,7 +296,8 @@ div#activation-form-wrapper {
 }
 
 /*
-ExtJS Style Edits
+ ExtJS Style Edits & Fixes
+ -------------------------
 */
 /* Window resize proxy */
 .x-resizable-proxy{
@@ -306,4 +307,22 @@ ExtJS Style Edits
     -webkit-opacity:.5;
     filter:alpha(opacity=50);
     border: 2px solid #fff;
+}
+/* Grid filter icons fix */
+.ux-filtered-column.sort-asc .x-grid3-sort-icon {
+    background-image: url('images/kernel/ext-ux/gridfilter/sort_filtered_asc.gif') !important;
+}
+.ux-filtered-column.sort-desc .x-grid3-sort-icon {
+    background-image: url('images/kernel/ext-ux/gridfilter/sort_filtered_desc.gif') !important;
+}
+.ux-gridfilter-text-icon {
+    background-image: url('images/kernel/ext-ux/gridfilter/find.png') !important;
+}.ux-rangemenu-gt {
+    background-image: url('images/kernel/ext-ux/gridfilter/greater_than.png') !important;
+}
+.ux-rangemenu-lt {
+    background-image: url('images/kernel/ext-ux/gridfilter/less_than.png') !important;
+}
+.ux-rangemenu-eq {
+    background-image: url('images/kernel/ext-ux/gridfilter/equals.png') !important;
 }
