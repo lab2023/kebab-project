@@ -38,4 +38,19 @@ final class Kebab_Version
      * Kebab Project version identification
      */
     const VERSION = '1.5.0';
+
+    /**
+     * Zend Framework version
+     */
+    const ZEND = '1.11.10';
+
+    /**
+     * Doctrine ORM version
+     */
+    const DOCTRINE = '1.2.4';
+
+    /**
+     * Ext JS version
+     */
+    const EXT_JS = '3.4.0';
 }
