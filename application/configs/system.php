@@ -76,6 +76,9 @@ $cfgs = array(
 
 /*
  * Dynamic BaseUrl and HTTPS detector
+ * 
+ * If don't use vhost, you modify $baseUrl variable value like this:
+ * $baseUrl = "http" . $ssl . "://" . @$_SERVER['HTTP_HOST'] . '/path_to_kebab/web';
  */
 $ssl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : null;
 $baseUrl = "http" . $ssl . "://" . @$_SERVER['HTTP_HOST'];
