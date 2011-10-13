@@ -37,7 +37,11 @@ $this->headLink()
         <strong>&nbsp;&nbsp;•&nbsp;&nbsp;</strong>
         
         <strong>Zend Version :</strong>
-        <span><?php echo Zend_Version::VERSION; ?></span>
+        <span><?php echo Kebab_Version::ZEND; ?> / <?php echo Zend_Version::VERSION; ?></span>
+        <strong>&nbsp;&nbsp;•&nbsp;&nbsp;</strong>
+        
+        <strong>Doctrine Version :</strong>
+        <span><?php echo Kebab_Version::DOCTRINE; ?> / <?php echo Doctrine_Core::VERSION; ?></span>
     </p>
     <em title="Kebab Project <?php echo $this->translate('Developer Tools'); ?> v.0.1">Kebab <?php echo $this->translate('Developer Tools'); ?>  v.0.1</em>
 
