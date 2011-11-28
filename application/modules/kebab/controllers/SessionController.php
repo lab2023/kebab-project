@@ -45,7 +45,7 @@ class Kebab_SessionController extends Kebab_Rest_Controller
         // Get params
         $userName = $this->_request->getParam('userName');
         $password = $this->_request->getParam('password');
-        $rememberMe = $this->_request->getParam('remember_me');
+        $rememberMe = $this->_request->getParam('rememberMe');
 
         // Check rememberMe checkbox
         if (is_null($rememberMe)) {
