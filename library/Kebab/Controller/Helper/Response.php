@@ -245,6 +245,12 @@ class Kebab_Controller_Helper_Response extends Zend_Controller_Action_Helper_Abs
      */
     public function getResponse()
     {
+        if (Zend_Registry::get('config')->kebab->logging->enable
+            && Zend_Registry::get('config')->kebab->logging->firebug->enable
+        ) {
+           Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
+        }
+        
         //KBBTODO We should write an adapter for array, xml in future
         $jsonHelper = new Zend_Controller_Action_Helper_Json();
         $jsonHelper->direct($this->_response);
