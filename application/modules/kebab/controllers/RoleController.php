@@ -91,33 +91,36 @@ class Kebab_RoleController extends Kebab_Rest_Controller
                 ? $params['data']
                 : $this->_helper->array()->convertRecordtoCollection($params['data']);
 
-        // Updating status
-        //KBBTODO move dql to model
         Doctrine_Manager::connection()->beginTransaction();
         try {
             // Doctrine
+            $returnData = array();
             foreach ($collection as $record) {
                 $role = new Model_Entity_Role();
-                $role->assignIdentifier($record['id']);
-                unset($record['id']);
 
                 if (array_key_exists('active', $record)) {
-                    $role->active = $record['active'];
+                    $returnRecord['active'] = $role->active = $record['active'];
+
                 }
 
                 if (array_key_exists('title', $record)) {
-                    $role->Translation[$lang]->title = $record['title'];
+                    $returnRecord['title'] = $role->Translation[$lang]->title = $record['title'];
                 }
 
                 if (array_key_exists('description', $record)) {
-                    $role->Translation[$lang]->description = $record['description'];
+                    $returnRecord['description'] = $role->Translation[$lang]->description = $record['description'];
                 }
 
                 $role->save();
+
+                $returnRecord['id'] = $role->id;
+                $returnRecord['num_story'] = 0;
+                $returnRecord['num_user'] = 0;
+                $returnData[] = $returnRecord;
             }
             Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->getResponse();
+            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->addData($returnData)->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
