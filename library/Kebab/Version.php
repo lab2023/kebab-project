@@ -37,13 +37,13 @@ final class Kebab_Version
     /**
      * Kebab Project version identification
      */
-    const KEBAB_VERSION = "1.5.0.rc1";
+    const KEBAB_VERSION = "1.5.0.rc2";
 
 
     /**
      * Zend Framework version
      */
-    const MIN_ZEND = '1.11.10';
+    const MIN_ZEND = '1.11.11';
 
     /**
      * Doctrine ORM version
