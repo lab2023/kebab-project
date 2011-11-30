@@ -37,20 +37,21 @@ final class Kebab_Version
     /**
      * Kebab Project version identification
      */
-    const VERSION = '1.5.0';
+    const KEBAB_VERSION = "1.5.0.rc1";
+
 
     /**
      * Zend Framework version
      */
-    const ZEND = '1.11.10';
+    const MIN_ZEND = '1.11.10';
 
     /**
      * Doctrine ORM version
      */
-    const DOCTRINE = '1.2.4';
+    const MIN_DOCTRINE = '1.2.4';
 
     /**
      * Ext JS version
      */
-    const EXT_JS = '3.4.0';
+    const MIN_EXT_JS = '3.4.0';
 }
