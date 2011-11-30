@@ -185,14 +185,14 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
      */
     public function setCurrentPage()
     {
-        if ($this->_startValue < $this->_limitValue) {
+        if ($this->_startValue < $this->_resultsPerPage) {
             $this->_currentPage = 1;
-        } elseif ($this->_startValue === $this->_limitValue) {
+        } elseif ($this->_startValue === $this->_resultsPerPage) {
             $this->_currentPage = 2;
         } else {
-            $this->_currentPage = ceil($this->_startValue / $this->_resultsPerPage);
+            $this->_currentPage = ceil($this->_startValue / $this->_resultsPerPage) + 1;
         }
-    }    
+    }
 
     /**
      * @return
