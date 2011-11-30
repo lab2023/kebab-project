@@ -14,6 +14,11 @@ Suggessions
     - PHP 5.3.6 (with APC or eAccelerator, memcached or xcache enabled better performance),
     - Nginx or Apache 2.2.x for application server.
     - If you use CDN (yeah Kebab Project supports CDN) you can use Nginx for static content.
+    
+Installation
+------------
+
+- http://onurozgurozkan.github.com/blog/2011/11/30/how-to-install-kebab-reloaded-v-dot-1-5-0-using-mysql-apache-on-ubuntu/
 
 Other Repositories
 -----------
