@@ -15,18 +15,9 @@ Suggessions
     - Nginx or Apache 2.2.x for application server.
     - If you use CDN (yeah Kebab Project supports CDN) you can use Nginx for static content.
 
-Installation
------------
-Kebab Project Ubuntu installation article is here:
-    - http://www.kebab-project.com/wiki/en/Install_Kebab_1.5.x_on_Ubuntu_Apache_2.x
-
 Other Repositories
 -----------
 Kebab Application Templates:
     - https://github.com/kebab-project/application-templates
-
-Documentation
--------------
-- http://www.kebab-project.com/wiki/en or http://www.kebab-project.com/wiki/tr
 
 [1]: http://kebab-project.com
