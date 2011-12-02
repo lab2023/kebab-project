@@ -75,3 +75,14 @@ Model_Entity_Story:
       tr:
         title: Geribildirim yönetimi
         description: Kullanıcı geri bildirimlerini yönetin
+
+  Translation_Management:
+    name: translation_management
+    active: 1
+    Translation:
+      en:
+        title: Translation öanagement
+        description: User can translate data where _translate table at db.
+      tr:
+        title: Çeviri yönetimi
+        description: Kullanıcılar veritabanındaki _translate tablolarındaki veriyi çevirebilirler.

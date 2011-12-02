@@ -65,3 +65,7 @@ Model_Entity_Controller:
   Kebab_Application:
     Module: Kebab
     name: application
+
+  Kebab_TranslationTables:
+    Module: Kebab
+    name: translation-tables
