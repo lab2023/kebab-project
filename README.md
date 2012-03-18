@@ -18,7 +18,6 @@ Suggessions
 Installation
 ------------
 
-- http://onurozgurozkan.github.com/blog/2011/11/30/how-to-install-kebab-reloaded-v-dot-1-5-0-using-mysql-apache-on-ubuntu/
 
 Other Repositories
 -----------
